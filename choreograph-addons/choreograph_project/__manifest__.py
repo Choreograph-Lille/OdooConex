@@ -7,9 +7,11 @@
     'category': '',
     'website': '',
     'images': [],
-    'depends': [],
+    'depends': ['choreograph_contact', 'project'],
     'data': [
-
+        # security
+        # views
+        'views/project_views.xml',
     ],
     'installable': True,
     'application': False,
