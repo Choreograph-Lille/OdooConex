@@ -7,9 +7,13 @@
     'category': '',
     'website': '',
     'images': [],
-    'depends': [],
+    'depends': ['base'],
     'data': [
-
+        # security
+        'security/ir.model.access.csv',
+        # views
+        'views/choreograph_role_views.xml',
+        'views/res_partner_views.xml',
     ],
     'installable': True,
     'application': False,
