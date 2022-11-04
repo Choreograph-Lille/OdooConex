@@ -7,9 +7,10 @@
     'category': '',
     'website': '',
     'images': [],
-    'depends': [],
+    'depends': ['sale_project', 'project_template'],
     'data': [
-
+        # views
+        'views/sale_order.xml',
     ],
     'installable': True,
     'application': False,
