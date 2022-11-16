@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'choreograph sale',
-    'summary': 'Manage choreograph sale',
+    'name': 'choreograph sale project',
+    'summary': 'Manage relation between choreograph sale and project',
     'sequence': 10,
     'description': "",
     'category': '',
     'website': '',
     'images': [],
-    'depends': ['choreograph_sale_project', 'project_template'],
+    'depends': ['sale_project'],
     'data': [
         # security
         'security/ir.model.access.csv',
         # views
+        'views/project_views.xml',
         'views/sale_order.xml',
-        'views/operation_condition.xml',
     ],
     'installable': True,
     'application': False,

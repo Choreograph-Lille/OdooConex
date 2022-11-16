@@ -1,0 +1,48 @@
+<odoo>
+  <data>
+    <!-- project task -->
+    <record id="view_task_form2_inherit2" model="ir.ui.view">
+      <field name="name">project.task.form.inherit2</field>
+      <field name="model">project.task</field>
+      <field name="inherit_id" ref="project.view_task_form2"/>
+      <field name="arch" type="xml">
+        <field name="user_ids" position="after">
+          <field name="task_type"/>
+        </field>
+        <field name="description" position="before">
+          <group>
+            <field name="show_sms_coupling" invisible="1"/>
+            <field name="sms_coupling" attrs="{'invisible': [('show_sms_coupling', '=', False)]}"/>
+          </group>
+        </field>
+      </field>
+    </record>
+
+    <!-- choreograph project task type -->
+    <record id="choreograph_sale_project_task_type_view_tree" model="ir.ui.view">
+        <field name="name">choreograph.sale.project.task.type.view.tree</field>
+        <field name="model">choreograph.project.task.type</field>
+        <field name="arch" type="xml">
+          <tree editable="top">
+            <field name="name"/>
+          </tree>
+        </field>
+    </record>
+
+    <record id="choreograph_sale_project_task_type_action" model="ir.actions.act_window">
+        <field name="name">Task type</field>
+        <field name="res_model">choreograph.project.task.type</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Add a new task type
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_choreograph_sale_project_task_type"
+          action="choreograph_sale_project.choreograph_sale_project_task_type_action"
+          name="Task types"
+          sequence="10" parent="project.menu_project_config"/>
+  </data>
+</odoo>

@@ -1,0 +1,21 @@
+<odoo>
+    <!-- Form View -->
+  <record id="view_order_form_inherit2" model="ir.ui.view">
+    <field name="name">sale.order.form.inherit2</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale.view_order_form"/>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <notebook position="inside">
+        <page name="sale_operation" string="Operation">
+          <group>
+            <group string="SMS coupling">
+              <field name="sms_coupling"/>
+              <field name="sms_coupling_task_type_id"/>
+            </group>
+          </group>
+        </page>
+      </notebook>
+    </field>
+  </record>
+</odoo>
