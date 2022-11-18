@@ -1,0 +1,270 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* maas_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-28 13:58+0000\n"
+"PO-Revision-Date: 2022-10-28 13:58+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: maas_base
+#: model:ir.model,name:maas_base.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr "Combinaison d'activités"
+
+#. module: maas_base
+#: model:ir.model,name:maas_base.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_user_management
+msgid "Gérer les utilisateurs"
+msgstr "Gérer les utilisateurs"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_subscription_management
+msgid "Gérer un abonnement"
+msgstr "Gérer un abonnement"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_customer_management
+msgid "Gérer un client"
+msgstr "Gérer un client"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_package_management
+msgid "Gérer un forfait (article)"
+msgstr "Gérer un forfait (article)"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_campaign_management
+msgid "Gérer une campagne/action"
+msgstr "Gérer une campagne/action"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users_is_portal_user
+msgid "Is Portal User"
+msgstr "Est un utilisateur portail ?"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_start_modeling
+msgid "Lancer la modélisation"
+msgstr "Lancer la modélisation"
+
+#. module: maas_base
+#: model:ir.model,name:maas_base.model_mail_message
+msgid "Message"
+msgstr "Message"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_mail_compose_message_message_body
+#: model:ir.model.fields,field_description:maas_base.field_mail_mail_message_body
+#: model:ir.model.fields,field_description:maas_base.field_mail_message_message_body
+msgid "Message Body"
+msgstr "Message Body"
+
+#. module: maas_base
+#: model:ir.module.category,name:maas_base.module_category_my_model_access
+msgid "My Model Access"
+msgstr "My Model Access"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_sale_operation_activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'Activité à Venir"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_operation_order
+msgid "Passer commande"
+msgstr "Passer commande"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_operation_perform
+msgid "Réaliser une opération"
+msgstr "Réaliser une opération"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_mail_compose_message_stage
+#: model:ir.model.fields,field_description:maas_base.field_mail_mail_stage
+#: model:ir.model.fields,field_description:maas_base.field_mail_message_stage
+msgid "Stage"
+msgstr "Étape"
+
+#. module: maas_base
+#: selection:mail.compose.message,stage:0
+#: selection:mail.message,stage:0
+msgid "Stage 01"
+msgstr "Stage 01"
+
+#. module: maas_base
+#: selection:mail.compose.message,stage:0
+#: selection:mail.message,stage:0
+msgid "Stage 02"
+msgstr "Stage 02"
+
+#. module: maas_base
+#: model:ir.ui.view,arch_db:maas_base.custom_external_layout_clean
+msgid "Tel:"
+msgstr "Tél. :"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users_total_due
+msgid "Total Due"
+msgstr "Total dû"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_download_operation_ordered
+msgid "Télécharger le fichier commandé-"
+msgstr "Télécharger le fichier commandé-"
+
+#. module: maas_base
+#: model:ir.model,name:maas_base.model_res_users
+msgid "Users"
+msgstr "Utilisateurs"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_validate_next_package
+msgid "Valider le choix de passer au palier supérieur"
+msgstr "Valider le choix de passer au palier supérieur"
+
+#. module: web
+#. openerp-web
+#: code:addons/web/static/src/js/fields/field_utils.js:242
+#, python-format
+msgid "No records"
+msgstr "Pas d'enregistrements"
+
+#. module: web
+#. openerp-web
+#: code:addons/web/static/src/js/fields/field_utils.js:244
+#, python-format
+msgid "1 record"
+msgstr "1 enregistrement"
+
+#. module: auth_signup
+#: model:mail.template,subject:auth_signup.set_password_email
+msgid "Creating your My Model access"
+msgstr "Création de votre accès My Model"
+
+#. module: auth_signup
+#: model:mail.template,body_html:auth_signup.set_password_email
+msgid "\n"
+"        <div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"          <div style=\"algin:left;\">\n"
+"              <img src=\"/maas_base/static/description/MyModel_logo_sm2.PNG\" style=\"padding: 0px; margin: 0px; max-height:80px; max-width=150px\"/>\n"
+"          </div>\n"
+"          <div style=\"text-align: left; font-size:16px;padding-top:20px;padding-left:40px\">\n"
+"             <p>\n"
+"                Good morning,\n"
+"              </p>\n"
+"          </div>\n"
+"          <div style=\"text-align: center; font-size:16px;\">\n"
+"            <p>\n"
+"              In order to access the My Model platform,<br/>\n"
+"              Please click on the link below to create your password\n"
+"            </p>\n"
+"          </div>\n"
+"          <div style=\"text-align: left;font-size:16px;\">\n"
+"             <p>\n"
+"                Team MyModel,\n"
+"              </p>\n"
+"          </div>\n"
+"          <div style=\"text-align: center; margin-top: 18px; padding-top:20px;\">\n"
+"             <a href=\"${object.signup_url}\" style=\"width:180px;padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;\">Click here</a>\n"
+"          </div>\n"
+"        </div>\n"
+"      "
+msgstr "\n"
+"        <div style=\"padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777\">\n"
+"          <div style=\"algin:left;\">\n"
+"              <img src=\"/maas_base/static/description/MyModel_logo_sm2.PNG\" style=\"padding: 0px; margin: 0px; max-height:80px; max-width=150px\"/>\n"
+"          </div>\n"
+"          <div style=\"text-align: left; font-size:16px;padding-top:20px;padding-left:40px\">\n"
+"             <p>\n"
+"                Bonjour,\n"
+"              </p>\n"
+"          </div>\n"
+"          <div style=\"text-align: center; font-size:16px;\">\n"
+"            <p>\n"
+"              Afin d'accéder à la plateforme MyModel,<br/>\n"
+"              Veuillez cliquer sur le lien ci-dessous pour créer votre mot de passe\n"
+"            </p>\n"
+"          </div>\n"
+"          <div style=\"text-align: left;font-size:16px;\">\n"
+"             <p>\n"
+"                L'équipe MyModel,\n"
+"              </p>\n"
+"          </div>\n"
+"          <div style=\"text-align: center; margin-top: 18px; padding-top:20px;\">\n"
+"             <a href=\"${object.signup_url}\" style=\"width:180px;padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;\">Cliquez ici</a>\n"
+"          </div>\n"
+"        </div>\n"
+"      "
+
+#. module: auth_signup
+#: model:mail.template,body_html:auth_signup.reset_password_email
+msgid "\n"
+"            <div style=\"algin:left;\">\n"
+"              <img src=\"/maas_base/static/description/MyModel_logo_sm2.PNG\" style=\"padding: 0px; margin: 0px; max-height:80px; max-width=150px\"/>\n"
+"            </div>\n"
+"            <div style=\"text-align: left;font-size:16px; margin-top=18px;\">\n"
+"                <p>Dear ${object.name},</p>\n"
+"                <p>A password reset for your access on MyModel platform was requested.</p>\n"
+"                <p>You may change your password by following this link which will remain valid during 24 hours.</p>\n"
+"                <div style=\"text-align: center; margin-top: 32px;\">\n"
+"                    <a href=\"${object.signup_url}\" style=\"padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;\">Change password</a>\n"
+"                </div>\n"
+"            </div>\n"
+"            <div style=\"text-align: left;font-size:16px;\">\n"
+"                <p>\n"
+"                    Team MyModel,\n"
+"                </p>\n"
+"            </div>\n"
+"        \n"
+"        "
+msgstr "\n"
+"            <div style=\"algin:left;\">\n"
+"              <img src=\"/maas_base/static/description/MyModel_logo_sm2.PNG\" style=\"padding: 0px; margin: 0px; max-height:80px; max-width=150px\"/>\n"
+"            </div>\n"
+"            <div style=\"text-align: left;font-size:16px; margin-top=18px;\">\n"
+"                <p>Cher(e) ${object.name},</p>\n"
+"                <p>Une réinitialisation du mot de passe pour votre accès à la plateforme MyModel a été demandée.</p>\n"
+"                <p>Vous pouvez modifier votre mot de passe en cliquant sur le lien ci-dessous, valable durant 24 heures.</p>\n"
+"                <div style=\"text-align: center; margin-top: 32px;\">\n"
+"                    <a href=\"${object.signup_url}\" style=\"padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;\">Changer le mot de passe</a>\n"
+"                </div>\n"
+"            </div>\n"
+"            <div style=\"text-align: left;font-size:16px;\">\n"
+"                <p>\n"
+"                    L'équipe MyModel,\n"
+"                </p>\n"
+"            </div>\n"
+"        \n"
+"        "
+
+#. module: auth_signup
+#: code:addons/auth_signup/controllers/main.py:123
+#, python-format
+msgid "Passwords do not match; please retype them."
+msgstr "Les mots de passe ne correspondent pas; veuillez les retaper."
+
+#. module: maas_base
+#: model:ir.ui.view,arch_db:maas_base.fields
+msgid "Your password expired."
+msgstr "Votre mot de passe a expiré."
+
+#. module: auth_signup
+#: code:addons/auth_signup/models/res_users.py:110
+#, python-format
+msgid "Reset password: invalid username or email"
+msgstr ""
+"L’email ne peut pas être envoyé, l’email est erroné."

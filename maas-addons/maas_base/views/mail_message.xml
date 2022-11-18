@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+       <record id="mail_message_form_inherit" model="ir.ui.view">
+          <field name="name">mail.message.view.form.inherit</field>
+          <field name="model">mail.message</field>
+          <field name="inherit_id" ref="mail.mail_message_view_form"/>
+          <field name="arch" type="xml">
+            <xpath expr="//field[@name='email_from']" position="after">
+              <field name="message_body" invisible="1"/>
+            </xpath>
+          </field>
+       </record>
+  </data>
+</odoo>

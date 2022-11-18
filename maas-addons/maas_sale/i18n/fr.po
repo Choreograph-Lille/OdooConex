@@ -1,0 +1,1419 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* maas_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-18 15:32+0000\n"
+"PO-Revision-Date: 2022-11-18 15:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.operation_recall_download_file_mail_template
+msgid ""
+"\n"
+"        \n"
+"           <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"             <p>Hello,</p>\n"
+"             <p>\n"
+"               Your file concerning your operation <strong>${object.name}</strong> is still available on your portal.\n"
+"             </p>\n"
+"             <p>\n"
+"              You have 5 days left to download your file.\n"
+"             <p/>\n"
+"             <p>\n"
+"                <ul>\n"
+"                    <li>Campign : ${object.operation_id.campaign_id.name}</li>\n"
+"                    %if object.action_id:\n"
+"                        <li>Action : ${object.operation_id.action_id.name or ''}</li>\n"
+"                    %endif\n"
+"                    <li>Operation : ${object.name}</li>\n"
+"                    <li>Quantity : ${object.qty_extracted}</li>\n"
+"                </ul>\n"
+"             </p>\n"
+"             <p>\n"
+"                You can access the platform: &nbsp;\n"
+"                <a href=\"${object.operation_id.get_login_url()}\">Click here.</a>\n"
+"              </p>\n"
+"             <p>The MyModel team.</p>\n"
+"           </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"        \n"
+"           <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"             <p>Bonjour,</p>\n"
+"             <p>\n"
+"               Votre fichier concernant votre opération <strong>${object.name}</strong> est toujours disponible sur votre portail.\n"
+"             </p>\n"
+"             <p>\n"
+"              Il vous reste 5 jours pour télécharger votre fichier.\n"
+"             <p/>\n"
+"             <p>\n"
+"                <ul>\n"
+"                    <li>Campagne : ${object.operation_id.campaign_id.name}</li>\n"
+"                    %if object.action_id:\n"
+"                        <li>Action : ${object.operation_id.action_id.name or ''}</li>\n"
+"                    %endif\n"
+"                    <li>Operation : ${object.name}</li>\n"
+"                    <li>Quantité : ${object.qty_extracted}</li>\n"
+"                </ul>\n"
+"             </p>\n"
+"             <p>\n"
+"                Vous pouvez accéder à la plateforme: &nbsp;\n"
+"                <a href=\"${object.operation_id.get_login_url()}\">Cliquez ici.</a>\n"
+"              </p>\n"
+"             <p>L'équipe MyModel.</p>\n"
+"           </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.operation_created_mail_template
+msgid ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Hello,</p>\n"
+"            <p>\n"
+"              A new operation with code ${object.number} has just been created by ${user.name} at ${object.partner_id.name} account.\n"
+"            <p/>\n"
+"            <p>The MyModel team.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Bonjour,</p>\n"
+"            <p>\n"
+"              Une nouvelle opération avec le numéro ${object.number} est créée par ${user.name} pour le compte de ${object.partner_id.name}.\n"
+"            <p/>\n"
+"            <p>L’équipe My Model.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.operation_canceled_mail_template
+msgid ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Hello,</p>\n"
+"            <p>\n"
+"              The operation <strong>${object.name}</strong> has been canceled by ${user.name}.\n"
+"            <p/>\n"
+"            <p>Regards.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Bonjour,</p>\n"
+"            <p>\n"
+"              L'opération <strong>${object.name}</strong> est annulée par ${user.name}.\n"
+"            <p/>\n"
+"            <p>L’équipe My Model.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.operation_downloaded_mail_template
+msgid ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Hello,</p>\n"
+"            <p>\n"
+"              The operation <strong>${object.name}</strong> has been downloaded by ${user.name}.\n"
+"            <p/>\n"
+"            <p>Regards.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Bonjour,</p>\n"
+"            <p>\n"
+"              L'opération <strong>${object.name}</strong> a été téléchargée par ${user.name}.\n"
+"            <p/>\n"
+"            <p>L’équipe My Model.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.operation_ordered_mail_template
+msgid ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Hello,</p>\n"
+"            <p>\n"
+"              The operation <strong>${object.name}</strong> has been ordered by ${user.name}.\n"
+"            <p/>\n"
+"            <p>Regards.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Bonjour,</p>\n"
+"            <p>\n"
+"              L'opération <strong>${object.name}</strong> a été commandée par ${user.name}.\n"
+"            <p/>\n"
+"            <p>L’équipe My Model.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.operation_available_mail_template
+msgid ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Hello,</p>\n"
+"            <p>\n"
+"              The operation number <strong>${object.name}</strong> is complete, your file is available for download.\n"
+"              <ul>\n"
+"                <li>Campaign: <strong>${object.operation_id.campaign_id.name}</strong></li>\n"
+"                <li>Action: <strong>${object.operation_id.action_id.name or 'n/a'}</strong> </li>\n"
+"                <li>Operation: <strong>${object.name}</strong></li>\n"
+"                <li>Quantity: <strong>${object.qty_extracted}</strong> </li>\n"
+"              </ul>\n"
+"            <p/>\n"
+"            <p>\n"
+"              Depending on the delivery method you have chosen, you can :\n"
+"              <ul>\n"
+"                <li style=\"list-style-type:'-'\">Download it on your platform: <a href=\"${object.operation_id.get_login_url()}\">Click here.</a> It remains available for 30 days</li>\n"
+"                <li style=\"list-style-type:'-'\">Recover it on your SFTP. It remains available for 8 days.</li>\n"
+"              </ul>\n"
+"            </p>\n"
+"            <p>The MyModel team.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Bonjour,</p>\n"
+"            <p>\n"
+"              L’opération numéro  <strong>${object.name}</strong> est terminée, votre fichier est disponible au téléchargement.\n"
+"              <ul>\n"
+"                <li>Campagne: <strong>${object.operation_id.campaign_id.name}</strong></li>\n"
+"                <li>Action: <strong>${object.operation_id.action_id.name or 'n/a'}</strong> </li>\n"
+"                <li>Opération: <strong>${object.name}</strong></li>\n"
+"                <li>Quantité: <strong>${object.qty_extracted}</strong> </li>\n"
+"              </ul>\n"
+"            <p/>\n"
+"            <p>\n"
+"              Selon le mode de mise à disposition que vous avez choisi, vous pouvez :\n"
+"              <ul>\n"
+"                <li style=\"list-style-type:'- '\">Le télécharger sur votre plateforme : <a href=\"${object.operation_id.get_login_url()}\">Cliquez ici.</a> Il reste disponible pendant 30 jours</li>\n"
+"                <li style=\"list-style-type:'- '\">Le récupérer sur votre SFTP. Il reste disponible pendant 8 jours.</li>\n"
+"              </ul>\n"
+"            </p>\n"
+"            <p>L'équipe MyModel.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.operation_modeled_mail_template
+msgid ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Hello,</p>\n"
+"            <p>\n"
+"              The operation number <strong>${object.number}</strong> is modeled, your Power BI report is now available.\n"
+"              <ul>\n"
+"                <li>Campaign: <strong>${object.campaign_id.name}</strong></li>\n"
+"                <li>Action: <strong>${object.action_id.name or 'n/a'}</strong></li>\n"
+"                <li>Operation: <strong>${object.name}</strong></li>\n"
+"              </ul>\n"
+"            <p/>\n"
+"            <p>\n"
+"              You can access the platform: &nbsp;\n"
+"              <a href=\"${object.get_login_url()}\">Click here.</a>\n"
+"            </p>\n"
+"            <p>The MyModel team.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Bonjour,</p>\n"
+"            <p>\n"
+"              L’opération numéro <strong>${object.number}</strong> est modélisée, votre rapport Power BI est maintenant disponible.\n"
+"              <ul>\n"
+"                <li>Campagne: <strong>${object.campaign_id.name}</strong></li>\n"
+"                <li>Action: <strong>${object.action_id.name or 'n/a'}</strong></li>\n"
+"                <li>Opération: <strong>${object.name}</strong></li>\n"
+"              </ul>\n"
+"            <p/>\n"
+"            <p>\n"
+"              Vous pouvez accéder à la plateforme: &nbsp;\n"
+"              <a href=\"${object.get_login_url()}\">Cliquer ici.</a>\n"
+"            </p>\n"
+"            <p>L'équipe MyModel.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.packaging_upgrade_mail_template
+msgid ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Hello,</p>\n"
+"            <p>\n"
+"              We confirm the upgrade of your subscription to the next level. You can now connect to the platform to finalize your extraction.\n"
+"            </p>\n"
+"            <p>\n"
+"              You can access the platform: &nbsp;\n"
+"              <a href=\"${object.operation_id.get_login_url()}\">Click here.</a>\n"
+"            </p>\n"
+"            <p>\n"
+"              We thank you in advance!\n"
+"            <p/>\n"
+"            <p>The MyModel team.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Bonjour,</p>\n"
+"            <p>\n"
+"              Nous vous confirmons le passage de votre abonnement au palier suivant. Vous pouvez dès à présent vous connecter à la plateforme afin de finaliser votre extraction.\n"
+"            </p>\n"
+"            <p>\n"
+"              Vous pouvez accéder à la plateforme: &nbsp;\n"
+"              <a href=\"${object.operation_id.get_login_url()}\">Cliquez ici.</a>\n"
+"            </p>\n"
+"            <p>\n"
+"              Nous vous remercions par avance!\n"
+"            <p/>\n"
+"            <p>L’équipe MyModel.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.operation_request_upgrade_package_mail_template
+msgid ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Hello,</p>\n"
+"            <p>The modeling of your operation <strong>${object.name}</strong> is complete.</p>\n"
+"            <p>\n"
+"              You want to be able to download <strong>${object.qty_extracted}</strong> credentials, but the current balance is insufficient.\n"
+"            </p>\n"
+"            <p>We invite you to connect to the platform to validate your agreement on the next step.</p>\n"
+"            <p>\n"
+"              You can access the platform: &nbsp;\n"
+"              <a href=\"${object.operation_id.get_login_url()}\">Click here.</a>\n"
+"            </p>\n"
+"            <p>We thank you in advance!</p>\n"
+"            <p>The MyModel team.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Bonjour,</p>\n"
+"            <p>La modélisation de votre opération <strong>${object.name}</strong> est terminée.</p>\n"
+"            <p>\n"
+"              Vous souhaitez pouvoir télécharger <strong>${object.qty_extracted}</strong> identifiants, mais le solde actuel est insuffisant.\n"
+"            </p>\n"
+"            <p>Nous vous invitons à vous connecter à la plateforme afin de valider votre accord sur le passage au palier suivant.</p>\n"
+"            <p>\n"
+"              Vous pouvez accéder à la plateforme: &nbsp;\n"
+"              <a href=\"${object.operation_id.get_login_url()}\">Cliquez ici.</a>\n"
+"            </p>\n"
+"            <p>Nous vous remercions par avance !</p>\n"
+"            <p>L’équipe MyModel.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model:mail.template,body_html:maas_sale.operation_deleted_mail_template
+msgid ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Hello,</p>\n"
+"            <p>The operation <strong>${object.number}</strong>-<strong>${object.name}</strong> is deleted by ${user.name}.</p>\n"
+"            <p>The MyModel team.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+msgstr ""
+"\n"
+"        \n"
+"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"            <p>Bonjour,</p>\n"
+"            <p>L'operation <strong>${object.number}</strong>-<strong>${object.name}</strong> est supprimée par ${user.name}.</p>\n"
+"            <p>L'équipe MyModel.</p>\n"
+"          </div>\n"
+"        \n"
+"      "
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "(edit)"
+msgstr "(éditer)"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "<span class=\"oe_read_only\">-</span>"
+msgstr ""
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.package_upgrade_view_form
+msgid ""
+"<span>\n"
+"                            Thank you for confirming the suggested higher level.\n"
+"                        </span>"
+msgstr "<span>\n"
+"                            Merci de confirmer le passage au palier supérier.\n"
+"                        </span>"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.package_upgrade_view_form
+msgid ""
+"<span>\n"
+"                            Your balance is not sufficient to complete the requested transaction.\n"
+"                            We suggest you to move to the next higher level:\n"
+"                        </span>"
+msgstr "<span>\n"
+"                            Votre solde n'est pas suffisant pour réalisée l'opération demandée.\n"
+"                            Nous vous proposons de passer au plaier supérieur suivant :\n"
+"                        </span>"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_child_form_view
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "Abandon"
+msgstr "Abandonner"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__cancel
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__state__cancel
+msgid "Abandoned"
+msgstr "Abandonné"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__access_warning
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__access_warning
+msgid "Access warning"
+msgstr "Avertissement d'accès"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__action_id
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_view_form
+msgid "Action"
+msgstr "Action"
+
+#. module: maas_sale
+#: model:ir.actions.act_window,name:maas_sale.sale_campaign_action_action
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__action_ids
+#: model:ir.ui.menu,name:maas_sale.sale_campaign_action_menu
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_view_tree
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_view_form
+msgid "Actions"
+msgstr "Actions"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Address"
+msgstr "Adresse"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__res_partner__partner_type__alliance
+msgid "Alliance"
+msgstr "Alliance"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_datafile
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_datafile
+msgid "Attachment"
+msgstr "Pièce joint"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_attachment_count
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièce joint"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_filename
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_filename
+msgid "Attachment Name"
+msgstr "Nom du fichier"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__available
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__state__available
+msgid "Available"
+msgstr "Disponible"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_order__balance
+msgid "Balance"
+msgstr "Solde"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_order__package_id
+msgid "Basic Package"
+msgstr "Forfait de base"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__sens__best_scored
+msgid "Best scored"
+msgstr "Mieux scorés"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__type__crm
+msgid "CRM"
+msgstr "CRM"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__campaign_id
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_view_form
+msgid "Campaign"
+msgstr "Campagne"
+
+#. module: maas_sale
+#: code:addons/maas_sale/models/sale_campaign.py:0
+#, python-format
+msgid "Campaign must contain only operations of the defined customer."
+msgstr ""
+"Une campagne doit impérativement contenir que des opérations du client "
+"définie."
+
+#. module: maas_sale
+#: model:ir.actions.act_window,name:maas_sale.sale_campaign_action
+#: model:ir.model.fields,field_description:maas_sale.field_res_partner__campaign_ids
+#: model:ir.model.fields,field_description:maas_sale.field_res_users__campaign_ids
+#: model:ir.ui.menu,name:maas_sale.sale_campaign_menu
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_view_tree
+msgid "Campaigns"
+msgstr "Campagnes"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__canal
+msgid "Canal"
+msgstr "Canal"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.package_upgrade_view_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.packaging_upgrade_mail_template
+msgid "Changement de palier."
+msgstr "Changement de palier."
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__child_ids
+msgid "Children"
+msgstr "Operation fille"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__number_child
+msgid "Children number"
+msgstr "Nombre d'opération fille"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "City"
+msgstr "Ville"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_search
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_search
+msgid "Client"
+msgstr "Client"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__company_id
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Company"
+msgstr "Société"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__res_partner__partner_type__conexplus
+msgid "Conex +"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de config"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Contact / Address"
+msgstr "Contact / Adresse"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Contact Name"
+msgstr "Nom du contact"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Contacts & Addresses"
+msgstr "Contacts & Adresses"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Country"
+msgstr "Pays"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Create company"
+msgstr "Créer une société"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__create_uid
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__create_uid
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__create_uid
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__create_uid
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__create_uid
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__create_uid
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__create_date
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__create_date
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__create_date
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__create_date
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__create_date
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__create_date
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_order__current_cumulative_quantity
+msgid "Current Cumulative Quantity"
+msgstr "Quantité cumulative courante"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_order__current_package_id
+msgid "Current Package"
+msgstr "Forfait courant"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__partner_id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__partner_id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__is_customer
+msgid "Customer"
+msgstr "Client"
+
+#. module: maas_sale
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__access_url
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__access_url
+msgid "Customer Portal URL"
+msgstr "URL du portail client"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__date
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__date
+msgid "Date"
+msgstr "Date"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_res_partner__date_update_vars
+#: model:ir.model.fields,field_description:maas_sale.field_res_users__date_update_vars
+msgid "Date Update Vars"
+msgstr "Date MAJ vars additionnelles"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_res_partner__date_update_title
+#: model:ir.model.fields,field_description:maas_sale.field_res_users__date_update_title
+msgid "Date Update title"
+msgstr "Date MAJ titre"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__date_availability
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__date_availability
+msgid "Date of availability"
+msgstr "Date de disponibilité"
+
+#. module: maas_sale
+#: code:addons/maas_sale/models/sale.py:0
+#, python-format
+msgid "Delay before deadline can't be greater than availability duration!"
+msgstr ""
+"Délai avant date fin de téléchargement ne peut pas être supérieur à la durée"
+" de disponibilité !"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__deleted
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__deleted
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__deleted
+msgid "Deleted"
+msgstr "Supprimé"
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.operation_request_upgrade_package_mail_template
+msgid "Demande de changement de palier."
+msgstr "Demande de changement de palier."
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_desc
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_desc
+msgid "Description"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__display_name
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__display_name
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__display_name
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__display_name
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__display_name
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__display_name
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_child_form_view
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "Download"
+msgstr "Télécharger"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__downloaded
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__downloaded
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__state__downloaded
+msgid "Downloaded"
+msgstr "Téléchargé"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__canal__email
+msgid "Email"
+msgstr "Email"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__type__cancel_replace
+msgid "Full cancel and replace"
+msgstr "Annule et remplace complet"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__identifiers
+#: model:ir.model.fields,field_description:maas_sale.field_product_product__identifiers
+#: model:ir.model.fields,field_description:maas_sale.field_product_template__identifiers
+msgid "Ids"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__image
+msgid "Image"
+msgstr "Image"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__in_progress
+msgid "In Progress"
+msgstr "En cours"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__state__in_progress
+msgid "In progress"
+msgstr "En cours"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__indication_id
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Indication"
+msgstr "Indication"
+
+#. module: maas_sale
+#: model:ir.actions.act_window,name:maas_sale.indication_action
+#: model:ir.ui.menu,name:maas_sale.indication_menu
+msgid "Indications"
+msgstr "Indications"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__partner_info_ids
+msgid "Infos"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__type__initial_command
+msgid "Initial Command"
+msgstr "Commande initiale"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Internal Notes"
+msgstr "Notes internes"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Internal note..."
+msgstr "Note interne..."
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__is_cancel
+msgid "Is Cancel"
+msgstr "Est annulé"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_product_product__is_basic_package
+#: model:ir.model.fields,field_description:maas_sale.field_product_template__is_basic_package
+msgid "Is basic package?"
+msgstr "Est forfait de base ?"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__sens__least_scored
+msgid "Least scored"
+msgstr "Moins bien scorés"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_main_attachment_id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_child_form_view
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "Make Available"
+msgstr "Rendre Disponible"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_has_error
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_ids
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Misc"
+msgstr "Divers"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Mobile:"
+msgstr "Mobile :"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__modeled
+msgid "Modeled"
+msgstr "Modélisé"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__modeled_file_url
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__modeled_file_url
+msgid "Modeled File URL"
+msgstr "Fichier modélisé"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "Modeling"
+msgstr "Modéliser"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__modelling_end_date
+msgid "Modelling End Date"
+msgstr "Modelling End Date"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__modelling_start_date
+msgid "Modelling Start Date"
+msgstr "Modelling Start Date"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__modelling_progress
+msgid "Modelling progress"
+msgstr "Modelling progress"
+
+#. module: maas_sale
+#: model:ir.actions.server,name:maas_sale.download_availability_checker_cron_ir_actions_server
+#: model:ir.cron,cron_name:maas_sale.download_availability_checker_cron
+#: model:ir.cron,name:maas_sale.download_availability_checker_cron
+msgid "MyModel Sale Operation: File Download Availability Checker"
+msgstr "MyModel Sale Operation: Vérifier Disponibilité Fichier"
+
+#. module: maas_sale
+#: model:ir.actions.server,name:maas_sale.notify_before_download_deadline_cron_ir_actions_server
+#: model:ir.cron,cron_name:maas_sale.notify_before_download_deadline_cron
+#: model:ir.cron,name:maas_sale.notify_before_download_deadline_cron
+msgid "MyModel Sale Operation: Send Notification Before Download Deadline"
+msgstr "MyModel Opération: Relance Téléchargement Fichier"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__name
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__name
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__name
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__name
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__name
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Name"
+msgstr "Nom"
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.operation_created_mail_template
+msgid "Nouvelle opération créée."
+msgstr ""
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_search
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_search
+msgid "Num Operation"
+msgstr "Num Operation"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_needaction_counter
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__type__only_delta
+msgid "Only Delta"
+msgstr "Delta uniquement"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__operation_id
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_config_settings_maas_form_inherit
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_search
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_search
+msgid "Operation"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.operation_available_mail_template
+msgid "Operation Available Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.operation_canceled_mail_template
+msgid "Operation Canceled Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "Operation Children"
+msgstr "Operation fille"
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.operation_created_mail_template
+msgid "Operation Created Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.operation_downloaded_mail_template
+msgid "Operation Downloaded Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.operation_modeled_mail_template
+msgid "Operation Modeled Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__number
+msgid "Operation Number"
+msgstr "Numéro Op."
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.operation_ordered_mail_template
+msgid "Operation Ordered Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.operation_recall_download_file_mail_template
+msgid "Operation Recall Download File Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.operation_request_upgrade_package_mail_template
+msgid "Operation Request Upgrade Package Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.operation_deleted_mail_template
+msgid "Operation deleted Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.operation_deleted_mail_template
+msgid "Operation supprimée."
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_res_partner__operation_ids
+#: model:ir.model.fields,field_description:maas_sale.field_res_users__operation_ids
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__operation_ids
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__operation_ids
+#: model:ir.ui.menu,name:maas_sale.sale_operation_menu
+#: model:ir.ui.menu,name:maas_sale.sale_operation_menu_root
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_view_form
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_view_form
+msgid "Operations"
+msgstr "Opérations"
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.operation_canceled_mail_template
+msgid "Opération annulée"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.operation_ordered_mail_template
+msgid "Opération commandée"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.operation_available_mail_template
+msgid "Opération disponible au téléchargement"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.operation_modeled_mail_template
+msgid "Opération modélisée avec succès"
+msgstr ""
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.operation_downloaded_mail_template
+msgid "Opération télechargée"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__ordered
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__state__ordered
+msgid "Ordered"
+msgstr "Commandé"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_child_form_view
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "Ordering"
+msgstr "Commander"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__pbi_column_filter
+msgid "PBI Column Filter"
+msgstr "Colonne du filtre"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__pbi_function_app_url
+msgid "PBI Function App URL"
+msgstr "URL du rapport"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__pbi_table_filter
+msgid "PBI Table Filter"
+msgstr "Table du filtre"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__pbi_value_filter
+msgid "PBI Value Filter"
+msgstr "Valeur du filtre"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__type__prm
+msgid "PRM"
+msgstr "PRM"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_package_upgrade
+msgid "Package Upgrade"
+msgstr "Modification Forfai"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.package_upgrade_view_form
+msgid "Package Upgrade Assistant"
+msgstr "Assistant de modification forfait"
+
+#. module: maas_sale
+#: model:mail.template,name:maas_sale.packaging_upgrade_mail_template
+msgid "Package Upgrade Mail Template"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__operation_id
+msgid "Parent"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__partner_id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__partner_id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__partner_id
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_res_partner__partner_type
+#: model:ir.model.fields,field_description:maas_sale.field_res_users__partner_type
+msgid "Partner Type"
+msgstr "Type de partenaire"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Partners"
+msgstr "Partenaires"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Phone:"
+msgstr "Téléphone :"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "Population Scored"
+msgstr "Population à scorer"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__attachment_scored_id
+msgid "Population Scored Attachment"
+msgstr "Population Scored Attachment"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_count
+msgid "Population Scored Count Identifiers"
+msgstr "Population Scored Count Identifiers"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_res_config_settings__operation_qty_scored
+msgid "Population scored"
+msgstr "Population à scorer"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__access_url
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__access_url
+msgid "Portal Access URL"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_product_pricelist_item
+msgid "Pricelist Rule"
+msgstr "Règle des listes des prix"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__canal__print
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_product_template
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__product_id
+msgid "Product"
+msgstr "Article"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__quantity
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__qty_extracted
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__qty_extracted
+msgid "Quantity Extracted"
+msgstr "Quantité commandée"
+
+#. module: maas_sale
+#: model:mail.template,subject:maas_sale.operation_recall_download_file_mail_template
+msgid "Relance téléchargement fichier"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_product_product__retribution_rate
+#: model:ir.model.fields,field_description:maas_sale.field_product_template__retribution_rate
+msgid "Retribution Rate"
+msgstr "Taux de rétribution"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__canal__sms
+msgid "SMS"
+msgstr ""
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Sale"
+msgstr "Vente"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_sale_campaign
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__campaign_id
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_search
+msgid "Sale Campaign"
+msgstr "Campagne"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_sale_campaign_action
+msgid "Sale Campaign Action"
+msgstr "Action"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_search
+msgid "Sale Campaign action"
+msgstr "Sale Campaign action"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_sale_operation
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "Sale Operation"
+msgstr "Opération"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_child_form_view
+msgid "Sale Operation children"
+msgstr "Opérations filles"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_search
+msgid "Sale operation"
+msgstr "Opération"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Sales & Purchases"
+msgstr "Ventes & Achats"
+
+#. module: maas_sale
+#: model:ir.actions.act_window,name:maas_sale.sale_operation_action
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_tree
+msgid "Sales Operations"
+msgstr "Opérations"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__attachment_profile_id
+msgid "Searched Profile Attachment"
+msgstr "Searched Profile Attachment"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_count
+msgid "Searched Profile Count Identifiers"
+msgstr "Searched Profile Count Identifiers"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
+msgid "Searched Profiles"
+msgstr "Profils recherchés"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__access_token
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__access_token
+msgid "Security Token"
+msgstr "Jeton de sécurité"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__sens
+msgid "Sens"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__state
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__state
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "State"
+msgstr "Etat"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Street 2..."
+msgstr "Rue 2..."
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Street..."
+msgstr "Rue..."
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__is_studies
+msgid "Studies"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__subscription_id
+#: model_terms:ir.ui.view,arch_db:maas_sale.product_pricelist_item_form_inherit
+msgid "Subscription"
+msgstr "Etudes"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_product_pricelist_item__subscription_rent
+msgid "Subscription Rent"
+msgstr "Loyer d'abonnement"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_res_partner__subscription_ids
+#: model:ir.model.fields,field_description:maas_sale.field_res_users__subscription_ids
+msgid "Subscriptions"
+msgstr "Abonnements"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "Tags..."
+msgstr "Étiquettes..."
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_config_settings_maas_form_inherit
+msgid "The quantity ordered must be lower than the population scored count"
+msgstr "La quantité commandée doit être inférieure à la population à scorer"
+
+#. module: maas_sale
+#: code:addons/maas_sale/models/sale.py:0
+#: code:addons/maas_sale/models/sale.py:0
+#, python-format
+msgid "The quantity ordered must be strictly positive."
+msgstr "La quantité commandée doit être strictement positive."
+
+#. module: maas_sale
+#: code:addons/maas_sale/models/sale.py:0
+#, python-format
+msgid "This functionality is not deployed yet!"
+msgstr "Cette fonctionnalité n'est pas encore développée !"
+
+#. module: maas_sale
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__timeout
+#: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__state__timeout
+msgid "TimeOut"
+msgstr "Délai dépassé"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_res_partner__title_ref
+#: model:ir.model.fields,field_description:maas_sale.field_res_users__title_ref
+msgid "Title Ref."
+msgstr "Id Titre"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__type
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__type
+msgid "Type"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_product_product__unlimited
+#: model:ir.model.fields,field_description:maas_sale.field_product_template__unlimited
+msgid "Unlimited"
+msgstr "Illimité"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__user_id
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.package_upgrade_view_form
+msgid "Validate"
+msgstr "Valider"
+
+#. module: maas_sale
+#: code:addons/maas_sale/models/sale.py:0
+#: code:addons/maas_sale/models/sale.py:0
+#, python-format
+msgid "You cannot order quantity greater than the population scored."
+msgstr ""
+"Vous ne pouvez pas commander une quantité supérieure à la population cible."
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "ZIP"
+msgstr "Code postal"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "e.g. BE0477472701"
+msgstr ""
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "e.g. Mr."
+msgstr "Ex. : M."
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "e.g. Sales Director"
+msgstr "ex : Directeur Commercial"
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "e.g. www.odoo.com"
+msgstr "Ex. : www.odoo.com"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_indication_indication
+msgid "indication.indication"
+msgstr ""
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
+msgid "internal note..."
+msgstr "Note interne..."
+
+#. module: maas_sale
+#: model_terms:ir.ui.view,arch_db:maas_sale.package_upgrade_view_form
+msgid "or"
+msgstr "ou"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_partner_indication_infos
+msgid "partner.indication.infos"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_sale_operation_child
+msgid "sale.operation.child"
+msgstr ""

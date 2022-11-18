@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <record id="res_config_settings_maas_form_inherit" model = "ir.ui.view">
+      <field name="name">res.config.settings.maas.form.inherit</field>
+      <field name="model">res.config.settings</field>
+      <field name="inherit_id" ref="sale.res_config_settings_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//div[hasclass('app_settings_block')]" position="inside">
+          <h2>Operation</h2>
+          <div class="row mt16 o_settings_container">
+            <div class="col-xs-12 col-md-6 o_setting_box">
+              <div class="o_setting_left_pane">
+                <field name="operation_qty_scored"/>
+              </div>
+              <div class="o_setting_right_pane">
+                <label for="operation_qty_scored"/>
+                <div class="text-muted" id="delivery_carrier">
+                    The quantity ordered must be lower than the population scored count
+                </div>
+              </div>
+            </div>
+          </div>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>

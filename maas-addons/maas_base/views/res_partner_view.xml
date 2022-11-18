@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+      <field name="name">view.partner.form.inherit</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form"/>
+      <field name="arch" type="xml">
+
+        <field name="parent_id" position="attributes">
+          <attribute name="attrs"/>
+        </field>
+
+      </field>
+    </record>
+
+    <record id="view_res_partner_filter_inherit" model="ir.ui.view">
+      <field name="name">view.res.partner.filter.inherit</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_res_partner_filter"/>
+      <field name="arch" type="xml">
+
+        <filter name="customer" position="attributes">
+          <attribute name="domain">['|', '&amp;', ('customer_rank', '>', 0), ('parent_id', '=', False), '&amp;', '&amp;', ('customer_rank', '>', 0), ('parent_id', '!=', False), ('is_company', '=', True)]</attribute>
+        </filter>
+
+        <filter name="supplier" position="attributes">
+          <attribute name="domain">['|', '&amp;', ('supplier_rank', '>', 0), ('parent_id', '=', False), '&amp;', '&amp;', ('supplier_rank', '>', 0), ('parent_id', '!=', False), ('is_company', '=', True)]</attribute>
+        </filter>
+
+      </field>
+    </record>
+
+  </data>
+</odoo>
