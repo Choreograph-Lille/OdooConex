@@ -1,0 +1,19 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ir_sequence_all,access_ir_sequence all,base.model_ir_sequence,,1,0,0,0
+access_ir_ui_menu_all,access_ir_ui_menu all,base.model_ir_ui_menu,,1,0,0,0
+access_ir_model_all,access_ir_model all,base.model_ir_model,,1,0,0,0
+access_ir_config_parameter_all,access_ir_config_parameter all,base.model_ir_config_parameter,,1,0,0,0
+access_mail_followers_all,access_mail_followers all,mail.model_mail_followers,,1,1,1,0
+access_mail_message_all,access_mail_message all,mail.model_mail_message,,1,1,1,0
+access_mail_template_all,access_mail_template all,mail.model_mail_template,,1,1,1,0
+access_mail_mail_all,access_mail_mail all,mail.model_mail_mail,,1,1,1,0
+access_ir_rule_all,access_ir_rule all,base.model_ir_rule,,1,1,1,0
+access_ir_attachment_all,access_ir_attachment all,base.model_ir_attachment,,1,1,1,0
+access_res_partner_customer_management,access_res_partner_customer_management,base.model_res_partner,maas_base.group_customer_management,1,1,1,0
+access_res_company_customer_management,access_res_company_customer_management,base.model_res_company,maas_base.group_customer_management,1,1,1,0
+access_res_partner_user,access_res_partner user,base.model_res_partner,maas_base.group_operation_perform,1,0,0,0
+access_res_company_management,access_res_company user,base.model_res_company,maas_base.group_operation_perform,1,0,0,0
+access_res_users_user,access_res_users user,base.model_res_users,maas_base.group_operation_perform,1,0,0,0
+access_res_partner_customer_admin,access_res_partner_customer admin,base.model_res_partner,maas_base.group_user_management,1,1,1,0
+access_res_company_customer_admin,access_res_company_customer admin,base.model_res_company,maas_base.group_user_management,1,1,1,0
+access_res_users_user_admin,access_res_users_user admin,base.model_res_users,maas_base.group_user_management,1,1,1,0

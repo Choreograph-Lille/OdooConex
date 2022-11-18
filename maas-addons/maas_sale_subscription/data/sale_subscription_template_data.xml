@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data noupdate="0">
+		<record id="sale_subscription_template_monthly" model="sale.order.template">
+			<field name="name">Modèle d'abonnement mensuel</field>
+			<field name="recurring_rule_type">monthly</field>
+			<field name="recurring_interval">1</field>
+			<field name="payment_mandatory" eval="True"/>
+		</record>
+	</data>
+</odoo>
