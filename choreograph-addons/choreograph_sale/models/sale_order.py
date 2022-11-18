@@ -2,67 +2,53 @@
 
 from odoo import api, Command, fields, models, _
 
+OPERATION_CONDITION_TYPE = {
+    'file_processing': 'File condition',
+    'maj_condition': 'MAJ condition',
+    'sale_order': 'Sale order condition',
+    'exclusion': 'Exclusion',
+    'exclusion_so': 'Sale order exclusion',
+    'comment': 'Comment',
+}
+OPERATION_TYPE = {
+     'condition': 'Condition',
+     'exclusion': 'Exclusion',
+}
+
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    operation_type = fields.Many2one('project.project', string='Operation type', domain=[('is_template', '=', True)])
+    show_operation_generation_button = fields.Boolean(default=True)
+    operation_condition_ids = fields.One2many('operation.condition', 'order_id')
+    new_condition_count = fields.Integer(compute='_compute_new_condition_count')
 
-    class SaleOrder(models.Model):
-        _inherit = 'sale.order'
+    def action_generate_operation(self):
+        self.order_line.sudo().with_company(self.company_id).with_context(is_operation_generation=True)._timesheet_service_generation()
+        self.show_operation_generation_button = False
 
-        def _create_project_from_template(self, values, template):
-            values['name'] = "%s - %s" % (values['name'], template.name)
-            # The no_create_folder context key is used in documents_project
-            project = template.with_context(no_create_folder=True).copy(values)
-            project.tasks.write({
-                'sale_order_id': self.id,
-                'partner_id': self.partner_id.id,
-                'email_from': self.partner_id.email,
-            })
-            # duplicating a project doesn't set the SO on sub-tasks
-            project.tasks.filtered('parent_id').write({
-                'sale_order_id': self.id,
-            })
-            self.sudo().write({
-                'project_id': project.id,
-            })
-            self.order_line.filtered(lambda sol: sol.is_service and sol.product_id.service_tracking in ['project_only', 'task_in_project']).write({
-                'project_id': project.id,
-            })
+    def action_create_task_from_condition(self):
+        for rec in self:
+            for condition in self.operation_condition_ids.filtered(lambda c: not c.is_task_created and c.type != 'comment'):
+                vals = {
+                    'name': rec.name + '/' + OPERATION_TYPE[condition.operation_type] + '/' + OPERATION_CONDITION_TYPE[condition.type],
+                    'partner_id': rec.partner_id.id,
+                    'email_from': rec.partner_id.email,
+                    'description': condition.note,
+                    'sale_order_id': rec.id,
+                    'user_ids': False,
+                }
+                vals['name'] += condition.subtype_id.name if condition.subtype_id else ''
+                rec.project_ids.task_ids = [(0, 0, vals)]
+                condition.is_task_created = True
 
-        def _action_confirm(self):
-            """ Generate project if operation_type is not False. """
-            self.ensure_one()
-            if self.operation_type:
-                values = self._create_project_prepare_values()
-                if len(self.company_id) == 1:
-                    # All orders are in the same company
-                    self.sudo().with_company(self.company_id)._create_project_from_template(values, self.operation_type)
-                else:
-                    # Orders from different companies are confirmed together
-                    for order in self:
-                        order.sudo().with_company(order.company_id)._create_project_from_template(values, self.operation_type)
-            return super()._action_confirm()
+    def _compute_new_condition_count(self):
+        self.new_condition_count = len(self.operation_condition_ids.filtered(lambda c: not c.is_task_created and c.type != 'comment'))
 
-        def _create_project_prepare_values(self):
-            """Generate project values"""
-            account = self.analytic_account_id
-            if not account:
-                service_products = self.order_line.product_id.filtered(
-                    lambda p: p.type == 'service' and p.default_code)
-                default_code = service_products.default_code if len(service_products) == 1 else None
-                self.sudo()._create_analytic_account(prefix=default_code)
-                account = self.analytic_account_id
 
-            # create the project or duplicate one
-            return {
-                'name': '%s - %s' % (self.client_order_ref,
-                                     self.name) if self.client_order_ref else self.name,
-                'analytic_account_id': account.id,
-                'partner_id': self.partner_id.id,
-                'sale_order_id': self.id,
-                'active': True,
-                'company_id': self.company_id.id,
-                'allow_billable': True,
-            }
+class SaleOrderLine(models.Model):
+    _inherit = "sale.order.line"
+
+    def _timesheet_service_generation(self):
+        if self._context.get('is_operation_generation'):
+            super()._timesheet_service_generation()
