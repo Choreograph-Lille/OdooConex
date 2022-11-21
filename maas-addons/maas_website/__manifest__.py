@@ -29,7 +29,7 @@
     "author": "Arkeup",
     "website": "www.arkeup.com",
 
-    'depends': ['maas_crm', 'maas_sale', 'maas_sale_subscription', 'website', 'web', 'website_payment'],
+    'depends': ['maas_crm', 'maas_sale', 'maas_sale_subscription', 'website', 'web'],
     'description': """ This module allows to manage operations of customer from FO. """,
     'data': [
         # data
@@ -38,7 +38,7 @@
         'views/menu.xml',
         'views/templates.xml',
         'views/assets.xml',
-        'views/layout.xml',
+        #'views/layout.xml',
     ],
     'assets': {
         'web.assets_tests': [
