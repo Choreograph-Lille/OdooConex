@@ -15,6 +15,146 @@
             </field>
           </page>
         </xpath>
+
+        <!-- studion custom -->
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='team_id'][2]"
+               position="replace">
+          <xpath expr="//field[@name='property_payment_term_id']" position="move"/>
+          <xpath expr="//field[@name='property_product_pricelist']" position="move"/>
+        </xpath>
+        <xpath expr="//field[@name='category_id']" position="after">
+          <field widget="many2many_tags" name="catalogue_ids"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='user_id']"
+               position="after">
+          <field name="sale_team"/>
+          <field name="country_base"/>
+          <field name="category_name" force_save="True" readonly="1"/>
+        </xpath>
+        <xpath expr="//group[@name='purchase']" position="attributes">
+          <attribute name="groups">purchase.group_purchase_user</attribute>
+        </xpath>
+
+        <xpath expr="//group[@name='fiscal_information']" position="inside">
+          <xpath expr="//field[@name='property_account_position_id']" position="move"/>
+        </xpath>
+        <xpath expr="//group[@name='misc']" position="inside">
+          <xpath expr="//field[@name='company_registry']" position="move"/>
+          <xpath expr="//field[@name='ref']" position="move"/>
+          <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='misc']/field[@name='company_id']"
+                 position="move"/>
+          <xpath expr="//field[@name='industry_id']" position="move"/>
+        </xpath>
+        <xpath expr="//group[@name='misc']" position="after">
+          <group>
+            <group string="Contract">
+              <field name="first_contract_date"/>
+              <field name="contract_update_date"/>
+              <field name="rescission_date"/>
+            </group>
+            <xpath expr="//field[@name='property_account_position_id']" position="move"/>
+          </group>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounting']/group[1]" position="before">
+          <xpath expr="//field[@name='duplicated_bank_account_partners_count']" position="move"/>
+          <xpath expr="//field[@name='show_credit_limit']" position="move"/>
+        </xpath>
+        <xpath expr="//button[@name='62']" position="before">
+          <xpath expr="//field[@name='bank_ids']" position="move"/>
+        </xpath>
+        <xpath expr="//group[@name='accounting_entries']" position="inside">
+          <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounting']/group[1]/group[@name='accounting_entries']/field[@name='currency_id']"
+                 position="move"/>
+          <xpath expr="//field[@name='property_account_receivable_id']" position="move"/>
+          <xpath expr="//field[@name='property_account_payable_id']" position="move"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounting']/group[1]/group[@name='credit_limits']/label[1]"
+               position="before">
+          <xpath expr="//field[@name='credit']" position="move"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounting']/group[1]/group[@name='credit_limits']/div[1]"
+               position="inside">
+          <xpath expr="//field[@name='use_partner_credit_limit']" position="move"/>
+          <xpath expr="//field[@name='credit_limit']" position="move"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/group[1]/group[1]/separator[1]"
+               position="after">
+          <xpath expr="//field[@name='sale_warn']" position="move"/>
+          <xpath expr="//field[@name='sale_warn_msg']" position="move"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/group[1]" position="after">
+          <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/field[@name='comment']"
+                 position="move"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/t[1]/group[1]/separator[1]"
+               position="after">
+          <xpath expr="//field[@name='purchase_warn']" position="move"/>
+          <xpath expr="//field[@name='purchase_warn_msg']" position="move"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/t[2]/group[1]/separator[1]"
+               position="after">
+          <xpath expr="//field[@name='invoice_warn']" position="move"/>
+          <xpath expr="//field[@name='invoice_warn_msg']" position="move"/>
+        </xpath>
+        <xpath expr="//page[@name='partner_roles']" position="inside">
+          <xpath expr="//field[@name='role_ids']" position="move"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+          <page string="Client data" name="client_data">
+            <group>
+              <group name="client_data_left">
+                <field name="update_frequency"/>
+                <field name="last_conexup_date"/>
+                <field name="last_revival_date"/>
+                <field name="base_entry_date"/>
+              </group>
+              <group name="client_data_right">
+                <field name="last_transaction_date"/>
+                <field name="last_receipt_date"/>
+                <field name="private_title"/>
+                <field name="data_destruction_date"/>
+              </group>
+            </group>
+          </page>
+        </xpath>
+        <xpath expr="//form[1]/div[4]" position="inside">
+          <xpath expr="//field[@name='message_follower_ids']" position="move"/>
+          <xpath expr="//field[@name='activity_ids']" position="move"/>
+          <xpath expr="//field[@name='message_ids']" position="move"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="view_partner_property_form_inherit" model="ir.ui.view">
+      <field name="name">res.partner.purchase.property.form.inherit</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="purchase.view_partner_property_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//div[@name='receipt_reminder']" position="before">
+          <xpath expr="//field[@name='property_supplier_payment_term_id']" position="move"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='purchase']/div[@name='receipt_reminder']/label[1]"
+               position="after">
+          <xpath expr="//field[@name='receipt_reminder_email']" position="move"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='purchase']/div[@name='receipt_reminder']/div[1]/span[1]"
+               position="before">
+          <xpath expr="//field[@name='reminder_date_before_receipt']" position="move"/>
+        </xpath>
+        <xpath expr="//div[@name='receipt_reminder']" position="after">
+          <xpath expr="//field[@name='property_purchase_currency_id']" position="move"/>
+        </xpath>
+      </field>
+    </record>
+
+    <record id="res_partner_form_l10n_fr_inherit" model="ir.ui.view">
+      <field name="name">res.partner.form.l10n.fr.inherit</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="l10n_fr.res_partner_form_l10n_fr"/>
+      <field name="arch" type="xml">
+        <xpath expr="//group[@name='misc']" position="inside">
+          <xpath expr="//field[@name='siret']" position="move"/>
+        </xpath>
       </field>
     </record>
   </data>
