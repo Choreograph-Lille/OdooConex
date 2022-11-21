@@ -22,7 +22,6 @@
       <field name="social_twitter">https://twitter.com/hashtag/conexance</field>
       <field name="social_facebook">https://www.facebook.com/pages/Conexance-MD/209232869245085</field>
       <field name="social_linkedin">https://www.linkedin.com/company/conexance-md</field>
-      <field name="social_googleplus"/>
     </record>
 
   </data>
