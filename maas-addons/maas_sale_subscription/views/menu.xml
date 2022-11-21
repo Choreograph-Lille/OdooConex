@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="sale_subscription.menu_sale_subscription_root" model="ir.ui.menu">
+      <field name="groups_id" eval="[(4, ref('maas_base.group_subscription_management')), (4, ref('maas_base.group_package_management'))]"/>
+    </record>
+
+  </data>
+</odoo>

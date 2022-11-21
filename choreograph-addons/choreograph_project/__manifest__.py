@@ -7,9 +7,10 @@
     'category': '',
     'website': '',
     'images': [],
-    'depends': ['choreograph_contact', 'project'],
+    'depends': ['choreograph_contact', 'choreograph_sale_project', 'choreograph_sale'],
     'data': [
         # security
+        # 'security/ir.model.access.csv',
         # views
         'views/project_views.xml',
     ],

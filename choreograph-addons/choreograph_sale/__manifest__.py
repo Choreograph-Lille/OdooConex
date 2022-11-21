@@ -7,9 +7,13 @@
     'category': '',
     'website': '',
     'images': [],
-    'depends': [],
+    'depends': ['choreograph_sale_project', 'project_template'],
     'data': [
-
+        # security
+        'security/ir.model.access.csv',
+        # views
+        'views/sale_order.xml',
+        'views/operation_condition.xml',
     ],
     'installable': True,
     'application': False,
