@@ -7,7 +7,7 @@
     'category': '',
     'website': '',
     'images': [],
-    'depends': ['base', 'contacts', 'account', 'purchase', 'l10n_fr'],
+    'depends': ['base', 'contacts', 'account', 'purchase', 'l10n_fr', 'sales_team', 'sale'],
     'data': [
         # security
         'security/ir.model.access.csv',
