@@ -7,9 +7,10 @@
     'category': '',
     'website': '',
     'images': [],
-    'depends': [],
+    'depends': ['crm'],
     'data': [
-
+        # views
+        'views/crm_views.xml',
     ],
     'installable': True,
     'application': False,
