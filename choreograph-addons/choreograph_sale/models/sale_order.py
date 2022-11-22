@@ -22,6 +22,14 @@ class SaleOrder(models.Model):
     show_operation_generation_button = fields.Boolean(default=True)
     operation_condition_ids = fields.One2many('operation.condition', 'order_id')
     new_condition_count = fields.Integer(compute='_compute_new_condition_count')
+    # studio custom
+    catalogue_ids = fields.Many2many('res.partner.catalogue', string='Catalogue')
+    prefulfill_study = fields.Boolean('Pre-fulfill study')
+    related_base = fields.Char('Related base')
+    data_conservation = fields.Char('Data conservation')
+    receiver = fields.Char('Receiver')
+    send_with = fields.Char('Send with')
+    operation_type_id = fields.Many2one('project.project', string='Operation type')
 
     def action_generate_operation(self):
         self.order_line.sudo().with_company(self.company_id).with_context(is_operation_generation=True)._timesheet_service_generation()

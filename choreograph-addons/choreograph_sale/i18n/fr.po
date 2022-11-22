@@ -21,6 +21,11 @@ msgid "Add a new subtype"
 msgstr "Ajouter un nouveau sous-type"
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Choose the operation type"
+msgstr "Choisir le type d'opération"
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__type__comment
 msgid "Comment"
 msgstr "Commentaire"
@@ -41,6 +46,11 @@ msgstr ""
 #: model:ir.ui.menu,name:choreograph_sale.menu_operation_condition_subtype
 msgid "Condition/Exclusion subtype"
 msgstr "Sous-type de condition/exclusion"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__data_conservation
+msgid "Data conservation"
+msgstr "Conservation des données"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__default_fill
@@ -66,10 +76,20 @@ msgid "Information"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__is_task_created
+msgid "Is Task Created"
+msgstr "Tâche crée"
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__type__maj_condition
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition_subtype__type__maj_condition
 msgid "MAJ condition"
 msgstr "Condition MAJ"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__new_condition_count
+msgid "New Condition Count"
+msgstr "Nombre nouveaux conditions"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
@@ -93,6 +113,7 @@ msgstr "Génération de l'opération"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_type
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__operation_type_id
 msgid "Operation type"
 msgstr "Type d'opération"
 
@@ -100,6 +121,21 @@ msgstr "Type d'opération"
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__order_id
 msgid "Order"
 msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__prefulfill_study
+msgid "Pre-fulfill study"
+msgstr "Prefulfill Etude"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__receiver
+msgid "Receiver"
+msgstr "A destination de"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__related_base
+msgid "Related base"
+msgstr "Base concernée"
 
 #. module: choreograph_sale
 #: code:addons/choreograph_sale/models/sale_order_line.py:0
@@ -123,6 +159,11 @@ msgstr "Exclusion bon de commande"
 #: model:ir.model,name:choreograph_sale.model_sale_order
 msgid "Sales Order"
 msgstr "Bon de commande"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__send_with
+msgid "Send with"
+msgstr "Envoi via"
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_order_line

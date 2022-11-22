@@ -13,6 +13,14 @@
               <field name="sms_coupling"/>
               <field name="sms_coupling_task_type_id"/>
             </group>
+            <group string="Phone coupling">
+              <field name="phone_coupling"/>
+              <field name="phone_coupling_task_type_id"/>
+            </group>
+            <group string="Email coupling">
+              <field name="email_coupling"/>
+              <field name="email_coupling_task_type_id"/>
+            </group>
           </group>
         </page>
       </notebook>
