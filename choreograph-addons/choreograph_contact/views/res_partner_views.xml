@@ -77,24 +77,9 @@
           <xpath expr="//field[@name='use_partner_credit_limit']" position="move"/>
           <xpath expr="//field[@name='credit_limit']" position="move"/>
         </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/group[1]/group[1]/separator[1]"
-               position="after">
-          <xpath expr="//field[@name='sale_warn']" position="move"/>
-          <xpath expr="//field[@name='sale_warn_msg']" position="move"/>
-        </xpath>
         <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/group[1]" position="after">
           <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/field[@name='comment']"
                  position="move"/>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/t[1]/group[1]/separator[1]"
-               position="after">
-          <xpath expr="//field[@name='purchase_warn']" position="move"/>
-          <xpath expr="//field[@name='purchase_warn_msg']" position="move"/>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/t[2]/group[1]/separator[1]"
-               position="after">
-          <xpath expr="//field[@name='invoice_warn']" position="move"/>
-          <xpath expr="//field[@name='invoice_warn_msg']" position="move"/>
         </xpath>
         <xpath expr="//page[@name='partner_roles']" position="inside">
           <xpath expr="//field[@name='role_ids']" position="move"/>
