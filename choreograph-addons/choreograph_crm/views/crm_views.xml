@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<odoo>
+  <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+    <field name="name">crm.lead.form.inherit</field>
+    <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+    <field name="model">crm.lead</field>
+    <field name="arch" type="xml">
+      <data>
+        <xpath expr="//field[@name='lead_properties']" position="replace"/>
+        <xpath expr="//form[1]/sheet[1]/group[1]/group[not(@name)][1]/field[@name='tag_ids']" position="after">
+          <field name="sox"/>
+        </xpath>
+        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='lead']/group[1]/group[1]/field[@name='website']" position="after">
+          <field name="category_name" force_save="True" readonly="1"/>
+          <field name="activity_sector" force_save="True" readonly="1"/>
+        </xpath>
+      </data>
+    </field>
+  </record>
+</odoo>
