@@ -17,5 +17,5 @@ class ResPartnerChoreographRole(models.Model):
     partner_id = fields.Many2one('res.partner')
 
     _sql_constraints = [
-        ('unique_role_partner', 'unique (roler_id, partner_id)', _('This role is already set for this client.'))
+        ('unique_role_partner', 'unique (role_id, partner_id)', _('This role is already set for this client.'))
     ]
