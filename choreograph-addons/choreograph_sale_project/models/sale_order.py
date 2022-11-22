@@ -9,3 +9,7 @@ class SaleOrder(models.Model):
     # operation fields
     sms_coupling = fields.Boolean()
     sms_coupling_task_type_id = fields.Many2one('choreograph.project.task.type', string='Task type')
+    phone_coupling = fields.Boolean()
+    phone_coupling_task_type_id = fields.Many2one('choreograph.project.task.type', string='Task type')
+    email_coupling = fields.Boolean()
+    email_coupling_task_type_id = fields.Many2one('choreograph.project.task.type', string='Task type')
