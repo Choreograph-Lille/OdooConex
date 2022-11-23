@@ -27,6 +27,11 @@ class OperationTest(TransactionCase):
             'company_id': self.company.id,
             'date': fields.Date.today(),
             'qty_extracted': 200000,
+            'population_scored_desc': 'Test',
+            'searched_profile_desc': 'Test',
+            'type': 'prm',
         }
+        campaign = self.env['sale.campaign'].create({'name': 'Campaign test'})
+        vals.update({'campaign_id': campaign.id})
         operation = self.env['sale.operation'].create(vals)
-        self.assertEquals(operation.state, 'in_progress', 'The state of your operation is not correct!')
+        self.assertEqual(operation.state, 'in_progress', 'The state of your operation is not correct!')

@@ -18,6 +18,7 @@ class ProjectTask(models.Model):
     show_email_coupling = fields.Boolean(compute='_compute_operation_fields')
 
     def _compute_operation_fields(self):
-        self.show_sms_coupling = self.task_type == self.sale_order_id.sms_coupling_task_type_id
-        self.show_phone_coupling = self.task_type == self.sale_order_id.phone_coupling_task_type_id
-        self.show_email_coupling = self.task_type == self.sale_order_id.email_coupling_task_type_id
+        for rec in self:
+            rec.show_sms_coupling = rec.task_type == rec.sale_order_id.sms_coupling_task_type_id
+            rec.show_phone_coupling = rec.task_type == rec.sale_order_id.phone_coupling_task_type_id
+            rec.show_email_coupling = rec.task_type == rec.sale_order_id.email_coupling_task_type_id
