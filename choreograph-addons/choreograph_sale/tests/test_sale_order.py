@@ -65,7 +65,9 @@ class TestSaleOrder(TestSaleCommon):
         # check if sms coupling in SO == sms coupling in tasks
         self.assertEqual(self.sale_order.tasks_ids[0].sms_coupling, self.sale_order.sms_coupling)
 
-        # check if sms coupling is shown
-        # self.sale_order.tasks_ids._compute_operation_fields()
-        # self.assertEqual(self.sale_order.tasks_ids[0].show_sms_coupling, True)
+        self.sale_order.tasks_ids[0].task_type_id = self.task_type.id
+        # check if sms coupling is shown for the first task and hidden for the second
+        self.sale_order.tasks_ids._compute_operation_fields()
+        self.assertEqual(self.sale_order.tasks_ids[0].show_sms_coupling, True)
+        self.assertEqual(self.sale_order.tasks_ids[1].show_sms_coupling, False)
 
