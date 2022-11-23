@@ -7,7 +7,7 @@
     'category': '',
     'website': '',
     'images': [],
-    'depends': ['choreograph_sale_project', 'project_template'],
+    'depends': ['choreograph_sale_project', 'project_template', 'choreograph_contact'],
     'data': [
         # security
         'security/ir.model.access.csv',

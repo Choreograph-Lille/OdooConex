@@ -36,6 +36,16 @@ msgid "Display Name"
 msgstr ""
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__email_coupling
+msgid "Email Coupling"
+msgstr "Couplage mail"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "Email coupling"
+msgstr "Couplage mail"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__id
 msgid "ID"
 msgstr ""
@@ -66,6 +76,16 @@ msgid "Operation"
 msgstr "Opération"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__phone_coupling
+msgid "Phone Coupling"
+msgstr "Couplage téléphone"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "Phone coupling"
+msgstr "Couplage téléphone"
+
+#. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
 msgid "SMS coupling"
 msgstr "Couplage SMS"
@@ -78,7 +98,9 @@ msgstr "Couplage SMS"
 
 #. module: choreograph_sale_project
 #: model:ir.actions.act_window,name:choreograph_sale_project.choreograph_sale_project_task_type_action
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__task_type
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__task_type_id
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__email_coupling_task_type_id
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__phone_coupling_task_type_id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__sms_coupling_task_type_id
 msgid "Task type"
 msgstr "Type de tâche"

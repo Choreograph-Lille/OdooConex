@@ -20,6 +20,18 @@
           <field name="operation_condition_ids"/>
         </page>
       </notebook>
+
+      <!-- from studio -->
+      <xpath expr="//field[@name='payment_term_id']" position="replace">
+        <field widget="many2many_tags" name="catalogue_ids"/>
+        <field name="data_conservation"/>
+        <field name="operation_type_id" help="Choose the operation type"/>
+        <field name="related_base"/>
+      </xpath>
+      <xpath expr="//field[@name='partner_shipping_id']" position="after">
+        <field name="send_with"/>
+        <field name="receiver"/>
+      </xpath>
     </field>
   </record>
 </odoo>

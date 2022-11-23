@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_crm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-22 07:44+0000\n"
+"PO-Revision-Date: 2022-11-22 07:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_crm
+#: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__activity_sector
+msgid "Activity sector"
+msgstr "Secteur d'activité"
+
+#. module: choreograph_crm
+#: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__category_name
+msgid "Category name"
+msgstr "Nom catégorie"
+
+#. module: choreograph_crm
+#: model:ir.model,name:choreograph_crm.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Piste/opportunité"
+
+#. module: choreograph_crm
+#: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__sox
+msgid "SOX"
+msgstr ""
