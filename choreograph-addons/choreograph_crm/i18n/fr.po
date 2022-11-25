@@ -21,6 +21,11 @@ msgid "Activity sector"
 msgstr "Secteur d'activité"
 
 #. module: choreograph_crm
+#: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__agency_id
+msgid "Agency"
+msgstr "Agence"
+
+#. module: choreograph_crm
 #: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__category_name
 msgid "Category name"
 msgstr "Nom catégorie"

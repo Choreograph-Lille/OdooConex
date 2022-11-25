@@ -5,16 +5,46 @@
     <field name="inherit_id" ref="crm.crm_lead_view_form"/>
     <field name="model">crm.lead</field>
     <field name="arch" type="xml">
-      <data>
-        <xpath expr="//field[@name='lead_properties']" position="replace"/>
-        <xpath expr="//form[1]/sheet[1]/group[1]/group[not(@name)][1]/field[@name='tag_ids']" position="after">
-          <field name="sox"/>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='lead']/group[1]/group[1]/field[@name='website']" position="after">
-          <field name="category_name" force_save="True" readonly="1"/>
-          <field name="activity_sector" force_save="True" readonly="1"/>
-        </xpath>
-      </data>
+      <xpath expr="//field[@name='lead_properties']" position="replace"/>
+      <xpath expr="//form[1]/sheet[1]/group[1]/group[not(@name)][1]/field[@name='tag_ids']" position="after">
+        <field name="sox"/>
+      </xpath>
+      <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='lead']/group[1]/group[1]/field[@name='website']"
+             position="after">
+        <field name="category_name" force_save="True" readonly="1"/>
+        <field name="activity_sector" force_save="True" readonly="1"/>
+      </xpath>
+      <xpath expr="//group[@name='lead_partner']/field[@name='partner_id']" position="after">
+        <field name="agency_id"/>
+      </xpath>
+      <xpath expr="//group[@name='opportunity_partner']/field[@name='partner_id']" position="after">
+        <field name="agency_id"/>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="crm_case_kanban_view_leads_inherit" model="ir.ui.view">
+    <field name="name">crm.lead.kanban.lead</field>
+    <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+    <field name="model">crm.lead</field>
+    <field name="arch" type="xml">
+      <field name="partner_id" position="replace">
+        <field name="agency_id"/>
+      </field>
+      <xpath expr="//span[@class='o_text_overflow']" position="replace">
+        <span class="o_text_overflow" t-if="record.agency_id.value" t-esc="record.agency_id.value"></span>
+      </xpath>
+    </field>
+  </record>
+
+  <record id="quick_create_opportunity_form_inherit" model="ir.ui.view">
+    <field name="name">crm.lead.form.quick_create</field>
+    <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+    <field name="model">crm.lead</field>
+    <field name="arch" type="xml">
+      <field name="name" position="before">
+        <field name="agency_id"/>
+      </field>
     </field>
   </record>
 </odoo>
