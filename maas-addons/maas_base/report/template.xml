@@ -18,24 +18,6 @@
         </div>
       </xpath>
     </template>
-    <!--<template id="custom_external_layout_background" inherit_id="web.external_layout_background">
-      <xpath expr="//div[hasclass('o_background_header')]" position="replace">
-        <div class="header o_background_header">
-          <div class="pull-right">
-            <h3 class="mt0 text-right" t-field="company.report_header"/>
-          </div>
-          <img src='/web/binary/company_logo' style="max-height: 45px;"/>
-          <div class="pull-left company_address">
-            <div>
-              <strong t-field="company.partner_id.name"/>
-            </div>
-            <span t-field="company.partner_id"
-                  t-field-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;], &quot;no_marker&quot;: true}"/>
-          </div>
-          <div class="clearfix mb8"/>
-        </div>
-      </xpath>
-    </template>-->
     <template id="cusotm_external_layout_boxed" inherit_id="web.external_layout_boxed">
       <xpath expr="//div[hasclass('o_boxed_header')]" position="replace">
         <div class="header o_boxed_header">
@@ -54,38 +36,6 @@
         </div>
       </xpath>
     </template>
-    <!--<template id="custom_external_layout_clean" inherit_id="web.external_layout_clean">
-      <xpath expr="//div[hasclass('o_clean_header')]" position="replace">
-        <div class="header o_clean_header">
-          <div class="row">
-            <div class="col-xs-6">
-              <img src='/web/binary/company_logo' style="max-height: 45px;"/>
-            </div>
-            <div class="col-xs-5 col-xs-offset-1" name="company_address">
-              <ul class="list-unstyled">
-                <strong>
-                  <li t-if="company.name">
-                    <span t-field="company.name"/>
-                  </li>
-                </strong>
-                <li t-if="company.vat"><t t-esc="company.country_id.vat_label or 'TIN'"/>:
-                  <span t-field="company.vat"/>
-                </li>
-                <li t-if="company.phone">Tel:
-                  <span t-field="company.phone"/>
-                </li>
-                <li t-if="company.email">
-                  <span t-field="company.email"/>
-                </li>
-                <li t-if="company.website">
-                  <span t-field="company.website"/>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </xpath>
-    </template>-->
 
   </data>
 </odoo>

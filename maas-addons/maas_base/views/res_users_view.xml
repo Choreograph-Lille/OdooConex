@@ -80,20 +80,6 @@
       </field>
     </record>
 
-    <!--<record id="view_user_profile_form_inherit" model="ir.ui.view">
-      <field name="name">view.user.profile.form.inherit</field>
-      <field name="model">res.users</field>
-      <field name="inherit_id" ref="smile_access_control.view_user_profile_form"/>
-      <field name="arch" type="xml">
-
-        <label for="is_update_users" position="after">
-          <br/>
-          <field name="is_portal_user" attrs="{'invisible': [('is_user_profile', '=', False)]}"/>
-          <label for="is_portal_user"/>
-        </label>
-
-      </field>
-    </record>-->
 
     <record id="base.action_res_users" model="ir.actions.act_window">
       <field name="context">{}</field>

@@ -83,15 +83,6 @@ class ResUsers(models.Model):
             result.append(('Email', "1" if self.default_email else "0"))
         return result
 
-    def _password_has_expired(self):
-        self.ensure_one()
-        res = super(ResUsers,self)._password_has_expired()
-        if self.company_id.groups_no_expiration:
-            return res and not any(group_id in self.company_id.mapped('groups_no_expiration').ids
-                               for group_id in self.mapped('groups_id').ids
-                               )
-        return res
-
     def _compute_portal_user(self):
         portal_users = self.env.ref('maas_base.standard_user').users
         portal_users |= self.env.ref('maas_base.validator_user').users
