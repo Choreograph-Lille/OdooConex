@@ -29,8 +29,9 @@
                position="after">
           <field name="sale_team"/>
           <field name="activity"/>
-          <field name="country_base"/>
-          <field name="category_name" force_save="True" readonly="1"/>
+          <field name="is_company" invisible="1"/>
+          <field name="country_base" attrs="{'invisible': [('is_company', '=', False)]}"/>
+          <field name="category_name" force_save="True" readonly="1" attrs="{'invisible': [('is_company', '=', False)]}"/>
         </xpath>
         <xpath expr="//group[@name='purchase']" position="attributes">
           <attribute name="groups">purchase.group_purchase_user</attribute>
@@ -86,7 +87,8 @@
           <xpath expr="//field[@name='role_ids']" position="move"/>
         </xpath>
         <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
-          <page string="Client data" name="client_data">
+          <page string="Client data" name="client_data" attrs="{'invisible': [('customer_rank', '=', 0)]}">
+            <field name="customer_rank" invisible="1"/>
             <group>
               <group name="client_data_left">
                 <field name="update_frequency"/>
