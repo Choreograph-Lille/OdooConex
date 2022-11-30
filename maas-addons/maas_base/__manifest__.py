@@ -30,7 +30,7 @@
     "website": "www.arkeup.com",
     
     
-    'depends': ['mail', 'sale', 'product', 'contacts', 'password_security'],
+    'depends': ['mail', 'sale', 'product', 'contacts'],
 
     'description': """ """,
     'data': [
@@ -40,16 +40,13 @@
         'data/res_users_data.xml',
         'data/mail_templates.xml',
         # security
-        'security/ir_rule.xml',
         'security/user_groups.xml',
         'security/user_profiles.xml',
         'security/ir.model.access.csv',
-        'security/groups_no_expiration.xml',
         # views
         'views/mail_message.xml',
         'views/res_users_view.xml',
         'views/res_partner_view.xml',
-        'views/res_company_views.xml',
         'views/templates.xml',
         # report
         'report/template.xml',

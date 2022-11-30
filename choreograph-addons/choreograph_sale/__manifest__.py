@@ -14,6 +14,8 @@
         # views
         'views/sale_order.xml',
         'views/operation_condition.xml',
+        'views/sale_base_views.xml',
+        'views/product_views.xml',
     ],
     'installable': True,
     'application': False,

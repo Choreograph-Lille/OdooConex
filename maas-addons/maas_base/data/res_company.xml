@@ -13,12 +13,6 @@
       <field name="website">http://www.conexancemd.com</field>
       <field name="logo" type="base64" file="maas_base/static/description/icon.png"/>
       <field name="report_header">La connaissance client dans un monde ultra connecté</field>
-      <field name="password_lower" eval="True"/>
-      <field name="password_upper" eval="False"/>
-      <field name="password_numeric" eval="True"/>
-      <field name="password_special" eval="True"/>
-      <field name="password_expiration">120</field>
-      <field name="password_length">6</field>
       <field name="social_twitter">https://twitter.com/hashtag/conexance</field>
       <field name="social_facebook">https://www.facebook.com/pages/Conexance-MD/209232869245085</field>
       <field name="social_linkedin">https://www.linkedin.com/company/conexance-md</field>

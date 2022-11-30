@@ -1,0 +1,31 @@
+<odoo>
+  <record id="sale_base_view_tree" model="ir.ui.view">
+    <field name="name">sale.base.view.tree</field>
+    <field name="model">sale.base.concerned</field>
+    <field name="arch" type="xml">
+      <tree editable="top">
+        <field name="name"/>
+        <field name="reason"/>
+        <field name="is_closed_base"/>
+        <field name="volume_percentage"/>
+        <field name="retribution_percentage"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="sale_base_action" model="ir.actions.act_window">
+    <field name="name">Concerned base</field>
+    <field name="res_model">sale.base.concerned</field>
+    <field name="view_mode">tree</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        Add a new concerned base
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="menu_sale_base"
+          action="choreograph_sale.sale_base_action"
+          name="Concerned base"
+          sequence="80" parent="sale.menu_sale_config"/>
+</odoo>

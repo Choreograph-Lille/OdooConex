@@ -1,17 +1,14 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'choreograph CRM',
-    'summary': 'Manage choreograph CRM',
+    'name': 'choreograph i18n',
+    'summary': 'Manage translation of native datas',
     'sequence': 10,
     'description': "",
     'category': '',
     'website': '',
     'images': [],
-    'depends': ['crm', 'sale_crm', 'choreograph_contact'],
-    'data': [
-        # views
-        'views/crm_views.xml',
-    ],
+    'depends': ['crm'],
+    'data': [],
     'installable': True,
     'application': False,
     'assets': {
