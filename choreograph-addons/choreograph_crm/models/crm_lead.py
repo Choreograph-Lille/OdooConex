@@ -22,3 +22,22 @@ class CrmLead(models.Model):
         action['context']['search_default_opportunity_id'] = self.id
         action['context']['default_partner_invoice_id'] = self.agency_id.id
         return action
+
+    @api.model
+    def create(self, vals):
+        res = super(CrmLead, self).create(vals)
+        self.update_name()
+        return res
+
+    def write(self, vals):
+        result = super(CrmLead, self).write(vals)
+        if 'contact_name' in vals or 'name' in vals:
+            self.update_name()
+        return result
+
+    def update_name(self):
+        for rec in self:
+            if rec.contact_name in rec.name:
+                return True
+            else:
+                rec.name = rec.contact_name + ' - ' + rec.name
