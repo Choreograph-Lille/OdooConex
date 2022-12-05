@@ -9,12 +9,6 @@ class ResPartner(models.Model):
     role_ids = fields.One2many('res.partner.choreograph.role', 'partner_id', string='Roles')
 
     # fields from studio
-    activity = fields.Selection([
-        ('press', 'Press'),
-        ('charity', 'Charity'),
-        ('bank', 'Bank / Insurance'),
-        ('leisure', 'Leisure'),
-    ], string='Activity sector')
     country_base = fields.Selection([
         ('uk', 'UK'),
         ('fr', 'FR'),
