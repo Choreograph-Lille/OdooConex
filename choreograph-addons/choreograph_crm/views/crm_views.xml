@@ -9,17 +9,16 @@
       <xpath expr="//form[1]/sheet[1]/group[1]/group[not(@name)][1]/field[@name='tag_ids']" position="after">
         <field name="sox"/>
       </xpath>
-      <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='lead']/group[1]/group[1]/field[@name='website']"
-             position="after">
-        <field name="category_name" force_save="True" readonly="1"/>
-        <field name="activity_sector" force_save="True" readonly="1"/>
-      </xpath>
       <xpath expr="//group[@name='lead_partner']/field[@name='partner_id']" position="after">
         <field name="agency_id"/>
       </xpath>
       <xpath expr="//group[@name='opportunity_partner']/field[@name='partner_id']" position="after">
         <field name="agency_id"/>
       </xpath>
+      <field name="partner_id" position="after">
+        <field name="category_name" force_save="True" readonly="1"/>
+        <field name="activity_sector" force_save="True" readonly="1"/>
+      </field>
     </field>
   </record>
 
