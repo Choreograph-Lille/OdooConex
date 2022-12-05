@@ -13,12 +13,10 @@
         <field name="agency_id"/>
       </xpath>
       <xpath expr="//group[@name='opportunity_partner']/field[@name='partner_id']" position="after">
+        <field name="activity_sector" force_save="True" readonly="1"/>
+        <field name="category_name" force_save="True" readonly="1"/>
         <field name="agency_id"/>
       </xpath>
-      <field name="partner_id" position="after">
-        <field name="category_name" force_save="True" readonly="1"/>
-        <field name="activity_sector" force_save="True" readonly="1"/>
-      </field>
     </field>
   </record>
 
