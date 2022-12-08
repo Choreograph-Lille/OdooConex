@@ -25,7 +25,7 @@ class SaleOrder(models.Model):
     # studio custom
     catalogue_ids = fields.Many2many('res.partner.catalogue', string='Catalogue')
     prefulfill_study = fields.Boolean('Pre-fulfill study')
-    related_base = fields.Char('Related base')
+    related_base = fields.Many2one('retribution.base', string='Related base')
     data_conservation = fields.Char('Data conservation')
     receiver = fields.Char('Receiver')
     send_with = fields.Char('Send with')
