@@ -31,7 +31,7 @@ class Home(Home):
     def index(self, *args, **kw):
         user = request.env['res.users'].sudo().browse(request.session.uid)
         if user.is_portal_user:
-            if user.check_active_subscription() and not user._password_has_expired():
+            if user.check_active_subscription():
                 return http.local_redirect('/operation/indication')
             return request.redirect('/web/session/logout')
         return super(Home, self).index(*args, **kw)
@@ -39,7 +39,7 @@ class Home(Home):
     def _login_redirect(self, uid, redirect=None):
         user = request.env['res.users'].sudo().browse(uid)
         if not redirect and user.is_portal_user:
-            if user.check_active_subscription() and not user._password_has_expired():
+            if user.check_active_subscription():
                 return '/operation/indication'
             return '/web/session/logout'
         return super(Home, self)._login_redirect(uid, redirect=redirect)
@@ -49,7 +49,7 @@ class Home(Home):
         user = request.env['res.users'].sudo().browse(request.session.uid)
         if user:
             if user.is_portal_user:
-                if user.check_active_subscription() and not user._password_has_expired():
+                if user.check_active_subscription():
                     return http.local_redirect('/operation/indication')
                 return request.redirect('/web/session/logout')
             return request.redirect('/')
