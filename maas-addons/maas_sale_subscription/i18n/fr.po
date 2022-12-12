@@ -82,7 +82,7 @@ msgstr ""
 msgid ""
 "MyModel Sale Subscription: Subscriptions Expiration and recurring invoice "
 "line"
-msgstr "MyModel Abonnement: Vérifier Expiration des abonnements"
+msgstr "MyModel Abonnement: Facturation récurrente et expiration d'abonnement"
 
 #. module: maas_sale_subscription
 #: code:addons/maas_sale_subscription/models/sale_operation.py:0
