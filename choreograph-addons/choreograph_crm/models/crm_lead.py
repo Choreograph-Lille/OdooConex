@@ -7,12 +7,7 @@ class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
     sox = fields.Boolean('SOX')
-    activity_sector = fields.Selection([
-        ('press', 'Press'),
-        ('charity', 'Charity'),
-        ('bank', 'Bank / Insurance'),
-        ('leisure', 'Leisure'),
-    ], string='Activity sector', related='partner_id.activity')
+    activity_sector = fields.Many2one('res.partner.industry', string='Activity sector', related='partner_id.industry_id')
     category_name = fields.Char('Category name', related='partner_id.category_name')
     agency_id = fields.Many2one('res.partner', string='Agency')
 

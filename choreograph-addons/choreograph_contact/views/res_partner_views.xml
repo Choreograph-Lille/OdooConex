@@ -28,7 +28,6 @@
         <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='user_id']"
                position="after">
           <field name="sale_team"/>
-          <field name="activity"/>
           <field name="is_company" invisible="1"/>
           <field name="country_base" attrs="{'invisible': [('is_company', '=', False)]}"/>
           <field name="category_name" force_save="True" readonly="1" attrs="{'invisible': [('is_company', '=', False)]}"/>

@@ -7,7 +7,7 @@
     'category': '',
     'website': '',
     'images': [],
-    'depends': ['crm'],
+    'depends': ['crm', 'base'],
     'data': [],
     'installable': True,
     'application': False,
