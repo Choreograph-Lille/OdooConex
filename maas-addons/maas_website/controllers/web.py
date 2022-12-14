@@ -32,7 +32,7 @@ class Home(Home):
         user = request.env['res.users'].sudo().browse(request.session.uid)
         if user.is_portal_user:
             if user.check_active_subscription():
-                return http.local_redirect('/operation/indication')
+                return request.redirect('/operation/indication')
             return request.redirect('/web/session/logout')
         return super(Home, self).index(*args, **kw)
 
@@ -50,7 +50,7 @@ class Home(Home):
         if user:
             if user.is_portal_user:
                 if user.check_active_subscription():
-                    return http.local_redirect('/operation/indication')
+                    return request.redirect('/operation/indication')
                 return request.redirect('/web/session/logout')
             return request.redirect('/')
         else:
@@ -64,6 +64,6 @@ class CustomerPortal(CustomerPortal):
         user = request.env['res.users'].sudo().browse(request.session.uid)
         if user.is_portal_user:
             if user.check_active_subscription() and not user._password_has_expired():
-                return http.local_redirect('/operation/list')
+                return request.redirect('/operation/list')
             return request.redirect('/web/session/logout')
         return request.redirect('/')
