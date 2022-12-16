@@ -20,6 +20,13 @@
         <field name="category_name" force_save="True" readonly="1"/>
         <field name="agency_id"/>
       </xpath>
+      <field name="name" position="attributes">
+        <attribute name="class">text-break oe_inline</attribute>
+      </field>
+      <field name="name" position="before">
+        <field name="client_name" class="oe_inline"/>
+        <span attrs="{'invisible':[('client_name', '=', False)]}"> - </span>
+      </field>
     </field>
   </record>
 
@@ -34,6 +41,10 @@
       <xpath expr="//span[@class='o_text_overflow']" position="replace">
         <span class="o_text_overflow" t-if="record.agency_id.value" t-esc="record.agency_id.value"></span>
       </xpath>
+      <field name="name" position="before">
+        <field name="client_name" class="oe_inline"/>
+        <span attrs="{'invisible':[('client_name', '=', False)]}"> - </span>
+      </field>
     </field>
   </record>
 

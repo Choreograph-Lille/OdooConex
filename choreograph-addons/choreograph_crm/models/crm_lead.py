@@ -10,6 +10,7 @@ class CrmLead(models.Model):
     activity_sector = fields.Many2one('res.partner.industry', string='Activity sector', related='partner_id.industry_id')
     category_name = fields.Char('Category name', related='partner_id.category_name')
     agency_id = fields.Many2one('res.partner', string='Agency')
+    client_name = fields.Char(related='partner_id.name')
 
     def action_new_quotation(self):
         action = self.env["ir.actions.actions"]._for_xml_id("sale_crm.sale_action_quotations_new")
@@ -17,22 +18,3 @@ class CrmLead(models.Model):
         action['context']['search_default_opportunity_id'] = self.id
         action['context']['default_partner_invoice_id'] = self.agency_id.id
         return action
-
-    @api.model
-    def create(self, vals):
-        res = super(CrmLead, self).create(vals)
-        self.update_name()
-        return res
-
-    def write(self, vals):
-        result = super(CrmLead, self).write(vals)
-        if 'contact_name' in vals or 'name' in vals:
-            self.update_name()
-        return result
-
-    def update_name(self):
-        for rec in self:
-            if rec.contact_name in rec.name:
-                return True
-            else:
-                rec.name = rec.contact_name + ' - ' + rec.name
