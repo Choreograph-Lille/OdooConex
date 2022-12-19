@@ -1,21 +1,28 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'choreograph purchase',
-    'summary': 'Manage choreograph purchase',
-    'sequence': 10,
-    'description': "",
-    'category': '',
-    'website': '',
-    'images': [],
-    'depends': [],
-    'data': [
-
+    'name': 'Choreograph Purchase',
+    'version': '16.0.0.1',
+    'license': 'LGPL-3',
+    'category': 'Purchase',
+    'sequence': -89,
+    'summary': 'Manage Choreograph Purchase',
+    'description': """This module allows to install specific purchase features""",
+    'author': 'ArkeUp',
+    'website': 'https://arkeup.com',
+    'depends': [
+        'purchase',
+        'choreograph_base',
     ],
-    'installable': True,
-    'application': False,
+    'data': [
+        # security
+        # 'security
+        # views
+    ],
     'assets': {
         'web._assets_primary_variables': [],
         'web.assets_backend': [],
         'web.assets_frontend': [],
     },
+    'installable': True,
+    'application': False,
 }

@@ -1,21 +1,29 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'choreograph account',
-    'summary': 'Manage choreograph accounting',
-    'sequence': 10,
-    'description': "",
-    'category': '',
-    'website': '',
-    'images': [],
-    'depends': [],
-    'data': [
-
+    'name': 'Choreograph Accounting',
+    'version': '16.0.0.1',
+    'license': 'LGPL-3',
+    'category': 'Accounting',
+    'sequence': -97,
+    'summary': 'Manage Choreograph Accounting',
+    'description': """This module allows to install specific features on accounting module""",
+    'author': 'ArkeUp',
+    'website': 'https://arkeup.com',
+    'depends': [
+        'account',
+        'l10n_fr',
+        'choreograph_base',
     ],
-    'installable': True,
-    'application': False,
+    'data': [
+        # data
+        # security
+        # views
+    ],
     'assets': {
         'web._assets_primary_variables': [],
         'web.assets_backend': [],
         'web.assets_frontend': [],
     },
+    'installable': True,
+    'application': False,
 }

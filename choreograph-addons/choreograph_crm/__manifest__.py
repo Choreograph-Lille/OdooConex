@@ -1,14 +1,20 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'choreograph CRM',
-    'summary': 'Manage choreograph CRM',
-    'sequence': 10,
-    'description': "",
-    'category': '',
-    'website': '',
-    'images': [],
-    'depends': ['crm', 'sale_crm', 'choreograph_contact'],
+    'name': 'Choreograph CRM',
+    'version': '16.0.0.1',
+    'license': 'LGPL-3',
+    'category': 'CRM',
+    'sequence': -94,
+    'summary': 'Manage Choreograph CRM',
+    'description': """This module allows to install CRM specific features""",
+    'author': 'ArkeUp',
+    'website': 'https://arkeup.com',
+    'depends': [
+        'sale_crm',
+        'choreograph_contact'],
     'data': [
+        # data
+        # security
         # views
         'views/crm_views.xml',
     ],

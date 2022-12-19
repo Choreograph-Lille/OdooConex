@@ -22,6 +22,7 @@
 {
     'name': 'Maas Sale',
     'version': '1.0',
+    'license': 'LGPL-3',
     'category': 'Sales',
     'sequence': 4,
     'summary': '',
@@ -39,7 +40,7 @@
         'data/ir_cron.xml',
         # security
         'security/ir.model.access.csv',
-        #'security/user_groups.xml',
+        # 'security/user_groups.xml',
         # views
         'views/sale_action.xml',
         'views/sale_campaign.xml',

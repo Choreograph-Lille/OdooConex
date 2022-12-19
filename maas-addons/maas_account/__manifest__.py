@@ -2,6 +2,7 @@
 {
     'name': 'MAAS Accounting',
     'version': '16.0.0.1',
+    'license': 'LGPL-3',
     'category': 'Accounting',
     'sequence': -99,
     'summary': 'MyModel As A Service Application',
