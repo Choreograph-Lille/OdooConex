@@ -1,24 +1,23 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 {
-    'name': 'Maas App',
-    'version': '1.0',
-    'category': '',
-    'sequence': 0,
-    'summary': '',
-    
-    "author": "Arkeup",
-    "website": "www.arkeup.com",    
-    
-    
-    'depends': ['maas_sale_subscription', 'maas_website', 'maas_account'],
-    'description': """ """,
+    'name': 'MAAS APP',
+    'version': '16.0.0.1',
+    'licence': 'LGPL-3',
+    'category': 'Application',
+    'sequence': -100,
+    'summary': 'MyModel As A Service Application',
+    'description': """This module allows to install all MAAS environment""",
+    'author': 'ArkeUp',
+    'website': 'https://arkeup.com',
+    'depends': [
+        'maas_sale_subscription',
+        'maas_website',
+        'maas_account'
+    ],
     'data': [
         # data
         # security
-        # views        
-        # report
+        # views
     ],
     'qweb': [],
     'demo': [],

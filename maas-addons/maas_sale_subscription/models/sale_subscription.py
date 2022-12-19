@@ -31,6 +31,7 @@ import logging
 _logger = logging.getLogger(__name__)
 
 SUBSCRIPTION_STATES = [('to_invoice', 'To Invoice'),
+                       ('invoiced', 'Invoiced'),
                        ('consumption', 'Consumption'),
                        ('start_subscription', 'Start Subscription / Article'),
                        ('subscription_change', 'Subscription change / Article'),
@@ -83,77 +84,56 @@ class SaleSubscription(models.Model):
     @api.model
     def scheduler_recurring_invoice_line(self):
         subscription_line_obj = self.env['sale.order.line']
-        subscriptions = self.env['sale.order'].search([('current_package_id', '!=', False), ('state', '=', 'sale')])
-        last_day_month = last_day_of_this_month(fields.Datetime.from_string(fields.Datetime.now())).strftime('%Y-%m-%d 20:59:59')
-        date = fields.Datetime.from_string(fields.Datetime.now())
+        stages_in_progress = self.env['sale.order.stage'].search([('category', '=', 'progress')])
+        subscriptions = self.env['sale.order'].search([('current_package_id', '!=', False), ('stage_id', 'in', stages_in_progress.ids)])
+        date = fields.Date.today()
         _logger.info("Subscription CRON launched at %s" % (date))
-        date_add = date and date.strftime('%Y-%m-%d 21:59:59') or False
-        date = date and date.strftime('%Y-%m-%d 20:59:59') or False
         for subscription in subscriptions:
             current_product_pricelist = subscription.pricelist_id or subscription.partner_id.property_product_pricelist
-            if (subscription.date_order and fields.Datetime.from_string(subscription.date_order) <= fields.Datetime.from_string(
-                    date)) or date == last_day_month:
-                lines = subscription.order_line.sorted(key='id', reverse=True)
+            if subscription.next_invoice_date == date:
+                lines = subscription.order_line.filtered(lambda l: l.state_subscription == 'consumption').sorted(key='id')
                 if lines:
                     product = lines[0].product_id
+                    vals = {'order_id': subscription.id,
+                            'product_id': product.id,
+                            'name': product.name,
+                            'date': date,
+                            'product_uom': product.uom_id.id,
+                            'product_uom_qty': 1,
+                            'price_unit': product.list_price,
+                            'state_subscription': 'to_invoice',
+                            'qty_cumulative': lines[0].qty_cumulative}
                     if subscription._check_pricelist_item_exists(product):
-                        vals = {'order_id': subscription.id,
-                                'product_id': product.id,
-                                'name': product.name,
-                                'date': date,
-                                'product_uom': product.uom_id.id,
-                                'price_unit': current_product_pricelist._get_product_price(product, 1),
-                                'state_subscription': 'to_invoice',
-                                'qty_cumulative': lines[0].qty_cumulative}
-                    else:
-                        vals = {'order_id': subscription.id,
-                                'product_id': product.id,
-                                'name': product.name,
-                                'date': date,
-                                'product_uom': product.uom_id.id,
-                                'price_unit': product.list_price,
-                                'state_subscription': 'to_invoice',
-                                'qty_cumulative': lines[0].qty_cumulative}
+                        vals.update({'price_unit': current_product_pricelist._get_product_price(product, 1)})
                     _logger.info(_('To invoice line added in subscription %s') % (subscription.name))
-                    if vals:
-                        subscription_line_obj.create(vals)
-            check = (not subscription.date_order or (
-                        subscription.date_order and fields.Datetime.from_string(subscription.date_order) > fields.Datetime.from_string(
-                    date))) and date == last_day_month
-            if check:
+                    new_line = subscription_line_obj.new(vals)
+                    new_line._compute_amount()
+                    subscription_line_obj.create(new_line._convert_to_write(new_line._cache))
+                    self.env.cr.commit()
                 product = subscription.package_id
+                vals = {'order_id': subscription.id,
+                        'product_id': product.id,
+                        'name': product.name,
+                        'date': date,
+                        'product_uom_qty': 1,
+                        'product_uom': product.uom_id.id,
+                        'price_unit': product.list_price}
                 if subscription._check_pricelist_item_exists(product):
-                    vals = {'analytic_account_id': subscription.id,
-                            'product_id': product.id,
-                            'name': product.name,
-                            'date': date_add,
-                            'product_uom': product.uom_id.id,
-                            'price_unit': current_product_pricelist.get_product_price(product, 1, subscription.partner_id)}
-                else:
-                    vals = {'analytic_account_id': subscription.id,
-                            'product_id': product.id,
-                            'name': product.name,
-                            'date': date_add,
-                            'product_uom': product.uom_id.id,
-                            'price_unit': product.list_price}
+                    vals.update({'price_unit': current_product_pricelist._get_product_price(product, 1)})
                 _logger.info(_('Start subscription line added in subscription %s') % (subscription.name))
                 subscription.create_subscription_rent()
                 subscription.write({'balance': subscription.package_id.identifiers,
                                     'current_cumulative_quantity': 0,
                                     'current_package_id': subscription.package_id.id})
-                if vals:
-                    subscription_line_obj.create(vals)
+                new_line = subscription_line_obj.new(vals)
+                new_line._compute_amount()
+                subscription_line_obj.create(new_line._convert_to_write(new_line._cache))
 
         return True
 
     @api.model
     def cron_account_analytic_account(self):
-        today = fields.Date.today()
-        date = fields.Date.to_string(fields.Date.from_string(today))
-        # call the 'to_invoice' line in subsrciption
         self.scheduler_recurring_invoice_line()
-        # set to close if data is passed
-        self.search([('next_invoice_date', '<=', date), ('state', 'in', ['sale'])]).write({'state': 'done'})
         return True
 
     def get_subscription_rent_items(self):
@@ -194,6 +174,20 @@ class SaleSubscription(models.Model):
         self.ensure_one()
         return product.product_tmpl_id in self.pricelist_id.item_ids.mapped('product_tmpl_id') or False
 
+    def _get_invoiceable_lines(self, final=False):
+        invoiceable_lines = super()._get_invoiceable_lines(final)
+        return invoiceable_lines.filtered(lambda l: l.order_id.package_id and l.state_subscription == 'to_invoice' or not l.order_id.package_id)
+
+    @api.model
+    def _cron_recurring_create_invoice(self):
+        try:
+            moves = super()._cron_recurring_create_invoice()
+            invoiceable_lines = moves.mapped('line_ids').mapped('sale_line_ids')
+            invoiceable_lines.write({'state_subscription': 'invoiced'})
+        except Exception as e:
+            _logger.info("Error in generating recurring invoice")
+        return True
+
 
 class SaleSubscriptionLine(models.Model):
     _inherit = 'sale.order.line'
@@ -222,9 +216,24 @@ class SaleSubscriptionLine(models.Model):
     @api.depends('price_unit', 'product_uom_qty', 'discount', 'order_id.pricelist_id')
     def _compute_amount(self):
         super(SaleSubscriptionLine, self)._compute_amount()
-        for line in self.filtered(lambda l: l.state != 'to_invoice'):
-            line.price_subtotal = 0
-        for line in self.filtered(lambda l: l.state == 'to_invoice'):
-            price_rent = self.filtered(lambda l: l.state == 'subscription_rent').sorted(key='date', reverse=True)
-            if price_rent:
-                line.price_subtotal += price_rent[0].price_unit
+        for line in self.filtered(lambda l: l.state_subscription != 'to_invoice'):
+            if line.order_id.package_id:
+                line.price_subtotal = 0
+        for line in self.filtered(lambda l: l.state_subscription == 'to_invoice'):
+            if line.order_id.package_id:
+                price_rent = self.filtered(lambda l: l.state_subscription == 'subscription_rent').sorted(key='date', reverse=True)
+                if price_rent:
+                    line.price_subtotal += price_rent[0].price_unit
+
+    def _prepare_invoice_line(self, **optional_values):
+        self.ensure_one()
+        res = super()._prepare_invoice_line(**optional_values)
+        if self.order_id.package_id:
+            res.update({'quantity': self.qty_cumulative})
+        return res
+
+    def _reset_subscription_qty_to_invoice(self):
+        super()._reset_subscription_qty_to_invoice()
+        for line in self:
+            if line.order_id.package_id:
+                line.qty_to_invoice = line.qty_cumulative

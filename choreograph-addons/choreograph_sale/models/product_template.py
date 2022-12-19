@@ -6,7 +6,7 @@ from odoo import api, Command, fields, models, _
 class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
-    concerned_base = fields.Many2one('sale.base.concerned', string='Concerned base')
+    concerned_base = fields.Many2one('retribution.base', string='Concerned base')
     datastore = fields.Boolean('Datastore')
     retribution_rate = fields.Float('Retribution rate')
 

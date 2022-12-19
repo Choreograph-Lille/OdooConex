@@ -32,6 +32,12 @@
         <field name="send_with"/>
         <field name="receiver"/>
       </xpath>
+
+      <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
+        <attribute name="domain">
+          [('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id), '|', ('concerned_base', '=', False), ('concerned_base', '=', parent.related_base)]
+        </attribute>
+      </xpath>
     </field>
   </record>
 </odoo>

@@ -16,8 +16,23 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__retribution_percentage
+msgid "%retribution"
+msgstr "%rétribution"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__volume_percentage
+msgid "%vol"
+msgstr ""
+
+#. module: choreograph_sale
 #: model_terms:ir.actions.act_window,help:choreograph_sale.sale_base_action
 msgid "Add a new concerned base"
+msgstr "Ajouter une nouvelle base concernée"
+
+#. module: choreograph_sale
+#: model_terms:ir.actions.act_window,help:choreograph_sale.retribution_base_action
+msgid "Add a new retribution base"
 msgstr "Ajouter une nouvelle base concernée"
 
 #. module: choreograph_sale
@@ -99,12 +114,27 @@ msgid "Is Task Created"
 msgstr "Tâche crée"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_base_concerned__write_date
+msgid "Last Updated on"
+msgstr "Date de mis à jour"
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__type__maj_condition
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition_subtype__type__maj_condition
 msgid "MAJ condition"
 msgstr "Condition MAJ"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__is_multi_base
+msgid "Multi-base"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__name
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_base_concerned__name
 msgid "Name"
 msgstr "Nom"
@@ -113,6 +143,11 @@ msgstr "Nom"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__new_condition_count
 msgid "New Condition Count"
 msgstr "Nombre nouveaux conditions"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__is_open
+msgid "Open"
+msgstr "Ouverte"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
@@ -166,8 +201,16 @@ msgid "Related base"
 msgstr "Base concernée"
 
 #. module: choreograph_sale
+#: model:ir.actions.act_window,name:choreograph_sale.retribution_base_action
+#: model:ir.model,name:choreograph_sale.model_retribution_base
+#: model:ir.ui.menu,name:choreograph_sale.menu_retribution_base
+msgid "Retribution base"
+msgstr "Bases concernées"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_product__retribution_rate
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_template__retribution_rate
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__retribution_rate
 msgid "Retribution rate"
 msgstr "Taux de retribution"
 

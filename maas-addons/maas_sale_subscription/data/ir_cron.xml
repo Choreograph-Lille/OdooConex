@@ -40,15 +40,16 @@
       <field name="model_id" ref="model_sale_order"/>
       <field name="code">model.cron_account_analytic_account()</field>
       <field name="state">code</field>
+      <field name="priority">0</field>
       <field name="nextcall" eval="(DateTime.now()+relativedelta(days=1)).strftime('%Y-%m-01 20:05:00')"/>
     </record>
 
     <record id="sale_subscription.account_analytic_cron_for_invoice" model="ir.cron">
-      <field name="active" eval="False"/>
+      <field name="active" eval="True"/>
     </record>
 
     <record id="sale_subscription.account_analytic_cron" model="ir.cron">
-      <field name="active" eval="False"/>
+      <field name="active" eval="True"/>
     </record>
 
   </data>

@@ -1,25 +1,23 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
 {
-    'name': 'Maas Accounting',
-    'version': '1.0',
+    'name': 'MAAS Accounting',
+    'version': '16.0.0.1',
     'category': 'Accounting',
-    'sequence': 2,
-    'summary': '',
-    
-    "author": "Arkeup",
-    "website": "www.arkeup.com",    
-    
-    
-    'depends': ['account', 'maas_base', 'l10n_fr'],
-    'description': """ """,
+    'sequence': -99,
+    'summary': 'MyModel As A Service Application',
+    'description': """This module allows to install specific features on accounting module""",
+    'author': 'ArkeUp',
+    'website': 'https://arkeup.com',
+    'depends': [
+        'account',
+        'maas_base',
+        'l10n_fr'
+    ],
     'data': [
         # data
         # security
         # views   
         'views/account_move_views.xml'
-        # report
     ],
     'qweb': [],
     'demo': [],
