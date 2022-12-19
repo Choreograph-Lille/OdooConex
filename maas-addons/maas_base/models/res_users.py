@@ -29,7 +29,7 @@ class ResUsers(models.Model):
     groups_id = fields.Many2many(default=False)
     bool_sms = fields.Boolean(string="SMS")
     bool_print = fields.Boolean(string="Print")
-    bool_email = fields.Boolean(string="Email")
+    bool_email = fields.Boolean(string="Email?")
     default_sms = fields.Boolean(string="Default SMS")
     default_print = fields.Boolean(string="Default Print")
     default_email = fields.Boolean(string="Default Email")
