@@ -135,20 +135,32 @@
                                                 <t t-name="kanban-box">
                                                     <t t-set="color" t-value="kanban_color(record.color.raw_value)"/>
                                                     <div t-att-class="color + (record.title.raw_value == 1 ? ' oe_kanban_color_alert' : '') + ' oe_kanban_global_click'">
-                                                        <a t-if="!read_only_mode" type="delete"
+                                                        <a t-if="!read_only_mode"
+                                                           type="delete"
+                                                           title="Delete"
                                                            class="fa fa-times pull-right"/>
                                                         <div class="o_kanban_image">
                                                             <img t-if="record.image_1920.raw_value"
+                                                                 title="Image"
+                                                                 alt="Image"
                                                                  t-att-src="'data:image/png;base64,'+record.image_1920.raw_value"/>
                                                             <t t-if="!record.image_1920.raw_value">
                                                                 <img t-if="record.type.raw_value === 'delivery'"
+                                                                     title="Delivery"
+                                                                     alt="Delivery"
                                                                      t-att-src='_s + "/base/static/src/img/truck.png"'/>
                                                                 <img t-if="record.type.raw_value === 'invoice'"
+                                                                     title="Invoice"
+                                                                     alt="Invoice"
                                                                      t-att-src='_s + "/base/static/src/img/money.png"'/>
                                                                 <t t-if="record.type.raw_value !== 'invoice' &amp;&amp; record.type.raw_value !== 'delivery'">
                                                                     <img t-if="record.is_company.raw_value === true"
+                                                                         title="Company"
+                                                                         alt="Company"
                                                                          t-att-src='_s + "/base/static/src/img/company_image.png"'/>
                                                                     <img t-if="record.is_company.raw_value === false"
+                                                                         title="Avatar"
+                                                                         alt="Avatar"
                                                                          t-att-src='_s + "/base/static/src/img/avatar.png"'/>
                                                                 </t>
                                                             </t>

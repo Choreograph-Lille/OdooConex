@@ -2,6 +2,7 @@
 {
     'name': 'MAAS Base',
     'version': '16.0.0.1',
+    'license': 'LGPL-3',
     'category': 'Tools',
     'sequence': -98,
     'summary': 'MyModel As A Service Base Module',

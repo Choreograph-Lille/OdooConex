@@ -7,17 +7,17 @@
         <field name="arch" type="xml">
             <form string="Package Upgrade Assistant">
                 <sheet>
-                    <div class="alert-info">
+                    <div class="alert-info" role="alert">
                         <span>
                             Your balance is not sufficient to complete the requested transaction.
                             We suggest you to move to the next higher level:
                         </span>
                     </div>
-                    <div class="alert alert-info">
+                    <div class="alert alert-info" role="alert">
                         <field name="product_id" nolabel="1"/>
                         (<field name="identifiers" class="oe_inline" nolabel="1"/>).
                     </div>
-                    <div class="alert-info">
+                    <div class="alert-info" role="alert">
                         <span>
                             Thank you for confirming the suggested higher level.
                         </span>

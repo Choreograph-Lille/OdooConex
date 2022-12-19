@@ -2,6 +2,7 @@
 {
     'name': 'MAAS Website',
     'version': '16.0.0.1',
+    'license': 'LGPL-3',
     'category': 'Website',
     'sequence': -95,
     'summary': 'MyModel As A Service Website',
