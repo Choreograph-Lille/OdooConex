@@ -31,7 +31,7 @@ class Partner(models.Model):
     title_ref = fields.Char('Title Ref.', size=6)
     operation_ids = fields.One2many('sale.operation', 'partner_id', 'Operations')
     campaign_ids = fields.One2many('sale.campaign', 'partner_id', 'Campaigns')
-    subscription_ids = fields.One2many('sale.order', 'partner_id', 'Subscriptions')
+    subscription_ids = fields.One2many('sale.order', 'partner_id', 'Subscriptions ')
     date_update_title = fields.Date(string="Date Update title")
     date_update_vars = fields.Date(string="Date Update Vars")
 
