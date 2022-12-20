@@ -13,7 +13,6 @@
         'sales_team',
         'project_template',
         'choreograph_contact',
-        'choreograph_sale_project',
     ],
     'data': [
         # data

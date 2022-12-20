@@ -12,7 +12,10 @@
     "author": "Arkeup",
     "website": "www.arkeup.com",
 
-    'depends': ['maas_base', 'crm'],
+    'depends': [
+        'maas_base',
+        'crm'
+    ],
     'description': """ """,
     'data': [
         # data

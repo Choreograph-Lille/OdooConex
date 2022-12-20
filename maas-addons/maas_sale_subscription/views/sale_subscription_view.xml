@@ -10,35 +10,35 @@
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
                     <field name="next_invoice_date"
-                           attrs="{'invisible': ['|', ('stage_category', 'not in', ['progress', 'paused']) , ('is_subscription', '=', False)],
-                                   'required': [('is_subscription', '!=', False), ('state', 'in', ['sale', 'done'])]}"
+                           attrs="{'invisible': ['|', ('stage_category', 'not in', ['progress', 'paused']) , ('recurrence_id', '=', False)],
+                                   'required': [('recurrence_id', '!=', False), ('state', 'in', ['sale', 'done'])]}"
                            position="move"/>
-                    <field name="service_start_date" attrs="{'invisible': [('is_subscription', '=', False)]}"/>
-                    <field name="balance" attrs="{'invisible': [('is_subscription', '=', False)]}"/>
+                    <field name="service_start_date" attrs="{'invisible': [('recurrence_id', '=', False)]}"/>
+                    <field name="balance" attrs="{'invisible': [('recurrence_id', '=', False)]}"/>
                 </field>
                 <field name="date_order" position="after">
-                    <field name="allowance" attrs="{'invisible': [('is_subscription', '=', False)]}"/>
-                    <field name="start_date" position="move" attrs="{'invisible': [('is_subscription', '=', False)]}"/>
+                    <field name="allowance" attrs="{'invisible': [('recurrence_id', '=', False)]}"/>
+                    <field name="start_date" position="move" attrs="{'invisible': [('recurrence_id', '=', False)]}"/>
                 </field>
                 <field name="payment_term_id" position="before">
                     <field name="package_id" options="{'no_create': False, 'no_open': False}" string="Basic Package"
-                           attrs="{'invisible': [('is_subscription', '=', False)]}"/>
+                           attrs="{'invisible': [('recurrence_id', '=', False)]}"/>
                     <field name="current_package_id"
                            options="{'no_create': True, 'no_open': True}"
                            readonly="1"
                            force_save="1"
-                           string="Current Package" attrs="{'invisible': [('is_subscription', '=', False)]}"/>
+                           string="Current Package" attrs="{'invisible': [('recurrence_id', '=', False)]}"/>
                 </field>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
-                    <field name="date" attrs="{'column_invisible': [('parent.is_subscription', '=', False)]}"/>
-                    <field name="period" attrs="{'column_invisible': [('parent.is_subscription', '=', False)]}"/>
+                    <field name="date" attrs="{'column_invisible': [('parent.recurrence_id', '=', False)]}"/>
+                    <field name="period" attrs="{'column_invisible': [('parent.recurrence_id', '=', False)]}"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="after">
-                    <field name="qty_consumed" attrs="{'column_invisible': [('parent.is_subscription', '=', False)]}"/>
-                    <field name="qty_cumulative" attrs="{'column_invisible': [('parent.is_subscription', '=', False)]}"/>
+                    <field name="qty_consumed" attrs="{'column_invisible': [('parent.recurrence_id', '=', False)]}"/>
+                    <field name="qty_cumulative" attrs="{'column_invisible': [('parent.recurrence_id', '=', False)]}"/>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
-                    <field name="state_subscription" attrs="{'column_invisible': [('parent.is_subscription', '=', False)]}"/>
+                    <field name="state_subscription" attrs="{'column_invisible': [('parent.recurrence_id', '=', False)]}"/>
                 </xpath>
             </field>
         </record>
