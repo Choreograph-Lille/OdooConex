@@ -16,6 +16,7 @@ class RetributionBase(models.Model):
 
 class RetributionBaseLine(models.Model):
     _name = 'retribution.base.line'
+    _description = 'Retribution base Line'
 
     multi_base_id = fields.Many2one('retribution.base', string='Multi base')
     base_id = fields.Many2one('retribution.base', string='Base')

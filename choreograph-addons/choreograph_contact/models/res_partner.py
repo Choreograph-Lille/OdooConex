@@ -32,5 +32,6 @@ class ResPartner(models.Model):
 
 class ResPartnerCatalogue(models.Model):
     _name = 'res.partner.catalogue'
+    _description = 'Partner Catalog'
 
     name = fields.Char('Name')
