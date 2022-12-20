@@ -10,15 +10,16 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
+        'l10n_fr',
         'account',
         'maas_base',
-        'l10n_fr'
     ],
     'data': [
         # data
         # security
-        # views   
-        'views/account_move_views.xml'
+        # views
+        'views/res_partner_views.xml',
+        'views/account_move_views.xml',
     ],
     'qweb': [],
     'demo': [],

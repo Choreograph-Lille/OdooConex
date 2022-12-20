@@ -30,7 +30,10 @@
     "author": "Arkeup",
     "website": "www.arkeup.com",
 
-    'depends': ['maas_sale', 'sale_subscription'],
+    'depends': [
+        'maas_sale',
+        'sale_subscription'
+    ],
     'description': """ """,
 
     'data': [

@@ -11,9 +11,6 @@
     'website': 'https://arkeup.com',
     'depends': [
         'mail',
-        'sale',
-        'product',
-        'contacts'
     ],
     'data': [
         # data

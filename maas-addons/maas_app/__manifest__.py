@@ -10,6 +10,8 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
+        'product',
+        'contacts',
         'maas_sale_subscription',
         'maas_website',
         'maas_account'

@@ -11,7 +11,8 @@
     'website': 'https://arkeup.com',
     'depends': [
         'sale_crm',
-        'choreograph_contact'],
+        'choreograph_contact'
+    ],
     'data': [
         # data
         # security

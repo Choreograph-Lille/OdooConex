@@ -1,33 +1,31 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Choreograph Contact',
+    'name': 'Choreograph APP',
     'version': '16.0.0.1',
     'license': 'LGPL-3',
-    'category': 'Contact',
-    'summary': 'Manage choreograph contacts',
+    'category': 'Tools',
+    'summary': 'Manage Choreograph Environment',
     'sequence': -96,
-    'description': """This module allows to install specific contact features""",
+    'description': """This module allows to install Choreograph's applications""",
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
-        'contacts',
-        'choreograph_account',
+        'choreograph_hr',
+        'choreograph_i18n',
+        'choreograph_website',
         'choreograph_purchase',
+        'choreograph_sale_project'
     ],
     'data': [
         # data
         # security
-        'security/ir.model.access.csv',
         # views
-        'views/choreograph_role_views.xml',
-        'views/res_partner_views.xml',
     ],
-
     'assets': {
         'web._assets_primary_variables': [],
         'web.assets_backend': [],
         'web.assets_frontend': [],
     },
     'installable': True,
-    'application': False,
+    'application': True,
 }

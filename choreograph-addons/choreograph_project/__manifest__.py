@@ -10,9 +10,8 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
-        'choreograph_sale',
         'choreograph_contact',
-        'choreograph_sale_project'],
+    ],
     'data': [
         # security
         # 'security

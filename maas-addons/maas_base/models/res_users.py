@@ -33,8 +33,7 @@ class ResUsers(models.Model):
     default_sms = fields.Boolean(string="Default SMS")
     default_print = fields.Boolean(string="Default Print")
     default_email = fields.Boolean(string="Default Email")
-    customer_ids = fields.Many2many('res.partner', 'res_users_customer_rel', 'user_id', 'partner_id', string='Customers',
-                                    domain=[('customer_rank', '>', 0)])
+    customer_ids = fields.Many2many('res.partner', 'res_users_customer_rel', 'user_id', 'partner_id', string='Customers')
 
     @api.onchange('default_sms')
     def onchange_default_sms(self):
