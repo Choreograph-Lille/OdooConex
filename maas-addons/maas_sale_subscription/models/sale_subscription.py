@@ -87,17 +87,18 @@ class SaleSubscription(models.Model):
         stages_in_progress = self.env['sale.order.stage'].search([('category', '=', 'progress')])
         subscriptions = self.env['sale.order'].search([('current_package_id', '!=', False), ('stage_id', 'in', stages_in_progress.ids)])
         date = fields.Date.today()
+        date_now = fields.Datetime.now()
         _logger.info("Subscription CRON launched at %s" % (date))
         for subscription in subscriptions:
             current_product_pricelist = subscription.pricelist_id or subscription.partner_id.property_product_pricelist
             if subscription.next_invoice_date == date:
-                lines = subscription.order_line.filtered(lambda l: l.state_subscription == 'consumption').sorted(key='id')
+                lines = subscription.order_line.filtered(lambda l: l.state_subscription == 'consumption').sorted(key='id', reverse=True)
                 if lines:
                     product = lines[0].product_id
                     vals = {'order_id': subscription.id,
                             'product_id': product.id,
                             'name': product.name,
-                            'date': date,
+                            'date': date_now,
                             'product_uom': product.uom_id.id,
                             'product_uom_qty': 1,
                             'price_unit': product.list_price,
@@ -114,7 +115,7 @@ class SaleSubscription(models.Model):
                 vals = {'order_id': subscription.id,
                         'product_id': product.id,
                         'name': product.name,
-                        'date': date,
+                        'date': date_now,
                         'product_uom_qty': 1,
                         'product_uom': product.uom_id.id,
                         'price_unit': product.list_price}
@@ -191,7 +192,7 @@ class SaleSubscription(models.Model):
 
 class SaleSubscriptionLine(models.Model):
     _inherit = 'sale.order.line'
-    _order = 'date desc'
+    _order = 'date desc, order_id, sequence, id'
 
     @api.model
     def default_get(self, fields):

@@ -48,7 +48,7 @@
     <field name="model">retribution.base.line</field>
     <field name="arch" type="xml">
       <tree editable="top">
-        <field name="base_id" domain="[('is_open', '=', True), ('is_multi_base', '=', False)]" required="1"/>
+        <field name="base_id" domain="[('is_open', '=', True), ('is_multi_base', '=', False)]" required="1" options="{'no_create': True}"/>
         <field name="volume"/>
         <field name="volume_percentage"/>
         <field name="retribution_percentage"/>
