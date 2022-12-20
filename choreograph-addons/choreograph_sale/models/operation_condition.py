@@ -5,6 +5,7 @@ from odoo import api, Command, fields, models, _
 
 class OperationConditionSubtype(models.Model):
     _name = 'operation.condition.subtype'
+    _description = 'Operation Condition Subtype'
 
     name = fields.Char('Subtype name')
     type = fields.Selection([
@@ -19,6 +20,7 @@ class OperationConditionSubtype(models.Model):
 
 class OperationCondition(models.Model):
     _name = 'operation.condition'
+    _description = 'Operation Condition'
 
     operation_type = fields.Selection([('condition', 'Condition'), ('exclusion', 'Exclusion')], string='Operation type',
                                       required=True)
