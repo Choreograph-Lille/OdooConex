@@ -130,7 +130,7 @@ msgstr "Condition MAJ"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__is_multi_base
-msgid "Multi-base"
+msgid "Multi-bases"
 msgstr ""
 
 #. module: choreograph_sale
@@ -286,3 +286,9 @@ msgstr "Type"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_base_concerned__volume_percentage
 msgid "Volume percentage"
 msgstr "% volume"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/retribution_base.py:0
+#, python-format
+msgid "Volume percentage is {0}%, this should be at 100%"
+msgstr "Le pourcentage actuel est de {0}%, il doit être de 100%"

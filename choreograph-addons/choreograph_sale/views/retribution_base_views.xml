@@ -31,11 +31,15 @@
               <field name="is_multi_base"/>
             </group>
             <group>
-              <field name="retribution_rate"/>
+              <field name="retribution_rate" attrs="{'readonly':[('is_multi_base', '=', True)]}"/>
               <field name="write_date"/>
             </group>
           </group>
-          <field name="quota_base_ids" attrs="{'invisible':[('is_multi_base', '=', False)]}"/>
+          <notebook>
+            <page name="quotas" string="Quotas">
+              <field name="quota_base_ids" attrs="{'invisible':[('is_multi_base', '=', False)]}"/>
+            </page>
+          </notebook>
         </sheet>
       </form>
     </field>
@@ -47,7 +51,7 @@
     <field name="name">retribution.base.line.view.tree</field>
     <field name="model">retribution.base.line</field>
     <field name="arch" type="xml">
-      <tree editable="top">
+      <tree editable="bottom">
         <field name="base_id" domain="[('is_open', '=', True), ('is_multi_base', '=', False)]" required="1" options="{'no_create': True}"/>
         <field name="volume"/>
         <field name="volume_percentage"/>
