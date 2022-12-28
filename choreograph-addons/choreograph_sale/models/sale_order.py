@@ -11,8 +11,8 @@ OPERATION_CONDITION_TYPE = {
     'comment': 'Comment',
 }
 OPERATION_TYPE = {
-     'condition': 'Condition',
-     'exclusion': 'Exclusion',
+    'condition': 'Condition',
+    'exclusion': 'Exclusion',
 }
 
 
@@ -30,9 +30,16 @@ class SaleOrder(models.Model):
     receiver = fields.Char('Receiver')
     send_with = fields.Char('Send with')
     operation_type_id = fields.Many2one('project.project', string='Operation type')
+    total_retribution = fields.Float(compute="_compute_total_retribution")
+
+    @api.depends('order_line')
+    def _compute_total_retribution(self):
+        for rec in self:
+            rec.total_retribution = sum(rec.order_line.mapped('retribution_cost'))
 
     def action_generate_operation(self):
-        self.order_line.sudo().with_company(self.company_id).with_context(is_operation_generation=True)._timesheet_service_generation()
+        self.order_line.sudo().with_company(self.company_id).with_context(
+            is_operation_generation=True)._timesheet_service_generation()
         self.show_operation_generation_button = False
 
     def action_create_task_from_condition(self):
@@ -51,12 +58,25 @@ class SaleOrder(models.Model):
                 condition.is_task_created = True
 
     def _compute_new_condition_count(self):
-        self.new_condition_count = len(self.operation_condition_ids.filtered(lambda c: not c.is_task_created and c.type != 'comment'))
+        self.new_condition_count = len(self.operation_condition_ids.filtered(
+            lambda c: not c.is_task_created and c.type != 'comment'))
 
 
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
+    retribution_cost = fields.Float(compute="_compute_retribution_cost")
+
     def _timesheet_service_generation(self):
         if self._context.get('is_operation_generation'):
             super()._timesheet_service_generation()
+
+    @api.depends('product_uom_qty', 'price_unit', 'order_id.related_base')
+    def _compute_retribution_cost(self):
+        for rec in self:
+            if rec.product_id.retribution_rate:
+                retribution_cost = rec.product_uom_qty * rec.price_unit * (rec.product_id.retribution_rate/100)
+                datastore_restribution = retribution_cost * (rec.product_id.concerned_base.retribution_rate/100)
+                rec.retribution_cost = retribution_cost if not rec.product_id.datastore else datastore_restribution
+            else:
+                rec.retribution_cost = 0
