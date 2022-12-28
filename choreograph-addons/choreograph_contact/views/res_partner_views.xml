@@ -25,7 +25,7 @@
         <xpath expr="//field[@name='category_id']" position="after">
           <field widget="many2many_tags" name="catalogue_ids"/>
         </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='user_id']"
+        <xpath expr="//notebook/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='user_id']"
                position="after">
           <field name="sale_team"/>
           <field name="is_company" invisible="1"/>
@@ -39,6 +39,7 @@
         <xpath expr="//group[@name='fiscal_information']" position="inside">
           <xpath expr="//field[@name='property_account_position_id']" position="move"/>
         </xpath>
+        <!--
         <xpath expr="//group[@name='misc']" position="inside">
           <xpath expr="//field[@name='company_registry']" position="move"/>
           <xpath expr="//field[@name='ref']" position="move"/>
@@ -46,14 +47,12 @@
                  position="move"/>
           <xpath expr="//field[@name='industry_id']" position="move"/>
         </xpath>
+        -->
         <xpath expr="//group[@name='misc']" position="after">
-          <group>
-            <group string="Contract">
-              <field name="first_contract_date"/>
-              <field name="contract_update_date"/>
-              <field name="rescission_date"/>
-            </group>
-            <xpath expr="//field[@name='property_account_position_id']" position="move"/>
+          <group string="Contract">
+            <field name="first_contract_date"/>
+            <field name="contract_update_date"/>
+            <field name="rescission_date"/>
           </group>
         </xpath>
         <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounting']/group[1]" position="before">
@@ -144,5 +143,49 @@
         </xpath>
       </field>
     </record>
+
+    <!-- catalogues -->
+    <record id="res_partner_catalogue_view_tree" model="ir.ui.view">
+        <field name="name">res.partner.catalogue.view.tree</field>
+        <field name="model">res.partner.catalogue</field>
+        <field name="arch" type="xml">
+          <tree>
+            <field name="name"/>
+            <field name="color" widget="color_picker"/>
+          </tree>
+        </field>
+    </record>
+
+    <record id="res_partner_catalogue_view_form" model="ir.ui.view">
+      <field name="name">res.partner.catalogue.view.form</field>
+      <field name="model">res.partner.catalogue</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group col="4">
+              <field name="name"/>
+              <field name="color" widget="color_picker"/>
+              <field name="active" widget="boolean_toggle"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="res_partner_catalogue_action" model="ir.actions.act_window">
+        <field name="name">Catalogues</field>
+        <field name="res_model">res.partner.catalogue</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Add a new catalogue
+          </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_res_partner_catalogue"
+          action="choreograph_contact.res_partner_catalogue_action"
+          name="Catalogues"
+          sequence="15" parent="contacts.res_partner_menu_config"/>
   </data>
 </odoo>
