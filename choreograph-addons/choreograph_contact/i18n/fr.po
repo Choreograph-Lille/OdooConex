@@ -27,6 +27,11 @@ msgid "Add a new role"
 msgstr "Ajouter un nouveau rôle"
 
 #. module: choreograph_contact
+#: model_terms:ir.actions.act_window,help:choreograph_contact.res_partner_catalogue_action
+msgid "Add a new catalogue"
+msgstr "Ajouter un nouveau catalogue"
+
+#. module: choreograph_contact
 #: model:ir.model.fields.selection,name:choreograph_contact.selection__res_partner__activity__bank
 msgid "Bank / Insurance"
 msgstr "Banque / Assurance"
@@ -58,6 +63,11 @@ msgstr "Charité"
 #: model_terms:ir.ui.view,arch_db:choreograph_contact.view_partner_form_inherit
 msgid "Client data"
 msgstr "Données client"
+
+#. module: choreograph_contact
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner_catalogue__color
+msgid "Color"
+msgstr "Couleur"
 
 #. module: choreograph_contact
 #: model:ir.model,name:choreograph_contact.model_res_partner
@@ -172,6 +182,7 @@ msgstr "Loisir"
 
 #. module: choreograph_contact
 #: model:ir.model.fields,field_description:choreograph_contact.field_choreograph_role__name
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner_catalogue__name
 msgid "Name"
 msgstr "Nom"
 

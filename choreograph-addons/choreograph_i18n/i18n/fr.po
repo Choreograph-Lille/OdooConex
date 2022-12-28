@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # 	* crm
-# 	* partner
+# 	* base
 #
 msgid ""
 msgstr ""
