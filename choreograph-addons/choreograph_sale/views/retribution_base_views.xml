@@ -31,7 +31,7 @@
               <field name="is_multi_base"/>
             </group>
             <group>
-              <field name="retribution_rate" attrs="{'readonly':[('is_multi_base', '=', True)]}"/>
+              <field name="retribution_rate" attrs="{'readonly':[('is_multi_base', '=', True)]}" force_save="1"/>
               <field name="write_date"/>
             </group>
           </group>
