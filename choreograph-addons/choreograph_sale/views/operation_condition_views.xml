@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
+  <data>
   <!-- operation condition -->
   <record id="operation_condition_view_tree" model="ir.ui.view">
     <field name="name">operation.condition.view.tree</field>
@@ -57,9 +59,7 @@
           </p>
         </field>
     </record>
+  </data>
 
-  <menuitem id="menu_operation_condition_subtype"
-          action="choreograph_sale.operation_condition_subtype_action"
-          name="Condition/Exclusion subtype"
-          sequence="70" parent="sale.menu_sale_config"/>
+
 </odoo>
