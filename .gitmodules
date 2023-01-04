@@ -1,9 +1,12 @@
 [submodule "oca-addons/partner"]
 	path = oca-addons/partner
 	url = https://github.com/OCA/partner-contact.git
+	branch = 16.0
 [submodule "oca-addons/project"]
 	path = oca-addons/project
 	url = https://github.com/OCA/project.git
+	branch = 16.0
 [submodule "oca-addons/web"]
 	path = oca-addons/web
 	url = https://github.com/OCA/web.git
+	branch = 16.0
