@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-22 07:44+0000\n"
-"PO-Revision-Date: 2022-11-22 07:44+0000\n"
+"POT-Creation-Date: 2023-01-05 16:09+0000\n"
+"PO-Revision-Date: 2023-01-05 16:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,10 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: choreograph_crm
-#: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__activity_sector
-msgid "Activity sector"
-msgstr "Secteur d'activité"
+#: model_terms:ir.ui.view,arch_db:choreograph_crm.crm_case_kanban_view_leads_inherit
+#: model_terms:ir.ui.view,arch_db:choreograph_crm.crm_lead_view_form_inherit
+msgid "<span attrs=\"{'invisible':[('client_name', '=', False)]}\">-</span>"
+msgstr ""
 
 #. module: choreograph_crm
 #: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__agency_id
@@ -27,13 +28,23 @@ msgstr "Agence"
 
 #. module: choreograph_crm
 #: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__category_name
-msgid "Category name"
-msgstr "Nom catégorie"
+msgid "Category Name"
+msgstr "Catégorie"
+
+#. module: choreograph_crm
+#: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__activity_sector
+msgid "Industry"
+msgstr "Secteur d'activité"
 
 #. module: choreograph_crm
 #: model:ir.model,name:choreograph_crm.model_crm_lead
 msgid "Lead/Opportunity"
 msgstr "Piste/opportunité"
+
+#. module: choreograph_crm
+#: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__client_name
+msgid "Name"
+msgstr "Nom"
 
 #. module: choreograph_crm
 #: model:ir.model.fields,field_description:choreograph_crm.field_crm_lead__sox
