@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-05 14:49+0000\n"
-"PO-Revision-Date: 2023-01-05 14:49+0000\n"
+"POT-Creation-Date: 2023-01-05 22:59+0000\n"
+"PO-Revision-Date: 2023-01-05 22:59+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -378,7 +378,7 @@ msgstr "Condition/Exclusion"
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_operation_condition_subtype
 msgid "Operation Condition Subtype"
-msgstr ""
+msgstr "Sous-type Condition/Exclusion"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_type
@@ -403,7 +403,7 @@ msgstr "Type d'opération"
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__order_id
 msgid "Order"
-msgstr ""
+msgstr "Commande"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__access_url
@@ -424,7 +424,7 @@ msgstr "Article"
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__quota_base_ids
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.retribution_base_view_form
 msgid "Quotas"
-msgstr ""
+msgstr "Quotas"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__receiver
@@ -439,7 +439,7 @@ msgstr "Base concernée"
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Responsable"
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_retribution_base_line
@@ -449,7 +449,7 @@ msgstr "Ligne de rétribution de base"
 #. module: choreograph_sale
 #: model:ir.ui.menu,name:choreograph_sale.retribution_base_menu
 msgid "Retribution Bases"
-msgstr ""
+msgstr "Bases concernées"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__retribution_cost
