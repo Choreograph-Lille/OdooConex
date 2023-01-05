@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-05 22:59+0000\n"
-"PO-Revision-Date: 2023-01-05 22:59+0000\n"
+"POT-Creation-Date: 2023-01-05 23:14+0000\n"
+"PO-Revision-Date: 2023-01-05 23:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -99,12 +99,6 @@ msgstr "Choisir le type d'opération"
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__type__comment
 msgid "Comment"
 msgstr "Commentaire"
-
-#. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_product_product__concerned_base
-#: model:ir.model.fields,field_description:choreograph_sale.field_product_template__concerned_base
-msgid "Concerned base"
-msgstr "Base concernée"
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__operation_type__condition
@@ -442,6 +436,12 @@ msgid "Responsible User"
 msgstr "Responsable"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_product_product__concerned_base
+#: model:ir.model.fields,field_description:choreograph_sale.field_product_template__concerned_base
+msgid "Retribution Base"
+msgstr "Base concernée"
+
+#. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_retribution_base_line
 msgid "Retribution Base Line"
 msgstr "Ligne de rétribution de base"
@@ -457,6 +457,8 @@ msgid "Retribution Cost"
 msgstr "Côut rétribution"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_product_product__retribution_rate
+#: model:ir.model.fields,field_description:choreograph_sale.field_product_template__retribution_rate
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__retribution_rate
 msgid "Retribution Rate"
 msgstr "Taux de rétribution"
@@ -466,12 +468,6 @@ msgstr "Taux de rétribution"
 #: model:ir.model,name:choreograph_sale.model_retribution_base
 msgid "Retribution base"
 msgstr "Bases concernées"
-
-#. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_product_product__retribution_rate
-#: model:ir.model.fields,field_description:choreograph_sale.field_product_template__retribution_rate
-msgid "Retribution rate"
-msgstr "Taux de rétribution"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_has_sms_error
