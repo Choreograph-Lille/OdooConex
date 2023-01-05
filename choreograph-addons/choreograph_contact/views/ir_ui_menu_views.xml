@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="menu_res_role"
+                  name="Roles"
+                  sequence="10"
+                  action="res_role_action"
+                  parent="contacts.res_partner_menu_config"/>
+
+        <menuitem id="menu_res_partner_catalogue"
+                  name="Catalogues"
+                  sequence="15"
+                  action="res_partner_catalogue_action"
+                  parent="contacts.res_partner_menu_config"/>
+
+    </data>
+
+</odoo>

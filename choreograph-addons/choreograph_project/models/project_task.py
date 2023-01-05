@@ -6,7 +6,7 @@ from odoo import models, fields, api, _
 class ProjectTask(models.Model):
     _inherit = 'project.task'
 
-    role_id = fields.Many2one('choreograph.role', string='Role')
+    role_id = fields.Many2one('res.role', 'Role')
 
     @api.onchange('role_id')
     def onchange_role_id(self):

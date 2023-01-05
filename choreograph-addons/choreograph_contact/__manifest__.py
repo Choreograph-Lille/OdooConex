@@ -19,8 +19,11 @@
         # security
         'security/ir.model.access.csv',
         # views
-        'views/choreograph_role_views.xml',
+        'views/res_role_views.xml',
+        'views/res_partner_role_views.xml',
+        'views/res_partner_catalogue_views.xml',
         'views/res_partner_views.xml',
+        'views/ir_ui_menu_views.xml',
     ],
 
     'assets': {

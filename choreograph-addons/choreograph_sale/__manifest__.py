@@ -21,6 +21,7 @@
         # views
         'views/sale_order_views.xml',
         'views/operation_condition_views.xml',
+        'views/operation_condition_subtype_views.xml',
         'views/product_template_views.xml',
         'views/retribution_base_views.xml',
         'views/ir_ui_menu_views.xml',

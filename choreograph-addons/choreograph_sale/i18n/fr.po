@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-04 14:16+0000\n"
-"PO-Revision-Date: 2023-01-04 14:16+0000\n"
+"POT-Creation-Date: 2023-01-05 14:49+0000\n"
+"PO-Revision-Date: 2023-01-05 14:49+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -87,8 +87,8 @@ msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__catalogue_ids
-msgid "Catalogue"
-msgstr ""
+msgid "Catalogues"
+msgstr "Catalogues"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
@@ -161,7 +161,7 @@ msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__default_fill
-msgid "Default fill"
+msgid "Default Fill"
 msgstr "Remplir par défaut"
 
 #. module: choreograph_sale
@@ -182,7 +182,7 @@ msgstr ""
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__type__file_processing
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition_subtype__type__file_processing
-msgid "File condition"
+msgid "File Condition"
 msgstr "Condition fichier client"
 
 #. module: choreograph_sale
@@ -246,7 +246,7 @@ msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__is_task_created
-msgid "Is Task Created"
+msgid "Is Task Created?"
 msgstr "Tâche crée"
 
 #. module: choreograph_sale
@@ -276,7 +276,7 @@ msgstr "Date de mis à jour"
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__type__maj_condition
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition_subtype__type__maj_condition
-msgid "MAJ condition"
+msgid "MAJ Condition"
 msgstr "Condition MAJ"
 
 #. module: choreograph_sale
@@ -381,6 +381,11 @@ msgid "Operation Condition Subtype"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_type
+msgid "Operation Type"
+msgstr "Type d'opération"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_date
 msgid "Operation date"
 msgstr "Date"
@@ -391,7 +396,6 @@ msgid "Operation generation"
 msgstr "Génération de l'opération"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_type
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__operation_type_id
 msgid "Operation type"
 msgstr "Type d'opération"
@@ -438,6 +442,11 @@ msgid "Responsible User"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_retribution_base_line
+msgid "Retribution Base Line"
+msgstr "Ligne de rétribution de base"
+
+#. module: choreograph_sale
 #: model:ir.ui.menu,name:choreograph_sale.retribution_base_menu
 msgid "Retribution Bases"
 msgstr ""
@@ -459,15 +468,10 @@ msgid "Retribution base"
 msgstr "Bases concernées"
 
 #. module: choreograph_sale
-#: model:ir.model,name:choreograph_sale.model_retribution_base_line
-msgid "Retribution base Line"
-msgstr ""
-
-#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_product__retribution_rate
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_template__retribution_rate
 msgid "Retribution rate"
-msgstr "Taux de retribution"
+msgstr "Taux de rétribution"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_has_sms_error
@@ -477,13 +481,13 @@ msgstr ""
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__type__sale_order
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition_subtype__type__sale_order
-msgid "Sale order condition"
+msgid "Sale Order Condition"
 msgstr "Condition bon de commande"
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__type__exclusion_so
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition_subtype__type__exclusion_so
-msgid "Sale order exclusion"
+msgid "Sale Order Exclusion"
 msgstr "Exclusion bon de commande"
 
 #. module: choreograph_sale
@@ -494,7 +498,7 @@ msgstr "Bon de commande"
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr ""
+msgstr "Ligne de bons de commande"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__access_token
@@ -571,7 +575,7 @@ msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__type
-msgid "Type name"
+msgid "Type Name"
 msgstr "Type"
 
 #. module: choreograph_sale

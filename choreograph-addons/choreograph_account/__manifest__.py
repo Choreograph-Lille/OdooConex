@@ -18,6 +18,7 @@
         # data
         # security
         # views
+        'views/res_partner_views.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],

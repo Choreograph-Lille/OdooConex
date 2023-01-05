@@ -1,191 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data>
-    <record id="view_partner_form_inherit" model="ir.ui.view">
-      <field name="name">res.partner.form.inherit</field>
-      <field name="model">res.partner</field>
-      <field name="inherit_id" ref="base.view_partner_form"/>
-      <field name="arch" type="xml">
-        <xpath expr="//notebook" position="inside">
-          <page name="partner_roles" string="Roles">
-            <field name="role_ids">
-              <tree editable="top">
-                <field name="role_id"/>
-                <field name="user_ids" widget="many2many_tags"/>
-              </tree>
+    <data>
+
+        <record id="res_partner_form_view_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page name="internal_notes" position="before">
+                    <page name="partner_role_pg" string="Roles">
+                        <field name="role_ids">
+                            <tree editable="bottom">
+                                <field name="role_id"/>
+                                <field name="user_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="client_data_pg" string="Partner Data" attrs="{'invisible': [('customer_rank', '=', 0)]}">
+                        <group>
+                            <group name="client_data_left">
+                                <field name="customer_rank" invisible="1"/>
+                                <field name="update_frequency"/>
+                                <field name="last_conexup_date"/>
+                                <field name="last_revival_date"/>
+                                <field name="base_entry_date"/>
+                            </group>
+                            <group name="client_data_right">
+                                <field name="last_transaction_date"/>
+                                <field name="last_receipt_date"/>
+                                <field name="private_title"/>
+                                <field name="data_destruction_date"/>
+                            </group>
+                        </group>
+                    </page>
+                </page>
+                <field name="category_id" position="after">
+                    <field name="catalogue_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                </field>
+                <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="after">
+                    <field name="country_base"/>
+                    <field name="category_name" force_save="True" readonly="1"/>
+                </xpath>
+                <group name="misc" position="after">
+                    <group string="Contract">
+                        <field name="first_contract_date"/>
+                        <field name="contract_update_date"/>
+                        <field name="rescission_date"/>
+                    </group>
+                </group>
             </field>
-          </page>
-        </xpath>
+        </record>
 
-        <!-- studion custom -->
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='team_id'][2]"
-               position="replace">
-          <xpath expr="//field[@name='property_payment_term_id']" position="move"/>
-          <xpath expr="//field[@name='property_product_pricelist']" position="move"/>
-        </xpath>
-        <xpath expr="//field[@name='category_id']" position="after">
-          <field widget="many2many_tags" name="catalogue_ids"/>
-        </xpath>
-        <xpath expr="//notebook/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='sale']/field[@name='user_id']"
-               position="after">
-          <field name="sale_team"/>
-          <field name="is_company" invisible="1"/>
-          <field name="country_base" attrs="{'invisible': [('is_company', '=', False)]}"/>
-          <field name="category_name" force_save="True" readonly="1" attrs="{'invisible': [('is_company', '=', False)]}"/>
-        </xpath>
-        <xpath expr="//group[@name='purchase']" position="attributes">
-          <attribute name="groups">purchase.group_purchase_user</attribute>
-        </xpath>
-
-        <xpath expr="//group[@name='fiscal_information']" position="inside">
-          <xpath expr="//field[@name='property_account_position_id']" position="move"/>
-        </xpath>
-        <!--
-        <xpath expr="//group[@name='misc']" position="inside">
-          <xpath expr="//field[@name='company_registry']" position="move"/>
-          <xpath expr="//field[@name='ref']" position="move"/>
-          <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='misc']/field[@name='company_id']"
-                 position="move"/>
-          <xpath expr="//field[@name='industry_id']" position="move"/>
-        </xpath>
-        -->
-        <xpath expr="//group[@name='misc']" position="after">
-          <group string="Contract">
-            <field name="first_contract_date"/>
-            <field name="contract_update_date"/>
-            <field name="rescission_date"/>
-          </group>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounting']/group[1]" position="before">
-          <xpath expr="//field[@name='duplicated_bank_account_partners_count']" position="move"/>
-          <xpath expr="//field[@name='show_credit_limit']" position="move"/>
-        </xpath>
-        <xpath expr="//button[@name='62']" position="before">
-          <xpath expr="//field[@name='bank_ids']" position="move"/>
-        </xpath>
-        <xpath expr="//group[@name='accounting_entries']" position="inside">
-          <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounting']/group[1]/group[@name='accounting_entries']/field[@name='currency_id']"
-                 position="move"/>
-          <xpath expr="//field[@name='property_account_receivable_id']" position="move"/>
-          <xpath expr="//field[@name='property_account_payable_id']" position="move"/>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounting']/group[1]/group[@name='credit_limits']/label[1]"
-               position="before">
-          <xpath expr="//field[@name='credit']" position="move"/>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='accounting']/group[1]/group[@name='credit_limits']/div[1]"
-               position="inside">
-          <xpath expr="//field[@name='use_partner_credit_limit']" position="move"/>
-          <xpath expr="//field[@name='credit_limit']" position="move"/>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/group[1]" position="after">
-          <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='internal_notes']/field[@name='comment']"
-                 position="move"/>
-        </xpath>
-        <xpath expr="//page[@name='partner_roles']" position="inside">
-          <xpath expr="//field[@name='role_ids']" position="move"/>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
-          <page string="Client data" name="client_data" attrs="{'invisible': [('customer_rank', '=', 0)]}">
-            <field name="customer_rank" invisible="1"/>
-            <group>
-              <group name="client_data_left">
-                <field name="update_frequency"/>
-                <field name="last_conexup_date"/>
-                <field name="last_revival_date"/>
-                <field name="base_entry_date"/>
-              </group>
-              <group name="client_data_right">
-                <field name="last_transaction_date"/>
-                <field name="last_receipt_date"/>
-                <field name="private_title"/>
-                <field name="data_destruction_date"/>
-              </group>
-            </group>
-          </page>
-        </xpath>
-        <xpath expr="//form[1]/div[4]" position="inside">
-          <xpath expr="//field[@name='message_follower_ids']" position="move"/>
-          <xpath expr="//field[@name='activity_ids']" position="move"/>
-          <xpath expr="//field[@name='message_ids']" position="move"/>
-        </xpath>
-      </field>
-    </record>
-
-    <record id="view_partner_property_form_inherit" model="ir.ui.view">
-      <field name="name">res.partner.purchase.property.form.inherit</field>
-      <field name="model">res.partner</field>
-      <field name="inherit_id" ref="purchase.view_partner_property_form"/>
-      <field name="arch" type="xml">
-        <xpath expr="//div[@name='receipt_reminder']" position="before">
-          <xpath expr="//field[@name='property_supplier_payment_term_id']" position="move"/>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='purchase']/div[@name='receipt_reminder']/label[1]"
-               position="after">
-          <xpath expr="//field[@name='receipt_reminder_email']" position="move"/>
-        </xpath>
-        <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='sales_purchases']/group[@name='container_row_2']/group[@name='purchase']/div[@name='receipt_reminder']/div[1]/span[1]"
-               position="before">
-          <xpath expr="//field[@name='reminder_date_before_receipt']" position="move"/>
-        </xpath>
-        <xpath expr="//div[@name='receipt_reminder']" position="after">
-          <xpath expr="//field[@name='property_purchase_currency_id']" position="move"/>
-        </xpath>
-      </field>
-    </record>
-
-    <record id="res_partner_form_l10n_fr_inherit" model="ir.ui.view">
-      <field name="name">res.partner.form.l10n.fr.inherit</field>
-      <field name="model">res.partner</field>
-      <field name="inherit_id" ref="l10n_fr.res_partner_form_l10n_fr"/>
-      <field name="arch" type="xml">
-        <xpath expr="//group[@name='misc']" position="inside">
-          <xpath expr="//field[@name='siret']" position="move"/>
-        </xpath>
-      </field>
-    </record>
-
-    <!-- catalogues -->
-    <record id="res_partner_catalogue_view_tree" model="ir.ui.view">
-        <field name="name">res.partner.catalogue.view.tree</field>
-        <field name="model">res.partner.catalogue</field>
-        <field name="arch" type="xml">
-          <tree>
-            <field name="name"/>
-            <field name="color" widget="color_picker"/>
-          </tree>
-        </field>
-    </record>
-
-    <record id="res_partner_catalogue_view_form" model="ir.ui.view">
-      <field name="name">res.partner.catalogue.view.form</field>
-      <field name="model">res.partner.catalogue</field>
-      <field name="arch" type="xml">
-        <form>
-          <sheet>
-            <group col="4">
-              <field name="name"/>
-              <field name="color" widget="color_picker"/>
-              <field name="active" widget="boolean_toggle"/>
-            </group>
-          </sheet>
-        </form>
-      </field>
-    </record>
-
-    <record id="res_partner_catalogue_action" model="ir.actions.act_window">
-        <field name="name">Catalogues</field>
-        <field name="res_model">res.partner.catalogue</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-          <p class="o_view_nocontent_smiling_face">
-            Add a new catalogue
-          </p>
-        </field>
-    </record>
-
-    <menuitem id="menu_res_partner_catalogue"
-          action="choreograph_contact.res_partner_catalogue_action"
-          name="Catalogues"
-          sequence="15" parent="contacts.res_partner_menu_config"/>
-  </data>
+    </data>
 </odoo>
