@@ -44,6 +44,7 @@
                 <group name="misc" position="after">
                     <group string="Contract">
                         <field name="first_contract_date"/>
+                        <field name="contract_version"/>
                         <field name="contract_update_date"/>
                         <field name="rescission_date"/>
                     </group>
