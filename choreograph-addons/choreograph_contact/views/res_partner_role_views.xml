@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_partner_role_view_tree" model="ir.ui.view">
+            <field name="name">res.partner.role.view.tree</field>
+            <field name="model">res.partner.role</field>
+            <field name="arch" type="xml">
+                <tree string="Roles">
+                    <field name="role_id"/>
+                    <field name="user_ids" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_project
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-31 08:08+0000\n"
+"PO-Revision-Date: 2022-10-31 08:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task__email_coupling
+msgid "Email Coupling"
+msgstr "Couplage mail"
+
+#. module: choreograph_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task__phone_coupling
+msgid "Phone Coupling"
+msgstr "Couplage téléphone"
+
+#. module: choreograph_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task__role_id
+msgid "Role"
+msgstr "Rôle"
+
+#. module: choreograph_project
+#: model:ir.model,name:choreograph_project.model_project_task
+msgid "Task"
+msgstr "Tâche"

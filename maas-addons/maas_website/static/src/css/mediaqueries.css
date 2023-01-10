@@ -1,0 +1,330 @@
+@media screen and (max-width:3000px) {
+	.headblock .heading {
+		padding:20px 80px 0 80px;	
+	}
+	.chiffres {
+        background:url('/maas_website/static/src/img/chiffres.png') top center;
+        height:743px;
+        width:100%;
+        padding-top:635px;
+
+    }
+    .chiffres-en {
+        background:url('/maas_website/static/src/img/Chiffres_EN_Web.png') top center;
+        height:770px;
+        width:100%;
+        padding-top:635px;
+    }
+}
+@media screen and (min-width:771px) { /* Desktop */
+	
+	#block03-logomob-msoft {
+		display: none !important;
+	}
+}
+@media screen and (max-width:991px) { /* Tablet large*/
+	#block02-lft .no {
+		display:none;
+	}
+	#block02-lft .blk {
+		display:block;
+	}
+	#block02-lft, #block02-lft div p {
+		text-align: center !important;
+	}
+	#block02-lft .separator3 {
+		margin: auto;
+		margin-top: 26px;
+		margin-bottom: 45px;
+	}
+}
+@media screen and (max-width:770px) { /* Tablet */
+	
+	.access_zone.small_access {
+		display:block;
+	}
+	.access_zone h3.client_access {
+		position: absolute;
+		top: calc(85vh);
+		left: calc(50% - 80px);
+	}
+	.scene--full {
+		width: 100%;
+		height: 80vh;
+	}
+	.big_access {
+		display:none;
+	}
+	.scene {
+		margin-bottom: 50px;
+	}
+	#block03-logo-msoft {
+		display: none !important;
+	}
+	.heading  h3.client_access{
+		display : none;
+	}
+	.headblock .heading {
+		padding:20px 0px 0 0px;	
+	}
+	.form_content .left_form, 
+	.form_content .right_form,
+	.form_bottom	{
+		display:none;
+	}
+	.blk {
+		display:block;
+	}
+	.no {
+		display:none;
+	}
+	.headblock .heading {
+		margin:0 auto;		
+		padding-left:0;
+		width:320px;
+	}
+	.content__title {
+		font-size: 75px;
+		line-height:75px;
+	}
+	.content__subtitle {
+		margin-top:50px;
+	}
+	.second_block {
+		margin-top:40px;
+	}
+	.form_content, .form_bottom {
+		width:100%;
+	}
+	.form_content .form_elements {
+		width:629px;
+		height:394px;
+		background:url('/maas_website/static/src/images/bg_form_tablette.jpg') no-repeat;
+		margin: 0 auto;
+		float: initial;
+	}
+	.form_content .thankyou {
+		width:629px;
+		height:394px;
+		background:url('/maas_website/static/src/images/bg_thankyou_tablette.jpg') no-repeat;
+		margin: 0 auto;
+		float: initial;
+	}
+	.chiffres {
+		background: url('/maas_website/static/src/images/chiffres_tab.png') top center;
+		height: 643px;
+		width: 100%;
+		padding-top: 560px;
+	}
+	.chiffres-en{
+	    background: url('/maas_website/static/src/images/chiffres_tab.png') top center;
+		height: 643px;
+		width: 100%;
+		padding-top: 560px;
+	}
+	.form_content .form_elements .left_space {
+		width:28px;
+	}
+	.form_content .form_elements .controls {
+		width:572px;
+	}
+	.form_content .form_elements .left_controls,
+	.form_content .form_elements .right_controls {
+		width:271px;
+		float:left;
+	}
+	.form_content .form_elements .middle_space {
+		width:28px;
+	}
+	.form_content .form_elements .right_space {
+		width:30px;
+	}
+	#block03-logo {
+		display: none !important;
+	}
+	
+	#block-logo-mob {
+		margin-top:45px;
+	}	
+	.separator3 {
+		margin: auto;
+		margin-top:26px;
+		margin-bottom:45px;
+	}	
+	#block02-lft, #block02-lft div p{
+		text-align:center !important;
+		
+	}	
+	#block02-lft {
+		margin-bottom:45px;
+	}	
+}
+
+@media screen and (max-width:640px){ /* Mobile */
+	.arrow_home{
+		left:48%;
+	}
+	.content__subtitle .play .buttonPlay {
+		background-size: 115px 110px;
+	}	
+	#blue-button {
+		margin:0 auto;
+		margin-top:25px;
+		/*margin-right:25px;*/
+		width : 90%;
+		height: 50px;
+		float:none;
+	}
+	
+	#blue-button input[value^="ENVOYER"] {
+		color:#ffffff;
+		/* padding-top: 24px; */
+		font-size:20px;
+		line-height:50px;
+	} 
+	
+	
+	#block03-logo-msoft {
+		display: none;
+	}
+	
+	#block03-logomob-msoft {
+		margin-top: 44px;
+	}
+	
+	#Logo-conexance {
+		margin-left: 175px;
+	}
+	
+	.content__title {
+		font-size: 50px;
+		line-height: 50px;
+	}
+	#block02-lft {
+		font-size:40px;
+	}
+	#block02-lft .description--3 {
+		font-size:15px;
+		margin-bottom : 40px;
+	}
+	#block02-rgt div.secondDiv  {
+		margin : 90px 0 30px;
+	}
+	#block07 div div img {
+		margin-left:140px;
+	}
+	.form_content .form_elements {
+		width: 97%;
+		height: 771px;
+		background: url('/maas_website/static/src/images/bg_form_mobile.jpg') no-repeat center;
+		max-width:420px;
+	}
+	#errorMessage {	
+		margin-top:20px;
+	}
+	.form_content .thankyou {
+		width: 100%;
+		height: 771px;
+		background: url('/maas_website/static/src/images/bg_thx_mobile.jpg') no-repeat center;
+	}
+	.form_content .thankyou .lineOne{
+		font-size:50px;
+		padding-top:200px;
+	}
+	.form_content .thankyou .btnOK {
+		width:260px;
+	}
+	.blk_mob {
+		display:block;
+	}
+	.form_content .form_elements .controls {
+		width:95%;
+		margin: 0 auto;
+		float: none;
+	}
+	.form_content .form_elements .left_controls, .form_content .form_elements .right_controls {
+		width:100%;
+	}
+	.form_content .form_elements .middle_space,
+	.form_content .form_elements .left_space	{
+		display:none;
+	}
+	.separator3 {
+		margin: auto;
+		margin-top:26px;
+		margin-bottom:45px;
+	}
+	.form_content .form_elements .controls  input[type="text"] {
+		height:65px;
+	}
+	.chiffres {
+		background: url('/maas_website/static/src/images/chiffres_mobile.png') top center;
+		height: 696px;
+		width: 100%;
+		padding-top: 570px;
+	}
+	.chiffres-en {
+		background: url('/maas_website/static/src/img/Schema-EN_Mobile.png') top center;
+		height: 696px;
+		width: 100%;
+		padding-top: 570px;
+	}
+	.mobile_hide {
+		display:none;
+	}
+	.mobile_show {
+		display:block;
+	}
+	#block07 #block07-fils-lft {
+		margin-left:50px;
+		margin-top: 20px;
+	}
+	
+	#block07 #block07-fils-rgt {
+		margin-left:50px;
+	}
+	
+	#block-logo-mob {
+		display: block !important;
+		margin-top: 58px;
+	}
+	
+	#block03-logo, #wavy_form-lft, #wavy_form-rgt {
+		display: none;
+	}
+	
+	#block-logo-mob img {
+		width: 100%;
+	}
+	
+	#block02-lft div p {
+		text-align:center !important;
+		display: block !important;
+	}
+			
+	#block02-lft {
+		margin-bottom: 30px;
+	}
+	
+	#bloc_004 {
+		width: 640px;
+		
+	}
+	.textlogofoot {
+		padding-left:0;
+	}
+	#Logo-conexance {
+		width: 243px;
+		margin: 0 auto;
+		margin-bottom:20px;
+	}
+}
+@media screen and (max-width:430px){
+	#block-pre-footer {			
+		font-size:25px;		
+	}
+	#block-pre-footer .bolded {
+		font-size:35px;
+		line-height:35px;
+	}
+}

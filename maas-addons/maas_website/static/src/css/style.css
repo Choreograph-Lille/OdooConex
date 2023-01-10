@@ -1,0 +1,16 @@
+.scrollup {
+	
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
+	display: none;
+	color: white;
+	
+	font-size: 20px;
+	text-align: center;
+	line-height: 37px;
+}
+ 
+.scrollup:hover {
+	color: white;
+}

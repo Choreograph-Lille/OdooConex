@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+    <record id="view_users_form_inherit" model="ir.ui.view">
+      <field name="name">view.users.form.inherit</field>
+      <field name="model">res.users</field>
+      <field name="inherit_id" ref="base.view_users_form"/>
+      <field name="arch" type="xml">
+
+        <field name="partner_id" position="attributes">
+          <attribute name="groups"/>
+          <attribute name="readonly">0</attribute>
+          <attribute name="attrs"/>
+        </field>
+
+        <xpath expr="//sheet/notebook/page[2]" position="after">
+          <page string="Multicanal">
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <h2>Canal</h2>
+                  </td>
+                  <td>
+                    <h2>Par Défaut</h2>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="row" style="padding-left:10px;padding-top:16px">
+                      <field name="bool_sms"/>
+                      <label for="bool_sms"/>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="row" style="padding-left:10px;padding-bottom: 5px;">
+                      <field name="default_sms"/>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="row" style="padding-left:10px;padding-top:16px">
+                      <field name="bool_print"/>
+                      <label for="bool_print"/>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="row" style="padding-left:10px;padding-bottom: 5px;">
+                      <field name="default_print"/>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="row" style="padding-left:10px;padding-top:16px">
+                      <field name="bool_email"/>
+                      <label for="bool_email"/>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="row" style="padding-left:10px;padding-bottom: 5px;">
+                      <field name="default_email"/>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+
+            <field name="customer_ids">
+              <tree>
+                <field name="name"/>
+              </tree>
+            </field>
+          </page>
+        </xpath>
+
+      </field>
+    </record>
+
+
+    <record id="base.action_res_users" model="ir.actions.act_window">
+      <field name="context">{}</field>
+    </record>
+
+  </data>
+</odoo>
