@@ -58,3 +58,12 @@ class SaleOrder(models.Model):
     def _compute_new_condition_count(self):
         self.new_condition_count = len(self.operation_condition_ids.filtered(
             lambda c: not c.is_task_created and c.type != 'comment'))
+
+    def _reset_show_operation_generation_button(self, vals):
+        vals['show_operation_generation_button'] = True
+        return vals
+
+    @api.model
+    def create(self, vals):
+        vals = self._reset_show_operation_generation_button(vals)
+        return super(SaleOrder, self).create(vals)
