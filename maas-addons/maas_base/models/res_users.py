@@ -86,7 +86,7 @@ class ResUsers(models.Model):
         portal_users = self.env.ref('maas_base.standard_user').users
         portal_users |= self.env.ref('maas_base.validator_user').users
         for rec in self:
-            if rec in portal_users:
+            if rec in portal_users and rec.id != self.env.ref('base.user_admin').id:
                 rec.is_portal_user = True
             else:
                 rec.is_portal_user = False
