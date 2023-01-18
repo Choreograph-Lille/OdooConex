@@ -4,14 +4,13 @@
         <record id="product_template_form_inherit" model="ir.ui.view">
             <field name="name">product.template.form.inherit</field>
             <field name="model">product.template</field>
-            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="inherit_id" ref="sale_subscription.product_template_view_form_recurring"/>
             <field name="arch" type="xml">
                 <page name="inventory" position="after">
-                    <page name="mymodel" string="MyModel">
+                    <page name="mymodel" string="MyModel" attrs="{'invisible': [('recurring_invoice','=',False)]}">
                         <group>
                             <group>
                                 <field name="identifiers"/>
-                                <field name="retribution_rate"/>
                             </group>
                             <group>
                                 <field name="is_basic_package"/>

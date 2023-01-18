@@ -22,20 +22,22 @@
                             attrs="{'invisible': ['|', ('new_condition_count', '=', 0), ('project_count', '=', 0)]}"/>
                 </header>
                 <notebook position="inside">
-                    <page name="operation_condition" string="Condition/Exclusion">
+                    <page name="operation_condition" string="Condition/Exclusion" attrs="{'invisible': [('recurrence_id', '!=', False)]}">
                         <field name="operation_condition_ids"/>
                     </page>
                 </notebook>
-                <xpath expr="//field[@name='payment_term_id']" position="replace">
-                    <field widget="many2many_tags" name="catalogue_ids"/>
-                    <field name="data_conservation"/>
-                    <field name="operation_type_id" help="Choose the operation type"/>
-                    <field name="related_base"/>
-                </xpath>
-                <xpath expr="//field[@name='partner_shipping_id']" position="after">
-                    <field name="send_with"/>
-                    <field name="receiver"/>
-                </xpath>
+                <field name="payment_term_id" position="after">
+                    <field name="catalogue_ids"
+                           widget="many2many_tags"
+                           attrs="{'invisible': [('recurrence_id', '!=', False)]}"
+                           options="{'color_field': 'color', 'no_create_edit': True}"/>
+                    <field name="data_conservation" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
+                    <field name="related_base" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
+                </field>
+                <field name="partner_shipping_id" position="after">
+                    <field name="send_with" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
+                    <field name="receiver" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
+                </field>
 
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']"
                        position="attributes">
