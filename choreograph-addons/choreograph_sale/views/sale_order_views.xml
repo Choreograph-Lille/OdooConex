@@ -13,9 +13,9 @@
                     <field name="new_condition_count" invisible="1"/>
                     <field name="project_count" invisible="1"/>
                     <button name="action_generate_operation" id="action_generate_operation"
-                            string="Operation generation"
+                            string="Generate The Operation"
                             class="btn-primary" type="object"
-                            attrs="{'invisible': [('show_operation_generation_button', '=', False)]}"/>
+                            attrs="{'invisible': ['|', ('show_operation_generation_button', '=', False), ('recurrence_id', '!=', False)]}"/>
                     <button name="action_create_task_from_condition" id="action_create_task_from_condition"
                             string="Task generation"
                             class="btn-primary" type="object"
