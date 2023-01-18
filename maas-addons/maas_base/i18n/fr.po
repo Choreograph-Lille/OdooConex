@@ -51,11 +51,6 @@ msgid "Gérer une campagne/action"
 msgstr "Gérer une campagne/action"
 
 #. module: maas_base
-#: model:ir.model.fields,field_description:maas_base.field_res_users_is_portal_user
-msgid "Is Portal User"
-msgstr "Est un utilisateur portail ?"
-
-#. module: maas_base
 #: model:res.groups,name:maas_base.group_start_modeling
 msgid "Lancer la modélisation"
 msgstr "Lancer la modélisation"
