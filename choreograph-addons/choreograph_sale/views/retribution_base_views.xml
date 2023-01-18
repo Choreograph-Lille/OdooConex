@@ -35,6 +35,9 @@
                                 <field name="retribution_rate" attrs="{'readonly':[('is_multi_base', '=', True)]}"
                                        force_save="1"
                                        widget="percentage"/>
+                                <field name="retribution_rate_multi_base" attrs="{'invisible':[('is_multi_base', '=', False)]}"
+                                       force_save="1"
+                                       widget="percentage"/>
                             </group>
                         </group>
                         <notebook>
@@ -60,7 +63,7 @@
                     <field name="base_id" domain="[('is_open', '=', True), ('is_multi_base', '=', False)]" required="1"
                            options="{'no_create': True}"/>
                     <field name="volume"/>
-                    <field name="volume_percentage"/>
+                    <field name="volume_percentage" readonly="1" force_save="1"/>
                     <field name="retribution_percentage" widget="percentage"/>
                 </tree>
             </field>
