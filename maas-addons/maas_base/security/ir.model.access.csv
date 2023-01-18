@@ -8,7 +8,7 @@ access_mail_message_all,access_mail_message all,mail.model_mail_message,,1,1,1,0
 access_mail_template_all,access_mail_template all,mail.model_mail_template,,1,1,1,0
 access_mail_mail_all,access_mail_mail all,mail.model_mail_mail,,1,1,1,0
 access_ir_rule_all,access_ir_rule all,base.model_ir_rule,,1,1,1,0
-access_ir_attachment_all,access_ir_attachment all,base.model_ir_attachment,,1,1,1,0
+access_ir_attachment_all,access_ir_attachment all,base.model_ir_attachment,,1,1,1,1
 access_res_partner_customer_management,access_res_partner_customer_management,base.model_res_partner,maas_base.group_customer_management,1,1,1,0
 access_res_company_customer_management,access_res_company_customer_management,base.model_res_company,maas_base.group_customer_management,1,1,1,0
 access_res_partner_user,access_res_partner user,base.model_res_partner,maas_base.group_operation_perform,1,0,0,0

@@ -156,7 +156,7 @@ class SaleOperation(models.Model):
                 'store_fname': population_name
             })
             self.attachment_scored_id.unlink()
-            self.attachment_scored_id = attachment_obj.create(attachment_vals).id
+            self.attachment_scored_id = attachment_obj.sudo().create(attachment_vals).id
         if profile_data and isinstance(profile_data, (str, bytes)):
             attachment_vals.update({
                 'name': profile_name,
@@ -164,7 +164,7 @@ class SaleOperation(models.Model):
                 'store_fname': profile_name
             })
             self.attachment_profile_id.unlink()
-            self.attachment_profile_id = attachment_obj.create(attachment_vals).id
+            self.attachment_profile_id = attachment_obj.sudo().create(attachment_vals).id
         return True
 
     @api.model
