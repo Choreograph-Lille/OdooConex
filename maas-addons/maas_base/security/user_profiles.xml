@@ -1,100 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data noupdate="0">
+    <data noupdate="0">
 
-    <record model="ir.module.category" id="module_category_my_model_profiles">
-      <field name="name">My Model Profiles</field>
-      <field name="sequence">140</field>
-    </record>
+        <record model="ir.module.category" id="module_category_my_model_profiles">
+            <field name="name">My Model Profiles</field>
+            <field name="sequence">140</field>
+        </record>
 
-    <record id="standard_user" model="res.groups">
-      <field name="name">Profile Standard</field>
-      <field name="category_id" ref="module_category_my_model_profiles"/>
-      <field name="implied_ids" eval="[(6, 0, [ref('maas_base.group_package_management'), ref('maas_base.group_start_modeling'),
-                                             ref('maas_base.group_operation_perform'), ref('maas_base.group_operation_order'),
-                                             ref('maas_base.group_download_operation_ordered')])]"/>
-    </record>
+        <record id="standard_user" model="res.groups">
+            <field name="name">Profile Standard</field>
+            <field name="category_id" ref="module_category_my_model_profiles"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('maas_base.group_package_management'),
+                                                     ref('maas_base.group_start_modeling'),
+                                                     ref('maas_base.group_operation_perform'),
+                                                     ref('maas_base.group_operation_order'),
+                                                     ref('base.group_portal'),
+                                                     ref('maas_base.group_download_operation_ordered')])]"/>
+        </record>
 
-    <record id="validator_user" model="res.groups">
-      <field name="name">Profile Valideur</field>
-      <field name="category_id" ref="module_category_my_model_profiles"/>
-      <field name="implied_ids" eval="[(6, 0, [ref('maas_base.group_package_management'), ref('maas_base.group_start_modeling'),
-                                             ref('maas_base.group_operation_perform'), ref('maas_base.group_operation_order'),
-                                             ref('maas_base.group_download_operation_ordered'), ref('maas_base.group_validate_next_package')])]"/>
-    </record>
+        <record id="validator_user" model="res.groups">
+            <field name="name">Profile Valideur</field>
+            <field name="category_id" ref="module_category_my_model_profiles"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('maas_base.group_package_management'),
+                                                     ref('maas_base.group_start_modeling'),
+                                                     ref('maas_base.group_operation_perform'),
+                                                     ref('maas_base.group_operation_order'),
+                                                     ref('maas_base.group_download_operation_ordered'),
+                                                     ref('base.group_portal'),
+                                                     ref('maas_base.group_validate_next_package')])]"/>
+        </record>
 
-    <record id="dsi_user" model="res.groups">
-      <field name="name">DSI</field>
-      <field name="category_id" ref="module_category_my_model_profiles"/>
-      <field name="implied_ids" eval="[(4, ref('maas_base.group_user_management'))]"/>
-    </record>
+        <record id="dsi_user" model="res.groups">
+            <field name="name">DSI</field>
+            <field name="category_id" ref="module_category_my_model_profiles"/>
+            <field name="implied_ids" eval="[(4, ref('maas_base.group_user_management'))]"/>
+        </record>
 
-    <record id="studies_user" model="res.groups">
-      <field name="name">Etude</field>
-      <field name="category_id" ref="module_category_my_model_profiles"/>
-      <field name="implied_ids" eval="[(4, ref('maas_base.group_campaign_management')), (4, ref('maas_base.group_start_modeling')),
-                                     (4, ref('maas_base.group_operation_perform'))]"/>
-    </record>
+        <record id="studies_user" model="res.groups">
+            <field name="name">Etude</field>
+            <field name="category_id" ref="module_category_my_model_profiles"/>
+            <field name="implied_ids" eval="[(4, ref('maas_base.group_campaign_management')),
+                                             (4, ref('maas_base.group_start_modeling')),
+                                             (4, ref('maas_base.group_operation_perform'))]"/>
+        </record>
 
-    <record id="commercial_user" model="res.groups">
-      <field name="name">Commercial</field>
-      <field name="category_id" ref="module_category_my_model_profiles"/>
-      <field name="implied_ids" eval="[(4, ref('maas_base.group_customer_management')), (4, ref('maas_base.group_subscription_management')),
-                                     (4, ref('maas_base.group_package_management')), (4, ref('maas_base.group_campaign_management')),
-                                     (4, ref('maas_base.group_operation_order')), (4, ref('maas_base.group_validate_next_package'))]"/>
-    </record>
+        <record id="commercial_user" model="res.groups">
+            <field name="name">Commercial</field>
+            <field name="category_id" ref="module_category_my_model_profiles"/>
+            <field name="implied_ids" eval="[(4, ref('maas_base.group_customer_management')),
+                                             (4, ref('maas_base.group_subscription_management')),
+                                             (4, ref('maas_base.group_package_management')),
+                                             (4, ref('maas_base.group_campaign_management')),
+                                             (4, ref('maas_base.group_operation_order')),
+                                             (4, ref('maas_base.group_validate_next_package'))]"/>
+        </record>
 
-    <record id="admin_user" model="res.groups">
-      <field name="name">Admin</field>
-      <field name="category_id" ref="module_category_my_model_profiles"/>
-      <field name="implied_ids" eval="[(4, ref('maas_base.group_customer_management')), (4, ref('maas_base.group_subscription_management')),
-                                     (4, ref('maas_base.group_package_management')), (4, ref('maas_base.group_campaign_management')),
-                                     (4, ref('maas_base.group_start_modeling')), (4, ref('maas_base.group_operation_perform')),
-                                     (4, ref('maas_base.group_operation_order')), (4, ref('maas_base.group_validate_next_package')),
-                                     (4, ref('maas_base.group_download_operation_ordered')), (4, ref('maas_base.group_user_management'))]"/>
-    </record>
+        <record id="admin_user" model="res.groups">
+            <field name="name">Admin</field>
+            <field name="category_id" ref="module_category_my_model_profiles"/>
+            <field name="implied_ids" eval="[(4, ref('maas_base.group_customer_management')),
+                                             (4, ref('maas_base.group_subscription_management')),
+                                             (4, ref('maas_base.group_package_management')),
+                                             (4, ref('maas_base.group_campaign_management')),
+                                             (4, ref('maas_base.group_start_modeling')),
+                                             (4, ref('maas_base.group_operation_perform')),
+                                             (4, ref('maas_base.group_operation_order')),
+                                             (4, ref('maas_base.group_validate_next_package')),
+                                             (4, ref('maas_base.group_download_operation_ordered')),
+                                             (4, ref('maas_base.group_user_management'))]"/>
+            <field name="users" eval="[(4, ref('base.user_admin'))]"/>
+        </record>
 
-
-    <!--
-    <record id="standard_user" model="res.users">
-      <field name="name">Standard</field>
-      <field name="login">standard</field>
-      <field name="is_portal_user" eval="True"/>
-    </record>-->
-
-    <!--<record id="validator_user" model="res.users">
-      <field name="name">Valideur</field>
-      <field name="login">validator</field>
-      <field name="is_portal_user" eval="True"/>
-    </record>-->
-
-    <!--<record id="dsi_user" model="res.users">
-      <field name="name">DSI</field>
-      <field name="login">dsi</field>
-      <field name="is_portal_user" eval="False"/>
-      <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
-    </record>-->
-
-    <!--<record id="studies_user" model="res.users">
-      <field name="name">Etude</field>
-      <field name="login">studies</field>
-      <field name="is_portal_user" eval="False"/>
-      <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
-    </record>-->
-
-    <!--<record id="commercial_user" model="res.users">
-      <field name="name">Commercial</field>
-      <field name="login">commercial</field>
-      <field name="is_portal_user" eval="False"/>
-      <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
-    </record>-->
-
-    <!--<record id="admin_user" model="res.users">
-      <field name="name">ADMIN</field>
-      <field name="login">admin_user</field>
-      <field name="is_portal_user" eval="False"/>
-      <field name="groups_id" eval="[(6, 0, [ref('base.group_user')])]"/>
-    </record>-->
-
-  </data>
+    </data>
 </odoo>
