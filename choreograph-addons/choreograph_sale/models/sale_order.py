@@ -28,7 +28,7 @@ class SaleOrder(models.Model):
     data_conservation = fields.Char('Data conservation')
     receiver = fields.Char('Receiver')
     send_with = fields.Char('Send with')
-    operation_type_id = fields.Many2one('project.project', string='Operation type')
+    operation_type_id = fields.Many2one('project.project', 'Operation Type')
     total_retribution = fields.Float(compute="_compute_total_retribution")
 
     @api.depends('order_line')

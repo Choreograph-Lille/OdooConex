@@ -49,7 +49,6 @@
         'views/sale_campaign.xml',
         'views/res_partner_view.xml',
         'views/sale_operation_view.xml',
-        'views/product_template_view.xml',
         'views/package_upgrade.xml',
         'views/menu.xml',
         'views/product_pricelist_views.xml',

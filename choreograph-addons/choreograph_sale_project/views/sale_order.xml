@@ -7,7 +7,7 @@
     <field name="type">form</field>
     <field name="arch" type="xml">
       <notebook position="inside">
-        <page name="sale_operation" string="Operation">
+        <page name="sale_operation" string="Operation" attrs="{'invisible': [('recurrence_id', '!=', False)]}">
           <group>
             <group string="SMS coupling">
               <field name="sms_coupling"/>

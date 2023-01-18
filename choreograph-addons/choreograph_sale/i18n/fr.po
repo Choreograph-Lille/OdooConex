@@ -390,11 +390,6 @@ msgid "Operation generation"
 msgstr "Génération de l'opération"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__operation_type_id
-msgid "Operation type"
-msgstr "Type d'opération"
-
-#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__order_id
 msgid "Order"
 msgstr "Commande"
