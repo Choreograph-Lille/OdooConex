@@ -16,11 +16,11 @@ class SaleOrderLine(models.Model):
     def _compute_retribution_cost(self):
         for rec in self:
             if rec.product_id.concerned_base:
-                sale_price = rec.product_uom_qty * rec.price_unit
+                rec.retribution_cost = rec.product_uom_qty * rec.price_unit
                 if rec.product_id.concerned_base.is_multi_base:
-                    rec.retribution_cost = sale_price * rec.product_id.concerned_base.retribution_rate_multi_base
+                    rec.retribution_cost *= rec.product_id.concerned_base.retribution_rate_multi_base
                 else:
-                    rec.retribution_cost = sale_price * rec.product_id.concerned_base.retribution_rate
+                    rec.retribution_cost *= rec.product_id.concerned_base.retribution_rate
             else:
                 rec.retribution_cost = 0
 
