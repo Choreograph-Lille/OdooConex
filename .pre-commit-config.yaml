@@ -14,7 +14,7 @@ exclude: |
   ^docs/_templates/.*\.html$|
   # You don't usually want a bot to modify your legal texts
   (LICENSE.*|COPYING.*)|
-  (oca-addons|/src/webfontkit|/src/report|/src/modal|/src/bootstrap)
+  (oca-addons|/src/webfontkit|/src/report|/src/modal|/src/bootstrap|__manifest__.py)
 default_language_version:
   python: python3
   node: "16.17.0"

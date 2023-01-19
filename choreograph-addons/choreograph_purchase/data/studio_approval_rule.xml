@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
-  <record
-    id="approval_button_confirm_group_validator_1_purchase_profile"
-    model="studio.approval.rule"
-  >
-    <field name="model_id" ref="purchase.model_purchase_order" />
-    <field name="group_id" ref="choreograph_sox.group_validator_1_purchase_profile" />
-    <field name="active" eval="True" />
-    <field name="method">button_confirm</field>
-  </record>
-  <record
-    id="approval_button_confirm_group_validator_2_purchase_profile"
-    model="studio.approval.rule"
-  >
-    <field name="model_id" ref="purchase.model_purchase_order" />
-    <field name="group_id" ref="choreograph_sox.group_validator_2_purchase_profile" />
-    <field name="active" eval="True" />
-    <field name="method">button_confirm</field>
-  </record>
+    <record id="approval_button_confirm_group_validator_1_purchase_profile" model="studio.approval.rule">
+        <field name="model_id" ref="purchase.model_purchase_order" />
+        <field name="group_id" ref="choreograph_sox.group_validator_1_purchase_profile" />
+        <field name="active" eval="True" />
+        <field name="exclusive_user" eval="True" />
+        <field name="method">button_confirm</field>
+    </record>
+    <record id="approval_button_confirm_group_validator_2_purchase_profile" model="studio.approval.rule">
+        <field name="model_id" ref="purchase.model_purchase_order" />
+        <field name="group_id" ref="choreograph_sox.group_validator_2_purchase_profile" />
+        <field name="active" eval="True" />
+        <field name="exclusive_user" eval="True" />
+        <field name="method">button_confirm</field>
+    </record>
 </odoo>
