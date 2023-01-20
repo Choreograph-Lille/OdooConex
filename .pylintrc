@@ -1,0 +1,40 @@
+[MASTER]
+load-plugins=pylint_odoo
+score=n
+ignore=**/static/src/js/plugins/**
+
+[ODOOLINT]
+readme_template_url="https://github.com/OCA/maintainer-tools/blob/master/template/module/README.rst"
+manifest_required_authors=Odoo Community Association (OCA)
+manifest_required_keys=license
+manifest_deprecated_keys=description,active
+license_allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3
+valid_odoo_versions=16.0
+
+[MESSAGES CONTROL]
+disable=all
+
+# This .pylintrc contains optional AND mandatory checks and is meant to be
+# loaded in an IDE to have it check everything, in the hope this will make
+# optional checks more visible to contributors who otherwise never look at a
+# green travis to see optional checks that failed.
+# .pylintrc-mandatory containing only mandatory checks is used the pre-commit
+# config as a blocking check.
+
+enable=manifest-required-author,
+    dangerous-qweb-replace-wo-priority,
+    dangerous-view-replace-wo-priority,
+    missing-newline-extrafiles,
+    missing-return,
+    messages that do not cause the lint step to fail
+    invalid-commit,
+    missing-newline-extrafiles,
+    missing-readme,
+    consider-merging-classes-inherited,
+    translation-positional-used
+
+
+[REPORTS]
+msg-template={path}:{line}: [{msg_id}({symbol}), {obj}] {msg}
+output-format=colorized
+reports=no

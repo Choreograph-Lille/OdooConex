@@ -455,6 +455,11 @@ msgid "Retribution Rate"
 msgstr "Taux de rétribution"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__retribution_rate_multi_base
+msgid "Retribution Rate (2)"
+msgstr "Taux de rétribution (2)"
+
+#. module: choreograph_sale
 #: model:ir.actions.act_window,name:choreograph_sale.retribution_base_action
 #: model:ir.model,name:choreograph_sale.model_retribution_base
 msgid "Retribution base"
