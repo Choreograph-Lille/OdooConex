@@ -37,12 +37,12 @@ class ResUsers(models.Model):
 
     def is_standard(self):
         self.ensure_one()
-        if self in self.env.ref('maas_base.standard_user').users:
+        if self in self.env.ref('maas_base.standard_user_role').users:
             return True
         return False
 
     def is_validator(self):
         self.ensure_one()
-        if self in self.env.ref('maas_base.validator_user').users:
+        if self in self.env.ref('maas_base.validator_user_role').users:
             return True
         return False

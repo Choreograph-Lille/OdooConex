@@ -253,32 +253,32 @@ class SaleOperation(models.Model):
             recipients.append(self.partner_id.email)
         users = self.env['res.users']
         if mode == 'operation_created':
-            users = self.env.ref('maas_base.commercial_user', raise_if_not_found=False).user_ids
+            users = self.env.ref('maas_base.commercial_user_role', raise_if_not_found=False).user_ids
         elif mode in ('operation_available', 'operation_modeled'):
-            users = self.env.ref('maas_base.standard_user', raise_if_not_found=False).user_ids
-            users |= self.env.ref('maas_base.validator_user', raise_if_not_found=False).user_ids
+            users = self.env.ref('maas_base.standard_user_role', raise_if_not_found=False).user_ids
+            users |= self.env.ref('maas_base.validator_user_role', raise_if_not_found=False).user_ids
             users = users.filtered(lambda usr: usr.partner_id.get_parent() == self.partner_id)
         elif mode in ('operation_recall_download_file', 'operation_canceled'):
-            users = self.env.ref('maas_base.commercial_user', raise_if_not_found=False).user_ids
-            clients = self.env.ref('maas_base.standard_user', raise_if_not_found=False).user_ids
-            clients |= self.env.ref('maas_base.validator_user', raise_if_not_found=False).user_ids
+            users = self.env.ref('maas_base.commercial_user_role', raise_if_not_found=False).user_ids
+            clients = self.env.ref('maas_base.standard_user_role', raise_if_not_found=False).user_ids
+            clients |= self.env.ref('maas_base.validator_user_role', raise_if_not_found=False).user_ids
             users |= clients.filtered(lambda usr: usr.partner_id.get_parent() == self.partner_id)
         elif mode == 'packaging_upgrade':
-            users = self.env.ref('maas_base.commercial_user', raise_if_not_found=False).user_ids
-            clients = self.env.ref('maas_base.standard_user', raise_if_not_found=False).user_ids
+            users = self.env.ref('maas_base.commercial_user_role', raise_if_not_found=False).user_ids
+            clients = self.env.ref('maas_base.standard_user_role', raise_if_not_found=False).user_ids
             clients = clients.filtered(lambda usr: usr.partner_id.get_parent() == self.partner_id)
             users |= clients
         elif mode == 'request_upgrade_package':
-            users = self.env.ref('maas_base.validator_user', raise_if_not_found=False).user_ids
+            users = self.env.ref('maas_base.validator_user_role', raise_if_not_found=False).user_ids
             users = users.filtered(lambda usr: usr.partner_id.get_parent() == self.partner_id)
         elif mode == 'operation_ordered':
-            users = self.env.ref('maas_base.studies_user', raise_if_not_found=False).user_ids
-            users |= self.env.ref('maas_base.commercial_user', raise_if_not_found=False).user_ids
+            users = self.env.ref('maas_base.studies_user_role', raise_if_not_found=False).user_ids
+            users |= self.env.ref('maas_base.commercial_user_role', raise_if_not_found=False).user_ids
             users = users.filtered(lambda usr: usr.partner_id.get_parent() == self.partner_id)
         elif mode == 'operation_deleted':
-            users = self.env.ref('maas_base.commercial_user', raise_if_not_found=False).user_ids
-            clients = self.env.ref('maas_base.standard_user', raise_if_not_found=False).user_ids
-            clients |= self.env.ref('maas_base.validator_user', raise_if_not_found=False).user_ids
+            users = self.env.ref('maas_base.commercial_user_role', raise_if_not_found=False).user_ids
+            clients = self.env.ref('maas_base.standard_user_role', raise_if_not_found=False).user_ids
+            clients |= self.env.ref('maas_base.validator_user_role', raise_if_not_found=False).user_ids
             users |= clients.filtered(lambda usr: usr.partner_id.get_parent() == self.partner_id)
         for user in users.filtered(lambda usr: usr.email):
             recipients.append(user.email)

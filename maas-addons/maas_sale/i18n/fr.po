@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-18 15:32+0000\n"
-"PO-Revision-Date: 2022-11-18 15:32+0000\n"
+"POT-Creation-Date: 2023-01-20 11:07+0000\n"
+"PO-Revision-Date: 2023-01-20 11:07+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -440,7 +440,13 @@ msgstr "Avertissement d'accès"
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__action_id
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_view_form
 msgid "Action"
-msgstr "Action"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_needaction
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_needaction
+msgid "Action Needed"
+msgstr "Action requise"
 
 #. module: maas_sale
 #: model:ir.actions.act_window,name:maas_sale.sale_campaign_action_action
@@ -449,7 +455,7 @@ msgstr "Action"
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_view_tree
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_view_form
 msgid "Actions"
-msgstr "Actions"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__active
@@ -457,32 +463,39 @@ msgid "Active"
 msgstr "Actif"
 
 #. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Address"
-msgstr "Adresse"
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_ids
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_exception_decoration
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Activité d'exception de décoration"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_state
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_state
+msgid "Activity State"
+msgstr "Statut d'activité"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_type_icon
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icône de type d'activité"
 
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__res_partner__partner_type__alliance
 msgid "Alliance"
-msgstr "Alliance"
-
-#. module: maas_sale
-#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_datafile
-#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_datafile
-msgid "Attachment"
-msgstr "Pièce joint"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_attachment_count
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_attachment_count
 msgid "Attachment Count"
 msgstr "Nombre de pièce joint"
-
-#. module: maas_sale
-#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_filename
-#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_filename
-msgid "Attachment Name"
-msgstr "Nom du fichier"
 
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__available
@@ -508,7 +521,7 @@ msgstr "Mieux scorés"
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__type__crm
 msgid "CRM"
-msgstr "CRM"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__campaign_id
@@ -517,6 +530,7 @@ msgid "Campaign"
 msgstr "Campagne"
 
 #. module: maas_sale
+#. odoo-python
 #: code:addons/maas_sale/models/sale_campaign.py:0
 #, python-format
 msgid "Campaign must contain only operations of the defined customer."
@@ -536,7 +550,7 @@ msgstr "Campagnes"
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__canal
 msgid "Canal"
-msgstr "Canal"
+msgstr ""
 
 #. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.package_upgrade_view_form
@@ -546,7 +560,7 @@ msgstr "Annuler"
 #. module: maas_sale
 #: model:mail.template,subject:maas_sale.packaging_upgrade_mail_template
 msgid "Changement de palier."
-msgstr "Changement de palier."
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__child_ids
@@ -559,19 +573,13 @@ msgid "Children number"
 msgstr "Nombre d'opération fille"
 
 #. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "City"
-msgstr "Ville"
-
-#. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_search
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_search
 msgid "Client"
-msgstr "Client"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__company_id
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
 msgid "Company"
 msgstr "Société"
 
@@ -588,32 +596,7 @@ msgstr "Paramètres de config"
 #. module: maas_sale
 #: model:ir.model,name:maas_sale.model_res_partner
 msgid "Contact"
-msgstr "Contact"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Contact / Address"
-msgstr "Contact / Adresse"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Contact Name"
-msgstr "Nom du contact"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Contacts & Addresses"
-msgstr "Contacts & Adresses"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Country"
-msgstr "Pays"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Create company"
-msgstr "Créer une société"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_indication_indication__create_uid
@@ -685,7 +668,13 @@ msgid "Date of availability"
 msgstr "Date de disponibilité"
 
 #. module: maas_sale
-#: code:addons/maas_sale/models/sale.py:0
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__default_sequence
+msgid "Default Sequence"
+msgstr "Séquence par défaut"
+
+#. module: maas_sale
+#. odoo-python
+#: code:addons/maas_sale/models/sale_operation_child.py:0
 #, python-format
 msgid "Delay before deadline can't be greater than availability duration!"
 msgstr ""
@@ -702,12 +691,6 @@ msgstr "Supprimé"
 #. module: maas_sale
 #: model:mail.template,subject:maas_sale.operation_request_upgrade_package_mail_template
 msgid "Demande de changement de palier."
-msgstr "Demande de changement de palier."
-
-#. module: maas_sale
-#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_desc
-#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_desc
-msgid "Description"
 msgstr ""
 
 #. module: maas_sale
@@ -719,7 +702,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__display_name
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom à afficher"
 
 #. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_child_form_view
@@ -737,12 +720,65 @@ msgstr "Téléchargé"
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__canal__email
 msgid "Email"
-msgstr "Email"
+msgstr "E-mail"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_follower_ids
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_partner_ids
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: maas_sale
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__activity_type_icon
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icône Font Awesome e.g. fa-tasks"
 
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__type__cancel_replace
 msgid "Full cancel and replace"
 msgstr "Annule et remplace complet"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__has_archived
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__has_archived
+msgid "Has Archived"
+msgstr "A archivé"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__has_message
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__has_message
+msgid "Has Message"
+msgstr "A un message"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__id
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__id
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__id
+msgid "ID"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_exception_icon
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_exception_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: maas_sale
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__activity_exception_icon
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icône pour indiquer une activité d'exception."
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__identifiers
@@ -752,9 +788,23 @@ msgid "Ids"
 msgstr ""
 
 #. module: maas_sale
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__message_needaction
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: maas_sale
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__message_has_error
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__message_has_sms_error
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__message_has_error
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si actif, certains messages ont une erreur de livraison."
+
+#. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_indication_indication__image
 msgid "Image"
-msgstr "Image"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__in_progress
@@ -770,13 +820,18 @@ msgstr "En cours"
 #: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__indication_id
 #: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
 msgid "Indication"
-msgstr "Indication"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_indication_indication
+msgid "Indication Indication"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.actions.act_window,name:maas_sale.indication_action
 #: model:ir.ui.menu,name:maas_sale.indication_menu
 msgid "Indications"
-msgstr "Indications"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_indication_indication__partner_info_ids
@@ -789,25 +844,54 @@ msgid "Initial Command"
 msgstr "Commande initiale"
 
 #. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Internal Notes"
-msgstr "Notes internes"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Internal note..."
-msgstr "Note interne..."
-
-#. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__is_cancel
 msgid "Is Cancel"
 msgstr "Est annulé"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_is_follower
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_is_follower
+msgid "Is Follower"
+msgstr "Est abonné"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_product_product__is_basic_package
 #: model:ir.model.fields,field_description:maas_sale.field_product_template__is_basic_package
 msgid "Is basic package?"
 msgstr "Est forfait de base ?"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication____last_update
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade____last_update
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos____last_update
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign____last_update
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action____last_update
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation____last_update
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__write_uid
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__write_uid
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__write_uid
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__write_uid
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__write_uid
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__write_uid
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_indication_indication__write_date
+#: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__write_date
+#: model:ir.model.fields,field_description:maas_sale.field_partner_indication_infos__write_date
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign__write_date
+#: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__write_date
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__write_date
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
 
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__sens__least_scored
@@ -837,16 +921,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_ids
 msgid "Messages"
 msgstr ""
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Misc"
-msgstr "Divers"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Mobile:"
-msgstr "Mobile :"
 
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__state__modeled

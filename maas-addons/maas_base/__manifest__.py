@@ -11,6 +11,7 @@
     'website': 'https://arkeup.com',
     'depends': [
         'mail',
+        'base_user_role',
     ],
     'data': [
         # data
