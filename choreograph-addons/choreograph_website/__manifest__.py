@@ -14,9 +14,7 @@
         'choreograph_base',
     ],
     'data': [
-        # data
-        # security
-        # views
+        'views/webclient_templates.xml'
     ],
     'assets': {
         'web._assets_primary_variables': [],
