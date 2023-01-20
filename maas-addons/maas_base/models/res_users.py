@@ -7,12 +7,12 @@ class ResUsers(models.Model):
     _inherit = 'res.users'
 
     groups_id = fields.Many2many(default=False)
-    bool_sms = fields.Boolean(string="SMS")
-    bool_print = fields.Boolean(string="Print")
-    bool_email = fields.Boolean(string="Email?")
-    default_sms = fields.Boolean(string="Default SMS")
-    default_print = fields.Boolean(string="Default Print")
-    default_email = fields.Boolean(string="Default Email")
+    bool_sms = fields.Boolean("SMS")
+    bool_print = fields.Boolean("Print")
+    bool_email = fields.Boolean("Email?")
+    default_sms = fields.Boolean("Default SMS")
+    default_print = fields.Boolean("Default Print")
+    default_email = fields.Boolean("Default Email")
     customer_ids = fields.Many2many('res.partner', 'res_users_customer_rel', 'user_id', 'partner_id', string='Customers')
 
     @api.onchange('default_sms')

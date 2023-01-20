@@ -2,14 +2,8 @@
 <odoo>
     <data noupdate="0">
 
-        <record model="ir.module.category" id="module_category_my_model_profiles">
-            <field name="name">My Model Profiles</field>
-            <field name="sequence">140</field>
-        </record>
-
-        <record id="standard_user" model="res.groups">
-            <field name="name">Profile Standard</field>
-            <field name="category_id" ref="module_category_my_model_profiles"/>
+        <record id="standard_user_role" model="res.users.role">
+            <field name="name">My Model / Profile Standard</field>
             <field name="implied_ids" eval="[(6, 0, [ref('maas_base.group_package_management'),
                                                      ref('maas_base.group_start_modeling'),
                                                      ref('maas_base.group_operation_perform'),
@@ -18,9 +12,8 @@
                                                      ref('maas_base.group_download_operation_ordered')])]"/>
         </record>
 
-        <record id="validator_user" model="res.groups">
-            <field name="name">Profile Valideur</field>
-            <field name="category_id" ref="module_category_my_model_profiles"/>
+        <record id="validator_user_role" model="res.users.role">
+            <field name="name">My Model / Profile Valideur</field>
             <field name="implied_ids" eval="[(6, 0, [ref('maas_base.group_package_management'),
                                                      ref('maas_base.group_start_modeling'),
                                                      ref('maas_base.group_operation_perform'),
@@ -30,23 +23,20 @@
                                                      ref('maas_base.group_validate_next_package')])]"/>
         </record>
 
-        <record id="dsi_user" model="res.groups">
-            <field name="name">DSI</field>
-            <field name="category_id" ref="module_category_my_model_profiles"/>
+        <record id="dsi_user_role" model="res.users.role">
+            <field name="name">My Model / Profile DSI</field>
             <field name="implied_ids" eval="[(4, ref('maas_base.group_user_management'))]"/>
         </record>
 
-        <record id="studies_user" model="res.groups">
-            <field name="name">Etude</field>
-            <field name="category_id" ref="module_category_my_model_profiles"/>
+        <record id="studies_user_role" model="res.users.role">
+            <field name="name">My Model / Profile Etude</field>
             <field name="implied_ids" eval="[(4, ref('maas_base.group_campaign_management')),
                                              (4, ref('maas_base.group_start_modeling')),
                                              (4, ref('maas_base.group_operation_perform'))]"/>
         </record>
 
-        <record id="commercial_user" model="res.groups">
-            <field name="name">Commercial</field>
-            <field name="category_id" ref="module_category_my_model_profiles"/>
+        <record id="commercial_user_role" model="res.users.role">
+            <field name="name">My Model / Profile Commercial</field>
             <field name="implied_ids" eval="[(4, ref('maas_base.group_customer_management')),
                                              (4, ref('maas_base.group_subscription_management')),
                                              (4, ref('maas_base.group_package_management')),
@@ -55,9 +45,8 @@
                                              (4, ref('maas_base.group_validate_next_package'))]"/>
         </record>
 
-        <record id="admin_user" model="res.groups">
-            <field name="name">Admin</field>
-            <field name="category_id" ref="module_category_my_model_profiles"/>
+        <record id="admin_user_role" model="res.users.role">
+            <field name="name">My Model / Profile Admin</field>
             <field name="implied_ids" eval="[(4, ref('maas_base.group_customer_management')),
                                              (4, ref('maas_base.group_subscription_management')),
                                              (4, ref('maas_base.group_package_management')),

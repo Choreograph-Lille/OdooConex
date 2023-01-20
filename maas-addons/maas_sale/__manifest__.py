@@ -43,7 +43,6 @@
         'data/ir_cron.xml',
         # security
         'security/ir.model.access.csv',
-        # 'security/user_groups.xml',
         # views
         'views/sale_action.xml',
         'views/sale_campaign.xml',

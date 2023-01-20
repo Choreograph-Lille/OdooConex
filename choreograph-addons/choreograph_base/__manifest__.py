@@ -10,7 +10,7 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
-        'base'
+        'base_user_role',
     ],
     'data': [
         # data
