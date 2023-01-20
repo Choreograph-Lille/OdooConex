@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase.order.form.inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form[1]/header[1]/button[@name='button_confirm'][1]"
+                position="attributes">
+                <attribute name="studio_approval">True</attribute>
+            </xpath>
+            <xpath expr="//form[1]/header[1]/button[@name='button_confirm'][2]"
+                position="attributes">
+                <attribute name="studio_approval">True</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

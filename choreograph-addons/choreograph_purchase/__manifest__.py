@@ -16,7 +16,8 @@
         'choreograph_sox'
     ],
     'data': [
-        'data/studio_approval_rule.xml'
+        'data/studio_approval_rule.xml',
+        'views/purchase_order_views.xml'
     ],
     'assets': {
         'web._assets_primary_variables': [],
