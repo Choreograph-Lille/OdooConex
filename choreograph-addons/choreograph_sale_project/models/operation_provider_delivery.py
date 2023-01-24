@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-
-from odoo import api, Command, fields, models, _
+from odoo import api, fields, models
 
 
 class OperationProviderDelivery(models.Model):

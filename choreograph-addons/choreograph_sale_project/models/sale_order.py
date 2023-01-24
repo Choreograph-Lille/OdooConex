@@ -1,7 +1,6 @@
-# -*- coding: utf-8 -*-
-
-from odoo import api, Command, fields, models, _
 from datetime import date
+
+from odoo import api, fields, models
 
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
@@ -11,18 +10,20 @@ PROVIDER_DELIVERY_NUMBER = '75'
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    potential_return = fields.Boolean('Potential Return')
-    study_delivery = fields.Boolean('Study Delivery')
-    presentation = fields.Boolean('Presentation')
-    potential_return_task_id = fields.Many2one('project.task', 'Potential Return Task', compute='_compute_operation_task')
+    potential_return = fields.Boolean()
+    study_delivery = fields.Boolean()
+    presentation = fields.Boolean()
+    potential_return_task_id = fields.Many2one(
+        'project.task', 'Potential Return Task', compute='_compute_operation_task')
     study_delivery_task_id = fields.Many2one('project.task', 'Study Delivery Task', compute='_compute_operation_task')
     presentation_task_id = fields.Many2one('project.task', 'Presentation Task', compute='_compute_operation_task')
 
-    show_provider_delivery = fields.Boolean('Show Provider Delivery', compute='_compute_show_provider_delivery')
-    operation_provider_delivery_ids = fields.One2many('operation.provider.delivery', 'order_id', 'Provider Delivery Tasks')
-    comment = fields.Text('Comment')
-    quantity_to_deliver = fields.Integer('Quantity To Deliver')
-    to_validate = fields.Boolean('To Validate')
+    show_provider_delivery = fields.Boolean(compute='_compute_show_provider_delivery')
+    operation_provider_delivery_ids = fields.One2many(
+        'operation.provider.delivery', 'order_id', 'Provider Delivery Tasks')
+    comment = fields.Text()
+    quantity_to_deliver = fields.Integer()
+    to_validate = fields.Boolean()
     segment_ids = fields.One2many('operation.segment', 'order_id', 'Segment')
     repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab')
 
@@ -67,9 +68,12 @@ class SaleOrder(models.Model):
     @api.depends('potential_return', 'study_delivery', 'presentation')
     def _compute_operation_task(self):
         for rec in self:
-            rec.potential_return_task_id = rec.tasks_ids.filtered(lambda t: t.task_number == REQUIRED_TASK_NUMBER['potential_return']).id or False
-            rec.study_delivery_task_id = rec.tasks_ids.filtered(lambda t: t.task_number == REQUIRED_TASK_NUMBER['study_delivery']).id or False
-            rec.presentation_task_id = rec.tasks_ids.filtered(lambda t: t.task_number == REQUIRED_TASK_NUMBER['presentation']).id or False
+            rec.potential_return_task_id = rec.tasks_ids.filtered(
+                lambda t: t.task_number == REQUIRED_TASK_NUMBER['potential_return']).id or False
+            rec.study_delivery_task_id = rec.tasks_ids.filtered(
+                lambda t: t.task_number == REQUIRED_TASK_NUMBER['study_delivery']).id or False
+            rec.presentation_task_id = rec.tasks_ids.filtered(
+                lambda t: t.task_number == REQUIRED_TASK_NUMBER['presentation']).id or False
 
     def action_generate_operation(self):
         super(SaleOrder, self).action_generate_operation()

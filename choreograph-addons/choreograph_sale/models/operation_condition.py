@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from odoo import api, fields, models
 
 
@@ -15,7 +13,7 @@ class OperationCondition(models.Model):
     operation_type = fields.Selection([
         ('condition', 'Condition'),
         ('exclusion', 'Exclusion')],
-        string='Operation Type', required=True)
+        required=True)
     type = fields.Selection([
         ('file_processing', 'File Condition'),
         ('maj_condition', 'MAJ Condition'),
@@ -23,8 +21,8 @@ class OperationCondition(models.Model):
         ('exclusion', 'Exclusion'),
         ('exclusion_so', 'Sale Order Exclusion'),
         ('comment', 'Comment')
-    ], 'Type', required=True)
-    file_name = fields.Char('File Name')
+    ], required=True)
+    file_name = fields.Char()
 
     @api.onchange('type')
     def _onchange_type(self):
@@ -37,4 +35,3 @@ class OperationCondition(models.Model):
             'subtype_id': [('id', 'in', subtypes.ids)]
         }}
         return domain
-
