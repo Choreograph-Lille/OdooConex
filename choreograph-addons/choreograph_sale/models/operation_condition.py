@@ -24,6 +24,7 @@ class OperationCondition(models.Model):
         ('exclusion_so', 'Sale Order Exclusion'),
         ('comment', 'Comment')
     ], 'Type', required=True)
+    file_name = fields.Char('File Name')
 
     @api.onchange('type')
     def _onchange_type(self):

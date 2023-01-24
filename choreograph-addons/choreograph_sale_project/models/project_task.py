@@ -2,23 +2,12 @@
 
 from odoo import models, fields, api, _
 
+TASK_NUMBER = [('5', '5'), ('10', '10'), ('15', '15'), ('20', '20'), ('25', '25'), ('30', '30'), ('35', '35'), ('40', '40'), ('45', '45'), ('50', '50'), ('60', '60'), ('65', '65'), ('70', '70'), ('75', '75'), ('80', '80'), ('85', '85'), ('90', '90'), ('95', '95')]
+
 
 class ProjectTask(models.Model):
     _inherit = 'project.task'
 
     task_type_id = fields.Many2one('choreograph.project.task.type', string='Task type')
-    # fields from SO
-    sms_coupling = fields.Boolean(related='sale_order_id.sms_coupling')
-    show_sms_coupling = fields.Boolean(compute='_compute_operation_fields')
-
-    phone_coupling = fields.Boolean(related='sale_order_id.phone_coupling')
-    show_phone_coupling = fields.Boolean(compute='_compute_operation_fields')
-
-    email_coupling = fields.Boolean(related='sale_order_id.email_coupling')
-    show_email_coupling = fields.Boolean(compute='_compute_operation_fields')
-
-    def _compute_operation_fields(self):
-        for rec in self:
-            rec.show_sms_coupling = rec.task_type_id == rec.sale_order_id.sms_coupling_task_type_id
-            rec.show_phone_coupling = rec.task_type_id == rec.sale_order_id.phone_coupling_task_type_id
-            rec.show_email_coupling = rec.task_type_id == rec.sale_order_id.email_coupling_task_type_id
+    task_number = fields.Selection(TASK_NUMBER, 'Task Number')
+    is_template = fields.Boolean(related='project_id.is_template')

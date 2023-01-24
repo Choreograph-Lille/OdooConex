@@ -49,22 +49,74 @@
                 <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="after">
                     <field name="retribution_cost"/>
                 </xpath>
+
+              <notebook position="inside">
+                <page name="campaign" string="Campaign">
+                  <group>
+                    <group>
+                      <field name="po_number"/>
+                      <field name="campaign_name"/>
+                      <field name="routing_date"/>
+                      <field name="routing_end_date"/>
+                      <field name="desired_finished_volume"/>
+                    </group>
+                    <group>
+                      <field name="is_info_validated"/>
+                    </group>
+                    <label for="volume_detail"/>
+                    <field name="volume_detail"/>
+                    <label for="sender"/>
+                    <field name="sender"/>
+                    <group string="Message Kit (wording)">
+                      <field name="reception_date"/>
+                      <field name="reception_location"/>
+                      <field name="personalization"/>
+                    </group>
+                    <label for="comment"/>
+                    <field name="comment"/>
+                  </group>
+                  <group string="BAT">
+                    <field name="bat_from"/>
+                    <field name="bat_internal_client"/>
+                    <field name="bat_comment"/>
+                  </group>
+                  <group>
+
+                  </group>
+                  <group string="Witnesses">
+                    <field name="witness_file_name"/>
+                    <field name="witness_comment"/>
+                  </group>
+                </page>
+              </notebook>
             </field>
         </record>
 
-        <record model="ir.ui.view" id="retribution_sale_order">
-            <field name="name">sale.order.retribution.total.view.form</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='tax_totals']" position="before">
-                    <label for="total_retribution" groups="base.group_user"/>
-                    <div class="text-nowrap" groups="base.group_user">
-                        <field name="total_retribution" widget="monetary" class="oe_inline"/>
-                    </div>
-                </xpath>
-            </field>
-        </record>
+    <record model="ir.ui.view" id="retribution_sale_order">
+      <field name="name">sale.order.retribution.total.view.form</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='tax_totals']" position="before">
+          <label for="total_retribution" groups="base.group_user"/>
+          <div class="text-nowrap" groups="base.group_user">
+            <field name="total_retribution" widget="monetary" class="oe_inline"/>
+          </div>
+        </xpath>
+      </field>
+    </record>
 
-    </data>
+    <record model="ir.ui.view" id="sale_order_form_purchase_inherit">
+      <field name="name">sale.order.form.purchase.inherit</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale_purchase.sale_order_inherited_form_purchase"/>
+      <field name="arch" type="xml">
+        <xpath expr="//button[@name='action_view_purchase_orders']" position="attributes">
+          <label for="total_retribution" groups="base.group_user"/>
+          <attribute name="attrs">{}</attribute>
+        </xpath>
+      </field>
+    </record>
+
+  </data>
 </odoo>
