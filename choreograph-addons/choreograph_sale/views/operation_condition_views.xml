@@ -11,6 +11,7 @@
                     <field name="type"/>
                     <field name="subtype_id"/>
                     <field name="operation_date"/>
+                    <field name="file_name"/>
                     <field name="note"/>
                 </tree>
             </field>

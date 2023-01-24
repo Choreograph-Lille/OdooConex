@@ -8,20 +8,8 @@
       <field name="arch" type="xml">
         <field name="user_ids" position="after">
           <field name="task_type_id"/>
-        </field>
-        <field name="description" position="before">
-          <group>
-            <field name="show_sms_coupling" invisible="1"/>
-            <field name="sms_coupling" attrs="{'invisible': [('show_sms_coupling', '=', False)]}"/>
-          </group>
-          <group>
-            <field name="show_phone_coupling" invisible="1"/>
-            <field name="phone_coupling" attrs="{'invisible': [('show_phone_coupling', '=', False)]}"/>
-          </group>
-          <group>
-            <field name="show_email_coupling" invisible="1"/>
-            <field name="email_coupling" attrs="{'invisible': [('show_email_coupling', '=', False)]}"/>
-          </group>
+          <field name="is_template" invisible="1"/>
+          <field name="task_number" attrs="{'invisible':[('is_template', '=', False)]}"/>
         </field>
       </field>
     </record>

@@ -21,6 +21,17 @@ msgid "Add a new task type"
 msgstr "Ajouter un nouveau type de tâche"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__civility
+msgid "Civility"
+msgstr "Civilités"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__comment
+msgid "Comment"
+msgstr "Commentaires"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_uid
 msgid "Created by"
 msgstr ""
@@ -29,6 +40,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_date
 msgid "Created on"
 msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__depth
+msgid "Depth"
+msgstr "Profondeur"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__display_name
@@ -66,7 +82,13 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__model_selection
+msgid "Model/Selection"
+msgstr "Modèle/Sélection"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__name
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__name
 msgid "Name"
 msgstr "Nom"
 
@@ -85,6 +107,89 @@ msgstr "Couplage téléphone"
 msgid "Phone coupling"
 msgstr "Couplage téléphone"
 
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__potential_return
+msgid "Potential Return"
+msgstr "Retour de potentiel"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__potential_return_task_id
+msgid "Potential Return Task"
+msgstr "Tâche retour de potentiel"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presentation
+msgid "Presentation"
+msgstr "Présentation"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presentation_task_id
+msgid "Presentation Task"
+msgstr "Tâche présentation"
+
+#. module: choreograph_sale_project
+#: model:ir.model,name:choreograph_sale_project.model_choreograph_project_task_type
+msgid "Project Task Type"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__operation_provider_delivery_ids
+msgid "Provider Delivery Tasks"
+msgstr "Tâche livraison presta"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__quantity
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__quantity_to_deliver
+msgid "Quantity To Deliver"
+msgstr "Quantité à livrer"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__ranking
+msgid "Ranking"
+msgstr "Classement"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__repatriate_information
+msgid "Repatriate Informations On Delivery Informations Tab"
+msgstr "Rapatrier les informations sur l'onglet informations livraison"
+
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__order_id
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__order_id
+msgid "Sale Order"
+msgstr "Bon de commande"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__segment_ids
+msgid "Segment"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__segment_number
+msgid "Segment Number"
+msgstr "N° segment"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__show_provider_delivery
+msgid "Show Provider Delivery"
+msgstr "Afficher livraison presta"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__study_delivery
+msgid "Study Delivery"
+msgstr "Livraison étude"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__study_delivery_task_id
+msgid "Study Delivery Task"
+msgstr "Tâche livraison étude"
+
 #. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
 msgid "SMS coupling"
@@ -95,6 +200,17 @@ msgstr "Couplage SMS"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__sms_coupling
 msgid "Sms Coupling"
 msgstr "Couplage SMS"
+
+#. module: choreograph_sale_project
+#: model:ir.model,name:choreograph_sale_project.model_project_task
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__task_id
+msgid "Task"
+msgstr "Tâche"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__task_number
+msgid "Task Number"
+msgstr "N° tâche"
 
 #. module: choreograph_sale_project
 #: model:ir.actions.act_window,name:choreograph_sale_project.choreograph_sale_project_task_type_action
@@ -109,6 +225,11 @@ msgstr "Type de tâche"
 #: model:ir.ui.menu,name:choreograph_sale_project.menu_choreograph_sale_project_task_type
 msgid "Task types"
 msgstr "Types de tâche"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__to_validate
+msgid "To Validate"
+msgstr "A valider"
 
 #. module: choreograph_sale_project
 #: model:ir.model,name:choreograph_sale_project.model_choreograph_project_task_type
