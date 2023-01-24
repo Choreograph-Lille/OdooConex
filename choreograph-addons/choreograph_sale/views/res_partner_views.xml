@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_partner_view_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.view.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="sales_team.res_partner_view_team"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='team_id'][last()]" position="attributes">
+                    <attribute name="groups"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
