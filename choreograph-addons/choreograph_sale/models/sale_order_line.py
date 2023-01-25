@@ -7,6 +7,7 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
     retribution_cost = fields.Float(compute='_compute_retribution_cost', store=True)
+    operation_template_id = fields.Many2one('project.project', related='product_template_id.project_template_id')
 
     def _timesheet_service_generation(self):
         if self._context.get('is_operation_generation'):
