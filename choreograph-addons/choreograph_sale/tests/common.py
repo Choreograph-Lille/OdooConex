@@ -50,11 +50,6 @@ class TestSaleCommon(TransactionCase):
             'product_id': cls.article1.product_variant_id.id,
         })
 
-        # create task type
-        cls.task_type = cls.env['choreograph.project.task.type'].create({
-            'name': 'Task type test',
-        })
-
         # create condition/exclusion subtype
         cls.subtype = cls.env['operation.condition.subtype'].create({
             'type': 'file_processing',
