@@ -1,23 +1,4 @@
 # -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2018 ArkeUp (<http://www.arkeup.fr>). All Rights Reserved
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
 
 from odoo import models, fields, api
 
@@ -25,14 +6,13 @@ from odoo import models, fields, api
 class ResUsers(models.Model):
     _inherit = 'res.users'
 
-    is_portal_user = fields.Boolean('Is Portal User', compute='_compute_portal_user')
     groups_id = fields.Many2many(default=False)
-    bool_sms = fields.Boolean(string="SMS")
-    bool_print = fields.Boolean(string="Print")
-    bool_email = fields.Boolean(string="Email?")
-    default_sms = fields.Boolean(string="Default SMS")
-    default_print = fields.Boolean(string="Default Print")
-    default_email = fields.Boolean(string="Default Email")
+    bool_sms = fields.Boolean("SMS")
+    bool_print = fields.Boolean("Print")
+    bool_email = fields.Boolean("Email?")
+    default_sms = fields.Boolean("Default SMS")
+    default_print = fields.Boolean("Default Print")
+    default_email = fields.Boolean("Default Email")
     customer_ids = fields.Many2many('res.partner', 'res_users_customer_rel', 'user_id', 'partner_id', string='Customers')
 
     @api.onchange('default_sms')
@@ -81,12 +61,3 @@ class ResUsers(models.Model):
         if self.bool_email:
             result.append(('Email', "1" if self.default_email else "0"))
         return result
-
-    def _compute_portal_user(self):
-        portal_users = self.env.ref('maas_base.standard_user').users
-        portal_users |= self.env.ref('maas_base.validator_user').users
-        for rec in self:
-            if rec in portal_users:
-                rec.is_portal_user = True
-            else:
-                rec.is_portal_user = False

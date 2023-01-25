@@ -1,29 +1,77 @@
 <odoo>
     <!-- Form View -->
-  <record id="view_order_form_inherit2" model="ir.ui.view">
-    <field name="name">sale.order.form.inherit2</field>
-    <field name="model">sale.order</field>
-    <field name="inherit_id" ref="sale.view_order_form"/>
-    <field name="type">form</field>
-    <field name="arch" type="xml">
-      <notebook position="inside">
-        <page name="sale_operation" string="Operation">
-          <group>
-            <group string="SMS coupling">
-              <field name="sms_coupling"/>
-              <field name="sms_coupling_task_type_id"/>
-            </group>
-            <group string="Phone coupling">
-              <field name="phone_coupling"/>
-              <field name="phone_coupling_task_type_id"/>
-            </group>
-            <group string="Email coupling">
-              <field name="email_coupling"/>
-              <field name="email_coupling_task_type_id"/>
-            </group>
-          </group>
-        </page>
-      </notebook>
-    </field>
-  </record>
+    <record id="view_order_form_inherit2" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit2</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="sale_operation" string="Operation" attrs="{'invisible': [('recurrence_id', '!=', False)]}">
+                    <group>
+                        <group>
+                            <field name="potential_return" />
+                            <field
+                name="potential_return_task_id"
+                attrs="{'invisible':[('potential_return', '=', False)]}"
+              />
+                            <field name="study_delivery" />
+                            <field
+                name="study_delivery_task_id"
+                attrs="{'invisible':[('study_delivery', '=', False)]}"
+              />
+                            <field name="presentation" />
+                            <field name="presentation_task_id" attrs="{'invisible':[('presentation', '=', False)]}" />
+                        </group>
+                        <group>
+                            <field name="show_provider_delivery" invisible="1" />
+                            <field
+                name="operation_provider_delivery_ids"
+                attrs="{'invisible':[('show_provider_delivery', '=', False)]}"
+              >
+                                <tree editable="bottom">
+                                    <field name="order_id" invisible="1" />
+                                    <field name="delivery_date" />
+                                    <field name="task_id" readonly="1" />
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                    <h3>
+                        <label for="operation_condition_ids" />
+                    </h3>
+                    <field name="operation_condition_ids" />
+                    <h3>
+                        <label for="comment" />
+                    </h3>
+                    <field name="comment" />
+                    <group>
+                        <group>
+                            <field name="quantity_to_deliver" />
+                        </group>
+                        <group>
+                            <field name="to_validate" />
+                        </group>
+                        <field name="segment_ids">
+                            <tree editable="bottom">
+                                <field name="segment_number" />
+                                <field name="model_selection" />
+                                <field name="name" />
+                                <field name="ranking" />
+                                <field name="quantity" />
+                                <field name="depth" />
+                                <field name="keycode" />
+                                <field name="civility" />
+                                <field name="comment" />
+                            </tree>
+                        </field>
+                        <div>
+                            <label for="repatriate_information" class="oe_inline" />
+                            <field name="repatriate_information" class="oe_inline" />
+                        </div>
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
 </odoo>

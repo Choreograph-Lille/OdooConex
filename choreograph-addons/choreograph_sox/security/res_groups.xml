@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="group_manage_customer" model="res.groups">
+        <field name="name">Manage a customer</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+    <record id="group_manage_subscriptions" model="res.groups">
+        <field name="name">Manage subscriptions</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+    <record id="group_manage_plan" model="res.groups">
+        <field name="name">Manage plan</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+    <record id="group_manage_compaign_action" model="res.groups">
+        <field name="name">Manage a campaign / action</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+    <record id="group_start_modeling" model="res.groups">
+        <field name="name">Start modeling</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+    <record id="group_perform_operation" model="res.groups">
+        <field name="name">Perform an operation</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+    <record id="group_to_order" model="res.groups">
+        <field name="name">To order</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+    <record id="group_validate_move_next_level" model="res.groups">
+        <field name="name">Validate the move to the next level</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+    <record id="group_download_ordered_file" model="res.groups">
+        <field name="name">Download the ordered file</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+    <record id="group_manage_users" model="res.groups">
+        <field name="name">Manage users</field>
+        <field name="category_id" ref="choreograph_sox.module_category_my_model_subscriptions" />
+    </record>
+
+    <record id="group_creator_supplier_profile" model="res.groups">
+        <field name="name">Creator Supplier</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('purchase.group_purchase_user')
+      ])]" />
+    </record>
+    <record id="group_guest_purchase_profile" model="res.groups">
+        <field name="name">Guest Purchase</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('purchase.group_purchase_user')
+      ])]" />
+    </record>
+    <record id="group_purchasing_preparer_profile" model="res.groups">
+        <field name="name">Purchasing Preparer</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('purchase.group_purchase_user')
+      ])]" />
+    </record>
+    <record id="group_validator_1_purchase_profile" model="res.groups">
+        <field name="name">Validator 1 Purchase</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('purchase.group_purchase_manager')
+      ])]" />
+    </record>
+    <record id="group_validator_2_purchase_profile" model="res.groups">
+        <field name="name">Validator 2 Purchase</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('purchase.group_purchase_manager')
+      ])]" />
+    </record>
+    <record id="group_guest_purchase_profile" model="res.groups">
+        <field name="name">Guest Sale</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('sales_team.group_sale_salesman')
+      ])]" />
+    </record>
+    <record id="group_customer_creator_profile" model="res.groups">
+        <field name="name">Customer Creator</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('sales_team.group_sale_salesman_all_leads')
+      ])]" />
+    </record>
+    <record id="group_sales_preparer_profile" model="res.groups">
+        <field name="name">Sales Preparer</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('sales_team.group_sale_salesman_all_leads')
+      ])]" />
+    </record>
+    <record id="group_validator_sale_profile" model="res.groups">
+        <field name="name">Validator Sale</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('sales_team.group_sale_manager')
+      ])]" />
+    </record>
+    <record id="group_accounting_guest_profile" model="res.groups">
+        <field name="name">Accounting Guest</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('account.group_account_readonly')
+      ])]" />
+    </record>
+    <record id="group_accounting_profile" model="res.groups">
+        <field name="name">Accounting</field>
+        <field
+      name="implied_ids"
+      eval="[(6, 0, [
+      ref('account.group_account_user'),
+      ref('account.group_account_manager')
+      ])]"
+    />
+    </record>
+    <record id="group_credit_note_preparer_profile" model="res.groups">
+        <field name="name">Credit note preparer</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('account.group_account_invoice')
+      ])]" />
+    </record>
+    <record id="group_credit_note_validator_profile" model="res.groups">
+        <field name="name">Credit note validator</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('account.group_account_invoice')
+      ])]" />
+    </record>
+    <record id="group_cac_profile" model="res.groups">
+        <field name="name">CAC</field>
+        <field
+      name="implied_ids"
+      eval="[(6, 0, [
+      ref('sales_team.group_sale_manager'),
+      ref('purchase.group_purchase_manager'),
+      ref('account.group_account_invoice')
+      ])]"
+    />
+    </record>
+    <record id="group_manager_profile" model="res.groups">
+        <field name="name">Manager</field>
+    </record>
+
+    <record id="group_admin_profile" model="res.groups">
+        <field name="name">Admin</field>
+        <field
+      name="implied_ids"
+      eval="[(6, 0, [
+      ref('sales_team.group_sale_manager'),
+      ref('sales_team.group_sale_salesman'),
+      ref('sales_team.group_sale_salesman_all_leads'),
+      ref('project.group_project_manager'),
+      ref('project.group_project_user'),
+      ref('purchase.group_purchase_manager'),
+      ref('purchase.group_purchase_user'),
+      ref('account.group_account_readonly'),
+      ref('account.group_account_invoice'),
+      ref('account.group_account_user'),
+      ref('account.group_account_manager'),
+      ref('choreograph_sox.group_manage_customer'),
+      ref('choreograph_sox.group_manage_subscriptions'),
+      ref('choreograph_sox.group_manage_plan'),
+      ref('choreograph_sox.group_manage_compaign_action'),
+      ref('choreograph_sox.group_start_modeling'),
+      ref('choreograph_sox.group_perform_operation'),
+      ref('choreograph_sox.group_to_order'),
+      ref('choreograph_sox.group_validate_move_next_level'),
+      ref('choreograph_sox.group_download_ordered_file'),
+      ref('choreograph_sox.group_manage_users'),
+      ref('hr_expense.group_hr_expense_manager'),
+      ref('hr_expense.group_hr_expense_user'),
+      ref('mass_mailing.group_mass_mailing_user'),
+      ref('hr_expense.group_hr_expense_team_approver'),
+      ref('documents.group_documents_manager'),
+      ref('documents.group_documents_user'),
+      ref('base.group_erp_manager'),
+      ref('base.group_system')
+      ])]"
+    />
+    </record>
+    <record id="group_super_user_profile" model="res.groups">
+        <field name="name">Super User</field>
+        <field
+      name="implied_ids"
+      eval="[(6, 0, [
+      ref('sales_team.group_sale_manager'),
+      ref('sales_team.group_sale_salesman'),
+      ref('sales_team.group_sale_salesman_all_leads'),
+      ref('project.group_project_manager'),
+      ref('project.group_project_user'),
+      ref('purchase.group_purchase_manager'),
+      ref('purchase.group_purchase_user'),
+      ref('account.group_account_readonly'),
+      ref('account.group_account_invoice'),
+      ref('account.group_account_user'),
+      ref('account.group_account_manager'),
+      ref('hr.group_hr_user'),
+      ref('hr.group_hr_manager'),
+      ref('choreograph_sox.group_manage_customer'),
+      ref('choreograph_sox.group_manage_subscriptions'),
+      ref('choreograph_sox.group_manage_plan'),
+      ref('choreograph_sox.group_manage_compaign_action'),
+      ref('choreograph_sox.group_start_modeling'),
+      ref('choreograph_sox.group_perform_operation'),
+      ref('choreograph_sox.group_to_order'),
+      ref('choreograph_sox.group_validate_move_next_level'),
+      ref('choreograph_sox.group_download_ordered_file'),
+      ref('choreograph_sox.group_manage_users'),
+      ref('hr_expense.group_hr_expense_manager'),
+      ref('hr_expense.group_hr_expense_user'),
+      ref('hr_expense.group_hr_expense_team_approver'),
+      ref('mass_mailing.group_mass_mailing_user'),
+      ref('documents.group_documents_manager'),
+      ref('documents.group_documents_user'),
+      ref('base.group_erp_manager')
+      ])]"
+    />
+    </record>
+    <record id="group_user_gao_profile" model="res.groups">
+        <field name="name">User GAO</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('project.group_project_user')
+      ])]" />
+    </record>
+    <record id="group_gao_responsible_profile" model="res.groups">
+        <field name="name">Responsible GAO</field>
+        <field name="implied_ids" eval="[(6, 0, [
+      ref('project.group_project_manager')
+      ])]" />
+    </record>
+    <record id="group_standard_profile" model="res.groups">
+        <field name="name">Standard profile</field>
+        <field
+      name="implied_ids"
+      eval="[(6, 0, [
+      ref('choreograph_sox.group_manage_plan'),
+      ref('choreograph_sox.group_manage_compaign_action'),
+      ref('choreograph_sox.group_start_modeling'),
+      ref('choreograph_sox.group_perform_operation'),
+      ref('choreograph_sox.group_to_order'),
+      ref('choreograph_sox.group_download_ordered_file')
+      ])]"
+    />
+    </record>
+    <record id="group_validator_profile" model="res.groups">
+        <field name="name">Validator profile</field>
+        <field
+      name="implied_ids"
+      eval="[(6, 0, [
+      ref('choreograph_sox.group_manage_plan'),
+      ref('choreograph_sox.group_manage_compaign_action'),
+      ref('choreograph_sox.group_start_modeling'),
+      ref('choreograph_sox.group_perform_operation'),
+      ref('choreograph_sox.group_to_order'),
+      ref('choreograph_sox.group_validate_move_next_level'),
+      ref('choreograph_sox.group_download_ordered_file')
+      ])]"
+    />
+    </record>
+    <record id="group_dsi_profile" model="res.groups">
+        <field name="name">DSI profile</field>
+        <field
+      name="implied_ids"
+      eval="[(6, 0, [
+      ref('choreograph_sox.group_manage_compaign_action'),
+      ref('choreograph_sox.group_start_modeling'),
+      ref('choreograph_sox.group_perform_operation'),
+      ref('choreograph_sox.group_to_order'),
+      ref('choreograph_sox.group_download_ordered_file')
+      ])]"
+    />
+    </record>
+    <record id="group_commercial_team_profile" model="res.groups">
+        <field name="name">Profile Commercial team</field>
+        <field
+      name="implied_ids"
+      eval="[(6, 0, [
+      ref('choreograph_sox.group_manage_customer'),
+      ref('choreograph_sox.group_manage_subscriptions'),
+      ref('choreograph_sox.group_manage_plan'),
+      ref('choreograph_sox.group_manage_compaign_action'),
+      ref('choreograph_sox.group_to_order'),
+      ref('choreograph_sox.group_validate_move_next_level'),
+      ])]"
+    />
+    </record>
+    <record id="group_admin_profile" model="res.groups">
+        <field name="name">Profile admin</field>
+        <field
+      name="implied_ids"
+      eval="[(6, 0, [
+      ref('choreograph_sox.group_manage_customer'),
+      ref('choreograph_sox.group_manage_subscriptions'),
+      ref('choreograph_sox.group_manage_plan'),
+      ref('choreograph_sox.group_manage_compaign_action'),
+      ref('choreograph_sox.group_start_modeling'),
+      ref('choreograph_sox.group_perform_operation'),
+      ref('choreograph_sox.group_to_order'),
+      ref('choreograph_sox.group_validate_move_next_level'),
+      ref('choreograph_sox.group_download_ordered_file'),
+      ref('choreograph_sox.group_manage_users')
+      ])]"
+    />
+    </record>
+</odoo>

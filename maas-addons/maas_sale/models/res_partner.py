@@ -35,20 +35,6 @@ class Partner(models.Model):
     date_update_title = fields.Date(string="Date Update title")
     date_update_vars = fields.Date(string="Date Update Vars")
 
-    # @api.model
-    # def fields_view_get(self, view_id=None, view_type=False, toolbar=False, submenu=False):
-    #     context = self._context or {}
-    #     res = super(Partner, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=False)
-    #     if self.env.user.user_profile_id.id == self.env.ref('maas_base.dsi_user').id:
-    #         view_types = ['tree', 'form', 'kanban']
-    #         doc = etree.XML(res['arch'])
-    #         for type in view_types:
-    #             for node in doc.xpath("//" + type):
-    #                 node.attrib['edit'] = 'false'
-    #         res['arch'] = etree.tostring(doc)
-    #         return res
-    #     return res
-
     def get_active_subscription(self):
         self.ensure_one()
         partner = self.get_parent()

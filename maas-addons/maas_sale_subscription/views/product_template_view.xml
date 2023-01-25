@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="product_template_form_inherit" model="ir.ui.view">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="sale_subscription.product_template_view_form_recurring"/>
+            <field name="arch" type="xml">
+                <page name="inventory" position="after">
+                    <page name="mymodel" string="MyModel" attrs="{'invisible': [('recurring_invoice','=',False)]}">
+                        <group>
+                            <group>
+                                <field name="identifiers"/>
+                            </group>
+                            <group>
+                                <field name="is_basic_package"/>
+                                <field name="unlimited"/>
+                            </group>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+    </data>
+</odoo>

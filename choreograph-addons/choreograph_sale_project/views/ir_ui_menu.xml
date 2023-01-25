@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <menuitem
+    id="menu_choreograph_sale_project_task_type"
+    action="choreograph_sale_project.choreograph_sale_project_task_type_action"
+    name="Task types"
+    sequence="10"
+    parent="project.menu_project_config"
+  />
+</odoo>

@@ -13,6 +13,7 @@
         'sales_team',
         'project_template',
         'choreograph_contact',
+        'sale_purchase',
     ],
     'data': [
         # data
@@ -20,6 +21,7 @@
         'security/ir.model.access.csv',
         # views
         'views/sale_order_views.xml',
+        'views/res_partner_views.xml',
         'views/operation_condition_views.xml',
         'views/operation_condition_subtype_views.xml',
         'views/product_template_views.xml',

@@ -11,12 +11,13 @@
     'website': 'https://arkeup.com',
     'depends': [
         'purchase',
+        'web_studio',
         'choreograph_base',
+        'choreograph_sox'
     ],
     'data': [
-        # security
-        # 'security
-        # views
+        'data/studio_approval_rule.xml',
+        'views/purchase_order_views.xml'
     ],
     'assets': {
         'web._assets_primary_variables': [],

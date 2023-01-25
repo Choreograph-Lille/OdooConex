@@ -1,0 +1,65 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_website
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-20 09:07+0000\n"
+"PO-Revision-Date: 2023-01-20 09:07+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_website
+#: model_terms:ir.ui.view,arch_db:choreograph_website.backoffice_login
+msgid "Database"
+msgstr "Base de données"
+
+#. module: choreograph_website
+#: model_terms:ir.ui.view,arch_db:choreograph_website.backoffice_login
+msgid "Email"
+msgstr "Email"
+
+#. module: choreograph_website
+#: model_terms:ir.ui.view,arch_db:choreograph_website.backoffice_login
+msgid "Log in"
+msgstr "Connexion"
+
+#. module: choreograph_website
+#: model_terms:ir.ui.view,arch_db:choreograph_website.backoffice_login
+msgid "Log in as superuser"
+msgstr "Connexion en tant que superutilisateur"
+
+#. module: choreograph_website
+#: code:addons/choreograph_website/controllers/main.py:0
+#, python-format
+msgid ""
+"Only employees can access this database. Please contact the administrator."
+msgstr ""
+"Seuls les employés peuvent accéder à cette base de données. Contactez "
+"l'administrateur."
+
+#. module: choreograph_website
+#: model_terms:ir.ui.view,arch_db:choreograph_website.backoffice_login
+msgid "Password"
+msgstr "Mot de passe"
+
+#. module: choreograph_website
+#: model_terms:ir.ui.view,arch_db:choreograph_website.backoffice_login
+msgid ""
+"Select <i class=\"fa fa-database\" role=\"img\" aria-label=\"Database\" "
+"title=\"Database\"/>"
+msgstr ""
+"Sélectionner <i class=\"fa fa-database\" role=\"img\" aria-label=\"Base de "
+"données\" title=\"Base de données\"/>"
+
+#. module: choreograph_website
+#: code:addons/choreograph_website/controllers/main.py:0
+#, python-format
+msgid "Wrong login/password"
+msgstr "Mauvais nom d'utilisateur ou mot de passe"

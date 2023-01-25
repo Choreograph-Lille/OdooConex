@@ -14,12 +14,17 @@ class RetributionBase(models.Model):
     is_multi_base = fields.Boolean('Multi-Bases', tracking=True)
     retribution_rate = fields.Float('Retribution Rate', tracking=True)
     quota_base_ids = fields.One2many('retribution.base.line', 'multi_base_id', 'Quotas', tracking=True)
+    retribution_rate_multi_base = fields.Float('Retribution Rate (2)', tracking=True, default=0.3)
 
     @api.onchange('quota_base_ids', 'is_multi_base')
     def _onchange_quota_base(self):
         self.retribution_rate = 0
         if self.is_multi_base:
             self.retribution_rate = sum([qb.volume_percentage * qb.retribution_percentage for qb in self.quota_base_ids]) / 100
+            total_volume = sum(self.quota_base_ids.mapped('volume'))
+            if total_volume:
+                for qb in self.quota_base_ids:
+                    qb.volume_percentage = (qb.volume / total_volume)*100
 
     def write(self, vals):
         res = super(RetributionBase, self).write(vals)
