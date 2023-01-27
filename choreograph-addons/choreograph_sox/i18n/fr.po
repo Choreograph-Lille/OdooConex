@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-18 11:25+0000\n"
-"PO-Revision-Date: 2023-01-18 11:25+0000\n"
+"POT-Creation-Date: 2023-01-27 11:31+0000\n"
+"PO-Revision-Date: 2023-01-27 11:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,166 +16,121 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_accounting_profile
+#: model:res.groups,name:choreograph_sox.group_accounting_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_accounting_profile
 msgid "Accounting"
 msgstr "Comptabilité"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_accounting_guest_profile
+#: model:res.groups,name:choreograph_sox.group_accounting_guest_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_accounting_guest_profile
 msgid "Accounting Guest"
 msgstr "Invité Comptabilité"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_cac_profile
-msgid "CAC"
-msgstr "CAC"
+#: model:res.groups,name:choreograph_sox.group_admin_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_admin_profile
+msgid "Admin"
+msgstr ""
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_creator_supplier_profile
+#: model:res.groups,name:choreograph_sox.group_cac_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_cac_profile
+msgid "CAC"
+msgstr ""
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_creator_supplier_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_creator_supplier_profile
 msgid "Creator Supplier"
 msgstr "Créateur Fournisseur"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_credit_note_preparer_profile
+#: model:res.groups,name:choreograph_sox.group_credit_note_preparer_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_credit_note_preparer_profile
 msgid "Credit note preparer"
 msgstr "Prépateur Avoir"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_credit_note_validator_profile
+#: model:res.groups,name:choreograph_sox.group_credit_note_validator_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_credit_note_validator_profile
 msgid "Credit note validator"
-msgstr "Valideur Avoir"
+msgstr ""
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_customer_creator_profile
+#: model:res.groups,name:choreograph_sox.group_customer_creator_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_customer_creator_profile
 msgid "Customer Creator"
 msgstr "Créateur Client"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_dsi_profile
-msgid "DSI profile"
-msgstr "Profil DSI"
+#: model:res.groups,name:choreograph_sox.group_guest_purchase_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_guest_purchase_profile
+msgid "Guest Purchase"
+msgstr "Invité Achat"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_download_ordered_file
-msgid "Download the ordered file"
-msgstr "Télécharger le fichier commandé"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_guest_purchase_profile
+#: model:res.groups,name:choreograph_sox.group_guest_sale_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_guest_sale_profile
 msgid "Guest Sale"
-msgstr "Invité Vente"
+msgstr "Invité vente"
 
 #. module: choreograph_sox
-#: model:ir.module.category,name:choreograph_sox.module_category_my_model_subscriptions
-msgid "MY MODEL SUBSCRIPTIONS"
-msgstr "ABONNEMENTS MY MODEL"
+#: model:res.groups,name:choreograph_sox.group_gao_hidden_fields_res_groups
+#: model:res.users.role,name:choreograph_sox.group_gao_hidden_fields
+msgid "Hidden Fields GAO"
+msgstr "GAO Hidden Fields"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_manage_compaign_action
-msgid "Manage a campaign / action"
-msgstr "Gérer une campagne / action"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_manage_customer
-msgid "Manage a customer"
-msgstr "Gérer un client"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_manage_plan
-msgid "Manage plan"
-msgstr "Gérer un forfait"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_manage_subscriptions
-msgid "Manage subscriptions"
-msgstr "Gérer un abonnement"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_manage_users
-msgid "Manage users"
-msgstr "Gérer les utilisateurs"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_manager_profile
+#: model:res.groups,name:choreograph_sox.group_manager_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_manager_profile
 msgid "Manager"
 msgstr ""
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_perform_operation
-msgid "Perform an operation"
-msgstr "Réaliser une opération"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_commercial_team_profile
-msgid "Profile Commercial team"
-msgstr "Profil Equipe commerciale"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_admin_profile
-msgid "Profile admin"
-msgstr "Profil ADMIN"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_purchasing_preparer_profile
+#: model:res.groups,name:choreograph_sox.group_purchasing_preparer_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_purchasing_preparer_profile
 msgid "Purchasing Preparer"
 msgstr "Préparateur Achat"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_gao_responsible_profile
+#: model:res.groups,name:choreograph_sox.group_gao_responsible_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_gao_responsible_profile
 msgid "Responsible GAO"
 msgstr "GAO Responsable"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_sales_preparer_profile
+#: model:res.groups,name:choreograph_sox.group_sales_preparer_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_sales_preparer_profile
 msgid "Sales Preparer"
 msgstr "Préparateur Vente"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_standard_profile
-msgid "Standard profile"
-msgstr "Profil Standard"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_start_modeling
-msgid "Start modeling"
-msgstr "Lancer la modélisation"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_super_user_profile
+#: model:res.groups,name:choreograph_sox.group_super_user_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_super_user_profile
 msgid "Super User"
-msgstr "Super User"
+msgstr ""
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_to_order
-msgid "To order"
-msgstr "Passer la commande"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_user_gao_profile
+#: model:res.groups,name:choreograph_sox.group_user_gao_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_user_gao_profile
 msgid "User GAO"
-msgstr "GAO Utilisateur"
+msgstr ""
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_validate_move_next_level
-msgid "Validate the move to the next level"
-msgstr "Valider le passage au palier supérieur"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_validator_1_purchase_profile
+#: model:res.groups,name:choreograph_sox.group_validator_1_purchase_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_validator_1_purchase_profile
 msgid "Validator 1 Purchase"
 msgstr "Valideur 1 Achat"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_validator_2_purchase_profile
+#: model:res.groups,name:choreograph_sox.group_validator_2_purchase_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_validator_2_purchase_profile
 msgid "Validator 2 Purchase"
 msgstr "Valideur 2 Achat"
 
 #. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_validator_sale_profile
+#: model:res.groups,name:choreograph_sox.group_validator_sale_profile_res_groups
+#: model:res.users.role,name:choreograph_sox.group_validator_sale_profile
 msgid "Validator Sale"
 msgstr "Valideur Vente"
-
-#. module: choreograph_sox
-#: model:res.groups,name:choreograph_sox.group_validator_profile
-msgid "Validator profile"
-msgstr "Profil Valideur"

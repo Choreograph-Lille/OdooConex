@@ -14,10 +14,11 @@
         'project',
         'hr_expense',
         'documents',
-        'mass_mailing'
+        'mass_mailing',
+        'choreograph_base',
+        'maas_base'
     ],
     'data': [
-        'data/ir_module_category.xml',
         'security/res_groups.xml'
     ],
     'installable': True,
