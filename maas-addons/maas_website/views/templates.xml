@@ -2,7 +2,7 @@
 <odoo>
 
   <!-- Login -->
-  <template id="login" name="Login" inherit_id="web.login">
+  <template id="login" name="Login" inherit_id="web.login" primary="True">
     <xpath expr="t" position="replace">
       <t>
         <main>
