@@ -51,7 +51,8 @@ class SaleOrder(models.Model):
     comment = fields.Text()
 
     bat_from = fields.Char('From')
-    bat_internal_client = fields.Char('BAT Internal/Client')
+    bat_internal = fields.Char()
+    bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
 
     witness_file_name = fields.Char('File Name')
@@ -87,9 +88,12 @@ class SaleOrder(models.Model):
                     'name': rec.name + '/' + OPERATION_TYPE[condition.operation_type] + '/' + OPERATION_CONDITION_TYPE[condition.type],
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
-                    'description': condition.note,
+                    'note': condition.note,
                     'sale_order_id': rec.id,
                     'user_ids': False,
+                    'ate_deadline': condition.operation_date,
+                    'campaign_file_name': condition.file_name,
+                    'task_number': condition.task_number,
                 }
                 vals['name'] += condition.subtype_id.name if condition.subtype_id else ''
                 rec.project_ids.task_ids = [(0, 0, vals)]
