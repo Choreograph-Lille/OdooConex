@@ -84,11 +84,11 @@
                   </group>
                   <group string="BAT">
                     <field name="bat_from"/>
-                    <field name="bat_internal_client"/>
+                    <field name="bat_internal"/>
+                    <field name="bat_client"/>
                     <field name="bat_comment"/>
                   </group>
                   <group>
-
                   </group>
                   <group string="Witnesses">
                     <field name="witness_file_name"/>

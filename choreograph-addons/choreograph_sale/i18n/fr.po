@@ -91,9 +91,14 @@ msgid "BAT Comment"
 msgstr "Commentaire"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal_client
-msgid "BAT Internal/Client"
-msgstr "BAT interne/client"
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_client
+msgid "BAT Client"
+msgstr "BAT client"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal
+msgid "Bat Internal"
+msgstr "BAT interne"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__campaign_id
@@ -529,6 +534,11 @@ msgstr "Bases concernées"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__retribution_cost
 msgid "Retribution Cost"
 msgstr "Côut rétribution"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__task_number
+msgid "Task Number"
+msgstr "N° tâche"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_product__retribution_rate

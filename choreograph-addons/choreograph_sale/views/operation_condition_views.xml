@@ -11,7 +11,8 @@
                     <field name="type" />
                     <field name="subtype_id" />
                     <field name="operation_date" />
-                    <field name="file_name" />
+                    <field name="file_name"/>
+                    <field name="task_number"/>
                     <field name="note" />
                 </tree>
             </field>
@@ -26,10 +27,11 @@
                         <group>
                             <field name="operation_type" />
                             <field name="type" />
-                            <field name="subtype_id" context="{'filter_by_parent_type': type}" />
+                            <field name="subtype_id" context="{'filter_by_parent_type': type}"/>
                             <field name="operation_date" />
                         </group>
                         <group>
+                            <field name="task_number"/>
                             <field name="note" />
                         </group>
                     </group>

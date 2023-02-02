@@ -1,5 +1,7 @@
 from odoo import api, fields, models
 
+TASK_NUMBER = [(str(n), str(n)) for n in range(5, 100, 5)]
+
 
 class OperationCondition(models.Model):
     _name = 'operation.condition'
@@ -23,6 +25,7 @@ class OperationCondition(models.Model):
         ('comment', 'Comment')
     ], required=True)
     file_name = fields.Char()
+    task_number = fields.Selection(TASK_NUMBER)
 
     @api.onchange('type')
     def _onchange_type(self):
