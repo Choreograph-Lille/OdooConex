@@ -91,9 +91,14 @@ msgid "BAT Comment"
 msgstr "Commentaire"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal_client
-msgid "BAT Internal/Client"
-msgstr "BAT interne/client"
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_client
+msgid "BAT Client"
+msgstr "BAT client"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal
+msgid "Bat Internal"
+msgstr "BAT interne"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__campaign_id
@@ -531,6 +536,11 @@ msgid "Retribution Cost"
 msgstr "Côut rétribution"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__task_number
+msgid "Task Number"
+msgstr "N° tâche"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_product__retribution_rate
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_template__retribution_rate
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__retribution_rate
@@ -633,6 +643,13 @@ msgstr "Sous-type"
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "Task generation"
 msgstr "Générer tâches"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid ""
+"The operation template must have the following task number: {0}, {1}, {2}"
+msgstr "Le modèle d'opération doit avoir des tâches de numéros: {0}, {1}, {2}"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__campaign_id
