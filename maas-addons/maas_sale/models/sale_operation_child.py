@@ -9,6 +9,7 @@ import uuid
 
 logger = logging.getLogger(__name__)
 
+
 class SaleOperationChild(models.Model):
     _name = 'sale.operation.child'
     _description = 'Sale Operation Child'
@@ -23,25 +24,26 @@ class SaleOperationChild(models.Model):
         default='in_progress', tracking=True, readonly=True)
     date_availability = fields.Datetime('Date of availability', readonly=True)
     qty_extracted = fields.Integer('Quantity Extracted', tracking=True)
-    downloaded = fields.Boolean("Downloaded")
+    downloaded = fields.Boolean()
     modeled_file_url = fields.Char('Modeled File URL')
     type = fields.Selection(
         [('initial_command', 'Initial Command'), ('cancel_replace', 'Full cancel and replace'), ('only_delta', 'Only Delta')],
-        string='Type', default='initial_command', tracking=True)
+        default='initial_command', tracking=True)
     operation_id = fields.Many2one('sale.operation', string="Parent")
 
     deleted = fields.Boolean("Deleted", default=False)
 
-    @api.model
-    def create(self, vals):
-        if 'operation_id' in vals:
-            operation = self.env['sale.operation'].search([('id', '=', vals['operation_id'])])
-            operation.number_child += 1
-            vals['name'] = operation.number + '-' + str(operation.number_child).zfill(3)
-            vals['date'] = odoo.fields.Datetime.now()
-            if 'qty_extracted' in vals:
-                self.with_context(operation_id=operation.id).check_quantity(vals['qty_extracted'])
-        return super(SaleOperationChild, self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            if 'operation_id' in vals:
+                operation = self.env['sale.operation'].search([('id', '=', vals['operation_id'])])
+                operation.number_child += 1
+                vals['name'] = operation.number + '-' + str(operation.number_child).zfill(3)
+                vals['date'] = odoo.fields.Datetime.now()
+                if 'qty_extracted' in vals:
+                    self.with_context(operation_id=operation.id).check_quantity(vals['qty_extracted'])
+        return super(SaleOperationChild, self).create(vals_list)
 
     def command_ordered(self):
         self.ensure_one()
@@ -52,7 +54,8 @@ class SaleOperationChild(models.Model):
         if child_qty_extracted <= 0:
             raise ValidationError(_('The quantity ordered must be strictly positive.'))
         if self.env.context.get('operation_id', False):
-            population_count = self.env['sale.operation'].browse(self.env.context.get('operation_id')).population_scored_count
+            population_count = self.env['sale.operation'].browse(
+                self.env.context.get('operation_id')).population_scored_count
             if child_qty_extracted > population_count and ICPsudo.get_param('maas_sale.operation_qty_scored', default=False):
                 raise ValidationError(_('You cannot order quantity greater than the population scored.'))
         return True
