@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 {
     'name': 'Choreograph Sale',
     'version': '16.0.0.1',
@@ -19,6 +18,8 @@
         # data
         # security
         'security/ir.model.access.csv',
+        # wizards
+        'wizards/operation_generation_views.xml',
         # views
         'views/sale_order_views.xml',
         'views/res_partner_views.xml',
@@ -36,3 +37,4 @@
     'installable': True,
     'application': False,
 }
+# -*- coding: utf-8 -*-

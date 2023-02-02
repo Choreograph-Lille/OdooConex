@@ -75,7 +75,9 @@ class SaleOrder(models.Model):
                     REQUIRED_TASK_NUMBER['potential_return'], REQUIRED_TASK_NUMBER['study_delivery'], REQUIRED_TASK_NUMBER['presentation']))
         self.order_line.sudo().with_company(self.company_id).with_context(
             is_operation_generation=True)._timesheet_service_generation()
-        self.show_operation_generation_button = False
+        
+        for project in self.order_line.mapped('project_id'):
+            project.name = project.name.replace(' (TEMPLATE)', '')
 
         for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
             task.active = False
