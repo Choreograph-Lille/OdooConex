@@ -21,7 +21,6 @@
         'views/menu.xml',
         'views/templates.xml',
         'views/assets.xml',
-        'views/layout.xml',
     ],
     'assets': {
         'web.assets_tests': [],
