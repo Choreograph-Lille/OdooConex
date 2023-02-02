@@ -167,7 +167,7 @@ class SaleOperation(models.Model):
             self.attachment_profile_id = attachment_obj.sudo().create(attachment_vals).id
         return True
 
-    @api.model_create_multi
+    @api.model
     def create(self, vals):
         vals['number'] = self.env['ir.sequence'].next_by_code('sale.operation')
         data01 = vals.pop('population_scored_datafile', None)
