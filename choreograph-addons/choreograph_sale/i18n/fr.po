@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-02 11:02+0000\n"
-"PO-Revision-Date: 2023-02-02 11:02+0000\n"
+"POT-Creation-Date: 2023-02-02 11:15+0000\n"
+"PO-Revision-Date: 2023-02-02 11:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -536,6 +536,11 @@ msgid "Responsible User"
 msgstr "Responsable"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__retribution
+msgid "Retribution"
+msgstr ""
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_product__concerned_base
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_template__concerned_base
 msgid "Retribution Base"
@@ -553,7 +558,6 @@ msgstr "Bases concernées"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__retribution_cost
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__retribution_cost
 msgid "Retribution Cost"
 msgstr "Coût des rétributions"
 
