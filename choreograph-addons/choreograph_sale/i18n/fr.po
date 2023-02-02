@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 23:14+0000\n"
-"PO-Revision-Date: 2023-01-24 23:14+0000\n"
+"POT-Creation-Date: 2023-02-02 11:02+0000\n"
+"PO-Revision-Date: 2023-02-02 11:02+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -553,8 +553,9 @@ msgstr "Bases concernées"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__retribution_cost
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__retribution_cost
 msgid "Retribution Cost"
-msgstr "Côut rétribution"
+msgstr "Coût des rétributions"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__task_number
@@ -612,6 +613,11 @@ msgid "Sale Order Exclusion"
 msgstr "Exclusion bon de commande"
 
 #. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Rapport d'analyse des ventes"
+
+#. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_order
 msgid "Sales Order"
 msgstr "Bon de commande"
@@ -630,6 +636,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__send_with
 msgid "Send with"
 msgstr "Envoi via"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sender
+msgid "Sender"
+msgstr "Expéditeur"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__show_operation_generation_button
@@ -659,6 +670,11 @@ msgstr "Sous-type"
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__name
 msgid "Subtype name"
 msgstr "Sous-type"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__task_number
+msgid "Task Number"
+msgstr "N° tâche"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
