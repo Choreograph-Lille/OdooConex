@@ -64,6 +64,9 @@ class ProjectTask(models.Model):
     segment_ids = fields.Many2many('operation.segment', compute='compute_segment_ids')
     operation_condition_ids = fields.Many2many('operation.condition', compute='compute_operation_condition_ids')
 
+    trap_address_ids = fields.One2many('trap.address', 'task_id')
+    project_task_campaign_ids = fields.One2many('project.task.campaign', 'task_id')
+
     @api.depends('sale_order_id', 'sale_order_id.segment_ids', 'sale_order_id.repatriate_information')
     def compute_segment_ids(self):
         if self.sale_order_id.repatriate_information:
