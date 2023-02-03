@@ -3,43 +3,49 @@
     <data>
 
         <menuitem id="sale_operation_menu_root"
-                  name="Operations"
-                  parent="sale.sale_menu_root"
-                  sequence="0"/>
+            name="Operations"
+            parent="sale.sale_menu_root"
+            sequence="0" />
 
         <menuitem id="sale_campaign_action_menu"
-                  name="Actions"
-                  parent="sale_operation_menu_root"
-                  sequence="20"
-                  action="sale_campaign_action_action"/>
+            name="Actions"
+            parent="sale_operation_menu_root"
+            sequence="20"
+            action="sale_campaign_action_action" />
 
         <menuitem id="sale_campaign_menu"
-                  name="Campaigns"
-                  parent="sale_operation_menu_root"
-                  sequence="10"
-                  action="sale_campaign_action"/>
+            name="Campaigns"
+            parent="sale_operation_menu_root"
+            sequence="10"
+            action="sale_campaign_action" />
 
         <menuitem id="sale_operation_menu"
-                  name="Operations"
-                  parent="sale_operation_menu_root"
-                  sequence="30"
-                  action="sale_operation_action"/>
+            name="Operations"
+            parent="sale_operation_menu_root"
+            sequence="30"
+            action="sale_operation_action" />
+
+        <menuitem id="indication_menu"
+            name="Indications"
+            parent="sale_operation_menu_root"
+            sequence="50"
+            action="maas_sale.indication_action" />
 
         <record model="ir.ui.menu" id="sale.res_partner_menu">
-            <field name="groups_id" eval="[(4, ref('maas_base.group_customer_management'))]"/>
+            <field name="groups_id" eval="[(4, ref('maas_base.group_customer_management'))]" />
         </record>
 
         <record model="ir.ui.menu" id="base.menu_administration">
-            <field name="groups_id" eval="[(4, ref('maas_base.group_user_management'))]"/>
+            <field name="groups_id" eval="[(4, ref('maas_base.group_user_management'))]" />
         </record>
 
         <record model="ir.ui.menu" id="contacts.menu_contacts">
-            <field name="groups_id" eval="[(4, ref('maas_base.group_customer_management'))]"/>
+            <field name="groups_id" eval="[(4, ref('maas_base.group_customer_management'))]" />
         </record>
 
         <record model="ir.ui.menu" id="sale.product_menu_catalog">
             <field name="groups_id"
-                   eval="[(4, ref('maas_base.group_operation_perform')),(4, ref('maas_base.group_download_operation_ordered')),(4, ref('maas_base.group_package_management'))]"/>
+                eval="[(4, ref('maas_base.group_operation_perform')),(4, ref('maas_base.group_download_operation_ordered')),(4, ref('maas_base.group_package_management'))]" />
         </record>
 
     </data>
