@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
-  <data noupdate="1">
+<odoo noupdate="1">
 
     <record id="res_partner_arkeup" model="res.partner">
-      <field name="name">ArkeUp</field>
-      <field name="is_company">1</field>
-      <field name="city">Paris</field>
-      <field name="zip">75009</field>
-      <field name="country_id" ref="base.fr"/>
-      <field name="street">8 rue montmartre</field>
-      <field name="email">info@arkeup.com</field>
-      <field name="phone">+33 1 79 97 36 20</field>
-      <field name="website">http://www.arkeup.com</field>
-      <field name="active" eval="False"/>
+        <field name="name">ArkeUp</field>
+        <field name="is_company">1</field>
+        <field name="city">Paris</field>
+        <field name="zip">75009</field>
+        <field name="country_id" ref="base.fr" />
+        <field name="street">8 rue montmartre</field>
+        <field name="email">info@arkeup.com</field>
+        <field name="phone">+33 1 79 97 36 20</field>
+        <field name="website">http://www.arkeup.com</field>
+        <field name="active" eval="False" />
     </record>
 
-  </data>
 </odoo>

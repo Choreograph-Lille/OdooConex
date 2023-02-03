@@ -19,8 +19,9 @@
 #
 ##############################################################################
 
-import logging
 import datetime
+import logging
+
 from dateutil.relativedelta import relativedelta
 
 logger = logging.getLogger(__name__)
@@ -54,6 +55,7 @@ def last_date_of_previous_month(today):
         logger.error(repr(e))
     return False
 
+
 def first_date_of_this_month(today):
     if not today:
         return False
@@ -63,6 +65,7 @@ def first_date_of_this_month(today):
     except Exception as e:
         logger.error(repr(e))
     return False
+
 
 def last_day_of_this_month(today):
     if not today:
