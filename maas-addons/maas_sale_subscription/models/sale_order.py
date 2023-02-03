@@ -19,12 +19,7 @@
 #
 ##############################################################################
 
-import odoo
 from odoo import fields, models, api, _
-from dateutil.relativedelta import relativedelta
-from odoo.addons.maas_base.models.tools import last_date_of_previous_month
-from odoo.addons.maas_base.models.tools import first_date_of_this_month
-from odoo.addons.maas_base.models.tools import last_day_of_this_month
 
 import logging
 
@@ -41,8 +36,8 @@ SUBSCRIPTION_STATES = [('to_invoice', 'To Invoice'),
 class SaleSubscription(models.Model):
     _inherit = 'sale.order'
 
-    service_start_date = fields.Date(string='Service Start Date', readonly=True)
-    allowance = fields.Selection([('crm', 'CRM'), ('prm', 'PRM')], 'Allowance', default='crm')
+    service_start_date = fields.Date(readonly=True)
+    allowance = fields.Selection([('crm', 'CRM'), ('prm', 'PRM')], default='crm')
 
     @api.model
     def create(self, vals):
@@ -85,14 +80,16 @@ class SaleSubscription(models.Model):
     def scheduler_recurring_invoice_line(self):
         subscription_line_obj = self.env['sale.order.line']
         stages_in_progress = self.env['sale.order.stage'].search([('category', '=', 'progress')])
-        subscriptions = self.env['sale.order'].search([('current_package_id', '!=', False), ('stage_id', 'in', stages_in_progress.ids)])
+        subscriptions = self.env['sale.order'].search(
+            [('current_package_id', '!=', False), ('stage_id', 'in', stages_in_progress.ids)])
         date = fields.Date.today()
         date_now = fields.Datetime.now()
         _logger.info("Subscription CRON launched at %s" % (date))
         for subscription in subscriptions:
             current_product_pricelist = subscription.pricelist_id or subscription.partner_id.property_product_pricelist
             if subscription.next_invoice_date == date:
-                lines = subscription.order_line.filtered(lambda l: l.state_subscription == 'consumption').sorted(key='id', reverse=True)
+                lines = subscription.order_line.filtered(
+                    lambda l: l.state_subscription == 'consumption').sorted(key='id', reverse=True)
                 if lines:
                     product = lines[0].product_id
                     vals = {'order_id': subscription.id,
@@ -188,53 +185,3 @@ class SaleSubscription(models.Model):
         except Exception as e:
             _logger.info("Error in generating recurring invoice")
         return True
-
-
-class SaleSubscriptionLine(models.Model):
-    _inherit = 'sale.order.line'
-    _order = 'date desc, order_id, sequence, id'
-
-    @api.model
-    def default_get(self, fields):
-        res = super(SaleSubscriptionLine, self).default_get(fields)
-        if not res.get('date'):
-            res['date'] = odoo.fields.Datetime.now()
-        return res
-
-    date = fields.Datetime('Date')
-    period = fields.Char('Period', compute='compute_period', store=True)
-    identifiers = fields.Integer(related='product_id.identifiers')
-    qty_consumed = fields.Integer('Consumed', readonly=True)
-    qty_cumulative = fields.Integer('Accrued Consumption', readonly=True)
-    state_subscription = fields.Selection(SUBSCRIPTION_STATES, 'Action', default='start_subscription', readonly=True)
-
-    @api.depends('date')
-    def compute_period(self):
-        for line in self:
-            if line.date:
-                line.period = fields.Datetime.from_string(line.date).strftime('%b-%y')
-
-    @api.depends('price_unit', 'product_uom_qty', 'discount', 'order_id.pricelist_id')
-    def _compute_amount(self):
-        super(SaleSubscriptionLine, self)._compute_amount()
-        for line in self.filtered(lambda l: l.state_subscription != 'to_invoice'):
-            if line.order_id.package_id:
-                line.price_subtotal = 0
-        for line in self.filtered(lambda l: l.state_subscription == 'to_invoice'):
-            if line.order_id.package_id:
-                price_rent = self.filtered(lambda l: l.state_subscription == 'subscription_rent').sorted(key='date', reverse=True)
-                if price_rent:
-                    line.price_subtotal += price_rent[0].price_unit
-
-    def _prepare_invoice_line(self, **optional_values):
-        self.ensure_one()
-        res = super()._prepare_invoice_line(**optional_values)
-        if self.order_id.package_id:
-            res.update({'quantity': self.qty_cumulative})
-        return res
-
-    def _reset_subscription_qty_to_invoice(self):
-        super()._reset_subscription_qty_to_invoice()
-        for line in self:
-            if line.order_id.package_id:
-                line.qty_to_invoice = line.qty_cumulative
