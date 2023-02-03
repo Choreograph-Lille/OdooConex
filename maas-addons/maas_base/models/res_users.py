@@ -10,10 +10,11 @@ class ResUsers(models.Model):
     bool_sms = fields.Boolean("SMS")
     bool_print = fields.Boolean("Print")
     bool_email = fields.Boolean("Email?")
-    default_sms = fields.Boolean("Default SMS")
-    default_print = fields.Boolean("Default Print")
-    default_email = fields.Boolean("Default Email")
-    customer_ids = fields.Many2many('res.partner', 'res_users_customer_rel', 'user_id', 'partner_id', string='Customers')
+    default_sms = fields.Boolean()
+    default_print = fields.Boolean()
+    default_email = fields.Boolean()
+    customer_ids = fields.Many2many('res.partner', 'res_users_customer_rel',
+                                    'user_id', 'partner_id', string='Customers')
 
     @api.onchange('default_sms')
     def onchange_default_sms(self):
