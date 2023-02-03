@@ -1,108 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-	<template id="maas_homepage" name="maas_website" inherit_id="maas_website.homepage">
-		<xpath expr="." position="inside">
-			<!-- Modif replace homepage-->
-			<meta charset="utf-8" />
-			<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-			<meta name="description" content=""/>
-			<meta name="author" content=""/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/font.css"/>
-			<link rel="icon" href="/maas_website/static/images/icone_conexance.ico"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/main-style.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/mediaqueries.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/bootstrap.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/webfontkit/barlow/stylesheet.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/webfontkit/muli/stylesheet.css"/>
-			<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
-			<link rel="stylesheet" href="/maas_website/static/src/css/home.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css"/>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/js/globe.js"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/three.min.js"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/TweenMax.min.js"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/demo1.js"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/jquery.validate.min.js"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/homepage.js"/>
+    <template id="maas_homepage" name="maas_website" inherit_id="maas_website.homepage">
+        <xpath expr="." position="inside">
+            <!-- Modif replace homepage-->
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+            <meta name="description" content="" />
+            <meta name="author" content="" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/font.css" />
+            <link rel="icon" href="/maas_website/static/images/icone_conexance.ico" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/main-style.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/mediaqueries.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/bootstrap.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/webfontkit/barlow/stylesheet.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/webfontkit/muli/stylesheet.css" />
+            <!--<link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
+            <link rel="stylesheet" href="/maas_website/static/src/css/home.css" />
+            <link rel="stylesheet"
+                href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css" />
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/js/globe.js" />
+            <script type="text/javascript" src="/maas_website/static/src/js/three.min.js" />
+            <script type="text/javascript" src="/maas_website/static/src/js/TweenMax.min.js" />
+            <script type="text/javascript" src="/maas_website/static/src/js/demo1.js" />
+            <script type="text/javascript" src="/maas_website/static/src/js/jquery.validate.min.js" />
+            <script type="text/javascript" src="/maas_website/static/src/js/homepage.js" />
 
 
+        </xpath>
+    </template>
+    <template id="maas_operation_list" name="maas_website" inherit_id="maas_website.operation_list">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/maas_website/static/src/css/maas.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/font.css" />
+            <link rel="stylesheet"
+                href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
+            <link rel="stylesheet"
+                href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css" />
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/js/maas.js?v1.21.0.0" />
+            <script type="text/javascript"
+                src="/maas_website/static/src/js/jquery.twbsPagination.min.js" />
+            <script type="text/javascript"
+                src="/maas_website/static/src/js/jquery.twbsPagination.js" />
+            <script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js" />
+        </xpath>
+    </template>
+    <template id="maas_operation_creation" name="maas_website"
+        inherit_id="maas_website.operation_creation">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/maas.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/font.css" />
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/js/maas.js?v1.21.0.0" />
+            <script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js" />
 
-
-		</xpath>
-	</template>
- 	<template id="maas_operation_list" name="maas_website" inherit_id="maas_website.operation_list">
-		<xpath expr="." position="inside">
-			<link rel="stylesheet" href="/maas_website/static/src/css/maas.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/font.css"/>
-			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css"/>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>	
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/js/maas.js?v1.21.0.0"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/jquery.twbsPagination.min.js"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/jquery.twbsPagination.js"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js"/>
-		</xpath>
-	</template>
-	<template id="maas_operation_creation" name="maas_website" inherit_id="maas_website.operation_creation">
-		<xpath expr="." position="inside">
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/maas.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/font.css"/>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/js/maas.js?v1.21.0.0"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js"/>
-			
-		</xpath>
- 	</template> 
-	<template id="maas_login" inherit_id="maas_website.login">
-		<xpath expr="." position="inside">
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/maas.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/font.css"/>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
-		</xpath>
-	</template>
-	<template id="maas_contact" inherit_id="maas_website.operation_contact">
-		<xpath expr="." position="inside">
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/maas.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/font.css"/>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/js/maas.js?v1.21.0.0"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js"/>
-		</xpath>
-	</template>
-	<template id="maas_indication" inherit_id="maas_website.indication">
-		<xpath expr="." position="inside">
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/maas.css"/>
-			<link rel="stylesheet" href="/maas_website/static/src/css/font.css"/>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
-			<script type="text/javascript" src="/maas_website/static/src/js/mansory.js"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/maas.js?v1.20.2.0"/>
-			<script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js"/>
-		</xpath>
-	</template>
+        </xpath>
+    </template>
+    <template id="maas_login" inherit_id="maas_website.login">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/maas.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/font.css" />
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
+        </xpath>
+    </template>
+    <template id="maas_contact" inherit_id="maas_website.operation_contact">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/maas.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/font.css" />
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/js/maas.js?v1.21.0.0" />
+            <script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js" />
+        </xpath>
+    </template>
+    <template id="maas_indication" inherit_id="maas_website.indication">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/maas.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/font.css" />
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/js/mansory.js" />
+            <script type="text/javascript" src="/maas_website/static/src/js/maas.js?v1.20.2.0" />
+            <script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js" />
+        </xpath>
+    </template>
 
 </odoo>
