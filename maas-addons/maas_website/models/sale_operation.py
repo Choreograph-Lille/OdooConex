@@ -20,7 +20,8 @@
 ##############################################################################
 
 from dateutil import tz
-from odoo import models, fields, api
+
+from odoo import api, fields, models
 
 
 class SaleOperation(models.Model):

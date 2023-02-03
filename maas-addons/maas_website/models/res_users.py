@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import models, api, fields
+from odoo import fields, models
 
 
 class ResUsers(models.Model):

@@ -2,10 +2,11 @@
 
 import odoo
 from odoo import _, http
-from odoo.addons.web.controllers.home import Home, SIGN_UP_REQUEST_PARAMS
-from odoo.addons.web.controllers.utils import ensure_db
 from odoo.http import request
+
 from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.addons.web.controllers.home import SIGN_UP_REQUEST_PARAMS, Home
+from odoo.addons.web.controllers.utils import ensure_db
 
 
 class Home(Home):

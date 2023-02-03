@@ -30,8 +30,7 @@
                                             readonly="readonly" />
                                         <span class="input-group-btn">
                                             <a href="/web/database/selector" class="btn btn-default">
-                                                Select
-                        <i
+                                                Select <i
                                                     class="fa fa-database" />
                                             </a>
                                         </span>
@@ -106,7 +105,8 @@
                                     class="access_zone big_access" target="_blank"><h3
                                     class="client_access"> ACCES CLIENTS</h3></a>
                   -->
-                                    <!--<t t-if="request.env.user.login == 'public'">-->
+                                    <!--<t
+                                    t-if="request.env.user.login == 'public'">-->
                                     <a href="web/login" class="access_zone big_access">
                                         <h3 class="client_access">
                                             <span class="bg-btn-connexion">REGISTRATION</span>
@@ -425,28 +425,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <!--<div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                  <div
-                            class="row">
-                      <div class="col-xl-12 col-lg-12
-                            col-md-12 col-sm-12" id="footer-fils-rgt">
-                          <p>
-                            <b>Annick Delmotte</b>
-                              <br/>
-                              Director
-                            of Development
-                              <br/>
-                              Phone
-                            : 03 28 04 74 46
-                              <br/>
-                              Email
-                            : annick.delmotte@conexancemd.com
-                          </p>
-                      </div>
-                            </div>
-              </div>-->
-
                         </div>
                     </div>
 
@@ -456,7 +434,8 @@
                         aria-labelledby="myModalLabel" aria-hidden="true" -->
 
                         <div class="container-fluid">
-                            <!--Modal: modalYT-->
+                            <!--Modal:
+                            modalYT-->
                             <div class="modal-dialog modal-lg">
                                 <!--Content-->
                                 <div class="modal-content">
@@ -501,7 +480,8 @@
                                 <!--/.Content-->
                             </div>
                         </div>
-                        <!--Modal: modalYT-->
+                        <!--Modal:
+                        modalYT-->
                     </div>
                     <div class="scrollup" id="scrollup" style="display: none;">
                         <a href="#base" class="redirect">
@@ -729,7 +709,7 @@
                                             t-att-deleted="'not deleted'"
                                             data-toggle="collapse" t-att-href="'#collapse-campaign'">
                                             Campaigns
-                    </a>
+                                        </a>
                                         <div id="collapse-campaign" class="collapsed-campaign"
                                             style="position:relative;">
                                             <t t-foreach="campaign_ids" t-as="c">
@@ -764,7 +744,8 @@
                                                         t-att-id="'campaign'+str(c.id)"
                                                         t-att-value="c.name" />
                                                 </div>
-                                                <!--<t t-if="c.action_ids">-->
+                                                <!--<t
+                                                t-if="c.action_ids">-->
                                                 <div t-att-id="'collapse'+str(c.id)"
                                                     class="panel-collapse collapse">
                                                     <ul t-att-id="'list-group'+str(c.id)"
@@ -812,7 +793,8 @@
                                             </t>
                                         </div>
 
-                                        <!--<a class="-liste editable" id="history-campaigns"
+                                        <!--<a
+                                        class="-liste editable" id="history-campaigns"
                                         style="cursor:pointer;"
                        t-att-folder="'parent-folder'"
                                         t-att-archived="'archived'"
@@ -1938,7 +1920,8 @@
                                                     </tr>
                                                 </tbdoy>
                                             </table>
-                                            <!--<img id="inactive-campaign"
+                                            <!--<img
+                                            id="inactive-campaign"
                                             class="green-actif-coche"
                                             src="/maas_website/static/src/img/ico-coche-inactif.png"/>
                                             <label>
@@ -2005,7 +1988,8 @@
                                                                         t-att-id="'campaign'+str(c.id)"
                                                                         t-att-value="c.name" />
                                                                 </div>
-                                                                <!--<t t-if="c.action_ids">-->
+                                                                <!--<t
+                                                                t-if="c.action_ids">-->
                                                                 <div t-att-id="'collapse'+str(c.id)"
                                                                     class="panel-collapse collapse">
                                                                     <ul
@@ -2060,7 +2044,8 @@
                                             </div>
                                             <input type="hidden" name="campaign_id" id="campaign_id" />
                                             <input type="hidden" name="action_id" id="action_id" />
-                                            <!--<div class="btn-foot">
+                                            <!--<div
+                                            class="btn-foot">
                           <a
                                             href="#" class="btn btn-left create-campaign"
                                             groups="maas_base.group_campaign_management,base.user_root">Create
@@ -2440,7 +2425,8 @@
         </div>
 
         <t t-call="maas_website.collapse_menu" />
-        <!--<div class="row">
+        <!--<div
+        class="row">
         <div style="algin:left;">
           <img
         src="/maas_base/static/description/MyModel_logo_sm.PNG" style="padding: 0px; margin: 0px;"/>
