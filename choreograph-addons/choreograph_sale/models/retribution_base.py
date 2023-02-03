@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, Command, fields, models, _
+from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
 
@@ -24,7 +24,7 @@ class RetributionBase(models.Model):
             total_volume = sum(self.quota_base_ids.mapped('volume'))
             if total_volume:
                 for qb in self.quota_base_ids:
-                    qb.volume_percentage = (qb.volume / total_volume)*100
+                    qb.volume_percentage = (qb.volume / total_volume) * 100
 
     def write(self, vals):
         res = super(RetributionBase, self).write(vals)
