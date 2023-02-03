@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2022 ArkeUp (<http://www.arkeup.fr>). All Rights Reserved
+#    Copyright (C) 2018 ArkeUp (<http://www.arkeup.fr>). All Rights Reserved
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -19,15 +19,13 @@
 #
 ##############################################################################
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
-class ProductPricelistItem(models.Model):
-    _inherit = 'product.pricelist.item'
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
 
-    subscription_rent = fields.Boolean('Subscription Rent')
-
-    @api.onchange('applied_on')
-    def onchange_applied_on(self):
-        if self.applied_on != '1_product':
-            self.subscription_rent = False
+    package_id = fields.Many2one('product.product', 'Basic Package')
+    current_package_id = fields.Many2one('product.product', 'Current Package')
+    current_cumulative_quantity = fields.Integer()
+    balance = fields.Integer(readonly=True)

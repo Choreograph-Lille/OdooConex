@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 
-from dateutil.relativedelta import relativedelta
 import odoo
 import logging
 from odoo import fields, models, api, _
@@ -54,10 +53,12 @@ class SaleOperation(models.Model):
     pbi_value_filter = fields.Char('PBI Value Filter')
     population_scored_desc = fields.Text('Population Scored Description', required=True, tracking=True)
     attachment_scored_id = fields.Many2one('ir.attachment', 'Population Scored Attachment', readonly=True)
-    population_scored_filename = fields.Char(related='attachment_scored_id.store_fname', string='Population Scored Attachment Name')
+    population_scored_filename = fields.Char(
+        related='attachment_scored_id.store_fname', string='Population Scored Attachment Name')
     population_scored_datafile = fields.Binary(related='attachment_scored_id.datas', string='Population Scored Datas')
     searched_profile_desc = fields.Text('Searched Profile Description', required=True, tracking=True)
-    searched_profile_filename = fields.Char(related='attachment_profile_id.store_fname', string='Searched Profile Attachment Name')
+    searched_profile_filename = fields.Char(
+        related='attachment_profile_id.store_fname', string='Searched Profile Attachment Name')
     searched_profile_datafile = fields.Binary(related='attachment_profile_id.datas', string='Searched Profile Datas')
     attachment_profile_id = fields.Many2one('ir.attachment', 'Searched Profile Attachment', readonly=True)
 

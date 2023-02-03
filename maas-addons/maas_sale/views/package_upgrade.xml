@@ -14,19 +14,18 @@
                         </span>
                     </div>
                     <div class="alert alert-info" role="alert">
-                        <field name="product_id" nolabel="1"/>
-                        (<field name="identifiers" class="oe_inline" nolabel="1"/>).
-                    </div>
+                        <field name="product_id" nolabel="1" /> (<field name="identifiers"
+                            class="oe_inline" nolabel="1" />). </div>
                     <div class="alert-info" role="alert">
                         <span>
                             Thank you for confirming the suggested higher level.
                         </span>
                     </div>
                     <footer>
-                        <button name="button_validate" type="object" string="Validate" class="oe_highlight"
-                                groups="maas_base.group_validate_next_package"/>
-                        or
-                        <button special="cancel" string="Cancel" class="oe_link"/>
+                        <button name="button_validate" type="object" string="Validate"
+                            class="oe_highlight"
+                            groups="maas_base.group_validate_next_package" /> or <button
+                            special="cancel" string="Cancel" class="oe_link" />
                     </footer>
                 </sheet>
             </form>

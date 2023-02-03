@@ -19,21 +19,19 @@
 #
 ##############################################################################
 
-from odoo import fields, api, models
-from lxml import etree
+from odoo import fields, models
 
 
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    partner_type = fields.Selection([('alliance', 'Alliance'), ('conexplus', 'Conex +')],
-                                    'Partner Type', default='alliance')
+    partner_type = fields.Selection([('alliance', 'Alliance'), ('conexplus', 'Conex +')], default='alliance')
     title_ref = fields.Char('Title Ref.', size=6)
     operation_ids = fields.One2many('sale.operation', 'partner_id', 'Operations')
     campaign_ids = fields.One2many('sale.campaign', 'partner_id', 'Campaigns')
     subscription_ids = fields.One2many('sale.order', 'partner_id', 'Subscriptions ')
-    date_update_title = fields.Date(string="Date Update title")
-    date_update_vars = fields.Date(string="Date Update Vars")
+    date_update_title = fields.Date()
+    date_update_vars = fields.Date()
 
     def get_active_subscription(self):
         self.ensure_one()
