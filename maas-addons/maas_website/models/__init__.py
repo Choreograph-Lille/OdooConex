@@ -19,5 +19,5 @@
 #
 ##############################################################################
 
-from . import sale
+from . import sale_operation
 from . import res_users

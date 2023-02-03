@@ -26,7 +26,7 @@
         # views
         'views/menu.xml',
         'views/product_template_view.xml',
-        'views/sale_subscription_view.xml',
+        'views/sale_order_view.xml',
     ],
     'qweb': [],
     'demo': [],

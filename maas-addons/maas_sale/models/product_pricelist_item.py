@@ -22,10 +22,12 @@
 from odoo import api, fields, models
 
 
-class ProductTemplate(models.Model):
-    _inherit = 'product.template'
+class ProductPricelistItem(models.Model):
+    _inherit = 'product.pricelist.item'
 
-    identifiers = fields.Integer('Ids')
-    retribution_rate = fields.Float('Retribution Rate')
-    is_basic_package = fields.Boolean('Is basic package?')
-    unlimited = fields.Boolean('Unlimited')
+    subscription_rent = fields.Boolean()
+
+    @api.onchange('applied_on')
+    def onchange_applied_on(self):
+        if self.applied_on != '1_product':
+            self.subscription_rent = False

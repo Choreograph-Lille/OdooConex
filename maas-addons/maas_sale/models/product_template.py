@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2018 ArkeUp (<http://www.arkeup.fr>). All Rights Reserved
+#    Copyright (C) 2022 ArkeUp (<http://www.arkeup.fr>). All Rights Reserved
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -19,13 +19,13 @@
 #
 ##############################################################################
 
-from odoo import fields, models, api
+from odoo import fields, models
 
 
-class SaleSubscription(models.Model):
-    _inherit = 'sale.order'
+class ProductTemplate(models.Model):
+    _inherit = 'product.template'
 
-    package_id = fields.Many2one('product.product', 'Basic Package')
-    current_package_id = fields.Many2one('product.product', 'Current Package')
-    current_cumulative_quantity = fields.Integer('Current Cumulative Quantity')
-    balance = fields.Integer('Balance', readonly=True)
+    identifiers = fields.Integer('Ids')
+    retribution_rate = fields.Float()
+    is_basic_package = fields.Boolean('Is basic package?')
+    unlimited = fields.Boolean()

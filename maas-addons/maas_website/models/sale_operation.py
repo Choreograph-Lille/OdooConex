@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2022 ArkeUp (<http://www.arkeup.fr>). All Rights Reserved
+#    Copyright (C) 2018 ArkeUp (<http://www.arkeup.fr>). All Rights Reserved
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -19,15 +19,20 @@
 #
 ##############################################################################
 
+from dateutil import tz
+
 from odoo import api, fields, models
 
 
-class ProductPricelistItem(models.Model):
-    _inherit = 'product.pricelist.item'
+class SaleOperation(models.Model):
+    _inherit = 'sale.operation'
 
-    subscription_rent = fields.Boolean('Subscription Rent')
-
-    @api.onchange('applied_on')
-    def onchange_applied_on(self):
-        if self.applied_on != '1_product':
-            self.subscription_rent = False
+    @api.model
+    def _get_date_tz(self, value=False):
+        if not value:
+            return False
+        from_tz = tz.tzutc()
+        to_tz = tz.gettz(self.env.user.tz)
+        datetime_wo_tz = fields.Datetime.from_string(value)
+        datetime_with_tz = datetime_wo_tz.replace(tzinfo=from_tz)
+        return fields.Datetime.to_string(datetime_with_tz.astimezone(to_tz))

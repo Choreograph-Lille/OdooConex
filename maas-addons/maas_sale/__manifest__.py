@@ -44,13 +44,13 @@
         # security
         'security/ir.model.access.csv',
         # views
-        'views/sale_action.xml',
+        'views/sale_campaign_action.xml',
         'views/sale_campaign.xml',
         'views/res_partner_view.xml',
         'views/sale_operation_view.xml',
         'views/package_upgrade.xml',
         'views/menu.xml',
-        'views/product_pricelist_views.xml',
+        'views/product_pricelist_item.xml',
         'views/res_config_settings.xml',
         'views/indication_views.xml',
         # report
