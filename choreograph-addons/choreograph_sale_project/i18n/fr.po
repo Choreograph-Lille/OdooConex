@@ -31,6 +31,11 @@ msgid "BAT Comment"
 msgstr "Commentaire"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__bc_number
+msgid "BC Number"
+msgstr "N° BC"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_client
 msgid "Bat Client"
 msgstr ""
@@ -46,7 +51,13 @@ msgid "Bat Internal"
 msgstr "Bat interne"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task_campaign__id_campaign
+msgid "Campaign ID"
+msgstr "ID Campagne"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_name
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task_campaign__name
 msgid "Campaign Name"
 msgstr "Nom Campagne"
 
@@ -383,6 +394,7 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__segment_number
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__segment_number
 msgid "Segment Number"
 msgstr "N° segment"
 
@@ -462,6 +474,16 @@ msgstr "Types de tâche"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__to_validate
 msgid "To Validate"
 msgstr "A valider"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__trap_address_ids
+msgid "Trap Address"
+msgstr "Adresse piège"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__name
+msgid "Trap Addresses"
+msgstr "Adresses pièges"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume

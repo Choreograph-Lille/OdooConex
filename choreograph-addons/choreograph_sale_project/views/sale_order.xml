@@ -1,5 +1,5 @@
 <odoo>
-    <!-- Form View -->
+  <!-- Form View -->
   <record id="view_order_form_inherit2" model="ir.ui.view">
     <field name="name">sale.order.form.inherit2</field>
     <field name="model">sale.order</field>
@@ -72,6 +72,18 @@
           </group>
         </page>
       </xpath>
+    </field>
+  </record>
+
+  <record id="view_order_form_inherit_sale_project2" model="ir.ui.view">
+    <field name="name">sale.order.form.sale.project2</field>
+    <field name="model">sale.order</field>
+    <field name="inherit_id" ref="sale_project.view_order_form_inherit_sale_project"/>
+    <field name="type">form</field>
+    <field name="arch" type="xml">
+      <button name="action_view_project_ids" position="attributes">
+        <attribute name="attrs">{'invisible': [('project_ids', '=', [])]}</attribute>
+      </button>
     </field>
   </record>
 </odoo>
