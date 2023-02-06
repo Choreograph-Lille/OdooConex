@@ -107,6 +107,14 @@
               <field name="civility"/>
             </tree>
           </field>
+          <field name="trap_address_ids" attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['75', '80', '85'])]}">
+            <tree editable="bottom">
+              <field name="task_id" invisible="1"/>
+              <field name="name"/>
+              <field name="segment_number"/>
+              <field name="bc_number"/>
+            </tree>
+          </field>
           <group attrs="{'invisible': [('task_number', '=', False)]}">
             <group>
               <field name="family_conex" attrs="{'invisible': [('task_number', 'not in', ['75', '85', '80'])]}"/>
@@ -116,6 +124,15 @@
 
               <field name="start_date" attrs="{'invisible': [('task_number', 'not in', ['90'])]}"/>
               <field name="routing_base" attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}"/>
+            </group>
+            <group></group>
+            <field name="project_task_campaign_ids" nolabel="1" attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}">
+              <tree editable="bottom">
+                <field name="id_campaign"/>
+                <field name="name"/>
+              </tree>
+            </field>
+            <group>
               <field name="specific_counting" attrs="{'invisible': [('task_number', 'not in', ['90'])]}"/>
               <field name="deposit_date_1" attrs="{'invisible': [('task_number', 'not in', ['95'])]}"/>
               <field name="deposit_date_2" attrs="{'invisible': [('task_number', 'not in', ['95'])]}"/>
