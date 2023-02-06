@@ -20,7 +20,7 @@
 ##############################################################################
 
 from odoo.exceptions import UserError, ValidationError
-from odoo import fields, models
+from odoo import fields, models, _
 
 
 class SaleOperatinChild(models.Model):

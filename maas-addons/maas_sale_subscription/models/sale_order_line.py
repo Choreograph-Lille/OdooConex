@@ -63,17 +63,9 @@ class SaleSubscriptionLine(models.Model):
                 line.price_subtotal = 0
         for line in self.filtered(lambda l: l.state_subscription == 'to_invoice'):
             if line.order_id.package_id:
-                price_rent = self.filtered(lambda l: l.state_subscription
-                                           == 'subscription_rent').sorted(key='date', reverse=True)
+                price_rent = self.filtered(lambda l: l.state_subscription == 'subscription_rent').sorted(key='date', reverse=True)
                 if price_rent:
                     line.price_subtotal += price_rent[0].price_unit
-
-    def _prepare_invoice_line(self, **optional_values):
-        self.ensure_one()
-        res = super()._prepare_invoice_line(**optional_values)
-        if self.order_id.package_id:
-            res.update({'quantity': self.qty_cumulative})
-        return res
 
     def _reset_subscription_qty_to_invoice(self):
         super()._reset_subscription_qty_to_invoice()
