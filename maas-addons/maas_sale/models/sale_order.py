@@ -19,19 +19,13 @@
 #
 ##############################################################################
 
-from dateutil import tz
-from odoo import models, fields, api
+from odoo import fields, models
 
 
-class SaleOperation(models.Model):
-    _inherit = 'sale.operation'
+class SaleOrder(models.Model):
+    _inherit = 'sale.order'
 
-    @api.model
-    def _get_date_tz(self, value=False):
-        if not value:
-            return False
-        from_tz = tz.tzutc()
-        to_tz = tz.gettz(self.env.user.tz)
-        datetime_wo_tz = fields.Datetime.from_string(value)
-        datetime_with_tz = datetime_wo_tz.replace(tzinfo=from_tz)
-        return fields.Datetime.to_string(datetime_with_tz.astimezone(to_tz))
+    package_id = fields.Many2one('product.product', 'Basic Package')
+    current_package_id = fields.Many2one('product.product', 'Current Package')
+    current_cumulative_quantity = fields.Integer()
+    balance = fields.Integer(readonly=True)

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -76,7 +78,7 @@ class SaleOrder(models.Model):
                     REQUIRED_TASK_NUMBER['potential_return'], REQUIRED_TASK_NUMBER['study_delivery'], REQUIRED_TASK_NUMBER['presentation']))
         self.order_line.sudo().with_company(self.company_id).with_context(
             is_operation_generation=True)._timesheet_service_generation()
-        
+
         for project in self.order_line.mapped('project_id'):
             project.name = project.name.replace(' (TEMPLATE)', '')
 

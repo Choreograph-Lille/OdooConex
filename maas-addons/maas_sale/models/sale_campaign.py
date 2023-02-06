@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import ValidationError
 from odoo import fields, models, api, _
 
 
@@ -34,7 +34,7 @@ class SaleCampaign(models.Model):
             res['partner_id'] = self.env.user.partner_id.id
         return res
 
-    name = fields.Char('Name', required=True)
+    name = fields.Char(required=True)
     partner_id = fields.Many2one('res.partner', 'Customer', ondelete='cascade')
     action_ids = fields.One2many('sale.campaign.action', 'campaign_id', 'Actions', readonly=True)
     operation_ids = fields.One2many('sale.operation', 'campaign_id', 'Operations', readonly=True)

@@ -19,14 +19,14 @@
 #
 ##############################################################################
 
-from odoo import fields, models, api, _
+from odoo import api, fields, models
 
 
 class SaleCampaignAction(models.Model):
     _name = 'sale.campaign.action'
     _description = 'Sale Campaign Action'
 
-    name = fields.Char('Name', required=True)
+    name = fields.Char(required=True)
     partner_id = fields.Many2one(related='campaign_id.partner_id', readonly=True)
     campaign_id = fields.Many2one('sale.campaign', 'Sale Campaign', required=True, ondelete='cascade')
     operation_ids = fields.One2many('sale.operation', 'action_id', 'Operations', readonly=True)

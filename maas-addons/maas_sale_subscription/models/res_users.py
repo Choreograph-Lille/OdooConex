@@ -19,7 +19,7 @@
 #
 ##############################################################################
 
-from odoo import models, api
+from odoo import models
 
 
 class ResUsers(models.Model):
@@ -28,6 +28,4 @@ class ResUsers(models.Model):
     def check_active_subscription(self):
         self.ensure_one()
         partner = self.partner_id.get_parent()
-        if partner.get_active_subscription():
-            return True
-        return False
+        return bool(partner.get_active_subscription())

@@ -19,7 +19,9 @@
 #
 ##############################################################################
 
-from . import sale_subscription
+from . import sale_order
+from . import sale_order_line
 from . import sale_operation
+from . import sale_operation_child
 from . import res_users
 from . import res_partner

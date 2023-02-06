@@ -19,48 +19,16 @@
 #
 ##############################################################################
 
-from odoo import http, modules
-from odoo.tools import pycompat
-from odoo.addons.http_routing.models.ir_http import url_for
-import werkzeug
-import json
 import base64
+import json
 import os
 
-import logging
-_logger = logging.getLogger(__name__)
+from odoo import http, modules
 
-#
-# def url_for(path_or_uri, lang=None):
-#     current_path = http.request.httprequest.path  # should already be text
-#     location = pycompat.to_text(path_or_uri).strip()
-#     force_lang = lang is not None
-#     url = werkzeug.urls.url_parse(location)
-#
-#     if not url.netloc and not url.scheme and (url.path or force_lang):
-#         location = werkzeug.urls.url_join(current_path, location)
-#
-#         lang = pycompat.to_text(lang or http.request.context.get('lang') or 'en_US')
-#         langs = [lg[0] for lg in http.request.env['ir.http']._get_language_codes()]
-#
-#         if (len(langs) > 1 or force_lang) and models.ir_http.is_multilang_url(location, langs):
-#             ps = location.split(u'/')
-#             if ps[1] in langs:
-#                 # Replace the language only if we explicitly provide a language to url_for
-#                 if force_lang:
-#                     ps[1] = lang
-#             # Insert the context language or the provided language
-#             elif lang != http.request.env['ir.http']._get_default_lang().code or force_lang:
-#                 ps.insert(1, lang)
-#             location = u'/'.join(ps)
-#     return location
-#
-#
-# models.ir_http.url_for = url_for
+from odoo.addons.http_routing.models.ir_http import url_for
 
 
 class OperationWebsite(http.Controller):
-
 
     @staticmethod
     def _get_consumption_data():
@@ -85,7 +53,7 @@ class OperationWebsite(http.Controller):
             'percent': percent,
             'url_for': url_for,
             'user': http.request.env.user,
-            'unlimited':unlimited
+            'unlimited': unlimited
         }
         return http.request.render('maas_website.operation_list', values, True)
 
@@ -148,13 +116,13 @@ class OperationWebsite(http.Controller):
             operation.write({'qty_extracted': int(kwargs.get('volume_filled'))})
         if kwargs.get('request_for_validation'):
             operation.request_package_upgrade()
-            return http.request.redirect('/operation/list'+'#operation'+str(operation.operation_id.id))
+            return http.request.redirect('/operation/list' + '#operation' + str(operation.operation_id.id))
         result = operation.command_ordered()
         if isinstance(result, bool):
             return http.request.redirect('/operation/list')
         wizard = package_obj.with_context(result['context']).create({})
         wizard.button_validate()
-        return http.request.redirect('/operation/list'+'#operation'+str(operation.operation_id.id))
+        return http.request.redirect('/operation/list' + '#operation' + str(operation.operation_id.id))
 
     @http.route('/operation/detail/<int:operation_id>', type='http', auth='user', methods=['POST'], website=True,
                 csrf=False)
@@ -199,10 +167,10 @@ class OperationWebsite(http.Controller):
             if isinstance(boolean, bool):
                 return json.dumps(list({'show_popup': False}))
             res = {result.id: {'id': result.id, 'show_popup': True,
-                                           'available_identifiers': subscription.balance,
-                                           'volume_filled': volume, 'difference': subscription.balance - volume,
-                                           'product_name': boolean['context'].get('product_name'),
-                                           'except': False, 'text': False}}
+                               'available_identifiers': subscription.balance,
+                               'volume_filled': volume, 'difference': subscription.balance - volume,
+                               'product_name': boolean['context'].get('product_name'),
+                               'except': False, 'text': False}}
         except Exception as e:
             res = {result.id: {'id': result.id, 'show_popup': True, 'except': True, 'text': e.args[0]}}
 
@@ -374,10 +342,10 @@ class OperationWebsite(http.Controller):
                 res = {operation.id: {'id': operation.id, 'show_popup': False, 'except': False}}
                 return json.dumps(list(res.values()))
             res = {operation.id: {'id': operation.id, 'show_popup': True,
-                               'available_identifiers': subscription.balance,
-                               'volume_filled': operation.qty_extracted, 'difference': subscription.balance - operation.qty_extracted,
-                               'product_name': boolean['context'].get('product_name'),
-                               'except': False, 'text': False}}
+                                  'available_identifiers': subscription.balance,
+                                  'volume_filled': operation.qty_extracted, 'difference': subscription.balance - operation.qty_extracted,
+                                  'product_name': boolean['context'].get('product_name'),
+                                  'except': False, 'text': False}}
         except Exception as e:
             res = {operation.id: {'id': operation.id, 'show_popup': True, 'except': True, 'text': e.args[0]}}
 
@@ -534,7 +502,7 @@ class OperationWebsite(http.Controller):
         }
         return http.request.render('maas_website.operation_contact', values)
 
-    @http.route('/operation/session/check',  methods=['POST'], website=True, csrf=False)
+    @http.route('/operation/session/check', methods=['POST'], website=True, csrf=False)
     def session_check(self):
         print(http.request.session.uid)
         values = {'connected': http.request.session.uid}
@@ -556,11 +524,12 @@ class OperationWebsite(http.Controller):
         values = {user.id: {'filter': filter}}
         return json.dumps(list(values))
 
-    @http.route('/operation/indication',  auth='user', website=True, csrf=False)
+    @http.route('/operation/indication', auth='user', website=True, csrf=False)
     def indication(self):
         quantity, identifiers, percent, unlimited = self._get_consumption_data()
         partner = http.request.env.user.partner_id.get_parent()
-        indications = http.request.env['partner.indication.infos'].sudo().search([('partner_id', '=', partner.id), ('active', '=', True)], order="sequence asc")
+        indications = http.request.env['partner.indication.infos'].sudo().search(
+            [('partner_id', '=', partner.id), ('active', '=', True)], order="sequence asc")
         values = {
             'campaign_ids': partner.campaign_ids,
             'total_qty_cumulative': quantity,
