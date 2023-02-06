@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-24 23:14+0000\n"
-"PO-Revision-Date: 2023-01-24 23:14+0000\n"
+"POT-Creation-Date: 2023-02-02 11:15+0000\n"
+"PO-Revision-Date: 2023-02-02 11:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -71,6 +71,11 @@ msgid "Add a new subtype"
 msgstr "Ajouter un nouveau sous-type"
 
 #. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_generation__operation_selection__association
+msgid "Associate order with an existing operation"
+msgstr "Associer la commande à une opération existante"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
@@ -91,9 +96,14 @@ msgid "BAT Comment"
 msgstr "Commentaire"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal_client
-msgid "BAT Internal/Client"
-msgstr "BAT interne/client"
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_client
+msgid "BAT Client"
+msgstr "BAT client"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal
+msgid "Bat Internal"
+msgstr "BAT interne"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__campaign_id
@@ -105,6 +115,11 @@ msgstr "Campagne"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__campaign_name
 msgid "Campaign Name"
 msgstr "Nom campagne"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
+msgid "Cancel"
+msgstr "Annuler"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__catalogue_ids
@@ -149,6 +164,11 @@ msgid "Condition/Exclusion subtype"
 msgstr "Sous-type de condition/exclusion"
 
 #. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_generation__operation_selection__creation
+msgid "Create a new operation"
+msgstr "Créer une nouvelle opération"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__create_uid
@@ -179,11 +199,6 @@ msgstr "Conservation des données"
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_template__datastore
 msgid "Datastore"
 msgstr ""
-
-#. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__reception_location
-msgid "Where to find ?"
-msgstr "Où le trouver ?"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__default_fill
@@ -422,6 +437,11 @@ msgid "Open"
 msgstr "Ouverte"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__project_id
+msgid "Operation"
+msgstr "Opération"
+
+#. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_operation_condition
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__operation_condition_ids
 msgid "Operation Condition"
@@ -446,6 +466,12 @@ msgstr "Date"
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "Operation generation"
+msgstr "Génération de l'opération"
+
+#. module: choreograph_sale
+#: model:ir.actions.act_window,name:choreograph_sale.operation_generation_action
+#: model:ir.model,name:choreograph_sale.model_operation_generation
+msgid "Operation Generation"
 msgstr "Génération de l'opération"
 
 #. module: choreograph_sale
@@ -510,6 +536,11 @@ msgid "Responsible User"
 msgstr "Responsable"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__retribution
+msgid "Retribution"
+msgstr ""
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_product__concerned_base
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_template__concerned_base
 msgid "Retribution Base"
@@ -528,7 +559,12 @@ msgstr "Bases concernées"
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__retribution_cost
 msgid "Retribution Cost"
-msgstr "Côut rétribution"
+msgstr "Coût des rétributions"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__task_number
+msgid "Task Number"
+msgstr "N° tâche"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_product_product__retribution_rate
@@ -581,6 +617,11 @@ msgid "Sale Order Exclusion"
 msgstr "Exclusion bon de commande"
 
 #. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Rapport d'analyse des ventes"
+
+#. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_order
 msgid "Sales Order"
 msgstr "Bon de commande"
@@ -599,6 +640,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__send_with
 msgid "Send with"
 msgstr "Envoi via"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sender
+msgid "Sender"
+msgstr "Expéditeur"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__show_operation_generation_button
@@ -630,9 +676,21 @@ msgid "Subtype name"
 msgstr "Sous-type"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__task_number
+msgid "Task Number"
+msgstr "N° tâche"
+
+#. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "Task generation"
 msgstr "Générer tâches"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid ""
+"The operation template must have the following task number: {0}, {1}, {2}"
+msgstr "Le modèle d'opération doit avoir des tâches de numéros: {0}, {1}, {2}"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__campaign_id
@@ -674,6 +732,11 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
+msgid "Validate"
+msgstr "Valider"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__volume
 msgid "Volume"
 msgstr ""
@@ -699,6 +762,16 @@ msgstr ""
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__website_message_ids
 msgid "Website communication history"
 msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
+msgid "What do you want to do ?"
+msgstr "Que souhaitez vous faire ?"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__reception_location
+msgid "Where to find ?"
+msgstr "Où le trouver ?"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__witness_comment

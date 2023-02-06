@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
@@ -51,7 +53,8 @@ class SaleOrder(models.Model):
     comment = fields.Text()
 
     bat_from = fields.Char('From')
-    bat_internal_client = fields.Char('BAT Internal/Client')
+    bat_internal = fields.Char()
+    bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
 
     witness_file_name = fields.Char('File Name')
@@ -75,7 +78,9 @@ class SaleOrder(models.Model):
                     REQUIRED_TASK_NUMBER['potential_return'], REQUIRED_TASK_NUMBER['study_delivery'], REQUIRED_TASK_NUMBER['presentation']))
         self.order_line.sudo().with_company(self.company_id).with_context(
             is_operation_generation=True)._timesheet_service_generation()
-        self.show_operation_generation_button = False
+
+        for project in self.order_line.mapped('project_id'):
+            project.name = project.name.replace(' (TEMPLATE)', '')
 
         for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
             task.active = False
@@ -87,9 +92,12 @@ class SaleOrder(models.Model):
                     'name': rec.name + '/' + OPERATION_TYPE[condition.operation_type] + '/' + OPERATION_CONDITION_TYPE[condition.type],
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
-                    'description': condition.note,
+                    'note': condition.note,
                     'sale_order_id': rec.id,
                     'user_ids': False,
+                    'ate_deadline': condition.operation_date,
+                    'campaign_file_name': condition.file_name,
+                    'task_number': condition.task_number,
                 }
                 vals['name'] += condition.subtype_id.name if condition.subtype_id else ''
                 rec.project_ids.task_ids = [(0, 0, vals)]

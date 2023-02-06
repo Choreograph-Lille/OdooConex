@@ -1,6 +1,5 @@
 # -*- encoding: utf-8 -*-
 
-from odoo.tests.common import TransactionCase
 from odoo.addons.choreograph_contact.tests.common import TestRoleCommon
 
 

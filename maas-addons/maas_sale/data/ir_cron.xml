@@ -1,32 +1,34 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-  <data noupdate="0">
+    <data noupdate="0">
 
-    <record id="notify_before_download_deadline_cron" model="ir.cron">
-      <field name='name'>MyModel Sale Operation: Send Notification Before Download Deadline</field>
-      <field name='priority'>4</field>
-      <field name='interval_number'>1</field>
-      <field name='interval_type'>days</field>
-      <field name="numbercall">-1</field>
-      <field name="doall" eval="True"/>
-      <field name="model_id" ref="model_sale_operation_child"/>
-      <field name="code">model.scheduler_recall_download_file()</field>
-      <field name="state">code</field>
-      <field name="nextcall" eval="(DateTime.now()+relativedelta(days=1)).strftime('%Y-%m-%d 00:15:00')"/>
-    </record>
+        <record id="notify_before_download_deadline_cron" model="ir.cron">
+            <field name='name'>MyModel Sale Operation: Send Notification Before Download Deadline</field>
+            <field name='priority'>4</field>
+            <field name='interval_number'>1</field>
+            <field name='interval_type'>days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True" />
+            <field name="model_id" ref="model_sale_operation_child" />
+            <field name="code">model.scheduler_recall_download_file()</field>
+            <field name="state">code</field>
+            <field name="nextcall"
+                eval="(DateTime.now()+relativedelta(days=1)).strftime('%Y-%m-%d 00:15:00')" />
+        </record>
 
-    <record id="download_availability_checker_cron" model="ir.cron">
-      <field name='name'>MyModel Sale Operation: File Download Availability Checker</field>
-      <field name='priority'>6</field>
-      <field name='interval_number'>1</field>
-      <field name='interval_type'>days</field>
-      <field name="numbercall">-1</field>
-      <field name="doall" eval="True"/>
-      <field name="model_id" ref="model_sale_operation_child"/>
-      <field name="code">model.scheduler_download_checker()</field>
-      <field name="state">code</field>
-      <field name="nextcall" eval="(DateTime.now()+relativedelta(days=1)).strftime('%Y-%m-%d 00:20:00')"/>
-    </record>
+        <record id="download_availability_checker_cron" model="ir.cron">
+            <field name='name'>MyModel Sale Operation: File Download Availability Checker</field>
+            <field name='priority'>6</field>
+            <field name='interval_number'>1</field>
+            <field name='interval_type'>days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="True" />
+            <field name="model_id" ref="model_sale_operation_child" />
+            <field name="code">model.scheduler_download_checker()</field>
+            <field name="state">code</field>
+            <field name="nextcall"
+                eval="(DateTime.now()+relativedelta(days=1)).strftime('%Y-%m-%d 00:20:00')" />
+        </record>
 
-  </data>
+    </data>
 </odoo>

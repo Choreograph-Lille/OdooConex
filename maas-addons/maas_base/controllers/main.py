@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-import logging
-import werkzeug
 
-from odoo import http, _
+from odoo import http
 from odoo.http import request
-from odoo.addons.website.controllers.main import Website
 
-_logger = logging.getLogger(__name__)
+from odoo.addons.website.controllers.main import Website
 
 
 class MaasWebsiteBase(Website):

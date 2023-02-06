@@ -12,12 +12,14 @@
                 <field name="show_operation_generation_button" invisible="1"/>
                 <field name="new_condition_count" invisible="1"/>
                 <field name="project_count" invisible="1"/>
+                <field name="id" invisible="1"/>
                 <button
-                        name="action_generate_operation"
+                        name="%(choreograph_sale.operation_generation_action)d"
                         id="action_generate_operation"
                         string="Generate The Operation"
                         class="btn-primary"
-                        type="object"
+                        type="action"
+                        context="{'default_order_id': id}"
                         attrs="{'invisible': ['|', ('show_operation_generation_button', '=', False), ('recurrence_id', '!=', False)]}"
                 />
                 <button
@@ -84,11 +86,11 @@
                   </group>
                   <group string="BAT">
                     <field name="bat_from"/>
-                    <field name="bat_internal_client"/>
+                    <field name="bat_internal"/>
+                    <field name="bat_client"/>
                     <field name="bat_comment"/>
                   </group>
                   <group>
-
                   </group>
                   <group string="Witnesses">
                     <field name="witness_file_name"/>

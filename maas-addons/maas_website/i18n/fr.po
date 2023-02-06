@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-19 23:30+0000\n"
-"PO-Revision-Date: 2022-12-19 23:30+0000\n"
+"POT-Creation-Date: 2023-01-27 12:26+0000\n"
+"PO-Revision-Date: 2023-01-27 12:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -260,7 +260,6 @@ msgstr ""
 "<span style=\"vertical-align: middle;padding-left:8px;\">Créer</span>\n"
 "                    <br/>\n"
 "                    <span style=\"vertical-align: middle;padding-left:8px;\">une campagne</span>"
-
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
@@ -735,6 +734,15 @@ msgid "Only delta"
 msgstr "Delta uniquement"
 
 #. module: maas_website
+#: code:addons/maas_website/controllers/web.py:0
+#, python-format
+msgid ""
+"Only employees can access this database. Please contact the administrator."
+msgstr ""
+"Seuls les employés peuvent accéder à cette base de données. Contactez "
+"l'administrateur."
+
+#. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.collapse_menu
 msgid "Operation <br/>creation"
 msgstr "Création d'une<br/>opération"
@@ -974,6 +982,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid "View"
 msgstr "Visualiser"
+
+#. module: maas_website
+#: code:addons/maas_website/controllers/web.py:0
+#, python-format
+msgid "Wrong login/password"
+msgstr "Mauvais nom d'utilisateur ou mot de passe"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list

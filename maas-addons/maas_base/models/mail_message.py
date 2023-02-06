@@ -19,19 +19,20 @@
 #
 ##############################################################################
 
-from odoo import fields, models, api
+from odoo import fields, models
 
 
 class MailMessage(models.Model):
     _inherit = 'mail.message'
 
-    message_body = fields.Html(string="Message Body")
-    stage = fields.Selection([('stage_01', 'Stage 01'), ('stage_02', 'Stage 02')], 'Stage', default='stage_01')
+    message_body = fields.Html()
+    stage = fields.Selection([('stage_01', 'Stage 01'), ('stage_02', 'Stage 02')], default='stage_01')
 
     def create_message(self, data):
         message = ""
         if data:
-            message = "&bull;  %s: %s &rarr; %s" % (data.get('changed_field', ''), data.get('old_value', ''), data.get('new_value', ''))
+            message = "&bull;  %s: %s &rarr; %s" % (
+                data.get('changed_field', ''), data.get('old_value', ''), data.get('new_value', ''))
         return message
 
     def message_format(self, format_reply=True):
