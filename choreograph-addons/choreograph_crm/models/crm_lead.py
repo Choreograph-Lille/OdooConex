@@ -13,8 +13,7 @@ class CrmLead(models.Model):
     client_name = fields.Char(related='partner_id.name', store=True)
 
     def action_new_quotation(self):
-        action = self.env.ref('sale_crm.sale_action_quotations_new', raise_if_not_found=False).read()[0]
-        action['context'] = self._prepare_opportunity_quotation_context()
-        action['context'].update({'search_default_opportunity_id': self.id,
-                                  'default_partner_invoice_id': self.agency_id.id})
+        action = super(CrmLead, self).action_new_quotation()
+        if self.agency_id:
+            action['context'].update({'default_partner_invoice_id': self.agency_id.id})
         return action
