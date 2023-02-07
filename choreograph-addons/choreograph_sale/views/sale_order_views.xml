@@ -98,6 +98,22 @@
                         </group>
                     </page>
                 </notebook>
+
+                <field name="partner_invoice_id" position="before">
+                    <field name="sox"/>
+                </field>
+
+                <field name="validity_date" position="before">
+                    <field name="commitment_date"/>
+                </field>
+
+                <group name="sale_shipping" position="after">
+                    <field name="validity_date"/>
+                </group>
+
+                <group name="sale_shipping" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </group>
             </field>
         </record>
 

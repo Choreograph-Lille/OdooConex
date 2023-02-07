@@ -16,6 +16,7 @@
     ],
     'data': [
         # data
+        'data/sale_data_conservation_data.xml',
         # security
         'security/ir.model.access.csv',
         # wizards
@@ -27,6 +28,7 @@
         'views/operation_condition_subtype_views.xml',
         'views/product_template_views.xml',
         'views/retribution_base_views.xml',
+        'views/sale_data_conservation_views.xml',
         'views/ir_ui_menu_views.xml',
     ],
     'assets': {

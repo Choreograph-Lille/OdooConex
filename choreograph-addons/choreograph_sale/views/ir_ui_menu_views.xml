@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
+  <data>
 
-        <menuitem id="retribution_base_menu"
-                  action="retribution_base_action"
-                  name="Retribution Bases"
-                  sequence="90" parent="sale.menu_sale_config"/>
+    <menuitem id="retribution_base_menu"
+              action="retribution_base_action"
+              name="Retribution Bases"
+              sequence="90" parent="sale.menu_sale_config"/>
 
-        <menuitem id="operation_condition_subtype_menu"
-                  action="operation_condition_subtype_action"
-                  name="Condition/Exclusion Subtype"
-                  sequence="70"
-                  parent="sale.menu_sale_config"/>
+    <menuitem id="sale_data_conservation_menu"
+              action="sale_data_conservation_action"
+              name="Data Conservation"
+              sequence="100" parent="sale.menu_sale_config"/>
 
-    </data>
+    <menuitem id="operation_condition_subtype_menu"
+              action="operation_condition_subtype_action"
+              name="Condition/Exclusion Subtype"
+              sequence="70"
+              parent="sale.menu_sale_config"/>
+
+  </data>
 </odoo>
