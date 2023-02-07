@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from odoo import fields, models, api
 
 from odoo.addons.choreograph_sale.models.operation_condition import TASK_NUMBER
