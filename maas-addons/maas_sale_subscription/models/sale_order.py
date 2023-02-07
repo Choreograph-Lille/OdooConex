@@ -37,7 +37,6 @@ SUBSCRIPTION_STATES = [('to_invoice', 'To Invoice'),
 class SaleSubscription(models.Model):
     _inherit = 'sale.order'
 
-    service_start_date = fields.Date(readonly=True)
     allowance = fields.Selection([('crm', 'CRM'), ('prm', 'PRM')], default='crm')
 
     @api.model
@@ -51,8 +50,8 @@ class SaleSubscription(models.Model):
         super(SaleSubscription, self).action_confirm()
         if self.is_subscription:
             current_product_pricelist = self.pricelist_id or self.partner_id.property_product_pricelist
-            if not self.service_start_date:
-                self.service_start_date = fields.Date.today()
+            if not self.start_date:
+                self.start_date = fields.Date.today()
             product = self.current_package_id
             if self._check_pricelist_item_exists(product):
                 self.order_line = [(0, 0, {'order_id': self.id,

@@ -7,10 +7,7 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     role_ids = fields.One2many('res.partner.role', 'partner_id', 'Roles')
-    country_base = fields.Selection([
-        ('uk', 'UK'),
-        ('fr', 'FR'),
-    ], 'Country Base', default='fr')
+    country_base = fields.Selection([('uk', 'UK'), ('fr', 'FR')], 'Country Base', default='fr')
     category_name = fields.Char('Category Name')
     last_revival_date = fields.Date('Last Revival Date')
     last_transaction_date = fields.Date('Last Transaction Date')
