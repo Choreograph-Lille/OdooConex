@@ -35,9 +35,8 @@ class Partner(models.Model):
 
     def get_active_subscription(self):
         self.ensure_one()
+        order_obj = self.env['sale.order']
         partner = self.get_parent()
-        subscriptions = self.env['sale.order'].search([('partner_id', '=', partner.id), ('is_subscription', '=', True)],
-                                                      order='date_order DESC')
-        if not subscriptions:
-            return False
-        return subscriptions[0]
+        orders = order_obj.search([('partner_id', '=', partner.id), ('is_subscription', '=', True), ('state', 'in', ('sale', 'done')),
+                                   ('stage_id.category', '=', 'progress')], order='date_order DESC')
+        return orders and orders[0] or False

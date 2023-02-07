@@ -19,7 +19,9 @@ class SaleOrderLine(models.Model):
             if rec.product_id.concerned_base:
                 rec.retribution_cost = rec.product_uom_qty * rec.price_unit * rec.product_id.concerned_base.retribution_rate
                 if rec.product_id.concerned_base.is_multi_base:
-                    rec.retribution_cost *= rec.product_id.concerned_base.retribution_rate_multi_base
+                    is_dsp = rec.product_id.default_code and rec.product_id.default_code[:3] == "DSP"
+                    rate = rec.product_id.concerned_base.postal_address if is_dsp else rec.product_id.concerned_base.postal_variable
+                    rec.retribution_cost *= rate
             else:
                 rec.retribution_cost = 0
 

@@ -1,4 +1,6 @@
-from odoo import fields, models, api
+# -*- coding: utf-8 -*-
+
+from odoo import fields, models
 
 
 class TrapAddress(models.Model):

@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class CrmLead(models.Model):
     _inherit = 'crm.lead'
 
-    sox = fields.Boolean('SOX')
     activity_sector = fields.Many2one(related='partner_id.industry_id', store=True)
     category_name = fields.Char(related='partner_id.category_name', store=True)
     agency_id = fields.Many2one('res.partner', 'Agency')
@@ -17,3 +16,9 @@ class CrmLead(models.Model):
         if self.agency_id:
             action['context'].update({'default_partner_invoice_id': self.agency_id.id})
         return action
+
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        self.update({
+            'agency_id': self.partner_id.agency_id
+        })

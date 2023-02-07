@@ -33,7 +33,6 @@ SUBSCRIPTION_STATES = [('to_invoice', 'To Invoice'),
 
 class SaleSubscriptionLine(models.Model):
     _inherit = 'sale.order.line'
-    _order = 'date desc, order_id, sequence, id'
 
     @api.model
     def default_get(self, fields):

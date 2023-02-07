@@ -35,8 +35,11 @@
                                 <field name="retribution_rate" attrs="{'readonly':[('is_multi_base', '=', True)]}"
                                        force_save="1"
                                        widget="percentage"/>
-                                <field name="retribution_rate_multi_base" attrs="{'invisible':[('is_multi_base', '=', False)]}"
+                                <field name="postal_variable" attrs="{'invisible':[('is_multi_base', '=', False)]}"
                                        force_save="1"
+                                       widget="percentage"/>
+                                <field name="postal_address" attrs="{'invisible':[('is_multi_base', '=', False)]}"
+                                       readonly="1"
                                        widget="percentage"/>
                             </group>
                         </group>

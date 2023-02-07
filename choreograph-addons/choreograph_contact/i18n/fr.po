@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-09 17:24+0000\n"
-"PO-Revision-Date: 2023-01-09 17:24+0000\n"
+"POT-Creation-Date: 2023-02-07 16:06+0000\n"
+"PO-Revision-Date: 2023-02-07 16:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -31,6 +31,12 @@ msgid "Add a new role"
 msgstr "Ajouter un nouveau rôle"
 
 #. module: choreograph_contact
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__agency_id
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_users__agency_id
+msgid "Agency"
+msgstr "Agence"
+
+#. module: choreograph_contact
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__base_entry_date
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_users__base_entry_date
 msgid "Base Entry Date"
@@ -42,7 +48,7 @@ msgstr "Date d'entrée en base"
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_users__catalogue_ids
 #: model:ir.ui.menu,name:choreograph_contact.menu_res_partner_catalogue
 msgid "Catalogues"
-msgstr "Catalogues"
+msgstr ""
 
 #. module: choreograph_contact
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__category_name
@@ -98,8 +104,8 @@ msgid "Created on"
 msgstr "Créé le"
 
 #. module: choreograph_contact
-#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__dpo
-#: model:ir.model.fields,field_description:choreograph_contact.field_res_users__dpo
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__is_dpo
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_users__is_dpo
 msgid "DPO"
 msgstr ""
 
@@ -230,7 +236,6 @@ msgstr "Rôle"
 #. module: choreograph_contact
 #: model:ir.actions.act_window,name:choreograph_contact.res_role_action
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__role_ids
-#: model:ir.model.fields,field_description:choreograph_contact.field_res_users__role_ids
 #: model:ir.ui.menu,name:choreograph_contact.menu_res_role
 #: model_terms:ir.ui.view,arch_db:choreograph_contact.res_partner_form_view_inherit
 #: model_terms:ir.ui.view,arch_db:choreograph_contact.res_partner_role_view_tree
