@@ -32,9 +32,9 @@ class SaleOrder(models.Model):
                                      'sale_order_id', 'catalogue_id', 'Catalogues')
     prefulfill_study = fields.Boolean('Pre-fulfill study')
     related_base = fields.Many2one('retribution.base')
-    data_conservation = fields.Char()
+    data_conservation = fields.Many2one('sale.data.conservation')
     receiver = fields.Char()
-    send_with = fields.Char()
+    send_with = fields.Selection([('mft', 'MFT'), ('sftp', 'SFTP'), ('email', 'Email'), ('ftp', 'FTP')])
     operation_type_id = fields.Many2one('project.project', 'Operation Type')
     total_retribution = fields.Float(compute="_compute_total_retribution")
 
@@ -59,6 +59,8 @@ class SaleOrder(models.Model):
 
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
+
+    sox = fields.Boolean('SOX')
 
     @api.depends('order_line')
     def _compute_total_retribution(self):
