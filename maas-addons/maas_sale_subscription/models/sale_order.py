@@ -91,17 +91,17 @@ class SaleSubscription(models.Model):
             'qty_cumulative': line.qty_cumulative
         }
 
-    def _prepare_start_subscription_line_values(self, line):
+    def _prepare_start_subscription_line_values(self, product):
         self.ensure_one()
-        if not line:
+        if not product:
             return {}
         return {
             'order_id': self.id,
-            'product_id': line.product_id.id,
-            'name': line.product_id.name,
+            'product_id': product.id,
+            'name': product.name,
             'product_uom_qty': 1,
-            'product_uom': line.product_id.uom_id.id,
-            'price_unit': line.product_id.list_price
+            'product_uom': product.uom_id.id,
+            'price_unit': product.list_price
         }
 
     @api.model
@@ -130,8 +130,11 @@ class SaleSubscription(models.Model):
                 new_line._compute_amount()
                 subscription_line_obj.create(new_line._convert_to_write(new_line._cache))
                 self.env.cr.commit()
+            else:
+                # TODO: invoice basic package
+                pass
             product = subscription.package_id
-            vals = subscription._prepare_start_subscription_line_values(line)
+            vals = subscription._prepare_start_subscription_line_values(product)
             vals.update({'date': date_now + relativedelta(months=1, day=1)})
             if subscription._check_pricelist_item_exists(product):
                 vals.update({'price_unit': current_product_pricelist._get_product_price(product, 1)})
