@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-02 11:15+0000\n"
-"PO-Revision-Date: 2023-02-02 11:15+0000\n"
+"POT-Creation-Date: 2023-02-07 06:51+0000\n"
+"PO-Revision-Date: 2023-02-07 06:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -81,11 +81,6 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__base_id
-msgid "Base"
-msgstr ""
-
-#. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "BAT"
 msgstr ""
@@ -94,6 +89,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_comment
 msgid "BAT Comment"
 msgstr "Commentaire"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__base_id
+msgid "Base"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_client
@@ -500,6 +500,16 @@ msgid "Portal Access URL"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__postal_variable
+msgid "Postal Variable"
+msgstr "Variable Postale"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__postal_address
+msgid "Postal address (DSP)"
+msgstr "Adresse Postale (DSP)"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__prefulfill_study
 msgid "Pre-fulfill study"
 msgstr "Prefulfill Etude"
@@ -572,11 +582,6 @@ msgstr "N° tâche"
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__retribution_rate
 msgid "Retribution Rate"
 msgstr "Taux de rétribution"
-
-#. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__retribution_rate_multi_base
-msgid "Retribution Rate (2)"
-msgstr "Taux de rétribution (2)"
 
 #. module: choreograph_sale
 #: model:ir.actions.act_window,name:choreograph_sale.retribution_base_action
