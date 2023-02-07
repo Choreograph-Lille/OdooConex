@@ -13,5 +13,6 @@
         <field name="active" eval="True" />
         <field name="exclusive_user" eval="True" />
         <field name="method">button_confirm</field>
+        <field name="domain">[("amount_untaxed", ">", 5000)]</field>
     </record>
 </odoo>
