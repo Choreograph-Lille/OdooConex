@@ -35,6 +35,7 @@
                     </page>
                 </page>
                 <field name="category_id" position="after">
+                    <field name="is_dpo" attrs="{'invisible': [('is_company', '=', True)]}"/>
                     <field name="catalogue_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
                 </field>
                 <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="after">
@@ -49,6 +50,9 @@
                         <field name="rescission_date"/>
                     </group>
                 </group>
+                <field name="vat" position="after">
+                    <field name="agency_id" options="{'no_create': True, 'no_open': True}"/>
+                </field>
             </field>
         </record>
 

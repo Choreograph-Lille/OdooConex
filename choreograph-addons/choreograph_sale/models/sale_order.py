@@ -25,7 +25,7 @@ REQUIRED_TASK_NUMBER = {
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    show_operation_generation_button = fields.Boolean(default=True)
+    show_operation_generation_button = fields.Boolean(default=True, copy=False)
     operation_condition_ids = fields.One2many('operation.condition', 'order_id')
     new_condition_count = fields.Integer(compute='_compute_new_condition_count')
     catalogue_ids = fields.Many2many('res.partner.catalogue', 'sale_order_partner_catalogue_rel',
