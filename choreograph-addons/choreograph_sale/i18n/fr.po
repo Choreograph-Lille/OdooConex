@@ -61,6 +61,11 @@ msgid "Activity Type Icon"
 msgstr ""
 
 #. module: choreograph_sale
+#: model_terms:ir.actions.act_window,help:choreograph_sale.sale_data_conservation_action
+msgid "Add a new data conservation"
+msgstr "Ajouter une nouvelle durée de conservation de données"
+
+#. module: choreograph_sale
 #: model_terms:ir.actions.act_window,help:choreograph_sale.retribution_base_action
 msgid "Add a new retribution base"
 msgstr "Ajouter une nouvelle base concernée"
@@ -190,8 +195,10 @@ msgid "Customer Portal URL"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.actions.act_window,name:choreograph_sale.sale_data_conservation_action
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__data_conservation
-msgid "Data conservation"
+#: model:ir.ui.menu,name:choreograph_sale.sale_data_conservation_menu
+msgid "Data Conservation"
 msgstr "Conservation des données"
 
 #. module: choreograph_sale

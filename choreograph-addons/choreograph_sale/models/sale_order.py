@@ -25,16 +25,16 @@ REQUIRED_TASK_NUMBER = {
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    show_operation_generation_button = fields.Boolean(default=True)
+    show_operation_generation_button = fields.Boolean(default=True, copy=False)
     operation_condition_ids = fields.One2many('operation.condition', 'order_id')
     new_condition_count = fields.Integer(compute='_compute_new_condition_count')
     catalogue_ids = fields.Many2many('res.partner.catalogue', 'sale_order_partner_catalogue_rel',
                                      'sale_order_id', 'catalogue_id', 'Catalogues')
     prefulfill_study = fields.Boolean('Pre-fulfill study')
     related_base = fields.Many2one('retribution.base')
-    data_conservation = fields.Char()
+    data_conservation = fields.Many2one('sale.data.conservation')
     receiver = fields.Char()
-    send_with = fields.Char()
+    send_with = fields.Selection([('mft', 'MFT'), ('sftp', 'SFTP'), ('email', 'Email'), ('ftp', 'FTP')])
     operation_type_id = fields.Many2one('project.project', 'Operation Type')
     total_retribution = fields.Float(compute="_compute_total_retribution")
 
@@ -59,6 +59,8 @@ class SaleOrder(models.Model):
 
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
+
+    sox = fields.Boolean('SOX')
 
     @api.depends('order_line')
     def _compute_total_retribution(self):
