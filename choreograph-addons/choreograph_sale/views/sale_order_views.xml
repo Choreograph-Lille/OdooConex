@@ -39,12 +39,15 @@
                             options="{'color_field': 'color', 'no_create_edit': True}"
                             context="{'filter_by_partner_catalogue': partner_id}"
                     />
-                    <field name="data_conservation" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
+                    <field name="data_conservation_id"
+                           attrs="{'invisible': [('recurrence_id', '!=', False)]}"
+                           options="{'no_open': True}"/>
                     <field name="related_base" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
                 </field>
                 <field name="partner_shipping_id" position="after">
                     <field name="send_with" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
                     <field name="receiver" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
+                    <field name="sox"/>
                 </field>
 
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
@@ -98,10 +101,6 @@
                         </group>
                     </page>
                 </notebook>
-
-                <field name="partner_invoice_id" position="before">
-                    <field name="sox"/>
-                </field>
 
                 <field name="validity_date" position="before">
                     <field name="commitment_date"/>
