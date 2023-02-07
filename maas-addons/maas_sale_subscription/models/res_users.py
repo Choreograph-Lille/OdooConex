@@ -28,4 +28,4 @@ class ResUsers(models.Model):
     def check_active_subscription(self):
         self.ensure_one()
         partner = self.partner_id.get_parent()
-        return bool(partner.get_active_subscription())
+        return partner.get_active_subscription()

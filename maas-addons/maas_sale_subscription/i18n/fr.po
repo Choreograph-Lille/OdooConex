@@ -166,11 +166,6 @@ msgid "Sales Order Line"
 msgstr "Ligne de bons de commande"
 
 #. module: maas_sale_subscription
-#: model:ir.model.fields,field_description:maas_sale_subscription.field_sale_order__service_start_date
-msgid "Service Start Date"
-msgstr "Date mise en service"
-
-#. module: maas_sale_subscription
 #: model:ir.model.fields.selection,name:maas_sale_subscription.selection__sale_order_line__state_subscription__start_subscription
 msgid "Start Subscription / Article"
 msgstr "Début Abonnement / Article"

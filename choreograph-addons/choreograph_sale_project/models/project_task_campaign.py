@@ -1,4 +1,6 @@
-from odoo import fields, models, api
+# -*- coding: utf-8 -*-
+
+from odoo import fields, models
 
 
 class ProjectTaskCampaign(models.Model):
@@ -7,4 +9,3 @@ class ProjectTaskCampaign(models.Model):
     name = fields.Char('Campaign Name')
     id_campaign = fields.Char('Campaign ID')
     task_id = fields.Many2one('project.task')
-

@@ -46,7 +46,8 @@ class SaleOperatinChild(models.Model):
                                  'product_uom_qty': 1,
                                  'product_uom': product.uom_id.id,
                                  'price_unit': current_product_pricelist._get_product_price(product, 1),
-                                 'qty_consumed': self.qty_extracted, 'qty_cumulative': quantity,
+                                 'qty_consumed': self.qty_extracted,
+                                 'qty_cumulative': quantity,
                                  'state_subscription': 'consumption'})
             elif product and not subscription._check_pricelist_item_exists(product):
                 line_obj.create({'product_id': product.id,
