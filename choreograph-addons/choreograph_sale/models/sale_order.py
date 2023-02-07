@@ -32,7 +32,7 @@ class SaleOrder(models.Model):
                                      'sale_order_id', 'catalogue_id', 'Catalogues')
     prefulfill_study = fields.Boolean('Pre-fulfill study')
     related_base = fields.Many2one('retribution.base')
-    data_conservation = fields.Many2one('sale.data.conservation')
+    data_conservation_id = fields.Many2one('sale.data.conservation', 'Data Conservation', index=True, ondelete='restrict')
     receiver = fields.Char()
     send_with = fields.Selection([('mft', 'MFT'), ('sftp', 'SFTP'), ('email', 'Email'), ('ftp', 'FTP')])
     operation_type_id = fields.Many2one('project.project', 'Operation Type')
@@ -61,6 +61,14 @@ class SaleOrder(models.Model):
     witness_comment = fields.Text()
 
     sox = fields.Boolean('SOX')
+
+    @api.model
+    def default_get(self, fields_list):
+        res = super(SaleOrder, self).default_get(fields_list)
+        if not res.get('data_conservation_id') and 'data_conservation_id' not in res:
+            res.update({
+                'data_conservation_id': self.env.ref('choreograph_sale.sale_data_conservation_3_months', raise_if_not_found=False).id})
+        return res
 
     @api.depends('order_line')
     def _compute_total_retribution(self):

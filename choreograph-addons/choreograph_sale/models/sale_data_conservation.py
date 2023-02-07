@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models, _
+from odoo import fields, models
 
 
 class SaleDataConservation(models.Model):
     _name = 'sale.data.conservation'
 
-    name = fields.Char()
+    name = fields.Char(translate=True)
