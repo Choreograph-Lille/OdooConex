@@ -36,7 +36,7 @@ class SaleOrder(models.Model):
     receiver = fields.Char()
     send_with = fields.Selection([('mft', 'MFT'), ('sftp', 'SFTP'), ('email', 'Email'), ('ftp', 'FTP')])
     operation_type_id = fields.Many2one('project.project', 'Operation Type')
-    total_retribution = fields.Float(compute="_compute_total_retribution")
+    total_retribution = fields.Float(compute="_compute_total_retribution", store=True)
 
     po_number = fields.Char('PO Number')
     campaign_name = fields.Char()
