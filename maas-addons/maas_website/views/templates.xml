@@ -101,19 +101,11 @@
                                             src="/maas_website/static/src/images/logo_conexance_hd.png"
                                             width="155" height="37" />
                                     </div>
-                                    <!--    <a href="https://www.mymodelbyconexance.com/login"
-                                    class="access_zone big_access" target="_blank"><h3
-                                    class="client_access"> ACCES CLIENTS</h3></a>
-                  -->
-                                    <!--<t
-                                    t-if="request.env.user.login == 'public'">-->
                                     <a href="web/login" class="access_zone big_access">
                                         <h3 class="client_access">
                                             <span class="bg-btn-connexion">REGISTRATION</span>
                                         </h3>
                                     </a>
-                                    <!--</t>-->
-
                                     <ul class="nav navbar-nav navbar-right" id="top_menu">
                                         <li
                                             t-if="(request and request.is_frontend_multilang and len(languages) &gt; 1) or (website and (editable or translatable))"
@@ -176,7 +168,6 @@
                                 <h3 class="content__subtitle">My <span class="model">Model</span>
                   <div
                                         class="play">
-                                        <!-- data-toggle="modal" data-target="#modalYT"  -->
                                         <button data-toggle="modal" data-target="#modalYT"
                                             class="buttonPlay"
                                             id="playVideo"></button>
