@@ -49,10 +49,10 @@
         'views/res_partner_view.xml',
         'views/sale_operation_view.xml',
         'views/package_upgrade.xml',
-        'views/menu.xml',
+        'views/indication_views.xml',
         'views/product_pricelist_item.xml',
         'views/res_config_settings.xml',
-        'views/indication_views.xml',
+        'views/menu.xml'
         # report
     ],
     'qweb': [],
