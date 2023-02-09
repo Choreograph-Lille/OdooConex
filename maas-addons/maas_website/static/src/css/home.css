@@ -782,3 +782,9 @@ input.error	:-ms-input-placeholder {
       border-radius: 4px;
       cursor: pointer;
 }
+.homepage > header {
+  display: none !important;
+}
+.homepage > footer {
+  display: none !important;
+}
