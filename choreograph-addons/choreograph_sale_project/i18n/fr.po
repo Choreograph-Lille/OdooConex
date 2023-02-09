@@ -51,13 +51,7 @@ msgid "Bat Internal"
 msgstr "Bat interne"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task_campaign__id_campaign
-msgid "Campaign ID"
-msgstr "ID Campagne"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_name
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task_campaign__name
 msgid "Campaign Name"
 msgstr "Nom Campagne"
 

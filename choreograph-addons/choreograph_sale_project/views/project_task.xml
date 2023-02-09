@@ -126,11 +126,20 @@
               <field name="routing_base" attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}"/>
             </group>
             <group></group>
-            <field name="project_task_campaign_ids" nolabel="1" attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}">
-              <tree editable="bottom">
+            <field name="project_task_campaign_ids" nolabel="1" attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}"
+              context="{'default_order_id': sale_order_id}" domain="[('order_id', '=', sale_order_id)]">
+              <tree editable="bottom" widget="one2many">
+                <field name="order_id" invisible="1"/>
                 <field name="id_campaign"/>
                 <field name="name"/>
               </tree>
+              <form>
+                <group>
+                  <field name="order_id" invisible="1"/>
+                  <field name="id_campaign"/>
+                  <field name="name"/>
+                </group>
+              </form>
             </field>
             <group>
               <field name="specific_counting" attrs="{'invisible': [('task_number', 'not in', ['90'])]}"/>

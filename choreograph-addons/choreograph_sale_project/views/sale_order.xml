@@ -6,7 +6,7 @@
     <field name="inherit_id" ref="choreograph_sale.view_order_form_inherit"/>
     <field name="type">form</field>
     <field name="arch" type="xml">
-      <xpath expr="//page[@name='campaign']" position="before">
+      <xpath expr="//page[@name='sms_campaign']" position="before">
         <page name="sale_operation" string="Operation" attrs="{'invisible': [('recurrence_id', '!=', False)]}">
           <group>
             <group>
