@@ -13,14 +13,20 @@
         'choreograph_contact',
     ],
     'data': [
-        # security
-        # 'security
+        # data
+        'data/project_project_stage.xml',
+        'data/project_task_type.xml',
         # views
         'views/project_views.xml',
+        'views/project_update.xml',
+        'views/project_project_stage.xml',
+        'views/project_task_type.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],
-        'web.assets_backend': [],
+        'web.assets_backend': [
+            'choreograph_project/static/src/**/*',
+        ],
         'web.assets_frontend': [],
     },
     'installable': True,
