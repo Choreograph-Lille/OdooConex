@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_project_stage_draft" model="project.project.stage">
+        <field name="sequence">10</field>
+        <field name="name">Draft / waiting</field>
+    </record>
+    <record id="project_project_stage_file_receipt" model="project.project.stage">
+        <field name="sequence">20</field>
+        <field name="name">File receipt / Update</field>
+    </record>
+    <record id="project_project_stage_expectation_precision" model="project.project.stage">
+        <field name="sequence">30</field>
+        <field name="name">Expectation precision</field>
+    </record>
+    <record id="project_project_stage_preparation" model="project.project.stage">
+        <field name="sequence">40</field>
+        <field name="name">Preparation</field>
+    </record>
+    <record id="project_project_stage_in_progress" model="project.project.stage">
+        <field name="sequence">50</field>
+        <field name="name">In progress</field>
+    </record>
+    <record id="project_project_stage_waiting_quantities" model="project.project.stage">
+        <field name="sequence">60</field>
+        <field name="name">Waiting quantities</field>
+    </record>
+    <record id="project_project_stage_valiation_bat_client" model="project.project.stage">
+        <field name="sequence">70</field>
+        <field name="name">Validation BAT client / interne</field>
+    </record>
+</odoo>

@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-31 08:08+0000\n"
-"PO-Revision-Date: 2022-10-31 08:08+0000\n"
+"POT-Creation-Date: 2023-02-10 07:41+0000\n"
+"PO-Revision-Date: 2023-02-10 07:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,14 +16,115 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: choreograph_project
-#: model:ir.model.fields,field_description:choreograph_project.field_project_task__email_coupling
-msgid "Email Coupling"
-msgstr "Couplage mail"
+#: model:project.task.type,legend_blocked:choreograph_project.planning_project_stage_canceled
+#: model:project.task.type,legend_blocked:choreograph_project.planning_project_stage_delivery
+#: model:project.task.type,legend_blocked:choreograph_project.planning_project_stage_draft
+#: model:project.task.type,legend_blocked:choreograph_project.planning_project_stage_in_progress
+#: model:project.task.type,legend_blocked:choreograph_project.planning_project_stage_planified
+#: model:project.task.type,legend_blocked:choreograph_project.planning_project_stage_presta_delivery
+#: model:project.task.type,legend_blocked:choreograph_project.planning_project_stage_template
+#: model:project.task.type,legend_blocked:choreograph_project.planning_project_stage_terminated
+msgid "Blocked"
+msgstr "Bloqué"
 
 #. module: choreograph_project
-#: model:ir.model.fields,field_description:choreograph_project.field_project_task__phone_coupling
-msgid "Phone Coupling"
-msgstr "Couplage téléphone"
+#: model:project.task.type,name:choreograph_project.planning_project_stage_canceled
+msgid "Canceled"
+msgstr "Annulé"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.planning_project_stage_delivery
+msgid "Delivery"
+msgstr "Livraison"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.planning_project_stage_draft
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.project_project_stage_draft
+msgid "Draft / waiting"
+msgstr "Brouillon / en attente"
+
+#. module: choreograph_project
+#: model:project.task.type,legend_normal:choreograph_project.planning_project_stage_canceled
+#: model:project.task.type,legend_normal:choreograph_project.planning_project_stage_delivery
+#: model:project.task.type,legend_normal:choreograph_project.planning_project_stage_draft
+#: model:project.task.type,legend_normal:choreograph_project.planning_project_stage_in_progress
+#: model:project.task.type,legend_normal:choreograph_project.planning_project_stage_planified
+#: model:project.task.type,legend_normal:choreograph_project.planning_project_stage_presta_delivery
+#: model:project.task.type,legend_normal:choreograph_project.planning_project_stage_template
+#: model:project.task.type,legend_normal:choreograph_project.planning_project_stage_terminated
+msgid "En cours"
+msgstr ""
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.project_project_stage_expectation_precision
+msgid "Expectation precision"
+msgstr "Attente précision"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.project_project_stage_file_receipt
+msgid "File receipt / Update"
+msgstr "Réception fichier / MAJ"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.project_project_stage_in_progress
+#: model:project.task.type,name:choreograph_project.planning_project_stage_in_progress
+msgid "In progress"
+msgstr "En cours"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.planning_project_stage_planified
+msgid "Planned"
+msgstr "Planifié"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.project_project_stage_preparation
+msgid "Preparation"
+msgstr "Préparation"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.planning_project_stage_presta_delivery
+msgid "Presta delivery"
+msgstr "Livraison Presta"
+
+#. module: choreograph_project
+#: model:ir.model,name:choreograph_project.model_project_project
+msgid "Project"
+msgstr "Projet"
+
+#. module: choreograph_project
+#: model:ir.model,name:choreograph_project.model_project_update
+msgid "Project Update"
+msgstr "Mise à Jour du Projet"
+
+#. module: choreograph_project
+#: model:project.task.type,legend_done:choreograph_project.planning_project_stage_canceled
+#: model:project.task.type,legend_done:choreograph_project.planning_project_stage_delivery
+#: model:project.task.type,legend_done:choreograph_project.planning_project_stage_draft
+#: model:project.task.type,legend_done:choreograph_project.planning_project_stage_in_progress
+#: model:project.task.type,legend_done:choreograph_project.planning_project_stage_planified
+#: model:project.task.type,legend_done:choreograph_project.planning_project_stage_presta_delivery
+#: model:project.task.type,legend_done:choreograph_project.planning_project_stage_template
+#: model:project.task.type,legend_done:choreograph_project.planning_project_stage_terminated
+msgid "Prêt"
+msgstr ""
+
+#. module: choreograph_project
+#. openerp-web
+#: code:addons/choreograph_project/static/src/xml/project_update.xml:0
+#, python-format
+msgid "Redelivery Prod"
+msgstr "Relivraison prod"
+
+#. module: choreograph_project
+#. openerp-web
+#: code:addons/choreograph_project/static/src/xml/project_update.xml:0
+#, python-format
+msgid "Redelivery studies"
+msgstr "Relivraison études"
 
 #. module: choreograph_project
 #: model:ir.model.fields,field_description:choreograph_project.field_project_task__role_id
@@ -34,3 +135,23 @@ msgstr "Rôle"
 #: model:ir.model,name:choreograph_project.model_project_task
 msgid "Task"
 msgstr "Tâche"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.planning_project_stage_template
+msgid "Template"
+msgstr "Template"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.planning_project_stage_terminated
+msgid "Terminated"
+msgstr "Terminé"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.project_project_stage_valiation_bat_client
+msgid "Validation BAT client / interne"
+msgstr ""
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.project_project_stage_waiting_quantities
+msgid "Waiting quantities"
+msgstr "Attente Quantités"
