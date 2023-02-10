@@ -19,7 +19,6 @@
         # views
         'views/project_views.xml',
         'views/project_update.xml',
-        'views/project_project_stage.xml',
         'views/project_task_type.xml',
     ],
     'assets': {
