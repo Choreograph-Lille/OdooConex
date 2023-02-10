@@ -2,12 +2,12 @@ from odoo import models
 
 state_done = {'kanban_state': 'done'}
 state_normal = {'kanban_state': 'normal'}
-WAITING_TASK_STAGE = 10
+WAITING_TASK_STAGE = '10'
 STUDIES_DELIVERY_TASK = '30'
 PROJECT_NAME_TASK = '20'
 DELIVERY_INFOS_TASK = '80'
 FULLFILLEMENT_TASK = '85'
-IN_PROGRESS_PROJECT_STAGE = 30
+IN_PROGRESS_PROJECT_STAGE = '30'
 DELIVERY_TASK_NUMBER = 30
 
 
@@ -19,7 +19,7 @@ class ProjectProject(models.Model):
         project_name_task_id = self.task_ids.filtered(lambda t: t.task_number == PROJECT_NAME_TASK)
         main_task_id = studies_delivery_task_id or project_name_task_id
         if main_task_id:
-            stage_id = self.type_ids.filtered(lambda t: t.sequence == WAITING_TASK_STAGE)
+            stage_id = self.type_ids.filtered(lambda t: t.stage_number == WAITING_TASK_STAGE)
             if stage_id:
                 stage_id = stage_id[0]
                 state_done.update({'stage_id': stage_id.id})
@@ -38,6 +38,6 @@ class ProjectProject(models.Model):
         self.update_stage(IN_PROGRESS_PROJECT_STAGE)
 
     def update_stage(self, number):
-        project_stage_id = self.env['project.project.stage'].search([('sequence', '=', number)], limit=1)
+        project_stage_id = self.env['project.project.stage'].search([('stage_number', '=', number)], limit=1)
         if project_stage_id:
             self.write({'stage_id': project_stage_id.id})
