@@ -8,3 +8,5 @@ from . import operation_condition
 from . import retribution_base_line
 from . import operation_condition_subtype
 from . import sale_data_conservation
+from . import project_task_campaign
+

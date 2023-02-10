@@ -62,6 +62,34 @@ class SaleOrder(models.Model):
 
     sox = fields.Boolean('SOX')
 
+    # email campaign
+    livedata_po_number = fields.Char('Email PO Livedata Number')
+    email_campaign_name = fields.Char('Email Campaign Name')
+    email_is_info_validated = fields.Boolean('Email Infos Validated')
+    email_reception_date = fields.Date('Email Reception Date')
+    email_reception_location = fields.Char('Email Where to find ?')
+    email_personalization = fields.Boolean('Email Personalization')
+    email_routing_date = fields.Date('Email Routing Date')
+    email_routing_end_date = fields.Date('Email Routing End Date')
+    campaign_type = fields.Selection([('instant', 'Instant Mail'), ('classic', 'Classic'), ('instant_classic', 'IM and Classic')], 'Email Campaign Type')
+    email_desired_finished_volume = fields.Char('Email Desired Finished Volume')
+    email_volume_detail = fields.Text('Email Volume Detail')
+    email_sender = fields.Char('Email Sender')
+    object = fields.Char('Email Object')
+    ab_test = fields.Boolean('Email A/B Test')
+    is_preheader_available = fields.Boolean('Email Preheader Available In HTML')
+    email_comment = fields.Text('Email Comment')
+
+    email_bat_internal = fields.Char('Email BAT Internal')
+    email_bat_client = fields.Char('Email BAT Client')
+    bat_desired_date = fields.Date('Email BAT Desired Date')
+    email_witness_file_name = fields.Char('Email File Name')
+    excluded_provider = fields.Char('Email Excluded Provider')
+    optout_comment = fields.Text('Email Optout Comment')
+    optout_link = fields.Char('Email Optout Link')
+    routing_base = fields.Char('Email Routing Base')
+    project_task_campaign_ids = fields.One2many('project.task.campaign', 'order_id', 'Email Campaign')
+
     @api.model
     def default_get(self, fields_list):
         res = super(SaleOrder, self).default_get(fields_list)
