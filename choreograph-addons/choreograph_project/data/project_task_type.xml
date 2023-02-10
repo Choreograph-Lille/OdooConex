@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_task_type_draft" model="project.task.type">
+        <field name="stage_number">10</field>
+        <field name="name">Draft / waiting</field>
+        <field name="legend_blocked">Blocked</field>
+    </record>
+    <record id="project_task_type_file_receipt" model="project.task.type">
+        <field name="stage_number">20</field>
+        <field name="name">File receipt / Update</field>
+        <field name="legend_blocked">Blocked</field>
+    </record>
+    <record id="project_task_type_expectation_precision" model="project.task.type">
+        <field name="stage_number">30</field>
+        <field name="name">Expectation precision</field>
+        <field name="legend_blocked">Blocked</field>
+    </record>
+    <record id="project_task_type_preparation" model="project.task.type">
+        <field name="stage_number">40</field>
+        <field name="name">Preparation</field>
+        <field name="legend_blocked">Blocked</field>
+    </record>
+    <record id="project_task_type_in_progress" model="project.task.type">
+        <field name="stage_number">50</field>
+        <field name="name">In progress</field>
+        <field name="legend_blocked">Blocked</field>
+    </record>
+    <record id="project_task_type_waiting_quantities" model="project.task.type">
+        <field name="stage_number">60</field>
+        <field name="name">Waiting quantities</field>
+        <field name="legend_blocked">Blocked</field>
+    </record>
+    <record id="project_task_type_valiation_bat_client" model="project.task.type">
+        <field name="stage_number">70</field>
+        <field name="name">Validation BAT client / interne</field>
+        <field name="legend_blocked">Blocked</field>
+    </record>
+</odoo>
