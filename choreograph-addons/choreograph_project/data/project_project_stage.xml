@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="project_project_stage_draft" model="project.project.stage">
-        <field name="sequence">10</field>
-        <field name="name">Draft / waiting</field>
+    <record id="planning_project_stage_draft" model="project.project.stage">
+        <field name="stage_number">10</field>
+        <field name="name">Draft</field>
     </record>
-    <record id="project_project_stage_file_receipt" model="project.project.stage">
-        <field name="sequence">20</field>
-        <field name="name">File receipt / Update</field>
+    <record id="planning_project_stage_planified" model="project.project.stage">
+        <field name="stage_number">20</field>
+        <field name="name">Planned</field>
     </record>
-    <record id="project_project_stage_expectation_precision" model="project.project.stage">
-        <field name="sequence">30</field>
-        <field name="name">Expectation precision</field>
-    </record>
-    <record id="project_project_stage_preparation" model="project.project.stage">
-        <field name="sequence">40</field>
-        <field name="name">Preparation</field>
-    </record>
-    <record id="project_project_stage_in_progress" model="project.project.stage">
-        <field name="sequence">50</field>
+    <record id="planning_project_stage_in_progress" model="project.project.stage">
+        <field name="stage_number">30</field>
         <field name="name">In progress</field>
     </record>
-    <record id="project_project_stage_waiting_quantities" model="project.project.stage">
-        <field name="sequence">60</field>
-        <field name="name">Waiting quantities</field>
+    <record id="planning_project_stage_presta_delivery" model="project.project.stage">
+        <field name="stage_number">40</field>
+        <field name="name">Presta delivery</field>
     </record>
-    <record id="project_project_stage_valiation_bat_client" model="project.project.stage">
-        <field name="sequence">70</field>
-        <field name="name">Validation BAT client / interne</field>
+    <record id="planning_project_stage_delivery" model="project.project.stage">
+        <field name="stage_number">50</field>
+        <field name="name">Delivery</field>
+    </record>
+    <record id="planning_project_stage_terminated" model="project.project.stage">
+        <field name="stage_number">60</field>
+        <field name="name">Terminated</field>
+    </record>
+    <record id="planning_project_stage_canceled" model="project.project.stage">
+        <field name="stage_number">70</field>
+        <field name="name">Canceled</field>
+    </record>
+    <record id="planning_project_stage_template" model="project.project.stage">
+        <field name="stage_number">80</field>
+        <field name="name">Template</field>
     </record>
 </odoo>
