@@ -16,9 +16,9 @@ class SaleOrder(models.Model):
     study_delivery = fields.Boolean()
     presentation = fields.Boolean()
     potential_return_task_id = fields.Many2one(
-        'project.task', 'Potential Return Task', compute='_compute_operation_task')
-    study_delivery_task_id = fields.Many2one('project.task', 'Study Delivery Task', compute='_compute_operation_task')
-    presentation_task_id = fields.Many2one('project.task', 'Presentation Task', compute='_compute_operation_task')
+        'project.task', 'Potential Return Task')
+    study_delivery_task_id = fields.Many2one('project.task', 'Study Delivery Task')
+    presentation_task_id = fields.Many2one('project.task', 'Presentation Task')
 
     show_provider_delivery = fields.Boolean(compute='_compute_show_provider_delivery')
     operation_provider_delivery_ids = fields.One2many(
@@ -29,30 +29,54 @@ class SaleOrder(models.Model):
     segment_ids = fields.One2many('operation.segment', 'order_id', 'Segment')
     repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab')
 
-    def write(self, vals):
-        res = super(SaleOrder, self).write(vals)
-        self._check_operation_values(vals)
-        return res
+    # def write(self, vals):
+    #     res = super(SaleOrder, self).write(vals)
+    #     self._check_operation_values(vals)
+    #     return res
 
-    def _check_operation_values(self, vals):
-        """
-        Unarchive operation tasks when associated boolean is checked
-        """
-        if vals.get("potential_return"):
+    @api.onchange('potential_return')
+    def onchange_potential_return(self):
+        if self.potential_return:
             self._unarchive_task('potential_return')
-        if vals.get("study_delivery"):
-            self._unarchive_task('study_delivery')
-        if vals.get("presentation"):
-            self._unarchive_task('presentation')
+        else:
+            self._archive_task('potential_return')
 
-    def _unarchive_task(self, task):
+    @api.onchange('study_delivery')
+    def onchange_study_delivery(self):
+        if self.study_delivery:
+            self._unarchive_task('study_delivery')
+        else:
+            self._archive_task('study_delivery')
+
+    @api.onchange('presentation')
+    def onchange_presentation(self):
+        if self.presentation:
+            self._unarchive_task('presentation')
+        else:
+            self._archive_task('presentation')
+
+    def _get_operation_task(self, operation_task, active):
         for rec in self:
-            task = self.env['project.task'].search(
-                ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
-                 ('sale_order_id', '=', rec.id), ('active', '=', False),
-                 ('task_number', '=', REQUIRED_TASK_NUMBER[task])])
+            return self.env['project.task'].search(
+                    ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
+                     ('sale_order_id', '=', rec.id), ('active', '=', active),
+                     ('task_number', '=', REQUIRED_TASK_NUMBER[operation_task])])
+
+    def _unarchive_task(self, operation_task):
+        for rec in self:
+            task = rec._get_operation_task(operation_task, False) or rec._get_operation_task(operation_task, True)
             task.write({
                 'active': True,
+            })
+            rec.write({
+                operation_task + '_task_id': task.id
+            })
+
+    def _archive_task(self, operation_task):
+        for rec in self:
+            task = rec._get_operation_task(operation_task, True)
+            task.write({
+                'active': False,
             })
 
     @api.depends('order_line')
