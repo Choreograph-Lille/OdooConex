@@ -63,7 +63,8 @@
                 </xpath>
 
                 <notebook position="inside">
-                    <page name="campaign" string="Campaign" attrs="{'invisible': [('recurrence_id', '!=', False)]}">
+                    <page name="sms_campaign" string="SMS Campaign"
+                          attrs="{'invisible': [('recurrence_id', '!=', False)]}">
                         <group>
                             <group>
                                 <field name="po_number"/>
@@ -99,6 +100,57 @@
                             <field name="witness_file_name"/>
                             <field name="witness_comment"/>
                         </group>
+                    </page>
+                    <page name="email_campaign" string="Email Campaign"
+                          attrs="{'invisible': [('recurrence_id', '!=', False)]}">
+                        <group>
+                            <group>
+                                <field name="livedata_po_number"/>
+                                <field name="email_campaign_name"/>
+                            </group>
+                            <group>
+                                <field name="email_is_info_validated"/>
+                            </group>
+                            <group string="Email Kit Detail">
+                                <field name="email_reception_date"/>
+                                <field name="email_reception_location"/>
+                                <field name="email_personalization"/>
+                                <field name="email_routing_date"/>
+                                <field name="email_routing_end_date"/>
+                                <field name="campaign_type"/>
+                                <field name="email_desired_finished_volume"/>
+                                <field name="email_volume_detail"/>
+                                <field name="email_sender"/>
+                                <field name="object"/>
+                                <field name="ab_test"/>
+                                <field name="is_preheader_available"/>
+                                <field name="email_comment"/>
+                            </group>
+                            <group></group>
+                            <group string="BAT">
+                                <field name="email_bat_internal"/>
+                                <field name="email_bat_client"/>
+                                <field name="bat_desired_date"/>
+                            </group>
+                            <group></group>
+                            <group string="Witnesses">
+                                <field name="email_witness_file_name"/>
+                            </group>
+                            <group></group>
+                            <group string="Optout">
+                                <field name="excluded_provider"/>
+                                <field name="optout_comment"/>
+                                <field name="optout_link"/>
+                                <field name="routing_base"/>
+                            </group>
+                            <group></group>
+                        </group>
+                        <field name="project_task_campaign_ids">
+                            <tree editable="bottom">
+                                <field name="id_campaign"/>
+                                <field name="name"/>
+                            </tree>
+                        </field>
                     </page>
                 </notebook>
 

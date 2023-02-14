@@ -217,6 +217,11 @@ msgid "Campaign"
 msgstr "Campagne"
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "SMS Campaign"
+msgstr "Campagne SMS"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__campaign_name
 msgid "Campaign Name"
 msgstr "Nom campagne"
@@ -318,6 +323,141 @@ msgstr ""
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__send_with__email
 msgid "Email"
 msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__ab_test
+msgid "Email A/B Test"
+msgstr "A/B Test"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_client
+msgid "Email BAT Client"
+msgstr "BAT Client"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_desired_date
+msgid "Email BAT Desired Date"
+msgstr "Date de BAT souhaité"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_internal
+msgid "Email BAT Internal"
+msgstr "BAT interne"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__project_task_campaign_ids
+msgid "Email Campaign"
+msgstr "Campagnes"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Email Campaign"
+msgstr "Campagne Email"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_campaign_name
+msgid "Email Campaign Name"
+msgstr "Nom Campagne"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__campaign_type
+msgid "Email Campaign Type"
+msgstr "Type de campagne"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_comment
+msgid "Email Comment"
+msgstr "Commentaire"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_desired_finished_volume
+msgid "Email Desired Finished Volume"
+msgstr "Volume abouti souhaité"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__excluded_provider
+msgid "Email Excluded Provider"
+msgstr "Provider à exclure"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_witness_file_name
+msgid "Email File Name"
+msgstr "Nom du fichier"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_is_info_validated
+msgid "Email Infos Validated"
+msgstr "Infos validées"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Email Kit Detail"
+msgstr "Détail Kit email"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__object
+msgid "Email Object"
+msgstr "Objet"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__optout_comment
+msgid "Email Optout Comment"
+msgstr "Commentaire"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__optout_link
+msgid "Email Optout Link"
+msgstr "Liens d'optout"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__livedata_po_number
+msgid "Email PO Livedata Number"
+msgstr "N° PO Livedata"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_personalization
+msgid "Email Personalization"
+msgstr "Personnalisation"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__is_preheader_available
+msgid "Email Preheader Available In HTML"
+msgstr "Préheader dispo dans le HTML"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_reception_date
+msgid "Email Reception Date"
+msgstr "Date de réception"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__routing_base
+msgid "Email Routing Base"
+msgstr "Base routage"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_routing_date
+msgid "Email Routing Date"
+msgstr "Date de routage"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_routing_end_date
+msgid "Email Routing End Date"
+msgstr "Fin de routage"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_sender
+msgid "Email Sender"
+msgstr "Expéditeur"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_volume_detail
+msgid "Email Volume Detail"
+msgstr "Détail volume"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_reception_location
+msgid "Email Where to find ?"
+msgstr "Où le trouver ?"
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__operation_type__exclusion

@@ -22,8 +22,8 @@ class ProjectTask(models.Model):
     bat_internal = fields.Char(related='sale_order_id.bat_internal')
     bat_client = fields.Char(related='sale_order_id.bat_client')
     bat_comment = fields.Text('BAT Comment', related='sale_order_id.bat_comment')
-    excluded_provider = fields.Char()
-    optout_comment = fields.Text()
+    excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
+    optout_comment = fields.Text(related='sale_order_id.bat_comment')
     witness_file_name = fields.Char('File Name', related='sale_order_id.witness_file_name')
     witness_comment = fields.Text(related='sale_order_id.witness_comment')
     file_name = fields.Char()
@@ -36,38 +36,38 @@ class ProjectTask(models.Model):
     provider_comment = fields.Text()
     desired_finished_volume = fields.Char(related='sale_order_id.desired_finished_volume')
     start_date = fields.Date()
-    routing_base = fields.Char()
+    routing_base = fields.Char(related='sale_order_id.routing_base')
     specific_counting = fields.Text()
-    send_with = fields.Char()
+    send_with = fields.Selection(related='sale_order_id.send_with')
     deposit_date_1 = fields.Date()
     deposit_date_2 = fields.Date()
     deposit_date_3 = fields.Date()
 
-    is_info_validated = fields.Boolean('Infos Validated')
-    po_livedata_number = fields.Integer('PO Livedata Number')
-    campaign_name = fields.Char()
+    is_info_validated = fields.Boolean('Infos Validated', related='sale_order_id.is_info_validated')
+    po_livedata_number = fields.Char('PO Livedata Number', related='sale_order_id.livedata_po_number')
+    campaign_name = fields.Char(related='sale_order_id.email_campaign_name')
     reception_date = fields.Date(related='sale_order_id.reception_date')
     reception_location = fields.Char('Where to find ?', related='sale_order_id.reception_location')
     personalization = fields.Boolean(related='sale_order_id.personalization')
     routing_date = fields.Date(related='sale_order_id.routing_date')
     routing_end_date = fields.Date(related='sale_order_id.routing_end_date')
-    campaign_type = fields.Char()
-    volume_detail = fields.Text()
+    campaign_type = fields.Selection(related='sale_order_id.campaign_type')
+    volume_detail = fields.Text(related='sale_order_id.email_volume_detail')
     sender = fields.Char(related='sale_order_id.sender')
     quantity_to_deliver = fields.Integer()
     to_validate = fields.Integer()
-    object = fields.Char()
-    ab_test = fields.Boolean('A/B Test')
-    is_preheader_available = fields.Boolean('Preheader available in HTML')
+    object = fields.Char(related='sale_order_id.object')
+    ab_test = fields.Boolean('A/B Test', related='sale_order_id.ab_test')
+    is_preheader_available = fields.Boolean('Preheader available in HTML', related='sale_order_id.is_preheader_available')
     comment = fields.Text(related='sale_order_id.comment')
-    bat_desired_date = fields.Date()
+    bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
     folder_key = fields.Char()
 
     segment_ids = fields.Many2many('operation.segment', compute='compute_segment_ids')
     operation_condition_ids = fields.Many2many('operation.condition', compute='compute_operation_condition_ids')
 
     trap_address_ids = fields.One2many('trap.address', 'task_id')
-    project_task_campaign_ids = fields.One2many('project.task.campaign', 'task_id')
+    project_task_campaign_ids = fields.Many2many('project.task.campaign', compute='compute_project_task_campaign_ids', inverse='_inverse_project_task_campaign_ids')
 
     @api.depends('sale_order_id', 'sale_order_id.segment_ids', 'sale_order_id.repatriate_information')
     def compute_segment_ids(self):
@@ -79,3 +79,10 @@ class ProjectTask(models.Model):
     @api.depends('sale_order_id', 'sale_order_id.operation_condition_ids')
     def compute_operation_condition_ids(self):
         self.operation_condition_ids = [(6, 0, self.env['operation.condition'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
+
+    @api.depends('sale_order_id', 'sale_order_id.project_task_campaign_ids')
+    def compute_project_task_campaign_ids(self):
+        self.project_task_campaign_ids = [(6, 0, self.env['project.task.campaign'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
+
+    def _inverse_project_task_campaign_ids(self):
+        pass
