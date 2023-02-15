@@ -1,4 +1,4 @@
-from odoo import models
+from odoo import api, fields, models
 
 state_done = {'kanban_state': 'done'}
 state_normal = {'kanban_state': 'normal'}
@@ -9,10 +9,17 @@ DELIVERY_INFOS_TASK = '80'
 FULLFILLEMENT_TASK = '85'
 IN_PROGRESS_PROJECT_STAGE = '30'
 DELIVERY_TASK_NUMBER = 30
+PROJECT_OPERATION_TYPE = [
+    ('standard', 'standard'),
+    ('operation', 'operation')
+]
 
 
 class ProjectProject(models.Model):
     _inherit = 'project.project'
+
+    project_operation_type = fields.Selection(
+        PROJECT_OPERATION_TYPE, default='standard', required=True, compute='_compute_project_operation_type', store=True, readonly=False)
 
     def js_redelivery_studies(self):
         studies_delivery_task_id = self.task_ids.filtered(lambda t: t.task_number == STUDIES_DELIVERY_TASK)
@@ -41,3 +48,8 @@ class ProjectProject(models.Model):
         project_stage_id = self.env['project.project.stage'].search([('stage_number', '=', number)], limit=1)
         if project_stage_id:
             self.write({'stage_id': project_stage_id.id})
+
+    @api.depends('sale_order_id')
+    def _compute_project_operation_type(self):
+        for rec in self:
+            rec.project_operation_type = 'operation' if rec.sale_order_id else 'standard'
