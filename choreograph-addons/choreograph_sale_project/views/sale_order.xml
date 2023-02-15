@@ -12,16 +12,13 @@
                         <group>
                             <field name="potential_return"/>
                             <field
-                                    name="potential_return_task_id"
-                                    attrs="{'invisible':[('potential_return', '=', False)]}"
+                                    name="potential_return_task_id" attrs="{'invisible':[('potential_return', '=', False)]}" readonly="1" force_save="True"
                             />
                             <field name="study_delivery"/>
-                            <field
-                                    name="study_delivery_task_id"
-                                    attrs="{'invisible':[('study_delivery', '=', False)]}"
+                            <field name="study_delivery_task_id" readonly="1" attrs="{'invisible':[('study_delivery', '=', False)]}"
                             />
                             <field name="presentation"/>
-                            <field name="presentation_task_id" attrs="{'invisible':[('presentation', '=', False)]}"/>
+                            <field name="presentation_task_id" readonly="1" force_save="True" attrs="{'invisible':[('presentation', '=', False)]}"/>
                         </group>
                         <group>
                             <field name="show_provider_delivery" invisible="1"/>
@@ -71,6 +68,30 @@
                         </div>
                     </group>
                 </page>
+            </xpath>
+            <xpath expr="//field[@name='project_count']" position="after">
+                <field name="can_display_redelivery" invisible="1" />
+                <field name="operation_type_id" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@id='action_generate_operation']" position="after">
+                <button
+                    name="action_redelivery"
+                    id="redelivery_prod_studies"
+                    context="{'redelivery_type': 'studies'}"
+                    string="Redelivery studies"
+                    attrs="{'invisible': [('can_display_redelivery','=',False)]}"
+                    class="btn-secondary"
+                    type="object"
+                />
+                <button
+                    name="action_redelivery"
+                    id="redelivery_prod_project"
+                    context="{'redelivery_type': 'prod'}"
+                    attrs="{'invisible': [('can_display_redelivery','=',False)]}"
+                    string="Redelivery Prod"
+                    class="btn-secondary"
+                    type="object"
+                />
             </xpath>
         </field>
     </record>

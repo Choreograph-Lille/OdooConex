@@ -6,14 +6,109 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-30 07:58+0000\n"
-"PO-Revision-Date: 2023-01-30 07:58+0000\n"
+"POT-Creation-Date: 2023-02-15 08:30+0000\n"
+"PO-Revision-Date: 2023-02-15 08:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__10
+msgid "10"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__15
+msgid "15"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__20
+msgid "20"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__25
+msgid "25"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__30
+msgid "30"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__35
+msgid "35"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__40
+msgid "40"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__45
+msgid "45"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__50
+msgid "50"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__55
+msgid "55"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__60
+msgid "60"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__65
+msgid "65"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__70
+msgid "70"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__75
+msgid "75"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__80
+msgid "80"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__85
+msgid "85"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__90
+msgid "90"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__95
+msgid "95"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__ab_test
+msgid "A/B Test"
+msgstr ""
 
 #. module: choreograph_sale_project
 #: model_terms:ir.actions.act_window,help:choreograph_sale_project.choreograph_sale_project_task_type_action
@@ -27,6 +122,7 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__optout_comment
 msgid "BAT Comment"
 msgstr "Commentaire"
 
@@ -49,6 +145,10 @@ msgstr "Date de BAT souhaité"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_internal
 msgid "Bat Internal"
 msgstr "Bat interne"
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__can_display_redelivery
+msgid "Can Display Redelivery"
+msgstr "Peut afficher la relivraison"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_name
@@ -72,18 +172,30 @@ msgstr "Civilités"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__comment
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__comment
 msgid "Comment"
 msgstr "Commentaires"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_date
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__create_date
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__create_date
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__delivery_date
+msgid "Date"
 msgstr ""
 
 #. module: choreograph_sale_project
@@ -115,6 +227,7 @@ msgstr "Date de dépôt 3"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__depth
 msgid "Depth"
 msgstr "Profondeur"
+
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__desired_finished_volume
 msgid "Desired Finished Volume"
@@ -124,8 +237,29 @@ msgstr "Volume abouti souhaité"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__display_name
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__display_name
 msgid "Display Name"
 msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_desired_date
+msgid "Email BAT Desired Date"
+msgstr "Date de BAT souhaité"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_name
+msgid "Email Campaign Name"
+msgstr "Nom Campagne"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_type
+msgid "Email Campaign Type"
+msgstr "Type de campagne"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__excluded_provider
+msgid "Email Excluded Provider"
+msgstr "Provider à exclure"
 
 #. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_task_form2_inherit2
@@ -344,6 +478,16 @@ msgstr "Classement"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__reception_date
 msgid "Reception Date"
 msgstr "Date de réception"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "Redelivery Prod"
+msgstr "Relivraison prod"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "Redelivery studies"
+msgstr "Relivraison études"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__related_base

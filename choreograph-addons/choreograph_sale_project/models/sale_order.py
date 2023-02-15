@@ -2,8 +2,8 @@
 
 from datetime import date
 
-from odoo import api, fields, models
-
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
 PROVIDER_DELIVERY_NUMBER = '75'
@@ -16,9 +16,9 @@ class SaleOrder(models.Model):
     study_delivery = fields.Boolean()
     presentation = fields.Boolean()
     potential_return_task_id = fields.Many2one(
-        'project.task', 'Potential Return Task', compute='_compute_operation_task')
-    study_delivery_task_id = fields.Many2one('project.task', 'Study Delivery Task', compute='_compute_operation_task')
-    presentation_task_id = fields.Many2one('project.task', 'Presentation Task', compute='_compute_operation_task')
+        'project.task', 'Potential Return Task')
+    study_delivery_task_id = fields.Many2one('project.task', 'Study Delivery Task')
+    presentation_task_id = fields.Many2one('project.task', 'Presentation Task')
 
     show_provider_delivery = fields.Boolean(compute='_compute_show_provider_delivery')
     operation_provider_delivery_ids = fields.One2many(
@@ -28,31 +28,72 @@ class SaleOrder(models.Model):
     to_validate = fields.Boolean()
     segment_ids = fields.One2many('operation.segment', 'order_id', 'Segment')
     repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab')
+    operation_type_id = fields.Many2one('project.project', compute='_compute_operation_type_id')
+    can_display_redelivery = fields.Boolean(compute='_compute_can_display_redelivery')
 
-    def write(self, vals):
-        res = super(SaleOrder, self).write(vals)
-        self._check_operation_values(vals)
-        return res
-
-    def _check_operation_values(self, vals):
-        """
-        Unarchive operation tasks when associated boolean is checked
-        """
-        if vals.get("potential_return"):
-            self._unarchive_task('potential_return')
-        if vals.get("study_delivery"):
-            self._unarchive_task('study_delivery')
-        if vals.get("presentation"):
-            self._unarchive_task('presentation')
-
-    def _unarchive_task(self, task):
+    @api.depends('project_ids')
+    def _compute_operation_type_id(self):
         for rec in self:
-            task = self.env['project.task'].search(
-                ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
-                 ('sale_order_id', '=', rec.id), ('active', '=', False),
-                 ('task_number', '=', REQUIRED_TASK_NUMBER[task])])
+            rec.operation_type_id = rec.project_ids[0] if rec.project_ids else False
+
+    @api.depends('operation_type_id.stage_id')
+    def _compute_can_display_redelivery(self):
+        STAGE_PROJECT = [
+            self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
+            self.env.ref('choreograph_project.planning_project_stage_delivery').id,
+            self.env.ref('choreograph_project.planning_project_stage_terminated').id
+        ]
+        for rec in self:
+            rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_PROJECT if rec.operation_type_id else False
+
+    # def write(self, vals):
+    #     res = super(SaleOrder, self).write(vals)
+    #     self._check_operation_values(vals)
+    #     return res
+
+    @api.onchange('potential_return')
+    def onchange_potential_return(self):
+        if self.potential_return:
+            self._unarchive_task('potential_return')
+        else:
+            self._archive_task('potential_return')
+
+    @api.onchange('study_delivery')
+    def onchange_study_delivery(self):
+        if self.study_delivery:
+            self._unarchive_task('study_delivery')
+        else:
+            self._archive_task('study_delivery')
+
+    @api.onchange('presentation')
+    def onchange_presentation(self):
+        if self.presentation:
+            self._unarchive_task('presentation')
+        else:
+            self._archive_task('presentation')
+
+    def _get_operation_task(self, operation_task, active):
+        for rec in self:
+            return self.env['project.task'].search(
+                    ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
+                     ('sale_order_id', '=', rec.id), ('active', '=', active),
+                     ('task_number', '=', REQUIRED_TASK_NUMBER[operation_task])])
+
+    def _unarchive_task(self, operation_task):
+        for rec in self:
+            task = rec._get_operation_task(operation_task, False) or rec._get_operation_task(operation_task, True)
             task.write({
                 'active': True,
+            })
+            rec.write({
+                operation_task + '_task_id': task.id
+            })
+
+    def _archive_task(self, operation_task):
+        for rec in self:
+            task = rec._get_operation_task(operation_task, True)
+            task.write({
+                'active': False,
             })
 
     @api.depends('order_line')
@@ -87,3 +128,13 @@ class SaleOrder(models.Model):
                     'task_id': self.tasks_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER).id
                 })]
             })
+
+    def action_redelivery(self):
+        if len(self.project_ids) > 1:
+            raise UserError(_("the SO contains several projects"))
+        project_id = self.project_ids[0]
+        redelivery_type = self.env.context.get('redelivery_type')
+        if redelivery_type == 'studies':
+            project_id.js_redelivery_studies()
+        else:
+            project_id.js_redelivery_prod()
