@@ -69,6 +69,30 @@
                     </group>
                 </page>
             </xpath>
+            <xpath expr="//field[@name='project_count']" position="after">
+                <field name="can_display_redelivery" invisible="1" />
+                <field name="operation_type_id" invisible="1" />
+            </xpath>
+            <xpath expr="//button[@id='action_generate_operation']" position="after">
+                <button
+                    name="action_redelivery"
+                    id="redelivery_prod_studies"
+                    context="{'redelivery_type': 'studies'}"
+                    string="Redelivery studies"
+                    attrs="{'invisible': [('can_display_redelivery','=',False)]}"
+                    class="btn-secondary"
+                    type="object"
+                />
+                <button
+                    name="action_redelivery"
+                    id="redelivery_prod_project"
+                    context="{'redelivery_type': 'prod'}"
+                    attrs="{'invisible': [('can_display_redelivery','=',False)]}"
+                    string="Redelivery Prod"
+                    class="btn-secondary"
+                    type="object"
+                />
+            </xpath>
         </field>
     </record>
 

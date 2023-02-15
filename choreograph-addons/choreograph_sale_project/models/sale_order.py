@@ -2,8 +2,8 @@
 
 from datetime import date
 
-from odoo import api, fields, models
-
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
 PROVIDER_DELIVERY_NUMBER = '75'
@@ -28,6 +28,23 @@ class SaleOrder(models.Model):
     to_validate = fields.Boolean()
     segment_ids = fields.One2many('operation.segment', 'order_id', 'Segment')
     repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab')
+    operation_type_id = fields.Many2one('project.project', compute='_compute_operation_type_id')
+    can_display_redelivery = fields.Boolean(compute='_compute_can_display_redelivery')
+
+    @api.depends('project_ids')
+    def _compute_operation_type_id(self):
+        for rec in self:
+            rec.operation_type_id = rec.project_ids[0] if rec.project_ids else False
+
+    @api.depends('operation_type_id.stage_id')
+    def _compute_can_display_redelivery(self):
+        STAGE_PROJECT = [
+            self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
+            self.env.ref('choreograph_project.planning_project_stage_delivery').id,
+            self.env.ref('choreograph_project.planning_project_stage_terminated').id
+        ]
+        for rec in self:
+            rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_PROJECT if rec.operation_type_id else False
 
     # def write(self, vals):
     #     res = super(SaleOrder, self).write(vals)
@@ -111,3 +128,13 @@ class SaleOrder(models.Model):
                     'task_id': self.tasks_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER).id
                 })]
             })
+
+    def action_redelivery(self):
+        if len(self.project_ids) > 1:
+            raise UserError(_("the SO contains several projects"))
+        project_id = self.project_ids[0]
+        redelivery_type = self.env.context.get('redelivery_type')
+        if redelivery_type == 'studies':
+            project_id.js_redelivery_studies()
+        else:
+            project_id.js_redelivery_prod()
