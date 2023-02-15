@@ -3,6 +3,8 @@
 from odoo import fields, models, api
 
 from odoo.addons.choreograph_sale.models.operation_condition import TASK_NUMBER
+from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
+from odoo.addons.choreograph_sale_project.models.sale_order import PROVIDER_DELIVERY_NUMBER
 
 
 class ProjectTask(models.Model):
@@ -68,6 +70,8 @@ class ProjectTask(models.Model):
 
     trap_address_ids = fields.One2many('trap.address', 'task_id')
     project_task_campaign_ids = fields.Many2many('project.task.campaign', compute='compute_project_task_campaign_ids', inverse='_inverse_project_task_campaign_ids')
+    operation_provider_delivery_ids = fields.One2many(
+        'operation.provider.delivery', 'task_id', 'Provider Delivery Tasks')
 
     @api.depends('sale_order_id', 'sale_order_id.segment_ids', 'sale_order_id.repatriate_information')
     def compute_segment_ids(self):
@@ -86,3 +90,12 @@ class ProjectTask(models.Model):
 
     def _inverse_project_task_campaign_ids(self):
         pass
+
+    def name_get(self):
+        res = []
+        for rec in self:
+            name = rec.name
+            if rec.date_deadline and rec.task_number in list(REQUIRED_TASK_NUMBER.values()):
+                name += ' %s' % rec.date_deadline.strftime("%d/%m/%Y")
+            res.append((rec.id, name))
+        return res
