@@ -10,17 +10,17 @@ DELIVERY_INFOS_TASK = '80'
 FULLFILLEMENT_TASK = '85'
 IN_PROGRESS_PROJECT_STAGE = '30'
 DELIVERY_TASK_NUMBER = 30
-PROJECT_OPERATION_TYPE = [
+TYPE_OF_PROJECT = [
     ('standard', 'standard'),
     ('operation', 'operation')
 ]
 
 
-def filter_by_project_operation_type(func):
+def filter_by_type_of_project(func):
     def wrapper(self, stages, domain, order):
-        project_operation_type = self._context.get('default_project_operation_type', 'standard')
+        type_of_project = self._context.get('default_type_of_project', 'standard')
         result = func(self, stages, domain, order)
-        return result.filtered(lambda item: item.project_operation_type == project_operation_type)
+        return result.filtered(lambda item: item.type_of_project == type_of_project)
     return wrapper
 
 
@@ -28,12 +28,12 @@ class ProjectProject(models.Model):
     _inherit = 'project.project'
 
     @api.model
-    @filter_by_project_operation_type
+    @filter_by_type_of_project
     def _read_group_stage_ids(self, stages, domain, order):
         return super()._read_group_stage_ids(stages, domain, order)
 
-    project_operation_type = fields.Selection(
-        PROJECT_OPERATION_TYPE, default='standard', required=True, compute='_compute_project_operation_type', store=True, readonly=False)
+    type_of_project = fields.Selection(
+        TYPE_OF_PROJECT, default='standard', required=True, compute='_compute_type_of_project', store=True, readonly=False)
 
     def get_waiting_task_stage(self):
         todo_stage_id = self.type_ids.filtered(lambda t: t.stage_number == TODO_TASK_STAGE)
@@ -73,6 +73,15 @@ class ProjectProject(models.Model):
             self.write({'stage_id': project_stage_id.id})
 
     @api.depends('sale_order_id')
-    def _compute_project_operation_type(self):
+    def _compute_type_of_project(self):
         for rec in self:
-            rec.project_operation_type = 'operation' if rec.sale_order_id else 'standard'
+            rec.type_of_project = 'operation' if rec.sale_order_id else 'standard'
+
+    @api.model
+    def create(self, values):
+        if values.get('is_operation_generation'):
+            values.update({
+                'type_of_project': 'operation',
+                'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft').id,
+            })
+        return super().create(values)

@@ -6,10 +6,10 @@
         <field name="inherit_id" ref="project.edit_project" />
         <field name="arch" type="xml">
             <field name="privacy_visibility" position="after">
-                <field name="project_operation_type" />
+                <field name="type_of_project" />
             </field>
             <xpath expr="//header/field[@name='stage_id']" position="attributes">
-                <attribute name="domain">[('project_operation_type','=',project_operation_type)]</attribute>
+                <attribute name="domain">[('type_of_project','=',type_of_project)]</attribute>
             </xpath>
         </field>
     </record>
