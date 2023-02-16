@@ -19,7 +19,8 @@
         # report
         'report/project_report.xml',
         # views
-        'views/project_views.xml',
+        'views/project_task_views.xml',
+        'views/project_project.xml',
         'views/project_update.xml',
         'views/project_task_type.xml',
         'views/ir_actions_act_windows.xml',

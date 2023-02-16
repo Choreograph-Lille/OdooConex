@@ -15,20 +15,22 @@ PROJECT_OPERATION_TYPE = [
 ]
 
 
+def filter_by_project_operation_type(func):
+    def wrapper(self, stages, domain, order):
+        project_operation_type = self._context.get('default_project_operation_type', 'standard')
+        result = func(self, stages, domain, order)
+        return result.filtered(lambda item: item.project_operation_type == project_operation_type)
+    return wrapper
+
+
 class ProjectProject(models.Model):
     _inherit = 'project.project'
 
-    def _default_stage_id(self):
-        project_operation_type = self._context.get('default_project_operation_type', 'standard')
-        return self.env['project.project.stage'].search([('project_operation_type', '=', project_operation_type)], limit=1)
-
     @api.model
+    @filter_by_project_operation_type
     def _read_group_stage_ids(self, stages, domain, order):
-        project_operation_type = self._context.get('default_project_operation_type', 'standard')
-        return self.env['project.project.stage'].search([('project_operation_type', '=', project_operation_type)], order=order)
+        return super()._read_group_stage_ids(stages, domain, order)
 
-    stage_id = fields.Many2one('project.project.stage', string='Stage', ondelete='restrict', groups="project.group_project_stages",
-                               tracking=True, index=True, copy=False, default=_default_stage_id, group_expand='_read_group_stage_ids')
     project_operation_type = fields.Selection(
         PROJECT_OPERATION_TYPE, default='standard', required=True, compute='_compute_project_operation_type', store=True, readonly=False)
 
