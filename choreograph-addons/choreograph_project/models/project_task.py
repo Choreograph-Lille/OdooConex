@@ -1,4 +1,4 @@
-from .project_project import PROJECT_OPERATION_TYPE
+from .project_project import PROJECT_OPERATION_TYPE, filter_by_project_operation_type
 from odoo import api, fields, models
 
 
@@ -20,3 +20,13 @@ class ProjectTask(models.Model):
     def _compute_project_operation_type(self):
         for rec in self:
             rec.project_operation_type = rec.project_id.project_operation_type if rec.project_id else 'standard'
+
+    @api.model
+    @filter_by_project_operation_type
+    def _read_group_stage_ids(self, stages, domain, order):
+        return super()._read_group_stage_ids(stages, domain, order)
+
+    @api.model
+    @filter_by_project_operation_type
+    def _read_group_personal_stage_type_ids(self, stages, domain, order):
+        return super()._read_group_personal_stage_type_ids(stages, domain, order)
