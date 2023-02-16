@@ -30,7 +30,7 @@ class ProjectProject(models.Model):
     @filter_by_project_operation_type
     def _read_group_stage_ids(self, stages, domain, order):
         return super()._read_group_stage_ids(stages, domain, order)
-
+        
     project_operation_type = fields.Selection(
         PROJECT_OPERATION_TYPE, default='standard', required=True, compute='_compute_project_operation_type', store=True, readonly=False)
 

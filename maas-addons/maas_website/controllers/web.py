@@ -13,6 +13,8 @@ class Home(Home):
 
     @http.route()
     def index(self, *args, **kw):
+        # if request.env.user and request.env.user.has_group('base.group_user'):
+        #     return request.redirect('/home/bo')
         user = request.env['res.users'].sudo().browse(request.session.uid)
         if user.share:
             if user.check_active_subscription():
