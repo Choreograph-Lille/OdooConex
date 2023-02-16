@@ -2,16 +2,16 @@
 <odoo>
     <record id="project.open_view_project_all_group_stage" model="ir.actions.act_window">
         <field name="context">{'search_default_groupby_stage': 1,
-            'default_type_of_project':'standard'}</field>
-        <field name="domain">[('type_of_project','=','standard')]</field>
+            'default_project_operation_type':'standard'}</field>
+        <field name="domain">[('project_operation_type','=','standard')]</field>
     </record>
 
     <record id="open_view_operation_all_group_stage" model="ir.actions.act_window">
         <field name="name">Operation</field>
         <field name="res_model">project.project</field>
         <field name="context">{'search_default_groupby_stage': 1,
-            'default_type_of_project':'operation'}</field>
-        <field name="domain">[('type_of_project','=','operation')]</field>
+            'default_project_operation_type':'operation'}</field>
+        <field name="domain">[('project_operation_type','=','operation')]</field>
         <field name="view_mode">kanban,tree,form,calendar,activity</field>
         <field name="view_id" ref="project.view_project_kanban" />
         <field name="search_view_id" ref="project.view_project_project_filter" />
@@ -30,17 +30,17 @@
         <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
         <field name="context">{'search_default_my_tasks': 1, 'search_default_open_tasks': 1,
             'all_task': 0, 'default_user_ids': [(4,
-            uid)],'default_type_of_project':'standard'}</field>
-        <field name="domain">[('type_of_project','=','standard')]</field>
+            uid)],'default_project_operation_type':'standard'}</field>
+        <field name="domain">[('project_operation_type','=','standard')]</field>
     </record>
     <record id="action_view_all_task" model="ir.actions.act_window">
         <field name="name">My Tasks</field>
         <field name="res_model">project.task</field>
         <field name="view_mode">kanban,tree,form,calendar,pivot,graph,activity</field>
-        <field name="domain">[('type_of_project','=','operation')]</field>
+        <field name="domain">[('project_operation_type','=','operation')]</field>
         <field name="context">{'search_default_my_tasks': 1, 'search_default_open_tasks': 1,
             'all_task': 0, 'default_user_ids': [(4,
-            uid),],'default_type_of_project':'operation'}</field>
+            uid),],'default_project_operation_type':'operation'}</field>
         <field name="search_view_id" ref="project.view_task_search_form_extended" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -51,14 +51,14 @@
         </field>
     </record>
     <record id="project.project_project_stage_configure" model="ir.actions.act_window">
-        <field name="domain">[('type_of_project','=','standard')]</field>
-        <field name="context">{'default_type_of_project':'standard'}</field>
+        <field name="domain">[('project_operation_type','=','standard')]</field>
+        <field name="context">{'default_project_operation_type':'standard'}</field>
     </record>
     <record id="project_project_stage_configure" model="ir.actions.act_window">
         <field name="name">Project Stages</field>
         <field name="res_model">project.project.stage</field>
-        <field name="domain">[('type_of_project','=','operation')]</field>
-        <field name="context">{'default_type_of_project':'operation'}</field>
+        <field name="domain">[('project_operation_type','=','operation')]</field>
+        <field name="context">{'default_project_operation_type':'operation'}</field>
         <field name="view_mode">tree,kanban,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -70,14 +70,14 @@
         </field>
     </record>
     <record id="project.open_task_type_form" model="ir.actions.act_window">
-        <field name="domain">[('user_id', '=', False),('type_of_project','=','standard')]</field>
+        <field name="domain">[('user_id', '=', False),('project_operation_type','=','standard')]</field>
     </record>
     <record id="open_task_type_form" model="ir.actions.act_window">
         <field name="name">Task Stages</field>
         <field name="res_model">project.task.type</field>
         <field name="view_mode">tree,kanban,form</field>
         <field name="view_id" ref="project.task_type_tree_inherited" />
-        <field name="domain">[('user_id', '=', False),('type_of_project','=','operation')]</field>
+        <field name="domain">[('user_id', '=', False),('project_operation_type','=','operation')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 No stages found. Let's create one!
@@ -88,16 +88,16 @@
         </field>
     </record>
     <record id="project.open_view_project_all_config_group_stage" model="ir.actions.act_window">
-        <field name="domain">[('type_of_project','=','standard')]</field>
-        <field name="context">{'default_type_of_project':'standard'}</field>
+        <field name="domain">[('project_operation_type','=','standard')]</field>
+        <field name="context">{'default_project_operation_type':'standard'}</field>
     </record>
     <record id="open_view_project_all_config_group_stage" model="ir.actions.act_window">
         <field name="name">Projects</field>
         <field name="res_model">project.project</field>
-        <field name="domain">[('type_of_project','=','operation')]</field>
+        <field name="domain">[('project_operation_type','=','operation')]</field>
         <field name="view_mode">tree,kanban,form,calendar,activity</field>
         <field name="search_view_id" ref="project.view_project_project_filter" />
-        <field name="context">{'default_type_of_project':'operation'}</field>
+        <field name="context">{'default_project_operation_type':'operation'}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 No projects found. Let's create one!

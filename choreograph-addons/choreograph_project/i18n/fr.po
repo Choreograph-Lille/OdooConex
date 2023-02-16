@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20230208\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-16 11:18+0000\n"
-"PO-Revision-Date: 2023-02-16 11:18+0000\n"
+"POT-Creation-Date: 2023-02-10 10:06+0000\n"
+"PO-Revision-Date: 2023-02-10 10:06+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -197,15 +197,15 @@ msgstr "Aucune tâche trouvée. Créons-en une !"
 #: model:ir.ui.menu,name:choreograph_project.menu_operation_root
 #: model:ir.ui.menu,name:choreograph_project.operation
 msgid "Operation"
-msgstr "Opérations"
+msgstr "Opération"
 
 #. module: choreograph_project
 #: model_terms:ir.actions.act_window,help:choreograph_project.open_view_operation_all_group_stage
 msgid ""
 "Operation contain tasks on the same topic, and each has its own dashboard."
 msgstr ""
-"Les opérations contiennent des tâches sur le même sujet, et chacun d'eux a "
-"son propre tableau de bord."
+"Les opérations contiennent des tâches sur le même sujet, et chacun d'eux a son "
+"propre tableau de bord."
 
 #. module: choreograph_project
 #: model_terms:ir.actions.act_window,help:choreograph_project.action_view_all_task
@@ -238,6 +238,15 @@ msgid "Project"
 msgstr "Projet"
 
 #. module: choreograph_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_project__project_operation_type
+#: model:ir.model.fields,field_description:choreograph_project.field_project_project_stage__project_operation_type
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task__project_operation_type
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task_type__project_operation_type
+#: model:ir.model.fields,field_description:choreograph_project.field_report_project_task_user__project_operation_type
+msgid "Project Operation Type"
+msgstr "Type d'opération de projet"
+
+#. module: choreograph_project
 #: model:ir.model,name:choreograph_project.model_project_project_stage
 msgid "Project Stage"
 msgstr "Étape du projet"
@@ -266,9 +275,7 @@ msgstr "Projets"
 #: model_terms:ir.actions.act_window,help:choreograph_project.open_view_project_all_config_group_stage
 msgid ""
 "Projects contain tasks on the same topic, and each has its own dashboard."
-msgstr ""
-"Les projets contiennent des tâches sur le même sujet, et chacun a son propre"
-" tableau de bord."
+msgstr "Les projets contiennent des tâches sur le même sujet, et chacun a son propre tableau de bord."
 
 #. module: choreograph_project
 #: model:project.task.type,legend_done:choreograph_project.project_task_type_draft
@@ -343,15 +350,6 @@ msgid "Terminated"
 msgstr "Terminé"
 
 #. module: choreograph_project
-#: model:ir.model.fields,field_description:choreograph_project.field_project_project__type_of_project
-#: model:ir.model.fields,field_description:choreograph_project.field_project_project_stage__type_of_project
-#: model:ir.model.fields,field_description:choreograph_project.field_project_task__type_of_project
-#: model:ir.model.fields,field_description:choreograph_project.field_project_task_type__type_of_project
-#: model:ir.model.fields,field_description:choreograph_project.field_report_project_task_user__type_of_project
-msgid "Type Of Project"
-msgstr "Type de projet"
-
-#. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_valiation_bat_client
 msgid "Validation BAT client / interne"
 msgstr ""
@@ -362,19 +360,19 @@ msgid "Waiting quantities"
 msgstr "Attente Quantités"
 
 #. module: choreograph_project
-#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project__type_of_project__operation
-#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__type_of_project__operation
-#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__type_of_project__operation
-#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__type_of_project__operation
-#: model:ir.model.fields.selection,name:choreograph_project.selection__report_project_task_user__type_of_project__operation
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project__project_operation_type__operation
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__project_operation_type__operation
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__project_operation_type__operation
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__project_operation_type__operation
+#: model:ir.model.fields.selection,name:choreograph_project.selection__report_project_task_user__project_operation_type__operation
 msgid "operation"
-msgstr "Opérations"
+msgstr "Opération"
 
 #. module: choreograph_project
-#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project__type_of_project__standard
-#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__type_of_project__standard
-#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__type_of_project__standard
-#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__type_of_project__standard
-#: model:ir.model.fields.selection,name:choreograph_project.selection__report_project_task_user__type_of_project__standard
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project__project_operation_type__standard
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__project_operation_type__standard
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__project_operation_type__standard
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__project_operation_type__standard
+#: model:ir.model.fields.selection,name:choreograph_project.selection__report_project_task_user__project_operation_type__standard
 msgid "standard"
 msgstr "Standard"
