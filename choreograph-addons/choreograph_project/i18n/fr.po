@@ -375,4 +375,3 @@ msgstr "Opération"
 #: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__project_operation_type__standard
 #: model:ir.model.fields.selection,name:choreograph_project.selection__report_project_task_user__project_operation_type__standard
 msgid "standard"
-msgstr "Standard"
