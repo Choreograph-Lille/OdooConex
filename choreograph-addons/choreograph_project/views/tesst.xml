@@ -1,0 +1,266 @@
+<form string="Projet" class="o_form_project_project" js_class="project_form">
+  <field
+    name="company_id" modifiers="{&quot;invisible&quot;: true, &quot;required&quot;: true}"
+    can_create="true" can_write="true" />
+  <field name="analytic_account_id"
+    modifiers="{&quot;invisible&quot;: true}" can_create="true" can_write="true" />
+  <header>
+    <button
+      name="390" string="Partager en lecture seule" type="action" class="oe_highlight"
+      context="{\'default_access_mode\': \'read\'}" data-hotkey="r"
+      modifiers="{&quot;invisible&quot;: [[&quot;privacy_visibility&quot;, &quot;!=&quot;, &quot;portal&quot;]]}" />
+    <button name="390" string="Partager en édition" type="action"
+      class="oe_highlight" context="{\'default_access_mode\': \'edit\'}" data-hotkey="e"
+      modifiers="{&quot;invisible&quot;: [[&quot;privacy_visibility&quot;, &quot;!=&quot;, &quot;portal&quot;]]}" />
+    <field name="stage_id" widget="statusbar"
+      options="{\'clickable\': \'1\', \'fold_field\': \'fold\'}" can_create="true" can_write="true" />
+    <field name="has_any_so_to_invoice"
+      modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}" />
+    <field
+      name="has_any_so_with_nothing_to_invoice"
+      modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}" />
+    <button
+      name="action_create_invoice" string="Créer une facture" type="object" class="btn-primary"
+      data-hotkey="w"
+      modifiers="{&quot;invisible&quot;: [[&quot;has_any_so_to_invoice&quot;, &quot;=&quot;, false]]}" />
+    <button name="action_create_invoice" string="Créer une facture" type="object"
+      class="btn-secondary" data-hotkey="w"
+      modifiers="{&quot;invisible&quot;: [&quot;|&quot;, [&quot;has_any_so_with_nothing_to_invoice&quot;, &quot;=&quot;, false], [&quot;has_any_so_to_invoice&quot;, &quot;=&quot;, true]]}" />
+    <button string="Créer un projet depuis le modèle" type="object"
+      name="create_project_from_template" class="oe_highlight"
+      modifiers="{&quot;invisible&quot;: [[&quot;is_template&quot;, &quot;=&quot;, false]]}" />
+  </header>
+  <sheet string="Projet">
+    <div class="oe_button_box" name="button_box">
+      <button
+        class="oe_stat_button" name="status" type="object">
+        <div class="ps-4">
+          <field name="last_update_color"
+            modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}" />
+          <field
+            name="last_update_status" widget="status_with_color"
+            options="{\'color_field\': \'last_update_color\'}" on_change="1"
+            modifiers="{&quot;readonly&quot;: true, &quot;required&quot;: true}" />
+        </div>
+      </button>
+      <button class="oe_stat_button" name="391" type="action" icon="fa-users"
+        modifiers="{&quot;invisible&quot;: [[&quot;privacy_visibility&quot;, &quot;!=&quot;, &quot;portal&quot;]]}">
+        <div class="o_field_widget o_stat_info">
+          <span
+            class="o_stat_value">
+            <field name="collaborator_count" nolabel="1"
+              modifiers="{&quot;readonly&quot;: true}" />
+          </span>
+          <span class="o_stat_text">
+            Collaborateurs </span>
+        </div>
+      </button>
+    </div>
+    <widget name="web_ribbon" title="Archivé"
+      bg_color="bg-danger"
+      modifiers="{&quot;invisible&quot;: [[&quot;active&quot;, &quot;=&quot;, true]]}" />
+    <div
+      class="oe_title">
+      <h1 class="d-flex flex-row">
+        <field name="is_favorite" nolabel="1"
+          widget="boolean_favorite" class="me-2" />
+        <field name="name" class="o_text_overflow"
+          placeholder="p.e. Fête au bureau" modifiers="{&quot;required&quot;: true}" />
+      </h1>
+    </div>
+    <group>
+      <group>
+        <field name="label_tasks" string="Nom des tâches" />
+        <field
+          name="partner_id" widget="res_partner_many2one" options="{\'always_reload\': True}"
+          context="{\'res_partner_search_mode\': \'customer\'}" on_change="1" can_create="true"
+          can_write="true" />
+        <field name="tag_ids" widget="many2many_tags"
+          options="{\'color_field\': \'color\'}" can_create="true" can_write="true" />
+        <field
+          name="is_template" class="oe_inline" string="Est un modèle ?" on_change="1" />
+      </group>
+      <group>
+        <field name="active" modifiers="{&quot;invisible&quot;: true}" />
+        <field
+          name="user_id" string="Chef de Projet"
+          widget="many2one_avatar_user" domain="[(\'share\', \'=\', False)]"
+          modifiers="{&quot;readonly&quot;: [[&quot;active&quot;, &quot;=&quot;, false]]}"
+          can_create="true" can_write="true" />
+        <label for="date_start" string="Date planifiée" />
+        <div name="dates" class="o_row">
+          <field name="date_start"
+            widget="daterange" options="{&quot;related_end_date&quot;: &quot;date&quot;}" />
+          <i
+            class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow" />
+          <i class="fa fa-long-arrow-right mx-2 oe_read_only"
+            aria-label="Arrow icon" title="Arrow"
+            modifiers="{&quot;invisible&quot;: [[&quot;date_start&quot;, &quot;=&quot;, false], [&quot;date&quot;, &quot;=&quot;, false]]}" />
+          <field name="date" widget="daterange"
+            options="{&quot;related_start_date&quot;: &quot;date_start&quot;}" />
+        </div>
+      </group>
+    </group>
+    <notebook>
+      <page name="description" string="Description">
+        <field
+          name="description" options="{\'resizable\': false}" placeholder="Project description..." />
+      </page>
+      <page name="settings" string="Paramètres">
+        <group>
+          <group>
+            <field
+              name="privacy_visibility" widget="radio"
+              on_change="1" modifiers="{&quot;required&quot;: true}" />
+            <field
+              name="project_operation_type" modifiers="{&quot;required&quot;: true}" />
+            <span
+              colspan="2" class="text-muted"
+              modifiers="{&quot;invisible&quot;: [[&quot;access_instruction_message&quot;, &quot;=&quot;, &quot;&quot;]]}">
+              <i class="fa fa-lightbulb-o" />&amp;nbsp;<field
+                class="d-inline" name="access_instruction_message" nolabel="1"
+                modifiers="{&quot;readonly&quot;: true}" />
+            </span>
+            <span colspan="2"
+              class="text-muted"
+              modifiers="{&quot;invisible&quot;: [[&quot;privacy_visibility_warning&quot;, &quot;=&quot;, &quot;&quot;]]}">
+              <i class="fa fa-warning" />&amp;nbsp;<field
+                class="d-inline" name="privacy_visibility_warning" nolabel="1"
+                modifiers="{&quot;readonly&quot;: true}" />
+            </span>
+          </group>
+          <group>
+            <div
+              name="alias_def" colspan="2" class="pb-2"
+              modifiers="{&quot;invisible&quot;: [[&quot;alias_domain&quot;, &quot;=&quot;, false]]}">
+              <!-- Always display the whole alias in edit mode. It
+              depends in read only -->
+              <field name="alias_enabled" on_change="1"
+                modifiers="{&quot;invisible&quot;: true}" />
+              <label for="alias_name"
+                class="fw-bold o_form_label" string="Créez des tâches en envoyant un email à" />
+              <field
+                name="alias_value" class="oe_read_only d-inline" widget="email"
+                modifiers="{&quot;invisible&quot;: [[&quot;alias_name&quot;, &quot;=&quot;, false]], &quot;readonly&quot;: true}" />
+              <span class="oe_edit_only">
+                <field name="alias_name"
+                  class="oe_inline" on_change="1" />@<field name="alias_domain" class="oe_inline"
+                  on_change="1" modifiers="{&quot;readonly&quot;: true}" />
+              </span>
+            </div> <!--
+            the alias contact must appear when the user start typing and it must disappear                                        when
+            the string is deleted. -->
+            <field
+              name="alias_contact" class="oe_inline" string="Accepter les emails de" on_change="1"
+              modifiers="{&quot;invisible&quot;: [&quot;|&quot;, [&quot;alias_name&quot;, &quot;=&quot;, &quot;&quot;], [&quot;alias_name&quot;, &quot;=&quot;, false]], &quot;required&quot;: true}" />
+          </group>
+          <group name="extra_settings"> </group>
+        </group>
+        <group>
+          <group
+            name="group_tasks_managment" string="Gestion des tâches"
+            col="1" class="row mt16 o_settings_container">
+            <div>
+              <div class="o_setting_box mt-4"
+                id="task_dependencies_setting">
+                <div class="o_setting_left_pane">
+                  <field
+                    name="allow_task_dependencies" />
+                </div>
+                <div class="o_setting_right_pane">
+                  <label for="allow_task_dependencies" />
+                  <div
+                    class="text-muted"> Déterminez l\'ordre dans lequel réaliser vos tâches </div>
+                </div>
+              </div>
+            </div>
+          </group>
+          <group
+            name="group_time_managment" string="Gestion du temps" col="1"
+            class="row mt16 o_settings_container" modifiers="{&quot;invisible&quot;: true}" />
+          <group
+            name="group_sales_invoicing" string="Ventes &amp; Facturation" col="1"
+            class="row mt16 o_settings_container col-lg-6">
+            <div>
+              <div class="o_setting_box"
+                id="allow_billable_container">
+                <div class="o_setting_left_pane">
+                  <field
+                    name="allow_billable" />
+                </div>
+                <div class="o_setting_right_pane">
+                  <label
+                    for="allow_billable" />
+                  <div class="text-muted" id="allow_billable_setting">
+                    Facturez votre temps et matériel à vos clients </div>
+                </div>
+              </div>
+            </div>
+          </group>
+          <group
+            name="group_documents_analytics" string="Documents &amp; Analytique" col="1"
+            class="row mt16 o_settings_container">
+            <div>
+              <field name="allow_rating"
+                modifiers="{&quot;invisible&quot;: true, &quot;readonly&quot;: true}" />
+              <div
+                class="o_setting_box mt-4" id="documents_setting">
+                <div
+                  class="o_setting_left_pane">
+                  <field name="use_documents" />
+                </div>
+                <div
+                  class="o_setting_right_pane">
+                  <label for="use_documents" />
+                  <div
+                    class="text-muted"> Classez et partagez vos documents avec vos clients </div>
+                  <div class="mt-3"
+                    modifiers="{&quot;invisible&quot;: [[&quot;use_documents&quot;, &quot;=&quot;, false]]}">
+                    <div class="row">
+                      <div class="col-3">
+                        <label
+                          for="documents_folder_id" class="fw-bold" />
+                        <field name="company_id"
+                          modifiers="{&quot;invisible&quot;: true, &quot;required&quot;: true}"
+                          can_create="true" can_write="true" />
+                      </div>
+                      <div class="col-9">
+                        <field
+                          name="documents_folder_id" class="ps-2 w-75"
+                          context="{\'documents_project\': True, \'default_company_id\': company_id}"
+                          on_change="1"
+                          modifiers="{&quot;required&quot;: [[&quot;use_documents&quot;, &quot;=&quot;, true], [&quot;id&quot;, &quot;!=&quot;, false]]}"
+                          can_create="true" can_write="true" />
+                      </div>
+                    </div>
+                    <div class="row"
+                      modifiers="{&quot;invisible&quot;: [[&quot;documents_folder_id&quot;, &quot;=&quot;, false]]}">
+                      <div class="col-3">
+                        <label for="documents_tag_ids"
+                          class="fw-bold" />
+                      </div>
+                      <div class="col-9">
+                        <field
+                          name="documents_tag_ids" class="ps-2 w-75" widget="many2many_tags"
+                          options="{\'no_quick_create\': True}"
+                          context="{\'form_view_ref\': \'documents_project.tag_view_form_inherit\', \'documents_project_folder\': documents_folder_id}"
+                          can_create="true" can_write="true" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </group>
+        </group>
+      </page>
+    </notebook>
+  </sheet>
+  <div
+    class="oe_chatter">
+    <field name="message_follower_ids" options="{\'post_refresh\':True}"
+      help="Permet de suivre automatiquement les événements associés aux tâches et aux problèmes de ce projet." />
+    <field name="activity_ids" />
+    <field name="message_ids" />
+  </div>
+</form>'
