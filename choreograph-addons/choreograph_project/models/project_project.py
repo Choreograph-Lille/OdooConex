@@ -79,7 +79,7 @@ class ProjectProject(models.Model):
 
     @api.model
     def create(self, values):
-        if values.get('is_operation_generation'):
+        if self._context.get('is_operation_generation'):
             values.update({
                 'type_of_project': 'operation',
                 'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft').id,
