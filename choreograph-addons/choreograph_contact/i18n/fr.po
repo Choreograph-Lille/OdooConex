@@ -78,12 +78,6 @@ msgid "Contract Update Date"
 msgstr "Date de mise à jour du contrat"
 
 #. module: choreograph_contact
-#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__contract_version
-#: model:ir.model.fields,field_description:choreograph_contact.field_res_users__contract_version
-msgid "Contract Version"
-msgstr "Version de contrat"
-
-#. module: choreograph_contact
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__country_base
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_users__country_base
 msgid "Country Base"
