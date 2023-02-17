@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from datetime import date
+from dateutil import tz
+from pytz import timezone, utc, UTC
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -28,7 +30,7 @@ class SaleOrder(models.Model):
     to_validate = fields.Boolean()
     segment_ids = fields.One2many('operation.segment', 'order_id', 'Segment')
     repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab')
-    operation_type_id = fields.Many2one('project.project', compute='_compute_operation_type_id')
+    operation_type_id = fields.Many2one('project.project', compute='_compute_operation_type_id', store=True)
     can_display_redelivery = fields.Boolean(compute='_compute_can_display_redelivery')
 
     @api.depends('project_ids')
@@ -53,6 +55,7 @@ class SaleOrder(models.Model):
 
     @api.onchange('potential_return')
     def onchange_potential_return(self):
+        self.study_delivery = self.potential_return
         if self.potential_return:
             self._unarchive_task('potential_return')
         else:
@@ -138,3 +141,17 @@ class SaleOrder(models.Model):
             project_id.js_redelivery_studies()
         else:
             project_id.js_redelivery_prod()
+
+    def write(self, vals):
+        res = super(SaleOrder, self).write(vals)
+        if vals.get('commitment_date'):
+            self._update_date_deadline()
+        return res
+
+    def _update_date_deadline(self):
+        for rec in self:
+            tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
+            date = utc.localize(rec.commitment_date).astimezone(tz)
+            rec.tasks_ids.filtered(lambda t: t.task_number in ['80', '65', '40', '85', '90', '45', '50', '25', '30', '35']).write({
+                'date_deadline': date,
+            })

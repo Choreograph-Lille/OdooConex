@@ -35,7 +35,7 @@ class SaleOrder(models.Model):
     data_conservation_id = fields.Many2one('sale.data.conservation', 'Data Conservation', index=True, ondelete='restrict')
     receiver = fields.Char()
     send_with = fields.Selection([('mft', 'MFT'), ('sftp', 'SFTP'), ('email', 'Email'), ('ftp', 'FTP')])
-    operation_type_id = fields.Many2one('project.project', 'Operation Type')
+    # operation_type_id = fields.Many2one('project.project', 'Operation Type')
     total_retribution = fields.Float(compute="_compute_total_retribution", store=True)
 
     po_number = fields.Char('PO Number')
@@ -123,6 +123,10 @@ class SaleOrder(models.Model):
         for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
             task.active = False
 
+        self.tasks_ids.write({
+            'date_deadline': self.commitment_date.date()
+        })
+
     def action_create_task_from_condition(self):
         for rec in self:
             for condition in self.operation_condition_ids.filtered(lambda c: not c.is_task_created and c.type != 'comment'):
@@ -133,10 +137,11 @@ class SaleOrder(models.Model):
                     'note': condition.note,
                     'sale_order_id': rec.id,
                     'user_ids': False,
-                    'ate_deadline': condition.operation_date,
+                    'date_deadline': condition.operation_date,
                     'campaign_file_name': condition.file_name,
                     'task_number': condition.task_number,
                 }
+                # TODO: add type in vals
                 vals['name'] += condition.subtype_id.name if condition.subtype_id else ''
                 rec.project_ids.task_ids = [(0, 0, vals)]
                 condition.is_task_created = True

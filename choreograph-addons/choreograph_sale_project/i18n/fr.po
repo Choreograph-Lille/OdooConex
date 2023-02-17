@@ -267,6 +267,11 @@ msgid "Email Kit Detail"
 msgstr "Détail Kit Email"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__optout_link
+msgid "Email Optout Comment"
+msgstr "Liens Optout"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__excluded_provider
 msgid "Excluded Provider"
 msgstr "Provider à exclure"
