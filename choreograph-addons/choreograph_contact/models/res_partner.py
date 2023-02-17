@@ -20,6 +20,8 @@ class ResPartner(models.Model):
     first_contract_date = fields.Date('First Contract Date')
     is_dpo = fields.Boolean('DPO')
     update_frequency = fields.Char('Update Frequency')
-    catalogue_ids = fields.Many2many('res.partner.catalogue', 'res_partner_catalogue_rel', 'partner_id', 'catalogue_id', 'Catalogues')
+    catalogue_ids = fields.Many2many('res.partner.catalogue', 'res_partner_catalogue_rel',
+                                     'partner_id', 'catalogue_id', 'Catalogues')
     private_title = fields.Char('Private Title')
     agency_id = fields.Many2one('res.partner', 'Agency', ondelete='restrict', index=True)
+    industry_id = fields.Many2one('res.partner.industry', 'Activity area')
