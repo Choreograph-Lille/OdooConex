@@ -20,12 +20,15 @@ class ProjectTask(models.Model):
     id_title = fields.Char('ID Title', related='partner_id.ref')
     note = fields.Text('Information')
     campaign_file_name = fields.Char('File Name')
+    type = fields.Char()  # this should take the type in cond/excl but another task
+
     bat_from = fields.Char('From', related='sale_order_id.bat_from')
     bat_internal = fields.Char(related='sale_order_id.bat_internal')
     bat_client = fields.Char(related='sale_order_id.bat_client')
     bat_comment = fields.Text('BAT Comment', related='sale_order_id.bat_comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
-    optout_comment = fields.Text(related='sale_order_id.bat_comment')
+    # optout_comment = fields.Text(related='sale_order_id.optout_comment')
+    optout_link = fields.Text(related='sale_order_id.optout_comment')
     witness_file_name = fields.Char('File Name', related='sale_order_id.witness_file_name')
     witness_comment = fields.Text(related='sale_order_id.witness_comment')
     file_name = fields.Char()
@@ -60,7 +63,8 @@ class ProjectTask(models.Model):
     to_validate = fields.Integer()
     object = fields.Char(related='sale_order_id.object')
     ab_test = fields.Boolean('A/B Test', related='sale_order_id.ab_test')
-    is_preheader_available = fields.Boolean('Preheader available in HTML', related='sale_order_id.is_preheader_available')
+    is_preheader_available = fields.Boolean('Preheader available in HTML',
+                                            related='sale_order_id.is_preheader_available')
     comment = fields.Text(related='sale_order_id.comment')
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
     folder_key = fields.Char()
@@ -69,24 +73,28 @@ class ProjectTask(models.Model):
     operation_condition_ids = fields.Many2many('operation.condition', compute='compute_operation_condition_ids')
 
     trap_address_ids = fields.One2many('trap.address', 'task_id')
-    project_task_campaign_ids = fields.Many2many('project.task.campaign', compute='compute_project_task_campaign_ids', inverse='_inverse_project_task_campaign_ids')
+    project_task_campaign_ids = fields.Many2many('project.task.campaign', compute='compute_project_task_campaign_ids',
+                                                 inverse='_inverse_project_task_campaign_ids')
     operation_provider_delivery_ids = fields.One2many(
         'operation.provider.delivery', 'task_id', 'Provider Delivery Tasks')
 
     @api.depends('sale_order_id', 'sale_order_id.segment_ids', 'sale_order_id.repatriate_information')
     def compute_segment_ids(self):
         if self.sale_order_id.repatriate_information:
-            self.segment_ids = [(6, 0, self.env['operation.segment'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
+            self.segment_ids = [
+                (6, 0, self.env['operation.segment'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
         else:
             self.segment_ids = False
 
     @api.depends('sale_order_id', 'sale_order_id.operation_condition_ids')
     def compute_operation_condition_ids(self):
-        self.operation_condition_ids = [(6, 0, self.env['operation.condition'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
+        self.operation_condition_ids = [
+            (6, 0, self.env['operation.condition'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
 
     @api.depends('sale_order_id', 'sale_order_id.project_task_campaign_ids')
     def compute_project_task_campaign_ids(self):
-        self.project_task_campaign_ids = [(6, 0, self.env['project.task.campaign'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
+        self.project_task_campaign_ids = [
+            (6, 0, self.env['project.task.campaign'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
 
     def _inverse_project_task_campaign_ids(self):
         pass

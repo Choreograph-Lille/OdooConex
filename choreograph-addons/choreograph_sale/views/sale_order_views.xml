@@ -155,7 +155,7 @@
                 </notebook>
 
                 <field name="validity_date" position="before">
-                    <field name="commitment_date"/>
+                    <field name="commitment_date" widget="date"/>
                 </field>
 
                 <group name="sale_shipping" position="after">

@@ -14,7 +14,7 @@
                             <field
                                     name="potential_return_task_id" attrs="{'invisible':[('potential_return', '=', False)]}" readonly="1" force_save="True"
                             />
-                            <field name="study_delivery"/>
+                            <field name="study_delivery" readonly="1"/>
                             <field name="study_delivery_task_id" readonly="1" attrs="{'invisible':[('study_delivery', '=', False)]}"
                             />
                             <field name="presentation"/>
