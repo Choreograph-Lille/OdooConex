@@ -47,7 +47,7 @@
                 <field name="partner_shipping_id" position="after">
                     <field name="send_with" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
                     <field name="receiver" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
-                    <field name="sox"/>
+                    <field name="sox" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
                 </field>
 
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
@@ -155,11 +155,11 @@
                 </notebook>
 
                 <field name="validity_date" position="before">
-                    <field name="commitment_date" widget="date"/>
+                    <field name="commitment_date" widget="date" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
                 </field>
 
                 <group name="sale_shipping" position="after">
-                    <field name="validity_date"/>
+                    <field name="validity_date" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
                 </group>
 
                 <group name="sale_shipping" position="attributes">
@@ -174,8 +174,8 @@
             <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='tax_totals']" position="before">
-                    <label for="total_retribution" groups="base.group_user"/>
-                    <div class="text-nowrap" groups="base.group_user">
+                    <label for="total_retribution" groups="base.group_user" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
+                    <div class="text-nowrap" groups="base.group_user" attrs="{'invisible': [('recurrence_id', '!=', False)]}">
                         <field name="total_retribution" widget="monetary" class="oe_inline"/>
                     </div>
                 </xpath>

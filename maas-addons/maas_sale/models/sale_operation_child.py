@@ -4,8 +4,7 @@ from dateutil.relativedelta import relativedelta
 import odoo
 import logging
 from odoo import fields, models, api, _
-from odoo.exceptions import UserError, ValidationError
-import uuid
+from odoo.exceptions import ValidationError
 
 logger = logging.getLogger(__name__)
 

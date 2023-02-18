@@ -87,4 +87,8 @@
         </field>
     </record>
 
+    <record id="sale_subscription.sale_subscription_action" model="ir.actions.act_window">
+        <field name="context">{'default_is_subscription': 1, 'default_recurrence_id': 3}</field>
+    </record>
+
 </odoo>

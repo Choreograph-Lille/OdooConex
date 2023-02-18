@@ -73,7 +73,7 @@ class SaleOperatinChild(models.Model):
                                                        ('recurring_invoice', '=', True),
                                                        ('product_tmpl_id', 'in', pricelist_products.ids)],
                                                       order='identifiers asc')
-        if not products and subscription.current_package_id.unlimited == False:
+        if not products and not subscription.current_package_id.unlimited:
             raise ValidationError(
                 _('No upper level to propose in product pricelist. Please contact your system administrator.'))
         context = {
