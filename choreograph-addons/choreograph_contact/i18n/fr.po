@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-07 16:06+0000\n"
-"PO-Revision-Date: 2023-02-07 16:06+0000\n"
+"POT-Creation-Date: 2023-02-17 07:21+0000\n"
+"PO-Revision-Date: 2023-02-17 07:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner_catalogue__active
 msgid "Active"
 msgstr "Actif"
+
+#. module: choreograph_contact
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__industry_id
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_users__industry_id
+msgid "Activity area"
+msgstr "Secteur d'activité"
 
 #. module: choreograph_contact
 #: model_terms:ir.actions.act_window,help:choreograph_contact.res_partner_catalogue_action
@@ -54,7 +60,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__category_name
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_users__category_name
 msgid "Category Name"
-msgstr "Catégorie"
+msgstr ""
 
 #. module: choreograph_contact
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner_catalogue__color
@@ -76,12 +82,6 @@ msgstr "Contrat"
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_users__contract_update_date
 msgid "Contract Update Date"
 msgstr "Date de mise à jour du contrat"
-
-#. module: choreograph_contact
-#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__contract_version
-#: model:ir.model.fields,field_description:choreograph_contact.field_res_users__contract_version
-msgid "Contract Version"
-msgstr "Version de contrat"
 
 #. module: choreograph_contact
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__country_base

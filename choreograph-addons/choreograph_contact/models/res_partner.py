@@ -8,7 +8,7 @@ class ResPartner(models.Model):
 
     role_ids = fields.One2many('res.partner.role', 'partner_id', 'Roles')
     country_base = fields.Selection([('uk', 'UK'), ('fr', 'FR')], 'Country Base', default='fr')
-    category_name = fields.Char('Category Name')
+    category_name = fields.Char()
     last_revival_date = fields.Date('Last Revival Date')
     last_transaction_date = fields.Date('Last Transaction Date')
     data_destruction_date = fields.Date('Data Destruction Date')
@@ -20,7 +20,8 @@ class ResPartner(models.Model):
     first_contract_date = fields.Date('First Contract Date')
     is_dpo = fields.Boolean('DPO')
     update_frequency = fields.Char('Update Frequency')
-    catalogue_ids = fields.Many2many('res.partner.catalogue', 'res_partner_catalogue_rel', 'partner_id', 'catalogue_id', 'Catalogues')
+    catalogue_ids = fields.Many2many('res.partner.catalogue', 'res_partner_catalogue_rel',
+                                     'partner_id', 'catalogue_id', 'Catalogues')
     private_title = fields.Char('Private Title')
-    contract_version = fields.Char('Contract Version')
     agency_id = fields.Many2one('res.partner', 'Agency', ondelete='restrict', index=True)
+    industry_id = fields.Many2one('res.partner.industry', 'Activity area')
