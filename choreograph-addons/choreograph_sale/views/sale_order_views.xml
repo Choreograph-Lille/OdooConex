@@ -126,24 +126,20 @@
                                 <field name="is_preheader_available"/>
                                 <field name="email_comment"/>
                             </group>
-                            <group></group>
                             <group string="BAT">
                                 <field name="email_bat_internal"/>
                                 <field name="email_bat_client"/>
                                 <field name="bat_desired_date"/>
-                            </group>
-                            <group></group>
-                            <group string="Witnesses">
+
+                                <separator string="Witnesses"/>
                                 <field name="email_witness_file_name"/>
-                            </group>
-                            <group></group>
-                            <group string="Optout">
+
+                                <separator string="Optout"/>
                                 <field name="excluded_provider"/>
                                 <field name="optout_comment"/>
                                 <field name="optout_link"/>
                                 <field name="routing_base"/>
                             </group>
-                            <group></group>
                         </group>
                         <field name="project_task_campaign_ids">
                             <tree editable="bottom">

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_role_cp" model="res.role">
+        <field name="name">CP</field>
+    </record>
+    <record id="res_role_ce" model="res.role">
+        <field name="name">CE</field>
+    </record>
+    <record id="res_role_cc" model="res.role">
+        <field name="name">CC</field>
+    </record>
+    <record id="res_role_commercial" model="res.role">
+        <field name="name">Commercial</field>
+    </record>
+    <record id="res_role_adv" model="res.role">
+        <field name="name">ADV</field>
+    </record>
+</odoo>
