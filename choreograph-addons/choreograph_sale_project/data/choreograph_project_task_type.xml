@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="choreograph_project_task_type_conditions_exlclusion"
+        model="choreograph.project.task.type">
+        <field name="name">CONDITIONS/EXCLUSION</field>
+    </record>
+    <record id="choreograph_project_task_type_study" model="choreograph.project.task.type">
+        <field name="name">STUDY</field>
+    </record>
+    <record id="choreograph_project_task_type_operation" model="choreograph.project.task.type">
+        <field name="name">OPERATION</field>
+    </record>
+    <record id="choreograph_project_task_type_delivery" model="choreograph.project.task.type">
+        <field name="name">DELIVERY</field>
+    </record>
+</odoo>

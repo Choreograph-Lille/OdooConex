@@ -16,6 +16,7 @@
     ],
     'data': [
         # data
+        'data/res_role.xml',
         # security
         'security/ir.model.access.csv',
         # views
