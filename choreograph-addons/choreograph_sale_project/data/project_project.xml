@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_project_postal_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">POSTAL PROSPECTING</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_postal_prospecting_telfixebox" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">POSTAL PROSPECTING + TELFIXEBOX</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_telfixebox_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">TELFIXEBOX PROSPECTING</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_postal_prospecting_email" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">POSTAL PROSPECTING + EMAIL</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_email_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">EMAIL PROSPECTING</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_postal_prospecting_sms" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">POSTAL PROSPECTING + SMS</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_sms_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">SMS PROSPECTING</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_postal_telportable_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">POSTAL + TELPORTABLE PROSPECTING</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_telmobile_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">TELMOBILE PROSPECTING</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_reactivation" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">REACTIVATION</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_loyalty" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">LOYALTY</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_activation" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">ACTIVATION</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_ddn_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">DDN ENRICHMENT</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_telportable_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">TELPORTABLE ENRICHMENT</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_sms_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">SMS ENRICHMENT</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_email_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">EMAIL ENRICHMENT</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_telfixebox_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">TELFIXEBOX ENRICHMENT</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_extraction" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">EXTRACTION</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_study" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">STUDY</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_count" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">COUNT</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_yield_calculation" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">YIELD CALCULATION</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_matchback" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">MATCHBACK</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+
+    <record id="project_project_score_presentation" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="name">SCORE PRESENTATION</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+    </record>
+    
+    <function model="project.task" name="set_task_project" />
+</odoo>
