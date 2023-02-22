@@ -83,18 +83,23 @@ msgstr ""
 "Analysez l'avancée de vos projets et les performances de vos employés."
 
 #. module: choreograph_project
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_cancelled
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_done
 #: model:project.task.type,legend_blocked:choreograph_project.project_task_type_draft
 #: model:project.task.type,legend_blocked:choreograph_project.project_task_type_expectation_precision
 #: model:project.task.type,legend_blocked:choreograph_project.project_task_type_file_receipt
 #: model:project.task.type,legend_blocked:choreograph_project.project_task_type_in_progress
 #: model:project.task.type,legend_blocked:choreograph_project.project_task_type_preparation
-#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_valiation_bat_client
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_received_file
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_to_do
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_validation_bat_client
 #: model:project.task.type,legend_blocked:choreograph_project.project_task_type_waiting_quantities
 msgid "Blocked"
 msgstr "Bloqué"
 
 #. module: choreograph_project
 #: model:project.project.stage,name:choreograph_project.planning_project_stage_canceled
+#: model:project.task.type,name:choreograph_project.project_task_type_canceled
 msgid "Canceled"
 msgstr "Annulé"
 
@@ -122,6 +127,11 @@ msgstr ""
 #: model:project.project.stage,name:choreograph_project.planning_project_stage_delivery
 msgid "Delivery"
 msgstr "Livraison"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_done
+msgid "Done"
+msgstr "Terminé"
 
 #. module: choreograph_project
 #: model:project.project.stage,name:choreograph_project.planning_project_stage_draft
@@ -282,6 +292,11 @@ msgid "Prêt"
 msgstr ""
 
 #. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_received_file
+msgid "Received File"
+msgstr "Fichier reçu"
+
+#. module: choreograph_project
 #. odoo-javascript
 #: code:addons/choreograph_project/static/src/xml/project_update.xml:0
 #, python-format
@@ -341,6 +356,11 @@ msgstr ""
 #: model:project.project.stage,name:choreograph_project.planning_project_stage_terminated
 msgid "Terminated"
 msgstr "Terminé"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_to_do
+msgid "To Do"
+msgstr "A faire"
 
 #. module: choreograph_project
 #: model:ir.model.fields,field_description:choreograph_project.field_project_project__type_of_project

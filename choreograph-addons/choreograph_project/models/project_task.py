@@ -30,3 +30,8 @@ class ProjectTask(models.Model):
     @filter_by_type_of_project
     def _read_group_personal_stage_type_ids(self, stages, domain, order):
         return super()._read_group_personal_stage_type_ids(stages, domain, order)
+
+    def update_task_stage(self, number):
+        task_stage_id = self.env['project.task.type'].search([('stage_number', '=', number)], limit=1)
+        if task_stage_id:
+            self.write({'stage_id': task_stage_id.id})

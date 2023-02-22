@@ -4,7 +4,6 @@ from odoo import fields, models, api
 
 from odoo.addons.choreograph_sale.models.operation_condition import TASK_NUMBER
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
-from odoo.addons.choreograph_sale_project.models.sale_order import PROVIDER_DELIVERY_NUMBER
 
 
 class ProjectTask(models.Model):
