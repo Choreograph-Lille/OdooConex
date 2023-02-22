@@ -485,6 +485,11 @@ msgid "Potential Return"
 msgstr "Retour de potentiel"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__potential_return_date
+msgid "Potential Return Date"
+msgstr "Date retour de potentiel"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__potential_return_task_id
 msgid "Potential Return Task"
 msgstr "Tâche retour de potentiel"
@@ -498,6 +503,11 @@ msgstr "Préheader dispo dans le HTML"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presentation
 msgid "Presentation"
 msgstr "Présentation"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presentation_date
+msgid "Presentation Date"
+msgstr "Date présentation"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presentation_task_id
@@ -656,6 +666,11 @@ msgstr "Date de démarrage"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__study_delivery
 msgid "Study Delivery"
 msgstr "Livraison étude"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__study_delivery_date
+msgid "Study Delivery Date"
+msgstr "Date livraison étude"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__study_delivery_task_id

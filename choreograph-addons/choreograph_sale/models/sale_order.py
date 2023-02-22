@@ -123,9 +123,10 @@ class SaleOrder(models.Model):
         for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
             task.active = False
 
-        self.tasks_ids.write({
-            'date_deadline': self.commitment_date.date()
-        })
+        if self.commitment_date:
+            self.tasks_ids.write({
+                'date_deadline': self.commitment_date.date()
+            })
 
     def action_create_task_from_condition(self):
         for rec in self:
