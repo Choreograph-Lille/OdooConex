@@ -57,14 +57,10 @@
     <record id="planning_project_stage_canceled" model="project.project.stage">
         <field name="sequence">100</field>
         <field name="stage_number">100</field>
-        <field name="sequence">100</field>
-        <field name="stage_number">100</field>
         <field name="name">Canceled</field>
         <field name="type_of_project">operation</field>
     </record>
     <record id="planning_project_stage_template" model="project.project.stage">
-        <field name="sequence">140</field>
-        <field name="stage_number">140</field>
         <field name="sequence">140</field>
         <field name="stage_number">140</field>
         <field name="name">Template</field>

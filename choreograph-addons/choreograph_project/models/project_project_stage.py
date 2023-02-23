@@ -1,7 +1,7 @@
 from .project_project import TYPE_OF_PROJECT
 from odoo import fields, models
 
-STAGE_NUMBER = [(str(n), str(n)) for n in range(10, 100, 10)] + [('15', '15'), ('25', '25')]
+STAGE_NUMBER = [(str(n), str(n)) for n in range(10, 150, 10)] + [('15', '15'), ('25', '25')]
 
 
 class ProjectProjectStage(models.Model):
