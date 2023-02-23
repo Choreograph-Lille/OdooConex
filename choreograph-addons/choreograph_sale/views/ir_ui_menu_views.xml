@@ -12,11 +12,5 @@
                   name="Data Conservation"
                   sequence="100" parent="sale.menu_sale_config"/>
 
-        <menuitem id="operation_condition_subtype_menu"
-                  action="operation_condition_subtype_action"
-                  name="Condition/Exclusion Subtype"
-                  sequence="70"
-                  parent="sale.menu_sale_config"/>
-
     </data>
 </odoo>
