@@ -13,7 +13,7 @@ REQUIRED_TASK_NUMBER = {
     'study_delivery': '30',
     'presentation': '35',
 }
-SUBTYPES = {a: b for a, b in SUBTYPE}
+SUBTYPES = dict(SUBTYPE)
 
 
 class SaleOrder(models.Model):
