@@ -1,5 +1,5 @@
 from odoo import models
-from odoo.addons.choreograph_project.models import WAITING_FILE_TASK_STAGE, TODO_TASK_STAGE, WAITING_QTY_TASK_STAGE
+from odoo.addons.choreograph_project.models.project_project import WAITING_FILE_TASK_STAGE, TODO_TASK_STAGE, WAITING_QTY_TASK_STAGE
 
 
 class ProjectProject(models.Model):
@@ -24,16 +24,16 @@ class ProjectProject(models.Model):
         self._update_task_stage('25', TODO_TASK_STAGE)
         self._update_task_stage('35', TODO_TASK_STAGE)
 
-    def _hook_task_stage_in_20_25(self):
+    def _hook_task_in_stage_20_25(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
 
-    def _hook_task_stage_20_to_80(self):
+    def _hook_task_20_in_stage_80(self):
         self._update_task_stage('65', TODO_TASK_STAGE)
 
-    def _hook_task_stage_25_to_80(self):
+    def _hook_task_25_in_stage_80(self):
         self._update_task_stage('30', WAITING_QTY_TASK_STAGE)
 
-    def _hook_task_stage_30_to_80(self):
+    def _hook_task_30_in_stage_80(self):
         self._update_task_stage('65', TODO_TASK_STAGE)
 
     def _hook_all_task_terminated(self, except_task):
@@ -41,8 +41,18 @@ class ProjectProject(models.Model):
             self._update_task_stage('70', TODO_TASK_STAGE)
             self._update_task_stage('80', TODO_TASK_STAGE)
 
-    def _hook_task_stage_70_to_80(self):
+    def _hook_task_70_in_stage_80(self):
         self._update_task_stage('75', TODO_TASK_STAGE)
 
-    def _hook_task_stage_75_to_80(self):
+    def _hook_task_75_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id})
+
+    def _hook_task_10_80_in_80(self):
+        self._update_task_stage('85', TODO_TASK_STAGE)
+
+    def _hook_task_fulfillement_terminated(self):
+        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_delivery').id})
+
+    def _hook_task_90_in_stage_80(self):
+        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
+        self._update_task_stage('95', TODO_TASK_STAGE)

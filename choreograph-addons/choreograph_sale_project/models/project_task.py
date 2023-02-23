@@ -2,16 +2,15 @@
 
 from odoo import fields, models, api
 
-from odoo.addons.choreograph_sale.models.operation_condition import TASK_NUMBER
+
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
-from ...choreograph_project.models import WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE, DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE, TERMINATED_TASK_STAGE, TODO_TASK_STAGE
+from odoo.addons.choreograph_project.models.project_project import WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE, DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE, TERMINATED_TASK_STAGE, TODO_TASK_STAGE
 
 
 class ProjectTask(models.Model):
     _inherit = 'project.task'
 
     task_type_id = fields.Many2one('choreograph.project.task.type', string='Task type')
-    task_number = fields.Selection(TASK_NUMBER)
     is_template = fields.Boolean(related='project_id.is_template')
     catalogue_ids = fields.Many2many('res.partner.catalogue', related='sale_order_id.catalogue_ids')
     related_base = fields.Many2one('retribution.base', related='sale_order_id.related_base')
