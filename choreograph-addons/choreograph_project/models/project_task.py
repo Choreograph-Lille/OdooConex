@@ -1,14 +1,12 @@
 from .project_project import TYPE_OF_PROJECT, filter_by_type_of_project
 from odoo import api, fields, models
 
-TASK_NUMBER = [(str(n), str(n)) for n in range(5, 100, 5)]
-
 
 class ProjectTask(models.Model):
     _inherit = 'project.task'
 
     role_id = fields.Many2one('res.role', 'Role')
-    task_number = fields.Selection(TASK_NUMBER)
+
     type_of_project = fields.Selection(
         TYPE_OF_PROJECT, default='standard', required=True, compute='_compute_type_of_project', store=True, readonly=False)
 

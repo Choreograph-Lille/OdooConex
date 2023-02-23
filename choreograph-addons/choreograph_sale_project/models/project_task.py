@@ -2,15 +2,15 @@
 
 from odoo import fields, models, api
 
-
+from odoo.addons.choreograph_sale.models.operation_condition import TASK_NUMBER
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
-from odoo.addons.choreograph_project.models.project_project import WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE, DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE, TERMINATED_TASK_STAGE, TODO_TASK_STAGE
 
 
 class ProjectTask(models.Model):
     _inherit = 'project.task'
 
     task_type_id = fields.Many2one('choreograph.project.task.type', string='Task type')
+    task_number = fields.Selection(TASK_NUMBER)
     is_template = fields.Boolean(related='project_id.is_template')
     catalogue_ids = fields.Many2many('res.partner.catalogue', related='sale_order_id.catalogue_ids')
     related_base = fields.Many2one('retribution.base', related='sale_order_id.related_base')
@@ -108,10 +108,33 @@ class ProjectTask(models.Model):
         return res
 
     @api.model
-    def get_task_list(self):
-        return {
+    def set_task_project(self):
+        task_details = {
+            'update': {
+                'name': 'MAj',
+                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_conditions_exlclusion').id,
+                'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
+                'task_number': '5', 'type_of_project': 'operation',
+                'sequence': 1
+            },
+            'update_push': {
+                'name': 'MAJ REPOUSSOIR',
+                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_conditions_exlclusion').id,
+                'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
+                'task_number': '10',
+                'type_of_project': 'operation',
+                'sequence': 2
+            },
+            'customer_file': {
+                'name': 'FICHIER CLIENT',
+                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_conditions_exlclusion').id,
+                'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
+                'task_number': '15',
+                'type_of_project': 'operation',
+                'sequence': 3
+            },
             'project_name': {
-                'name': 'Nom Du Projet',
+                'name': 'NOM DU PROJET',
                 'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_study').id,
                 'role_id': self.env.ref('choreograph_contact.res_role_ce').id,
                 'task_number': '20',
@@ -119,7 +142,7 @@ class ProjectTask(models.Model):
                 'sequence': 4
             },
             'potential': {
-                'name': 'Retour De Potentiel',
+                'name': 'RETOUR DE POTENTIEL',
                 'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_study').id,
                 'role_id': self.env.ref('choreograph_contact.res_role_ce').id,
                 'task_number': '25',
@@ -128,7 +151,7 @@ class ProjectTask(models.Model):
                 'sequence': 5
             },
             'delivery_study': {
-                'name': 'Livraison Etudes',
+                'name': 'LIVRAISON ETUDES',
                 'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_study').id,
                 'role_id': self.env.ref('choreograph_contact.res_role_ce').id,
                 'task_number': '30',
@@ -136,180 +159,61 @@ class ProjectTask(models.Model):
                 'sequence': 6
             },
             'presentation': {
-                'name': 'Presentation',
+                'name': 'PRESENTATION',
                 'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_study').id,
                 'role_id': self.env.ref('choreograph_contact.res_role_ce').id,
                 'task_number': '35',
                 'type_of_project': 'operation',
                 'sequence': 7
             },
-            'audit': {
-                'name': 'Audit',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_audit').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
-                'task_number': '40',
-                'type_of_project': 'operation',
-                'sequence': 8
-            },
-            'campaign': {
-                'name': 'Campagne @',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_campaign').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_cc').id,
-                'task_number': '45',
-                'type_of_project': 'operation',
-                'sequence': 9
-            },
-            'campaign_sms': {
-                'name': 'Campagne Sms',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_sms_campaign').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_commercial').id,
-                'task_number': '50',
-                'type_of_project': 'operation',
-                'sequence': 10
-            },
-            'file_bat': {
-                'name': 'Fichier BAT / Témoin',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_bat_witness_file').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
-                'task_number': '55',
-                'type_of_project': 'operation',
-                'sequence': 11
-            },
-            'link_opt_out': {
-                'name': 'Lien OPT-OUT',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_link_opt_out').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
-                'task_number': '60',
-                'type_of_project': 'operation',
-                'sequence': 12
-            },
             'prefulfillment': {
-                'name': 'Prefulfillment',
+                'name': 'PREFULFILLMENT',
                 'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_operation').id,
                 'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
                 'task_number': '65',
                 'type_of_project': 'operation',
-                'sequence': 13
-            },
-            'info_presta': {
-                'name': 'Info presta',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_info_presta').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_adv').id,
-                'task_number': '70',
-                'type_of_project': 'operation',
-                'sequence': 14
-            },
-            'delivery_presta': {
-                'name': 'Livraison presta',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_delivery_presta').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
-                'task_number': '75',
-                'type_of_project': 'operation',
-                'sequence': 15
-            },
-            'delivery_infos': {
-                'name': 'Infos livraison',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_delivery_infos').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_adv').id,
-                'task_number': '80',
-                'type_of_project': 'operation',
-                'sequence': 16
+                'sequence': 8
             },
             'fullfilment_client': {
-                'name': 'Fullfilment client',
+                'name': 'FULFILLMENT CLIENT',
                 'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_delivery').id,
                 'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
                 'task_number': '85',
                 'type_of_project': 'operation',
-                'sequence': 17
-            },
-            'campaign_counts': {
-                'name': 'Comptages campagne',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_campaign_counts').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
-                'task_number': '90',
-                'type_of_project': 'operation',
-                'sequence': 18
-            },
-            'deposit_date': {
-                'name': 'Date de dépôt',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_deposit_date').id,
-                'role_id': self.env.ref('choreograph_contact.res_role_adv').id,
-                'task_number': '95',
-                'type_of_project': 'operation',
-                'sequence': 19
-            }
-        }
-
-    @api.model
-    def set_task_project(self):
-        task_details = self.get_task_list()
+                'sequence': 9
+            }}
 
         def get_vals(_list):
             return {'task_ids': [(0, 0, task_details[item]) for item in _list]}
-
-        def new_extend(source_list: list(), extend_list: list()) -> list():
-            tmp = source_list.copy()
-            tmp.extend(extend_list)
-            return tmp
         task_list = ['project_name']
-        self.env.ref('choreograph_sale_project.project_project_score_presentation').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_study').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_count').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_yield_calculation').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_matchback').write(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_score_presentation').update(get_vals(task_list))
 
-        task_list.extend(['potential', 'delivery_study', 'fullfilment_client', 'delivery_infos'])
-        self.env.ref('choreograph_sale_project.project_project_telfixebox_enrichment').write(
-            get_vals(new_extend(task_list, ['campaign_counts'])))
-        self.env.ref('choreograph_sale_project.project_project_extraction').write(get_vals(task_list))
+        task_list.extend(['update', 'update_push', 'customer_file'])
+        self.env.ref('choreograph_sale_project.project_project_study').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_count').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_yield_calculation').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_matchback').update(get_vals(task_list))
+
+        task_list.extend(['potential', 'delivery_study', 'fullfilment_client'])
+        self.env.ref('choreograph_sale_project.project_project_telfixebox_enrichment').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_extraction').update(get_vals(task_list))
 
         task_list.extend(['prefulfillment'])
-        self.env.ref('choreograph_sale_project.project_project_ddn_enrichment').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_telportable_enrichment').write(
-            get_vals(new_extend(task_list, ['campaign_counts'])))
-        self.env.ref('choreograph_sale_project.project_project_sms_enrichment').write(
-            get_vals(new_extend(task_list, ['audit', 'campaign_sms', 'info_presta', 'delivery_presta', 'campaign_counts'])))
-        self.env.ref('choreograph_sale_project.project_project_email_enrichment').write(get_vals(new_extend(
-            task_list, ['audit', 'campaign', 'file_bat', 'link_opt_out', 'info_presta', 'delivery_presta', 'campaign_counts'])))
+        self.env.ref('choreograph_sale_project.project_project_ddn_enrichment').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_telportable_enrichment').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_sms_enrichment').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_email_enrichment').update(get_vals(task_list))
 
-        task_list.extend(['presentation', 'deposit_date'])
-        self.env.ref('choreograph_sale_project.project_project_reactivation').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_loyalty').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_activation').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting').write(get_vals(task_list))
-
-        task_list.extend(['campaign_counts'])
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_telfixebox').write(
-            get_vals(new_extend(task_list, ['info_presta', 'delivery_presta'])))
-        self.env.ref('choreograph_sale_project.project_project_telfixebox_prospecting').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_email').write(
-            get_vals(new_extend(task_list, ['campaign', 'file_bat', 'info_presta', 'delivery_presta'])))
-        self.env.ref('choreograph_sale_project.project_project_email_prospecting').write(
-            get_vals(new_extend(task_list, ['campaign', 'file_bat'])))
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_sms').write(
-            get_vals(new_extend(task_list, ['campaign_sms', 'info_presta', 'delivery_presta'])))
-        self.env.ref('choreograph_sale_project.project_project_sms_prospecting').write(
-            get_vals(new_extend(task_list, ['campaign_sms'])))
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_telportable').write(
-            get_vals(new_extend(task_list, ['info_presta', 'delivery_presta'])))
-        self.env.ref('choreograph_sale_project.project_project_prospection_telportable').write(get_vals(task_list))
-
-    def write(self, vals):
-        res = super(ProjectTask, self).write(vals)
-        if self.type_of_project == 'operation' and vals.get('stage_id', False):
-            if vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_all_task_terminated(except_task=self.id)
-            if self.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and vals.get('stage_id') in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
-                self.project_id._hook_task_stage_in_20_25()
-            elif self.task_number == '20' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_20_to_80()
-            elif self.task_number == '25' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_25_to_80()
-            elif self.task_number == '30' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_30_to_80()
-            elif self.task_number == '70' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_70_to_80()
-            elif self.task_number == '75' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_75_to_80()
-        return res
+        task_list.extend(['presentation'])
+        self.env.ref('choreograph_sale_project.project_project_postal_prospecting').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_telfixebox').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_telfixebox_prospecting').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_email').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_email_prospecting').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_sms').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_sms_prospecting').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_postal_telportable_prospecting').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_telmobile_prospecting').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_reactivation').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_loyalty').update(get_vals(task_list))
+        self.env.ref('choreograph_sale_project.project_project_activation').update(get_vals(task_list))

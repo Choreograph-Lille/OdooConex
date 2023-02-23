@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-23 11:39+0000\n"
-"PO-Revision-Date: 2023-02-23 11:39+0000\n"
+"POT-Creation-Date: 2023-02-22 10:56+0000\n"
+"PO-Revision-Date: 2023-02-22 10:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -112,7 +112,7 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_activation
-msgid "Activation (TEMPLATE)"
+msgid "ACTIVATION"
 msgstr ""
 
 #. module: choreograph_sale_project
@@ -152,6 +152,11 @@ msgid "Bat Internal"
 msgstr "Bat interne"
 
 #. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_count
+msgid "COUNT"
+msgstr "COMPTAGE"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__can_display_redelivery
 msgid "Can Display Redelivery"
 msgstr "Peut afficher la relivraison"
@@ -184,11 +189,6 @@ msgid "Comment"
 msgstr "Commentaires"
 
 #. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_count
-msgid "Counting (TEMPLATE)"
-msgstr "Comptage (TEMPLATE)"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__create_uid
@@ -206,8 +206,8 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_ddn_enrichment
-msgid "DDN Enrichment (TEMPLATE)"
-msgstr "Enrichissement DDN (TEMPLATE)"
+msgid "DDN ENRICHMENT"
+msgstr "ENRICHISSEMENT DDN"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__delivery_date
@@ -258,6 +258,21 @@ msgid "Display Name"
 msgstr ""
 
 #. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_email_enrichment
+msgid "EMAIL ENRICHMENT"
+msgstr "ENRICHISSEMENT EMAIL"
+
+#. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_email_prospecting
+msgid "EMAIL PROSPECTING"
+msgstr "PROSPECTION EMAIL"
+
+#. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_extraction
+msgid "EXTRACTION"
+msgstr "EXTRACTION"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_desired_date
 msgid "Email BAT Desired Date"
 msgstr "Date de BAT souhaité"
@@ -271,11 +286,6 @@ msgstr "Nom Campagne"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_type
 msgid "Email Campaign Type"
 msgstr "Type de campagne"
-
-#. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_email_enrichment
-msgid "Email Enrichment (TEMPLATE)"
-msgstr "Enrichissement Email (TEMPLATE)"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__excluded_provider
@@ -293,34 +303,14 @@ msgid "Email Optout Comment"
 msgstr "Liens Optout"
 
 #. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_email_prospecting
-msgid "Email Prospecting (TEMPLATE)"
-msgstr "Prospection Email (TEMPLATE)"
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__routing_base
-msgid "Email Routing Base"
-msgstr "Base routage"
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume_detail
-msgid "Email Volume Detail"
-msgstr "Détail volume"
-
-#. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_extraction
-msgid "Extraction (TEMPLATE)"
-msgstr "Extraction (TEMPLATE)"
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__excluded_provider
+msgid "Excluded Provider"
+msgstr "Provider à exclure"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__family_conex
 msgid "Family Conex"
 msgstr "Conex Family"
-
-#. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_loyalty
-msgid "Fidelization (TEMPLATE)"
-msgstr "Fidelisation (TEMPLATE)"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_file_name
@@ -348,7 +338,6 @@ msgstr "DE"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__id
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__id
 msgid "ID"
 msgstr ""
 
@@ -378,10 +367,14 @@ msgid "Keycode"
 msgstr ""
 
 #. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_loyalty
+msgid "LOYALTY"
+msgstr "FIDELISATION"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment____last_update
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -389,7 +382,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__write_uid
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -397,13 +389,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__write_date
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_matchback
-msgid "Matchback (TEMPLATE)"
+msgid "MATCHBACK"
 msgstr ""
 
 #. module: choreograph_sale_project
@@ -453,29 +444,29 @@ msgid "Personalization"
 msgstr "Personnalisation"
 
 #. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_postal_telportable_prospecting
+msgid "POSTAL + TELPORTABLE PROSPECTING"
+msgstr "PROSPECTION POSTALE + TELPORTABLE"
+
+#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_postal_prospecting
-msgid "Postal Prospecting (TEMPLATE)"
-msgstr "Prospection postale (TEMPLATE)"
+msgid "POSTAL PROSPECTING"
+msgstr "PROSPECTION POSTALE"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_postal_prospecting_email
-msgid "Postal Prospecting + Email (TEMPLATE)"
-msgstr "Prospection postale + Email (TEMPLATE)"
+msgid "POSTAL PROSPECTING + EMAIL"
+msgstr "PROSPECTION POSTALE + EMAIL"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_postal_prospecting_sms
-msgid "Postal Prospecting + Sms (TEMPLATE)"
-msgstr "Prospection postale + SMS (TEMPLATE)"
+msgid "POSTAL PROSPECTING + SMS"
+msgstr "PROSPECTION POSTALE + SMS"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_postal_prospecting_telfixebox
-msgid "Postal Prospecting + Telfixebox (TEMPLATE)"
-msgstr "Prospection postale + Telfixebox (TEMPLATE)"
-
-#. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_postal_prospecting_telportable
-msgid "Postal Prospecting + Telportable (TEMPLATE)"
-msgstr "Prospection postale + Teleportable (TEMPLATE)"
+msgid "POSTAL PROSPECTING + TELFIXEBOX"
+msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__phone_coupling
@@ -529,11 +520,6 @@ msgid "Project Task Type"
 msgstr ""
 
 #. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_prospection_telportable
-msgid "Prospecting Telportable (TEMPLATE)"
-msgstr "Prospection Teleportable (TEMPLATE)"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__provider_comment
 msgid "Provider Comment"
 msgstr "Commentaire"
@@ -568,11 +554,6 @@ msgstr "Quantité à livrer"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__ranking
 msgid "Ranking"
 msgstr "Classement"
-
-#. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_reactivation
-msgid "Reactivation (TEMPLATE)"
-msgstr "Réactivation (TEMPLATE)"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__reception_date
@@ -615,6 +596,26 @@ msgid "Routing End Date"
 msgstr "Fin de routage"
 
 #. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_score_presentation
+msgid "SCORE PRESENTATION"
+msgstr "PRESENTATION DE SCORE"
+
+#. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_sms_enrichment
+msgid "SMS ENRICHMENT"
+msgstr "ENRICHISSEMENT SMS"
+
+#. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_sms_prospecting
+msgid "SMS PROSPECTING"
+msgstr "PROSPECTION SMS"
+
+#. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_study
+msgid "STUDY"
+msgstr "ETUDE"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__order_id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__order_id
 msgid "Sale Order"
@@ -626,12 +627,6 @@ msgid "Salesperson"
 msgstr "Commerciale"
 
 #. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_score_presentation
-msgid "Score Presentation (TEMPLATE)"
-msgstr "Presentation de score (TEMPLATE)"
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__segment_ids
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__segment_ids
 msgid "Segment"
 msgstr ""
@@ -658,16 +653,6 @@ msgid "Show Provider Delivery"
 msgstr "Afficher livraison presta"
 
 #. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_sms_enrichment
-msgid "Sms Enrichment (TEMPLATE)"
-msgstr "Enrichissement SMS (TEMPLATE)"
-
-#. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_sms_prospecting
-msgid "Sms Prospecting (TEMPLATE)"
-msgstr "Prospection SMS (TEMPLATE)"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__specific_counting
 msgid "Specific Counting"
 msgstr "Comptages spécifiques"
@@ -676,11 +661,6 @@ msgstr "Comptages spécifiques"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__start_date
 msgid "Start Date"
 msgstr "Date de démarrage"
-
-#. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_study
-msgid "Study (TEMPLATE)"
-msgstr "Etude (TEMPLATE)"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__study_delivery
@@ -703,9 +683,24 @@ msgid "SMS coupling"
 msgstr "Couplage SMS"
 
 #. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_telfixebox_enrichment
+msgid "TELFIXEBOX ENRICHMENT"
+msgstr "ENRICHISSEMENT TELFIXEBOX"
+
+#. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_telfixebox_prospecting
+msgid "TELFIXEBOX PROSPECTING"
+msgstr "PROSPECTION TELFIXEBOX"
+
+#. module: choreograph_sale_project
+#: model:project.project,name:choreograph_sale_project.project_project_telmobile_prospecting
+msgid "TELMOBILE PROSPECTING"
+msgstr "PROSPECTION TELPORTABLE"
+
+#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_telportable_enrichment
-msgid "Supportable Enrichment (TEMPLATE)"
-msgstr "Enrichissement Teleportable (TEMPLATE)"
+msgid "TELPORTABLE ENRICHMENT"
+msgstr "ENRICHISSEMENT TELPORTABLE"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__sms_coupling
@@ -751,8 +746,7 @@ msgstr "Types de tâche"
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_postal_prospecting_email
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_postal_prospecting_sms
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_postal_prospecting_telfixebox
-#: model:project.project,label_tasks:choreograph_sale_project.project_project_postal_prospecting_telportable
-#: model:project.project,label_tasks:choreograph_sale_project.project_project_prospection_telportable
+#: model:project.project,label_tasks:choreograph_sale_project.project_project_postal_telportable_prospecting
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_reactivation
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_score_presentation
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_sms_enrichment
@@ -760,20 +754,11 @@ msgstr "Types de tâche"
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_study
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_telfixebox_enrichment
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_telfixebox_prospecting
+#: model:project.project,label_tasks:choreograph_sale_project.project_project_telmobile_prospecting
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_telportable_enrichment
 #: model:project.project,label_tasks:choreograph_sale_project.project_project_yield_calculation
 msgid "Tasks"
 msgstr "Tâches"
-
-#. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_telfixebox_enrichment
-msgid "Telfixebox Enrichment (TEMPLATE)"
-msgstr "Enrichissement Telfixebox (TEMPLATE)"
-
-#. module: choreograph_sale_project
-#: model:project.project,name:choreograph_sale_project.project_project_telfixebox_prospecting
-msgid "Telfixebox Prospecting (TEMPLATE)"
-msgstr "Prospection Telfixebox (TEMPLATE)"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__to_validate
@@ -820,8 +805,8 @@ msgstr "Témoins"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_yield_calculation
-msgid "Yield Calculation (TEMPLATE)"
-msgstr "Caluld de rendements (TEMPLATE)"
+msgid "YIELD CALCULATION"
+msgstr "CALCUL DE RENDEMENTS"
 
 #. module: choreograph_sale_project
 #: model:ir.model,name:choreograph_sale_project.model_operation_provider_delivery
