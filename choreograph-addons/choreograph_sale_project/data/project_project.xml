@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<odoo noupdate="1">
     <record id="project_project_postal_prospecting" model="project.project">
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
