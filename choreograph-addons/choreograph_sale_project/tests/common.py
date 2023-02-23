@@ -50,9 +50,3 @@ class TestSaleCommon(TransactionCase):
             'product_id': cls.article1.product_variant_id.id,
         })
 
-        # create condition/exclusion subtype
-        cls.subtype = cls.env['operation.condition.subtype'].create({
-            'type': 'file_processing',
-            'name': 'Subtype test',
-            'default_fill': True,
-        })

@@ -5,6 +5,7 @@ from pytz import timezone, utc
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
 PROVIDER_DELIVERY_NUMBER = '75'
 TODO_TASK_STAGE = '15'
@@ -140,6 +141,13 @@ class SaleOrder(models.Model):
 
     def action_generate_operation(self):
         super(SaleOrder, self).action_generate_operation()
+
+        for project in self.order_line.mapped('project_id'):
+            project.name = project.name.replace(' (TEMPLATE)', '')
+
+        for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
+            task.active = False
+
         provider_delivery_template = self.get_provider_delivery_template()
         if provider_delivery_template:
             self.with_context(no_create_delivery_task=True).write({

@@ -30,17 +30,14 @@ class TestSaleOrder(TestSaleCommon):
         # create condition/exclusion
         self.cond_exc = self.env['operation.condition'].create({
             'operation_type': 'condition',
-            'type': 'file_processing',
+            'condition_subtype': 'client_file',
             'note': 'NOTE TEST',
-            'order_id': self.sale_order.id
+            'order_id': self.sale_order.id,
+            'file_name': 'File Name',
         })
 
-        #####
-        # Test create tasks from condition/exclusion
-        # check if the condition's subtype is in the subptypes with the current type
-        self.cond_exc._onchange_type()
-        self.assertIn(self.cond_exc.subtype_id,
-                      self.env['operation.condition.subtype'].search([('type', '=', self.cond_exc.type)]))
+        self.cond_exc._compute_subtype()
+        self.cond_exc._compute_task_number()
 
         # check if the button is shown
         self.assertEqual(1, self.sale_order.new_condition_count)
