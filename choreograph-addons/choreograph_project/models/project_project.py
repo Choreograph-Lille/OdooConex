@@ -1,14 +1,8 @@
 from odoo import api, fields, models
-
+from ..models import WAITING_TASK_STAGE, TODO_TASK_STAGE, STUDIES_DELIVERY_TASK, PROJECT_NAME_TASK, DELIVERY_INFOS_TASK, FULLFILLEMENT_TASK, IN_PROGRESS_PROJECT_STAGE
 state_done = {'kanban_state': 'done'}
 state_normal = {'kanban_state': 'normal'}
-WAITING_TASK_STAGE = '10'
-TODO_TASK_STAGE = '15'
-STUDIES_DELIVERY_TASK = '30'
-PROJECT_NAME_TASK = '20'
-DELIVERY_INFOS_TASK = '80'
-FULLFILLEMENT_TASK = '85'
-IN_PROGRESS_PROJECT_STAGE = '30'
+
 DELIVERY_TASK_NUMBER = 30
 TYPE_OF_PROJECT = [
     ('standard', 'standard'),
