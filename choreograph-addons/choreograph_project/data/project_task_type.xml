@@ -7,10 +7,24 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    <record id="project_task_type_to_do" model="project.task.type">
+        <field name="sequence">15</field>
+        <field name="stage_number">15</field>
+        <field name="name">To Do</field>
+        <field name="legend_blocked">Blocked</field>
+        <field name="type_of_project">operation</field>
+    </record>
     <record id="project_task_type_file_receipt" model="project.task.type">
         <field name="sequence">20</field>
         <field name="stage_number">20</field>
         <field name="name">File receipt / Update</field>
+        <field name="legend_blocked">Blocked</field>
+        <field name="type_of_project">operation</field>
+    </record>
+    <record id="project_task_type_received_file" model="project.task.type">
+        <field name="sequence">25</field>
+        <field name="stage_number">25</field>
+        <field name="name">Received File</field>
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
@@ -60,20 +74,6 @@
         <field name="sequence">90</field>
         <field name="stage_number">90</field>
         <field name="name">Canceled</field>
-        <field name="legend_blocked">Blocked</field>
-        <field name="type_of_project">operation</field>
-    </record>
-    <record id="project_task_type_to_do" model="project.task.type">
-        <field name="sequence">15</field>
-        <field name="stage_number">15</field>
-        <field name="name">To Do</field>
-        <field name="legend_blocked">Blocked</field>
-        <field name="type_of_project">operation</field>
-    </record>
-    <record id="project_task_type_received_file" model="project.task.type">
-        <field name="sequence">25</field>
-        <field name="stage_number">25</field>
-        <field name="name">Received File</field>
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
