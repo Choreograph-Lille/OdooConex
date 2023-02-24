@@ -241,75 +241,28 @@ class ProjectTask(models.Model):
             }
         }
 
-    @api.model
-    def set_task_project(self):
-        task_details = self.get_task_list()
-
-        def get_vals(_list):
-            return {'task_ids': [(0, 0, task_details[item]) for item in _list]}
-
-        def new_extend(source_list: list(), extend_list: list()) -> list():
-            tmp = source_list.copy()
-            tmp.extend(extend_list)
-            return tmp
-        task_list = ['project_name']
-        self.env.ref('choreograph_sale_project.project_project_score_presentation').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_study').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_count').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_yield_calculation').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_matchback').write(get_vals(task_list))
-
-        task_list.extend(['potential', 'delivery_study', 'fullfilment_client', 'delivery_infos'])
-        self.env.ref('choreograph_sale_project.project_project_telfixebox_enrichment').write(
-            get_vals(new_extend(task_list, ['campaign_counts'])))
-        self.env.ref('choreograph_sale_project.project_project_extraction').write(get_vals(task_list))
-
-        task_list.extend(['prefulfillment'])
-        self.env.ref('choreograph_sale_project.project_project_ddn_enrichment').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_telportable_enrichment').write(
-            get_vals(new_extend(task_list, ['campaign_counts'])))
-        self.env.ref('choreograph_sale_project.project_project_sms_enrichment').write(
-            get_vals(new_extend(task_list, ['audit', 'campaign_sms', 'info_presta', 'delivery_presta', 'campaign_counts'])))
-        self.env.ref('choreograph_sale_project.project_project_email_enrichment').write(get_vals(new_extend(
-            task_list, ['audit', 'campaign', 'file_bat', 'link_opt_out', 'info_presta', 'delivery_presta', 'campaign_counts'])))
-
-        task_list.extend(['presentation', 'deposit_date'])
-        self.env.ref('choreograph_sale_project.project_project_reactivation').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_loyalty').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_activation').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting').write(get_vals(task_list))
-
-        task_list.extend(['campaign_counts'])
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_telfixebox').write(
-            get_vals(new_extend(task_list, ['info_presta', 'delivery_presta'])))
-        self.env.ref('choreograph_sale_project.project_project_telfixebox_prospecting').write(get_vals(task_list))
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_email').write(
-            get_vals(new_extend(task_list, ['campaign', 'file_bat', 'info_presta', 'delivery_presta'])))
-        self.env.ref('choreograph_sale_project.project_project_email_prospecting').write(
-            get_vals(new_extend(task_list, ['campaign', 'file_bat'])))
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_sms').write(
-            get_vals(new_extend(task_list, ['campaign_sms', 'info_presta', 'delivery_presta'])))
-        self.env.ref('choreograph_sale_project.project_project_sms_prospecting').write(
-            get_vals(new_extend(task_list, ['campaign_sms'])))
-        self.env.ref('choreograph_sale_project.project_project_postal_prospecting_telportable').write(
-            get_vals(new_extend(task_list, ['info_presta', 'delivery_presta'])))
-        self.env.ref('choreograph_sale_project.project_project_prospection_telportable').write(get_vals(task_list))
-
     def write(self, vals):
         res = super(ProjectTask, self).write(vals)
-        if self.type_of_project == 'operation' and vals.get('stage_id', False):
-            if vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_all_task_terminated(except_task=self.id)
-            if self.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and vals.get('stage_id') in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
-                self.project_id._hook_task_stage_in_20_25()
-            elif self.task_number == '20' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_20_to_80()
-            elif self.task_number == '25' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_25_to_80()
-            elif self.task_number == '30' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_30_to_80()
-            elif self.task_number == '70' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_70_to_80()
-            elif self.task_number == '75' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                self.project_id._hook_task_stage_75_to_80()
+        for task in self:
+            if task.type_of_project == 'operation' and vals.get('stage_id', False):
+                if vals['stage_id'] == TERMINATED_TASK_STAGE:
+                    task.project_id._hook_all_task_terminated(except_task=self.id)
+                if task.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and vals.get('stage_id') in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
+                    task.project_id._hook_task_stage_in_20_25()
+                elif task.task_number == '20' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                    task.project_id._hook_task_stage_20_to_80()
+                elif task.task_number == '25' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                    task.project_id._hook_task_stage_25_to_80()
+                elif task.task_number == '30' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                    task.project_id._hook_task_stage_30_to_80()
+                elif task.task_number == '70' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                    task.project_id._hook_task_stage_70_to_80()
+                elif task.task_number == '75' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                    task.project_id._hook_task_stage_75_to_80()
+                elif task.task_number == '90' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                    task.project_id._hook_task_90_in_stage_80()
+                elif task.task_number == '45' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                    task.project_id._hook_task_45_in_80_or_90_in_15()
+                elif task.task_number == '90' and vals['stage_id'] == TODO_TASK_STAGE and not task.project_id.task_ids(lambda t: t.task_number == '45'):
+                    task.project_id._hook_task_45_in_80_or_90_in_15()
         return res
