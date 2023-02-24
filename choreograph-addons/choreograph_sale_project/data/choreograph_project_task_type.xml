@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="choreograph_project_task_type_conditions_exlclusion"
-        model="choreograph.project.task.type">
-        <field name="name">CONDITIONS/EXCLUSION</field>
-    </record>
     <record id="choreograph_project_task_type_study" model="choreograph.project.task.type">
-        <field name="name">STUDY</field>
+        <field name="name">Study</field>
     </record>
     <record id="choreograph_project_task_type_operation" model="choreograph.project.task.type">
-        <field name="name">OPERATION</field>
+        <field name="name">Operation</field>
     </record>
     <record id="choreograph_project_task_type_delivery" model="choreograph.project.task.type">
-        <field name="name">DELIVERY</field>
+        <field name="name">Delivery</field>
+    </record>
+    <record id="choreograph_project_task_type_audit" model="choreograph.project.task.type">
+        <field name="name">Audit</field>
+    </record>
+    <record id="choreograph_project_task_type_campaign" model="choreograph.project.task.type">
+        <field name="name">Campaign</field>
+    </record>
+    <record id="choreograph_project_task_type_sms_campaign" model="choreograph.project.task.type">
+        <field name="name">SMS Campaign</field>
+    </record>
+    <record id="choreograph_project_task_type_bat_witness_file" model="choreograph.project.task.type">
+        <field name="name">BAT / WITNESS FILE</field>
+    </record>
+    <record id="choreograph_project_task_type_link_opt_out" model="choreograph.project.task.type">
+        <field name="name">Link OPT-OUT</field>
+    </record>
+    <record id="choreograph_project_task_type_info_presta" model="choreograph.project.task.type">
+        <field name="name">Info presta</field>
+    </record>
+    <record id="choreograph_project_task_type_delivery_presta" model="choreograph.project.task.type">
+        <field name="name">Delivery presta</field>
+    </record>
+    <record id="choreograph_project_task_type_delivery_infos" model="choreograph.project.task.type">
+        <field name="name">Delivery infos</field>
+    </record>
+    <record id="choreograph_project_task_campaign_counts" model="choreograph.project.task.type">
+        <field name="name">Campaign counts</field>
+    </record>
+    <record id="choreograph_project_task_type_deposit_date" model="choreograph.project.task.type">
+        <field name="name">Deposit date</field>
     </record>
 </odoo>

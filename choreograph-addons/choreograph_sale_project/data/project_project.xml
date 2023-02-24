@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo>
+<odoo noupdate="1">
     <record id="project_project_postal_prospecting" model="project.project">
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">POSTAL PROSPECTING</field>
+        <field name="name">Postal Prospecting (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -13,7 +13,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">POSTAL PROSPECTING + TELFIXEBOX</field>
+        <field name="name">Postal Prospecting + Telfixebox (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -22,7 +22,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">TELFIXEBOX PROSPECTING</field>
+        <field name="name">Telfixebox Prospecting (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -31,7 +31,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">POSTAL PROSPECTING + EMAIL</field>
+        <field name="name">Postal Prospecting + Email (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -40,7 +40,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">EMAIL PROSPECTING</field>
+        <field name="name">Email Prospecting (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -49,7 +49,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">POSTAL PROSPECTING + SMS</field>
+        <field name="name">Postal Prospecting + Sms (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -58,25 +58,25 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">SMS PROSPECTING</field>
+        <field name="name">Sms Prospecting (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
 
-    <record id="project_project_postal_telportable_prospecting" model="project.project">
+    <record id="project_project_postal_prospecting_telportable" model="project.project">
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">POSTAL + TELPORTABLE PROSPECTING</field>
+        <field name="name">Postal Prospecting + Telportable (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
 
-    <record id="project_project_telmobile_prospecting" model="project.project">
+    <record id="project_project_prospection_telportable" model="project.project">
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">TELMOBILE PROSPECTING</field>
+        <field name="name">Prospecting Telportable (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -85,7 +85,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">REACTIVATION</field>
+        <field name="name">Reactivation (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -94,7 +94,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">LOYALTY</field>
+        <field name="name">Fidelization (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -103,7 +103,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">ACTIVATION</field>
+        <field name="name">Activation (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -112,7 +112,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">DDN ENRICHMENT</field>
+        <field name="name">DDN Enrichment (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -121,7 +121,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">TELPORTABLE ENRICHMENT</field>
+        <field name="name">Supportable Enrichment (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -130,7 +130,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">SMS ENRICHMENT</field>
+        <field name="name">Sms Enrichment (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -139,7 +139,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">EMAIL ENRICHMENT</field>
+        <field name="name">Email Enrichment (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -148,7 +148,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">TELFIXEBOX ENRICHMENT</field>
+        <field name="name">Telfixebox Enrichment (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -157,7 +157,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">EXTRACTION</field>
+        <field name="name">Extraction (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -166,7 +166,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">STUDY</field>
+        <field name="name">Study (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -175,7 +175,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">COUNT</field>
+        <field name="name">Counting (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -184,7 +184,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">YIELD CALCULATION</field>
+        <field name="name">Yield Calculation (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -193,7 +193,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">MATCHBACK</field>
+        <field name="name">Matchback (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
@@ -202,7 +202,7 @@
         <field name="is_template" eval="True" />
         <field name="type_of_project">operation</field>
         <field name="privacy_visibility">portal</field>
-        <field name="name">SCORE PRESENTATION</field>
+        <field name="name">Score Presentation (TEMPLATE)</field>
         <field name="task_ids" eval="[Command.clear()]" />
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
