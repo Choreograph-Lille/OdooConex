@@ -207,5 +207,5 @@
         <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
     </record>
 
-    <function model="project.task" name="set_task_project" />
+    <function model="project.project" name="set_task_project" />
 </odoo>
