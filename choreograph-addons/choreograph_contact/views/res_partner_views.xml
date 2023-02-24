@@ -16,20 +16,20 @@
                             </tree>
                         </field>
                     </page>
-                    <page name="client_data_pg" string="Partner Data" attrs="{'invisible': [('customer_rank', '=', 0)]}">
+                    <page name="client_data_pg" string="Partner Data" attrs="{'invisible': ['|', ('customer_rank', '=', 0), ('is_company', '=', False)]}">
                         <group>
                             <group name="client_data_left">
-                                <field name="customer_rank" invisible="1"/>
-                                <field name="update_frequency"/>
-                                <field name="last_conexup_date"/>
-                                <field name="last_revival_date"/>
-                                <field name="base_entry_date"/>
+                                <field name="customer_rank" invisible="1" readonly="1"/>
+                                <field name="update_frequency" readonly="1"/>
+                                <field name="last_conexup_date" readonly="1"/>
+                                <field name="last_revival_date" readonly="1"/>
+                                <field name="base_entry_date" readonly="1"/>
                             </group>
                             <group name="client_data_right">
-                                <field name="last_transaction_date"/>
-                                <field name="last_receipt_date"/>
-                                <field name="private_title"/>
-                                <field name="data_destruction_date"/>
+                                <field name="last_transaction_date" readonly="1"/>
+                                <field name="last_receipt_date" readonly="1"/>
+                                <field name="private_title" readonly="1"/>
+                                <field name="data_destruction_date" readonly="1"/>
                             </group>
                         </group>
                     </page>

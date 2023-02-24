@@ -4,11 +4,14 @@ from datetime import date
 from pytz import timezone, utc
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
 PROVIDER_DELIVERY_NUMBER = '75'
 TODO_TASK_STAGE = '15'
+SMS_TASK_NUMBER = '50'
+EMAIL_TASK_NUMBER = '45'
+CHECK_TASK_STAGE_NUMBER = '10'
 OPERATION_TASK_NUMBER = {
     'potential_return': '25',
     'study_delivery': '30',
@@ -32,7 +35,6 @@ class SaleOrder(models.Model):
     study_delivery_date = fields.Date(copy=False)
     presentation_date = fields.Date(copy=False)
 
-    show_provider_delivery = fields.Boolean(compute='_compute_show_provider_delivery')
     operation_provider_delivery_ids = fields.One2many(
         'operation.provider.delivery', 'order_id', 'Provider Delivery Tasks')
     comment = fields.Text()
@@ -136,9 +138,6 @@ class SaleOrder(models.Model):
             return provider_template if provider_template else False
         return False
 
-    def _compute_show_provider_delivery(self):
-        self.show_provider_delivery = True if self.get_provider_delivery_template() else False
-
     def action_generate_operation(self):
         super(SaleOrder, self).action_generate_operation()
 
@@ -197,3 +196,30 @@ class SaleOrder(models.Model):
                 rec._get_operation_task(['50', '55', '60']).update_task_stage(TODO_TASK_STAGE)
             if vals.get('email_is_info_validated'):
                 rec._get_operation_task(['45', '55', '60']).update_task_stage(TODO_TASK_STAGE)
+
+    @api.onchange('is_info_validated')
+    def _onchange_sms_info_validated(self):
+        for rec in self:
+            rec.check_operation_exists()
+            rec.check_campaign_tasks_exist(SMS_TASK_NUMBER)
+            rec.check_task_stage_number(self._get_operation_task([SMS_TASK_NUMBER]).stage_id.stage_number)
+
+    @api.onchange('email_is_info_validated')
+    def _onchange_email_info_validated(self):
+        for rec in self:
+            rec.check_operation_exists()
+            rec.check_campaign_tasks_exist(EMAIL_TASK_NUMBER)
+            rec.check_task_stage_number(self._get_operation_task([EMAIL_TASK_NUMBER]).stage_id.stage_number)
+
+    def check_operation_exists(self):
+        if not self.project_ids:
+            raise ValidationError(_('You must already generate the operation to launch the tasks on the campaigns'))
+
+    def check_campaign_tasks_exist(self, task_number):
+        for rec in self:
+            if not rec._get_operation_task([task_number]):
+                raise ValidationError(_('You can\'t check this field, the task %s doesn\'t exist in the operation') % task_number)
+
+    def check_task_stage_number(self, number=''):
+        if number != CHECK_TASK_STAGE_NUMBER:
+            raise ValidationError(_('The task is in progress, you can\'t check/uncheck this field'))
