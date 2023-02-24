@@ -37,3 +37,7 @@ class ProjectTask(models.Model):
         task_stage_id = self.env['project.task.type'].search([('stage_number', '=', number)], limit=1)
         if task_stage_id:
             self.write({'stage_id': task_stage_id.id})
+
+    @api.model
+    def get_operation_project_task_type(self):
+        return self.env['project.task.type'].search([('type_of_project', '=', 'operation')])
