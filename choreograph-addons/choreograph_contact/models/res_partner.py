@@ -22,6 +22,6 @@ class ResPartner(models.Model):
     update_frequency = fields.Char('Update Frequency')
     catalogue_ids = fields.Many2many('res.partner.catalogue', 'res_partner_catalogue_rel',
                                      'partner_id', 'catalogue_id', 'Catalogues')
-    private_title = fields.Char('Private Title')
+    private_title = fields.Boolean('Private Title')
     agency_id = fields.Many2one('res.partner', 'Agency', ondelete='restrict', index=True)
     industry_id = fields.Many2one('res.partner.industry', 'Activity area')
