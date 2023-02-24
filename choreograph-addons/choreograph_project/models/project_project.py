@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+
 state_done = {'kanban_state': 'done'}
 state_normal = {'kanban_state': 'normal'}
 
@@ -102,8 +103,16 @@ class ProjectProject(models.Model):
     @api.model
     def create(self, values):
         if self._context.get('is_operation_generation'):
+            type_ids = self.env['project.task'].get_operation_project_task_type()
             values.update({
                 'type_of_project': 'operation',
                 'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft').id,
+                'type_ids': [(6, 0, type_ids.ids)]
             })
-        return super().create(values)
+        project_id = super().create(values)
+        return project_id
+
+    def action_view_tasks(self):
+        action = super().action_view_tasks()
+        action['context'].update({'default_type_of_project': self.type_of_project})
+        return action
