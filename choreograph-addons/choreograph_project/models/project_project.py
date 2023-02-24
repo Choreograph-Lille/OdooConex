@@ -1,5 +1,4 @@
 from odoo import api, fields, models
-
 state_done = {'kanban_state': 'done'}
 state_normal = {'kanban_state': 'normal'}
 
