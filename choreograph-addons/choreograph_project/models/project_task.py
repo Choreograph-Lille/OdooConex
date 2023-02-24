@@ -41,6 +41,7 @@ class ProjectTask(models.Model):
     @api.model
     def get_operation_project_task_type(self):
         return self.env['project.task.type'].search([('type_of_project', '=', 'operation')])
+        
     @api.model
     def create(self, values):
         if self._context.get('is_operation_generation'):
