@@ -107,7 +107,7 @@ class ProjectProject(models.Model):
                 self._update_task_stage('80', TODO_TASK_STAGE)
 
     def _is_task_terminated(self, task_number_list, task_number=False):
-        if task_number:
+        if task_number and task_number in task_number_list:
             task_number_list.pop(task_number_list.index(task_number))
         task_ids = self.task_ids.filtered(lambda task: task.task_number in task_number_list)
         return all([task.stage_id.stage_number == TERMINATED_TASK_STAGE for task in task_ids])
