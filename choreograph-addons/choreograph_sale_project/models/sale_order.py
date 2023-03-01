@@ -175,6 +175,12 @@ class SaleOrder(models.Model):
         self._check_info_validated(vals)
         return res
 
+    @api.model
+    def create(self, vals):
+        vals['is_info_validated'] = False
+        vals['email_is_info_validated'] = False
+        return super(SaleOrder, self).create(vals)
+
     def _update_date_deadline(self, vals):
         for rec in self:
             if vals.get('commitment_date'):
@@ -199,17 +205,19 @@ class SaleOrder(models.Model):
 
     @api.onchange('is_info_validated')
     def _onchange_sms_info_validated(self):
-        for rec in self:
-            rec.check_operation_exists()
-            rec.check_campaign_tasks_exist(SMS_TASK_NUMBER)
-            rec.check_task_stage_number(self._get_operation_task([SMS_TASK_NUMBER]).stage_id.stage_number)
+        if self.id.origin:
+            for rec in self:
+                rec.check_operation_exists()
+                rec.check_campaign_tasks_exist(SMS_TASK_NUMBER)
+                rec.check_task_stage_number(self._get_operation_task([SMS_TASK_NUMBER]).stage_id.stage_number)
 
     @api.onchange('email_is_info_validated')
     def _onchange_email_info_validated(self):
-        for rec in self:
-            rec.check_operation_exists()
-            rec.check_campaign_tasks_exist(EMAIL_TASK_NUMBER)
-            rec.check_task_stage_number(self._get_operation_task([EMAIL_TASK_NUMBER]).stage_id.stage_number)
+        if self.id.origin:
+            for rec in self:
+                rec.check_operation_exists()
+                rec.check_campaign_tasks_exist(EMAIL_TASK_NUMBER)
+                rec.check_task_stage_number(self._get_operation_task([EMAIL_TASK_NUMBER]).stage_id.stage_number)
 
     def check_operation_exists(self):
         if not self.project_ids:
