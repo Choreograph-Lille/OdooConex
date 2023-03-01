@@ -245,24 +245,25 @@ class ProjectTask(models.Model):
         res = super(ProjectTask, self).write(vals)
         for task in self:
             if task.type_of_project == 'operation' and vals.get('stage_id', False):
-                if vals['stage_id'] == TERMINATED_TASK_STAGE:
+                stage_id = self.env['project.task.type'].browse(vals['stage_id'])
+                if stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_all_task_terminated(except_task=self.id)
-                if task.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and vals.get('stage_id') in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
+                if task.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and stage_id.stage_number in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
                     task.project_id._hook_task_in_stage_20_25()
-                elif task.task_number == '20' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                elif task.task_number == '20' and stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_task_20_in_stage_80()
-                elif task.task_number == '25' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                elif task.task_number == '25' and stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_task_25_in_stage_80()
-                elif task.task_number == '30' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                elif task.task_number == '30' and stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_task_30_in_stage_80()
-                elif task.task_number == '70' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                elif task.task_number == '70' and stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_task_70_in_stage_80()
-                elif task.task_number == '75' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                elif task.task_number == '75' and stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_task_75_in_stage_80()
-                elif task.task_number == '90' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                elif task.task_number == '90' and stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_task_90_in_stage_80()
-                elif task.task_number == '45' and vals['stage_id'] == TERMINATED_TASK_STAGE:
+                elif task.task_number == '45' and stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_task_45_in_80_or_90_in_15()
-                elif task.task_number == '90' and vals['stage_id'] == TODO_TASK_STAGE and not task.project_id.task_ids(lambda t: t.task_number == '45'):
+                elif task.task_number == '90' and stage_id.stage_number == TODO_TASK_STAGE and not task.project_id.task_ids(lambda t: t.task_number == '45'):
                     task.project_id._hook_task_45_in_80_or_90_in_15()
         return res
