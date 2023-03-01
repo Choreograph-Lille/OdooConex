@@ -197,6 +197,13 @@
                         <group></group>
                     </group>
                 </field>
+
+                <field name="user_ids" position="after">
+                    <field name="type_of_project" invisible="0"/>
+                </field>
+                <xpath expr="//header/field[@name='stage_id']" position="attributes">
+                    <attribute name="domain">[('type_of_project', '=', type_of_project)]</attribute>
+                </xpath>
             </field>
         </record>
     </data>

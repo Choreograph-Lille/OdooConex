@@ -266,3 +266,4 @@ class ProjectTask(models.Model):
                 elif task.task_number == '90' and vals['stage_id'] == TODO_TASK_STAGE and not task.project_id.task_ids(lambda t: t.task_number == '45'):
                     task.project_id._hook_task_45_in_80_or_90_in_15()
         return res
+
