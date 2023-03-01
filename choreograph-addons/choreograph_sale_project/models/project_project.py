@@ -100,11 +100,17 @@ class ProjectProject(models.Model):
         self._update_task_stage('65', TODO_TASK_STAGE)
 
     def _hook_all_task_terminated(self, except_task):
-        if not self.task_ids.filtered(lambda task: task.task_number != '80' and task.id != except_task):
+        if self._is_task_terminated(['65', '5', '15'], except_task):
             if self.task_ids.filtered(lambda task: task.task_number == '70'):
                 self._update_task_stage('70', TODO_TASK_STAGE)
             else:
                 self._update_task_stage('80', TODO_TASK_STAGE)
+
+    def _is_task_terminated(self, task_number_list, task_number=False):
+        if task_number:
+            task_number_list.pop(task_number_list.index(task_number))
+        task_ids = self.task_ids.filtered(lambda task: task.task_number in task_number_list)
+        return all([task.stage_id.stage_number == TERMINATED_TASK_STAGE for task in task_ids])
 
     def _hook_task_70_in_stage_80(self):
         self._update_task_stage('75', TODO_TASK_STAGE)
@@ -113,11 +119,7 @@ class ProjectProject(models.Model):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id})
 
     def _hook_task_10_and_80_in_stage_80(self, task_number):
-        task_10_stage_number = self._get_task_stage_number_by_task_number('10')
-        task_10_stage_number = self._get_task_stage_number_by_task_number('80')
-        task_80_terminated = task_10_stage_number == TERMINATED_TASK_STAGE and task_number == '80'
-        task_10_terminated = task_10_stage_number == TERMINATED_TASK_STAGE and task_number == '10'
-        if task_10_terminated or task_80_terminated:
+        if self._is_task_terminated(['10', '80'], task_number):
             self._update_task_stage('85', TODO_TASK_STAGE)
 
     def _hook_task_fulfillement_terminated(self):
