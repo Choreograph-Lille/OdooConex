@@ -246,24 +246,22 @@ class ProjectTask(models.Model):
         for task in self:
             if task.type_of_project == 'operation' and vals.get('stage_id', False):
                 stage_id = self.env['project.task.type'].browse(vals['stage_id'])
+                method_dict = {
+                    '20': '_hook_task_20_in_stage_80',
+                    '25': '_hook_task_25_in_stage_80',
+                    '30': '_hook_task_30_in_stage_80',
+                    '45': '_hook_task_45_in_80_or_90_in_15',
+                    '70': '_hook_task_70_in_stage_80',
+                    '75': '_hook_task_75_in_stage_80',
+                    '90': '_hook_task_90_in_stage_80'
+                }
+                method_name = method_dict.get(task.task_number, None)
                 if stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_all_task_terminated(except_task=self.id)
-                if task.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and stage_id.stage_number in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
+                if method_name and stage_id.stage_number == TERMINATED_TASK_STAGE:
+                    getattr(task.project_id, method_name)()
+                elif task.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and stage_id.stage_number in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
                     task.project_id._hook_task_in_stage_20_25()
-                elif task.task_number == '20' and stage_id.stage_number == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_20_in_stage_80()
-                elif task.task_number == '25' and stage_id.stage_number == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_25_in_stage_80()
-                elif task.task_number == '30' and stage_id.stage_number == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_30_in_stage_80()
-                elif task.task_number == '70' and stage_id.stage_number == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_70_in_stage_80()
-                elif task.task_number == '75' and stage_id.stage_number == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_75_in_stage_80()
-                elif task.task_number == '90' and stage_id.stage_number == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_90_in_stage_80()
-                elif task.task_number == '45' and stage_id.stage_number == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_45_in_80_or_90_in_15()
                 elif task.task_number == '90' and stage_id.stage_number == TODO_TASK_STAGE and not task.project_id.task_ids(lambda t: t.task_number == '45'):
                     task.project_id._hook_task_45_in_80_or_90_in_15()
         return res
