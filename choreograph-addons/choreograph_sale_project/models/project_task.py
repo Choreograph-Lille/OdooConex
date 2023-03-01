@@ -248,17 +248,17 @@ class ProjectTask(models.Model):
                 if vals['stage_id'] == TERMINATED_TASK_STAGE:
                     task.project_id._hook_all_task_terminated(except_task=self.id)
                 if task.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and vals.get('stage_id') in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
-                    task.project_id._hook_task_stage_in_20_25()
+                    task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '20' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_stage_20_to_80()
+                    task.project_id._hook_task_20_in_stage_80()
                 elif task.task_number == '25' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_stage_25_to_80()
+                    task.project_id._hook_task_25_in_stage_80()
                 elif task.task_number == '30' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_stage_30_to_80()
+                    task.project_id._hook_task_30_in_stage_80()
                 elif task.task_number == '70' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_stage_70_to_80()
+                    task.project_id._hook_task_70_in_stage_80()
                 elif task.task_number == '75' and vals['stage_id'] == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_task_stage_75_to_80()
+                    task.project_id._hook_task_75_in_stage_80()
                 elif task.task_number == '90' and vals['stage_id'] == TERMINATED_TASK_STAGE:
                     task.project_id._hook_task_90_in_stage_80()
                 elif task.task_number == '45' and vals['stage_id'] == TERMINATED_TASK_STAGE:
