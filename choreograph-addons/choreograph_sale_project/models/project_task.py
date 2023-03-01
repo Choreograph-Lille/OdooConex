@@ -258,11 +258,12 @@ class ProjectTask(models.Model):
                 method_name = method_dict.get(task.task_number, None)
                 if stage_id.stage_number == TERMINATED_TASK_STAGE:
                     task.project_id._hook_all_task_terminated(except_task=self.id)
-                if method_name and stage_id.stage_number == TERMINATED_TASK_STAGE:
-                    getattr(task.project_id, method_name)()
+                    if method_name:
+                        getattr(task.project_id, method_name)()
+                    if task.task_number in ['10', '80']:
+                        task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
                 elif task.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and stage_id.stage_number in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '90' and stage_id.stage_number == TODO_TASK_STAGE and not task.project_id.task_ids(lambda t: t.task_number == '45'):
                     task.project_id._hook_task_45_in_80_or_90_in_15()
         return res
-

@@ -1,7 +1,7 @@
 from datetime import timedelta
 
 from odoo import api, models
-from odoo.addons.choreograph_project.models.project_project import WAITING_FILE_TASK_STAGE, TODO_TASK_STAGE, WAITING_QTY_TASK_STAGE
+from odoo.addons.choreograph_project.models.project_project import WAITING_FILE_TASK_STAGE, TODO_TASK_STAGE, WAITING_QTY_TASK_STAGE, TERMINATED_TASK_STAGE
 
 
 class ProjectProject(models.Model):
@@ -67,8 +67,15 @@ class ProjectProject(models.Model):
             self._hook_stage_planified()
         return res
 
+    def _find_task_by_task_number(self, task_number: str):
+        return self.task_ids.filtered(lambda task: task.task_number == task_number)
+
+    def _get_task_stage_number_by_task_number(self, task_number: str):
+        task_id = self._find_task_by_task_number(task_number)
+        return task_id.stage_number if task_id else False
+
     def _update_task_stage(self, task_number: str, stage_number: str):
-        task_id = self.task_ids.filtered(lambda task: task.task_number == task_number)
+        task_id = self._find_task_by_task_number(task_number)
         if task_id:
             task_id.update_task_stage(stage_number)
 
@@ -105,8 +112,13 @@ class ProjectProject(models.Model):
     def _hook_task_75_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id})
 
-    def _hook_task_10_80_in_80(self):
-        self._update_task_stage('85', TODO_TASK_STAGE)
+    def _hook_task_10_and_80_in_stage_80(self, task_number):
+        task_10_stage_number = self._get_task_stage_number_by_task_number('10')
+        task_10_stage_number = self._get_task_stage_number_by_task_number('80')
+        task_80_terminated = task_10_stage_number == TERMINATED_TASK_STAGE and task_number == '80'
+        task_10_terminated = task_10_stage_number == TERMINATED_TASK_STAGE and task_number == '10'
+        if task_10_terminated or task_80_terminated:
+            self._update_task_stage('85', TODO_TASK_STAGE)
 
     def _hook_task_fulfillement_terminated(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_delivery').id})
