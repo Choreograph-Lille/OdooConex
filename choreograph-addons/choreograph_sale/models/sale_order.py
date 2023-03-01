@@ -35,7 +35,7 @@ class SaleOrder(models.Model):
 
     po_number = fields.Char('PO Number')
     campaign_name = fields.Char()
-    is_info_validated = fields.Boolean('Infos Validated')
+    is_info_validated = fields.Boolean('Infos Validated', copy=False)
     routing_date = fields.Date()
     routing_end_date = fields.Date()
     desired_finished_volume = fields.Char()
@@ -60,7 +60,7 @@ class SaleOrder(models.Model):
     # email campaign
     livedata_po_number = fields.Char('Email PO Livedata Number')
     email_campaign_name = fields.Char('Email Campaign Name')
-    email_is_info_validated = fields.Boolean('Email Infos Validated')
+    email_is_info_validated = fields.Boolean('Email Infos Validated', copy=False)
     email_reception_date = fields.Date('Email Reception Date')
     email_reception_location = fields.Char('Email Where to find ?')
     email_personalization = fields.Boolean('Email Personalization')
