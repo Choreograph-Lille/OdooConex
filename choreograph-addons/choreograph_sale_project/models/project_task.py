@@ -257,7 +257,8 @@ class ProjectTask(models.Model):
                 }
                 method_name = method_dict.get(task.task_number, None)
                 if stage_id.stage_number == TERMINATED_TASK_STAGE:
-                    task.project_id._hook_all_task_terminated(task.task_number)
+                    if task.task_number in ['65', '5', '15']:
+                        task.project_id._hook_all_task_terminated(task.task_number)
                     if method_name:
                         getattr(task.project_id, method_name)()
                     if task.task_number in ['10', '80']:
