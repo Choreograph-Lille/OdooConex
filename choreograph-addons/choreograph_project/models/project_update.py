@@ -11,3 +11,9 @@ class ProjectUpdate(models.Model):
             project_id.js_redelivery_studies()
         if project_id and type_redelivery == 'prod':
             project_id.js_redelivery_prod()
+
+    @api.model
+    def js_livery(self, active_id, type_redelivery):
+        project_id = self.env['project.project'].browse(active_id).exists()
+        if project_id:
+            project_id.livery_project()

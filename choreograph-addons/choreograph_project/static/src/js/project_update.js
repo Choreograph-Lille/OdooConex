@@ -16,6 +16,9 @@ export class KanbanProjectUpdate extends KanbanController {
     async onRedeliveryProd() {
         await this.orm.call(this.props.resModel, 'js_redelivery', [this.props.context.active_id, 'prod'], {});
     }
+    async onLiveryProject() {
+        await this.orm.call(this.props.resModel, 'js_livery', [this.props.context.active_id, 'prod'], {});
+    }
 };
 
 registry.category('views').add('project_update_redelivery', {
