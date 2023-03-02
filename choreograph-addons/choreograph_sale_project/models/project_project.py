@@ -121,6 +121,12 @@ class ProjectProject(models.Model):
 
     def _hook_task_90_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
-        self._update_task_stage('95', TODO_TASK_STAGE)
-        if self.sale_order_id.commitment_date:
-            self.sale_order_id.write({'commitment_date': self.sale_order_id.commitment_date + timedelta(days=15)})
+        task_95 = self.task_ids.filtered(lambda task: task.task_number == '95')
+        if task_95:
+            task_stage_id = self.env['project.task.type'].search([('stage_number', '=', TODO_TASK_STAGE)], limit=1)
+            values = {}
+            if task_stage_id:
+                values.update({'stage_id': task_stage_id.id})
+            if self.sale_order_id.commitment_date:
+                values.udpate({'date_deadline': self.sale_order_id.commitment_date + timedelta(days=15)})
+            task_95.write(values)
