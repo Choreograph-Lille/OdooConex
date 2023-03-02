@@ -90,16 +90,28 @@ class ProjectProject(models.Model):
             fullfillement_task_id.write(state_normal)
         self.update_project_stage(IN_PROGRESS_PROJECT_STAGE)
 
+    def _find_task_by_task_number(self, task_number: str):
+        return self.task_ids.filtered(lambda task: task.task_number == task_number)
+
+    def _get_task_stage_number_by_task_number(self, task_number: str):
+        task_id = self._find_task_by_task_number(task_number)
+        return task_id.stage_number if task_id else False
+
+    def _update_task_stage(self, task_number: str, stage_number: str):
+        task_id = self._find_task_by_task_number(task_number)
+        if task_id:
+            task_id.update_task_stage(stage_number)
+
     def livery_project(self):
-        stage_source = {
-            '40': self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
-            '50': self.env.ref('choreograph_project.planning_project_stage_extraction')
-        }
-        contains_source = stage_source.get(self.stage_id.stage_number, False)
-        if contains_source:
-            if self.stage_id.stage_number == '40':
-                self._update_task_stage('80', '15')
-            self.write({'stage_id': contains_source})
+        if self.stage_id.stage_number == '40':
+            self._update_task_stage('80', '15')
+            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
+        elif self.stage_id.stage_number == '50':
+            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_extraction').id})
+            if not self.task_ids.filtered(lambda task: task.task_number == '45'):
+                self._update_task_stage('90', '15')
+            else:
+                self._update_task_stage('45', '15')
 
     def update_project_stage(self, number):
         project_stage_id = self.env['project.project.stage'].search([('stage_number', '=', number)], limit=1)
