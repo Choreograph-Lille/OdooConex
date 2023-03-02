@@ -116,6 +116,9 @@ class ProjectProject(models.Model):
     def _hook_task_45_in_80_or_90_in_15(self):
         self._update_task_stage('90', TODO_TASK_STAGE)
 
+    def _hook_task_90_in_stage_15(self):
+        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_extraction').id})
+
     def _hook_task_90_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
         self._update_task_stage('95', TODO_TASK_STAGE)
