@@ -134,13 +134,4 @@ class ProjectProject(models.Model):
         if self.sale_order_id.commitment_date:
             self.sale_order_id.write({'commitment_date': self.sale_order_id.commitment_date + timedelta(days=15)})
 
-    def livery_project(self):
-        stage_source = {
-            '40': self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
-            '50': self.env.ref('choreograph_project.planning_project_stage_extraction')
-        }
-        contains_source = stage_source.get(self.stage_id.stage_number, False)
-        if contains_source:
-            if self.stage_id.stage_number == '40':
-                    self._update_task_stage('80', '15')
-            self.write({'stage_id': contains_source})
+
