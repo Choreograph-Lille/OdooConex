@@ -28,7 +28,7 @@ class SaleOrder(models.Model):
     presentation = fields.Boolean(copy=False)
     potential_return_task_id = fields.Many2one(
         'project.task', 'Potential Return Task', copy=False)
-    study_delivery_task_id = fields.Many2one('project.task', 'Study Delivery Task',copy=False)
+    study_delivery_task_id = fields.Many2one('project.task', 'Study Delivery Task', copy=False)
     presentation_task_id = fields.Many2one('project.task', 'Presentation Task', copy=False)
     study_global_task_id = fields.Many2one('project.task', 'Study Global Task', copy=False)
     potential_return_date = fields.Date(copy=False)
@@ -43,7 +43,8 @@ class SaleOrder(models.Model):
     segment_ids = fields.One2many('operation.segment', 'order_id', 'Segment')
     repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab')
     operation_type_id = fields.Many2one('project.project', compute='_compute_operation_type_id', store=True)
-    can_display_redelivery = fields.Boolean(compute='_compute_can_display_redelivery')
+    can_display_redelivery = fields.Boolean(compute='_compute_can_display_delivery')
+    can_display_livery_project = fields.Boolean(compute='_compute_can_display_delivery')
 
     @api.depends('project_ids')
     def _compute_operation_type_id(self):
@@ -51,15 +52,20 @@ class SaleOrder(models.Model):
             rec.operation_type_id = rec.project_ids[0] if rec.project_ids else False
 
     @api.depends('operation_type_id.stage_id')
-    def _compute_can_display_redelivery(self):
-        STAGE_PROJECT = [
+    def _compute_can_display_delivery(self):
+        STAGE_REDELIVERY_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
             self.env.ref('choreograph_project.planning_project_stage_delivery').id,
             self.env.ref('choreograph_project.planning_project_stage_terminated').id,
             self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
         ]
+        STAGE_DELIVERY_PROJECT = [
+            self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
+            self.env.ref('choreograph_project.planning_project_stage_delivery').id,
+        ]
         for rec in self:
-            rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_PROJECT if rec.operation_type_id else False
+            rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_REDELIVERY_PROJECT if rec.operation_type_id else False
+            rec.can_display_livery_project = rec.operation_type_id.stage_id.id in STAGE_DELIVERY_PROJECT if rec.operation_type_id else False
 
     @api.onchange('potential_return')
     def onchange_potential_return(self):
@@ -88,13 +94,14 @@ class SaleOrder(models.Model):
     def _get_operation_task(self, task_number_list, active=True):
         for rec in self:
             return self.env['project.task'].search(
-                    ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
-                     ('sale_order_id', '=', rec.id), ('active', '=', active),
-                     ('task_number', 'in', task_number_list)])
+                ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
+                 ('sale_order_id', '=', rec.id), ('active', '=', active),
+                 ('task_number', 'in', task_number_list)])
 
     def _unarchive_task(self, operation_task):
         for rec in self:
-            task = rec._get_operation_task([OPERATION_TASK_NUMBER[operation_task]], False) or rec._get_operation_task([OPERATION_TASK_NUMBER[operation_task]], True)
+            task = rec._get_operation_task([OPERATION_TASK_NUMBER[operation_task]], False) or rec._get_operation_task([
+                OPERATION_TASK_NUMBER[operation_task]], True)
             if task:
                 task.write({
                     'active': True,
@@ -170,6 +177,12 @@ class SaleOrder(models.Model):
         else:
             project_id.js_redelivery_prod()
 
+    def action_livery_project(self):
+        if len(self.project_ids) > 1:
+            raise UserError(_("the SO contains several projects"))
+        project_id = self.project_ids[0]
+        project_id.livery_project()
+
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
         self._update_date_deadline(vals)
@@ -188,8 +201,8 @@ class SaleOrder(models.Model):
                 tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
                 date = utc.localize(rec.commitment_date).astimezone(tz)
                 rec.tasks_ids.filtered(lambda t: t.task_number in ['80', '65', '40', '85', '90', '45', '50', '25', '30', '35']).write({
-                'date_deadline': date,
-            })
+                    'date_deadline': date,
+                })
             if vals.get('potential_return_date') and rec.potential_return_task_id:
                 rec.potential_return_task_id.date_deadline = rec.potential_return_date
             if vals.get('study_delivery_date') and rec.study_delivery_task_id:
@@ -227,7 +240,8 @@ class SaleOrder(models.Model):
     def check_campaign_tasks_exist(self, task_number):
         for rec in self:
             if not rec._get_operation_task([task_number]):
-                raise ValidationError(_('You can\'t check this field, the task %s doesn\'t exist in the operation') % task_number)
+                raise ValidationError(
+                    _('You can\'t check this field, the task %s doesn\'t exist in the operation') % task_number)
 
     def check_task_stage_number(self, number=''):
         if number != CHECK_TASK_STAGE_NUMBER:

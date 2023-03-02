@@ -3,77 +3,96 @@
     <record id="view_order_form_inherit2" model="ir.ui.view">
         <field name="name">sale.order.form.inherit2</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="choreograph_sale.view_order_form_inherit"/>
+        <field name="inherit_id" ref="choreograph_sale.view_order_form_inherit" />
         <field name="type">form</field>
         <field name="arch" type="xml">
             <xpath expr="//page[@name='sms_campaign']" position="before">
-                <page name="sale_operation" string="Operation" attrs="{'invisible': [('recurrence_id', '!=', False)]}">
+                <page name="sale_operation" string="Operation"
+                    attrs="{'invisible': [('recurrence_id', '!=', False)]}">
                     <group>
                         <group>
-                            <field name="potential_return" force_save="1"/>
-                            <field name="potential_return_date" attrs="{'invisible':[('potential_return', '=', False)]}"/>
-                            <field name="potential_return_task_id" attrs="{'invisible':[('potential_return', '=', False)]}" readonly="1" force_save="1"/>
-                            <field name="study_delivery" readonly="1" force_save="1"/>
-                            <field name="study_delivery_date" attrs="{'invisible':[('study_delivery', '=', False)]}"/>
-                            <field name="study_delivery_task_id" attrs="{'invisible':[('study_delivery', '=', False)]}" readonly="1" force_save="1"/>
-                            <field name="presentation" force_save="1"/>
-                            <field name="presentation_date" attrs="{'invisible':[('presentation', '=', False)]}"/>
-                            <field name="presentation_task_id" attrs="{'invisible':[('presentation', '=', False)]}" readonly="1" force_save="1"/>
-                            <field name="study_global_task_id" invisible="1" readonly="1"/>
+                            <field name="potential_return" force_save="1" />
+                            <field name="potential_return_date"
+                                attrs="{'invisible':[('potential_return', '=', False)]}" />
+                            <field name="potential_return_task_id"
+                                attrs="{'invisible':[('potential_return', '=', False)]}"
+                                readonly="1" force_save="1" />
+                            <field name="study_delivery" readonly="1" force_save="1" />
+                            <field name="study_delivery_date"
+                                attrs="{'invisible':[('study_delivery', '=', False)]}" />
+                            <field name="study_delivery_task_id"
+                                attrs="{'invisible':[('study_delivery', '=', False)]}" readonly="1"
+                                force_save="1" />
+                            <field name="presentation" force_save="1" />
+                            <field name="presentation_date"
+                                attrs="{'invisible':[('presentation', '=', False)]}" />
+                            <field name="presentation_task_id"
+                                attrs="{'invisible':[('presentation', '=', False)]}" readonly="1"
+                                force_save="1" />
+                            <field name="study_global_task_id" invisible="1" readonly="1" />
                         </group>
                         <group>
                             <field
-                                    name="operation_provider_delivery_ids"
-                                    attrs="{'invisible':[('operation_provider_delivery_ids', '=', [])]}"
+                                name="operation_provider_delivery_ids"
+                                attrs="{'invisible':[('operation_provider_delivery_ids', '=', [])]}"
                             >
                                 <tree editable="bottom">
-                                    <field name="order_id" invisible="1"/>
-                                    <field name="delivery_date"/>
-                                    <field name="task_id" readonly="1"/>
+                                    <field name="order_id" invisible="1" />
+                                    <field name="delivery_date" />
+                                    <field name="task_id" readonly="1" />
                                 </tree>
                             </field>
                         </group>
                     </group>
                     <h3>
-                        <label for="operation_condition_ids"/>
+                        <label for="operation_condition_ids" />
                     </h3>
-                    <field name="operation_condition_ids"/>
+                    <field name="operation_condition_ids" />
                     <h3>
-                        <label for="comment"/>
+                        <label for="comment" />
                     </h3>
-                    <field name="comment"/>
+                    <field name="comment" />
                     <group>
                         <group>
-                            <field name="quantity_to_deliver"/>
+                            <field name="quantity_to_deliver" />
                         </group>
                         <group>
-                            <field name="to_validate"/>
+                            <field name="to_validate" />
                         </group>
                         <field name="segment_ids">
                             <tree editable="bottom">
-                                <field name="segment_number"/>
-                                <field name="model_selection"/>
-                                <field name="name"/>
-                                <field name="ranking"/>
-                                <field name="quantity"/>
-                                <field name="depth"/>
-                                <field name="keycode"/>
-                                <field name="civility"/>
-                                <field name="comment"/>
+                                <field name="segment_number" />
+                                <field name="model_selection" />
+                                <field name="name" />
+                                <field name="ranking" />
+                                <field name="quantity" />
+                                <field name="depth" />
+                                <field name="keycode" />
+                                <field name="civility" />
+                                <field name="comment" />
                             </tree>
                         </field>
                         <div>
-                            <label for="repatriate_information" class="oe_inline"/>
-                            <field name="repatriate_information" class="oe_inline"/>
+                            <label for="repatriate_information" class="oe_inline" />
+                            <field name="repatriate_information" class="oe_inline" />
                         </div>
                     </group>
                 </page>
             </xpath>
             <xpath expr="//field[@name='project_count']" position="after">
                 <field name="can_display_redelivery" invisible="1" />
+                <field name="can_display_livery_project" invisible="1" />
                 <field name="operation_type_id" invisible="1" />
             </xpath>
             <xpath expr="//button[@id='action_generate_operation']" position="after">
+                <button
+                    name="action_livery_project"
+                    id="livery_project"
+                    string="Livery"
+                    attrs="{'invisible': [('can_display_livery_project','=',False)]}"
+                    class="btn-primary"
+                    type="object"
+                />
                 <button
                     name="action_redelivery"
                     id="redelivery_prod_studies"
@@ -99,7 +118,7 @@
     <record id="view_order_form_inherit_sale_project2" model="ir.ui.view">
         <field name="name">sale.order.form.sale.project2</field>
         <field name="model">sale.order</field>
-        <field name="inherit_id" ref="sale_project.view_order_form_inherit_sale_project"/>
+        <field name="inherit_id" ref="sale_project.view_order_form_inherit_sale_project" />
         <field name="type">form</field>
         <field name="arch" type="xml">
             <button name="action_view_project_ids" position="attributes">
