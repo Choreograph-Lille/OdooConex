@@ -90,6 +90,17 @@ class ProjectProject(models.Model):
             fullfillement_task_id.write(state_normal)
         self.update_project_stage(IN_PROGRESS_PROJECT_STAGE)
 
+    def livery_project(self):
+        stage_source = {
+            '40': self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
+            '50': self.env.ref('choreograph_project.planning_project_stage_extraction')
+        }
+        contains_source = stage_source.get(self.stage_id.stage_number, False)
+        if contains_source:
+            if self.stage_id.stage_number == '40':
+                self._update_task_stage('80', '15')
+            self.write({'stage_id': contains_source})
+
     def update_project_stage(self, number):
         project_stage_id = self.env['project.project.stage'].search([('stage_number', '=', number)], limit=1)
         if project_stage_id:
