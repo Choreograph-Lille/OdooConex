@@ -55,7 +55,8 @@ class SaleOrder(models.Model):
         STAGE_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
             self.env.ref('choreograph_project.planning_project_stage_delivery').id,
-            self.env.ref('choreograph_project.planning_project_stage_terminated').id
+            self.env.ref('choreograph_project.planning_project_stage_terminated').id,
+            self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
         ]
         for rec in self:
             rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_PROJECT if rec.operation_type_id else False
