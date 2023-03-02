@@ -6,104 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-24 11:24+0000\n"
-"PO-Revision-Date: 2023-02-24 11:24+0000\n"
+"POT-Creation-Date: 2023-03-02 09:08+0000\n"
+"PO-Revision-Date: 2023-03-02 09:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__10
-msgid "10"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__15
-msgid "15"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__20
-msgid "20"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__25
-msgid "25"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__30
-msgid "30"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__35
-msgid "35"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__40
-msgid "40"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__45
-msgid "45"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__50
-msgid "50"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__55
-msgid "55"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__60
-msgid "60"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__65
-msgid "65"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__70
-msgid "70"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__75
-msgid "75"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__80
-msgid "80"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__85
-msgid "85"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__90
-msgid "90"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__project_task__task_number__95
-msgid "95"
-msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__ab_test
@@ -420,6 +330,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__write_date
 msgid "Last Updated on"
 msgstr ""
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "Livery"
+msgstr "Livrer"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_matchback

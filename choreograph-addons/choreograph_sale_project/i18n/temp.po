@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20230208\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-24 07:41+0000\n"
-"PO-Revision-Date: 2023-02-24 07:41+0000\n"
+"POT-Creation-Date: 2023-03-02 09:08+0000\n"
+"PO-Revision-Date: 2023-03-02 09:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_internal
 msgid "Bat Internal"
 msgstr "Bat interne"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__can_display_livery_project
+msgid "Can Display Livery Project"
+msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__can_display_redelivery
@@ -298,6 +303,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__write_date
 msgid "Last Updated on"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "Livery"
 msgstr ""
 
 #. module: choreograph_sale_project
@@ -552,11 +562,6 @@ msgid "Sender"
 msgstr "Expéditeur"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__show_provider_delivery
-msgid "Show Provider Delivery"
-msgstr "Afficher livraison presta"
-
-#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_sms_enrichment
 msgid "Sms Enrichment (TEMPLATE)"
 msgstr "Enrichissement SMS (TEMPLATE)"
@@ -662,6 +667,13 @@ msgid "Telfixebox Prospecting (TEMPLATE)"
 msgstr "Prospection Telfixebox (TEMPLATE)"
 
 #. module: choreograph_sale_project
+#. odoo-python
+#: code:addons/choreograph_sale_project/models/sale_order.py:0
+#, python-format
+msgid "The task is in progress, you can't check/uncheck this field"
+msgstr "La tâche est en cours, vous ne pouvez pas cocher/décocher cette case"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__to_validate
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__to_validate
 msgid "To Validate"
@@ -708,64 +720,22 @@ msgid "Yield Calculation (TEMPLATE)"
 msgstr "Caluld de rendements (TEMPLATE)"
 
 #. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_all_task_terminated"
+#. odoo-python
+#: code:addons/choreograph_sale_project/models/sale_order.py:0
+#, python-format
+msgid "You can't check this field, the task %s doesn't exist in the operation"
 msgstr ""
+"Vous ne pouvez pas cocher cette case, la tâche %s n'existe pas dans "
+"l'opération"
 
 #. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_stage_planified"
+#. odoo-python
+#: code:addons/choreograph_sale_project/models/sale_order.py:0
+#, python-format
+msgid ""
+"You must already generate the operation to launch the tasks on the campaigns"
 msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_10_80_in_80"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_20_in_stage_80"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_25_in_stage_80"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_30_in_stage_80"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_45_in_80_or_90_in_15"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_70_in_stage_80"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_75_in_stage_80"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_90_in_stage_80"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_fulfillement_terminated"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.test_button
-msgid "hook_task_in_stage_20_25"
-msgstr ""
+"Il faut déjà générer l'opération pour lancer les tâches sur les campagnes"
 
 #. module: choreograph_sale_project
 #: model:ir.model,name:choreograph_sale_project.model_operation_provider_delivery
@@ -779,6 +749,7 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #. odoo-python
+#: code:addons/choreograph_sale_project/models/sale_order.py:0
 #: code:addons/choreograph_sale_project/models/sale_order.py:0
 #, python-format
 msgid "the SO contains several projects"
