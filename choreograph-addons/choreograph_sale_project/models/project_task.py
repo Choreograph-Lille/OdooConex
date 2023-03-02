@@ -253,6 +253,7 @@ class ProjectTask(models.Model):
                     '45': '_hook_task_45_in_80_or_90_in_15',
                     '70': '_hook_task_70_in_stage_80',
                     '75': '_hook_task_75_in_stage_80',
+                    '85': '_hook_task_fulfillement_terminated',
                     '90': '_hook_task_90_in_stage_80'
                 }
                 method_name = method_dict.get(task.task_number, None)
