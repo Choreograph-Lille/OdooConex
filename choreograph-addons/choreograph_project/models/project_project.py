@@ -107,11 +107,7 @@ class ProjectProject(models.Model):
             self._update_task_stage('80', '15')
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
         elif self.stage_id.stage_number == '50':
-            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_extraction').id})
-            if not self.task_ids.filtered(lambda task: task.task_number == '45'):
-                self._update_task_stage('90', '15')
-            else:
-                self._update_task_stage('45', '15')
+            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
 
     def update_project_stage(self, number):
         project_stage_id = self.env['project.project.stage'].search([('stage_number', '=', number)], limit=1)
