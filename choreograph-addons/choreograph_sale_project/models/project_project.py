@@ -67,18 +67,6 @@ class ProjectProject(models.Model):
             self._hook_stage_planified()
         return res
 
-    def _find_task_by_task_number(self, task_number: str):
-        return self.task_ids.filtered(lambda task: task.task_number == task_number)
-
-    def _get_task_stage_number_by_task_number(self, task_number: str):
-        task_id = self._find_task_by_task_number(task_number)
-        return task_id.stage_number if task_id else False
-
-    def _update_task_stage(self, task_number: str, stage_number: str):
-        task_id = self._find_task_by_task_number(task_number)
-        if task_id:
-            task_id.update_task_stage(stage_number)
-
     def _hook_stage_planified(self):
         self._update_task_stage('5', WAITING_FILE_TASK_STAGE)
         self._update_task_stage('10', WAITING_FILE_TASK_STAGE)
@@ -133,5 +121,3 @@ class ProjectProject(models.Model):
         self._update_task_stage('95', TODO_TASK_STAGE)
         if self.sale_order_id.commitment_date:
             self.sale_order_id.write({'commitment_date': self.sale_order_id.commitment_date + timedelta(days=15)})
-
-
