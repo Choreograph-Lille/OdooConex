@@ -87,7 +87,7 @@ class ProjectProject(models.Model):
     def _hook_task_30_in_stage_80(self):
         self._update_task_stage('65', TODO_TASK_STAGE)
 
-    def _hook_all_task_terminated(self, except_task):
+    def _hook_task_65_5_15_terminated(self, except_task):
         if self._is_task_terminated(['65', '5', '15'], except_task):
             if self.task_ids.filtered(lambda task: task.task_number == '70'):
                 self._update_task_stage('70', TODO_TASK_STAGE)
@@ -121,12 +121,10 @@ class ProjectProject(models.Model):
 
     def _hook_task_90_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
-        task_95 = self.task_ids.filtered(lambda task: task.task_number == '95')
-        if task_95:
-            task_stage_id = self.env['project.task.type'].search([('stage_number', '=', TODO_TASK_STAGE)], limit=1)
-            values = {}
-            if task_stage_id:
-                values.update({'stage_id': task_stage_id.id})
-            if self.sale_order_id.commitment_date:
-                values.update({'date_deadline': self.sale_order_id.commitment_date + timedelta(days=15)})
-            task_95.write(values)
+        self._update_95_to_15_with_commitment_date()
+
+    def _hook_check_all_task(self, task_id):
+        not_terminated = self.task_ids.filtered(
+            lambda task: task.id != task_id and task.stage_id.stage_number != TERMINATED_TASK_STAGE)
+        if not not_terminated:
+            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
