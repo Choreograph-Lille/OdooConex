@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 from odoo import api, fields, models
 
 state_done = {'kanban_state': 'done'}
@@ -108,6 +110,19 @@ class ProjectProject(models.Model):
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
         elif self.stage_id.stage_number == '50':
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
+            if not self.task_ids.filtered(lambda task: task.task_number == '90'):
+                self._update_95_to_15_with_commitment_date()
+
+    def _update_95_to_15_with_commitment_date(self):
+        task_95 = self.task_ids.filtered(lambda task: task.task_number == '95')
+        if task_95:
+            task_stage_id = self.env['project.task.type'].search([('stage_number', '=', TODO_TASK_STAGE)], limit=1)
+            values = {}
+            if task_stage_id:
+                values.update({'stage_id': task_stage_id.id})
+            if self.sale_order_id.commitment_date:
+                values.update({'date_deadline': self.sale_order_id.commitment_date + timedelta(days=15)})
+            task_95.write(values)
 
     def update_project_stage(self, number):
         project_stage_id = self.env['project.project.stage'].search([('stage_number', '=', number)], limit=1)
