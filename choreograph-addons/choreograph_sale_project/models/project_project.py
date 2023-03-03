@@ -128,5 +128,5 @@ class ProjectProject(models.Model):
             if task_stage_id:
                 values.update({'stage_id': task_stage_id.id})
             if self.sale_order_id.commitment_date:
-                values.udpate({'date_deadline': self.sale_order_id.commitment_date + timedelta(days=15)})
+                values.update({'date_deadline': self.sale_order_id.commitment_date + timedelta(days=15)})
             task_95.write(values)
