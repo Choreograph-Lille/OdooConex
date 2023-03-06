@@ -16,6 +16,7 @@
     ],
     'data': [
         # data
+        'data/account_payment_term_data.xml',
         # security
         # views
         'views/res_partner_views.xml',
