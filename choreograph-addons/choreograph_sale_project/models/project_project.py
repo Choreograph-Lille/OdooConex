@@ -65,6 +65,22 @@ class ProjectProject(models.Model):
             get_vals(new_extend(task_list, ['info_presta', 'delivery_presta'])))
         self.env.ref('choreograph_sale_project.project_project_prospection_telportable').write(get_vals(task_list))
 
+    def create_project_from_template(self):
+        action_id = super().create_project_from_template()
+        project_id = self.browse(action_id.get('res_id')).exists()
+        if project_id and project_id.type_of_project == 'operation':
+            type_ids = self.env['project.task'].get_operation_project_task_type()
+            project_stage_id = self.env.ref('choreograph_project.planning_project_stage_draft').id
+            task_stage_id = self.env.ref('choreograph_project.project_task_type_draft').id
+            project_id.write({
+                'stage_id': project_stage_id,
+                'type_ids': [(6, 0, type_ids.ids)]
+            })
+            project_id.task_ids.with_context(task_stage_init=True).write({
+                'stage_id': task_stage_id,
+            })
+        return action_id
+
     def write(self, vals):
         res = super(ProjectProject, self).write(vals)
         if self.type_of_project == 'operation' and vals.get('stage_id', False) == self.env.ref('choreograph_project.planning_project_stage_planified').id:
