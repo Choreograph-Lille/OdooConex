@@ -174,3 +174,7 @@ class SaleOrder(models.Model):
             'context': {'default_origin': self.name}
         })
         return action
+
+    def _get_purchase_orders(self):
+        purchases =  super(SaleOrder, self)._get_purchase_orders() | self.env['purchase.order'].search([('origin', '=', self.name)])
+        return purchases
