@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-23 11:25+0000\n"
-"PO-Revision-Date: 2023-02-23 11:25+0000\n"
+"POT-Creation-Date: 2023-03-06 11:39+0000\n"
+"PO-Revision-Date: 2023-03-06 11:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -181,6 +181,12 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Audit"
+msgstr "Audit"
+
+#. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "BAT"
 msgstr ""
@@ -189,6 +195,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_comment
 msgid "BAT Comment"
 msgstr "Commentaire"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "BAT/Witness File"
+msgstr "Fichier BAT/Témoin"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__base_id
@@ -204,6 +216,12 @@ msgstr "BAT client"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal
 msgid "Bat Internal"
 msgstr "BAT interne"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Campaign Couting"
+msgstr "Comptages campagne"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__campaign_id
@@ -232,6 +250,7 @@ msgid "Catalogues"
 msgstr ""
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/operation_condition.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__client_file
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__client_file
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__client_file
@@ -239,6 +258,8 @@ msgid "Client File"
 msgstr "Fichier client"
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/operation_condition.py:0
+#: code:addons/choreograph_sale/models/sale_order.py:0
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__comment
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__comment
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__comment
@@ -285,6 +306,12 @@ msgid "Created on"
 msgstr ""
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Customer Fulfillment"
+msgstr "Fulfillment client"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__access_url
 msgid "Customer Portal URL"
 msgstr ""
@@ -295,6 +322,18 @@ msgstr ""
 #: model:ir.ui.menu,name:choreograph_sale.sale_data_conservation_menu
 msgid "Data Conservation"
 msgstr "Conservation des données"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Delivery Info"
+msgstr "Info livraison"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Deposit Date"
+msgstr "Date de dépôt"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__desired_finished_volume
@@ -334,6 +373,12 @@ msgstr "Date de BAT souhaité"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_internal
 msgid "Email BAT Internal"
 msgstr "BAT interne"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Email Campaign"
+msgstr "Campagne email"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__project_task_campaign_ids
@@ -675,6 +720,12 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "OPT-OUT Link"
+msgstr "Lien OPT-OUT"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__is_open
 msgid "Open"
 msgstr "Ouverte"
@@ -744,14 +795,44 @@ msgid "Postal address (DSP)"
 msgstr "Adresse Postale (DSP)"
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Potential Return"
+msgstr "Retour de potentiel"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__prefulfill_study
 msgid "Pre-fulfill study"
 msgstr "Prefulfill Etude"
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Prefulfillment"
+msgstr "Prefulfillment"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Presta Delivery"
+msgstr "Livraison presta"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Presta Info"
+msgstr "Info presta"
+
+#. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_product_template
 msgid "Product"
 msgstr "Article"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Project Name"
+msgstr "Nom du projet"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__operation_template_id
@@ -837,6 +918,12 @@ msgid "SFTP"
 msgstr ""
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "SMS Campaign"
+msgstr "Campagne SMS"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr ""
@@ -853,6 +940,7 @@ msgid "Sale Order"
 msgstr "Bons de commande"
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/operation_condition.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__sale_order
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__sale_order
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__sale_order
@@ -873,6 +961,12 @@ msgstr "Bon de commande"
 #: model:ir.model,name:choreograph_sale.model_sale_order_line
 msgid "Sales Order Line"
 msgstr "Ligne de bons de commande"
+
+#. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Scoring Presentation"
+msgstr "Présentation de score"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__access_token
@@ -909,6 +1003,12 @@ msgid ""
 msgstr ""
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Study Delivery"
+msgstr "Livraison études"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__subtype
 msgid "Subtype"
 msgstr "Sous-type"
@@ -929,7 +1029,6 @@ msgid "Task generation"
 msgstr "Générer tâches"
 
 #. module: choreograph_sale
-#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid ""
@@ -971,12 +1070,16 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/operation_condition.py:0
+#: code:addons/choreograph_sale/models/sale_order.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__update
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__update
 msgid "Update"
 msgstr "Mise à jour"
 
 #. module: choreograph_sale
+#: code:addons/choreograph_sale/models/operation_condition.py:0
+#: code:addons/choreograph_sale/models/sale_order.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__update_repoussoir
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__update_repoussoir
 msgid "Update Repoussoir"
