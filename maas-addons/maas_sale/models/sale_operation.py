@@ -54,11 +54,11 @@ class SaleOperation(models.Model):
     population_scored_desc = fields.Text('Population Scored Description', required=True, tracking=True)
     attachment_scored_id = fields.Many2one('ir.attachment', 'Population Scored Attachment', readonly=True)
     population_scored_filename = fields.Char(
-        related='attachment_scored_id.store_fname', string='Population Scored Attachment Name')
+        related='attachment_scored_id.name', string='Population Scored Attachment Name')
     population_scored_datafile = fields.Binary(related='attachment_scored_id.datas', string='Population Scored Datas')
     searched_profile_desc = fields.Text('Searched Profile Description', required=True, tracking=True)
     searched_profile_filename = fields.Char(
-        related='attachment_profile_id.store_fname', string='Searched Profile Attachment Name')
+        related='attachment_profile_id.name', string='Searched Profile Attachment Name')
     searched_profile_datafile = fields.Binary(related='attachment_profile_id.datas', string='Searched Profile Datas')
     attachment_profile_id = fields.Many2one('ir.attachment', 'Searched Profile Attachment', readonly=True)
 

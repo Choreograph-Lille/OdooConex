@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-01-20 11:07+0000\n"
-"PO-Revision-Date: 2023-01-20 11:07+0000\n"
+"POT-Creation-Date: 2023-03-06 09:25+0000\n"
+"PO-Revision-Date: 2023-03-06 09:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,29 +47,27 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"        \n"
-"           <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "             <p>Bonjour,</p>\n"
 "             <p>\n"
-"               Votre fichier concernant votre opération <strong>${object.name}</strong> est toujours disponible sur votre portail.\n"
+"               Votre fichier concernant votre opération <strong><t t-out=\"object.name\"/></strong> est toujours disponible sur votre portail.\n"
 "             </p>\n"
 "             <p>\n"
 "              Il vous reste 5 jours pour télécharger votre fichier.\n"
-"             <p/>\n"
+"             </p><p/>\n"
 "             <p>\n"
-"                <ul>\n"
-"                    <li>Campagne : ${object.operation_id.campaign_id.name}</li>\n"
-"                    %if object.action_id:\n"
-"                        <li>Action : ${object.operation_id.action_id.name or ''}</li>\n"
-"                    %endif\n"
-"                    <li>Operation : ${object.name}</li>\n"
-"                    <li>Quantité : ${object.qty_extracted}</li>\n"
+"                </p><ul>\n"
+"                    <li>Campagne : <t t-out=\"object.operation_id.campaign_id.name\"/></li>\n"
+"                    <t t-if=\"object.action_id\">\n"
+"                        <li>Action : <t t-out=\"object.operation_id.action_id.name or ''\"/></li>\n"
+"                    </t>\n"
+"                    <li>Operation : <t t-out=\"object.name\"/></li>\n"
+"                    <li>Quantité : <t t-out=\"object.qty_extracted\"/></li>\n"
 "                </ul>\n"
-"             </p>\n"
+"             \n"
 "             <p>\n"
-"                Vous pouvez accéder à la plateforme: &nbsp;\n"
-"                <a href=\"${object.operation_id.get_login_url()}\">Cliquez ici.</a>\n"
+"                Vous pouvez accéder à la plateforme:  \n"
+"                <a t-attf-href=\"{{ object.operation_id.get_login_url() }}\">Cliquez ici.</a>\n"
 "              </p>\n"
 "             <p>L'équipe MyModel.</p>\n"
 "           </div>\n"
@@ -91,13 +89,11 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"        \n"
-"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "            <p>Bonjour,</p>\n"
 "            <p>\n"
-"              Une nouvelle opération avec le numéro ${object.number} est créée par ${user.name} pour le compte de ${object.partner_id.name}.\n"
-"            <p/>\n"
+"              Une nouvelle opération avec le numéro <t t-out=\"object.number\"/> est créée par <t t-out=\"user.name\"/> pour le compte de <t t-out=\"object.partner_id.name\"/>.\n"
+"            </p><p/>\n"
 "            <p>L’équipe My Model.</p>\n"
 "          </div>\n"
 "        \n"
@@ -118,13 +114,11 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"        \n"
-"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "            <p>Bonjour,</p>\n"
 "            <p>\n"
-"              L'opération <strong>${object.name}</strong> est annulée par ${user.name}.\n"
-"            <p/>\n"
+"              L'opération <strong><t t-out=\"object.name\"/></strong> est annulée par <t t-out=\"user.name\"/>.\n"
+"            </p><p/>\n"
 "            <p>L’équipe My Model.</p>\n"
 "          </div>\n"
 "        \n"
@@ -145,13 +139,11 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"        \n"
-"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "            <p>Bonjour,</p>\n"
 "            <p>\n"
-"              L'opération <strong>${object.name}</strong> a été téléchargée par ${user.name}.\n"
-"            <p/>\n"
+"              L'opération <strong><t t-out=\"object.name\"/></strong> a été téléchargée par <t t-out=\"user.name\"/>.\n"
+"            </p><p/>\n"
 "            <p>L’équipe My Model.</p>\n"
 "          </div>\n"
 "        \n"
@@ -172,13 +164,11 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"        \n"
-"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "            <p>Bonjour,</p>\n"
 "            <p>\n"
-"              L'opération <strong>${object.name}</strong> a été commandée par ${user.name}.\n"
-"            <p/>\n"
+"              L'opération <strong><t t-out=\"object.name\"/></strong> a été commandée par <t t-out=\"user.name\"/>.\n"
+"            </p><p/>\n"
 "            <p>L’équipe My Model.</p>\n"
 "          </div>\n"
 "        \n"
@@ -212,25 +202,24 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "            <p>Bonjour,</p>\n"
 "            <p>\n"
-"              L’opération numéro  <strong>${object.name}</strong> est terminée, votre fichier est disponible au téléchargement.\n"
-"              <ul>\n"
-"                <li>Campagne: <strong>${object.operation_id.campaign_id.name}</strong></li>\n"
-"                <li>Action: <strong>${object.operation_id.action_id.name or 'n/a'}</strong> </li>\n"
-"                <li>Opération: <strong>${object.name}</strong></li>\n"
-"                <li>Quantité: <strong>${object.qty_extracted}</strong> </li>\n"
+"              L’opération numéro  <strong><t t-out=\"object.name\"/></strong> est terminée, votre fichier est disponible au téléchargement.\n"
+"              </p><ul>\n"
+"                <li>Campagne: <strong><t t-out=\"object.operation_id.campaign_id.name\"/></strong></li>\n"
+"                <li>Action: <strong><t t-out=\"object.operation_id.action_id.name or 'n/a'\"/></strong> </li>\n"
+"                <li>Opération: <strong><t t-out=\"object.name\"/></strong></li>\n"
+"                <li>Quantité: <strong><t t-out=\"object.qty_extracted\"/></strong> </li>\n"
 "              </ul>\n"
 "            <p/>\n"
 "            <p>\n"
 "              Selon le mode de mise à disposition que vous avez choisi, vous pouvez :\n"
-"              <ul>\n"
-"                <li style=\"list-style-type:'- '\">Le télécharger sur votre plateforme : <a href=\"${object.operation_id.get_login_url()}\">Cliquez ici.</a> Il reste disponible pendant 30 jours</li>\n"
+"              </p><ul>\n"
+"                <li style=\"list-style-type:'- '\">Le télécharger sur votre plateforme : <a t-attf-href=\"{{ object.operation_id.get_login_url() }}\">Cliquez ici.</a> Il reste disponible pendant 30 jours</li>\n"
 "                <li style=\"list-style-type:'- '\">Le récupérer sur votre SFTP. Il reste disponible pendant 8 jours.</li>\n"
 "              </ul>\n"
-"            </p>\n"
+"            \n"
 "            <p>L'équipe MyModel.</p>\n"
 "          </div>\n"
 "        \n"
@@ -260,21 +249,19 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"        \n"
-"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "            <p>Bonjour,</p>\n"
 "            <p>\n"
-"              L’opération numéro <strong>${object.number}</strong> est modélisée, votre rapport Power BI est maintenant disponible.\n"
-"              <ul>\n"
-"                <li>Campagne: <strong>${object.campaign_id.name}</strong></li>\n"
-"                <li>Action: <strong>${object.action_id.name or 'n/a'}</strong></li>\n"
-"                <li>Opération: <strong>${object.name}</strong></li>\n"
+"              L’opération numéro <strong><t t-out=\"object.number\"/></strong> est modélisée, votre rapport Power BI est maintenant disponible.\n"
+"              </p><ul>\n"
+"                <li>Campagne: <strong><t t-out=\"object.campaign_id.name\"/></strong></li>\n"
+"                <li>Action: <strong><t t-out=\"object.action_id.name or 'n/a'\"/></strong></li>\n"
+"                <li>Opération: <strong><t t-out=\"object.name\"/></strong></li>\n"
 "              </ul>\n"
 "            <p/>\n"
 "            <p>\n"
-"              Vous pouvez accéder à la plateforme: &nbsp;\n"
-"              <a href=\"${object.get_login_url()}\">Cliquer ici.</a>\n"
+"              Vous pouvez accéder à la plateforme:  \n"
+"              <a t-attf-href=\"{{ object.get_login_url() }}\">Cliquer ici.</a>\n"
 "            </p>\n"
 "            <p>L'équipe MyModel.</p>\n"
 "          </div>\n"
@@ -303,20 +290,18 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"        \n"
-"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "            <p>Bonjour,</p>\n"
 "            <p>\n"
 "              Nous vous confirmons le passage de votre abonnement au palier suivant. Vous pouvez dès à présent vous connecter à la plateforme afin de finaliser votre extraction.\n"
 "            </p>\n"
 "            <p>\n"
-"              Vous pouvez accéder à la plateforme: &nbsp;\n"
-"              <a href=\"${object.operation_id.get_login_url()}\">Cliquez ici.</a>\n"
+"              Vous pouvez accéder à la plateforme:  \n"
+"              <a t-attf-href=\"{{ object.operation_id.get_login_url() }}\">Cliquez ici.</a>\n"
 "            </p>\n"
 "            <p>\n"
 "              Nous vous remercions par avance!\n"
-"            <p/>\n"
+"            </p><p/>\n"
 "            <p>L’équipe MyModel.</p>\n"
 "          </div>\n"
 "        \n"
@@ -344,18 +329,16 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"        \n"
-"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "            <p>Bonjour,</p>\n"
-"            <p>La modélisation de votre opération <strong>${object.name}</strong> est terminée.</p>\n"
+"            <p>La modélisation de votre opération <strong><t t-out=\"object.name\"/></strong> est terminée.</p>\n"
 "            <p>\n"
-"              Vous souhaitez pouvoir télécharger <strong>${object.qty_extracted}</strong> identifiants, mais le solde actuel est insuffisant.\n"
+"              Vous souhaitez pouvoir télécharger <strong><t t-out=\"object.qty_extracted\"/></strong> identifiants, mais le solde actuel est insuffisant.\n"
 "            </p>\n"
 "            <p>Nous vous invitons à vous connecter à la plateforme afin de valider votre accord sur le passage au palier suivant.</p>\n"
 "            <p>\n"
-"              Vous pouvez accéder à la plateforme: &nbsp;\n"
-"              <a href=\"${object.operation_id.get_login_url()}\">Cliquez ici.</a>\n"
+"              Vous pouvez accéder à la plateforme:  \n"
+"              <a t-attf-href=\"{{ object.operation_id.get_login_url() }}\">Cliquez ici.</a>\n"
 "            </p>\n"
 "            <p>Nous vous remercions par avance !</p>\n"
 "            <p>L’équipe MyModel.</p>\n"
@@ -376,20 +359,13 @@ msgid ""
 "        \n"
 "      "
 msgstr ""
-"\n"
-"        \n"
-"          <div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
+"<div style=\"font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; \">\n"
 "            <p>Bonjour,</p>\n"
-"            <p>L'operation <strong>${object.number}</strong>-<strong>${object.name}</strong> est supprimée par ${user.name}.</p>\n"
+"            <p>L'operation <strong><t t-out=\"object.number\"/></strong>-<strong><t t-out=\"object.name\"/></strong> est supprimée par <t t-out=\"user.name\"/>.</p>\n"
 "            <p>L'équipe MyModel.</p>\n"
 "          </div>\n"
 "        \n"
 "      "
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "(edit)"
-msgstr "(éditer)"
 
 #. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
@@ -402,7 +378,8 @@ msgid ""
 "<span>\n"
 "                            Thank you for confirming the suggested higher level.\n"
 "                        </span>"
-msgstr "<span>\n"
+msgstr ""
+"<span>\n"
 "                            Merci de confirmer le passage au palier supérier.\n"
 "                        </span>"
 
@@ -413,7 +390,8 @@ msgid ""
 "                            Your balance is not sufficient to complete the requested transaction.\n"
 "                            We suggest you to move to the next higher level:\n"
 "                        </span>"
-msgstr "<span>\n"
+msgstr ""
+"<span>\n"
 "                            Votre solde n'est pas suffisant pour réalisée l'opération demandée.\n"
 "                            Nous vous proposons de passer au plaier supérieur suivant :\n"
 "                        </span>"
@@ -565,7 +543,7 @@ msgstr ""
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__child_ids
 msgid "Children"
-msgstr "Operation fille"
+msgstr "Enfants"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__number_child
@@ -647,19 +625,19 @@ msgstr "URL du portail client"
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__date
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__date
 msgid "Date"
-msgstr "Date"
+msgstr "Date "
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_res_partner__date_update_title
+#: model:ir.model.fields,field_description:maas_sale.field_res_users__date_update_title
+msgid "Date Update Title"
+msgstr "Date MAJ titre"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_res_partner__date_update_vars
 #: model:ir.model.fields,field_description:maas_sale.field_res_users__date_update_vars
 msgid "Date Update Vars"
 msgstr "Date MAJ vars additionnelles"
-
-#. module: maas_sale
-#: model:ir.model.fields,field_description:maas_sale.field_res_partner__date_update_title
-#: model:ir.model.fields,field_description:maas_sale.field_res_users__date_update_title
-msgid "Date Update title"
-msgstr "Date MAJ titre"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__date_availability
@@ -941,29 +919,33 @@ msgstr "Modéliser"
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__modelling_end_date
 msgid "Modelling End Date"
-msgstr "Modelling End Date"
+msgstr "Date de fin de modélisation"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__modelling_start_date
 msgid "Modelling Start Date"
-msgstr "Modelling Start Date"
+msgstr "Date de début de modélisation"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__modelling_progress
 msgid "Modelling progress"
-msgstr "Modelling progress"
+msgstr "Avancement de la modélisation"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__my_activity_date_deadline
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Date limite de mon activité"
 
 #. module: maas_sale
 #: model:ir.actions.server,name:maas_sale.download_availability_checker_cron_ir_actions_server
 #: model:ir.cron,cron_name:maas_sale.download_availability_checker_cron
-#: model:ir.cron,name:maas_sale.download_availability_checker_cron
 msgid "MyModel Sale Operation: File Download Availability Checker"
 msgstr "MyModel Sale Operation: Vérifier Disponibilité Fichier"
 
 #. module: maas_sale
 #: model:ir.actions.server,name:maas_sale.notify_before_download_deadline_cron_ir_actions_server
 #: model:ir.cron,cron_name:maas_sale.notify_before_download_deadline_cron
-#: model:ir.cron,name:maas_sale.notify_before_download_deadline_cron
 msgid "MyModel Sale Operation: Send Notification Before Download Deadline"
 msgstr "MyModel Opération: Relance Téléchargement Fichier"
 
@@ -973,9 +955,32 @@ msgstr "MyModel Opération: Relance Téléchargement Fichier"
 #: model:ir.model.fields,field_description:maas_sale.field_sale_campaign_action__name
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__name
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__name
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
 msgid "Name"
 msgstr "Nom"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_calendar_event_id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_date_deadline
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'activité à venir"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_summary
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé de l'activité suivante"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_type_id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'activité suivante"
 
 #. module: maas_sale
 #: model:mail.template,subject:maas_sale.operation_created_mail_template
@@ -986,13 +991,31 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_search
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_search
 msgid "Num Operation"
-msgstr "Num Operation"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_needaction_counter
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_needaction_counter
 msgid "Number of Actions"
 msgstr "Nombre d'actions"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_has_error_counter
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'erreurs"
+
+#. module: maas_sale
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__message_needaction_counter
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Nombre de messages exigeant une action"
+
+#. module: maas_sale
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__message_has_error_counter
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec des erreurs d'envoi"
 
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation_child__type__only_delta
@@ -1005,7 +1028,7 @@ msgstr "Delta uniquement"
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_search
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_search
 msgid "Operation"
-msgstr ""
+msgstr "Opération"
 
 #. module: maas_sale
 #: model:mail.template,name:maas_sale.operation_available_mail_template
@@ -1139,7 +1162,7 @@ msgstr "Valeur du filtre"
 #. module: maas_sale
 #: model:ir.model.fields.selection,name:maas_sale.selection__sale_operation__type__prm
 msgid "PRM"
-msgstr "PRM"
+msgstr ""
 
 #. module: maas_sale
 #: model:ir.model,name:maas_sale.model_package_upgrade
@@ -1169,20 +1192,15 @@ msgid "Partner"
 msgstr "Partenaire"
 
 #. module: maas_sale
+#: model:ir.model,name:maas_sale.model_partner_indication_infos
+msgid "Partner Indication Infos"
+msgstr "Informations sur l'indication du partenaire"
+
+#. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_res_partner__partner_type
 #: model:ir.model.fields,field_description:maas_sale.field_res_users__partner_type
 msgid "Partner Type"
 msgstr "Type de partenaire"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Partners"
-msgstr "Partenaires"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Phone:"
-msgstr "Téléphone :"
 
 #. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
@@ -1192,12 +1210,27 @@ msgstr "Population à scorer"
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__attachment_scored_id
 msgid "Population Scored Attachment"
-msgstr "Population Scored Attachment"
+msgstr "Fichier de la population à scorer"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_filename
+msgid "Population Scored Attachment Name"
+msgstr "Nom du fichier de la population à scorer"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_count
 msgid "Population Scored Count Identifiers"
-msgstr "Population Scored Count Identifiers"
+msgstr "Nom d'identifiants de la population à scorer"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_datafile
+msgid "Population Scored Datas"
+msgstr "Pièce joint"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__population_scored_desc
+msgid "Population Scored Description"
+msgstr "Description"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_res_config_settings__operation_qty_scored
@@ -1243,6 +1276,12 @@ msgid "Relance téléchargement fichier"
 msgstr ""
 
 #. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__activity_user_id
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__activity_user_id
+msgid "Responsible User"
+msgstr "Utilisateur responsable"
+
+#. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_product_product__retribution_rate
 #: model:ir.model.fields,field_description:maas_sale.field_product_template__retribution_rate
 msgid "Retribution Rate"
@@ -1254,9 +1293,10 @@ msgid "SMS"
 msgstr ""
 
 #. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Sale"
-msgstr "Vente"
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__message_has_sms_error
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Erreur d'envoi SMS"
 
 #. module: maas_sale
 #: model:ir.model,name:maas_sale.model_sale_campaign
@@ -1273,13 +1313,18 @@ msgstr "Action"
 #. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_campaign_action_search
 msgid "Sale Campaign action"
-msgstr "Sale Campaign action"
+msgstr "Action de la compagne de vente"
 
 #. module: maas_sale
 #: model:ir.model,name:maas_sale.model_sale_operation
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
 msgid "Sale Operation"
 msgstr "Opération"
+
+#. module: maas_sale
+#: model:ir.model,name:maas_sale.model_sale_operation_child
+msgid "Sale Operation Child"
+msgstr "Ligne de l'opération"
 
 #. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_child_form_view
@@ -1290,11 +1335,6 @@ msgstr "Opérations filles"
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_search
 msgid "Sale operation"
 msgstr "Opération"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Sales & Purchases"
-msgstr "Ventes & Achats"
 
 #. module: maas_sale
 #: model:ir.actions.act_window,name:maas_sale.sale_operation_action
@@ -1310,12 +1350,27 @@ msgstr "Bon de commande"
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__attachment_profile_id
 msgid "Searched Profile Attachment"
-msgstr "Searched Profile Attachment"
+msgstr "Fichier de profil recherché"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_filename
+msgid "Searched Profile Attachment Name"
+msgstr "Nom du fichier de profil recherché"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_count
 msgid "Searched Profile Count Identifiers"
-msgstr "Searched Profile Count Identifiers"
+msgstr "Nombre d'identifiants de profil recherché"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_datafile
+msgid "Searched Profile Datas"
+msgstr "Pièce joint"
+
+#. module: maas_sale
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__searched_profile_desc
+msgid "Searched Profile Description"
+msgstr "Description"
 
 #. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.sale_operation_view_form
@@ -1341,24 +1396,27 @@ msgstr ""
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__state
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__state
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
 msgid "State"
 msgstr "Etat"
 
 #. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Street 2..."
-msgstr "Rue 2..."
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Street..."
-msgstr "Rue..."
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__activity_state
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut basé sur les activités\n"
+"En retard : la date d'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifiée : activités futures"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_sale_operation__is_studies
 msgid "Studies"
-msgstr ""
+msgstr "Etudes"
 
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_package_upgrade__subscription_id
@@ -1374,13 +1432,8 @@ msgstr "Loyer d'abonnement"
 #. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_res_partner__subscription_ids
 #: model:ir.model.fields,field_description:maas_sale.field_res_users__subscription_ids
-msgid "Subscriptions"
+msgid "Subscriptions "
 msgstr "Abonnements"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "Tags..."
-msgstr "Étiquettes..."
 
 #. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.res_config_settings_maas_form_inherit
@@ -1388,14 +1441,16 @@ msgid "The quantity ordered must be lower than the population scored count"
 msgstr "La quantité commandée doit être inférieure à la population à scorer"
 
 #. module: maas_sale
-#: code:addons/maas_sale/models/sale.py:0
-#: code:addons/maas_sale/models/sale.py:0
+#. odoo-python
+#: code:addons/maas_sale/models/sale_operation.py:0
+#: code:addons/maas_sale/models/sale_operation_child.py:0
 #, python-format
 msgid "The quantity ordered must be strictly positive."
 msgstr "La quantité commandée doit être strictement positive."
 
 #. module: maas_sale
-#: code:addons/maas_sale/models/sale.py:0
+#. odoo-python
+#: code:addons/maas_sale/models/sale_operation.py:0
 #, python-format
 msgid "This functionality is not deployed yet!"
 msgstr "Cette fonctionnalité n'est pas encore développée !"
@@ -1419,6 +1474,12 @@ msgid "Type"
 msgstr ""
 
 #. module: maas_sale
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__activity_exception_decoration
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Type d'activité d'exception enregistrée"
+
+#. module: maas_sale
 #: model:ir.model.fields,field_description:maas_sale.field_product_product__unlimited
 #: model:ir.model.fields,field_description:maas_sale.field_product_template__unlimited
 msgid "Unlimited"
@@ -1435,59 +1496,27 @@ msgid "Validate"
 msgstr "Valider"
 
 #. module: maas_sale
-#: code:addons/maas_sale/models/sale.py:0
-#: code:addons/maas_sale/models/sale.py:0
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation__website_message_ids
+#: model:ir.model.fields,field_description:maas_sale.field_sale_operation_child__website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: maas_sale
+#: model:ir.model.fields,help:maas_sale.field_sale_operation__website_message_ids
+#: model:ir.model.fields,help:maas_sale.field_sale_operation_child__website_message_ids
+msgid "Website communication history"
+msgstr "Historique de communication du site web"
+
+#. module: maas_sale
+#. odoo-python
+#: code:addons/maas_sale/models/sale_operation.py:0
+#: code:addons/maas_sale/models/sale_operation_child.py:0
 #, python-format
 msgid "You cannot order quantity greater than the population scored."
 msgstr ""
 "Vous ne pouvez pas commander une quantité supérieure à la population cible."
 
 #. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "ZIP"
-msgstr "Code postal"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "e.g. BE0477472701"
-msgstr ""
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "e.g. Mr."
-msgstr "Ex. : M."
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "e.g. Sales Director"
-msgstr "ex : Directeur Commercial"
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "e.g. www.odoo.com"
-msgstr "Ex. : www.odoo.com"
-
-#. module: maas_sale
-#: model:ir.model,name:maas_sale.model_indication_indication
-msgid "indication.indication"
-msgstr ""
-
-#. module: maas_sale
-#: model_terms:ir.ui.view,arch_db:maas_sale.res_partner_view_form_inherit
-msgid "internal note..."
-msgstr "Note interne..."
-
-#. module: maas_sale
 #: model_terms:ir.ui.view,arch_db:maas_sale.package_upgrade_view_form
 msgid "or"
 msgstr "ou"
-
-#. module: maas_sale
-#: model:ir.model,name:maas_sale.model_partner_indication_infos
-msgid "partner.indication.infos"
-msgstr ""
-
-#. module: maas_sale
-#: model:ir.model,name:maas_sale.model_sale_operation_child
-msgid "sale.operation.child"
-msgstr ""
