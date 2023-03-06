@@ -4,6 +4,28 @@ from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 from .operation_condition import SUBTYPE
 
+TASK_NAME = {
+    '5': _('Update'),
+    '10': _('Update Repoussoir'),
+    '15': _('Client File'),
+    '20': _('Project Name'),
+    '25': _('Potential Return'),
+    '30': _('Study Delivery'),
+    '35': _('Scoring Presentation'),
+    '40': _('Audit'),
+    '45': _('Email Campaign'),
+    '50': _('SMS Campaign'),
+    '55': _('BAT/Witness File'),
+    '60': _('OPT-OUT Link'),
+    '65': _('Prefulfillment'),
+    '70': _('Presta Info'),
+    '75': _('Presta Delivery'),
+    '80': _('Delivery Info'),
+    '85': _('Customer Fulfillment'),
+    '90': _('Campaign Couting'),
+    '95': _('Deposit Date'),
+}
+
 OPERATION_TYPE = {
     'condition': 'Condition',
     'exclusion': 'Exclusion',
@@ -112,8 +134,8 @@ class SaleOrder(models.Model):
             if any([task not in tasks for task in REQUIRED_TASK_NUMBER.values()]):
                 raise ValidationError(
                     _('The operation template must have the following task number: {0}, {1}, {2}').format(
-                        REQUIRED_TASK_NUMBER['potential_return'], REQUIRED_TASK_NUMBER['study_delivery'],
-                        REQUIRED_TASK_NUMBER['presentation']))
+                        _(TASK_NAME[REQUIRED_TASK_NUMBER['potential_return']]), _(TASK_NAME[REQUIRED_TASK_NUMBER['study_delivery']]),
+                        _(TASK_NAME[REQUIRED_TASK_NUMBER['presentation']])))
         self.order_line.sudo().with_company(self.company_id).with_context(
             is_operation_generation=True)._timesheet_service_generation()
 
@@ -127,8 +149,8 @@ class SaleOrder(models.Model):
             for condition in self.operation_condition_ids.filtered(
                     lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order']):
                 vals = {
-                    'name': rec.name + '/' + OPERATION_TYPE[condition.operation_type] + '/' + SUBTYPES[
-                        condition.subtype],
+                    'name': rec.name + '/' + OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
+                        condition.subtype]),
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
                     'note': condition.note,

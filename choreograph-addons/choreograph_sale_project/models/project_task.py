@@ -61,8 +61,8 @@ class ProjectTask(models.Model):
     campaign_type = fields.Selection(related='sale_order_id.campaign_type')
     volume_detail = fields.Text(related='sale_order_id.email_volume_detail')
     sender = fields.Char(related='sale_order_id.sender')
-    quantity_to_deliver = fields.Integer()
-    to_validate = fields.Integer()
+    quantity_to_deliver = fields.Integer(related='sale_order_id.quantity_to_deliver')
+    to_validate = fields.Boolean(related='sale_order_id.to_validate')
     object = fields.Char(related='sale_order_id.object')
     ab_test = fields.Boolean('A/B Test', related='sale_order_id.ab_test')
     is_preheader_available = fields.Boolean('Preheader available in HTML',
