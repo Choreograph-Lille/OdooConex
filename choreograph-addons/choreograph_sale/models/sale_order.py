@@ -167,3 +167,10 @@ class SaleOrder(models.Model):
     def _compute_new_condition_count(self):
         self.new_condition_count = len(self.operation_condition_ids.filtered(
             lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order']))
+
+    def action_view_purchase_orders(self):
+        action = super().action_view_purchase_orders()
+        action.update({
+            'context': {'default_origin': self.name}
+        })
+        return action
