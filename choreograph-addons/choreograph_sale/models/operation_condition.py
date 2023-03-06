@@ -1,8 +1,10 @@
-from odoo import api, fields, models
+# -*- coding: utf-8 -*-
+
+from odoo import api, fields, models, _
 
 TASK_NUMBER = [(str(n), str(n)) for n in range(5, 100, 5)]
-SUBTYPE = [('client_file', 'Client File'), ('sale_order', 'Sale Order'), ('comment', 'Comment'),
-           ('update', 'Update'), ('update_repoussoir', 'Update Repoussoir')]
+SUBTYPE = [('client_file', _('Client File')), ('sale_order', _('Sale Order')), ('comment', _('Comment')),
+           ('update', _('Update')), ('update_repoussoir', _('Update Repoussoir'))]
 CONDITION_SUBTYPE = [('client_file', 'Client File'), ('update', 'Update'),
                      ('sale_order', 'Sale Order'), ('comment', 'Comment')]
 EXCLUSION_SUBTYPE = [('client_file', 'Client File'), ('update_repoussoir', 'Update Repoussoir'),
