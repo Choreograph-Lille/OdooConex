@@ -1,7 +1,11 @@
-from datetime import timedelta
-
 from odoo import api, models
-from odoo.addons.choreograph_project.models.project_project import WAITING_FILE_TASK_STAGE, TODO_TASK_STAGE, WAITING_QTY_TASK_STAGE, TERMINATED_TASK_STAGE
+
+from odoo.addons.choreograph_project.models.project_project import (
+    TERMINATED_TASK_STAGE,
+    TODO_TASK_STAGE,
+    WAITING_FILE_TASK_STAGE,
+    WAITING_QTY_TASK_STAGE,
+)
 
 
 class ProjectProject(models.Model):
@@ -115,6 +119,9 @@ class ProjectProject(models.Model):
 
     def _hook_task_45_in_80_or_90_in_15(self):
         self._update_task_stage('90', TODO_TASK_STAGE)
+
+    def _hook_task_80_in_stage_80(self):
+        self._update_task_stage('85', TODO_TASK_STAGE)
 
     def _hook_task_90_in_stage_15(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_extraction').id})
