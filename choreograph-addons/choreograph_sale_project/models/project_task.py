@@ -1,11 +1,9 @@
 from odoo import api, fields, models
 
 from odoo.addons.choreograph_project.models.project_project import (
-    DRAFT_PROJECT_STAGE,
-    FILE_RECEIVED_TASK_STAGE,
-    PLANIFIED_PROJECT_STAGE,
     TERMINATED_TASK_STAGE,
-    WAITING_FILE_TASK_STAGE,
+    FILE_RECEIVED_TASK_STAGE,
+    WAITING_FILE_TASK_STAGE
 )
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
@@ -269,7 +267,7 @@ class ProjectTask(models.Model):
                         getattr(task.project_id, method_name)()
                     if task.task_number in ['10', '80']:
                         task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
-                elif task.project_id.stage_id.stage_number in [DRAFT_PROJECT_STAGE, PLANIFIED_PROJECT_STAGE] and stage_id.stage_number in [WAITING_FILE_TASK_STAGE, FILE_RECEIVED_TASK_STAGE]:
+                elif (task.task_number in ['5', '10', '15'] and stage_id.stage_number == FILE_RECEIVED_TASK_STAGE) or (task.task_number in ['20', '25', '35'] and stage_id.stage_number == WAITING_FILE_TASK_STAGE):                    
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
