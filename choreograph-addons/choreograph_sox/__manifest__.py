@@ -9,17 +9,18 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
-        'purchase',
         'sales_team',
         'project',
         'hr_expense',
         'documents',
+        'base_user_role',
         'mass_mailing',
-        'choreograph_base',
+        'choreograph_purchase',
         'maas_base'
     ],
     'data': [
-        'security/res_groups.xml'
+        'security/res_groups.xml',
+        'data/studio_approval_rule.xml',
     ],
     'installable': True,
     'application': False,

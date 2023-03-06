@@ -7,13 +7,14 @@
             <field name="model">operation.condition</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="operation_type" />
-                    <field name="type" />
-                    <field name="subtype_id" />
+                    <field name="operation_type" force_save="1"/>
+                    <field name="subtype" force_save="1"/>
                     <field name="operation_date" />
+                    <field name="order_ids" widget="many2many_tags"/>
                     <field name="file_name"/>
-                    <field name="task_number"/>
                     <field name="note" />
+                    <field name="task_number" invisible="1"/>
+                    <field name="task_id" invisible="1"/>
                 </tree>
             </field>
         </record>
@@ -25,14 +26,18 @@
                 <form string="Condition/Exclusion">
                     <group>
                         <group>
-                            <field name="operation_type" />
-                            <field name="type" />
-                            <field name="subtype_id" context="{'filter_by_parent_type': type}"/>
+                            <field name="operation_type" default_focus="1"/>
+                            <field name="subtype" invisible="1"/>
+                            <field name="condition_subtype" attrs="{'invisible':[('operation_type', '=', 'exclusion')]}"/>
+                            <field name="exclusion_subtype" attrs="{'invisible':[('operation_type', '=', 'condition')]}"/>
                             <field name="operation_date" />
                         </group>
                         <group>
-                            <field name="task_number"/>
-                            <field name="note" />
+                            <field name="task_number" invisible="1"/>
+                            <field name="task_id" invisible="1"/>
+                            <field name="order_ids" widget="many2many_tags" attrs="{'invisible':[('subtype', 'not in', ['sale_order'])]}"/>
+                            <field name="file_name" attrs="{'invisible':[('subtype', 'not in', ['client_file'])]}"/>
+                            <field name="note"/>
                         </group>
                     </group>
                 </form>

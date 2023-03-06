@@ -16,13 +16,15 @@
     ],
     'data': [
         # data
+        'data/choreograph_project_task_type.xml',
+        'data/project_project.xml',
         # security
         'security/ir.model.access.csv',
         # views
         'views/project_task.xml',
         'views/choreograph_project_task_type.xml',
         'views/sale_order.xml',
-        'views/ir_ui_menu.xml'
+        'views/ir_ui_menu.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],

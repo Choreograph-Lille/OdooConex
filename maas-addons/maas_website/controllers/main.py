@@ -376,8 +376,8 @@ class OperationWebsite(http.Controller):
     <script src="es6-promise.js"></script>
     <script src="powerbi.js"></script>
 </head>
-<body>    
-    
+<body>
+
     <div id=embedContainer style="height:600px; width:100%; max-width:10000px;">
     </div>
 
@@ -436,8 +436,6 @@ class OperationWebsite(http.Controller):
 
             // Embed the report and display it within the div container.
             var report = powerbi.embed(embedContainer, config);
-
-                
             })
             .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error + "(status=" + jqxhr.status + ")";

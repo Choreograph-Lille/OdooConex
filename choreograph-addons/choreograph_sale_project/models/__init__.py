@@ -6,4 +6,4 @@ from . import sale_order
 from . import operation_segment
 from . import operation_provider_delivery
 from . import trap_address
-from . import project_task_campaign
+from . import project_project

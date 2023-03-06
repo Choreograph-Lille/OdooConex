@@ -38,3 +38,6 @@ access_package_upgrade_admin,access_package_upgrade admin,model_package_upgrade,
 access_partner_indication_infos_all,access_partner_indication_infos all,model_partner_indication_infos,,1,0,0,0
 access_partner_indication_infos_user,access_partner_indication_infos user,model_partner_indication_infos,base.group_user,1,1,1,0
 access_partner_indication_infos_admin,access_partner_indication_infos admin,model_partner_indication_infos,base.group_erp_manager,1,1,1,1
+
+access_package_upgrade_all,access_package_upgrade all,model_package_upgrade,,1,0,0,0
+access_package_upgrade_validator,access_package_upgrade validator,model_package_upgrade,maas_base.group_validate_next_package,1,1,1,1

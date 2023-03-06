@@ -14,6 +14,8 @@
         'choreograph_base',
     ],
     'data': [
+        'data/ir_ui_view.xml',
+        'data/website_page.xml',
         'views/webclient_templates.xml'
     ],
     'assets': {
@@ -23,4 +25,5 @@
     },
     'installable': True,
     'application': False,
+    'post_init_hook': 'post_init_hook',
 }

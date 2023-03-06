@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Operation"
+        id="menu_operation_root"
+        web_icon="choreograph_project,static/description/app_icon.png"
+        sequence="71">
+        <menuitem
+            id="operation"
+            name="Operation"
+            action="choreograph_project.open_view_operation_all_group_stage"
+            sequence="1" />
+        <menuitem
+            id="taks"
+            name="My Tasks"
+            action="choreograph_project.action_view_all_task"
+            sequence="2" />
+        <menuitem
+            id="analysis_root"
+            name="Analysis"
+            sequence="3"
+        >
+            <menuitem
+                id="analysis"
+                name="Analysis"
+                action="choreograph_project.action_project_task_user_tree"
+                sequence="1" />
+        </menuitem>
+        <menuitem
+            id="configuration"
+            name="Configuration"
+            sequence="4">
+            <menuitem
+                id="project_config"
+                name="Project"
+                action="choreograph_project.open_view_project_all_config_group_stage"
+                sequence="1" />
+            <menuitem
+                id="project_stage"
+                name="Project stage"
+                action="choreograph_project.project_project_stage_configure"
+                sequence="2" />
+            <menuitem
+                id="task_stage"
+                name="Tasks stage"
+                action="choreograph_project.open_task_type_form"
+                sequence="3" />
+        </menuitem>
+    </menuitem>
+</odoo>

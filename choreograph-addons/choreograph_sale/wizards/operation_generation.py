@@ -32,9 +32,11 @@ class OperationGeneration(models.TransientModel):
                     'sale_line_id': line.id,
                     'partner_id': self.order_id.partner_id.id,
                     'email_from': self.order_id.partner_id.email,
+                    'date_deadline': self.order_id.commitment_date.date()
                 })
                 self.project_id.task_ids.filtered('parent_id').write({
                     'sale_line_id': self.id,
                     'sale_order_id': self.order_id.id,
+                    'date_deadline': self.order_id.commitment_date.date()
                 })
         self.order_id.show_operation_generation_button = False

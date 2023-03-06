@@ -8,4 +8,4 @@ class ProjectTaskCampaign(models.Model):
 
     name = fields.Char('Campaign Name')
     id_campaign = fields.Char('Campaign ID')
-    task_id = fields.Many2one('project.task')
+    order_id = fields.Many2one('sale.order', 'Sale Order')

@@ -45,31 +45,26 @@ class SaleSubscription(models.Model):
             vals['balance'] = self.env['product.product'].browse(vals.get('package_id')).identifiers
         return super(SaleSubscription, self).create(vals)
 
+    def _get_pricelist(self):
+        self.ensure_one()
+        pricelist = self.pricelist_id or self.partner_id.property_product_pricelist
+        pricelist = pricelist or self.env.ref('product.list0', raise_if_not_found=False)
+        return pricelist
+
+    def _manage_subscription_start(self):
+        self.ensure_one()
+        if not self.start_date:
+            self.start_date = fields.Date.today()
+        self.create_subscription_rent()
+        vals = self._prepare_start_subscription_line_values(self.current_package_id)
+        self.order_line = [(0, 0, vals)]
+
     def action_confirm(self):
         self.ensure_one()
-        super(SaleSubscription, self).action_confirm()
+        result = super(SaleSubscription, self).action_confirm()
         if self.is_subscription:
-            current_product_pricelist = self.pricelist_id or self.partner_id.property_product_pricelist
-            if not self.start_date:
-                self.start_date = fields.Date.today()
-            product = self.current_package_id
-            if self._check_pricelist_item_exists(product):
-                self.order_line = [(0, 0, {'order_id': self.id,
-                                           'product_id': product.id,
-                                           'name': product.name,
-                                           'date': fields.Datetime.now(),
-                                           'product_uom': product.uom_id.id,
-                                           'price_unit': current_product_pricelist._get_product_price(product, 1)})]
-            else:
-                self.order_line = [(0, 0, {'order_id': self.id,
-                                           'product_id': product.id,
-                                           'name': product.name,
-                                           'date': fields.Datetime.now(),
-                                           'product_uom': product.uom_id.id,
-                                           'price_unit': product.list_price})]
-
-            self.create_subscription_rent()
-        return True
+            self.with_context(come_from_action_confirm=True)._manage_subscription_start()
+        return result
 
     @api.onchange('package_id')
     def _onchange_package(self):
@@ -78,15 +73,18 @@ class SaleSubscription(models.Model):
 
     def _prepare_line_to_invoice_values(self, line):
         self.ensure_one()
-        if not line:
+        if not line.product_id:
             return {}
+        pricelist = self._get_pricelist()
+        product = line.product_id
+        price = self._check_pricelist_item_exists(product) and pricelist._get_product_price(product, 1) or product.list_price
         return {
             'order_id': self.id,
             'product_id': line.product_id.id,
             'name': line.product_id.name,
             'product_uom': line.product_id.uom_id.id,
             'product_uom_qty': 1,
-            'price_unit': line.product_id.list_price,
+            'price_unit': price,
             'state_subscription': 'to_invoice',
             'qty_cumulative': line.qty_cumulative
         }
@@ -95,13 +93,33 @@ class SaleSubscription(models.Model):
         self.ensure_one()
         if not product:
             return {}
+        pricelist = self._get_pricelist()
+        price = self._check_pricelist_item_exists(product) and pricelist._get_product_price(product, 1) or product.list_price
         return {
             'order_id': self.id,
             'product_id': product.id,
             'name': product.name,
             'product_uom_qty': 1,
             'product_uom': product.uom_id.id,
-            'price_unit': product.list_price
+            'price_unit': price,
+            'date': fields.Datetime.now()
+        }
+
+    def _prepare_subscription_rent_line_values(self, product=False, item=False):
+        self.ensure_one()
+        if not product or not item:
+            return {}
+        pricelist = self._get_pricelist()
+        template = item.product_tmpl_id
+        price = self._check_pricelist_item_exists(product) and pricelist._get_product_price(template, 1) or template.list_price
+        return {
+            'order_id': self.id,
+            'product_id': product.id,
+            'name': product.name,
+            'product_uom_qty': 1,
+            'product_uom': product.uom_id.id,
+            'price_unit': price,
+            'date': fields.Datetime.now()
         }
 
     @api.model
@@ -115,16 +133,11 @@ class SaleSubscription(models.Model):
         date_now = fields.Datetime.now()
         _logger.info("Subscription CRON launched at %s" % date_now)
         for subscription in subscriptions:
-            pricelist = subscription.pricelist_id or subscription.partner_id.property_product_pricelist
-            pricelist = pricelist or self.env.ref('product.list0', raise_if_not_found=False)
             lines = subscription.order_line.filtered(lambda l: l.state_subscription == 'consumption').sorted(key='create_date',
                                                                                                              reverse=True)
             if lines:
                 line = lines[0]
                 vals = subscription._prepare_line_to_invoice_values(line)
-                vals.update({'date': date_now})
-                if subscription._check_pricelist_item_exists(line.product_id):
-                    vals.update({'price_unit': current_product_pricelist._get_product_price(line.product_id, 1)})
                 _logger.info(_('To invoice line added in subscription %s') % subscription.name)
                 new_line = subscription_line_obj.new(vals)
                 new_line._compute_amount()
@@ -136,8 +149,6 @@ class SaleSubscription(models.Model):
             product = subscription.package_id
             vals = subscription._prepare_start_subscription_line_values(product)
             vals.update({'date': date_now + relativedelta(months=1, day=1)})
-            if subscription._check_pricelist_item_exists(product):
-                vals.update({'price_unit': current_product_pricelist._get_product_price(product, 1)})
             _logger.info(_('Start subscription line added in subscription %s') % (subscription.name))
             subscription.create_subscription_rent()
             subscription.write({'balance': subscription.package_id.identifiers,
@@ -156,31 +167,34 @@ class SaleSubscription(models.Model):
 
     def create_subscription_rent(self):
         self.ensure_one()
-        items_rent = self.get_subscription_rent_items()
-        current_product_pricelist = self.pricelist_id or self.partner_id.property_product_pricelist
+        items = self.get_subscription_rent_items()
+        pricelist = self._get_pricelist()
         product = self.current_package_id
-        if items_rent:
-            for item in items_rent:
-                self.order_id = [(0, 0, {'order_id': self.id,
-                                         'product_id': product.id,
-                                         'name': product.name,
-                                         'date': fields.Datetime.now(), 'uom_id': product.uom_id.id,
-                                         'state_subscription': 'subscription_rent',
-                                         'price_unit': current_product_pricelist._get_product_price
-                                         (item.product_tmpl_id, 1)})]
+        for item in items:
+            vals = self._prepare_start_subscription_line_values(product)
+            vals.update({
+                'state_subscription': 'subscription_rent',
+                'price_unit': pricelist._get_product_price(item.product_tmpl_id, 1)
+            })
+            if not self._context.get('come_from_action_confirm'):
+                vals.update({
+                    'date': fields.Datetime.now() + relativedelta(months=1, day=1)
+                })
+            self.order_line = [(0, 0, vals)]
         return True
 
     @api.onchange('partner_id')
     def _onchange_partner_id_warning(self):
-        super(SaleSubscription, self)._onchange_partner_id_warning()
-        current_product_pricelist = self.pricelist_id or self.partner_id.property_product_pricelist
+        result = super(SaleSubscription, self)._onchange_partner_id_warning()
+        pricelist = self._get_pricelist()
         products = self.env['product.product'].search([('recurring_invoice', '=', True),
                                                        ('is_basic_package', '=', True),
-                                                       ('id', 'in', current_product_pricelist.item_ids.mapped('product_tmpl_id').ids)],
+                                                       ('id', 'in', pricelist.item_ids.mapped('product_tmpl_id').ids)],
                                                       order='identifiers asc')
         if products:
             product = products[0]
             self.package_id = product
+        return result
 
     def _check_pricelist_item_exists(self, product):
         self.ensure_one()

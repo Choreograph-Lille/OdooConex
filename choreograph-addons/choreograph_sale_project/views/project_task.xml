@@ -1,148 +1,210 @@
 <odoo>
-  <data>
-    <record id="view_task_form2_inherit2" model="ir.ui.view">
-      <field name="name">project.task.form.inherit2</field>
-      <field name="model">project.task</field>
-      <field name="inherit_id" ref="project.view_task_form2" />
-      <field name="arch" type="xml">
-        <field name="user_ids" position="after">
-          <field name="catalogue_ids" widget="many2many_tags" attrs="{'invisible':[('task_number', '=', False)]}"/>
-          <field name="task_type_id"/>
-          <field name="related_base" attrs="{'invisible': [('task_number', '=', False)]}"/>
-          <field name="user_id" attrs="{'invisible': [('task_number', '=', False)]}"/>
-          <field name="is_template" invisible="1" />
-          <field name="task_number" attrs="{'invisible': [('is_template', '=', False)]}" />
-          <field name="user_ids" position="move"/>
-        </field>
+    <data>
+        <record id="view_task_form2_inherit2" model="ir.ui.view">
+            <field name="name">project.task.form.inherit2</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <field name="date_deadline" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('is_closed', '=', True), ('task_number', 'in', ['70'])]}</attribute>
+                    <attribute name="readonly">1</attribute>
+                </field>
 
-        <field name="partner_id" position="after">
-          <field name="id_title" attrs="{'invisible': [('task_number', 'in', ['45', '20', '25', '30', '35', False])]}"/>
-          <field name="sale_order_id" attrs="{'invisible': [('task_number', '=', False)]}"/>
-        </field>
+                <field name="user_ids" position="after">
+                    <field name="catalogue_ids" widget="many2many_tags"
+                           attrs="{'invisible':[('task_number', '=', False)]}"/>
+                    <field name="task_type_id"/>
+                    <field name="related_base" attrs="{'invisible': [('task_number', '=', False)]}"/>
+                    <field name="user_id" attrs="{'invisible': [('task_number', '=', False)]}"/>
+                    <field name="is_template" invisible="1"/>
+                    <field name="task_number" attrs="{'invisible': [('is_template', '=', False)]}"/>
+                    <field name="user_ids" position="move"/>
+                </field>
 
-        <field name="project_id" position="before">
-          <field name="folder_key" attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
-        </field>
+                <field name="partner_id" position="after">
+                    <field name="id_title"
+                           attrs="{'invisible': [('task_number', 'in', ['45', '20', '25', '30', '35', False])]}"/>
+                    <field name="sale_order_id" attrs="{'invisible': [('task_number', '=', False)]}"/>
+                </field>
 
-        <field name="task_properties" position="before">
-          <field name="operation_condition_ids" attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['20', '25' '30', '35'])]}"/>
-          <group attrs="{'invisible': [('task_number', '=', False)]}">
-            <group>
-              <field name="campaign_file_name" attrs="{'invisible': [('task_number', 'not in', ['15'])]}"/>
-              <field name="file_name" attrs="{'invisible': [('task_number', 'not in', ['75', '85', '80'])]}"/>
-              <field name="file_quantity" attrs="{'invisible': [('task_number', 'not in', ['75', '85', '80'])]}"/>
-              <field name="volume" attrs="{'invisible': [('task_number', 'not in', ['75', '85', '80'])]}"/>
-              <field name="po_livedata_number" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
-              <field name="campaign_name" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                <field name="project_id" position="before">
+                    <field name="folder_key"
+                           attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                </field>
 
-              <h4 attrs="{'invisible': [('task_number', 'not in', ['45'])]}">
-                Email Kit Detail
-              </h4>
-              <br attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
-              <h4 attrs="{'invisible': [('task_number', 'not in', ['50'])]}">
-                Message Kit (wording)
-              </h4>
-              <br attrs="{'invisible': [('task_number', 'not in', ['50'])]}"/>
-              <field name="reception_date" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
-              <field name="reception_location" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
-              <field name="personalization" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
-              <field name="routing_date" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
-              <field name="routing_end_date" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
-              <field name="campaign_type" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
-              <field name="desired_finished_volume"
-                     attrs="{'invisible': [('task_number', 'not in', ['90', '45', '50'])]}"/>
-              <field name="volume_detail" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
-              <field name="sender" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
-              <field name="object" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
-              <field name="ab_test" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
-              <field name="is_preheader_available" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
-              <field name="comment"
-                     attrs="{'invisible': [('task_number', 'not in', ['45', '50', '20', '25', '30', '35'])]}"/>
+                <field name="task_properties" position="before">
+                    <field name="operation_condition_ids"
+                           attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['20', '25' '30', '35'])]}"/>
+                    <group attrs="{'invisible': [('task_number', '=', False)]}">
+                        <group>
+                            <field name="type"
+                                   attrs="{'invisible': [('task_number', 'not in', ['15'])]}"/>
+                            <field name="campaign_file_name"
+                                   attrs="{'invisible': [('task_number', 'not in', ['15'])]}"/>
+                            <field name="file_name" readonly="1"
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+                            <field name="file_quantity" readonly="1"
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+                            <field name="volume"
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+                            <field name="po_livedata_number"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="campaign_name"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
 
-              <h4 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}">
-                BAT
-              </h4><br attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
-              <field name="bat_from" attrs="{'invisible': [('task_number', 'not in', ['40', '55', '75', '85', '80', '50'])]}"/>
-              <field name="bat_internal" attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
-              <field name="bat_client" attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
-              <field name="bat_comment" attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50'])]}"/>
-              <field name="bat_desired_date" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+                            <h4 attrs="{'invisible': [('task_number', 'not in', ['45'])]}">
+                                Email Kit Detail
+                            </h4>
+                            <br attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+                            <h4 attrs="{'invisible': [('task_number', 'not in', ['50'])]}">
+                                Message Kit (wording)
+                            </h4>
+                            <br attrs="{'invisible': [('task_number', 'not in', ['50'])]}"/>
+                            <field name="reception_date"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="reception_location"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="personalization"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="routing_date"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="routing_end_date"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="campaign_type" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+                            <field name="desired_finished_volume"
+                                   attrs="{'invisible': [('task_number', 'not in', ['90', '45', '50'])]}"/>
+                            <field name="volume_detail"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="sender" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="object" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+                            <field name="ab_test" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+                            <field name="is_preheader_available"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+                            <field name="comment"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45', '50', '20', '25', '30', '35'])]}"/>
 
-              <h4 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}">
-                Witnesses
-              </h4><br attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
-              <field name="witness_file_name" attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
-              <field name="witness_comment" attrs="{'invisible': [('task_number', 'not in', ['55', '50'])]}"/>
+                            <h4 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}">
+                                BAT
+                            </h4>
+                            <br attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
+                            <field name="bat_from"
+                                   attrs="{'invisible': [('task_number', 'not in', ['40', '55', '70', '75', '85', '80', '50'])]}"/>
+                            <field name="bat_internal"
+                                   attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
+                            <field name="bat_client"
+                                   attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
+                            <field name="bat_comment"
+                                   attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50'])]}"/>
+                            <field name="bat_desired_date" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
 
-              <h4 attrs="{'invisible': [('task_number', 'not in', ['60', '45'])]}">
-                Optout
-              </h4><br attrs="{'invisible': [('task_number', 'not in', ['60', '45'])]}"/>
-              <field name="excluded_provider" attrs="{'invisible': [('task_number', 'not in', ['60'])]}"/>
-              <field name="optout_comment" attrs="{'invisible': [('task_number', 'not in', ['60'])]}"/>
+                            <h4 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}">
+                                Witnesses
+                            </h4>
+                            <br attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
+                            <field name="witness_file_name"
+                                   attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
+                            <field name="witness_comment"
+                                   attrs="{'invisible': [('task_number', 'not in', ['55', '50'])]}"/>
 
-              <field name="dedup_title_number" attrs="{'invisible': [('task_number', 'not in', ['75', '85', '80'])]}"/>
-              <h4 attrs="{'invisible': [('task_number', 'not in', ['75'])]}">
-                Provider File
-              </h4><br attrs="{'invisible': [('task_number', 'not in', ['75'])]}"/>
-            </group>
-            <group>
-              <field name="send_with" attrs="{'invisible': [('task_number', 'not in', ['80'])]}"/>
-              <field name="is_info_validated" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
-            </group>
-          </group>
-          <group attrs="{'invisible': [('task_number', '=', False)]}">
-            <group>
-              <field name="quantity_to_deliver" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30'])]}"/>
-            </group>
-            <group>
-              <field name="to_validate" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30'])]}"/>
-            </group>
-          </group>
-          <field name="segment_ids" attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['75', '85', '80', '20', '25', '30'])]}">
-            <tree>
-              <field name="name"/>
-              <field name="ranking"/>
-              <field name="quantity"/>
-              <field name="keycode"/>
-              <field name="civility"/>
-            </tree>
-          </field>
-          <field name="trap_address_ids" attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['75', '80', '85'])]}">
-            <tree editable="bottom">
-              <field name="task_id" invisible="1"/>
-              <field name="name"/>
-              <field name="segment_number"/>
-              <field name="bc_number"/>
-            </tree>
-          </field>
-          <group attrs="{'invisible': [('task_number', '=', False)]}">
-            <group>
-              <field name="family_conex" attrs="{'invisible': [('task_number', 'not in', ['75', '85', '80'])]}"/>
-              <field name="provider_file_name" attrs="{'invisible': [('task_number', 'not in', ['75', '85', '80'])]}"/>
-              <field name="provider_delivery_address" attrs="{'invisible': [('task_number', 'not in', ['75', '85', '80'])]}"/>
-              <field name="provider_comment" attrs="{'invisible': [('task_number', 'not in', ['75', '85', '80'])]}"/>
+                            <h4 attrs="{'invisible': [('task_number', 'not in', ['60', '45'])]}">
+                                Optout
+                            </h4>
+                            <br attrs="{'invisible': [('task_number', 'not in', ['60', '45'])]}"/>
+                            <field name="excluded_provider" attrs="{'invisible': [('task_number', 'not in', ['60', '45'])]}"/>
+                            <field name="optout_link" attrs="{'invisible': [('task_number', 'not in', ['60', '45'])]}"/>
 
-              <field name="start_date" attrs="{'invisible': [('task_number', 'not in', ['90'])]}"/>
-              <field name="routing_base" attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}"/>
-            </group>
-            <group></group>
-            <field name="project_task_campaign_ids" nolabel="1" attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}">
-              <tree editable="bottom">
-                <field name="id_campaign"/>
-                <field name="name"/>
-              </tree>
+                            <field name="dedup_title_number"
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+                            <h4 attrs="{'invisible': [('task_number', 'not in', ['70', '75'])]}">
+                                Provider File
+                            </h4>
+                            <br attrs="{'invisible': [('task_number', 'not in', ['70', '75'])]}"/>
+                        </group>
+                        <group>
+                            <field name="send_with" attrs="{'invisible': [('task_number', 'not in', ['80'])]}"/>
+                            <field name="is_info_validated" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+                        </group>
+                    </group>
+                    <group attrs="{'invisible': [('task_number', '=', False)]}">
+                        <group>
+                            <field name="quantity_to_deliver"
+                                   attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30'])]}"/>
+                        </group>
+                        <group>
+                            <field name="to_validate"
+                                   attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30'])]}"/>
+                        </group>
+                    </group>
+                    <field name="segment_ids"
+                           attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['70', '75', '85', '80', '20', '25', '30'])]}">
+                        <tree>
+                            <field name="name"/>
+                            <field name="ranking"/>
+                            <field name="quantity"/>
+                            <field name="keycode"/>
+                            <field name="civility"/>
+                        </tree>
+                    </field>
+                    <field name="trap_address_ids"
+                           attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['70', '75', '80', '85'])]}">
+                        <tree editable="bottom">
+                            <field name="task_id" invisible="1"/>
+                            <field name="name"/>
+                            <field name="segment_number"/>
+                            <field name="bc_number"/>
+                        </tree>
+                    </field>
+                    <group attrs="{'invisible': [('task_number', '=', False)]}">
+                        <group>
+                            <field name="family_conex"
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+                            <field name="provider_file_name"
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+                            <field name="provider_delivery_address"
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+                            <field name="provider_comment"
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+
+                            <field name="start_date" attrs="{'invisible': [('task_number', 'not in', ['90'])]}"/>
+                            <field name="routing_base"
+                                   attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}"/>
+                        </group>
+                        <group></group>
+                        <field name="project_task_campaign_ids" nolabel="1"
+                               attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}"
+                               context="{'default_order_id': sale_order_id}"
+                               domain="[('order_id', '=', sale_order_id)]">
+                            <tree editable="bottom" widget="one2many">
+                                <field name="order_id" invisible="1"/>
+                                <field name="id_campaign"/>
+                                <field name="name"/>
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="order_id" invisible="1"/>
+                                    <field name="id_campaign"/>
+                                    <field name="name"/>
+                                </group>
+                            </form>
+                        </field>
+                        <group>
+                            <field name="specific_counting" attrs="{'invisible': [('task_number', 'not in', ['90'])]}"/>
+                            <field name="deposit_date_1" attrs="{'invisible': [('task_number', 'not in', ['95'])]}"/>
+                            <field name="deposit_date_2" attrs="{'invisible': [('task_number', 'not in', ['95'])]}"/>
+                            <field name="deposit_date_3" attrs="{'invisible': [('task_number', 'not in', ['95'])]}"/>
+                            <field name="note" attrs="{'invisible': [('task_number', 'not in', ['5', '10', '15'])]}"/>
+                        </group>
+                        <group></group>
+                    </group>
+                </field>
+
+                <field name="user_ids" position="after">
+                    <field name="type_of_project" invisible="0"/>
+                </field>
+                <xpath expr="//header/field[@name='stage_id']" position="attributes">
+                    <attribute name="domain">[('type_of_project', '=', type_of_project)]</attribute>
+                </xpath>
             </field>
-            <group>
-              <field name="specific_counting" attrs="{'invisible': [('task_number', 'not in', ['90'])]}"/>
-              <field name="deposit_date_1" attrs="{'invisible': [('task_number', 'not in', ['95'])]}"/>
-              <field name="deposit_date_2" attrs="{'invisible': [('task_number', 'not in', ['95'])]}"/>
-              <field name="deposit_date_3" attrs="{'invisible': [('task_number', 'not in', ['95'])]}"/>
-              <field name="note" attrs="{'invisible': [('task_number', 'not in', ['5', '10', '15'])]}"/>
-            </group>
-            <group></group>
-          </group>
-        </field>
-      </field>
-    </record>
-  </data>
+        </record>
+    </data>
 </odoo>
