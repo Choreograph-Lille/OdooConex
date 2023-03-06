@@ -18,6 +18,10 @@ OPERATION_TASK_NUMBER = {
     'presentation': '35',
     'study_global': '20'
 }
+CAMPAIGN_TASK_NAME = {
+    '45': _('Email Campaign'),
+    '50': _('SMS Campaign'),
+}
 
 
 class SaleOrder(models.Model):
@@ -241,7 +245,7 @@ class SaleOrder(models.Model):
         for rec in self:
             if not rec._get_operation_task([task_number]):
                 raise ValidationError(
-                    _('You can\'t check this field, the task %s doesn\'t exist in the operation') % task_number)
+                    _('You can\'t check this field, the task {0} doesn\'t exist in the operation').format(_(CAMPAIGN_TASK_NAME[task_number])))
 
     def check_task_stage_number(self, number=''):
         if number != CHECK_TASK_STAGE_NUMBER:
