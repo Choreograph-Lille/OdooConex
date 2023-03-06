@@ -193,6 +193,12 @@ msgid "Email BAT Desired Date"
 msgstr "Date de BAT souhaité"
 
 #. module: choreograph_sale_project
+#: code:addons/choreograph_sale_project/models/sale_order.py:0
+#, python-format
+msgid "Email Campaign"
+msgstr "Campagne email"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_name
 msgid "Email Campaign Name"
 msgstr "Nom Campagne"
@@ -593,6 +599,12 @@ msgid "Show Provider Delivery"
 msgstr "Afficher livraison presta"
 
 #. module: choreograph_sale_project
+#: code:addons/choreograph_sale_project/models/sale_order.py:0
+#, python-format
+msgid "SMS Campaign"
+msgstr "Campagne SMS"
+
+#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_sms_enrichment
 msgid "Sms Enrichment (TEMPLATE)"
 msgstr "Enrichissement SMS (TEMPLATE)"
@@ -767,8 +779,10 @@ msgstr "Caluld de rendements (TEMPLATE)"
 #. module: choreograph_sale_project
 #: code:addons/choreograph_sale_project/models/sale_order.py:0
 #, python-format
-msgid "You can't check this field, the task %s doesn't exist in the operation"
-msgstr "Vous ne pouvez pas cocher cette case, la tâche %s n'existe pas dans l'opération"
+msgid "You can't check this field, the task {0} doesn't exist in the operation"
+msgstr ""
+"Vous ne pouvez pas cocher cette case, la tâche {0} n'existe pas dans "
+"l'opération"
 
 #. module: choreograph_sale_project
 #: code:addons/choreograph_sale_project/models/sale_order.py:0
