@@ -129,6 +129,7 @@
                                                                 t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])"
                                                                 t-att-data-default-lang="editable and 'true' if lg[0] == website.default_lang_id.code else None"
                                                                 t-att-data-lang="lg[0]"
+                                                                t-att-data-url_code="lg[1]"
                                                                 class="js_change_lang"
                                                             >
                                                                 <t t-esc="lg[2].split('/').pop()" />
@@ -559,6 +560,7 @@
                                                             t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])"
                                                             t-att-data-default-lang="editable and 'true' if lg[0] == website.default_lang_id.code else None"
                                                             t-att-data-lang="lg[0]"
+                                                            t-att-data-url_code="lg[1]"
                                                             class="js_change_lang"
                                                         >
 
@@ -1821,6 +1823,7 @@
                                                             t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])"
                                                             t-att-data-default-lang="editable and 'true' if lg[0] == website.default_lang_id.code else None"
                                                             t-att-data-lang="lg[0]"
+                                                            t-att-data-url_code="lg[1]"
                                                             class="js_change_lang"
                                                         >
                                                             <t t-esc="lg[1].split('/').pop()" />
@@ -2358,6 +2361,7 @@
                                                             t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])"
                                                             t-att-data-default-lang="editable and 'true' if lg[0] == website.default_lang_id.code else None"
                                                             t-att-data-lang="lg[0]"
+                                                            t-att-data-url_code="lg[1]"
                                                             class="js_change_lang"
                                                         >
                                                             <t t-esc="lg[1].split('/').pop()" />
@@ -2480,6 +2484,7 @@
                                                             t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])"
                                                             t-att-data-default-lang="editable and 'true' if lg[0] == website.default_lang_id.code else None"
                                                             t-att-data-lang="lg[0]"
+                                                            t-att-data-url_code="lg[1]"
                                                             class="js_change_lang"
                                                         >
                                                             <t t-esc="lg[1].split('/').pop()" />
