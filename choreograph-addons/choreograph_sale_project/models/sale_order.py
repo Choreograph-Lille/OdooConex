@@ -250,3 +250,10 @@ class SaleOrder(models.Model):
     def check_task_stage_number(self, number=''):
         if number != CHECK_TASK_STAGE_NUMBER:
             raise ValidationError(_('The task is in progress, you can\'t check/uncheck this field'))
+
+    def action_view_task(self):
+        action = super().action_view_task()
+        project_id = self.env['project.project'].browse(action['context'].get('default_project_id', False)).exists()
+        if project_id:
+            action['context'].update({'default_type_of_project': project_id.type_of_project})
+        return action
