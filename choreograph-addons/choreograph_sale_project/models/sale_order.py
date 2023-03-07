@@ -265,5 +265,7 @@ class SaleOrder(models.Model):
             return False
         for task in self.project_ids.task_ids.filtered(lambda tsk: tsk.role_id):
             roles = self.partner_id.role_ids.filtered(lambda pr: pr.role_id == task.role_id)
+            if not roles:
+                continue
             task.write({'user_ids': [(6, 0, roles.mapped('user_ids').ids)]})
         return True
