@@ -41,10 +41,14 @@ class ProjectTask(models.Model):
     @api.model
     def get_operation_project_task_type(self):
         return self.env['project.task.type'].search([('type_of_project', '=', 'operation')])
-        
+
     @api.model
     def create(self, values):
         if self._context.get('is_operation_generation'):
+            if values.get('task_number', False) == '20' and values.get('project_id', False):
+                project_id = self.env['project.project'].browse(values['project_id']).exists()
+                if project_id:
+                    values['name'] = project_id.name.replace(' (TEMPLATE)', '').replace(' (COPY)', '')
             values.update({
                 'stage_id': self.env.ref('choreograph_project.project_task_type_draft').id,
             })
