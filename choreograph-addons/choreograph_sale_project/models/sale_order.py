@@ -170,6 +170,7 @@ class SaleOrder(models.Model):
         self.onchange_potential_return()
         self.onchange_study_delivery()
         self.onchange_presentation()
+        self._manage_task_assignation()
 
     def action_redelivery(self):
         if len(self.project_ids) > 1:
@@ -257,3 +258,12 @@ class SaleOrder(models.Model):
         if project_id:
             action['context'].update({'default_type_of_project': project_id.type_of_project})
         return action
+
+    def _manage_task_assignation(self):
+        self.ensure_one()
+        if not self.partner_id.role_ids:
+            return False
+        for task in self.project_ids.task_ids.filtered(lambda tsk: tsk.role_id):
+            roles = self.partner_id.role_ids.filtered(lambda pr: pr.role_id == task.role_id)
+            task.write({'user_ids': [(6, 0, roles.mapped('user_ids').ids)]})
+        return True
