@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_project_view_form_simplified_inherit" model="ir.ui.view">
+        <field name="name">project.project.view.form.simplified.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.project_project_view_form_simplified" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="before">
+                <field name="type_of_project" invisible="1" />
+                <label for="template_source_id" string="Template"
+                    attrs="{'invisible': [('type_of_project','!=','operation')]}" />
+                <field name="template_source_id"
+                    attrs="{'invisible': [('type_of_project','!=','operation')]}"
+                    domain="[('type_of_project','=','operation'),('is_template','=',True)]"
+                    options="{'no_create': True}" />
+            </xpath>
+        </field>
+    </record>
+    <record id="project_project_view_form_simplified_footer_inherit" model="ir.ui.view">
+        <field name="name">project_project_view_form_simplified_footer_inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.project_project_view_form_simplified_footer" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_view_tasks']" position="attributes">
+                <attribute name="attrs">{'invisible': [('template_source_id','!=',False)]}</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_view_tasks']" position="after">
+                <button string="Create project"
+                    name="create_operation_from_template"
+                    attrs="{'invisible': [('template_source_id','=',False)]}"
+                    type="object"
+                    class="btn-primary" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

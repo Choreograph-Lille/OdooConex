@@ -26,6 +26,7 @@
         'views/choreograph_project_task_type.xml',
         'views/sale_order.xml',
         'views/ir_ui_menu.xml',
+        'views/project_project.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],

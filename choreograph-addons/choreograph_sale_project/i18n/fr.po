@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-07 14:29+0000\n"
-"PO-Revision-Date: 2023-03-07 14:29+0000\n"
+"POT-Creation-Date: 2023-03-08 13:34+0000\n"
+"PO-Revision-Date: 2023-03-08 13:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -212,6 +212,11 @@ msgstr "Commentaire"
 #: model:project.project,name:choreograph_sale_project.project_project_count
 msgid "Counting (TEMPLATE)"
 msgstr "Comptage (TEMPLATE)"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.project_project_view_form_simplified_footer_inherit
+msgid "Créer un projet"
+msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_uid
@@ -637,6 +642,7 @@ msgstr "Quantité"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__quantity_to_deliver
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__quantity_to_deliver
 msgid "Quantity To Deliver"
 msgstr "Quantité à livrer"
