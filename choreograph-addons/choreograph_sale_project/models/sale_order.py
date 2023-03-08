@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
+from datetime import date, datetime
 from pytz import timezone, utc
+from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
+from odoo.addons.choreograph_project.models.project_project import WAITING_TASK_STAGE, TODO_TASK_STAGE
 
 PROVIDER_DELIVERY_NUMBER = '75'
-TODO_TASK_STAGE = '15'
 SMS_TASK_NUMBER = '50'
 EMAIL_TASK_NUMBER = '45'
 CHECK_TASK_STAGE_NUMBER = '10'
@@ -49,6 +50,7 @@ class SaleOrder(models.Model):
     operation_type_id = fields.Many2one('project.project', compute='_compute_operation_type_id', store=True)
     can_display_redelivery = fields.Boolean(compute='_compute_can_display_delivery')
     can_display_livery_project = fields.Boolean(compute='_compute_can_display_delivery')
+    can_display_to_plan = fields.Boolean(compute='_compute_can_display_delivery')
     delivery_email_to = fields.Char()
 
     @api.depends('project_ids')
@@ -68,9 +70,13 @@ class SaleOrder(models.Model):
             self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
             self.env.ref('choreograph_project.planning_project_stage_delivery').id,
         ]
+        STAGE_TO_PLAN_PROJECT = [
+            self.env.ref('choreograph_project.planning_project_stage_draft').id
+        ]
         for rec in self:
             rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_REDELIVERY_PROJECT if rec.operation_type_id else False
             rec.can_display_livery_project = rec.operation_type_id.stage_id.id in STAGE_DELIVERY_PROJECT if rec.operation_type_id else False
+            rec.can_display_to_plan = rec.operation_type_id.stage_id.id in STAGE_TO_PLAN_PROJECT if rec.operation_type_id else False
 
     @api.onchange('potential_return')
     def onchange_potential_return(self):
@@ -173,9 +179,15 @@ class SaleOrder(models.Model):
         self.onchange_presentation()
         self._manage_task_assignation()
 
+    def check_project_count(func):
+        def wrapper(self):
+            if len(self.project_ids) > 1:
+                raise UserError(_("the SO contains several projects"))
+            return func(self)
+        return wrapper
+
+    @check_project_count
     def action_redelivery(self):
-        if len(self.project_ids) > 1:
-            raise UserError(_("the SO contains several projects"))
         project_id = self.project_ids[0]
         redelivery_type = self.env.context.get('redelivery_type')
         if redelivery_type == 'studies':
@@ -183,11 +195,15 @@ class SaleOrder(models.Model):
         else:
             project_id.js_redelivery_prod()
 
+    @check_project_count
     def action_livery_project(self):
-        if len(self.project_ids) > 1:
-            raise UserError(_("the SO contains several projects"))
         project_id = self.project_ids[0]
         return project_id.livery_project()
+
+    @check_project_count
+    def action_to_plan(self):
+        project_id = self.project_ids[0]
+        return project_id.action_to_plan()
 
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
