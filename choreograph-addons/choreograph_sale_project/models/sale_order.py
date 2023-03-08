@@ -73,6 +73,9 @@ class SaleOrder(models.Model):
         STAGE_TO_PLAN_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_draft').id
         ]
+        STAGE_TO_PLAN_PROJECT = [
+            self.env.ref('choreograph_project.planning_project_stage_draft').id
+        ]
         for rec in self:
             rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_REDELIVERY_PROJECT if rec.operation_type_id else False
             rec.can_display_livery_project = rec.operation_type_id.stage_id.id in STAGE_DELIVERY_PROJECT if rec.operation_type_id else False
