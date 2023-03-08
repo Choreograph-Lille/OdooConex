@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models
 
 from odoo.addons.choreograph_project.models.project_project import (
@@ -289,3 +293,23 @@ class ProjectTask(models.Model):
                     'provider_file_name': rec.provider_file_name,
                     'provider_delivery_address': rec.provider_delivery_address,
                 })
+
+    def _schedule_move_task_95_to_15_stage(self, limit=1):
+        """
+        Move task 95 to 15 stage
+        :param limit:
+        :return:
+        """
+        project_task_obj = self.env['project.task']
+        draft_stage = self.env.ref('choreograph_project.project_task_type_draft', raise_if_not_found=False)
+        if not draft_stage:
+            return False
+        to_do_stage = self.env.ref('choreograph_project.project_task_type_to_do', raise_if_not_found=False)
+        if not to_do_stage:
+            return False
+        date = fields.Datetime.today() - relativedelta(days=15)
+        tasks = project_task_obj.search([('stage_id', '=', draft_stage.id),
+                                         ('task_number', '=', '95'),
+                                         ('sale_order_id.commitment_date', '!=', False),
+                                         ('sale_order_id.commitment_date', '<=', date)])
+        return tasks.write({'stage_id': to_do_stage.id})

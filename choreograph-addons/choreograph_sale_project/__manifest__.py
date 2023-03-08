@@ -19,7 +19,7 @@
         'data/choreograph_project_task_type.xml',
         'data/project_project.xml',
         'data/mail_template_data.xml',
-        'data/ir_cron.xml',
+        'data/ir_cron_data.xml',
         # security
         'security/ir.model.access.csv',
         # views

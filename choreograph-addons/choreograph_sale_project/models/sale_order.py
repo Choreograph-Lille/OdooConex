@@ -51,12 +51,6 @@ class SaleOrder(models.Model):
     can_display_redelivery = fields.Boolean(compute='_compute_can_display_delivery')
     can_display_livery_project = fields.Boolean(compute='_compute_can_display_delivery')
     delivery_email_to = fields.Char()
-    commitment_date_to_date = fields.Date(compute='compute_commitment_date_to_date', store=True)
-
-    @api.depends('commitment_date')
-    def compute_commitment_date_to_date(self):
-        for rec in self:
-            rec.commitment_date_to_date = rec.commitment_date.date() if rec.commitment_date else False
 
     @api.depends('project_ids')
     def _compute_operation_type_id(self):
@@ -298,12 +292,3 @@ class SaleOrder(models.Model):
                 'active_ids': self.ids,
             },
         }
-
-    def action_update_task_95(self, limit=1):
-        todo_stage_id = self.env['project.task.type'].search([('stage_number', '=', TODO_TASK_STAGE)], limit=1)
-        draft_stage_id = self.env['project.task.type'].search([('stage_number', '=', WAITING_TASK_STAGE)], limit=1)
-        orders = self.env['sale.order'].search([('commitment_date_to_date', '=', date.today() - relativedelta(days=16))], limit=limit)
-        tasks = self.env['project.task'].search([('sale_order_id', 'in', orders.ids), ('stage_id', '=', draft_stage_id.id), ('task_number', '=', '95')])
-        tasks.write({
-            'stage_id': todo_stage_id.id
-        })
