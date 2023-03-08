@@ -105,13 +105,18 @@ class ProjectProject(models.Model):
             task_id.update_task_stage(stage_number)
 
     def livery_project(self):
+        delivery_task_number = '0'
         if self.stage_id.stage_number == '40':
             self._update_task_stage('80', '15')
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
+            delivery_task_number = '75'
         elif self.stage_id.stage_number == '50':
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
             if not self.task_ids.filtered(lambda task: task.task_number == '90'):
                 self._update_95_to_15_with_commitment_date()
+            delivery_task_number = '85'
+        self.sale_order_id.delivery_email_to = self.task_ids.filtered(lambda t: t.task_number == delivery_task_number).provider_delivery_address
+        return self.sale_order_id.action_send_delivery_email(completed_task=delivery_task_number)
 
     def _update_95_to_15_with_commitment_date(self):
         task_95 = self.task_ids.filtered(lambda task: task.task_number == '95')

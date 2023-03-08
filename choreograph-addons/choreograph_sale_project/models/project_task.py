@@ -22,7 +22,7 @@ class ProjectTask(models.Model):
     campaign_file_name = fields.Char('File Name')
     type = fields.Char()  # this should take the type in cond/excl but another task
 
-    bat_from = fields.Char('From', related='sale_order_id.bat_from')
+    bat_from = fields.Many2one('choreograph.campaign.de', related='sale_order_id.bat_from')
     bat_internal = fields.Char(related='sale_order_id.bat_internal')
     bat_client = fields.Char(related='sale_order_id.bat_client')
     bat_comment = fields.Text('BAT Comment', related='sale_order_id.bat_comment')
@@ -33,11 +33,13 @@ class ProjectTask(models.Model):
     witness_comment = fields.Text(related='sale_order_id.witness_comment')
     file_name = fields.Char()
     file_quantity = fields.Char()
-    volume = fields.Float()
+    volume = fields.Integer(related='sale_order_id.quantity_to_deliver')
     dedup_title_number = fields.Char()
     family_conex = fields.Boolean()
+
     provider_file_name = fields.Char()
     provider_delivery_address = fields.Char('Delivery Address')
+
     provider_comment = fields.Text()
     desired_finished_volume = fields.Char(related='sale_order_id.desired_finished_volume')
     start_date = fields.Date()
@@ -271,4 +273,19 @@ class ProjectTask(models.Model):
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
+            if 'provider_file_name' in vals or 'provider_delivery_address' in vals:
+                task.update_provider_data()
         return res
+
+    def update_provider_data(self):
+        for rec in self:
+            targeted_task = False
+            if rec.task_number == '70':
+                targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '75')
+            elif rec.task_number == '80':
+                targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '85')
+            if targeted_task:
+                targeted_task.write({
+                    'provider_file_name': rec.provider_file_name,
+                    'provider_delivery_address': rec.provider_delivery_address,
+                })
