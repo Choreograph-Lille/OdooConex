@@ -115,7 +115,8 @@ class ProjectProject(models.Model):
             if not self.task_ids.filtered(lambda task: task.task_number == '90'):
                 self._update_95_to_15_with_commitment_date()
             delivery_task_number = '85'
-        self.sale_order_id.delivery_email_to = self.task_ids.filtered(lambda t: t.task_number == delivery_task_number).provider_delivery_address
+        self.sale_order_id.delivery_email_to = self.task_ids.filtered(
+            lambda t: t.task_number == delivery_task_number).provider_delivery_address
         return self.sale_order_id.action_send_delivery_email(completed_task=delivery_task_number)
 
     def _update_95_to_15_with_commitment_date(self):
@@ -155,3 +156,6 @@ class ProjectProject(models.Model):
         action = super().action_view_tasks()
         action['context'].update({'default_type_of_project': self.type_of_project})
         return action
+
+    def action_to_plan(self):
+        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_planified').id})
