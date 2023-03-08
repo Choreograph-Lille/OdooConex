@@ -4,12 +4,17 @@
 
         <record id="sale_data_conservation_3_months" model="sale.data.conservation">
             <field name="name">3 months</field>
+            <field name="active" eval="True"/>
         </record>
+
         <record id="sale_data_conservation_6_months" model="sale.data.conservation">
             <field name="name">6 months</field>
+            <field name="active" eval="True"/>
         </record>
+
         <record id="sale_data_conservation_9_months" model="sale.data.conservation">
             <field name="name">9 months</field>
+            <field name="active" eval="True"/>
         </record>
 
     </data>

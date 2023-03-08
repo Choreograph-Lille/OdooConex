@@ -10,7 +10,9 @@
         <menuitem id="sale_data_conservation_menu"
                   action="sale_data_conservation_action"
                   name="Data Conservation"
-                  sequence="100" parent="sale.menu_sale_config"/>
+                  sequence="100"
+                  parent="sale.menu_sale_config"
+                  groups="base.group_no_one"/>
 
         <menuitem id="choreograph_campaign_de_menu"
                   action="choreograph_campaign_de_action"
