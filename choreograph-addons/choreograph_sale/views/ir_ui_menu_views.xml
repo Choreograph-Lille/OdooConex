@@ -12,5 +12,10 @@
                   name="Data Conservation"
                   sequence="100" parent="sale.menu_sale_config"/>
 
+        <menuitem id="choreograph_campaign_de_menu"
+                  action="choreograph_campaign_de_action"
+                  name="DE"
+                  sequence="110" parent="sale.menu_sale_config"/>
+
     </data>
 </odoo>

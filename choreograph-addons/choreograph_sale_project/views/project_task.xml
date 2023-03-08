@@ -159,9 +159,10 @@
                             <field name="family_conex"
                                    attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
                             <field name="provider_file_name"
-                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])], 'readonly': [('task_number', 'in', ['75', '85'])]}"/>
                             <field name="provider_delivery_address"
-                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])], 'readonly': [('task_number', 'in', ['75', '85'])]}"
+                                   widget="email"/>
                             <field name="provider_comment"
                                    attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
 
@@ -199,7 +200,7 @@
                 </field>
 
                 <field name="user_ids" position="after">
-                    <field name="type_of_project" invisible="0"/>
+                    <field name="type_of_project" invisible="1"/>
                 </field>
                 <xpath expr="//header/field[@name='stage_id']" position="attributes">
                     <attribute name="domain">[('type_of_project', '=', type_of_project)]</attribute>

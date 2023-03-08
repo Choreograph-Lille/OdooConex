@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="choreograph_campaign_de_view_tree" model="ir.ui.view">
+            <field name="name">choreograph.campaign.de.view.tree</field>
+            <field name="model">choreograph.campaign.de</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="active" />
+                </tree>
+            </field>
+        </record>
+
+        <record id="choreograph_campaign_de_action" model="ir.actions.act_window">
+            <field name="name">Choreograph Campaign DE</field>
+            <field name="res_model">choreograph.campaign.de</field>
+            <field name="view_mode">tree</field>
+        </record>
+    </data>
+</odoo>

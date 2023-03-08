@@ -69,7 +69,7 @@ class SaleOrder(models.Model):
     personalization = fields.Boolean()
     comment = fields.Text()
 
-    bat_from = fields.Char('From')
+    bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
