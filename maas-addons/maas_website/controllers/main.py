@@ -521,21 +521,3 @@ class OperationWebsite(http.Controller):
         user.sudo().write({'portal_filter': filter})
         values = {user.id: {'filter': filter}}
         return json.dumps(list(values))
-
-    @http.route('/operation/indication', auth='user', website=True, csrf=False)
-    def indication(self):
-        quantity, identifiers, percent, unlimited = self._get_consumption_data()
-        partner = http.request.env.user.partner_id.get_parent()
-        indications = http.request.env['partner.indication.infos'].sudo().search(
-            [('partner_id', '=', partner.id), ('active', '=', True)], order="sequence asc")
-        values = {
-            'campaign_ids': partner.campaign_ids,
-            'total_qty_cumulative': quantity,
-            'identifiers': identifiers,
-            'percent': percent,
-            'url_for': url_for,
-            'unlimited': unlimited,
-            'indications': indications,
-            'partner': partner,
-        }
-        return http.request.render('maas_website.indication', values)
