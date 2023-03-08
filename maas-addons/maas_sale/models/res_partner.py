@@ -25,13 +25,14 @@ from odoo import fields, models
 class Partner(models.Model):
     _inherit = 'res.partner'
 
-    partner_type = fields.Selection([('alliance', 'Alliance'), ('conexplus', 'Conex +')], default='alliance')
-    title_ref = fields.Char('Title Ref.', size=6)
+    partner_type = fields.Selection([('alliance', 'Alliance'), ('conexplus', 'Conex +')],
+                                    default='alliance', tracking=10)
+    title_ref = fields.Char('Title Ref.', size=6, tracking=10)
     operation_ids = fields.One2many('sale.operation', 'partner_id', 'Operations')
     campaign_ids = fields.One2many('sale.campaign', 'partner_id', 'Campaigns')
     subscription_ids = fields.One2many('sale.order', 'partner_id', 'Subscriptions ')
-    date_update_title = fields.Date()
-    date_update_vars = fields.Date()
+    date_update_title = fields.Date(tracking=10)
+    date_update_vars = fields.Date(tracking=10)
 
     def get_active_subscription(self):
         self.ensure_one()
