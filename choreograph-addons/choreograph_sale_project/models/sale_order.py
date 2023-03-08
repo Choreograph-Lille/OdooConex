@@ -49,6 +49,7 @@ class SaleOrder(models.Model):
     operation_type_id = fields.Many2one('project.project', compute='_compute_operation_type_id', store=True)
     can_display_redelivery = fields.Boolean(compute='_compute_can_display_delivery')
     can_display_livery_project = fields.Boolean(compute='_compute_can_display_delivery')
+    delivery_email_to = fields.Char()
 
     @api.depends('project_ids')
     def _compute_operation_type_id(self):
@@ -186,7 +187,7 @@ class SaleOrder(models.Model):
         if len(self.project_ids) > 1:
             raise UserError(_("the SO contains several projects"))
         project_id = self.project_ids[0]
-        project_id.livery_project()
+        return project_id.livery_project()
 
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
@@ -269,3 +270,24 @@ class SaleOrder(models.Model):
                 continue
             task.write({'user_ids': [(6, 0, roles.mapped('user_ids').ids)]})
         return True
+
+    def action_send_delivery_email(self, completed_task=''):
+        composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form')
+        template_id = self.env.ref('choreograph_sale_project.email_template_choreograph_delivery')
+        return {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'view_id': composer_form_view_id.id,
+            'target': 'new',
+            'context': {
+                'default_composition_mode': 'comment',
+                'default_email_layout_xmlid': 'mail.mail_notification_light',
+                'default_res_id': self.id,
+                'default_model': 'sale.order',
+                'default_use_template': bool(template_id),
+                'default_template_id': template_id.id,
+                'website_sale_send_recovery_email': True,
+                'active_ids': self.ids,
+            },
+        }
