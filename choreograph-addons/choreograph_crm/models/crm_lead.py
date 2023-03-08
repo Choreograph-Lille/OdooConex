@@ -20,5 +20,6 @@ class CrmLead(models.Model):
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
         self.update({
-            'agency_id': self.partner_id.agency_id
+            'agency_id': self.partner_id.agency_id,
+            'user_id': self.partner_id.user_id
         })
