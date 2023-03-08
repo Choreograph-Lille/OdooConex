@@ -10,9 +10,6 @@
                 src="/maas_website/static/src/img/ico-back.png" />
             <ul class="list-menu">
                 <li>
-                    <a class="link-menu contact-menu active" href="/operation/indication">Indication</a>
-                </li>
-                <li>
                     <a class="link-menu campagne-menu" href="/operation/list">Campaigns</a>
                 </li>
                 <li>
