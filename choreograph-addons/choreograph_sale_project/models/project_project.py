@@ -142,9 +142,10 @@ class ProjectProject(models.Model):
     def _hook_task_90_in_stage_15(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_extraction').id})
 
-    def _hook_task_90_in_stage_80(self):
-        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
-        self._update_95_to_15_with_commitment_date()
+    # HT00832: function not used
+    # def _hook_task_90_in_stage_80(self):
+    #     self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
+    #     self._update_95_to_15_with_commitment_date()
 
     def _hook_check_all_task(self, task_id):
         not_terminated = self.task_ids.filtered(

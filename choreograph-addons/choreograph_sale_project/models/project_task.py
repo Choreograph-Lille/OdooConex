@@ -3,7 +3,7 @@ from odoo import api, fields, models
 from odoo.addons.choreograph_project.models.project_project import (
     TERMINATED_TASK_STAGE,
     FILE_RECEIVED_TASK_STAGE,
-    WAITING_FILE_TASK_STAGE
+    WAITING_FILE_TASK_STAGE,
 )
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
@@ -258,7 +258,7 @@ class ProjectTask(models.Model):
                     '75': '_hook_task_75_in_stage_80',
                     '80': '_hook_task_80_in_stage_80',
                     '85': '_hook_task_fulfillement_terminated',
-                    '90': '_hook_task_90_in_stage_80'
+                    # '90': '_hook_task_90_in_stage_80'
                 }
                 if stage_id.stage_number == TERMINATED_TASK_STAGE:
                     method_name = method_dict.get(task.task_number, None)
