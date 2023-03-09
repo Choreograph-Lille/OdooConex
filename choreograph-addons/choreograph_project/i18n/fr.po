@@ -212,9 +212,9 @@ msgstr ""
 " à l'achèvement."
 
 #. module: choreograph_project
-#: model:project.project.stage,name:choreograph_project.planning_project_stage_delivery
-msgid "Delivery"
-msgstr "Livraison"
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_to_deliver
+msgid "To deliver"
+msgstr "A livrer"
 
 #. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_done
