@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e-20230208\n"
+"Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-02 11:53+0000\n"
-"PO-Revision-Date: 2023-03-02 11:53+0000\n"
+"POT-Creation-Date: 2023-03-09 18:31+0000\n"
+"PO-Revision-Date: 2023-03-09 18:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -212,9 +212,9 @@ msgstr ""
 " à l'achèvement."
 
 #. module: choreograph_project
-#: model:project.project.stage,name:choreograph_project.planning_project_stage_to_deliver
-msgid "To deliver"
-msgstr "A livrer"
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_delivery
+msgid "Delivery"
+msgstr "Livraison"
 
 #. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_done
@@ -480,6 +480,11 @@ msgstr "Terminé"
 #: model:project.task.type,name:choreograph_project.project_task_type_to_do
 msgid "To Do"
 msgstr "A faire"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_to_deliver
+msgid "To deliver"
+msgstr "A livrer"
 
 #. module: choreograph_project
 #: model:ir.model.fields,field_description:choreograph_project.field_project_project__type_of_project

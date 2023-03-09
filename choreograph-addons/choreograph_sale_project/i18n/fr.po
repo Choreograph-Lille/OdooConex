@@ -6,15 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-08 14:12+0000\n"
-"PO-Revision-Date: 2023-03-08 14:12+0000\n"
+"POT-Creation-Date: 2023-03-09 18:26+0000\n"
+"PO-Revision-Date: 2023-03-09 18:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
 
 #. module: choreograph_sale_project
 #: model:mail.template,body_html:choreograph_sale_project.email_template_choreograph_delivery
@@ -105,7 +104,6 @@ msgstr ""
 "                </div>\n"
 "            "
 
-
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__ab_test
 msgid "A/B Test"
@@ -157,11 +155,6 @@ msgid "Bat From"
 msgstr "DE"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_desired_date
-msgid "Bat Desired Date"
-msgstr "Date de BAT souhaité"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_internal
 msgid "Bat Internal"
 msgstr "Bat interne"
@@ -187,14 +180,34 @@ msgid "Can Display Redelivery"
 msgstr "Peut afficher la relivraison"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__can_display_to_plan
+msgid "Can Display To Plan"
+msgstr "Peut afficher pour planifier"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__catalogue_ids
 msgid "Catalogues"
 msgstr ""
 
 #. module: choreograph_sale_project
+#: model:mail.template,subject:choreograph_sale_project.email_template_choreograph_delivery
+msgid ""
+"Choreograph/ I-Behavior: The {{ object.operation_type_id.name }} campaign "
+"for {{ object.partner_id.name }} UK has been delivered"
+msgstr ""
+"Fichier choreograph pour la campagne de {{ object.operation_type_id.name }} "
+"/ {{ object.partner_id.name }} / {{ object.name }}"
+
+#. module: choreograph_sale_project
 #: model:mail.template,name:choreograph_sale_project.email_template_choreograph_delivery
 msgid "Choreograph: Delivery Email Template"
 msgstr "Choreograph: Template email de livraison"
+
+#. module: choreograph_sale_project
+#: model:ir.actions.server,name:choreograph_sale_project.scheduler_move_task_95_in_15_stage_ir_actions_server
+#: model:ir.cron,cron_name:choreograph_sale_project.scheduler_move_task_95_in_15_stage
+msgid "Choreograph: Move Task 95 to Stage 15"
+msgstr "Choreograph: Déplacer la tâche 95 dans l'étape 15"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__civility
@@ -209,19 +222,14 @@ msgid "Comment"
 msgstr "Commentaire"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__commitment_date_to_date
-msgid "Commitment Date To Date"
-msgstr "Date de livraison (date)"
-
-#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_count
 msgid "Counting (TEMPLATE)"
 msgstr "Comptage (TEMPLATE)"
 
 #. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.project_project_view_form_simplified_footer_inherit
-msgid "Créer un projet"
-msgstr ""
+msgid "Create Operation"
+msgstr "Créer l'opération"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_uid
@@ -273,6 +281,11 @@ msgstr "Numéro titre Dédup."
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__provider_delivery_address
 msgid "Delivery Address"
 msgstr "Adresse de livraison"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__delivery_email_to
+msgid "Delivery Email To"
+msgstr "Livrer l'email à"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__deposit_date_1
@@ -402,11 +415,6 @@ msgid "Folder Key"
 msgstr "Clé de dossier"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_from
-msgid "From"
-msgstr "DE"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__id
@@ -497,7 +505,7 @@ msgstr "Nom"
 #. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_operation
 msgid "OPERATION"
-msgstr "OPERATION"
+msgstr ""
 
 #. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
@@ -508,6 +516,11 @@ msgstr "Opération"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__operation_condition_ids
 msgid "Operation Condition"
 msgstr "Condition de l'opération"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_project__project_template_id
+msgid "Operation Template"
+msgstr "Modèle d'opération"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__operation_type_id
@@ -853,11 +866,6 @@ msgid "Tasks"
 msgstr "Tâches"
 
 #. module: choreograph_sale_project
-#: model:mail.template,description:choreograph_sale_project.email_template_choreograph_delivery
-msgid "Template used on SO when we push the button Delivery"
-msgstr "Modèle utilisé dans les BC au clic du bouton Livrer"
-
-#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_telfixebox_enrichment
 msgid "Telfixebox Enrichment (TEMPLATE)"
 msgstr "Enrichissement Telfixebox (TEMPLATE)"
@@ -866,6 +874,11 @@ msgstr "Enrichissement Telfixebox (TEMPLATE)"
 #: model:project.project,name:choreograph_sale_project.project_project_telfixebox_prospecting
 msgid "Telfixebox Prospecting (TEMPLATE)"
 msgstr "Prospection Telfixebox (TEMPLATE)"
+
+#. module: choreograph_sale_project
+#: model:mail.template,description:choreograph_sale_project.email_template_choreograph_delivery
+msgid "Template used on SO when we push the button Delivery"
+msgstr "Modèle utilisé dans les BC au clic du bouton Livrer"
 
 #. module: choreograph_sale_project
 #. odoo-python
@@ -901,11 +914,6 @@ msgid "Type"
 msgstr ""
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume
-msgid "Volume"
-msgstr ""
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__reception_location
 msgid "Where to find ?"
 msgstr "Où le trouver ?"
@@ -923,7 +931,7 @@ msgstr "Témoins"
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_yield_calculation
 msgid "Yield Calculation (TEMPLATE)"
-msgstr "Caluld de rendements (TEMPLATE)"
+msgstr "Calcul de rendements (TEMPLATE)"
 
 #. module: choreograph_sale_project
 #. odoo-python
@@ -945,14 +953,6 @@ msgstr ""
 "Il faut déjà générer l'opération pour lancer les tâches sur les campagnes"
 
 #. module: choreograph_sale_project
-#: model:mail.template,subject:choreograph_sale_project.email_template_choreograph_delivery
-msgid ""
-"Choreograph/ I-Behavior: The {{ object.operation_type_id.name }} campaign "
-"for {{ object.partner_id.name }} UK has been delivered"
-msgstr "Fichier choreograph pour la campagne de {{ object.operation_type_id.name }} / "
-"{{ object.partner_id.name }} / {{ object.name }}"
-
-#. module: choreograph_sale_project
 #: model:ir.model,name:choreograph_sale_project.model_operation_provider_delivery
 msgid "operation.provider.delivery"
 msgstr ""
@@ -964,7 +964,6 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #. odoo-python
-#: code:addons/choreograph_sale_project/models/sale_order.py:0
 #: code:addons/choreograph_sale_project/models/sale_order.py:0
 #, python-format
 msgid "the SO contains several projects"

@@ -13,7 +13,7 @@ from odoo.addons.choreograph_project.models.project_project import (
 class ProjectProject(models.Model):
     _inherit = 'project.project'
 
-    template_source_id = fields.Many2one('project.project')
+    project_template_id = fields.Many2one('project.project', 'Operation Template', domain=[('is_template', '=', True)], copy=False)
 
     @api.model
     def set_task_project(self):
@@ -70,31 +70,33 @@ class ProjectProject(models.Model):
         self.env.ref('choreograph_sale_project.project_project_prospection_telportable').write(get_vals(task_list))
 
     def create_operation_from_template(self):
-        action = self.template_source_id.create_project_from_template(self.name)
+        action = self.project_template_id.create_project_from_template(self.name)
         self.unlink()
         return action
 
     def create_project_from_template(self, name=False):
-        action_id = super().create_project_from_template()
-        project_id = self.browse(action_id.get('res_id')).exists()
-        if project_id and project_id.type_of_project == 'operation':
-            type_ids = self.env['project.task'].get_operation_project_task_type()
-            project_stage_id = self.env.ref('choreograph_project.planning_project_stage_draft').id
-            task_stage_id = self.env.ref('choreograph_project.project_task_type_draft').id
-            project_id.write({
-                'stage_id': project_stage_id,
-                'type_ids': [(6, 0, type_ids.ids)],
-                'name': name if name else project_id.name
+        action = super(ProjectProject, self).create_project_from_template()
+        project = self.browse(action.get('res_id')).exists()
+        if project.type_of_project == 'operation':
+            types = self.env['project.task'].get_operation_project_task_type()
+            project_stage = self.env.ref('choreograph_project.planning_project_stage_draft')
+            task_stage = self.env.ref('choreograph_project.project_task_type_draft')
+            project.write({
+                'stage_id': project_stage.id,
+                'type_ids': [(6, 0, types.ids)],
+                'name': name if name else project.name
             })
-            project_id.task_ids.with_context(task_stage_init=True).write({
-                'stage_id': task_stage_id,
+            project.task_ids.with_context(task_stage_init=True).write({
+                'stage_id': task_stage.id,
             })
-        return action_id
+        return action
 
     def write(self, vals):
         res = super(ProjectProject, self).write(vals)
-        if self.type_of_project == 'operation' and vals.get('stage_id', False) == self.env.ref('choreograph_project.planning_project_stage_planified').id:
-            self._hook_stage_planified()
+        for record in self:
+            if record.type_of_project == 'operation' and \
+                    vals.get('stage_id') == self.env.ref('choreograph_project.planning_project_stage_planified').id:
+                record._hook_stage_planified()
         return res
 
     def _hook_stage_planified(self):

@@ -55,10 +55,9 @@ class ProjectProject(models.Model):
     @api.model
     @filter_by_type_of_project
     def _read_group_stage_ids(self, stages, domain, order):
-        return super()._read_group_stage_ids(stages, domain, order)
+        return super(ProjectProject, self)._read_group_stage_ids(stages, domain, order)
 
-    type_of_project = fields.Selection(
-        TYPE_OF_PROJECT, default='standard', required=True, compute='_compute_type_of_project', store=True, readonly=False)
+    type_of_project = fields.Selection(TYPE_OF_PROJECT, default='standard')
 
     def get_waiting_task_stage(self):
         todo_stage_id = self.type_ids.filtered(lambda t: t.stage_number == TODO_TASK_STAGE)
@@ -140,11 +139,6 @@ class ProjectProject(models.Model):
         project_stage_id = self.env['project.project.stage'].search([('stage_number', '=', number)], limit=1)
         if project_stage_id:
             self.write({'stage_id': project_stage_id.id})
-
-    @api.depends('sale_order_id')
-    def _compute_type_of_project(self):
-        for rec in self:
-            rec.type_of_project = 'operation' if rec.sale_order_id else 'standard'
 
     @api.model_create_multi
     def create(self, vals_list):
