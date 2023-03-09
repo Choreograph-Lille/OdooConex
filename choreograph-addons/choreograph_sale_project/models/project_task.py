@@ -257,7 +257,7 @@ class ProjectTask(models.Model):
                     '20': '_hook_task_20_in_stage_80',
                     '25': '_hook_task_25_in_stage_80',
                     '30': '_hook_task_30_in_stage_80',
-                    '45': '_hook_task_45_in_80_or_90_in_15',
+                    '45': '_hook_task_45_in_stage_80',
                     '70': '_hook_task_70_in_stage_80',
                     '75': '_hook_task_75_in_stage_80',
                     '80': '_hook_task_80_in_stage_80',
@@ -275,6 +275,8 @@ class ProjectTask(models.Model):
                         task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
                 elif (task.task_number in ['5', '10', '15'] and stage_id.stage_number == FILE_RECEIVED_TASK_STAGE) or (task.task_number in ['20', '25', '35'] and stage_id.stage_number == WAITING_FILE_TASK_STAGE):
                     task.project_id._hook_task_in_stage_20_25()
+                elif task.task_number == '45' and stage_id.stage_number == '50':
+                    task.project_id._hook_task_45_in_stage_50()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
             if 'provider_file_name' in vals or 'provider_delivery_address' in vals:

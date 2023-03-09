@@ -62,13 +62,13 @@ class SaleOrder(models.Model):
     def _compute_can_display_delivery(self):
         STAGE_REDELIVERY_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
-            self.env.ref('choreograph_project.planning_project_stage_delivery').id,
+            self.env.ref('choreograph_project.planning_project_stage_to_deliver').id,
             self.env.ref('choreograph_project.planning_project_stage_terminated').id,
             self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
         ]
         STAGE_DELIVERY_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
-            self.env.ref('choreograph_project.planning_project_stage_delivery').id,
+            self.env.ref('choreograph_project.planning_project_stage_to_deliver').id,
         ]
         STAGE_TO_PLAN_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_draft').id
