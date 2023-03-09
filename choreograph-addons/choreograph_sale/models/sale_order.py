@@ -139,6 +139,7 @@ class SaleOrder(models.Model):
                         _(TASK_NAME[REQUIRED_TASK_NUMBER['presentation']])))
         self.order_line.sudo().with_company(self.company_id).with_context(
             is_operation_generation=True, user_id=self.user_id.id)._timesheet_service_generation()
+        self.project_ids.write({'type_of_project': 'operation'})
 
         if self.commitment_date:
             self.tasks_ids.write({

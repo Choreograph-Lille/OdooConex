@@ -1,4 +1,4 @@
-from datetime import timedelta
+# -*- coding: utf-8 -*-
 
 from odoo import api, fields, models
 
@@ -55,10 +55,9 @@ class ProjectProject(models.Model):
     @api.model
     @filter_by_type_of_project
     def _read_group_stage_ids(self, stages, domain, order):
-        return super()._read_group_stage_ids(stages, domain, order)
+        return super(ProjectProject, self)._read_group_stage_ids(stages, domain, order)
 
-    type_of_project = fields.Selection(
-        TYPE_OF_PROJECT, default='standard', required=True, compute='_compute_type_of_project', store=True, readonly=False)
+    type_of_project = fields.Selection(TYPE_OF_PROJECT, default='standard')
 
     def get_waiting_task_stage(self):
         todo_stage_id = self.type_ids.filtered(lambda t: t.stage_number == TODO_TASK_STAGE)
@@ -104,10 +103,13 @@ class ProjectProject(models.Model):
         if task_id:
             task_id.update_task_stage(stage_number)
 
+    def _is_compaign(self) -> bool:
+        return bool(self.task_ids.filtered(lambda task: task.task_number in ['45', '50']))
+
     def livery_project(self):
         delivery_task_number = '0'
         if self.stage_id.stage_number == '40':
-            self._update_task_stage('80', '15')
+            self._update_task_stage('80', TODO_TASK_STAGE)
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
             delivery_task_number = '75'
         elif self.stage_id.stage_number == '50':
@@ -118,6 +120,9 @@ class ProjectProject(models.Model):
         self.sale_order_id.delivery_email_to = self.task_ids.filtered(
             lambda t: t.task_number == delivery_task_number).provider_delivery_address
         return self.sale_order_id.action_send_delivery_email(completed_task=delivery_task_number)
+
+    def livery_project_compaign(self):
+        self._update_task_stage('90', TODO_TASK_STAGE)
 
     # def _update_95_to_15_with_commitment_date(self):
     #     task_95 = self.task_ids.filtered(lambda task: task.task_number == '95')
@@ -134,11 +139,6 @@ class ProjectProject(models.Model):
         project_stage_id = self.env['project.project.stage'].search([('stage_number', '=', number)], limit=1)
         if project_stage_id:
             self.write({'stage_id': project_stage_id.id})
-
-    @api.depends('sale_order_id')
-    def _compute_type_of_project(self):
-        for rec in self:
-            rec.type_of_project = 'operation' if rec.sale_order_id else 'standard'
 
     @api.model_create_multi
     def create(self, vals_list):

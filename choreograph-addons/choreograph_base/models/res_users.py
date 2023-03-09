@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from .tools import clean_dict
-from odoo import api, fields, models
+from odoo import models
+
 
 class ResUsers(models.Model):
     _inherit = 'res.users'

@@ -49,4 +49,3 @@ class TestSaleCommon(TransactionCase):
             'order_id': cls.sale_order.id,
             'product_id': cls.article1.product_variant_id.id,
         })
-
