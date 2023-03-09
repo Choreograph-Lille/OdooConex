@@ -140,20 +140,22 @@ class ProjectProject(models.Model):
         for rec in self:
             rec.type_of_project = 'operation' if rec.sale_order_id else 'standard'
 
-    @api.model
-    def create(self, values):
-        if self._context.get('is_operation_generation') or self.env.context.get('default_type_of_project', False) == 'operation':
-            type_ids = self.env['project.task'].get_operation_project_task_type()
-            name_seq = self.env['ir.sequence'].next_by_code('project.project.operation')
-            values.update({
-                'type_of_project': 'operation',
-                'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft').id,
-                'type_ids': [(6, 0, type_ids.ids)],
-                'user_id': self.env.context.get('user_id', values['user_id']),
-                'name': f'{name_seq} - {values["name"]}'
-            })
-        project_id = super().create(values)
-        return project_id
+    @api.model_create_multi
+    def create(self, vals_list):
+        project_task_obj = self.env['project.task']
+        sequence_obj = self.env['ir.sequence']
+        for vals in vals_list:
+            if self._context.get('is_operation_generation') or self._context.get('default_type_of_project') == 'operation':
+                types = project_task_obj.get_operation_project_task_type()
+                name_seq = sequence_obj.next_by_code('project.project.operation')
+                vals.update({
+                    'type_of_project': 'operation',
+                    'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id,
+                    'type_ids': [(6, 0, types.ids)],
+                    'user_id': self._context.get('user_id', vals.get('user_id')),
+                    'name': '%s - %s' % (name_seq, vals.get('name'))
+                })
+        return super(ProjectProject, self).create(vals_list)
 
     def action_view_tasks(self):
         action = super().action_view_tasks()
