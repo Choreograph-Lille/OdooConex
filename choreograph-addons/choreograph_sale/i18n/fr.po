@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-06 11:39+0000\n"
-"PO-Revision-Date: 2023-03-06 11:39+0000\n"
+"POT-Creation-Date: 2023-03-09 08:40+0000\n"
+"PO-Revision-Date: 2023-03-09 08:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -142,6 +142,7 @@ msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__active
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__active
 msgid "Active"
 msgstr "Actif"
 
@@ -186,6 +187,7 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Audit"
@@ -202,6 +204,7 @@ msgid "BAT Comment"
 msgstr "Commentaire"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "BAT/Witness File"
@@ -339,6 +342,12 @@ msgid "Data Conservation"
 msgstr "Conservation des données"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__commitment_date
+msgid "Delivery Date"
+msgstr "Date de livraison"
+
+#. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Delivery Info"
