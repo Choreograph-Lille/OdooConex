@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<odoo noupdate="1">
+<odoo noupdate="0">
     <record id="project_task_type_draft" model="project.task.type">
         <field name="sequence">10</field>
         <field name="stage_number">10</field>
@@ -42,6 +42,13 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    <record id="project_task_type_validation_bat_client" model="project.task.type">
+        <field name="sequence">49</field>
+        <field name="stage_number">70</field>
+        <field name="name">Validation BAT client / interne</field>
+        <field name="legend_blocked">Blocked</field>
+        <field name="type_of_project">operation</field>
+    </record>
     <record id="project_task_type_in_progress" model="project.task.type">
         <field name="sequence">50</field>
         <field name="stage_number">50</field>
@@ -53,13 +60,6 @@
         <field name="sequence">60</field>
         <field name="stage_number">60</field>
         <field name="name">Waiting quantities</field>
-        <field name="legend_blocked">Blocked</field>
-        <field name="type_of_project">operation</field>
-    </record>
-    <record id="project_task_type_validation_bat_client" model="project.task.type">
-        <field name="sequence">70</field>
-        <field name="stage_number">70</field>
-        <field name="name">Validation BAT client / interne</field>
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>

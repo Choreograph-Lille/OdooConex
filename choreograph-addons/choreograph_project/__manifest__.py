@@ -16,6 +16,7 @@
         # data
         'data/project_project_stage.xml',
         'data/project_task_type.xml',
+        'data/ir_sequence.xml',
         # report
         'report/project_report.xml',
         # views

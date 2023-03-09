@@ -134,10 +134,11 @@ class SaleOrder(models.Model):
             if any([task not in tasks for task in REQUIRED_TASK_NUMBER.values()]):
                 raise ValidationError(
                     _('The operation template must have the following task number: {0}, {1}, {2}').format(
-                        _(TASK_NAME[REQUIRED_TASK_NUMBER['potential_return']]), _(TASK_NAME[REQUIRED_TASK_NUMBER['study_delivery']]),
+                        _(TASK_NAME[REQUIRED_TASK_NUMBER['potential_return']]), _(
+                            TASK_NAME[REQUIRED_TASK_NUMBER['study_delivery']]),
                         _(TASK_NAME[REQUIRED_TASK_NUMBER['presentation']])))
         self.order_line.sudo().with_company(self.company_id).with_context(
-            is_operation_generation=True)._timesheet_service_generation()
+            is_operation_generation=True, user_id=self.user_id.id)._timesheet_service_generation()
 
         if self.commitment_date:
             self.tasks_ids.write({
@@ -176,5 +177,6 @@ class SaleOrder(models.Model):
         return action
 
     def _get_purchase_orders(self):
-        purchases =  super(SaleOrder, self)._get_purchase_orders() | self.env['purchase.order'].search([('origin', '=', self.name)])
+        purchases = super(SaleOrder, self)._get_purchase_orders(
+        ) | self.env['purchase.order'].search([('origin', '=', self.name)])
         return purchases

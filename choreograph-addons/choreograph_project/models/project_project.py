@@ -112,22 +112,23 @@ class ProjectProject(models.Model):
             delivery_task_number = '75'
         elif self.stage_id.stage_number == '50':
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
-            if not self.task_ids.filtered(lambda task: task.task_number == '90'):
-                self._update_95_to_15_with_commitment_date()
+            # if not self.task_ids.filtered(lambda task: task.task_number == '90'):
+            #     self._update_95_to_15_with_commitment_date()
             delivery_task_number = '85'
-        self.sale_order_id.delivery_email_to = self.task_ids.filtered(lambda t: t.task_number == delivery_task_number).provider_delivery_address
+        self.sale_order_id.delivery_email_to = self.task_ids.filtered(
+            lambda t: t.task_number == delivery_task_number).provider_delivery_address
         return self.sale_order_id.action_send_delivery_email(completed_task=delivery_task_number)
 
-    def _update_95_to_15_with_commitment_date(self):
-        task_95 = self.task_ids.filtered(lambda task: task.task_number == '95')
-        if task_95:
-            task_stage_id = self.env['project.task.type'].search([('stage_number', '=', TODO_TASK_STAGE)], limit=1)
-            values = {}
-            if task_stage_id:
-                values.update({'stage_id': task_stage_id.id})
-            if self.sale_order_id.commitment_date:
-                values.update({'date_deadline': self.sale_order_id.commitment_date + timedelta(days=15)})
-            task_95.write(values)
+    # def _update_95_to_15_with_commitment_date(self):
+    #     task_95 = self.task_ids.filtered(lambda task: task.task_number == '95')
+    #     if task_95:
+    #         task_stage_id = self.env['project.task.type'].search([('stage_number', '=', TODO_TASK_STAGE)], limit=1)
+    #         values = {}
+    #         if task_stage_id:
+    #             values.update({'stage_id': task_stage_id.id})
+    #         if self.sale_order_id.commitment_date:
+    #             values.update({'date_deadline': self.sale_order_id.commitment_date + timedelta(days=15)})
+    #         task_95.write(values)
 
     def update_project_stage(self, number):
         project_stage_id = self.env['project.project.stage'].search([('stage_number', '=', number)], limit=1)
@@ -139,19 +140,27 @@ class ProjectProject(models.Model):
         for rec in self:
             rec.type_of_project = 'operation' if rec.sale_order_id else 'standard'
 
-    @api.model
-    def create(self, values):
-        if self._context.get('is_operation_generation'):
-            type_ids = self.env['project.task'].get_operation_project_task_type()
-            values.update({
-                'type_of_project': 'operation',
-                'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft').id,
-                'type_ids': [(6, 0, type_ids.ids)]
-            })
-        project_id = super().create(values)
-        return project_id
+    @api.model_create_multi
+    def create(self, vals_list):
+        project_task_obj = self.env['project.task']
+        sequence_obj = self.env['ir.sequence']
+        for vals in vals_list:
+            if self._context.get('is_operation_generation') or self._context.get('default_type_of_project') == 'operation':
+                types = project_task_obj.get_operation_project_task_type()
+                name_seq = sequence_obj.next_by_code('project.project.operation')
+                vals.update({
+                    'type_of_project': 'operation',
+                    'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id,
+                    'type_ids': [(6, 0, types.ids)],
+                    'user_id': self._context.get('user_id', vals.get('user_id')),
+                    'name': '%s - %s' % (name_seq, vals.get('name'))
+                })
+        return super(ProjectProject, self).create(vals_list)
 
     def action_view_tasks(self):
         action = super().action_view_tasks()
         action['context'].update({'default_type_of_project': self.type_of_project})
         return action
+
+    def action_to_plan(self):
+        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_planified').id})
