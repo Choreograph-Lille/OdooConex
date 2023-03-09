@@ -76,6 +76,7 @@ class OperationWebsite(http.Controller):
     @http.route('/operation/launch', type='http', auth='user', methods=['POST'], website=True, csrf=False)
     def launch_operation(self, **kwargs):
         operation_obj = http.request.env['sale.operation']
+        attachment_obj = http.request.env['ir.attachment'].sudo()
         partner = http.request.env.user.partner_id.get_parent()
         canal = kwargs.get('canal')
         canal = canal if canal != 'null' and canal in ('SMS', 'Print', 'Email') else False
@@ -86,14 +87,14 @@ class OperationWebsite(http.Controller):
                                           'action_id': kwargs.get('action_id', False),
                                           'searched_profile_desc': kwargs.get('searched_profile_desc'),
                                           'population_scored_desc': kwargs.get('population_scored_desc'),
-                                          'population_scored_datafile': base64.encodebytes(
-                                              kwargs.get('population_scored_datafile').read()),
-                                          'population_scored_filename': kwargs.get(
-                                              'population_scored_datafile').filename,
-                                          'searched_profile_datafile': base64.encodebytes(
-                                              kwargs.get('searched_profile_datafile').read()),
-                                          'searched_profile_filename': kwargs.get(
-                                              'searched_profile_datafile').filename,
+                                          'attachment_scored_id': attachment_obj.create({
+                                              'name': kwargs.get('population_scored_datafile').filename,
+                                              'datas': kwargs.get('population_scored_datafile').read(),
+                                              'type': 'binary'}).id,
+                                          'attachment_profile_id': attachment_obj.create({
+                                              'name': kwargs.get('searched_profile_datafile').filename,
+                                              'datas': kwargs.get('searched_profile_datafile').read(),
+                                              'type': 'binary'}).id,
                                           'canal': canal})
         res = {operation.id: {'name': operation.name}}
         return json.dumps(list(res.values()))
