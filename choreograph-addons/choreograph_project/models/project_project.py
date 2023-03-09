@@ -147,7 +147,8 @@ class ProjectProject(models.Model):
             values.update({
                 'type_of_project': 'operation',
                 'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft').id,
-                'type_ids': [(6, 0, type_ids.ids)]
+                'type_ids': [(6, 0, type_ids.ids)],
+                'user_id': self.env.context.get('user_id', values['user_id'])
             })
         project_id = super().create(values)
         return project_id
