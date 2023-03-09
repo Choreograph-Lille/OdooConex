@@ -142,13 +142,15 @@ class ProjectProject(models.Model):
 
     @api.model
     def create(self, values):
-        if self._context.get('is_operation_generation'):
+        if self._context.get('is_operation_generation') or self.env.context.get('default_type_of_project', False) == 'operation':
             type_ids = self.env['project.task'].get_operation_project_task_type()
+            name_seq = self.env['ir.sequence'].next_by_code('project.project.operation')
             values.update({
                 'type_of_project': 'operation',
                 'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft').id,
                 'type_ids': [(6, 0, type_ids.ids)],
-                'user_id': self.env.context.get('user_id', values['user_id'])
+                'user_id': self.env.context.get('user_id', values['user_id']),
+                'name': f'{name_seq} - {values["name"]}'
             })
         project_id = super().create(values)
         return project_id
