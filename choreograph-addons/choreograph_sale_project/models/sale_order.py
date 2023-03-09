@@ -200,6 +200,8 @@ class SaleOrder(models.Model):
     @check_project_count
     def action_livery_project(self):
         project_id = self.project_ids[0]
+        if project_id._is_compaign():
+            return project_id.livery_project_compaign()
         return project_id.livery_project()
 
     @check_project_count
