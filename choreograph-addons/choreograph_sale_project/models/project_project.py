@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, models
+from odoo import api, fields, models
 
 from odoo.addons.choreograph_project.models.project_project import (
     TERMINATED_TASK_STAGE,
@@ -12,6 +12,8 @@ from odoo.addons.choreograph_project.models.project_project import (
 
 class ProjectProject(models.Model):
     _inherit = 'project.project'
+
+    template_source_id = fields.Many2one('project.project')
 
     @api.model
     def set_task_project(self):
@@ -67,7 +69,12 @@ class ProjectProject(models.Model):
             get_vals(new_extend(task_list, ['info_presta', 'delivery_presta'])))
         self.env.ref('choreograph_sale_project.project_project_prospection_telportable').write(get_vals(task_list))
 
-    def create_project_from_template(self):
+    def create_operation_from_template(self):
+        action = self.template_source_id.create_project_from_template(self.name)
+        self.unlink()
+        return action
+
+    def create_project_from_template(self, name=False):
         action_id = super().create_project_from_template()
         project_id = self.browse(action_id.get('res_id')).exists()
         if project_id and project_id.type_of_project == 'operation':
@@ -77,6 +84,7 @@ class ProjectProject(models.Model):
             project_id.write({
                 'stage_id': project_stage_id,
                 'type_ids': [(6, 0, type_ids.ids)],
+                'name': name if name else project_id.name
             })
             project_id.task_ids.with_context(task_stage_init=True).write({
                 'stage_id': task_stage_id,

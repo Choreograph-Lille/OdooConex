@@ -219,6 +219,11 @@ msgid "Counting (TEMPLATE)"
 msgstr "Comptage (TEMPLATE)"
 
 #. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.project_project_view_form_simplified_footer_inherit
+msgid "Créer un projet"
+msgstr ""
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__create_uid
@@ -642,6 +647,7 @@ msgstr "Quantité"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__quantity_to_deliver
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__quantity_to_deliver
 msgid "Quantity To Deliver"
 msgstr "Quantité à livrer"
