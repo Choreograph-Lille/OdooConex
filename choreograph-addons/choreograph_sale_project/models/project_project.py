@@ -71,12 +71,14 @@ class ProjectProject(models.Model):
         action_id = super().create_project_from_template()
         project_id = self.browse(action_id.get('res_id')).exists()
         if project_id and project_id.type_of_project == 'operation':
+            name_seq = self.env['ir.sequence'].next_by_code('project.project.operation')
             type_ids = self.env['project.task'].get_operation_project_task_type()
             project_stage_id = self.env.ref('choreograph_project.planning_project_stage_draft').id
             task_stage_id = self.env.ref('choreograph_project.project_task_type_draft').id
             project_id.write({
                 'stage_id': project_stage_id,
-                'type_ids': [(6, 0, type_ids.ids)]
+                'type_ids': [(6, 0, type_ids.ids)],
+                'name': f'{name_seq} {project_id.name}'
             })
             project_id.task_ids.with_context(task_stage_init=True).write({
                 'stage_id': task_stage_id,
