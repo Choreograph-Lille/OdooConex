@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, models
+from odoo import api, fields, models
 
 from odoo.addons.choreograph_project.models.project_project import (
     TERMINATED_TASK_STAGE,
