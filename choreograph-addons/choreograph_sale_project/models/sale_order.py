@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date, datetime
+from datetime import date
 from pytz import timezone, utc
-from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
-from odoo.addons.choreograph_project.models.project_project import WAITING_TASK_STAGE, TODO_TASK_STAGE
+from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STAGE
 
 PROVIDER_DELIVERY_NUMBER = '75'
 SMS_TASK_NUMBER = '50'

@@ -1,4 +1,4 @@
-from datetime import timedelta
+# -*- coding: utf-8 -*-
 
 from odoo import api, fields, models
 
