@@ -108,7 +108,6 @@ class SaleOrder(models.Model):
     optout_link = fields.Char('Email Optout Link')
     routing_base = fields.Char('Email Routing Base')
     project_task_campaign_ids = fields.One2many('project.task.campaign', 'order_id', 'Email Campaign')
-    commitment_date = fields.Datetime(required=1)
 
     @api.model
     def default_get(self, fields_list):

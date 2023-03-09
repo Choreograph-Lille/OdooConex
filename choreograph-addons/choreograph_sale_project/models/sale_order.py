@@ -73,6 +73,9 @@ class SaleOrder(models.Model):
         STAGE_TO_PLAN_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_draft').id
         ]
+        STAGE_TO_PLAN_PROJECT = [
+            self.env.ref('choreograph_project.planning_project_stage_draft').id
+        ]
         for rec in self:
             rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_REDELIVERY_PROJECT if rec.operation_type_id else False
             rec.can_display_livery_project = rec.operation_type_id.stage_id.id in STAGE_DELIVERY_PROJECT if rec.operation_type_id else False
@@ -161,8 +164,7 @@ class SaleOrder(models.Model):
         super(SaleOrder, self).action_generate_operation()
 
         for project in self.order_line.mapped('project_id'):
-            name_seq = self.env['ir.sequence'].next_by_code('project.project.operation')
-            project.name = project.name.replace(' (TEMPLATE)', '').replace(project.sale_order_id.name, name_seq)
+            project.name = project.name.replace(' (TEMPLATE)', '').replace(f'{project.sale_order_id.name} - ', '')
 
         for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
             task.active = False
