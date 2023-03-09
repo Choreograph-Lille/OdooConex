@@ -164,8 +164,7 @@ class SaleOrder(models.Model):
         super(SaleOrder, self).action_generate_operation()
 
         for project in self.order_line.mapped('project_id'):
-            name_seq = self.env['ir.sequence'].next_by_code('project.project.operation')
-            project.name = project.name.replace(' (TEMPLATE)', '').replace(project.sale_order_id.name, name_seq)
+            project.name = project.name.replace(' (TEMPLATE)', '').replace(f'{project.sale_order_id.name} - ', '')
 
         for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
             task.active = False
