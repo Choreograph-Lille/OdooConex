@@ -130,6 +130,9 @@ class ProjectProject(models.Model):
             delivery_task_number = '75'
         elif self.stage_id.stage_number == '50':
             delivery_task_number = '85'
+        else:
+            # TODO: check this with tsiori or davis
+            delivery_task_number = '85'
         return delivery_task_number
 
     def update_delivery_address(self):
