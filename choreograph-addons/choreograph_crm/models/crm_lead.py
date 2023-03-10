@@ -16,7 +16,7 @@ class CrmLead(models.Model):
         if self.agency_id:
             action['context'].update({
                 'default_partner_invoice_id': self.agency_id.id,
-                'default_payment_term_id': self.agency_id.property_supplier_payment_term_id.id
+                'default_payment_term_id': self.agency_id.property_payment_term_id.id
             })
         return action
 
