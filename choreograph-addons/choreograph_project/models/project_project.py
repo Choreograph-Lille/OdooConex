@@ -114,7 +114,10 @@ class ProjectProject(models.Model):
             self._update_task_stage('80', TODO_TASK_STAGE)
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
         elif self.stage_id.stage_number == '50':
-            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
+            if self.task_ids.filtered(lambda task: task.task_number == '90'):
+                self._update_task_stage('90', TODO_TASK_STAGE)
+            else:
+                self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
         self.update_delivery_address()
         return self.sale_order_id.action_send_delivery_email()
 
