@@ -73,7 +73,7 @@ class ProjectTask(models.Model):
                                             related='sale_order_id.is_preheader_available')
     comment = fields.Text(related='sale_order_id.comment')
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
-    folder_key = fields.Char()
+    folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
     segment_ids = fields.Many2many('operation.segment', compute='compute_segment_ids')
     operation_condition_ids = fields.Many2many('operation.condition', compute='compute_operation_condition_ids')
@@ -83,6 +83,18 @@ class ProjectTask(models.Model):
                                                  inverse='_inverse_project_task_campaign_ids')
     operation_provider_delivery_ids = fields.One2many(
         'operation.provider.delivery', 'task_id', 'Provider Delivery Tasks')
+
+    @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
+    def _compute_folder_key(self):
+        for task in self:
+            combinaison_value = [
+                task.project_id.code_sequence,
+                task.project_id.code,
+                task.related_base.code,
+                task.partner_id.ref,
+                task.sale_order_id.name
+            ]
+            task.folder_key = '_'.join([str(item) for item in combinaison_value if item])
 
     @api.depends('sale_order_id', 'sale_order_id.segment_ids', 'sale_order_id.repatriate_information')
     def compute_segment_ids(self):
