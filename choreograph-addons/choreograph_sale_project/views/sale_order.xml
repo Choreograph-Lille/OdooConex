@@ -32,6 +32,7 @@
                             <field name="study_global_task_id" invisible="1" readonly="1" />
                         </group>
                         <group>
+                            <field name="delivery_info_task_id"/>
                             <field
                                 name="operation_provider_delivery_ids"
                                 attrs="{'invisible':[('operation_provider_delivery_ids', '=', [])]}"

@@ -51,6 +51,10 @@ class SaleOrder(models.Model):
     can_display_livery_project = fields.Boolean(compute='_compute_can_display_delivery')
     can_display_to_plan = fields.Boolean(compute='_compute_can_display_delivery')
     delivery_email_to = fields.Char()
+    delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_task_id')
+
+    def compute_delivery_info_task_id(self):
+        self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
 
     @api.depends('project_ids')
     def _compute_operation_type_id(self):
