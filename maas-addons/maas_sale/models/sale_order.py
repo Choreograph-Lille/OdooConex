@@ -25,7 +25,7 @@ from odoo import fields, models
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
-    package_id = fields.Many2one('product.product', 'Basic Package')
+    package_id = fields.Many2one('product.product', 'Basic Package', domain=[('recurring_invoice', '=', True)])
     current_package_id = fields.Many2one('product.product', 'Current Package')
     current_cumulative_quantity = fields.Integer()
     balance = fields.Integer(readonly=True)
