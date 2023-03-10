@@ -4,20 +4,20 @@
 
         <record id="crm_lead_view_form_inherit" model="ir.ui.view">
             <field name="name">crm.lead.form.inherit</field>
-            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="inherit_id" ref="crm.crm_lead_view_form" />
             <field name="model">crm.lead</field>
             <field name="arch" type="xml">
-                <field name="lead_properties" position="replace"/>
+                <field name="lead_properties" position="replace" />
                 <field name="partner_phone_update" position="after">
-                    <field name="agency_id"/>
-                    <field name="activity_sector" force_save="True" readonly="1"/>
-                    <field name="category_name" force_save="True" readonly="1"/>
+                    <field name="agency_id" />
+                    <field name="activity_sector" force_save="True" readonly="1" />
+                    <field name="category_name" force_save="True" readonly="1" />
                 </field>
                 <field name="name" position="attributes">
                     <attribute name="class">text-break oe_inline</attribute>
                 </field>
                 <field name="name" position="before">
-                    <field name="client_name" class="oe_inline"/>
+                    <field name="client_name" class="oe_inline" />
                     <span attrs="{'invisible':[('client_name', '=', False)]}">-</span>
                 </field>
             </field>
@@ -25,17 +25,18 @@
 
         <record id="crm_case_kanban_view_leads_inherit" model="ir.ui.view">
             <field name="name">crm.lead.kanban.lead</field>
-            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads" />
             <field name="model">crm.lead</field>
             <field name="arch" type="xml">
                 <field name="partner_id" position="replace">
-                    <field name="agency_id"/>
+                    <field name="agency_id" />
                 </field>
                 <xpath expr="//span[hasclass('o_text_overflow')]" position="replace">
-                    <span class="o_text_overflow" t-if="record.agency_id.value" t-esc="record.agency_id.value"></span>
+                    <span class="o_text_overflow" t-if="record.agency_id.value"
+                        t-esc="record.agency_id.value"></span>
                 </xpath>
                 <field name="name" position="before">
-                    <field name="client_name" class="oe_inline"/>
+                    <field name="client_name" class="oe_inline" />
                     <span attrs="{'invisible':[('client_name', '=', False)]}">-</span>
                 </field>
             </field>
@@ -43,12 +44,26 @@
 
         <record id="quick_create_opportunity_form_inherit" model="ir.ui.view">
             <field name="name">crm.lead.form.quick_create</field>
-            <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+            <field name="inherit_id" ref="crm.quick_create_opportunity_form" />
             <field name="model">crm.lead</field>
             <field name="arch" type="xml">
                 <field name="name" position="before">
-                    <field name="agency_id"/>
+                    <field name="agency_id" />
                 </field>
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="context">{
+                        'res_partner_search_mode': type == 'opportunity' and 'customer' or False,
+                        'default_name': contact_name or partner_name,
+                        'default_is_company': type == 'opportunity' and contact_name == False,
+                        'default_company_name': type == 'opportunity' and partner_name,
+                        'default_phone': phone,
+                        'default_email': email_from,
+                        'default_user_id': user_id,
+                        'default_team_id': team_id,
+                        'show_vat': True,
+                        'name_get_custom': True
+                        }</attribute>
+                </xpath>
             </field>
         </record>
 
