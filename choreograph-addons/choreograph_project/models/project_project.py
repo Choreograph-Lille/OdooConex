@@ -113,18 +113,26 @@ class ProjectProject(models.Model):
         if self.stage_id.stage_number == '40':
             self._update_task_stage('80', TODO_TASK_STAGE)
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
-            delivery_task_number = '75'
         elif self.stage_id.stage_number == '50':
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
-            # if not self.task_ids.filtered(lambda task: task.task_number == '90'):
-            #     self._update_95_to_15_with_commitment_date()
-            delivery_task_number = '85'
-        self.sale_order_id.delivery_email_to = self.task_ids.filtered(
-            lambda t: t.task_number == delivery_task_number).provider_delivery_address
-        return self.sale_order_id.action_send_delivery_email(completed_task=delivery_task_number)
+        self.update_delivery_address()
+        return self.sale_order_id.action_send_delivery_email()
 
     def livery_project_compaign(self):
         self._update_task_stage('90', TODO_TASK_STAGE)
+        self.update_delivery_address()
+
+    def get_delivery_task_number(self):
+        if self.stage_id.stage_number == '40':
+            delivery_task_number = '75'
+        elif self.stage_id.stage_number == '50':
+            delivery_task_number = '85'
+        return delivery_task_number
+
+    def update_delivery_address(self):
+        delivery_task_number = self.get_delivery_task_number()
+        self.sale_order_id.delivery_email_to = self.task_ids.filtered(
+            lambda t: t.task_number == delivery_task_number).provider_delivery_address
 
     # def _update_95_to_15_with_commitment_date(self):
     #     task_95 = self.task_ids.filtered(lambda task: task.task_number == '95')

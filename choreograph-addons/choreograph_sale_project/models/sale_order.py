@@ -295,7 +295,7 @@ class SaleOrder(models.Model):
             task.write({'user_ids': [(6, 0, roles.mapped('user_ids').ids)]})
         return True
 
-    def action_send_delivery_email(self, completed_task=''):
+    def action_send_delivery_email(self):
         composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form')
         template_id = self.env.ref('choreograph_sale_project.email_template_choreograph_delivery')
         return {
@@ -313,5 +313,6 @@ class SaleOrder(models.Model):
                 'default_template_id': template_id.id,
                 'website_sale_send_recovery_email': True,
                 'active_ids': self.ids,
+                'operation_email_process': True,
             },
         }
