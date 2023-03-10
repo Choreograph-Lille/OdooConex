@@ -1,9 +1,13 @@
+# -*- coding: utf-8 -*-
+
+from dateutil.relativedelta import relativedelta
+
 from odoo import api, fields, models
 
 from odoo.addons.choreograph_project.models.project_project import (
     TERMINATED_TASK_STAGE,
     FILE_RECEIVED_TASK_STAGE,
-    WAITING_FILE_TASK_STAGE
+    WAITING_FILE_TASK_STAGE,
 )
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
@@ -22,7 +26,7 @@ class ProjectTask(models.Model):
     campaign_file_name = fields.Char('File Name')
     type = fields.Char()  # this should take the type in cond/excl but another task
 
-    bat_from = fields.Char('From', related='sale_order_id.bat_from')
+    bat_from = fields.Many2one('choreograph.campaign.de', related='sale_order_id.bat_from')
     bat_internal = fields.Char(related='sale_order_id.bat_internal')
     bat_client = fields.Char(related='sale_order_id.bat_client')
     bat_comment = fields.Text('BAT Comment', related='sale_order_id.bat_comment')
@@ -33,11 +37,13 @@ class ProjectTask(models.Model):
     witness_comment = fields.Text(related='sale_order_id.witness_comment')
     file_name = fields.Char()
     file_quantity = fields.Char()
-    volume = fields.Float()
+    volume = fields.Integer(related='sale_order_id.quantity_to_deliver')
     dedup_title_number = fields.Char()
     family_conex = fields.Boolean()
+
     provider_file_name = fields.Char()
     provider_delivery_address = fields.Char('Delivery Address')
+
     provider_comment = fields.Text()
     desired_finished_volume = fields.Char(related='sale_order_id.desired_finished_volume')
     start_date = fields.Date()
@@ -67,7 +73,7 @@ class ProjectTask(models.Model):
                                             related='sale_order_id.is_preheader_available')
     comment = fields.Text(related='sale_order_id.comment')
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
-    folder_key = fields.Char()
+    folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
     segment_ids = fields.Many2many('operation.segment', compute='compute_segment_ids')
     operation_condition_ids = fields.Many2many('operation.condition', compute='compute_operation_condition_ids')
@@ -77,6 +83,18 @@ class ProjectTask(models.Model):
                                                  inverse='_inverse_project_task_campaign_ids')
     operation_provider_delivery_ids = fields.One2many(
         'operation.provider.delivery', 'task_id', 'Provider Delivery Tasks')
+
+    @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
+    def _compute_folder_key(self):
+        for task in self:
+            combinaison_value = [
+                task.project_id.code_sequence,
+                task.project_id.code,
+                task.related_base.code,
+                task.partner_id.ref,
+                task.sale_order_id.name
+            ]
+            task.folder_key = '_'.join([str(item) for item in combinaison_value if item])
 
     @api.depends('sale_order_id', 'sale_order_id.segment_ids', 'sale_order_id.repatriate_information')
     def compute_segment_ids(self):
@@ -251,7 +269,7 @@ class ProjectTask(models.Model):
                     '20': '_hook_task_20_in_stage_80',
                     '25': '_hook_task_25_in_stage_80',
                     '30': '_hook_task_30_in_stage_80',
-                    '45': '_hook_task_45_in_80_or_90_in_15',
+                    '45': '_hook_task_45_in_stage_80',
                     '70': '_hook_task_70_in_stage_80',
                     '75': '_hook_task_75_in_stage_80',
                     '80': '_hook_task_80_in_stage_80',
@@ -269,6 +287,43 @@ class ProjectTask(models.Model):
                         task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
                 elif (task.task_number in ['5', '10', '15'] and stage_id.stage_number == FILE_RECEIVED_TASK_STAGE) or (task.task_number in ['20', '25', '35'] and stage_id.stage_number == WAITING_FILE_TASK_STAGE):
                     task.project_id._hook_task_in_stage_20_25()
+                elif task.task_number == '45' and stage_id.stage_number == '50':
+                    task.project_id._hook_task_45_in_stage_50()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
+            if 'provider_file_name' in vals or 'provider_delivery_address' in vals:
+                task.update_provider_data()
         return res
+
+    def update_provider_data(self):
+        for rec in self:
+            targeted_task = False
+            if rec.task_number == '70':
+                targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '75')
+            elif rec.task_number == '80':
+                targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '85')
+            if targeted_task:
+                targeted_task.write({
+                    'provider_file_name': rec.provider_file_name,
+                    'provider_delivery_address': rec.provider_delivery_address,
+                })
+
+    def _schedule_move_task_95_to_15_stage(self, limit=1):
+        """
+        Move task 95 to 15 stage
+        :param limit:
+        :return:
+        """
+        project_task_obj = self.env['project.task']
+        draft_stage = self.env.ref('choreograph_project.project_task_type_draft', raise_if_not_found=False)
+        if not draft_stage:
+            return False
+        to_do_stage = self.env.ref('choreograph_project.project_task_type_to_do', raise_if_not_found=False)
+        if not to_do_stage:
+            return False
+        date = fields.Datetime.today() - relativedelta(days=15)
+        tasks = project_task_obj.search([('stage_id', '=', draft_stage.id),
+                                         ('task_number', '=', '95'),
+                                         ('sale_order_id.commitment_date', '!=', False),
+                                         ('sale_order_id.commitment_date', '<=', date)])
+        return tasks.write({'stage_id': to_do_stage.id})

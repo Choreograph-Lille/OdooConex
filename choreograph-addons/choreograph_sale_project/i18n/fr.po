@@ -6,14 +6,103 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-06 17:19+0000\n"
-"PO-Revision-Date: 2023-03-06 17:19+0000\n"
+"POT-Creation-Date: 2023-03-09 18:26+0000\n"
+"PO-Revision-Date: 2023-03-09 18:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: choreograph_sale_project
+#: model:mail.template,body_html:choreograph_sale_project.email_template_choreograph_delivery
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '75')\"/>\n"
+"                        <t t-if=\"info_task\">\n"
+"\n"
+"                            <t t-if=\"object.project_ids[0].stage_id.stage_number == '60'\">\n"
+"                                <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '85')\"/>\n"
+"                            </t>\n"
+"                            <t t-set=\"delivery_address\" t-value=\"info_task.provider_delivery_address\"/>\n"
+"                            <t t-set=\"file_name\" t-value=\"info_task.provider_file_name\"/>\n"
+"                            Hello,\n"
+"                            <br/><br/>\n"
+"                            Kindly find on your <t t-out=\"delivery_address\"/> FTP the file from choreograph for the\n"
+"                            <t t-out=\"object.operation_type_id.name\"/> Campaign <t t-out=\"object.partner_id.name\"/>\n"
+"                            <br/><br/>\n"
+"                            The file name is <t t-out=\"file_name\"/>\n"
+"                            <br/><br/>\n"
+"                            The distribution of addresses is as follows:\n"
+"                            <br/>\n"
+"                            <t t-if=\"object.repatriate_information\">\n"
+"                                <t t-set=\"count\" t-value=\"1\"/>\n"
+"                                <t t-foreach=\"object.segment_ids\" t-as=\"segment\">\n"
+"                                    Segment <t t-out=\"count\"/>: <t t-out=\"segment.name\"/><br/>\n"
+"                                    Quantité: <t t-out=\"segment.quantity\"/><br/>\n"
+"                                    Keycode: <t t-out=\"segment.keycode\"/><br/><br/>\n"
+"                                    <t t-set=\"count\" t-value=\"count + 1\"/>\n"
+"                                </t>\n"
+"                            </t>\n"
+"                            <br/>\n"
+"                            IMPORTANT: Please confirm receipt of the file to production.data@conexancemd.com\n"
+"                            <br/><br/>\n"
+"                            The password is: xxxxxxx.\n"
+"                            <br/><br/>\n"
+"                            For any questions, please contact: <br/>\n"
+"                            production.data@conexancemd.com\n"
+"                            <br/><br/>\n"
+"                            Regards,\n"
+"                            <br/><br/>\n"
+"                            Production Service\n"
+"                        </t>\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '75')\"></t>\n"
+"                        <t t-if=\"info_task\">\n"
+"\n"
+"                            <t t-if=\"object.project_ids[0].stage_id.stage_number == '60'\">\n"
+"                                <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '85')\"></t>\n"
+"                            </t>\n"
+"                            <t t-set=\"delivery_address\" t-value=\"info_task.provider_delivery_address\"></t>\n"
+"                            <t t-set=\"file_name\" t-value=\"info_task.provider_file_name\"></t>\n"
+"                            Bonjour,\n"
+"                            <br><br>\n"
+"                            Veuillez trouver sur votre FTP le fichier source choreograph pour la campagne de\n"
+"                            <t t-out=\"object.operation_type_id.name\"/> / <t t-out=\"object.partner_id.name\"/> / <t t-out=\"object.name\"/>\n"
+"                            <br><br>\n"
+"                            La répartition des adresses est la suivante:\n"
+"                            <br>\n"
+"                            <t t-if=\"object.repatriate_information\">\n"
+"                                <t t-set=\"count\" t-value=\"1\"></t>\n"
+"                                <t t-foreach=\"object.segment_ids\" t-as=\"segment\">\n"
+"                                    Segment <t t-out=\"count\"></t>: <t t-out=\"segment.name\"></t><br>\n"
+"                                    Quantité: <t t-out=\"segment.quantity\"></t><br>\n"
+"                                    Keycode: <t t-out=\"segment.keycode\"></t><br><br>\n"
+"                                    <t t-set=\"count\" t-value=\"count + 1\"></t>\n"
+"                                </t>\n"
+"                            </t>\n"
+"                            <br>\n"
+"                            IMPORTANT: merci de bien vouloir confirmer la réception du fichier à production.data@conexancemd.com\n"
+"                            <br><br>\n"
+"                            Voici le mot de passe: xxxxxxx.\n"
+"                            <br><br>\n"
+"                            Pour toute question, n’hésitez pas à contacter: <br>\n"
+"                            production.data@conexancemd.com\n"
+"                            <br><br>\n"
+"                            Cordialement,\n"
+"                            <br><br>\n"
+"                            Le service de production\n"
+"                        </t>\n"
+"                    </p>\n"
+"                </div>\n"
+"            "
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__ab_test
@@ -61,6 +150,11 @@ msgid "Bat Client"
 msgstr ""
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_from
+msgid "Bat From"
+msgstr "DE"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_internal
 msgid "Bat Internal"
 msgstr "Bat interne"
@@ -86,9 +180,34 @@ msgid "Can Display Redelivery"
 msgstr "Peut afficher la relivraison"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__can_display_to_plan
+msgid "Can Display To Plan"
+msgstr "Peut afficher pour planifier"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__catalogue_ids
 msgid "Catalogues"
 msgstr ""
+
+#. module: choreograph_sale_project
+#: model:mail.template,subject:choreograph_sale_project.email_template_choreograph_delivery
+msgid ""
+"Choreograph/ I-Behavior: The {{ object.operation_type_id.name }} campaign "
+"for {{ object.partner_id.name }} UK has been delivered"
+msgstr ""
+"Fichier choreograph pour la campagne de {{ object.operation_type_id.name }} "
+"/ {{ object.partner_id.name }} / {{ object.name }}"
+
+#. module: choreograph_sale_project
+#: model:mail.template,name:choreograph_sale_project.email_template_choreograph_delivery
+msgid "Choreograph: Delivery Email Template"
+msgstr "Choreograph: Template email de livraison"
+
+#. module: choreograph_sale_project
+#: model:ir.actions.server,name:choreograph_sale_project.scheduler_move_task_95_in_15_stage_ir_actions_server
+#: model:ir.cron,cron_name:choreograph_sale_project.scheduler_move_task_95_in_15_stage
+msgid "Choreograph: Move Task 95 to Stage 15"
+msgstr "Choreograph: Déplacer la tâche 95 dans l'étape 15"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__civility
@@ -106,6 +225,11 @@ msgstr "Commentaire"
 #: model:project.project,name:choreograph_sale_project.project_project_count
 msgid "Counting (TEMPLATE)"
 msgstr "Comptage (TEMPLATE)"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.project_project_view_form_simplified_footer_inherit
+msgid "Create Operation"
+msgstr "Créer l'opération"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_uid
@@ -157,6 +281,16 @@ msgstr "Numéro titre Dédup."
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__provider_delivery_address
 msgid "Delivery Address"
 msgstr "Adresse de livraison"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__delivery_email_to
+msgid "Delivery Email To"
+msgstr "Livrer l'email à"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__delivery_info_task_id
+msgid "Delivery Info"
+msgstr "Infos livraison"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__deposit_date_1
@@ -286,11 +420,6 @@ msgid "Folder Key"
 msgstr "Clé de dossier"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_from
-msgid "From"
-msgstr "DE"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__id
@@ -381,7 +510,7 @@ msgstr "Nom"
 #. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_operation
 msgid "OPERATION"
-msgstr "OPERATION"
+msgstr ""
 
 #. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
@@ -392,6 +521,11 @@ msgstr "Opération"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__operation_condition_ids
 msgid "Operation Condition"
 msgstr "Condition de l'opération"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_project__project_template_id
+msgid "Operation Template"
+msgstr "Modèle d'opération"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__operation_type_id
@@ -512,7 +646,7 @@ msgstr "Commentaire"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__operation_provider_delivery_ids
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__operation_provider_delivery_ids
 msgid "Provider Delivery Tasks"
-msgstr "Tâche livraison presta"
+msgstr "Infos Presta"
 
 #. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_task_form2_inherit2
@@ -531,6 +665,7 @@ msgstr "Quantité"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__quantity_to_deliver
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__quantity_to_deliver
 msgid "Quantity To Deliver"
 msgstr "Quantité à livrer"
@@ -746,6 +881,11 @@ msgid "Telfixebox Prospecting (TEMPLATE)"
 msgstr "Prospection Telfixebox (TEMPLATE)"
 
 #. module: choreograph_sale_project
+#: model:mail.template,description:choreograph_sale_project.email_template_choreograph_delivery
+msgid "Template used on SO when we push the button Delivery"
+msgstr "Modèle utilisé dans les BC au clic du bouton Livrer"
+
+#. module: choreograph_sale_project
 #. odoo-python
 #: code:addons/choreograph_sale_project/models/sale_order.py:0
 #, python-format
@@ -757,6 +897,11 @@ msgstr "La tâche est en cours, vous ne pouvez pas cocher/décocher cette case"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__to_validate
 msgid "To Validate"
 msgstr "A valider"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "To plan"
+msgstr "Planifier"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__trap_address_ids
@@ -771,11 +916,6 @@ msgstr "Adresses pièges"
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__type
 msgid "Type"
-msgstr ""
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume
-msgid "Volume"
 msgstr ""
 
 #. module: choreograph_sale_project
@@ -796,7 +936,7 @@ msgstr "Témoins"
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_yield_calculation
 msgid "Yield Calculation (TEMPLATE)"
-msgstr "Caluld de rendements (TEMPLATE)"
+msgstr "Calcul de rendements (TEMPLATE)"
 
 #. module: choreograph_sale_project
 #. odoo-python
@@ -829,7 +969,6 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #. odoo-python
-#: code:addons/choreograph_sale_project/models/sale_order.py:0
 #: code:addons/choreograph_sale_project/models/sale_order.py:0
 #, python-format
 msgid "the SO contains several projects"

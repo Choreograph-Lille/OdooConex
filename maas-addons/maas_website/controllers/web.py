@@ -18,7 +18,7 @@ class Home(Home):
         user = request.env['res.users'].sudo().browse(request.session.uid)
         if user.share:
             if user.check_active_subscription():
-                return request.redirect('/operation/indication')
+                return request.redirect('/operation/list')
             return request.redirect('/web/session/logout')
         return super(Home, self).index(*args, **kw)
 
@@ -26,7 +26,7 @@ class Home(Home):
         user = request.env['res.users'].sudo().browse(uid)
         if not redirect and user.share:
             if user.check_active_subscription():
-                return '/operation/indication'
+                return '/operation/list'
             return '/web/session/logout'
         return super(Home, self)._login_redirect(uid, redirect=redirect)
 
@@ -36,7 +36,7 @@ class Home(Home):
         if user:
             if user.share:
                 if user.check_active_subscription():
-                    return request.redirect('/operation/indication')
+                    return request.redirect('/operation/list')
                 return request.redirect('/web/session/logout')
             return request.redirect('/')
         else:

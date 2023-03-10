@@ -24,10 +24,10 @@
         <field name="name">Presta delivery</field>
         <field name="type_of_project">operation</field>
     </record>
-    <record id="planning_project_stage_delivery" model="project.project.stage">
+    <record id="planning_project_stage_to_deliver" model="project.project.stage">
         <field name="sequence">50</field>
         <field name="stage_number">50</field>
-        <field name="name">Delivery</field>
+        <field name="name">To deliver</field>
         <field name="type_of_project">operation</field>
     </record>
     <record id="planning_project_stage_livery" model="project.project.stage">

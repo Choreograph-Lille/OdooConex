@@ -14,11 +14,15 @@ class CrmLead(models.Model):
     def action_new_quotation(self):
         action = super(CrmLead, self).action_new_quotation()
         if self.agency_id:
-            action['context'].update({'default_partner_invoice_id': self.agency_id.id})
+            action['context'].update({
+                'default_partner_invoice_id': self.agency_id.id,
+                'default_payment_term_id': self.agency_id.property_payment_term_id.id
+            })
         return action
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
         self.update({
-            'agency_id': self.partner_id.agency_id
+            'agency_id': self.partner_id.agency_id,
+            'user_id': self.partner_id.user_id
         })

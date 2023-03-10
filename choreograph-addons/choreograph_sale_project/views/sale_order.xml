@@ -32,6 +32,7 @@
                             <field name="study_global_task_id" invisible="1" readonly="1" />
                         </group>
                         <group>
+                            <field name="delivery_info_task_id"/>
                             <field
                                 name="operation_provider_delivery_ids"
                                 attrs="{'invisible':[('operation_provider_delivery_ids', '=', [])]}"
@@ -82,6 +83,7 @@
             <xpath expr="//field[@name='project_count']" position="after">
                 <field name="can_display_redelivery" invisible="1" />
                 <field name="can_display_livery_project" invisible="1" />
+                <field name="can_display_to_plan" invisible="1" />
                 <field name="operation_type_id" invisible="1" />
             </xpath>
             <xpath expr="//button[@id='action_generate_operation']" position="after">
@@ -90,6 +92,14 @@
                     id="livery_project"
                     string="Livery"
                     attrs="{'invisible': [('can_display_livery_project','=',False)]}"
+                    class="btn-primary"
+                    type="object"
+                />
+                <button
+                    name="action_to_plan"
+                    id="to_plan"
+                    string="To plan"
+                    attrs="{'invisible': [('can_display_to_plan','=',False)]}"
                     class="btn-primary"
                     type="object"
                 />

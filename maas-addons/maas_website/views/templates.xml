@@ -407,13 +407,12 @@
                                             width="243" />
                                     </div>
                                 </div>
-                                <div class="row" id="block07-fils-lft">
+                                                                <div class="row" id="block07-fils-lft">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                        <p class="textlogofoot"> Conexance MD <br /> 28 Place de la
-                                            Gare - 59000 Lille 27 bis, rue du Vieux Faubourg - 59000
-                                            Lille <br />
-                      <br /> Phone : 03 28 04 74 40 <br /> Email :
-                                            contact@conexancemd.com </p>
+                                        <p class="textlogofoot"> Conexance MD <br /> 27 bis, rue du
+                                            Vieux Faubourg - 59000 Lille <br />
+                      <br /> Phone : 03 28
+                                            04 74 40 <br /> Email : contact@conexancemd.com </p>
                                     </div>
                                 </div>
                             </div>
@@ -1914,22 +1913,6 @@
                                                     </tr>
                                                 </tbdoy>
                                             </table>
-                                            <!--<img
-                                            id="inactive-campaign"
-                                            class="green-actif-coche"
-                                            src="/maas_website/static/src/img/ico-coche-inactif.png"/>
-                                            <label>
-                          <img class="trait-img"
-                                            src="/maas_website/static/src/img/trait.png"/>
-                      </label>
-                                            <input type="text" class="form-control" id="search"
-                                            placeholder="Search…"/>
-                      <button
-                                            class="btn btn-default" type="submit">
-                          <i
-                                            class="glyphicon glyphicon-search"></i>
-                      </button>-->
-
                                         </div>
                                     </div>
                                     <div class="btn-head" style="text-transform: None;">
@@ -2416,166 +2399,6 @@
                         </div>
                     </div>
                 </div>
-            </main>
-        </div>
-
-        <t t-call="maas_website.collapse_menu" />
-        <!--<div
-        class="row">
-        <div style="algin:left;">
-          <img
-        src="/maas_base/static/description/MyModel_logo_sm.PNG" style="padding: 0px; margin: 0px;"/>
-        </div>
-    </div>-->
-    </template>
-
-    <!-- Indication -->
-    <template id="indication" name="Indications">
-        <div class="wrap-connexion">
-            <head>
-            </head>
-            <main class="indication-page">
-                <section class="container-fluid overlaying">
-                    <div class="top-container">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <a href="/" class="navbar-brand logo">
-                                    <img src="/maas_website/static/src/img/logo-header.png"
-                                        alt="Logo of YourCompany"
-                                        title="YourCompany" />
-                                </a>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="progress">
-                                    <input class="percent-progress-bar" type="hidden"
-                                        t-att-value="percent" />
-                                    <div id="progress-bar" class="progress-bar" role="progressbar"
-                                        aria-valuenow="70"
-                                        aria-valuemin="0" aria-valuemax="100" style="width:0%">
-                                    </div>
-                                </div>
-                                <p class="valeur-id" style="text-align: center">
-                                    <b>
-                                        <t t-esc='total_qty_cumulative' />
-                                        <t t-if="unlimited == False"> / <t t-esc='identifiers' />
-                                        </t>
-                                    </b>
-                                    Downloaded ID </p>
-                            </div>
-                            <div class="col-md-4 user-section">
-                                <ul class="nav navbar-nav navbar-right" id="top_menu">
-                                    <li
-                                        t-if="(request and request.is_frontend_multilang and len(languages) &gt; 1) or (website and (editable or translatable))"
-                                        class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <t t-foreach="languages" t-as="lg">
-                                                <t t-if="request.context.get('lang') == lg[0]">
-                                                    <t t-esc="lg[1].split('/').pop()" />
-                                                </t>
-                                            </t>
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu js_language_selector" role="menu"
-                                            style="min-width: 73px;">
-                                            <t t-foreach="languages" t-as="lg">
-                                                <t t-if="lang!=lg[0]">
-                                                    <li style="min-width: 50px;">
-                                                        <a
-                                                            t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])"
-                                                            t-att-data-default-lang="editable and 'true' if lg[0] == website.default_lang_id.code else None"
-                                                            t-att-data-lang="lg[0]"
-                                                            t-att-data-url_code="lg[1]"
-                                                            class="js_change_lang"
-                                                        >
-                                                            <t t-esc="lg[1].split('/').pop()" />
-                                                        </a>
-                                                    </li>
-                                                </t>
-                                            </t>
-                                        </ul>
-                                    </li>
-                                    <li style="margin-top:-5px">
-                                        <a href="#">
-                                            <img class="notification-top"
-                                                src="/maas_website/static/src/img/ico-notif.png" />
-                                        </a>
-                                    </li>
-                                    <li class="dropdown" style="margin-top:-9px">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                            <img class="user-top"
-                                                src="/maas_website/static/src/img/ico-user.png" />
-                                            <span t-esc="request.env.user.name" />
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a id="logout-id"
-                                                    href="/web/session/logout?redirect=/">
-                                                    <span>Disconnect</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="maas-indication-text">
-                    <input id="indication_number" class="hidden" t-att-value="len(indications)" />
-                    <div class="row indication-maj">
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">Partner data update : <span
-                                t-field="partner.date_update_title"></span>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">Partner additional data
-                            update : <span t-field="partner.date_update_title"></span>
-                        </div>
-                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4" style="text-align: center;">
-                            <span t-esc="partner.user_id.partner_id.name or ''"></span>
-                            <br />
-                            <span t-esc="partner.user_id.partner_id.email or ''"></span>
-                        </div>
-                    </div>
-                    <div class="lgrid">
-                        <div>
-                            <div class="lgrid-sizer" />
-                            <t t-foreach="indications" t-as="indication">
-
-                                <div class="lgrid-item">
-                                    <div>
-                                        <t t-if="indication.indication_id.image">
-                                            <img
-                                                t-att-src="'data:image*//*;base64,'+ str(indication.indication_id.image.decode('utf-8'))"
-                                                class='img img-fluid img-case' alt='Demo Logo'
-                                                style="height:240px;width:240px">
-
-                                            </img>
-                                        </t>
-                                        <t t-if="not indication.indication_id.image">
-                                            <img
-                                                src="/maas_website/static/src/images/interogation.png"
-                                                class='img img-fluid img-case' alt='Demo Logo'
-                                                style="height:240px;width:240px">
-
-                                            </img>
-                                        </t>
-                                        <div class="indication-quantity">
-                                            <span t-field="indication.quantity"></span>
-                                        </div>
-                                        <div class="indication-name">
-                                            <span t-field="indication.indication_id.name"></span>
-                                        </div>
-                                    </div>
-
-                                    <!-- TO DO in case there'no image, add default image-->
-
-
-                                </div>
-                            </t>
-                        </div>
-
-                    </div>
-                </div>
-
             </main>
         </div>
 

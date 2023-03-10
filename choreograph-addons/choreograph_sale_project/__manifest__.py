@@ -18,6 +18,8 @@
         # data
         'data/choreograph_project_task_type.xml',
         'data/project_project.xml',
+        'data/mail_template_data.xml',
+        'data/ir_cron_data.xml',
         # security
         'security/ir.model.access.csv',
         # views
@@ -25,6 +27,7 @@
         'views/choreograph_project_task_type.xml',
         'views/sale_order.xml',
         'views/ir_ui_menu.xml',
+        'views/project_project.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],

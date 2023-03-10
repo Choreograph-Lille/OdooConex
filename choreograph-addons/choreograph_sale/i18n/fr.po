@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-06 11:39+0000\n"
-"PO-Revision-Date: 2023-03-06 11:39+0000\n"
+"POT-Creation-Date: 2023-03-10 09:03+0000\n"
+"PO-Revision-Date: 2023-03-10 09:03+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -141,6 +141,12 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__active
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_ids
 msgid "Activities"
 msgstr ""
@@ -181,6 +187,7 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Audit"
@@ -197,6 +204,7 @@ msgid "BAT Comment"
 msgstr "Commentaire"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "BAT/Witness File"
@@ -211,6 +219,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_client
 msgid "Bat Client"
 msgstr "BAT client"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_from
+msgid "Bat From"
+msgstr "DE"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal
@@ -248,6 +261,11 @@ msgstr "Annuler"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__catalogue_ids
 msgid "Catalogues"
 msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.actions.act_window,name:choreograph_sale.choreograph_campaign_de_action
+msgid "Choreograph Campaign DE"
+msgstr "DE"
 
 #. module: choreograph_sale
 #: code:addons/choreograph_sale/models/operation_condition.py:0
@@ -324,6 +342,7 @@ msgid "Data Conservation"
 msgstr "Conservation des données"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Delivery Info"
@@ -334,6 +353,11 @@ msgstr "Info livraison"
 #, python-format
 msgid "Deposit Date"
 msgstr "Date de dépôt"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__description
+msgid "Description"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__desired_finished_volume
@@ -669,6 +693,8 @@ msgid "My Activity Deadline"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__name
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__name
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__name
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__name
 msgid "Name"
@@ -1034,6 +1060,13 @@ msgstr "Générer tâches"
 msgid ""
 "The operation template must have the following task number: {0}, {1}, {2}"
 msgstr "Le modèle d'opération doit avoir des tâches de numéros: {0}, {1}, {2}"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "There is no operation to generate for the items selected in the quote"
+msgstr "Il n'y a pas d'opération à générer pour les articles sélectionnés dans le devis"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__campaign_id

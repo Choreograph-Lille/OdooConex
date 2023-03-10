@@ -28,6 +28,7 @@
         'views/product_template_views.xml',
         'views/retribution_base_views.xml',
         'views/sale_data_conservation_views.xml',
+        'views/choreograph_campaign_de.xml',
         'views/ir_ui_menu_views.xml',
     ],
     'assets': {

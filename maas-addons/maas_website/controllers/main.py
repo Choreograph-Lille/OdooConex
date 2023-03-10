@@ -76,6 +76,7 @@ class OperationWebsite(http.Controller):
     @http.route('/operation/launch', type='http', auth='user', methods=['POST'], website=True, csrf=False)
     def launch_operation(self, **kwargs):
         operation_obj = http.request.env['sale.operation']
+        attachment_obj = http.request.env['ir.attachment'].sudo()
         partner = http.request.env.user.partner_id.get_parent()
         canal = kwargs.get('canal')
         canal = canal if canal != 'null' and canal in ('SMS', 'Print', 'Email') else False
@@ -86,14 +87,14 @@ class OperationWebsite(http.Controller):
                                           'action_id': kwargs.get('action_id', False),
                                           'searched_profile_desc': kwargs.get('searched_profile_desc'),
                                           'population_scored_desc': kwargs.get('population_scored_desc'),
-                                          'population_scored_datafile': base64.encodebytes(
-                                              kwargs.get('population_scored_datafile').read()),
-                                          'population_scored_filename': kwargs.get(
-                                              'population_scored_datafile').filename,
-                                          'searched_profile_datafile': base64.encodebytes(
-                                              kwargs.get('searched_profile_datafile').read()),
-                                          'searched_profile_filename': kwargs.get(
-                                              'searched_profile_datafile').filename,
+                                          'attachment_scored_id': attachment_obj.create({
+                                              'name': kwargs.get('population_scored_datafile').filename,
+                                              'datas': base64.encodebytes(kwargs.get('population_scored_datafile').read()),
+                                              'type': 'binary'}).id,
+                                          'attachment_profile_id': attachment_obj.create({
+                                              'name': kwargs.get('searched_profile_datafile').filename,
+                                              'datas': base64.encodebytes(kwargs.get('searched_profile_datafile').read()),
+                                              'type': 'binary'}).id,
                                           'canal': canal})
         res = {operation.id: {'name': operation.name}}
         return json.dumps(list(res.values()))
@@ -521,21 +522,3 @@ class OperationWebsite(http.Controller):
         user.sudo().write({'portal_filter': filter})
         values = {user.id: {'filter': filter}}
         return json.dumps(list(values))
-
-    @http.route('/operation/indication', auth='user', website=True, csrf=False)
-    def indication(self):
-        quantity, identifiers, percent, unlimited = self._get_consumption_data()
-        partner = http.request.env.user.partner_id.get_parent()
-        indications = http.request.env['partner.indication.infos'].sudo().search(
-            [('partner_id', '=', partner.id), ('active', '=', True)], order="sequence asc")
-        values = {
-            'campaign_ids': partner.campaign_ids,
-            'total_qty_cumulative': quantity,
-            'identifiers': identifiers,
-            'percent': percent,
-            'url_for': url_for,
-            'unlimited': unlimited,
-            'indications': indications,
-            'partner': partner,
-        }
-        return http.request.render('maas_website.indication', values)

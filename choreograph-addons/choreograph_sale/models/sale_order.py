@@ -69,7 +69,7 @@ class SaleOrder(models.Model):
     personalization = fields.Boolean()
     comment = fields.Text()
 
-    bat_from = fields.Char('From')
+    bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
@@ -134,10 +134,15 @@ class SaleOrder(models.Model):
             if any([task not in tasks for task in REQUIRED_TASK_NUMBER.values()]):
                 raise ValidationError(
                     _('The operation template must have the following task number: {0}, {1}, {2}').format(
-                        _(TASK_NAME[REQUIRED_TASK_NUMBER['potential_return']]), _(TASK_NAME[REQUIRED_TASK_NUMBER['study_delivery']]),
+                        _(TASK_NAME[REQUIRED_TASK_NUMBER['potential_return']]), _(
+                            TASK_NAME[REQUIRED_TASK_NUMBER['study_delivery']]),
                         _(TASK_NAME[REQUIRED_TASK_NUMBER['presentation']])))
+        else:
+            no_template = _('There is no operation to generate for the items selected in the quote')
+            raise ValidationError(no_template)
         self.order_line.sudo().with_company(self.company_id).with_context(
-            is_operation_generation=True)._timesheet_service_generation()
+            is_operation_generation=True, user_id=self.user_id.id)._timesheet_service_generation()
+        self.project_ids.write({'type_of_project': 'operation'})
 
         if self.commitment_date:
             self.tasks_ids.write({
@@ -176,5 +181,6 @@ class SaleOrder(models.Model):
         return action
 
     def _get_purchase_orders(self):
-        purchases =  super(SaleOrder, self)._get_purchase_orders() | self.env['purchase.order'].search([('origin', '=', self.name)])
+        purchases = super(SaleOrder, self)._get_purchase_orders(
+        ) | self.env['purchase.order'].search([('origin', '=', self.name)])
         return purchases

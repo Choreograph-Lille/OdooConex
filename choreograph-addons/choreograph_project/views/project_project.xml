@@ -11,6 +11,9 @@
             <xpath expr="//header/field[@name='stage_id']" position="attributes">
                 <attribute name="domain">[('type_of_project','=',type_of_project)]</attribute>
             </xpath>
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="code" />
+            </xpath>
         </field>
     </record>
 </odoo>

@@ -6,9 +6,9 @@ from pytz import timezone, utc
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
+from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STAGE
 
 PROVIDER_DELIVERY_NUMBER = '75'
-TODO_TASK_STAGE = '15'
 SMS_TASK_NUMBER = '50'
 EMAIL_TASK_NUMBER = '45'
 CHECK_TASK_STAGE_NUMBER = '10'
@@ -49,6 +49,12 @@ class SaleOrder(models.Model):
     operation_type_id = fields.Many2one('project.project', compute='_compute_operation_type_id', store=True)
     can_display_redelivery = fields.Boolean(compute='_compute_can_display_delivery')
     can_display_livery_project = fields.Boolean(compute='_compute_can_display_delivery')
+    can_display_to_plan = fields.Boolean(compute='_compute_can_display_delivery')
+    delivery_email_to = fields.Char()
+    delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_task_id')
+
+    def compute_delivery_info_task_id(self):
+        self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
 
     @api.depends('project_ids')
     def _compute_operation_type_id(self):
@@ -59,17 +65,24 @@ class SaleOrder(models.Model):
     def _compute_can_display_delivery(self):
         STAGE_REDELIVERY_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
-            self.env.ref('choreograph_project.planning_project_stage_delivery').id,
+            self.env.ref('choreograph_project.planning_project_stage_to_deliver').id,
             self.env.ref('choreograph_project.planning_project_stage_terminated').id,
             self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
         ]
         STAGE_DELIVERY_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
-            self.env.ref('choreograph_project.planning_project_stage_delivery').id,
+            self.env.ref('choreograph_project.planning_project_stage_to_deliver').id,
+        ]
+        STAGE_TO_PLAN_PROJECT = [
+            self.env.ref('choreograph_project.planning_project_stage_draft').id
+        ]
+        STAGE_TO_PLAN_PROJECT = [
+            self.env.ref('choreograph_project.planning_project_stage_draft').id
         ]
         for rec in self:
             rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_REDELIVERY_PROJECT if rec.operation_type_id else False
             rec.can_display_livery_project = rec.operation_type_id.stage_id.id in STAGE_DELIVERY_PROJECT if rec.operation_type_id else False
+            rec.can_display_to_plan = rec.operation_type_id.stage_id.id in STAGE_TO_PLAN_PROJECT if rec.operation_type_id else False
 
     @api.onchange('potential_return')
     def onchange_potential_return(self):
@@ -154,7 +167,7 @@ class SaleOrder(models.Model):
         super(SaleOrder, self).action_generate_operation()
 
         for project in self.order_line.mapped('project_id'):
-            project.name = project.name.replace(' (TEMPLATE)', '')
+            project.name = project.name.replace(' (TEMPLATE)', '').replace(f'{project.sale_order_id.name} - ', '')
 
         for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
             task.active = False
@@ -172,9 +185,15 @@ class SaleOrder(models.Model):
         self.onchange_presentation()
         self._manage_task_assignation()
 
+    def check_project_count(func):
+        def wrapper(self):
+            if len(self.project_ids) > 1:
+                raise UserError(_("the SO contains several projects"))
+            return func(self)
+        return wrapper
+
+    @check_project_count
     def action_redelivery(self):
-        if len(self.project_ids) > 1:
-            raise UserError(_("the SO contains several projects"))
         project_id = self.project_ids[0]
         redelivery_type = self.env.context.get('redelivery_type')
         if redelivery_type == 'studies':
@@ -182,11 +201,17 @@ class SaleOrder(models.Model):
         else:
             project_id.js_redelivery_prod()
 
+    @check_project_count
     def action_livery_project(self):
-        if len(self.project_ids) > 1:
-            raise UserError(_("the SO contains several projects"))
         project_id = self.project_ids[0]
-        project_id.livery_project()
+        if project_id._is_compaign():
+            return project_id.livery_project_compaign()
+        return project_id.livery_project()
+
+    @check_project_count
+    def action_to_plan(self):
+        project_id = self.project_ids[0]
+        return project_id.action_to_plan()
 
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
@@ -265,5 +290,28 @@ class SaleOrder(models.Model):
             return False
         for task in self.project_ids.task_ids.filtered(lambda tsk: tsk.role_id):
             roles = self.partner_id.role_ids.filtered(lambda pr: pr.role_id == task.role_id)
+            if not roles:
+                continue
             task.write({'user_ids': [(6, 0, roles.mapped('user_ids').ids)]})
         return True
+
+    def action_send_delivery_email(self, completed_task=''):
+        composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form')
+        template_id = self.env.ref('choreograph_sale_project.email_template_choreograph_delivery')
+        return {
+            'type': 'ir.actions.act_window',
+            'view_mode': 'form',
+            'res_model': 'mail.compose.message',
+            'view_id': composer_form_view_id.id,
+            'target': 'new',
+            'context': {
+                'default_composition_mode': 'comment',
+                'default_email_layout_xmlid': 'mail.mail_notification_light',
+                'default_res_id': self.id,
+                'default_model': 'sale.order',
+                'default_use_template': bool(template_id),
+                'default_template_id': template_id.id,
+                'website_sale_send_recovery_email': True,
+                'active_ids': self.ids,
+            },
+        }

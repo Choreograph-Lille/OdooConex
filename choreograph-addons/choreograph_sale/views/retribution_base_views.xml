@@ -7,10 +7,11 @@
             <field name="model">retribution.base</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="name"/>
-                    <field name="is_open"/>
-                    <field name="is_multi_base"/>
-                    <field name="retribution_rate" widget="percentage"/>
+                    <field name="name" />
+                    <field name="code" />
+                    <field name="is_open" />
+                    <field name="is_multi_base" />
+                    <field name="retribution_rate" widget="percentage" />
                 </tree>
             </field>
         </record>
@@ -23,36 +24,41 @@
                     <sheet>
                         <div class="oe_title">
                             <h1>
-                                <field name="name"/>
+                                <field name="name" />
                             </h1>
                         </div>
                         <group>
                             <group>
-                                <field name="is_open"/>
-                                <field name="is_multi_base"/>
+                                <field name="code" />
+                                <field name="is_open" />
+                                <field name="is_multi_base" />
                             </group>
                             <group>
-                                <field name="retribution_rate" attrs="{'readonly':[('is_multi_base', '=', True)]}"
-                                       force_save="1"
-                                       widget="percentage"/>
-                                <field name="postal_variable" attrs="{'invisible':[('is_multi_base', '=', False)]}"
-                                       force_save="1"
-                                       widget="percentage"/>
-                                <field name="postal_address" attrs="{'invisible':[('is_multi_base', '=', False)]}"
-                                       readonly="1"
-                                       widget="percentage"/>
+                                <field name="retribution_rate"
+                                    attrs="{'readonly':[('is_multi_base', '=', True)]}"
+                                    force_save="1"
+                                    widget="percentage" />
+                                <field name="postal_variable"
+                                    attrs="{'invisible':[('is_multi_base', '=', False)]}"
+                                    force_save="1"
+                                    widget="percentage" />
+                                <field name="postal_address"
+                                    attrs="{'invisible':[('is_multi_base', '=', False)]}"
+                                    readonly="1"
+                                    widget="percentage" />
                             </group>
                         </group>
                         <notebook>
-                            <page name="quotas" string="Quotas" attrs="{'invisible':[('is_multi_base', '=', False)]}">
-                                <field name="quota_base_ids"/>
+                            <page name="quotas" string="Quotas"
+                                attrs="{'invisible':[('is_multi_base', '=', False)]}">
+                                <field name="quota_base_ids" />
                             </page>
                         </notebook>
                     </sheet>
                     <div class="oe_chatter" name="oe_chatter">
-                        <field name="message_follower_ids"/>
-                        <field name="message_ids"/>
-                        <field name="activity_ids"/>
+                        <field name="message_follower_ids" />
+                        <field name="message_ids" />
+                        <field name="activity_ids" />
                     </div>
                 </form>
             </field>
@@ -63,11 +69,13 @@
             <field name="model">retribution.base.line</field>
             <field name="arch" type="xml">
                 <tree editable="bottom">
-                    <field name="base_id" domain="[('is_open', '=', True), ('is_multi_base', '=', False)]" required="1"
-                           options="{'no_create': True}"/>
-                    <field name="volume"/>
-                    <field name="volume_percentage" readonly="1" force_save="1"/>
-                    <field name="retribution_percentage" widget="percentage"/>
+                    <field name="base_id"
+                        domain="[('is_open', '=', True), ('is_multi_base', '=', False)]"
+                        required="1"
+                        options="{'no_create': True}" />
+                    <field name="volume" />
+                    <field name="volume_percentage" readonly="1" force_save="1" />
+                    <field name="retribution_percentage" widget="percentage" />
                 </tree>
             </field>
         </record>

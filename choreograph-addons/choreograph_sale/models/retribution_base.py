@@ -16,6 +16,7 @@ class RetributionBase(models.Model):
     quota_base_ids = fields.One2many('retribution.base.line', 'multi_base_id', 'Quotas', tracking=True)
     postal_variable = fields.Float('Postal Variable', tracking=True, default=0.3)
     postal_address = fields.Float('Postal address (DSP)', tracking=True, default=1.0)
+    code = fields.Char('Code')
 
     @api.onchange('quota_base_ids', 'is_multi_base')
     def _onchange_quota_base(self):
