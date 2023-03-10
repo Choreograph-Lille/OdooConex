@@ -89,11 +89,11 @@ class OperationWebsite(http.Controller):
                                           'population_scored_desc': kwargs.get('population_scored_desc'),
                                           'attachment_scored_id': attachment_obj.create({
                                               'name': kwargs.get('population_scored_datafile').filename,
-                                              'datas': kwargs.get('population_scored_datafile').read(),
+                                              'datas': base64.encodebytes(kwargs.get('population_scored_datafile').read()),
                                               'type': 'binary'}).id,
                                           'attachment_profile_id': attachment_obj.create({
                                               'name': kwargs.get('searched_profile_datafile').filename,
-                                              'datas': kwargs.get('searched_profile_datafile').read(),
+                                              'datas': base64.encodebytes(kwargs.get('searched_profile_datafile').read()),
                                               'type': 'binary'}).id,
                                           'canal': canal})
         res = {operation.id: {'name': operation.name}}
