@@ -274,7 +274,7 @@ class ProjectTask(models.Model):
                     '75': '_hook_task_75_in_stage_80',
                     '80': '_hook_task_80_in_stage_80',
                     '85': '_hook_task_fulfillement_terminated',
-                    # '90': '_hook_task_90_in_stage_80'
+                    '90': '_hook_task_90_in_stage_80'
                 }
                 if stage_id.stage_number == TERMINATED_TASK_STAGE:
                     method_name = method_dict.get(task.task_number, None)

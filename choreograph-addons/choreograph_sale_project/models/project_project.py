@@ -13,7 +13,8 @@ from odoo.addons.choreograph_project.models.project_project import (
 class ProjectProject(models.Model):
     _inherit = 'project.project'
 
-    project_template_id = fields.Many2one('project.project', 'Operation Template', domain=[('is_template', '=', True)], copy=False)
+    project_template_id = fields.Many2one('project.project', 'Operation Template',
+                                          domain=[('is_template', '=', True)], copy=False)
 
     @api.model
     def set_task_project(self):
@@ -157,10 +158,8 @@ class ProjectProject(models.Model):
     def _hook_task_90_in_stage_15(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_extraction').id})
 
-    # HT00832: function not used
-    # def _hook_task_90_in_stage_80(self):
-    #     self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
-    #     self._update_95_to_15_with_commitment_date()
+    def _hook_task_90_in_stage_80(self):
+        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
 
     def _hook_check_all_task(self, task_id):
         not_terminated = self.task_ids.filtered(
