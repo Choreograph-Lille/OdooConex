@@ -8,6 +8,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="name" />
+                    <field name="code" />
                     <field name="is_open" />
                     <field name="is_multi_base" />
                     <field name="retribution_rate" widget="percentage" />
@@ -28,10 +29,9 @@
                         </div>
                         <group>
                             <group>
-                                <field name="is_open" />
+                                <field name="code" />
                                 <field name="is_open" />
                                 <field name="is_multi_base" />
-                                <field name="code" />
                             </group>
                             <group>
                                 <field name="retribution_rate"
