@@ -137,6 +137,9 @@ class SaleOrder(models.Model):
                         _(TASK_NAME[REQUIRED_TASK_NUMBER['potential_return']]), _(
                             TASK_NAME[REQUIRED_TASK_NUMBER['study_delivery']]),
                         _(TASK_NAME[REQUIRED_TASK_NUMBER['presentation']])))
+        else:
+            no_template = _('There is no operation to generate for the items selected in the quote')
+            raise ValidationError(no_template)
         self.order_line.sudo().with_company(self.company_id).with_context(
             is_operation_generation=True, user_id=self.user_id.id)._timesheet_service_generation()
         self.project_ids.write({'type_of_project': 'operation'})
