@@ -58,6 +58,8 @@ class ProjectProject(models.Model):
         return super(ProjectProject, self)._read_group_stage_ids(stages, domain, order)
 
     type_of_project = fields.Selection(TYPE_OF_PROJECT, default='standard')
+    code_sequence = fields.Char()
+    code = fields.Char()
 
     def get_waiting_task_stage(self):
         todo_stage_id = self.type_ids.filtered(lambda t: t.stage_number == TODO_TASK_STAGE)
@@ -150,6 +152,7 @@ class ProjectProject(models.Model):
                 name_seq = sequence_obj.next_by_code('project.project.operation')
                 vals.update({
                     'type_of_project': 'operation',
+                    'code_sequence': name_seq,
                     'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id,
                     'type_ids': [(6, 0, types.ids)],
                     'user_id': self._context.get('user_id', vals.get('user_id')),
