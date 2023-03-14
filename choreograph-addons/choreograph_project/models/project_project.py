@@ -126,14 +126,11 @@ class ProjectProject(models.Model):
         self.update_delivery_address()
 
     def get_delivery_task_number(self):
-        if self.stage_id.stage_number == '40':
-            delivery_task_number = '75'
-        elif self.stage_id.stage_number == '50':
-            delivery_task_number = '85'
-        else:
-            # TODO: check this with tsiori or davis
-            delivery_task_number = '85'
-        return delivery_task_number
+        stage_to_delivery = {
+            '40': '75',
+            '50': '85'
+        }
+        return stage_to_delivery.get(self.stage_id.stage_number, None)
 
     def update_delivery_address(self):
         delivery_task_number = self.get_delivery_task_number()
