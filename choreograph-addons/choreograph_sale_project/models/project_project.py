@@ -90,7 +90,29 @@ class ProjectProject(models.Model):
             project.task_ids.with_context(task_stage_init=True).write({
                 'stage_id': task_stage.id,
             })
+            return {
+                'type': 'ir.actions.act_window',
+                'view_mode': 'form',
+                'res_model': 'sale.order',
+                'target': 'current',
+                'context': {
+                    'create_project_from_template': True,
+                    'operation_id': action.get('res_id')
+                }
+            }
         return action
+
+    def initialize_order(self, order_id):
+        self.write({
+            'sale_order_id': order_id.id,
+            'partner_id': order_id.partner_id.id,
+            'user_id': order_id.user_id.id
+        })
+        self.task_ids.write({
+            'sale_order_id': order_id.id,
+            'partner_id': order_id.partner_id.id,
+            'date_deadline': order_id.commitment_date
+        })
 
     def write(self, vals):
         res = super(ProjectProject, self).write(vals)
