@@ -48,6 +48,6 @@ class MailMessage(models.Model):
             vals.update({'stage': self._context.get('stage', 'stage_01')})
         if isinstance(vals, list):
             for val in vals:
-                if val.get('model') in ['sale.operation', 'sale.operatoin.child']:
+                if val.get('model') in ['sale.operation', 'sale.operation.child']:
                     val.update({'stage': self._context.get('stage', 'stage_01')})
         return super(MailMessage, self).create(vals)
