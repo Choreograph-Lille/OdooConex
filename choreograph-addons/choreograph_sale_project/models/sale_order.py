@@ -223,7 +223,16 @@ class SaleOrder(models.Model):
     def create(self, vals):
         vals['is_info_validated'] = False
         vals['email_is_info_validated'] = False
-        return super(SaleOrder, self).create(vals)
+        order_id = super(SaleOrder, self).create(vals)
+        if self.env.context.get('create_project_from_template', False):
+            project = self.env['project.project'].browse(self.env.context.get('operation_id', False)).exists()
+            if project:
+                project.initialize_order(order_id)
+                order_id.write({
+                    'project_id': project.id,
+                    'show_operation_generation_button': False
+                })
+        return order_id
 
     def _update_date_deadline(self, vals):
         for rec in self:
