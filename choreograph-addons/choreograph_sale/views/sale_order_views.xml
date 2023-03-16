@@ -62,7 +62,7 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']"
                     position="after">
-                    <field name="retribution_cost" />
+                    <field name="retribution_cost" attrs="{'column_invisible': [('parent.is_subscription','=',True)]}"/>
                 </xpath>
 
                 <notebook position="inside">
@@ -130,6 +130,7 @@
                                 <field name="email_comment" />
                             </group>
                             <group string="BAT">
+                                <field name="email_bat_from"/>
                                 <field name="email_bat_internal" />
                                 <field name="email_bat_client" />
                                 <field name="bat_desired_date" />
@@ -139,7 +140,6 @@
 
                                 <separator string="Optout" />
                                 <field name="excluded_provider" />
-                                <field name="optout_comment" />
                                 <field name="optout_link" />
                                 <field name="routing_base" />
                             </group>

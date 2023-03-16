@@ -99,13 +99,14 @@ class SaleOrder(models.Model):
     is_preheader_available = fields.Boolean('Email Preheader Available In HTML')
     email_comment = fields.Text('Email Comment')
 
+    email_bat_from = fields.Many2one('choreograph.campaign.de', 'Email BAT From')
     email_bat_internal = fields.Char('Email BAT Internal')
     email_bat_client = fields.Char('Email BAT Client')
     bat_desired_date = fields.Date('Email BAT Desired Date')
     email_witness_file_name = fields.Char('Email File Name')
     excluded_provider = fields.Char('Email Excluded Provider')
     optout_comment = fields.Text('Email Optout Comment')
-    optout_link = fields.Char('Email Optout Link')
+    optout_link = fields.Text('Email Optout Link')
     routing_base = fields.Char('Email Routing Base')
     project_task_campaign_ids = fields.One2many('project.task.campaign', 'order_id', 'Email Campaign')
 
