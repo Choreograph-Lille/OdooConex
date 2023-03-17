@@ -14,12 +14,11 @@
                     <field name="project_count" invisible="1" />
                     <field name="id" invisible="1" />
                     <button
-                        name="%(choreograph_sale.operation_generation_action)d"
+                        name="action_generate_operation"
                         id="action_generate_operation"
                         string="Generate The Operation"
                         class="btn-primary"
-                        type="action"
-                        context="{'default_order_id': id}"
+                        type="object"
                         attrs="{'invisible': ['|', ('show_operation_generation_button', '=', False), ('recurrence_id', '!=', False)]}"
                     />
                     <button
@@ -62,7 +61,8 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']"
                     position="after">
-                    <field name="retribution_cost" />
+                    <field name="retribution_cost"
+                        attrs="{'column_invisible': [('parent.is_subscription','=',True)]}" />
                 </xpath>
 
                 <notebook position="inside">
@@ -130,6 +130,7 @@
                                 <field name="email_comment" />
                             </group>
                             <group string="BAT">
+                                <field name="email_bat_from" />
                                 <field name="email_bat_internal" />
                                 <field name="email_bat_client" />
                                 <field name="bat_desired_date" />
@@ -139,7 +140,6 @@
 
                                 <separator string="Optout" />
                                 <field name="excluded_provider" />
-                                <field name="optout_comment" />
                                 <field name="optout_link" />
                                 <field name="routing_base" />
                             </group>
@@ -155,7 +155,7 @@
 
                 <field name="validity_date" position="before">
                     <field name="commitment_date" widget="date"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
+                        attrs="{'invisible': [('recurrence_id', '!=', False)], 'required': [('is_subscription', '=', False)]}" />
                 </field>
 
                 <group name="sale_shipping" position="after">

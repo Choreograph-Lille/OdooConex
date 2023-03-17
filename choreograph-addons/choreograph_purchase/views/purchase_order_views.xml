@@ -1,15 +1,26 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record id="purchase_order_form_inherit" model="ir.ui.view">
         <field name="name">purchase.order.form.inherit</field>
         <field name="model">purchase.order</field>
         <field name="inherit_id" ref="purchase.purchase_order_form" />
         <field name="arch" type="xml">
-            <xpath expr="//form[1]/header[1]/button[@name='button_confirm'][1]" position="attributes">
+            <xpath expr="//form[1]/header[1]/button[@name='button_confirm'][1]"
+                position="attributes">
                 <attribute name="studio_approval">True</attribute>
             </xpath>
-            <xpath expr="//form[1]/header[1]/button[@name='button_confirm'][2]" position="attributes">
+            <xpath expr="//form[1]/header[1]/button[@name='button_confirm'][2]"
+                position="attributes">
                 <attribute name="studio_approval">True</attribute>
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="context">
+                    {'res_partner_search_mode': 'supplier', 'show_vat': True,'name_get_custom':
+                    True}
+                </attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_planned']" position="attributes">
+                <attribute name="string">Predicted date</attribute>
             </xpath>
         </field>
     </record>
