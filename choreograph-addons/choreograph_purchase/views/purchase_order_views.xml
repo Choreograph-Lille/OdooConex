@@ -15,8 +15,12 @@
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="attributes">
                 <attribute name="context">
-                    {'res_partner_search_mode': 'supplier', 'show_vat': True,'name_get_custom': True}
+                    {'res_partner_search_mode': 'supplier', 'show_vat': True,'name_get_custom':
+                    True}
                 </attribute>
+            </xpath>
+            <xpath expr="//field[@name='date_planned']" position="attributes">
+                <attribute name="string">Predicted date</attribute>
             </xpath>
         </field>
     </record>
