@@ -149,6 +149,7 @@ class SaleOrder(models.Model):
             self.tasks_ids.write({
                 'date_deadline': self.commitment_date.date()
             })
+        self.write({'show_operation_generation_button': False})
 
     def action_create_task_from_condition(self):
         for rec in self:
