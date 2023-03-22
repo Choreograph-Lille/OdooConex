@@ -110,10 +110,16 @@ class SaleOrder(models.Model):
 
     def _get_operation_task(self, task_number_list, active=True):
         for rec in self:
-            return self.env['project.task'].search(
-                ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
-                 ('sale_order_id', '=', rec.id), ('active', '=', active),
-                 ('task_number', 'in', task_number_list)])
+            if self._context.get('is_operation_generation'):
+                sale_id = rec.id
+            else:
+                sale_id = rec.id.origin
+            if sale_id:
+                return self.env['project.task'].search(
+                    ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
+                     ('sale_order_id', '=', sale_id), ('active', '=', active),
+                     ('task_number', 'in', task_number_list)])
+            return False
 
     def _unarchive_task(self, operation_task):
         for rec in self:
@@ -163,15 +169,17 @@ class SaleOrder(models.Model):
             return provider_template if provider_template else False
         return False
 
+    def archive_required_tasks(self):
+        for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
+            task.active = False
+
     def action_generate_operation(self):
         super(SaleOrder, self).action_generate_operation()
 
         for project in self.order_line.mapped('project_id'):
             project.name = project.name.replace(' (TEMPLATE)', '').replace(f'{project.sale_order_id.name} - ', '')
 
-        for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
-            task.active = False
-
+        self.archive_required_tasks()
         provider_delivery_template = self.get_provider_delivery_template()
         if provider_delivery_template:
             self.with_context(no_create_delivery_task=True).write({
@@ -180,10 +188,13 @@ class SaleOrder(models.Model):
                     'task_id': self.tasks_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER).id
                 })]
             })
-        self.onchange_potential_return()
-        self.onchange_study_delivery()
-        self.onchange_presentation()
+        self.compute_task_operations()
         self._manage_task_assignation()
+
+    def compute_task_operations(self):
+        self.with_context(is_operation_generation=True).onchange_potential_return()
+        self.with_context(is_operation_generation=True).onchange_study_delivery()
+        self.with_context(is_operation_generation=True).onchange_presentation()
 
     def check_project_count(func):
         def wrapper(self):
@@ -232,6 +243,8 @@ class SaleOrder(models.Model):
                     'project_id': project.id,
                     'show_operation_generation_button': False
                 })
+                order_id.archive_required_tasks()
+                order_id.compute_task_operations()
         return order_id
 
     def _update_date_deadline(self, vals):
