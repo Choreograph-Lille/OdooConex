@@ -22,6 +22,7 @@
                 </field>
 
                 <field name="partner_id" position="after">
+                    <field name="complexity" attrs="{'invisible': [('task_number', 'not in', ['20', '30'])]}"/>
                     <field name="id_title"
                            attrs="{'invisible': [('task_number', 'in', ['45', '20', '25', '30', '35', False])]}"/>
                     <field name="sale_order_id" attrs="{'invisible': [('task_number', '=', False)]}"/>
@@ -201,6 +202,10 @@
 
                 <field name="user_ids" position="after">
                     <field name="type_of_project" invisible="1"/>
+                </field>
+
+                <field name="sale_order_id" position="after">
+                    <field name="customer_commitment_date" widget="date" attrs="{'invisible': [('task_number', 'not in', ['20', '30'])]}"/>
                 </field>
                 <xpath expr="//header/field[@name='stage_id']" position="attributes">
                     <attribute name="domain">[('type_of_project', '=', type_of_project)]</attribute>

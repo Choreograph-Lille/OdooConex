@@ -127,17 +127,20 @@ class SaleOrder(models.Model):
     def get_operation_product(self):
         return self.order_line.filtered(lambda l: l.operation_template_id)
 
+    def check_for_required_tasks(self, template):
+        tasks = template.task_ids.mapped('task_number')
+        if any([task not in tasks for task in REQUIRED_TASK_NUMBER.values()]):
+            raise ValidationError(
+                _('The operation template must have the following task number: {0}, {1}, {2}').format(
+                    _(TASK_NAME[REQUIRED_TASK_NUMBER['potential_return']]), _(
+                        TASK_NAME[REQUIRED_TASK_NUMBER['study_delivery']]),
+                    _(TASK_NAME[REQUIRED_TASK_NUMBER['presentation']])))
+
     def action_generate_operation(self):
         # check for tasks in operation template
         line_with_project = self.get_operation_product()
         if line_with_project:
-            tasks = line_with_project[0].operation_template_id.task_ids.mapped('task_number')
-            if any([task not in tasks for task in REQUIRED_TASK_NUMBER.values()]):
-                raise ValidationError(
-                    _('The operation template must have the following task number: {0}, {1}, {2}').format(
-                        _(TASK_NAME[REQUIRED_TASK_NUMBER['potential_return']]), _(
-                            TASK_NAME[REQUIRED_TASK_NUMBER['study_delivery']]),
-                        _(TASK_NAME[REQUIRED_TASK_NUMBER['presentation']])))
+            self.check_for_required_tasks(line_with_project[0].operation_template_id)
         else:
             no_template = _('There is no operation to generate for the items selected in the quote')
             raise ValidationError(no_template)
