@@ -83,6 +83,8 @@ class ProjectTask(models.Model):
                                                  inverse='_inverse_project_task_campaign_ids')
     operation_provider_delivery_ids = fields.One2many(
         'operation.provider.delivery', 'task_id', 'Provider Delivery Tasks')
+    customer_commitment_date = fields.Datetime(related='sale_order_id.commitment_date')
+    complexity = fields.Char()
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):
