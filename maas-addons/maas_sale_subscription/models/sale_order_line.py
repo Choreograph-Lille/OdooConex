@@ -38,10 +38,10 @@ class SaleSubscriptionLine(models.Model):
     @api.depends('price_unit', 'product_uom_qty', 'discount', 'order_id.pricelist_id')
     def _compute_amount(self):
         super(SaleSubscriptionLine, self)._compute_amount()
-        for line in self.filtered(lambda l: l.state_subscription != 'to_invoice'):
+        for line in self.filtered(lambda l: l.state_subscription != 'to_invoice' and l.order_id.is_subscription):
             if line.order_id.package_id:
                 line.price_subtotal = 0
-        for line in self.filtered(lambda l: l.state_subscription == 'to_invoice'):
+        for line in self.filtered(lambda l: l.state_subscription == 'to_invoice' and l.order_id.is_subscription):
             if line.order_id.package_id:
                 price_rent = self.filtered(lambda l: l.state_subscription == 'subscription_rent').sorted(key='date', reverse=True)
                 if price_rent:
