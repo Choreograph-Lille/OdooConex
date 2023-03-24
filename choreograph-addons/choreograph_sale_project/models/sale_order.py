@@ -184,7 +184,7 @@ class SaleOrder(models.Model):
         if provider_delivery_template:
             self.with_context(no_create_delivery_task=True).write({
                 'operation_provider_delivery_ids': [(0, 0, {
-                    'delivery_date': provider_delivery_template.date_deadline or date.today(),
+                    'delivery_date': provider_delivery_template.date_deadline,
                     'task_id': self.tasks_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER).id
                 })]
             })
