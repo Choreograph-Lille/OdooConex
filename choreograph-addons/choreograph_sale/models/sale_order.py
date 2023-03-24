@@ -139,9 +139,9 @@ class SaleOrder(models.Model):
     def action_generate_operation(self):
         # check for tasks in operation template
         line_with_project = self.get_operation_product()
-        if line_with_project:
-            self.check_for_required_tasks(line_with_project[0].operation_template_id)
-        else:
+        # if line_with_project:
+        #     self.check_for_required_tasks(line_with_project[0].operation_template_id)
+        if not line_with_project:
             no_template = _('There is no operation to generate for the items selected in the quote')
             raise ValidationError(no_template)
         self.order_line.sudo().with_company(self.company_id).with_context(
