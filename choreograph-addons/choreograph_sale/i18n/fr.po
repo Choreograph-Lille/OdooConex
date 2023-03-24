@@ -801,6 +801,16 @@ msgid "Order"
 msgstr "Commande"
 
 #. module: choreograph_sale
+#: model:sale.data.conservation,name:choreograph_sale.sale_data_conservation_other
+msgid "Other"
+msgstr "Autre"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__other_conservation_duration
+msgid "Other Duration"
+msgstr "Autre durée"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__po_number
 msgid "PO Number"
 msgstr "N° PO"
@@ -1018,6 +1028,11 @@ msgstr "Expéditeur"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__show_operation_generation_button
 msgid "Show Operation Generation Button"
 msgstr "Afficher bouton génération de l'opération"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__show_other_conservation_duration
+msgid "Show Other Conservation Duration"
+msgstr "Afficher autre durée de conservation"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__source_id

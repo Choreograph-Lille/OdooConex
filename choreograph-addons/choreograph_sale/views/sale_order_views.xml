@@ -38,9 +38,12 @@
                         options="{'color_field': 'color', 'no_create_edit': True}"
                         context="{'filter_by_partner_catalogue': partner_id}"
                     />
+                    <field name="show_other_conservation_duration" invisible="1"/>
                     <field name="data_conservation_id"
                         attrs="{'invisible': [('recurrence_id', '!=', False)]}"
-                        options="{'no_open': True}" />
+                        options="{'no_open': True, 'no_create': True}" />
+                    <field name="other_conservation_duration"
+                        attrs="{'invisible': [('show_other_conservation_duration', '=', False)]}"/>
                     <field name="related_base"
                         attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
                 </field>
