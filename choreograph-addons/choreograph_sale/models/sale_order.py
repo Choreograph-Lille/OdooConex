@@ -50,6 +50,8 @@ class SaleOrder(models.Model):
     related_base = fields.Many2one('retribution.base')
     data_conservation_id = fields.Many2one('sale.data.conservation', 'Data Conservation', index=True,
                                            ondelete='restrict')
+    other_conservation_duration = fields.Char('Other Duration')
+    show_other_conservation_duration = fields.Boolean(compute='compute_show_other_conservation_duration')
     receiver = fields.Char()
     send_with = fields.Selection([('mft', 'MFT'), ('sftp', 'SFTP'), ('email', 'Email'), ('ftp', 'FTP')])
     # operation_type_id = fields.Many2one('project.project', 'Operation Type')
@@ -139,9 +141,9 @@ class SaleOrder(models.Model):
     def action_generate_operation(self):
         # check for tasks in operation template
         line_with_project = self.get_operation_product()
-        if line_with_project:
-            self.check_for_required_tasks(line_with_project[0].operation_template_id)
-        else:
+        # if line_with_project:
+        #     self.check_for_required_tasks(line_with_project[0].operation_template_id)
+        if not line_with_project:
             no_template = _('There is no operation to generate for the items selected in the quote')
             raise ValidationError(no_template)
         self.order_line.sudo().with_company(self.company_id).with_context(
@@ -189,3 +191,7 @@ class SaleOrder(models.Model):
         purchases = super(SaleOrder, self)._get_purchase_orders(
         ) | self.env['purchase.order'].search([('origin', '=', self.name)])
         return purchases
+
+    @api.depends('data_conservation_id')
+    def compute_show_other_conservation_duration(self):
+        self.show_other_conservation_duration = self.data_conservation_id.id == self.env.ref('choreograph_sale.sale_data_conservation_other').id

@@ -1020,7 +1020,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <span t-field="o.date"
-                                                                        t-field-options='{"format": "dd/MM/yy"}' />
+                                                                        t-options='{"format": "dd/MM/YYYY"}' />
                                                                 </td>
                                                                 <td>
                                                                     <span id="op-name"
