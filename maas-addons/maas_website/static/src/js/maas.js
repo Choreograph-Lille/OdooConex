@@ -1975,6 +1975,18 @@ $(document).ready(function () {
     })();
 
 
-
+    $('.js_change_lang').click(function (ev){
+        ev.preventDefault();
+        if (document.body.classList.contains('editor_enable')) {
+            return;
+        }
+        var $target = $(ev.currentTarget);
+        var redirect = {
+            lang: $target.data('url_code'),
+            url: encodeURIComponent($target.attr('href').replace(/[&?]edit_translations[^&?]+/, '')),
+            hash: encodeURIComponent(window.location.hash)
+        };
+        window.location.href = "/website/lang/"+redirect.lang+"?r="+redirect.url+redirect.hash;
+    })
 
 });
