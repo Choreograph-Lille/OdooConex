@@ -65,7 +65,10 @@
                 <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']"
                     position="after">
                     <field name="retribution_cost"
-                        attrs="{'column_invisible': [('parent.is_subscription','=',True)]}" />
+                        attrs="{'column_invisible': [('parent.is_subscription','=',True)]}"
+                        optional="show" 
+                        string="Retribution"
+                        />
                 </xpath>
 
                 <notebook position="inside">
