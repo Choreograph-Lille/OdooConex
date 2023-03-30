@@ -94,7 +94,7 @@ class ProjectTask(models.Model):
                 task.project_id.code,
                 task.related_base.code,
                 task.partner_id.ref,
-                task.sale_order_id.name
+                task.sale_order_id.name if task.sale_order_id else False
             ]
             task.folder_key = '_'.join([str(item) for item in combinaison_value if item])
 
