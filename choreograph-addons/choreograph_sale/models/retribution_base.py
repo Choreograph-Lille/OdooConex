@@ -12,7 +12,7 @@ class RetributionBase(models.Model):
     name = fields.Char(required=True, tracking=True)
     is_open = fields.Boolean('Open', tracking=True)
     is_multi_base = fields.Boolean('Multi-Bases', tracking=True)
-    retribution_rate = fields.Float('Retribution Rate', tracking=True)
+    retribution_rate = fields.Float(tracking=True, compute='_compute_retribution_rate', store=True, readonly=False)
     quota_base_ids = fields.One2many('retribution.base.line', 'multi_base_id', 'Quotas', tracking=True)
     postal_variable = fields.Float('Postal Variable', tracking=True, default=0.3)
     postal_address = fields.Float('Postal address (DSP)', tracking=True, default=1.0)
@@ -20,14 +20,19 @@ class RetributionBase(models.Model):
 
     @api.onchange('quota_base_ids', 'is_multi_base')
     def _onchange_quota_base(self):
-        self.retribution_rate = 0
         if self.is_multi_base:
-            self.retribution_rate = sum(
-                [qb.volume_percentage * qb.retribution_percentage for qb in self.quota_base_ids]) / 100
             total_volume = sum(self.quota_base_ids.mapped('volume'))
-            if total_volume:
-                for qb in self.quota_base_ids:
-                    qb.volume_percentage = (qb.volume / total_volume) * 100
+            for qb in self.quota_base_ids:
+                qb.volume_percentage = (qb.volume / total_volume) * 100 if total_volume else 0
+
+    @api.depends('quota_base_ids')
+    def _compute_retribution_rate(self):
+        for rec in self:
+            if rec.is_multi_base:
+                rec.retribution_rate = sum(
+                    [qb.volume_percentage * qb.retribution_percentage for qb in rec.quota_base_ids]) / 100
+            else:
+                rec.retribution_rate = rec.retribution_rate
 
     def write(self, vals):
         res = super(RetributionBase, self).write(vals)
