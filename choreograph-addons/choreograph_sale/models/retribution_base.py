@@ -15,7 +15,8 @@ class RetributionBase(models.Model):
     retribution_rate = fields.Float(tracking=True, compute='_compute_retribution_rate', store=True, readonly=False)
     quota_base_ids = fields.One2many('retribution.base.line', 'multi_base_id', 'Quotas', tracking=True)
     postal_variable = fields.Float('Postal Variable', tracking=True, default=0.3)
-    postal_address = fields.Float('Postal address (DSP)', tracking=True, default=1.0)
+    postal_address = fields.Float('Postal address', tracking=True, default=1.0)
+    product_template_id = fields.Many2one('product.template', 'Product')
     code = fields.Char('Code')
 
     @api.onchange('quota_base_ids', 'is_multi_base')
