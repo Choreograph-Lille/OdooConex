@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 07:37+0000\n"
-"PO-Revision-Date: 2023-03-28 07:37+0000\n"
+"POT-Creation-Date: 2023-04-04 14:10+0000\n"
+"PO-Revision-Date: 2023-04-04 14:10+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -832,8 +832,9 @@ msgstr "Variable Postale"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__postal_address
-msgid "Postal address (DSP)"
-msgstr "Adresse Postale (DSP)"
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.retribution_base_view_form
+msgid "Postal address"
+msgstr "Adresse Postale"
 
 #. module: choreograph_sale
 #: code:addons/choreograph_sale/models/sale_order.py:0
@@ -866,10 +867,13 @@ msgstr "Info presta"
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_product_template
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__product_template_id
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.retribution_base_view_form
 msgid "Product"
 msgstr "Article"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Project Name"
