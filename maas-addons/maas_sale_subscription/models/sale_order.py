@@ -203,8 +203,7 @@ class SaleSubscription(models.Model):
     def _get_invoiceable_lines(self, final=False):
         invoiceable_lines = super(SaleSubscription, self)._get_invoiceable_lines(final)
         if self.is_subscription:
-            return invoiceable_lines.filtered(
-                lambda l: l.order_id.package_id and l.state_subscription == 'to_invoice' or not l.order_id.package_id)
+            return invoiceable_lines.filtered(lambda l: l.state_subscription == 'to_invoice')
         return invoiceable_lines
 
     @api.model

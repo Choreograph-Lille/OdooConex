@@ -23,7 +23,7 @@ from odoo.exceptions import UserError, ValidationError
 from odoo import fields, models, _
 
 
-class SaleOperatinChild(models.Model):
+class SaleOperationChild(models.Model):
     _inherit = 'sale.operation.child'
 
     def command_ordered(self):
@@ -32,8 +32,7 @@ class SaleOperatinChild(models.Model):
         subscription = self.operation_id.partner_id.get_active_subscription()
         if not subscription:
             raise UserError(_('No active subscription was found for this customer.'))
-        if subscription:
-            self.check_quantity(self.qty_extracted)
+        self.check_quantity(self.qty_extracted)
         if subscription.balance >= self.qty_extracted or subscription.current_package_id.unlimited:
             product = subscription.current_package_id
             quantity = subscription.current_cumulative_quantity + self.qty_extracted
