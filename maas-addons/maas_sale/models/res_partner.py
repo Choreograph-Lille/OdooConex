@@ -22,7 +22,7 @@
 from odoo import fields, models
 
 
-class Partner(models.Model):
+class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     partner_type = fields.Selection([('alliance', 'Alliance'), ('conexplus', 'Conex +')],
@@ -38,6 +38,11 @@ class Partner(models.Model):
         self.ensure_one()
         order_obj = self.env['sale.order']
         partner = self.get_parent()
-        orders = order_obj.search([('partner_id', '=', partner.id), ('is_subscription', '=', True), ('state', 'in', ('sale', 'done')),
-                                   ('stage_id.category', '=', 'progress')], order='date_order DESC')
-        return orders and orders[0] or False
+        order = order_obj.search([('partner_id', '=', partner.id),
+                                   ('is_subscription', '=', True),
+                                   ('state', 'in', ('sale', 'done')),
+                                   ('stage_id.category', '=', 'progress')], limit=1)
+
+        if not order:
+            return False
+        return order

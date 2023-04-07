@@ -22,6 +22,7 @@
         'data/product_template_data.xml',
         'data/ir_cron.xml',
         # security
+        'security/ir_rule.xml',
         'security/ir.model.access.csv',
         # views
         'views/menu.xml',
