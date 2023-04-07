@@ -25,3 +25,4 @@ class ResPartner(models.Model):
     private_title = fields.Boolean('Private Title', tracking=10)
     agency_id = fields.Many2one('res.partner', 'Agency', ondelete='restrict', index=True, tracking=10)
     industry_id = fields.Many2one('res.partner.industry', 'Activity area', tracking=10)
+    function = fields.Char(string='Job Position', tracking=10)
