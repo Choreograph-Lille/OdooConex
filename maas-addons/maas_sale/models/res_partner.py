@@ -39,9 +39,9 @@ class ResPartner(models.Model):
         order_obj = self.env['sale.order']
         partner = self.get_parent()
         order = order_obj.search([('partner_id', '=', partner.id),
-                                   ('is_subscription', '=', True),
-                                   ('state', 'in', ('sale', 'done')),
-                                   ('stage_id.category', '=', 'progress')], limit=1)
+                                  ('is_subscription', '=', True),
+                                  ('state', 'in', ('sale', 'done')),
+                                  ('stage_id.category', '=', 'progress')], limit=1)
 
         if not order:
             return False
