@@ -1,61 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-  <data noupdate="0">
+    <data noupdate="0">
 
-    <!-- Email template for new users -->
-    <record id="auth_signup.set_password_email" model="mail.template">
-      <!--<field name="subject">Creating your My Model access</field>-->
-      <field name="body_html"><![CDATA[
-        <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
-          <div style="algin:left;">
-              <img src="/maas_base/static/description/MyModel_logo_sm2.PNG" style="padding: 0px; margin: 0px; max-height:80px; max-width=150px"/>
-          </div>
-          <div style="text-align: left; font-size:16px;padding-top:20px;padding-left:40px">
-             <p>
-                Good morning,
-              </p>
-          </div>
-          <div style="text-align: center; font-size:16px;">
-            <p>
-              In order to access the My Model platform,<br/>
-              Please click on the link below to create your password
-            </p>
-          </div>
-          <div style="text-align: left;font-size:16px;">
-             <p>
-                Team MyModel,
-              </p>
-          </div>
-          <div style="text-align: center; margin-top: 18px; padding-top:20px;">
-             <a href="${object.signup_url}" style="width:180px;padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;">Click here</a>
-          </div>
-        </div>]]>
-      </field>
-    </record>
-
-
-    <!-- Email template for reset password -->
-     <record id="auth_signup.reset_password_email" model="mail.template">
-        <field name="body_html"><![CDATA[
-            <div style="algin:left;">
-              <img src="/maas_base/static/description/MyModel_logo_sm2.PNG" style="padding: 0px; margin: 0px; max-height:80px; max-width=150px"/>
-            </div>
-            <div style="text-align: left;font-size:16px; margin-top=18px;">
-                <p>Dear ${object.name},</p>
-                <p>A password reset for your access on MyModel platform was requested.</p>
-                <p>You may change your password by following this link which will remain valid during 24 hours.</p>
-                <div style="text-align: center; margin-top: 32px;">
-                    <a href="${object.signup_url}" style="padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;">Change password</a>
+        <!-- Email template for new users -->
+        <record id="auth_signup.set_password_email" model="mail.template">
+            <!--<field name="subject">Creating your My Model access</field>-->
+            <field name="body_html" type="html">
+                <div style="padding:0px;width:600px;margin:auto;background: #FFFFFF repeat top /100%;color:#777777">
+                    <div style="algin:left;">
+                        <img src="/maas_base/static/description/MyModel_logo_sm2.PNG"
+                             style="padding: 0px; margin: 0px; max-height:80px; max-width=150px"/>
+                    </div>
+                    <div style="text-align: left; font-size:16px;padding-top:20px;padding-left:40px">
+                        <p>
+                            Good morning,
+                        </p>
+                    </div>
+                    <div style="text-align: center; font-size:16px;">
+                        <p>
+                            In order to access the My Model platform,
+                            <br/>
+                            Please click on the link below to create your password
+                        </p>
+                    </div>
+                    <div style="text-align: left;font-size:16px;">
+                        <p>
+                            Team MyModel,
+                        </p>
+                    </div>
+                    <div style="text-align: center; margin-top: 18px; padding-top:20px;">
+                        <a href="{{ object.signup_url }}"
+                           style="width:180px;padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;">
+                            Click here
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div style="text-align: left;font-size:16px;">
-                <p>
-                    Team MyModel,
-                </p>
-            </div>
-        ]]>
-        </field>
-    </record>
 
-  </data>
+            </field>
+        </record>
+
+
+        <!-- Email template for reset password -->
+        <record id="auth_signup.reset_password_email" model="mail.template">
+            <field name="body_html" type="html">
+                <div style="algin:left;">
+                    <img src="/maas_base/static/description/MyModel_logo_sm2.PNG"
+                         style="padding: 0px; margin: 0px; max-height:80px; max-width=150px"/>
+                </div>
+                <div style="text-align: left;font-size:16px; margin-top=18px;">
+                    <p>Dear<t t-out="object.name"/>,
+                    </p>
+                    <p>A password reset for your access on MyModel platform was requested.</p>
+                    <p>You may change your password by following this link which will remain valid during 24 hours.</p>
+                    <div style="text-align: center; margin-top: 32px;">
+                        <a href="{{ object.signup_url }}"
+                           style="padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;">
+                            Change password
+                        </a>
+                    </div>
+                </div>
+                <div style="text-align: left;font-size:16px;">
+                    <p>
+                        Team MyModel,
+                    </p>
+                </div>
+
+            </field>
+        </record>
+
+    </data>
 </odoo>
