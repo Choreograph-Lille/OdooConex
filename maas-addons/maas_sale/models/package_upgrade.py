@@ -23,28 +23,18 @@ class PackageUpgrade(models.TransientModel):
         })
         line_obj = self.env['sale.order.line']
         current_product_pricelist = self.subscription_id.pricelist_id or self.subscription_id.partner_id.property_product_pricelist
-        if self.subscription_id and self.subscription_id._check_pricelist_item_exists(self.product_id):
-            line_obj.create({'order_id': self.subscription_id.id,
-                             'product_id': self.product_id.id,
-                             'name': self.product_id.name,
-                             'date': fields.Datetime.now(),
-                             'product_uom_qty': 1,
-                             'product_uom': self.product_id.uom_id.id,
-                             'price_unit': current_product_pricelist._get_product_price(self.product_id, 1),
-                             'qty_consumed': 0,
-                             'qty_cumulative': self.subscription_id.current_cumulative_quantity,
-                             'state_subscription': 'subscription_change'})
-        else:
-            line_obj.create({'order_id': self.subscription_id.id,
-                             'product_id': self.product_id.id,
-                             'name': self.product_id.name,
-                             'date': fields.Datetime.now(),
-                             'product_uom_qty': 1,
-                             'product_uom': self.product_id.uom_id.id,
-                             'price_unit': self.product_id.list_price,
-                             'qty_consumed': 0,
-                             'qty_cumulative': self.subscription_id.current_cumulative_quantity,
-                             'state_subscription': 'subscription_change'})
+
+        line_obj.create({'order_id': self.subscription_id.id,
+                         'product_id': self.product_id.id,
+                         'name': self.product_id.name,
+                         'date': fields.Datetime.now(),
+                         'product_uom_qty': 1,
+                         'product_uom': self.product_id.uom_id.id,
+                         'price_unit': current_product_pricelist._get_product_price(self.product_id, 1),
+                         'qty_consumed': 0,
+                         'qty_cumulative': self.subscription_id.current_cumulative_quantity,
+                         'state_subscription': 'subscription_change'})
+
         template = self.env.ref('maas_sale.packaging_upgrade_mail_template')
         self.operation_id.send_mail(template.with_context(stage='stage_02'))
         self.operation_id.command_ordered()

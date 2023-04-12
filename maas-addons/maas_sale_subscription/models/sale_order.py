@@ -77,7 +77,7 @@ class SaleSubscription(models.Model):
             return {}
         pricelist = self._get_pricelist()
         product = line.product_id
-        price = self._check_pricelist_item_exists(product) and pricelist._get_product_price(product, 1) or product.list_price
+        price = pricelist._get_product_price(product, 1)
         return {
             'order_id': self.id,
             'product_id': line.product_id.id,
@@ -85,8 +85,8 @@ class SaleSubscription(models.Model):
             'product_uom': line.product_id.uom_id.id,
             'product_uom_qty': 1,
             'price_unit': price,
-            'state_subscription': 'to_invoice',
-            'qty_cumulative': line.qty_cumulative
+            'state_subscription': 'invoiced',
+            'qty_cumulative': line.qty_cumulative,
         }
 
     def _prepare_start_subscription_line_values(self, product):
@@ -94,7 +94,7 @@ class SaleSubscription(models.Model):
         if not product:
             return {}
         pricelist = self._get_pricelist()
-        price = self._check_pricelist_item_exists(product) and pricelist._get_product_price(product, 1) or product.list_price
+        price = pricelist._get_product_price(product, 1)
         return {
             'order_id': self.id,
             'product_id': product.id,
@@ -102,50 +102,42 @@ class SaleSubscription(models.Model):
             'product_uom_qty': 1,
             'product_uom': product.uom_id.id,
             'price_unit': price,
-            'date': fields.Datetime.now()
+            'date': fields.Datetime.now(),
+            'qty_cumulative': 1,
         }
 
-    def _prepare_subscription_rent_line_values(self, product=False, item=False):
-        self.ensure_one()
-        if not product or not item:
-            return {}
-        pricelist = self._get_pricelist()
-        template = item.product_tmpl_id
-        price = self._check_pricelist_item_exists(product) and pricelist._get_product_price(template, 1) or template.list_price
-        return {
-            'order_id': self.id,
-            'product_id': product.id,
-            'name': product.name,
-            'product_uom_qty': 1,
-            'product_uom': product.uom_id.id,
-            'price_unit': price,
-            'date': fields.Datetime.now()
-        }
+    def _prepare_subscription_rent_line_values(self, product=False):
+        return self._prepare_start_subscription_line_values(product)
 
     @api.model
     def _manage_recurring_invoice_lines(self):
-        stage_obj = self.env['sale.order.stage']
+        """
+        Create line to invoice
+        :return:
+        """
         subscription_obj = self.env['sale.order']
         subscription_line_obj = self.env['sale.order.line']
-        stages_in_progress = stage_obj.search([('category', '=', 'progress')])
+
         subscriptions = subscription_obj.search([('is_subscription', '=', True), ('next_invoice_date', '=', fields.Date.today()),
-                                                 ('current_package_id', '!=', False), ('stage_id', 'in', stages_in_progress.ids)])
+                                                 ('current_package_id', '!=', False), ('stage_id.category', '=', 'progress')])
         date_now = fields.Datetime.now()
         _logger.info("Subscription CRON launched at %s" % date_now)
+
+        start_period = date_now.replace(hour=0, minute=0, second=0) + relativedelta(day=1)
+        end_period = date_now.replace(hour=23, minute=59, second=59, microsecond=999) + relativedelta(day=31)
+
         for subscription in subscriptions:
-            lines = subscription.order_line.filtered(lambda l: l.state_subscription == 'consumption').sorted(key='create_date',
-                                                                                                             reverse=True)
+            lines = subscription.order_line.filtered(
+                lambda l: l.state_subscription == 'consumption' and start_period <= l.date <= end_period
+            )
             if lines:
-                line = lines[0]
+                line = lines[-1:]
                 vals = subscription._prepare_line_to_invoice_values(line)
                 _logger.info(_('To invoice line added in subscription %s') % subscription.name)
                 new_line = subscription_line_obj.new(vals)
                 new_line._compute_amount()
                 subscription_line_obj.create(new_line._convert_to_write(new_line._cache))
                 self.env.cr.commit()
-            else:
-                # TODO: invoice basic package
-                pass
             product = subscription.package_id
             vals = subscription._prepare_start_subscription_line_values(product)
             vals.update({'date': date_now + relativedelta(months=1, day=1)})
@@ -169,12 +161,13 @@ class SaleSubscription(models.Model):
         self.ensure_one()
         items = self.get_subscription_rent_items()
         pricelist = self._get_pricelist()
-        product = self.current_package_id
         for item in items:
-            vals = self._prepare_start_subscription_line_values(product)
+            product = item.product_tmpl_id.product_variant_id
+            vals = self._prepare_subscription_rent_line_values(product)
             vals.update({
                 'state_subscription': 'subscription_rent',
-                'price_unit': pricelist._get_product_price(item.product_tmpl_id, 1)
+                'temporal_type': 'subscription',
+                'price_unit': pricelist._get_product_price(product, 1)
             })
             if not self._context.get('come_from_action_confirm'):
                 vals.update({
@@ -196,20 +189,35 @@ class SaleSubscription(models.Model):
             self.package_id = product
         return result
 
-    def _check_pricelist_item_exists(self, product):
-        self.ensure_one()
-        return product.product_tmpl_id in self.pricelist_id.item_ids.mapped('product_tmpl_id') or False
-
     def _get_invoiceable_lines(self, final=False):
+        """
+        Override to implement the choreograph invoice policy
+        :param final:
+        :return:
+        """
         invoiceable_lines = super(SaleSubscription, self)._get_invoiceable_lines(final)
-        if self.is_subscription:
-            return invoiceable_lines.filtered(lambda l: l.state_subscription == 'to_invoice')
+        invoiceable_lines = invoiceable_lines.filtered(lambda invl: not invl.order_id.is_subscription)
+
+        states = ['subscription_rent', 'start_subscription', 'consumption']
+
+        date = fields.Datetime.now()
+
+        start_period = date.replace(hour=0, minute=0, second=0) + relativedelta(day=1)
+        end_period = date.replace(hour=23, minute=59, second=59, microsecond=999) + relativedelta(day=31)
+
+        for subscription in self.filtered(lambda sub: sub.is_subscription):
+            lines = subscription.order_line.filtered(
+                lambda l: l.state_subscription in states and start_period <= l.date <= end_period
+            )
+            if lines:
+                invoiceable_lines |= lines[0]
+                invoiceable_lines |= lines[-1:]
+            else:
+                invoiceable_lines |= lines[0]
+                invoiceable_lines |= lines[1]
         return invoiceable_lines
 
     @api.model
     def _cron_recurring_create_invoice(self):
         self._manage_recurring_invoice_lines()
-        moves = super(SaleSubscription, self)._cron_recurring_create_invoice()
-        invoiceable_lines = moves.mapped('line_ids').mapped('sale_line_ids')
-        invoiceable_lines.write({'state_subscription': 'invoiced'})
-        return True
+        return super(SaleSubscription, self)._cron_recurring_create_invoice()
