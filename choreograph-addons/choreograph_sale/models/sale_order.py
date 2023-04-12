@@ -111,6 +111,25 @@ class SaleOrder(models.Model):
     optout_link = fields.Text('Email Optout Link')
     routing_base = fields.Char('Email Routing Base')
     project_task_campaign_ids = fields.One2many('project.task.campaign', 'order_id', 'Email Campaign')
+    state_specific = fields.Selection([
+        ('forecast', 'Forecast'),
+        ('lead', 'Lead'),
+        ('prospecting', 'Prospecting'),
+        ('qualif', 'Qualif'),
+        ('draft_native', 'Draft'),
+    ], default='forecast', string='State')
+
+    def action_lead(self):
+        self.write({'state_specific': 'lead'})
+
+    def action_prospecting(self):
+        self.write({'state_specific': 'prospecting'})
+
+    def action_qualif(self):
+        self.write({'state_specific': 'qualif'})
+
+    def action_draft_native(self):
+        self.write({'state_specific': 'draft_native'})
 
     @api.model
     def default_get(self, fields_list):
@@ -194,4 +213,5 @@ class SaleOrder(models.Model):
 
     @api.depends('data_conservation_id')
     def compute_show_other_conservation_duration(self):
-        self.show_other_conservation_duration = self.data_conservation_id.id == self.env.ref('choreograph_sale.sale_data_conservation_other').id
+        self.show_other_conservation_duration = self.data_conservation_id.id == self.env.ref(
+            'choreograph_sale.sale_data_conservation_other').id
