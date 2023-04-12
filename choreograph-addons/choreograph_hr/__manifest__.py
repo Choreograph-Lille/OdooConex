@@ -11,12 +11,14 @@
     'website': 'https://arkeup.com',
     'depends': [
         'hr',
+        'hr_contract',
         'choreograph_base'
     ],
     'data': [
         # data
         # security
         # views
+        'views/hr_employee.xml'
     ],
     'assets': {
         'web._assets_primary_variables': [],
