@@ -38,12 +38,12 @@
                         options="{'color_field': 'color', 'no_create_edit': True}"
                         context="{'filter_by_partner_catalogue': partner_id}"
                     />
-                    <field name="show_other_conservation_duration" invisible="1"/>
+                    <field name="show_other_conservation_duration" invisible="1" />
                     <field name="data_conservation_id"
                         attrs="{'invisible': [('recurrence_id', '!=', False)]}"
                         options="{'no_open': True, 'no_create': True}" />
                     <field name="other_conservation_duration"
-                        attrs="{'invisible': [('show_other_conservation_duration', '=', False)]}"/>
+                        attrs="{'invisible': [('show_other_conservation_duration', '=', False)]}" />
                     <field name="related_base"
                         attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
                 </field>
@@ -66,9 +66,9 @@
                     position="after">
                     <field name="retribution_cost"
                         attrs="{'column_invisible': [('parent.is_subscription','=',True)]}"
-                        optional="show" 
+                        optional="show"
                         string="Retribution"
-                        />
+                    />
                 </xpath>
 
                 <notebook position="inside">
@@ -172,6 +172,31 @@
                 <group name="sale_shipping" position="attributes">
                     <attribute name="invisible">1</attribute>
                 </group>
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('recurrence_id', '=',False),
+                        ('state_specific','!=','draft_native')]}
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="state_specific"
+                        widget="statusbar"
+                        statusbar_visible="forecast,lead,prospecting,qualif"
+                        attrs="{'invisible': ['|',('recurrence_id','!=', False),('state_specific','=','draft_native')]}" />
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button name="action_lead"
+                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','forecast')]}"
+                        string="Lead" type="object" />
+                    <button name="action_prospecting"
+                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','lead')]}"
+                        string="Propecting" type="object" />
+                    <button name="action_qualif"
+                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','prospecting')]}"
+                        string="Qualif" type="object" />
+                    <button name="action_draft_native"
+                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','qualif')]}"
+                        string="Quotation" type="object" />
+                </xpath>
             </field>
         </record>
 
