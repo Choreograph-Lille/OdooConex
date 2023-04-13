@@ -37,7 +37,7 @@ class ProjectTask(models.Model):
     witness_comment = fields.Text(related='sale_order_id.witness_comment')
     file_name = fields.Char()
     file_quantity = fields.Char()
-    volume = fields.Integer(related='sale_order_id.quantity_to_deliver')
+    volume = fields.Integer()
     dedup_title_number = fields.Char()
     family_conex = fields.Boolean()
 
