@@ -116,8 +116,17 @@ class SaleOrder(models.Model):
         ('lead', 'Lead'),
         ('prospecting', 'Prospecting'),
         ('qualif', 'Qualif'),
-        ('draft_native', 'Draft'),
+        ('draft', 'Quotation'),
+        ('sent', 'Quotation Sent'),
+        ('sale', 'Sales Order'),
+        ('done', 'Locked'),
+        ('cancel', 'Cancelled'),
     ], default='forecast', string='State')
+
+    def write(self, values):
+        if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
+            values['state_specific'] = values['state']
+        return super().write(values)
 
     def action_lead(self):
         self.write({'state_specific': 'lead'})
@@ -129,9 +138,9 @@ class SaleOrder(models.Model):
         self.write({'state_specific': 'qualif'})
 
     def action_draft_native(self):
-        self.write({'state_specific': 'draft_native'})
+        self.write({'state_specific': 'draft'})
 
-    @api.model
+    @ api.model
     def default_get(self, fields_list):
         res = super(SaleOrder, self).default_get(fields_list)
         if not res.get('data_conservation_id') and 'data_conservation_id' not in res:
@@ -140,7 +149,7 @@ class SaleOrder(models.Model):
                                                      raise_if_not_found=False).id})
         return res
 
-    @api.depends('order_line')
+    @ api.depends('order_line')
     def _compute_total_retribution(self):
         for rec in self:
             rec.total_retribution = sum(rec.order_line.mapped('retribution_cost'))

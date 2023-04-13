@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-04 14:10+0000\n"
-"PO-Revision-Date: 2023-04-04 14:10+0000\n"
+"POT-Creation-Date: 2023-04-13 07:36+0000\n"
+"PO-Revision-Date: 2023-04-13 07:36+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -256,6 +256,11 @@ msgstr "Nom campagne"
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
 msgid "Cancel"
 msgstr "Annuler"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__cancel
+msgid "Cancelled"
+msgstr "Annulé"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__catalogue_ids
@@ -653,6 +658,17 @@ msgid "Last Updated on"
 msgstr "Date de mis à jour"
 
 #. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__lead
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Lead"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__done
+msgid "Locked"
+msgstr "Bloqué"
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__send_with__mft
 msgid "MFT"
 msgstr ""
@@ -891,6 +907,17 @@ msgid "Quotas"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__draft
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Quotation"
+msgstr "Devis"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__sent
+msgid "Quotation Sent"
+msgstr "Devis envoyé"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__receiver
 msgid "Receiver"
 msgstr "A destination de"
@@ -1001,6 +1028,7 @@ msgstr "Rapport d'analyse des ventes"
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_order
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__sale
 msgid "Sales Order"
 msgstr "Bon de commande"
 
