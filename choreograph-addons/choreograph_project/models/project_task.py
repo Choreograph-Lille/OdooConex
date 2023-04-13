@@ -53,3 +53,10 @@ class ProjectTask(models.Model):
                 'stage_id': self.env.ref('choreograph_project.project_task_type_draft').id,
             })
         return super().create(values)
+
+    @api.returns('mail.message', lambda value: value.id)
+    def message_post(self, **kwargs):
+        message = super(ProjectTask, self).message_post(**kwargs)
+        if self.project_id.type_of_project == 'operation':
+            message.copy({'res_id': self.project_id.id, 'model': 'project.project'})
+        return message
