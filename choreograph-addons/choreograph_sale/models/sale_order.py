@@ -2,6 +2,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+from dateutil.relativedelta import relativedelta
 from .operation_condition import SUBTYPE
 
 TASK_NAME = {
@@ -181,6 +182,9 @@ class SaleOrder(models.Model):
         if self.commitment_date:
             self.tasks_ids.write({
                 'date_deadline': self.commitment_date.date()
+            })
+            self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
+                'date_deadline': self.commitment_date - relativedelta(days=2),
             })
         self.write({'show_operation_generation_button': False})
 

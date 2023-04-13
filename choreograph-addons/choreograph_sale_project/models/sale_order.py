@@ -5,6 +5,7 @@ from pytz import timezone, utc
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from dateutil.relativedelta import relativedelta
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STAGE
 
@@ -253,8 +254,11 @@ class SaleOrder(models.Model):
             if vals.get('commitment_date'):
                 tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
                 date = utc.localize(rec.commitment_date).astimezone(tz)
-                rec.tasks_ids.filtered(lambda t: t.task_number in ['80', '65', '40', '85', '90', '45', '50', '25', '30', '35']).write({
+                rec.tasks_ids.filtered(lambda t: t.task_number in ['65', '40', '85', '90', '45', '50', '25', '30', '35']).write({
                     'date_deadline': date,
+                })
+                rec.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
+                    'date_deadline': date - relativedelta(days=2),
                 })
             if vals.get('potential_return_date') and rec.potential_return_task_id:
                 rec.potential_return_task_id.date_deadline = rec.potential_return_date
