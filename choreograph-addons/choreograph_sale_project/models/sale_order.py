@@ -7,7 +7,7 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from dateutil.relativedelta import relativedelta
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
-from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STAGE
+from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STAGE, WAITING_FILE_TASK_STAGE
 
 PROVIDER_DELIVERY_NUMBER = '75'
 SMS_TASK_NUMBER = '50'
@@ -348,4 +348,9 @@ class SaleOrder(models.Model):
         super().action_create_task_from_condition()
         project_id = self.project_ids[0] if self.project_ids else False
         if project_id and project_id.stage_id == self.env.ref('choreograph_project.planning_project_stage_planified'):
-            project_id._hook_stage_planified()
+            task_draft_stage_id = self.env.ref('choreograph_project.project_task_type_draft')
+            for condition_id in self.operation_condition_ids.filtered(lambda item: item.task_id.stage_id == task_draft_stage_id):
+                if condition_id.task_id.task_number in ('5', '10', '15'):
+                    project_id._update_task_stage(condition_id.task_id.task_number, WAITING_FILE_TASK_STAGE)
+                elif condition_id.task_id.task_number in ('20', '25', '35'):
+                    project_id._update_task_stage(condition_id.task_id.task_number, TODO_TASK_STAGE)
