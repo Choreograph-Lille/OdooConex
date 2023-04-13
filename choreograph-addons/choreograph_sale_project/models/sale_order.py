@@ -343,3 +343,9 @@ class SaleOrder(models.Model):
                 'operation_email_process': True,
             },
         }
+
+    def action_create_task_from_condition(self):
+        super().action_create_task_from_condition()
+        project_id = self.project_ids[0] if self.project_ids else False
+        if project_id and project_id.stage_id == self.env.ref('choreograph_project.planning_project_stage_planified'):
+            project_id._hook_stage_planified()
