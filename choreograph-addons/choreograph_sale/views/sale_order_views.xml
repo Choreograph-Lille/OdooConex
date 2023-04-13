@@ -173,15 +173,14 @@
                     <attribute name="invisible">1</attribute>
                 </group>
                 <xpath expr="//field[@name='state']" position="attributes">
-                    <attribute name="attrs">{'invisible': [('recurrence_id', '=',False),
-                        ('state_specific','!=','draft_native')]}
+                    <attribute name="attrs">{'invisible': [('recurrence_id', '=',False)]}
                     </attribute>
                 </xpath>
                 <xpath expr="//field[@name='state']" position="after">
                     <field name="state_specific"
                         widget="statusbar"
-                        statusbar_visible="forecast,lead,prospecting,qualif"
-                        attrs="{'invisible': ['|',('recurrence_id','!=', False),('state_specific','=','draft_native')]}" />
+                        statusbar_visible="forecast,lead,prospecting,qualif,draft,sent,sale"
+                        attrs="{'invisible': [('recurrence_id','!=', False)]}" />
                 </xpath>
                 <xpath expr="//header" position="inside">
                     <button name="action_lead"

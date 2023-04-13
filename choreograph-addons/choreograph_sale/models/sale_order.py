@@ -116,8 +116,17 @@ class SaleOrder(models.Model):
         ('lead', 'Lead'),
         ('prospecting', 'Prospecting'),
         ('qualif', 'Qualif'),
-        ('draft_native', 'Draft'),
+        ('draft', 'Quotation'),
+        ('sent', 'Quotation Sent'),
+        ('sale', 'Sales Order'),
+        ('done', 'Locked'),
+        ('cancel', 'Cancelled'),
     ], default='forecast', string='State')
+
+    def write(self, values):
+        if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
+            values['state_specific'] = values['state']
+        return super().write(values)
 
     def action_lead(self):
         self.write({'state_specific': 'lead'})
@@ -129,7 +138,7 @@ class SaleOrder(models.Model):
         self.write({'state_specific': 'qualif'})
 
     def action_draft_native(self):
-        self.write({'state_specific': 'draft_native'})
+        self.write({'state_specific': 'draft'})
 
     @api.model
     def default_get(self, fields_list):
