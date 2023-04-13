@@ -140,7 +140,7 @@ class SaleOrder(models.Model):
     def action_draft_native(self):
         self.write({'state_specific': 'draft'})
 
-    @ api.model
+    @api.model
     def default_get(self, fields_list):
         res = super(SaleOrder, self).default_get(fields_list)
         if not res.get('data_conservation_id') and 'data_conservation_id' not in res:
@@ -149,7 +149,7 @@ class SaleOrder(models.Model):
                                                      raise_if_not_found=False).id})
         return res
 
-    @ api.depends('order_line')
+    @api.depends('order_line')
     def _compute_total_retribution(self):
         for rec in self:
             rec.total_retribution = sum(rec.order_line.mapped('retribution_cost'))
