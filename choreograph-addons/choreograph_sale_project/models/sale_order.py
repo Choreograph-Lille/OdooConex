@@ -247,6 +247,7 @@ class SaleOrder(models.Model):
                 })
                 order_id.archive_required_tasks()
                 order_id.compute_task_operations()
+                order_id._manage_task_assignation()
         return order_id
 
     def _update_date_deadline(self, vals):
