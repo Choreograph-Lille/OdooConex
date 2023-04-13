@@ -115,7 +115,7 @@ class ProjectProject(models.Model):
             'date_deadline': order_id.commitment_date
         })
         self.task_ids.filtered(lambda t: t.task_number in ['80']).write({
-            'date_deadline': order_id.commitment_date - relativedelta(days=2),
+            'date_deadline': order_id.commitment_date and order_id.commitment_date - relativedelta(days=2) or False,
         })
 
     def write(self, vals):
