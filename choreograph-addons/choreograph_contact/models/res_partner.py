@@ -8,7 +8,7 @@ class ResPartner(models.Model):
 
     role_ids = fields.One2many("res.partner.role", "partner_id", "Roles")
     country_base = fields.Selection([("uk", "UK"), ("fr", "FR")], "Country Base", default="fr", tracking=True)
-    category_name = fields.Char(tracking=True)
+    category_name = fields.Char("Category Name", tracking=True)
     last_revival_date = fields.Date("Last Revival Date", tracking=True)
     last_transaction_date = fields.Date("Last Transaction Date", tracking=True)
     data_destruction_date = fields.Date("Data Destruction Date", tracking=True)
