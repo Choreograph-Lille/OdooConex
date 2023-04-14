@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-28 07:37+0000\n"
-"PO-Revision-Date: 2023-03-28 07:37+0000\n"
+"POT-Creation-Date: 2023-04-14 12:27+0000\n"
+"PO-Revision-Date: 2023-04-14 12:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -256,6 +256,11 @@ msgstr "Nom campagne"
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
 msgid "Cancel"
 msgstr "Annuler"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__cancel
+msgid "Cancelled"
+msgstr "Annulé"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__catalogue_ids
@@ -606,6 +611,22 @@ msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__is_preheader_available_text
+msgid "If not, indicate where to find it"
+msgstr "Si non, indiquer où le trouver"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__ab_test_text
+msgid "If so, on what?"
+msgstr "Si oui, sur quoi?"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_personalization_text
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sms_personalization_text
+msgid "If yes specify"
+msgstr "Si oui préciser"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__note
 msgid "Information"
 msgstr ""
@@ -651,6 +672,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__write_date
 msgid "Last Updated on"
 msgstr "Date de mis à jour"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__lead
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Lead"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__done
+msgid "Locked"
+msgstr "Bloqué"
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__send_with__mft
@@ -816,7 +848,7 @@ msgid "PO Number"
 msgstr "N° PO"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__personalization
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sms_personalization
 msgid "Personalization"
 msgstr "Personnalisation"
 
@@ -832,8 +864,9 @@ msgstr "Variable Postale"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__postal_address
-msgid "Postal address (DSP)"
-msgstr "Adresse Postale (DSP)"
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.retribution_base_view_form
+msgid "Postal address"
+msgstr "Adresse Postale"
 
 #. module: choreograph_sale
 #: code:addons/choreograph_sale/models/sale_order.py:0
@@ -866,10 +899,13 @@ msgstr "Info presta"
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_product_template
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__product_template_id
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.retribution_base_view_form
 msgid "Product"
 msgstr "Article"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Project Name"
@@ -885,6 +921,17 @@ msgstr "Modèle de projet"
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.retribution_base_view_form
 msgid "Quotas"
 msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__draft
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Quotation"
+msgstr "Devis"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__sent
+msgid "Quotation Sent"
+msgstr "Devis envoyé"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__receiver
@@ -997,6 +1044,7 @@ msgstr "Rapport d'analyse des ventes"
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_order
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__sale
 msgid "Sales Order"
 msgstr "Bon de commande"
 

@@ -139,6 +139,7 @@
                     <field name="segment_ids"
                            attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['70', '75', '85', '80', '20', '25', '30'])]}">
                         <tree>
+                            <field name="segment_number"/>
                             <field name="name"/>
                             <field name="ranking"/>
                             <field name="quantity"/>

@@ -5,268 +5,352 @@
         <record id="operation_created_mail_template" model="mail.template">
             <field name="name">Operation Created Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${object.get_recipients('operation_created') or 'n/a'}</field>
-            <field name="subject">Nouvelle opération créée.</field>
-            <field name="model_id" ref="model_sale_operation" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">fr_FR</field>
-            <field name="body_html">
-        <![CDATA[
-          <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-            <p>Hello,</p>
-            <p>
-              A new operation with code ${object.number} has just been created by ${user.name} at ${object.partner_id.name} account.
-            <p/>
-            <p>The MyModel team.</p>
-          </div>
-        ]]>
-      </field>
+            <field name="email_to">{{ object.get_recipients('operation_created') }}</field>
+            <field name="subject">A new operation is created.</field>
+            <field name="model_id" ref="model_sale_operation"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>Hello,</p>
+                    <p>
+                        A new operation with code
+                        <t t-out="object.number"/>
+                        has just been created by
+                        <t t-out="user.name"/>
+                        at
+                        <t t-out="object.partner_id.name"/>
+                        account.
+                    </p>
+                    <p>The MyModel team.</p>
+                </div>
+
+            </field>
         </record>
 
         <record id="operation_modeled_mail_template" model="mail.template">
             <field name="name">Operation Modeled Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${object.get_recipients('operation_modeled') or 'n/a'}</field>
-            <field name="subject">Opération modélisée avec succès</field>
-            <field name="model_id" ref="model_sale_operation" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">fr_FR</field>
-            <field name="body_html">
-        <![CDATA[
-          <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-            <p>Hello,</p>
-            <p>
-              The operation number <strong>${object.number}</strong> is modeled, your Power BI report is now available.
-              <ul>
-                <li>Campaign: <strong>${object.campaign_id.name}</strong></li>
-                <li>Action: <strong>${object.action_id.name or 'n/a'}</strong></li>
-                <li>Operation: <strong>${object.name}</strong></li>
-              </ul>
-            <p/>
-            <p>
-              You can access the platform: &nbsp;
-              <a href="${object.get_login_url()}">Click here.</a>
-            </p>
-            <p>The MyModel team.</p>
-          </div>
-        ]]>
-      </field>
+            <field name="email_to">{{ object.get_recipients('operation_modeled') }}</field>
+            <field name="subject">Operation successfully modeled.</field>
+            <field name="model_id" ref="model_sale_operation"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>Hello,</p>
+                    <p>
+                        The operation number
+                        <strong>
+                            <t t-out="object.number"/>
+                        </strong>
+                        is modeled, your Power BI report is now available.
+                        <ul>
+                            <li>Campaign:
+                                <strong>
+                                    <t t-out="object.campaign_id.name"/>
+                                </strong>
+                            </li>
+                            <li>Action:
+                                <strong>
+                                    <t t-out="object.action_id.name"/>
+                                </strong>
+                            </li>
+                            <li>Operation:
+                                <strong>
+                                    <t t-out="object.name"/>
+                                </strong>
+                            </li>
+                        </ul>
+                    </p>
+                    <p>
+                        You can access the platform:
+                        <a href="{{ object.get_login_url() }}">Click here.</a>
+                    </p>
+                    <p>The MyModel team.</p>
+                </div>
+
+            </field>
         </record>
 
         <record id="operation_ordered_mail_template" model="mail.template">
             <field name="name">Operation Ordered Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${object.operation_id.get_recipients('operation_ordered') or
-                'n/a'}</field>
-            <field name="subject">Opération commandée</field>
-            <field name="model_id" ref="model_sale_operation_child" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">fr_FR</field>
-            <field name="body_html">
-        <![CDATA[
-          <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-            <p>Hello,</p>
-            <p>
-              The operation <strong>${object.name}</strong> has been ordered by ${user.name}.
-            <p/>
-            <p>Regards.</p>
-          </div>
-        ]]>
-      </field>
+            <field name="email_to">{{ object.operation_id.get_recipients('operation_ordered') }}</field>
+            <field name="subject">Operation ordered.</field>
+            <field name="model_id" ref="model_sale_operation_child"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>Hello,</p>
+                    <p>
+                        The operation
+                        <strong>
+                            <t t-out="object.name"/>
+                        </strong>
+                        has been ordered by<t t-out="user.name"/>.
+                    </p>
+                    <p>Regards.</p>
+                </div>
+
+            </field>
         </record>
 
         <record id="operation_available_mail_template" model="mail.template">
             <field name="name">Operation Available Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${object.operation_id.get_recipients('operation_available') or
-                'n/a'}</field>
-            <field name="subject">Opération disponible au téléchargement</field>
-            <field name="model_id" ref="model_sale_operation_child" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">fr_FR</field>
-            <field name="body_html">
-        <![CDATA[
-          <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-            <p>Hello,</p>
-            <p>
-              The operation number <strong>${object.name}</strong> is complete, your file is available for download.
-              <ul>
-                <li>Campaign: <strong>${object.operation_id.campaign_id.name}</strong></li>
-                <li>Action: <strong>${object.operation_id.action_id.name or 'n/a'}</strong> </li>
-                <li>Operation: <strong>${object.name}</strong></li>
-                <li>Quantity: <strong>${object.qty_extracted}</strong> </li>
-              </ul>
-            <p/>
-            <p>
-              Depending on the delivery method you have chosen, you can :
-              <ul>
-                <li style="list-style-type:'-'">Download it on your platform: <a href="${object.operation_id.get_login_url()}">Click here.</a> It remains available for 30 days</li>
-                <li style="list-style-type:'-'">Recover it on your SFTP. It remains available for 8 days.</li>
-              </ul>
-            </p>
-            <p>The MyModel team.</p>
-          </div>
-        ]]>
-      </field>
+            <field name="email_to">{{ object.operation_id.get_recipients('operation_available') }}
+            </field>
+            <field name="subject">Operation available for download</field>
+            <field name="model_id" ref="model_sale_operation_child"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF;">
+                    <p>Hello,</p>
+                    <p>
+                        The operation number
+                        <strong>
+                            <t t-out="object.name"/>
+                        </strong>
+                        is complete, your file is available for download.
+                        <ul>
+                            <li>Campaign:
+                                <strong>
+                                    <t t-out="object.operation_id.campaign_id.name"/>
+                                </strong>
+                            </li>
+                            <li>Action:
+                                <strong>
+                                    <t t-out="object.operation_id.action_id.name"/>
+                                </strong>
+                            </li>
+                            <li>Operation:
+                                <strong>
+                                    <t t-out="object.name"/>
+                                </strong>
+                            </li>
+                            <li>Quantity:
+                                <strong>
+                                    <t t-out="object.qty_extracted"/>
+                                </strong>
+                            </li>
+                        </ul>
+                    </p>
+                    <p>
+                        Depending on the delivery method you have chosen, you can :
+                        <ul>
+                            <li style="list-style-type:'-'">Download it on your platform:
+                                <a href="{{ object.operation_id.get_login_url() }}">
+                                    Click here.
+                                </a>
+                                It remains available for 30 days
+                            </li>
+                            <li style="list-style-type:'-'">Recover it on your SFTP. It remains available for 8 days.</li>
+                        </ul>
+                    </p>
+                    <p>The MyModel team.</p>
+                </div>
+
+            </field>
         </record>
 
         <record id="operation_downloaded_mail_template" model="mail.template">
             <field name="name">Operation Downloaded Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${'n/a'}</field>
-            <field name="subject">Opération télechargée</field>
-            <field name="model_id" ref="model_sale_operation_child" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">fr_FR</field>
-            <field name="body_html">
-        <![CDATA[
-          <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-            <p>Hello,</p>
-            <p>
-              The operation <strong>${object.name}</strong> has been downloaded by ${user.name}.
-            <p/>
-            <p>Regards.</p>
-          </div>
-        ]]>
-      </field>
+            <field name="email_to"/>
+            <field name="subject">Operation downloaded</field>
+            <field name="model_id" ref="model_sale_operation_child"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>Hello,</p>
+                    <p>
+                        The operation
+                        <strong>
+                            <t t-out="object.name"/>
+                        </strong>
+                        has been downloaded by<t t-out="user.name"/>.
+                    </p>
+                    <p>Regards.</p>
+                </div>
+
+            </field>
         </record>
 
         <record id="packaging_upgrade_mail_template" model="mail.template">
             <field name="name">Package Upgrade Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${object.operation_id.get_recipients('packaging_upgrade') or
-                'n/a'}</field>
-            <field name="subject">Changement de palier.</field>
-            <field name="model_id" ref="model_sale_operation_child" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">${object.partner_id.lang}</field>
-            <field name="body_html">
-        <![CDATA[
-          <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-            <p>Hello,</p>
-            <p>
-              We confirm the upgrade of your subscription to the next level. You can now connect to the platform to finalize your extraction.
-            </p>
-            <p>
-              You can access the platform: &nbsp;
-              <a href="${object.operation_id.get_login_url()}">Click here.</a>
-            </p>
-            <p>
-              We thank you in advance!
-            <p/>
-            <p>The MyModel team.</p>
-          </div>
-        ]]>
-      </field>
+            <field name="email_to">{{ object.operation_id.get_recipients('packaging_upgrade') }}</field>
+            <field name="subject">Change of level.</field>
+            <field name="model_id" ref="model_sale_operation_child"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>Hello,</p>
+                    <p>
+                        We confirm the upgrade of your subscription to the next level. You can now connect to the platform to finalize your
+                        extraction.
+                    </p>
+                    <p>
+                        You can access the platform:
+                        <a href="{{ object.operation_id.get_login_url() }}">Click here.</a>
+                    </p>
+                    <p>
+                        We thank you in advance!
+                    </p>
+                    <p>The MyModel team.</p>
+                </div>
+
+            </field>
         </record>
 
         <record id="operation_recall_download_file_mail_template" model="mail.template">
             <field name="name">Operation Recall Download File Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${object.operation_id.get_recipients('operation_recall_download_file')
-                or 'n/a'}</field>
-            <field name="subject">Relance téléchargement fichier</field>
-            <field name="model_id" ref="model_sale_operation_child" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">fr_FR</field>
-            <field name="body_html">
-        <![CDATA[
-           <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-             <p>Hello,</p>
-             <p>
-               Your file concerning your operation <strong>${object.name}</strong> is still available on your portal.
-             </p>
-             <p>
-              You have 5 days left to download your file.
-             <p/>
-             <p>
-                <ul>
-                    <li>Campign : ${object.operation_id.campaign_id.name}</li>
-                    %if object.action_id:
-                        <li>Action : ${object.operation_id.action_id.name or ''}</li>
-                    %endif
-                    <li>Operation : ${object.name}</li>
-                    <li>Quantity : ${object.qty_extracted}</li>
-                </ul>
-             </p>
-             <p>
-                You can access the platform: &nbsp;
-                <a href="${object.operation_id.get_login_url()}">Click here.</a>
-              </p>
-             <p>The MyModel team.</p>
-           </div>
-        ]]>
-      </field>
+            <field name="email_to">{{ object.operation_id.get_recipients('operation_recall_download_file') }}</field>
+            <field name="subject">File download restart</field>
+            <field name="model_id" ref="model_sale_operation_child"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>Hello,</p>
+                    <p>
+                        Your file concerning your operation
+                        <strong>
+                            <t t-out="object.name"/>
+                        </strong>
+                        is still available on your portal.
+                    </p>
+                    <p>
+                        You have 5 days left to download your file.
+                    </p>
+                    <p>
+                        <ul>
+                            <li>Campaign :
+                                <t t-out="object.operation_id.campaign_id.name"/>
+                            </li>
+                            % if object.action_id:
+                            <li>Action :
+                                <t t-out="object.operation_id.action_id.name"/>
+                            </li>
+                            % endif
+                            <li>Operation :
+                                <t t-out="object.name"/>
+                            </li>
+                            <li>Quantity :
+                                <t t-out="object.qty_extracted"/>
+                            </li>
+                        </ul>
+                    </p>
+                    <p>
+                        You can access the platform:
+                        <a href="{{ object.operation_id.get_login_url() }}">Click here.</a>
+                    </p>
+                    <p>The MyModel team.</p>
+                </div>
+
+            </field>
         </record>
 
         <record id="operation_canceled_mail_template" model="mail.template">
             <field name="name">Operation Canceled Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${object.operation_id.get_recipients('operation_canceled') or
-                'n/a'}</field>
-            <field name="subject">Opération annulée</field>
-            <field name="model_id" ref="model_sale_operation_child" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">fr_FR</field>
-            <field name="body_html">
-        <![CDATA[
-          <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-            <p>Hello,</p>
-            <p>
-              The operation <strong>${object.name}</strong> has been canceled by ${user.name}.
-            <p/>
-            <p>Regards.</p>
-          </div>
-        ]]>
-      </field>
+            <field name="email_to">{{ object.operation_id.get_recipients('operation_canceled') }}</field>
+            <field name="subject">Operation canceled</field>
+            <field name="model_id" ref="model_sale_operation_child"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>Hello,</p>
+                    <p>
+                        The operation
+                        <strong>
+                            <t t-out="object.name"/>
+                        </strong>
+                        has been canceled by<t t-out="user.name"/>.
+                    </p>
+                    <p>Regards.</p>
+                </div>
+
+            </field>
         </record>
 
         <record id="operation_request_upgrade_package_mail_template" model="mail.template">
             <field name="name">Operation Request Upgrade Package Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${object.operation_id.get_recipients('request_upgrade_package')
-                or 'n/a'}</field>
-            <field name="subject">Demande de changement de palier.</field>
-            <field name="model_id" ref="model_sale_operation_child" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">${object.partner_id.lang}</field>
-            <field name="body_html">
-        <![CDATA[
-          <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-            <p>Hello,</p>
-            <p>The modeling of your operation <strong>${object.name}</strong> is complete.</p>
-            <p>
-              You want to be able to download <strong>${object.qty_extracted}</strong> credentials, but the current balance is insufficient.
-            </p>
-            <p>We invite you to connect to the platform to validate your agreement on the next step.</p>
-            <p>
-              You can access the platform: &nbsp;
-              <a href="${object.operation_id.get_login_url()}">Click here.</a>
-            </p>
-            <p>We thank you in advance!</p>
-            <p>The MyModel team.</p>
-          </div>
-        ]]>
-      </field>
+            <field name="email_to">{{ object.operation_id.get_recipients('request_upgrade_package') }}</field>
+            <field name="subject">Level change request.</field>
+            <field name="model_id" ref="model_sale_operation_child"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>Hello,</p>
+                    <p>The modeling of your operation
+                        <strong>
+                            <t t-out="object.name"/>
+                        </strong>
+                        is complete.
+                    </p>
+                    <p>
+                        You want to be able to download
+                        <strong>
+                            <t t-out="object.qty_extracted"/>
+                        </strong>
+                        credentials, but the current balance is insufficient.
+                    </p>
+                    <p>We invite you to connect to the platform to validate your agreement on the next step.</p>
+                    <p>
+                        You can access the platform:
+                        <a href="{{ object.operation_id.get_login_url() }}">Click here.</a>
+                    </p>
+                    <p>We thank you in advance!</p>
+                    <p>The MyModel team.</p>
+                </div>
+
+            </field>
         </record>
 
         <record id="operation_deleted_mail_template" model="mail.template">
             <field name="name">Operation deleted Mail Template</field>
             <field name="email_from">mymodel@conexancemd.com</field>
-            <field name="email_to">${object.get_recipients('operation_deleted') or 'n/a'}</field>
-            <field name="subject">Operation supprimée.</field>
-            <field name="model_id" ref="model_sale_operation" />
-            <field name="auto_delete" eval="False" />
-            <field name="lang">${object.partner_id.lang}</field>
-            <field name="body_html">
-        <![CDATA[
-          <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
-            <p>Hello,</p>
-            <p>The operation <strong>${object.number}</strong>-<strong>${object.name}</strong> is deleted by ${user.name}.</p>
-            <p>The MyModel team.</p>
-          </div>
-        ]]>
-      </field>
+            <field name="email_to">{{ object.get_recipients('operation_deleted') }}</field>
+            <field name="subject">Operation deleted.</field>
+            <field name="model_id" ref="model_sale_operation"/>
+            <field name="auto_delete" eval="False"/>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="body_html" type="html">
+
+                <div style="font-family: 'Lucica Grande', Ubuntu, Arial, Verdana, sans-serif; font-size: 12px; color: rgb(34, 34, 34); background-color: #FFF; ">
+                    <p>Hello,</p>
+                    <p>The operation
+                        <strong>
+                            <t t-out="object.number"/>
+                        </strong>
+                        -
+                        <strong>
+                            <t t-out="object.name"/>
+                        </strong>
+                        is deleted by<t t-out="user.name"/>.
+                    </p>
+                    <p>The MyModel team.</p>
+                </div>
+
+            </field>
         </record>
 
     </data>

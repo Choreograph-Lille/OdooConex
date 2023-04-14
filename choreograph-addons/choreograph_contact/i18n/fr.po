@@ -6,14 +6,101 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-17 07:21+0000\n"
-"PO-Revision-Date: 2023-02-17 07:21+0000\n"
+"POT-Creation-Date: 2023-04-14 12:09+0000\n"
+"PO-Revision-Date: 2023-04-14 12:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: choreograph_contact
+#. odoo-python
+#: code:addons/choreograph_contact/models/res_partner.py:0
+#, python-format
+msgid ""
+"\n"
+"                <ul>\n"
+"                    <li><strong>Catalogues: </strong>\n"
+"                    <ul>\n"
+"                        <li><strong>Previous values: </strong>%s\n"
+"                        <li><strong>New values: </strong>%s\n"
+"                    </ul>\n"
+"                </ul>\n"
+"            "
+msgstr ""
+"\n"
+"                <ul>\n"
+"                    <li><strong>Catalogues: </strong>\n"
+"                    <ul>\n"
+"                        <li><strong>Anciennes valeurs: </strong>%s\n"
+"                        <li><strong>Nouvelles valeurs: </strong>%s\n"
+"                    </ul>\n"
+"                </ul>\n"
+"            "
+
+#. module: choreograph_contact
+#. odoo-python
+#: code:addons/choreograph_contact/models/res_partner.py:0
+#, python-format
+msgid ""
+"\n"
+"                <ul>\n"
+"                    <li><strong>Categories: </strong>\n"
+"                    <ul>\n"
+"                        <li><strong>Previous values: </strong>%s\n"
+"                        <li><strong>New values: </strong>%s\n"
+"                    </ul>\n"
+"                </ul>\n"
+"            "
+msgstr ""
+"\n"
+"                <ul>\n"
+"                    <li><strong>Étiquettes: </strong>\n"
+"                    <ul>\n"
+"                        <li><strong>Anciennes valeurs: </strong>%s\n"
+"                        <li><strong>Nouvelles valeurs: </strong>%s\n"
+"                    </ul>\n"
+"                </ul>\n"
+"            "
+
+#. module: choreograph_contact
+#. odoo-python
+#: code:addons/choreograph_contact/models/res_partner.py:0
+#, python-format
+msgid ""
+"\n"
+"                <ul>\n"
+"                    <li><strong>Roles: </strong>\n"
+"                    <ul>\n"
+"                        <li><strong>Previous values: </strong> \n"
+"                            <ul>\n"
+"                                %s\n"
+"                            </ul>\n"
+"                        <li><strong>New values: </strong>\n"
+"                            <ul>\n"
+"                                %s\n"
+"                            </ul>\n"
+"                    </ul>\n"
+"                </ul>\n"
+"            "
+msgstr ""
+"\n"
+"                <ul>\n"
+"                    <li><strong>Rôles: </strong>\n"
+"                    <ul>\n"
+"                        <li><strong>Anciennes valeurs: </strong> \n"
+"                            <ul>\n"
+"                                %s\n"
+"                            </ul>\n"
+"                        <li><strong>Nouvelles valeurs: </strong>\n"
+"                            <ul>\n"
+"                                %s\n"
+"                            </ul>\n"
+"                    </ul>\n"
+"                </ul>\n"
+"            "
 
 #. module: choreograph_contact
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner_catalogue__active
@@ -60,7 +147,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__category_name
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_users__category_name
 msgid "Category Name"
-msgstr ""
+msgstr "Category Name"
 
 #. module: choreograph_contact
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner_catalogue__color
@@ -139,6 +226,12 @@ msgstr "Date du premier contrat"
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_role__id
 msgid "ID"
 msgstr ""
+
+#. module: choreograph_contact
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__function
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_users__function
+msgid "Job Position"
+msgstr "Poste Occupé"
 
 #. module: choreograph_contact
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__last_conexup_date

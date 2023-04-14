@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import api, fields, models
+from dateutil.relativedelta import relativedelta
 
 from odoo.addons.choreograph_project.models.project_project import (
     TERMINATED_TASK_STAGE,
@@ -112,6 +113,9 @@ class ProjectProject(models.Model):
             'sale_order_id': order_id.id,
             'partner_id': order_id.partner_id.id,
             'date_deadline': order_id.commitment_date
+        })
+        self.task_ids.filtered(lambda t: t.task_number in ['80']).write({
+            'date_deadline': order_id.commitment_date and order_id.commitment_date - relativedelta(days=2) or False,
         })
 
     def write(self, vals):

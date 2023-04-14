@@ -42,9 +42,14 @@
                                     attrs="{'invisible':[('is_multi_base', '=', False)]}"
                                     force_save="1"
                                     widget="percentage" />
+                                <field name="product_template_id"
+                                    domain="[('concerned_base','=',id)]"
+                                    string="Product"
+                                    options="{'no_create': True}"
+                                    attrs="{'invisible':[('is_multi_base', '=', False)], 'required': [('is_multi_base', '=', True)]}" />
                                 <field name="postal_address"
                                     attrs="{'invisible':[('is_multi_base', '=', False)]}"
-                                    readonly="1"
+                                    string="Postal address"
                                     widget="percentage" />
                             </group>
                         </group>

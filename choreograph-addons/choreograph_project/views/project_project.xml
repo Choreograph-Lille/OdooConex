@@ -12,7 +12,7 @@
                 <attribute name="domain">[('type_of_project','=',type_of_project)]</attribute>
             </xpath>
             <xpath expr="//field[@name='tag_ids']" position="after">
-                <field name="code" />
+                <field name="code" attrs="{'invisible': [('is_template','=',False)]}"/>
             </xpath>
         </field>
     </record>

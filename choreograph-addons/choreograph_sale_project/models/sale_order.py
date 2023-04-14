@@ -5,8 +5,9 @@ from pytz import timezone, utc
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from dateutil.relativedelta import relativedelta
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
-from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STAGE
+from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STAGE, WAITING_FILE_TASK_STAGE
 
 PROVIDER_DELIVERY_NUMBER = '75'
 SMS_TASK_NUMBER = '50'
@@ -52,6 +53,7 @@ class SaleOrder(models.Model):
     can_display_to_plan = fields.Boolean(compute='_compute_can_display_delivery')
     delivery_email_to = fields.Char()
     delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_task_id')
+    has_enrichment_email_op = fields.Boolean(compute='_compute_has_enrichment_email_op', store=True)
 
     def compute_delivery_info_task_id(self):
         self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
@@ -60,6 +62,13 @@ class SaleOrder(models.Model):
     def _compute_operation_type_id(self):
         for rec in self:
             rec.operation_type_id = rec.project_ids[0] if rec.project_ids else False
+
+    @api.depends('order_line')
+    def _compute_has_enrichment_email_op(self):
+        for rec in self:
+            enrichment_email = self.env.ref('choreograph_sale_project.project_project_email_enrichment')
+            rec.has_enrichment_email_op = any(
+                [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == enrichment_email])
 
     @api.depends('operation_type_id.stage_id')
     def _compute_can_display_delivery(self):
@@ -109,17 +118,7 @@ class SaleOrder(models.Model):
             self._archive_task('presentation')
 
     def _get_operation_task(self, task_number_list, active=True):
-        for rec in self:
-            if self._context.get('is_operation_generation'):
-                sale_id = rec.id
-            else:
-                sale_id = rec.id.origin
-            if sale_id:
-                return self.env['project.task'].search(
-                    ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
-                     ('sale_order_id', '=', sale_id), ('active', '=', active),
-                     ('task_number', 'in', task_number_list)])
-            return False
+        return self.project_ids.mapped('task_ids').filtered(lambda item: item.task_number == task_number_list and item.active == active)
 
     def _unarchive_task(self, operation_task):
         for rec in self:
@@ -217,7 +216,8 @@ class SaleOrder(models.Model):
         project_id = self.project_ids[0]
         if project_id._is_compaign():
             return project_id.livery_project_compaign()
-        return project_id.livery_project()
+        # return project_id.livery_project()
+        return self.action_send_delivery_email()
 
     @check_project_count
     def action_to_plan(self):
@@ -245,6 +245,7 @@ class SaleOrder(models.Model):
                 })
                 order_id.archive_required_tasks()
                 order_id.compute_task_operations()
+                order_id._manage_task_assignation()
         return order_id
 
     def _update_date_deadline(self, vals):
@@ -252,8 +253,11 @@ class SaleOrder(models.Model):
             if vals.get('commitment_date'):
                 tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
                 date = utc.localize(rec.commitment_date).astimezone(tz)
-                rec.tasks_ids.filtered(lambda t: t.task_number in ['80', '65', '40', '85', '90', '45', '50', '25', '30', '35']).write({
+                rec.tasks_ids.filtered(lambda t: t.task_number in ['65', '40', '85', '90', '45', '50', '25', '30', '35']).write({
                     'date_deadline': date,
+                })
+                rec.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
+                    'date_deadline': date - relativedelta(days=2),
                 })
             if vals.get('potential_return_date') and rec.potential_return_task_id:
                 rec.potential_return_task_id.date_deadline = rec.potential_return_date
@@ -338,3 +342,14 @@ class SaleOrder(models.Model):
                 'operation_email_process': True,
             },
         }
+
+    def action_create_task_from_condition(self):
+        super().action_create_task_from_condition()
+        project_id = self.project_ids[0] if self.project_ids else False
+        if project_id and project_id.stage_id == self.env.ref('choreograph_project.planning_project_stage_planified'):
+            task_draft_stage_id = self.env.ref('choreograph_project.project_task_type_draft')
+            for condition_id in self.operation_condition_ids.filtered(lambda item: item.task_id.stage_id == task_draft_stage_id):
+                if condition_id.task_id.task_number in ('5', '10', '15'):
+                    project_id._update_task_stage(condition_id.task_id.task_number, WAITING_FILE_TASK_STAGE)
+                elif condition_id.task_id.task_number in ('20', '25', '35'):
+                    project_id._update_task_stage(condition_id.task_id.task_number, TODO_TASK_STAGE)

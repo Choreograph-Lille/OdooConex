@@ -37,7 +37,7 @@ class ProjectTask(models.Model):
     witness_comment = fields.Text(related='sale_order_id.witness_comment')
     file_name = fields.Char()
     file_quantity = fields.Char()
-    volume = fields.Integer(related='sale_order_id.quantity_to_deliver')
+    volume = fields.Integer()
     dedup_title_number = fields.Char()
     family_conex = fields.Boolean()
 
@@ -59,7 +59,7 @@ class ProjectTask(models.Model):
     campaign_name = fields.Char(related='sale_order_id.email_campaign_name')
     reception_date = fields.Date(related='sale_order_id.reception_date')
     reception_location = fields.Char('Where to find ?', related='sale_order_id.reception_location')
-    personalization = fields.Boolean(related='sale_order_id.personalization')
+    personalization = fields.Boolean(related='sale_order_id.sms_personalization')
     routing_date = fields.Date(related='sale_order_id.routing_date')
     routing_end_date = fields.Date(related='sale_order_id.routing_end_date')
     campaign_type = fields.Selection(related='sale_order_id.campaign_type')

@@ -247,6 +247,7 @@ class SaleOperation(models.Model):
         :return:
         """
         self.ensure_one()
+        self = self.sudo()
         if not mode:
             return False
         recipients = []

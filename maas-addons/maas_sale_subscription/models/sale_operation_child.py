@@ -23,7 +23,7 @@ from odoo.exceptions import UserError, ValidationError
 from odoo import fields, models, _
 
 
-class SaleOperatinChild(models.Model):
+class SaleOperationChild(models.Model):
     _inherit = 'sale.operation.child'
 
     def command_ordered(self):
@@ -32,34 +32,23 @@ class SaleOperatinChild(models.Model):
         subscription = self.operation_id.partner_id.get_active_subscription()
         if not subscription:
             raise UserError(_('No active subscription was found for this customer.'))
-        if subscription:
-            self.check_quantity(self.qty_extracted)
+        self.check_quantity(self.qty_extracted)
         if subscription.balance >= self.qty_extracted or subscription.current_package_id.unlimited:
             product = subscription.current_package_id
             quantity = subscription.current_cumulative_quantity + self.qty_extracted
             current_product_pricelist = subscription.pricelist_id or subscription.partner_id.property_product_pricelist
-            if product and subscription._check_pricelist_item_exists(product):
-                line_obj.create({'product_id': product.id,
-                                 'name': product.name,
-                                 'date': fields.Datetime.now(),
-                                 'order_id': subscription.id,
-                                 'product_uom_qty': 1,
-                                 'product_uom': product.uom_id.id,
-                                 'price_unit': current_product_pricelist._get_product_price(product, 1),
-                                 'qty_consumed': self.qty_extracted,
-                                 'qty_cumulative': quantity,
-                                 'state_subscription': 'consumption'})
-            elif product and not subscription._check_pricelist_item_exists(product):
-                line_obj.create({'product_id': product.id,
-                                 'name': product.name,
-                                 'date': fields.Datetime.now(),
-                                 'order_id': subscription.id,
-                                 'product_uom_qty': 1,
-                                 'product_uom': product.uom_id.id,
-                                 'price_unit': product.list_price,
-                                 'qty_consumed': self.qty_extracted,
-                                 'qty_cumulative': quantity,
-                                 'state_subscription': 'consumption'})
+
+            line_obj.create({'product_id': product.id,
+                             'name': product.name,
+                             'date': fields.Datetime.now(),
+                             'order_id': subscription.id,
+                             'product_uom_qty': 1,
+                             'product_uom': product.uom_id.id,
+                             'price_unit': current_product_pricelist._get_product_price(product, 1),
+                             'qty_consumed': self.qty_extracted,
+                             'qty_cumulative': quantity,
+                             'state_subscription': 'consumption'})
+
             balance = subscription.balance - self.qty_extracted
             subscription.write({'current_cumulative_quantity': quantity, 'balance': balance})
             self.write({'state': 'ordered'})
@@ -67,6 +56,7 @@ class SaleOperatinChild(models.Model):
             template = self.env.ref('maas_sale.operation_ordered_mail_template')
             self.send_mail(template.with_context(stage='stage_02'))
             return True
+
         identifiers = subscription.current_package_id.identifiers + self.qty_extracted - subscription.balance
         pricelist_products = subscription.pricelist_id.mapped('item_ids').mapped('product_tmpl_id')
         products = self.env['product.product'].search([('identifiers', '>=', identifiers),

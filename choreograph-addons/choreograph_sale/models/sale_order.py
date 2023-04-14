@@ -2,6 +2,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+from dateutil.relativedelta import relativedelta
 from .operation_condition import SUBTYPE
 
 TASK_NAME = {
@@ -68,8 +69,9 @@ class SaleOrder(models.Model):
 
     reception_date = fields.Date()
     reception_location = fields.Char('Where to find ?')
-    personalization = fields.Boolean()
-    comment = fields.Text()
+    sms_personalization = fields.Boolean('Personalization')
+    sms_personalization_text = fields.Text('If yes specify')
+    sms_comment = fields.Text('Comment')
 
     bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
@@ -88,6 +90,7 @@ class SaleOrder(models.Model):
     email_reception_date = fields.Date('Email Reception Date')
     email_reception_location = fields.Char('Email Where to find ?')
     email_personalization = fields.Boolean('Email Personalization')
+    email_personalization_text = fields.Text('If yes specify')
     email_routing_date = fields.Date('Email Routing Date')
     email_routing_end_date = fields.Date('Email Routing End Date')
     campaign_type = fields.Selection(
@@ -98,7 +101,9 @@ class SaleOrder(models.Model):
     email_sender = fields.Char('Email Sender')
     object = fields.Char('Email Object')
     ab_test = fields.Boolean('Email A/B Test')
+    ab_test_text = fields.Text('If so, on what?')
     is_preheader_available = fields.Boolean('Email Preheader Available In HTML')
+    is_preheader_available_text = fields.Text('If not, indicate where to find it')
     email_comment = fields.Text('Email Comment')
 
     email_bat_from = fields.Many2one('choreograph.campaign.de', 'Email BAT From')
@@ -111,6 +116,34 @@ class SaleOrder(models.Model):
     optout_link = fields.Text('Email Optout Link')
     routing_base = fields.Char('Email Routing Base')
     project_task_campaign_ids = fields.One2many('project.task.campaign', 'order_id', 'Email Campaign')
+    state_specific = fields.Selection([
+        ('forecast', 'Forecast'),
+        ('lead', 'Lead'),
+        ('prospecting', 'Prospecting'),
+        ('qualif', 'Qualif'),
+        ('draft', 'Quotation'),
+        ('sent', 'Quotation Sent'),
+        ('sale', 'Sales Order'),
+        ('done', 'Locked'),
+        ('cancel', 'Cancelled'),
+    ], default='forecast', string='State')
+
+    def write(self, values):
+        if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
+            values['state_specific'] = values['state']
+        return super().write(values)
+
+    def action_lead(self):
+        self.write({'state_specific': 'lead'})
+
+    def action_prospecting(self):
+        self.write({'state_specific': 'prospecting'})
+
+    def action_qualif(self):
+        self.write({'state_specific': 'qualif'})
+
+    def action_draft_native(self):
+        self.write({'state_specific': 'draft'})
 
     @api.model
     def default_get(self, fields_list):
@@ -154,6 +187,9 @@ class SaleOrder(models.Model):
             self.tasks_ids.write({
                 'date_deadline': self.commitment_date.date()
             })
+            self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
+                'date_deadline': self.commitment_date - relativedelta(days=2),
+            })
         self.write({'show_operation_generation_button': False})
 
     def action_create_task_from_condition(self):
@@ -194,4 +230,5 @@ class SaleOrder(models.Model):
 
     @api.depends('data_conservation_id')
     def compute_show_other_conservation_duration(self):
-        self.show_other_conservation_duration = self.data_conservation_id.id == self.env.ref('choreograph_sale.sale_data_conservation_other').id
+        self.show_other_conservation_duration = self.data_conservation_id.id == self.env.ref(
+            'choreograph_sale.sale_data_conservation_other').id
