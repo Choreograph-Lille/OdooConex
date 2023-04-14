@@ -189,20 +189,24 @@
                         statusbar_visible="forecast,lead,prospecting,qualif,draft,sent,sale"
                         attrs="{'invisible': [('recurrence_id','!=', False)]}" />
                 </xpath>
-                <xpath expr="//header" position="inside">
+                <button name="payment_action_capture" position="before">
                     <button name="action_lead"
-                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','forecast')]}"
-                        string="Lead" type="object" />
+                            attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','forecast')]}"
+                            string="Lead"
+                            type="object" />
                     <button name="action_prospecting"
-                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','lead')]}"
-                        string="Propecting" type="object" />
+                            attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','lead')]}"
+                            string="Propecting"
+                            type="object" />
                     <button name="action_qualif"
-                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','prospecting')]}"
-                        string="Qualif" type="object" />
+                            attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','prospecting')]}"
+                            string="Qualif"
+                            type="object" />
                     <button name="action_draft_native"
-                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','qualif')]}"
-                        string="Quotation" type="object" />
-                </xpath>
+                            attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','qualif')]}"
+                            string="Quotation"
+                            type="object" />
+                </button>
             </field>
         </record>
 
