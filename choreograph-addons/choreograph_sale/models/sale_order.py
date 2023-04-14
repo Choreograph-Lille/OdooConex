@@ -69,8 +69,9 @@ class SaleOrder(models.Model):
 
     reception_date = fields.Date()
     reception_location = fields.Char('Where to find ?')
-    personalization = fields.Boolean()
-    comment = fields.Text()
+    sms_personalization = fields.Boolean('Personalization')
+    sms_personalization_text = fields.Text('If yes specify')
+    sms_comment = fields.Text('Comment')
 
     bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
