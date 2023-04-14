@@ -118,17 +118,7 @@ class SaleOrder(models.Model):
             self._archive_task('presentation')
 
     def _get_operation_task(self, task_number_list, active=True):
-        for rec in self:
-            if self._context.get('is_operation_generation'):
-                sale_id = rec.id
-            else:
-                sale_id = rec.id.origin
-            if sale_id:
-                return self.env['project.task'].search(
-                    ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
-                     ('sale_order_id', '=', sale_id), ('active', '=', active),
-                     ('task_number', 'in', task_number_list)])
-            return False
+        return self.project_ids.mapped('task_ids').filtered(lambda item: item.task_number == task_number_list and item.active == active)
 
     def _unarchive_task(self, operation_task):
         for rec in self:
