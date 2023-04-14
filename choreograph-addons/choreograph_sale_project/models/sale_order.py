@@ -53,6 +53,7 @@ class SaleOrder(models.Model):
     can_display_to_plan = fields.Boolean(compute='_compute_can_display_delivery')
     delivery_email_to = fields.Char()
     delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_task_id')
+    has_enrichment_email_op = fields.Boolean(compute='_compute_has_enrichment_email_op', store=True)
 
     def compute_delivery_info_task_id(self):
         self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
@@ -61,6 +62,13 @@ class SaleOrder(models.Model):
     def _compute_operation_type_id(self):
         for rec in self:
             rec.operation_type_id = rec.project_ids[0] if rec.project_ids else False
+
+    @api.depends('order_line')
+    def _compute_has_enrichment_email_op(self):
+        for rec in self:
+            enrichment_email = self.env.ref('choreograph_sale_project.project_project_email_enrichment')
+            rec.has_enrichment_email_op = any(
+                [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == enrichment_email])
 
     @api.depends('operation_type_id.stage_id')
     def _compute_can_display_delivery(self):
@@ -110,17 +118,7 @@ class SaleOrder(models.Model):
             self._archive_task('presentation')
 
     def _get_operation_task(self, task_number_list, active=True):
-        for rec in self:
-            if self._context.get('is_operation_generation'):
-                sale_id = rec.id
-            else:
-                sale_id = rec.id.origin
-            if sale_id:
-                return self.env['project.task'].search(
-                    ['&', ('display_project_id', '!=', 'False'), '|', ('sale_line_id', 'in', rec.order_line.ids),
-                     ('sale_order_id', '=', sale_id), ('active', '=', active),
-                     ('task_number', 'in', task_number_list)])
-            return False
+        return self.project_ids.mapped('task_ids').filtered(lambda item: item.task_number == task_number_list and item.active == active)
 
     def _unarchive_task(self, operation_task):
         for rec in self:

@@ -69,8 +69,9 @@ class SaleOrder(models.Model):
 
     reception_date = fields.Date()
     reception_location = fields.Char('Where to find ?')
-    personalization = fields.Boolean()
-    comment = fields.Text()
+    sms_personalization = fields.Boolean('Personalization')
+    sms_personalization_text = fields.Text('If yes specify')
+    sms_comment = fields.Text('Comment')
 
     bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
@@ -89,6 +90,7 @@ class SaleOrder(models.Model):
     email_reception_date = fields.Date('Email Reception Date')
     email_reception_location = fields.Char('Email Where to find ?')
     email_personalization = fields.Boolean('Email Personalization')
+    email_personalization_text = fields.Text('If yes specify')
     email_routing_date = fields.Date('Email Routing Date')
     email_routing_end_date = fields.Date('Email Routing End Date')
     campaign_type = fields.Selection(
@@ -99,7 +101,9 @@ class SaleOrder(models.Model):
     email_sender = fields.Char('Email Sender')
     object = fields.Char('Email Object')
     ab_test = fields.Boolean('Email A/B Test')
+    ab_test_text = fields.Text('If so, on what?')
     is_preheader_available = fields.Boolean('Email Preheader Available In HTML')
+    is_preheader_available_text = fields.Text('If not, indicate where to find it')
     email_comment = fields.Text('Email Comment')
 
     email_bat_from = fields.Many2one('choreograph.campaign.de', 'Email BAT From')

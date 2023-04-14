@@ -92,10 +92,11 @@
                             <group string="Message Kit (wording)">
                                 <field name="reception_date" />
                                 <field name="reception_location" />
-                                <field name="personalization" />
+                                <field name="sms_personalization" />
+                                <field name="sms_personalization_text"
+                                    attrs="{'invisible': [('sms_personalization','=',False)]}" />
+                                <field name="sms_comment" />
                             </group>
-                            <label for="comment" />
-                            <field name="comment" />
                         </group>
                         <group string="BAT">
                             <field name="bat_from" />
@@ -124,6 +125,8 @@
                                 <field name="email_reception_date" />
                                 <field name="email_reception_location" />
                                 <field name="email_personalization" />
+                                <field name="email_personalization_text"
+                                    attrs="{'invisible': [('email_personalization','=',False)]}" />
                                 <field name="email_routing_date" />
                                 <field name="email_routing_end_date" />
                                 <field name="campaign_type" />
@@ -132,7 +135,11 @@
                                 <field name="email_sender" />
                                 <field name="object" />
                                 <field name="ab_test" />
+                                <field name="ab_test_text"
+                                    attrs="{'invisible': [('ab_test','=',False)]}" />
                                 <field name="is_preheader_available" />
+                                <field name="is_preheader_available_text"
+                                    attrs="{'invisible': [('is_preheader_available','=',True)]}" />
                                 <field name="email_comment" />
                             </group>
                             <group string="BAT">

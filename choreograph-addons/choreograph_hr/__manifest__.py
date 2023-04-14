@@ -10,7 +10,7 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
-        'hr',
+        'hr_gamification',
         'hr_contract',
         'choreograph_base'
     ],
