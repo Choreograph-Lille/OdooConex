@@ -53,6 +53,7 @@ class SaleOrder(models.Model):
     can_display_to_plan = fields.Boolean(compute='_compute_can_display_delivery')
     delivery_email_to = fields.Char()
     delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_task_id')
+    has_enrichment_email_op = fields.Boolean(compute='_compute_has_enrichment_email_op', store=True)
 
     def compute_delivery_info_task_id(self):
         self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
@@ -61,6 +62,13 @@ class SaleOrder(models.Model):
     def _compute_operation_type_id(self):
         for rec in self:
             rec.operation_type_id = rec.project_ids[0] if rec.project_ids else False
+
+    @api.depends('order_line')
+    def _compute_has_enrichment_email_op(self):
+        for rec in self:
+            enrichment_email = self.env.ref('choreograph_sale_project.project_project_email_enrichment')
+            rec.has_enrichment_email_op = any(
+                [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == enrichment_email])
 
     @api.depends('operation_type_id.stage_id')
     def _compute_can_display_delivery(self):
