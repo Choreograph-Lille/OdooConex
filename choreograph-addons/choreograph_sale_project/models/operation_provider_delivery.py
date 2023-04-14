@@ -16,7 +16,7 @@ class OperationProviderDelivery(models.Model):
         res.create_delivery_task()
         return res
 
-    @api.onchange('task_id.date_deadline')
+    @api.depends('task_id.date_deadline')
     def compute_delivery_date(self):
         for rec in self:
             rec.delivery_date = rec.task_id.date_deadline
