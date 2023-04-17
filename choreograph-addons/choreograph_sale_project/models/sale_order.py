@@ -29,7 +29,9 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     potential_return = fields.Boolean(copy=False)
+    return_production_potential = fields.Boolean('Return of production potential')
     study_delivery = fields.Boolean(copy=False)
+    presta_delivery = fields.Boolean(copy=False)
     presentation = fields.Boolean(copy=False)
     potential_return_task_id = fields.Many2one(
         'project.task', 'Potential Return Task', copy=False)
@@ -38,7 +40,9 @@ class SaleOrder(models.Model):
     study_global_task_id = fields.Many2one('project.task', 'Study Global Task', copy=False)
     potential_return_date = fields.Date(copy=False)
     study_delivery_date = fields.Date(copy=False)
+    presta_delivery_date = fields.Date(copy=False)
     presentation_date = fields.Date(copy=False)
+    return_production_potential_date = fields.Date('Date of return of production potential')
 
     operation_provider_delivery_ids = fields.One2many(
         'operation.provider.delivery', 'order_id', 'Provider Delivery Tasks')
@@ -245,7 +249,7 @@ class SaleOrder(models.Model):
                 })
                 order_id.archive_required_tasks()
                 order_id.compute_task_operations()
-                order_id._manage_task_assignation()
+                # order_id._manage_task_assignation()
         return order_id
 
     def _update_date_deadline(self, vals):

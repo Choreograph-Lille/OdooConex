@@ -203,12 +203,14 @@ class SaleOrder(models.Model):
                     'email_from': rec.partner_id.email,
                     'note': condition.note,
                     'sale_order_id': rec.id,
+                    'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
                     'user_ids': False,
                     'date_deadline': condition.operation_date,
                     'campaign_file_name': condition.file_name,
                     'task_number': condition.task_number,
                 }
                 condition.task_id = self.env['project.task'].sudo().create(vals)
+                condition.task_id.onchange_role_id()
                 rec.project_ids.task_ids = [(4, condition.task_id.id)]
                 condition.is_task_created = True
 

@@ -140,11 +140,14 @@
                            attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['70', '75', '85', '80', '20', '25', '30'])]}">
                         <tree>
                             <field name="segment_number"/>
+                            <field name="model_selection" attrs="{'column_invisible': [('parent.task_number', 'not in', ['20', '25', '30'])]}"/>
                             <field name="name"/>
                             <field name="ranking"/>
                             <field name="quantity"/>
+                            <field name="depth" attrs="{'column_invisible': [('parent.task_number', 'not in', ['20', '25', '30'])]}"/>
                             <field name="keycode"/>
                             <field name="civility"/>
+                            <field name="comment" attrs="{'column_invisible': [('parent.task_number', 'not in', ['20', '25', '30'])]}"/>
                         </tree>
                     </field>
                     <field name="trap_address_ids"
