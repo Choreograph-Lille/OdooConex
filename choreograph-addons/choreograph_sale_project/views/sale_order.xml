@@ -17,9 +17,15 @@
                             <field name="potential_return_task_id"
                                 attrs="{'invisible':[('potential_return', '=', False)]}"
                                 readonly="1" force_save="1" />
+                            <field name="return_production_potential" />
+                            <field name="return_production_potential_date"
+                                attrs="{'invisible':[('return_production_potential', '=', False)]}" />
                             <field name="study_delivery" readonly="1" force_save="1" />
                             <field name="study_delivery_date"
                                 attrs="{'invisible':[('study_delivery', '=', False)]}" />
+                            <field name="presta_delivery" />
+                            <field name="presta_delivery_date"
+                                attrs="{'invisible':[('presta_delivery', '=', False)]}" />
                             <field name="study_delivery_task_id"
                                 attrs="{'invisible':[('study_delivery', '=', False)]}" readonly="1"
                                 force_save="1" />
@@ -143,7 +149,7 @@
         <field name="inherit_id" ref="choreograph_sale.view_order_form_inherit" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='excluded_provider']" position="before">
-                <field name="has_enrichment_email_op" invisible="1"/>
+                <field name="has_enrichment_email_op" invisible="1" />
             </xpath>
             <xpath expr="//field[@name='excluded_provider']" position="attributes">
                 <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
