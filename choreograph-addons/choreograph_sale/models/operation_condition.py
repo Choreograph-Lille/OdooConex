@@ -38,6 +38,7 @@ class OperationCondition(models.Model):
     order_ids = fields.Many2many('sale.order', 'operation_condition_sale_order_rel',
                                  'condition_id', 'sale_order_id', 'Sale Order')
     task_id = fields.Many2one('project.task')
+    partner_id = fields.Many2one('res.partner')
 
     @api.depends('operation_type', 'condition_subtype', 'exclusion_subtype')
     def _compute_subtype(self):
