@@ -824,10 +824,14 @@ msgid "Operation Selection"
 msgstr ""
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_type
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__operation_type_id
 msgid "Operation Type"
 msgstr "Type d'opération"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_type
+msgid "Operation Type"
+msgstr "Type"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_date

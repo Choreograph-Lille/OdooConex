@@ -423,6 +423,11 @@ msgid "Family Conex"
 msgstr "Conex Family"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__operation_segment__civility__female
+msgid "Females"
+msgstr "Femmes"
+
+#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_loyalty
 msgid "Fidelization (TEMPLATE)"
 msgstr "Fidelisation (TEMPLATE)"
@@ -532,6 +537,11 @@ msgid "Livery"
 msgstr "Livrer"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__operation_segment__civility__male
+msgid "Males"
+msgstr "Hommes"
+
+#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_matchback
 msgid "Matchback (TEMPLATE)"
 msgstr ""
@@ -548,9 +558,13 @@ msgstr "Modèle/Sélection"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__name
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__name
 msgid "Name"
 msgstr "Nom"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__name
+msgid "Name"
+msgstr "Nom du segment"
 
 #. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_operation
@@ -581,6 +595,11 @@ msgstr "Type de l'opération"
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_task_form2_inherit2
 msgid "Optout"
 msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__operation_segment__civility__other
+msgid "Others"
+msgstr "Mixtes"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__po_livedata_number
@@ -630,7 +649,7 @@ msgstr "Prospection postale + Teleportable (TEMPLATE)"
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__potential_return
 msgid "Potential Return"
-msgstr "Retour de potentiel"
+msgstr "Retour de potentiel études"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__potential_return_date
@@ -724,6 +743,16 @@ msgstr "Quantité"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__quantity_to_deliver
 msgid "Quantity To Deliver"
 msgstr "Quantité à livrer"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__operation_segment__ranking__random
+msgid "Random"
+msgstr "Aléatoire"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__operation_segment__ranking__ranked
+msgid "Ranked"
+msgstr "Rang"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__ranking

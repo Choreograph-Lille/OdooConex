@@ -17,10 +17,11 @@
                             <field name="potential_return_task_id"
                                 attrs="{'invisible':[('potential_return', '=', False)]}"
                                 readonly="1" force_save="1" />
-                            <field name="return_production_potential" />
+                            <field name="operation_code" invisible="1"/>
+                            <field name="return_production_potential" attrs="{'invisible':[('operation_code', 'not in', ['ENR_EMAIL', 'ENR_SMS'])]}" />
                             <field name="return_production_potential_date"
                                 attrs="{'invisible':[('return_production_potential', '=', False)]}" />
-                            <field name="study_delivery" readonly="1" force_save="1" />
+                            <field name="study_delivery" force_save="1" />
                             <field name="study_delivery_date"
                                 attrs="{'invisible':[('study_delivery', '=', False)]}" />
                             <field name="presta_delivery" />
@@ -54,7 +55,7 @@
                     <h3>
                         <label for="operation_condition_ids" />
                     </h3>
-                    <field name="operation_condition_ids" />
+                    <field name="operation_condition_ids" context="{'default_partner_id': partner_id}"/>
                     <h3>
                         <label for="comment" />
                     </h3>
@@ -68,7 +69,7 @@
                         </group>
                         <field name="segment_ids">
                             <tree editable="bottom">
-                                <field name="segment_number" />
+                                <field name="segment_number" readonly="1"/>
                                 <field name="model_selection" />
                                 <field name="name" />
                                 <field name="ranking" />
