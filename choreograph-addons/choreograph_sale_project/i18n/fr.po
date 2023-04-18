@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-17 08:25+0000\n"
-"PO-Revision-Date: 2023-04-17 08:25+0000\n"
+"POT-Creation-Date: 2023-04-18 07:24+0000\n"
+"PO-Revision-Date: 2023-04-18 07:24+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -298,6 +298,11 @@ msgid "Delivery Date"
 msgstr "Date de livraison client"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__delivery_date
+msgid "Delivery Date"
+msgstr "Date de livraison"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__delivery_email_to
 msgid "Delivery Email To"
 msgstr "Livrer l'email à"
@@ -403,6 +408,11 @@ msgid "Email Volume Detail"
 msgstr "Détail volume"
 
 #. module: choreograph_sale_project
+#: model:ir.model,name:choreograph_sale_project.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Assistant de composition d'emails"
+
+#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_extraction
 msgid "Extraction (TEMPLATE)"
 msgstr ""
@@ -435,6 +445,11 @@ msgid "Folder Key"
 msgstr "Clé de dossier"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__has_enrichment_email_op
+msgid "Has Enrichment Email Op"
+msgstr ""
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__id
@@ -446,6 +461,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__id_title
 msgid "ID Title"
 msgstr "ID titre"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__is_preheader_available_text
+msgid "If not, indicate where to find it"
+msgstr "Si non, indiquer où le trouver"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__ab_test_text
+msgid "If so, on what?"
+msgstr "Si oui, sur quoi?"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__personalization_text
+msgid "If yes specify"
+msgstr "Si oui préciser"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__note

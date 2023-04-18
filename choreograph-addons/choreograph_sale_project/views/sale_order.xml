@@ -157,6 +157,12 @@
             <xpath expr="//field[@name='optout_link']" position="attributes">
                 <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
             </xpath>
+            <xpath expr="//field[@name='routing_base']" position="attributes">
+                <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
+            </xpath>
+            <xpath expr="//group[@name='bat']/separator[2]" position="attributes">
+                <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>

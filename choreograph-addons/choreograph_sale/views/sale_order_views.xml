@@ -81,6 +81,7 @@
                                 <field name="routing_date" />
                                 <field name="routing_end_date" />
                                 <field name="desired_finished_volume" />
+                                <field name="id_title" />
                             </group>
                             <group>
                                 <field name="is_info_validated" />
@@ -142,7 +143,7 @@
                                     attrs="{'invisible': [('is_preheader_available','=',True)]}" />
                                 <field name="email_comment" />
                             </group>
-                            <group string="BAT">
+                            <group name="bat" string="BAT">
                                 <field name="email_bat_from" />
                                 <field name="email_bat_internal" />
                                 <field name="email_bat_client" />
