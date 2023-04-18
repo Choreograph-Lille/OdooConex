@@ -122,7 +122,7 @@ class SaleOrder(models.Model):
             self._archive_task('presentation')
 
     def _get_operation_task(self, task_number_list, active=True):
-        return self.project_ids.mapped('task_ids').filtered(lambda item: item.task_number == task_number_list and item.active == active)
+        return self.project_ids.mapped('task_ids').filtered(lambda item: item.task_number in task_number_list and item.active == active)
 
     def _unarchive_task(self, operation_task):
         for rec in self:
@@ -284,6 +284,8 @@ class SaleOrder(models.Model):
                 rec.check_operation_exists()
                 rec.check_campaign_tasks_exist(SMS_TASK_NUMBER)
                 rec.check_task_stage_number(self._get_operation_task([SMS_TASK_NUMBER]).stage_id.stage_number)
+                if self.is_info_validated:
+                    self.update_task_sms_campaign()
 
     @api.onchange('email_is_info_validated')
     def _onchange_email_info_validated(self):
@@ -292,6 +294,54 @@ class SaleOrder(models.Model):
                 rec.check_operation_exists()
                 rec.check_campaign_tasks_exist(EMAIL_TASK_NUMBER)
                 rec.check_task_stage_number(self._get_operation_task([EMAIL_TASK_NUMBER]).stage_id.stage_number)
+                if self.email_is_info_validated:
+                    self.update_task_email_campaign()
+
+    @api.model
+    def update_tasks(self, values, task_number):
+        task_id = self._get_operation_task([task_number])
+        if task_id:
+            task_id.write(values)
+
+    def update_task_email_campaign(self):
+        values_list = [
+            ('reception_date', 'email_reception_date'),
+            ('routing_date', 'email_routing_date'),
+            ('reception_location', 'email_reception_location'),
+            ('routing_end_date', 'email_routing_end_date'),
+            ('desired_finished_volume', 'email_desired_finished_volume'),
+            ('sender', 'email_sender'),
+            ('personalization', 'email_personalization'),
+            ('personalization_text', 'email_personalization_text'),
+            ('is_preheader_available', 'is_preheader_available'),
+            ('is_preheader_available_text', 'is_preheader_available_text'),
+            ('ab_test', 'ab_test'),
+            ('ab_test_text', 'ab_test_text'),
+            ('comment', 'email_comment'),
+            ('bat_internal', 'email_bat_internal'),
+            ('bat_client', 'email_bat_client'),
+            ('witness_file_name', 'email_witness_file_name'),
+            ('po_livedata_number', 'livedata_po_number')
+            ('campaign_name', 'email_campaign_name')
+        ]
+        values = {task_key: self[so_key] for task_key, so_key in values_list}
+        self.update_tasks(values, EMAIL_TASK_NUMBER)
+
+    def update_task_sms_campaign(self):
+        values_list = [
+            ('po_livedata_number', 'po_number'),
+            ('campaign_name', 'campaign_name'),
+            ('personalization', 'sms_personalization'),
+            ('personalization_text', 'sms_personalization_text'),
+            ('comment', 'sms_comment'),
+            ('bat_internal', 'bat_internal'),
+            ('bat_client', 'bat_client'),
+            ('desired_finished_volume', 'desired_finished_volume'),
+            ('sender', 'sender'),
+        ]
+        values = {task_key: self[so_key] for task_key, so_key in values_list}
+        values.update({'user_ids': [(4, self.user_id.id)]})
+        self.update_tasks(values, SMS_TASK_NUMBER)
 
     def check_operation_exists(self):
         if not self.project_ids:
