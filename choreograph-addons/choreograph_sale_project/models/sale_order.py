@@ -232,6 +232,10 @@ class SaleOrder(models.Model):
         res = super(SaleOrder, self).write(vals)
         self._update_date_deadline(vals)
         self._check_info_validated(vals)
+        if vals.get('is_info_validated', False):
+            self.update_task_sms_campaign()
+        if vals.get('email_is_info_validated', False):
+            self.update_task_email_campaign()
         return res
 
     @api.model
@@ -284,8 +288,6 @@ class SaleOrder(models.Model):
                 rec.check_operation_exists()
                 rec.check_campaign_tasks_exist(SMS_TASK_NUMBER)
                 rec.check_task_stage_number(self._get_operation_task([SMS_TASK_NUMBER]).stage_id.stage_number)
-                if self.is_info_validated:
-                    self.update_task_sms_campaign()
 
     @api.onchange('email_is_info_validated')
     def _onchange_email_info_validated(self):
@@ -294,8 +296,6 @@ class SaleOrder(models.Model):
                 rec.check_operation_exists()
                 rec.check_campaign_tasks_exist(EMAIL_TASK_NUMBER)
                 rec.check_task_stage_number(self._get_operation_task([EMAIL_TASK_NUMBER]).stage_id.stage_number)
-                if self.email_is_info_validated:
-                    self.update_task_email_campaign()
 
     @api.model
     def update_tasks(self, values, task_number):
