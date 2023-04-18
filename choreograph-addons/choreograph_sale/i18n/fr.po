@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-14 12:27+0000\n"
-"PO-Revision-Date: 2023-04-14 12:27+0000\n"
+"POT-Creation-Date: 2023-04-17 14:40+0000\n"
+"PO-Revision-Date: 2023-04-17 14:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -600,6 +600,11 @@ msgid "Icon to indicate an exception activity."
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__id_title
+msgid "Id Title"
+msgstr "ID Titre"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr ""
@@ -675,12 +680,14 @@ msgstr "Date de mis à jour"
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__lead
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__lead
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "Lead"
 msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__done
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__done
 msgid "Locked"
 msgstr "Bloqué"
 
@@ -783,6 +790,7 @@ msgid "Number of messages with delivery error"
 msgstr ""
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "OPT-OUT Link"
@@ -924,12 +932,14 @@ msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__draft
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__draft
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "Quotation"
 msgstr "Devis"
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__sent
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__sent
 msgid "Quotation Sent"
 msgstr "Devis envoyé"
 
@@ -1024,18 +1034,16 @@ msgid "SOX"
 msgstr ""
 
 #. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/operation_condition.py:0
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__order_ids
 #: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__order_id
-msgid "Sale Order"
-msgstr "Bons de commande"
-
-#. module: choreograph_sale
-#: code:addons/choreograph_sale/models/operation_condition.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__sale_order
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__sale_order
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__sale_order
+#, python-format
 msgid "Sale Order"
-msgstr "Bon de commande"
+msgstr "Bons de commande"
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_report
@@ -1045,6 +1053,7 @@ msgstr "Rapport d'analyse des ventes"
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_order
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__sale
 msgid "Sales Order"
 msgstr "Bon de commande"
 
@@ -1088,6 +1097,16 @@ msgstr "Afficher autre durée de conservation"
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__source_id
 msgid "Source"
 msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__state_specific
+msgid "State"
+msgstr "Statut"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__state_specific
+msgid "State Specific"
+msgstr "Statut spéc"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_state

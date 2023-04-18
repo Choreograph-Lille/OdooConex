@@ -6,10 +6,14 @@
             <field name="inherit_id" ref="project.view_task_form2"/>
             <field name="arch" type="xml">
                 <field name="date_deadline" position="attributes">
-                    <attribute name="attrs">{'invisible': ['|', ('is_closed', '=', True), ('task_number', 'in', ['70'])]}</attribute>
+                    <attribute name="attrs">{'invisible': ['|', ('is_closed', '=', True), ('task_number', 'in', ['70', '50', '45'])]}</attribute>
                     <attribute name="readonly">1</attribute>
                 </field>
-
+                <field name="date_deadline" position="after">
+                     <field name="delivery_date" 
+                            readonly="1"
+                            attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                </field>
                 <field name="user_ids" position="after">
                     <field name="catalogue_ids" widget="many2many_tags"
                            attrs="{'invisible':[('task_number', '=', False)]}"/>
@@ -49,9 +53,14 @@
                             <field name="volume"
                                    attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
                             <field name="po_livedata_number"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
                             <field name="campaign_name"
+                                   readonly="1"       
                                    attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="id_title"
+                                   readonly="1"
+                                   attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>      
 
                             <h4 attrs="{'invisible': [('task_number', 'not in', ['45'])]}">
                                 Email Kit Detail
@@ -62,26 +71,37 @@
                             </h4>
                             <br attrs="{'invisible': [('task_number', 'not in', ['50'])]}"/>
                             <field name="reception_date"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
                             <field name="reception_location"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
                             <field name="personalization"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="personalization_text"
+                                   readonly="1"
+                                   attrs="{'invisible': ['|',('task_number', 'not in', ['45', '50']),('personalization','=',False)]}"/>
                             <field name="routing_date"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
                             <field name="routing_end_date"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
                             <field name="campaign_type" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
                             <field name="desired_finished_volume"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['90', '45', '50'])]}"/>
                             <field name="volume_detail"
                                    attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
-                            <field name="sender" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
+                            <field name="sender" readonly="1" attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}"/>
                             <field name="object" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
-                            <field name="ab_test" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+                            <field name="ab_test" readonly="1" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+                            <field name="ab_test_text" readonly="1" attrs="{'invisible': ['|',('task_number', 'not in', ['45']),('ab_test','=',False)]}"/>
                             <field name="is_preheader_available"
                                    attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
                             <field name="comment"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['45', '50', '20', '25', '30', '35'])]}"/>
 
                             <h4 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}">
@@ -91,8 +111,10 @@
                             <field name="bat_from"
                                    attrs="{'invisible': [('task_number', 'not in', ['40', '55', '70', '75', '85', '80', '50'])]}"/>
                             <field name="bat_internal"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
                             <field name="bat_client"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
                             <field name="bat_comment"
                                    attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50'])]}"/>
@@ -103,6 +125,7 @@
                             </h4>
                             <br attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
                             <field name="witness_file_name"
+                                   readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
                             <field name="witness_comment"
                                    attrs="{'invisible': [('task_number', 'not in', ['55', '50'])]}"/>

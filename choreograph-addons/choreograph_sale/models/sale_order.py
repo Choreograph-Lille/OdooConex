@@ -66,6 +66,7 @@ class SaleOrder(models.Model):
     desired_finished_volume = fields.Char()
     volume_detail = fields.Text()
     sender = fields.Char()
+    id_title = fields.Char()
 
     reception_date = fields.Date()
     reception_location = fields.Char('Where to find ?')
