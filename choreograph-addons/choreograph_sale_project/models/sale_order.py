@@ -43,6 +43,7 @@ class SaleOrder(models.Model):
     presta_delivery_date = fields.Date(copy=False)
     presentation_date = fields.Date(copy=False)
     return_production_potential_date = fields.Date('Date of return of production potential')
+    operation_code = fields.Char(compute='compute_operation_code', store=True)
 
     operation_provider_delivery_ids = fields.One2many(
         'operation.provider.delivery', 'order_id', 'Provider Delivery Tasks')
@@ -99,7 +100,6 @@ class SaleOrder(models.Model):
 
     @api.onchange('potential_return')
     def onchange_potential_return(self):
-        self.study_delivery = self.potential_return
         if self.potential_return:
             self._unarchive_task('potential_return')
             self._archive_task('study_global')
@@ -113,6 +113,9 @@ class SaleOrder(models.Model):
             self._unarchive_task('study_delivery')
         else:
             self._archive_task('study_delivery')
+        self._get_operation_task('study_global').write({
+            'date_deadline': self.study_delivery_date
+        })
 
     @api.onchange('presentation')
     def onchange_presentation(self):
@@ -411,3 +414,13 @@ class SaleOrder(models.Model):
                     project_id._update_task_stage(condition_id.task_id.task_number, WAITING_FILE_TASK_STAGE)
                 elif condition_id.task_id.task_number in ('20', '25', '35'):
                     project_id._update_task_stage(condition_id.task_id.task_number, TODO_TASK_STAGE)
+
+    @api.depends('project_ids')
+    def compute_operation_code(self):
+        self.operation_code = self.project_ids[0].code if self.project_ids else ''
+        
+    @api.onchange('segment_ids')
+    def onchange_segment_sequence(self):
+        for rec in self:
+            for i, l in enumerate(rec.segment_ids):
+                l.segment_number = i + 1

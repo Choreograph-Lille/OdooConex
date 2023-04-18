@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class OperationSegment(models.Model):
@@ -11,8 +11,12 @@ class OperationSegment(models.Model):
     model_selection = fields.Char('Model/Selection')
     name = fields.Char()
     quantity = fields.Integer()
-    depth = fields.Char()
+    depth = fields.Integer()
     keycode = fields.Char()
-    ranking = fields.Char()
-    civility = fields.Char()
+    ranking = fields.Selection([('ranked', 'Ranked'), ('random', 'Random')])
+    civility = fields.Selection([
+        ('male', 'Males'),
+        ('female', 'Females'),
+        ('other', 'Others')
+    ])
     comment = fields.Char()
