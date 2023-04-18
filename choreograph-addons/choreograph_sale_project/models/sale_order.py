@@ -43,7 +43,7 @@ class SaleOrder(models.Model):
     presta_delivery_date = fields.Date(copy=False)
     presentation_date = fields.Date(copy=False)
     return_production_potential_date = fields.Date('Date of return of production potential')
-    operation_code = fields.Char(compute='compute_operation_code')
+    operation_code = fields.Char(compute='compute_operation_code', store=True)
 
     operation_provider_delivery_ids = fields.One2many(
         'operation.provider.delivery', 'order_id', 'Provider Delivery Tasks')
@@ -417,9 +417,8 @@ class SaleOrder(models.Model):
 
     @api.depends('project_ids')
     def compute_operation_code(self):
-        if self.project_ids:
-            self.operation_code = self.project_ids[0].code
-
+        self.operation_code = self.project_ids[0].code if self.project_ids else ''
+        
     @api.onchange('segment_ids')
     def onchange_segment_sequence(self):
         for rec in self:
