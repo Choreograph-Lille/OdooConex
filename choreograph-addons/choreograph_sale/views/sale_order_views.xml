@@ -81,7 +81,6 @@
                                 <field name="routing_date" />
                                 <field name="routing_end_date" />
                                 <field name="desired_finished_volume" />
-                                <field name="campaign_sms_delivery_date" />
                                 <field name="id_title" />
                             </group>
                             <group>
@@ -119,7 +118,6 @@
                             <group>
                                 <field name="livedata_po_number" />
                                 <field name="email_campaign_name" />
-                                <field name="campaign_email_delivery_date" />
                             </group>
                             <group>
                                 <field name="email_is_info_validated" />

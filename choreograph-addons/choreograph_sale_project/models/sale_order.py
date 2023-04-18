@@ -304,6 +304,7 @@ class SaleOrder(models.Model):
             task_id.write(values)
 
     def update_task_email_campaign(self):
+        delivery_date = 'presta_delivery_date' if self.has_enrichment_email_op else 'commitment_date'
         values_list = [
             ('reception_date', 'email_reception_date'),
             ('routing_date', 'email_routing_date'),
@@ -321,13 +322,15 @@ class SaleOrder(models.Model):
             ('bat_internal', 'email_bat_internal'),
             ('bat_client', 'email_bat_client'),
             ('witness_file_name', 'email_witness_file_name'),
-            ('po_livedata_number', 'livedata_po_number')
-            ('campaign_name', 'email_campaign_name')
+            ('po_livedata_number', 'livedata_po_number'),
+            ('campaign_name', 'email_campaign_name'),
+            ('delivery_date', delivery_date)
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
         self.update_tasks(values, EMAIL_TASK_NUMBER)
 
     def update_task_sms_campaign(self):
+        delivery_date = 'presta_delivery_date' if self.has_enrichment_email_op else 'commitment_date'
         values_list = [
             ('po_livedata_number', 'po_number'),
             ('campaign_name', 'campaign_name'),
@@ -338,6 +341,7 @@ class SaleOrder(models.Model):
             ('bat_client', 'bat_client'),
             ('desired_finished_volume', 'desired_finished_volume'),
             ('sender', 'sender'),
+            ('delivery_date', delivery_date)
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
         values.update({'user_ids': [(4, self.user_id.id)]})
