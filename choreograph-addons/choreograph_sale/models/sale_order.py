@@ -198,7 +198,7 @@ class SaleOrder(models.Model):
             for condition in self.operation_condition_ids.filtered(
                     lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order']):
                 vals = {
-                    'name': rec.name + '/' + OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
+                    'name': OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
                         condition.subtype]),
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
