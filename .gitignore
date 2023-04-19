@@ -76,3 +76,4 @@ target/
 
 # Sonar
 */.scannerwork
+.scannerwork/
