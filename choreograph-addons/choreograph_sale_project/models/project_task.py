@@ -29,12 +29,12 @@ class ProjectTask(models.Model):
     bat_from = fields.Many2one('choreograph.campaign.de', related='sale_order_id.bat_from')
     bat_internal = fields.Char()
     bat_client = fields.Char()
-    bat_comment = fields.Text('BAT Comment', related='sale_order_id.bat_comment')
+    bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
     # optout_comment = fields.Text(related='sale_order_id.optout_comment')
     optout_link = fields.Text(related='sale_order_id.optout_comment')
     witness_file_name = fields.Char('File Name')
-    witness_comment = fields.Text(related='sale_order_id.witness_comment')
+    witness_comment = fields.Text()
     file_name = fields.Char()
     file_quantity = fields.Char()
     volume = fields.Integer()
@@ -296,22 +296,34 @@ class ProjectTask(models.Model):
                     task.project_id._hook_task_45_in_stage_50()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
-            if 'provider_file_name' in vals or 'provider_delivery_address' in vals:
+            provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex', 'trap_address_ids', 'provider_comment']
+            if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
         return res
 
     def update_provider_data(self):
         for rec in self:
             targeted_task = False
+            data = {
+                    'provider_file_name': rec.provider_file_name,
+                    'provider_delivery_address': rec.provider_delivery_address,
+                }
             if rec.task_number == '70':
                 targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '75')
             elif rec.task_number == '80':
                 targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '85')
-            if targeted_task:
-                targeted_task.write({
-                    'provider_file_name': rec.provider_file_name,
-                    'provider_delivery_address': rec.provider_delivery_address,
+                new_traps = self.env['trap.address'].create([{
+                        'name': trap.name,
+                        'segment_number': trap.segment_number,
+                        'bc_number': trap.bc_number,
+                    } for trap in rec.trap_address_ids])
+                data.update({
+                    'family_conex': rec.family_conex,
+                    'provider_comment': rec.provider_comment,
+                    'trap_address_ids': [(6, 0, new_traps.ids)]
                 })
+            if targeted_task:
+                targeted_task.write(data)
 
     def _schedule_move_task_95_to_15_stage(self, limit=1):
         """
