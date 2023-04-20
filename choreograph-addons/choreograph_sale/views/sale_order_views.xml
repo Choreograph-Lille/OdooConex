@@ -45,7 +45,7 @@
                     <field name="other_conservation_duration"
                         attrs="{'invisible': [('show_other_conservation_duration', '=', False)]}" />
                     <field name="related_base"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
+                        attrs="{'invisible': [('recurrence_id', '!=', False)], 'required': [('recurrence_id', '=', False)]}" />
                 </field>
                 <field name="partner_shipping_id" position="after">
                     <field name="send_with" attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
