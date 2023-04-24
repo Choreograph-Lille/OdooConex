@@ -169,11 +169,15 @@ class SaleOrder(models.Model):
     @api.depends('order_line')
     def get_provider_delivery_template(self):
         line_with_project = self.get_operation_product()
+        operation_template = False
         if line_with_project:
-            provider_template = line_with_project[0].operation_template_id.task_ids.filtered(
-                lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER)
-            return provider_template if provider_template else False
-        return False
+            operation_template = line_with_project[0].operation_template_id
+        elif self.project_ids:
+            operation_template = self.project_ids[0]
+        provider_template = operation_template.task_ids.filtered(
+            lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER)
+
+        return provider_template
 
     def archive_required_tasks(self):
         for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
@@ -186,6 +190,11 @@ class SaleOrder(models.Model):
             project.name = project.name.replace(' (TEMPLATE)', '').replace(f'{project.sale_order_id.name} - ', '')
 
         self.archive_required_tasks()
+        self.initiate_provider_delivery()
+        self.compute_task_operations()
+        self._manage_task_assignation()
+
+    def initiate_provider_delivery(self):
         provider_delivery_template = self.get_provider_delivery_template()
         if provider_delivery_template:
             self.with_context(no_create_delivery_task=True).write({
@@ -194,8 +203,6 @@ class SaleOrder(models.Model):
                     'task_id': self.tasks_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER).id
                 })]
             })
-        self.compute_task_operations()
-        self._manage_task_assignation()
 
     def compute_task_operations(self):
         self.with_context(is_operation_generation=True).onchange_potential_return()
@@ -256,6 +263,7 @@ class SaleOrder(models.Model):
                 })
                 order_id.archive_required_tasks()
                 order_id.compute_task_operations()
+                order_id.initiate_provider_delivery()
                 # order_id._manage_task_assignation()
         return order_id
 
