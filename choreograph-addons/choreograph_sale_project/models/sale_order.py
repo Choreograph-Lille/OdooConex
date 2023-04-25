@@ -113,9 +113,6 @@ class SaleOrder(models.Model):
             self._unarchive_task('study_delivery')
         else:
             self._archive_task('study_delivery')
-        self._get_operation_task('study_global').write({
-            'date_deadline': self.study_delivery_date
-        })
 
     @api.onchange('presentation')
     def onchange_presentation(self):
@@ -125,7 +122,12 @@ class SaleOrder(models.Model):
             self._archive_task('presentation')
 
     def _get_operation_task(self, task_number_list, active=True):
-        return self.project_ids.mapped('task_ids').filtered(lambda item: item.task_number in task_number_list and item.active == active)
+        # return self.project_ids.mapped('task_ids').filtered(lambda item: item.task_number in task_number_list and item.active == active)
+        return self.env['project.task'].search([
+            '&', ('display_project_id', '!=', 'False'),
+            '|', ('sale_line_id', 'in', self.order_line.ids),
+            ('sale_order_id', '=', self.id), ('active', '=', active),
+            ('task_number', 'in', task_number_list)])
 
     def _unarchive_task(self, operation_task):
         for rec in self:
@@ -165,6 +167,8 @@ class SaleOrder(models.Model):
                 lambda t: t.task_number == OPERATION_TASK_NUMBER['study_delivery']).id or False
             rec.presentation_task_id = rec.tasks_ids.filtered(
                 lambda t: t.task_number == OPERATION_TASK_NUMBER['presentation']).id or False
+            rec.study_global_task_id = rec.tasks_ids.filtered(
+                lambda t: t.task_number == OPERATION_TASK_NUMBER['study_global']).id or False
 
     @api.depends('order_line')
     def get_provider_delivery_template(self):
@@ -246,6 +250,8 @@ class SaleOrder(models.Model):
             self.update_task_sms_campaign()
         if vals.get('email_is_info_validated', False):
             self.update_task_email_campaign()
+        if vals.get('repatriate_information'):
+            self.repatriate_quantity_information_on_task()
         return res
 
     @api.model
@@ -267,6 +273,10 @@ class SaleOrder(models.Model):
                 # order_id._manage_task_assignation()
         return order_id
 
+    def repatriate_quantity_information_on_task(self):
+        if self.repatriate_information:
+            self.tasks_ids.filtered(lambda t: t.task_number == '80').repatriate_quantity_information()
+
     def _update_date_deadline(self, vals):
         for rec in self:
             if vals.get('commitment_date'):
@@ -280,8 +290,16 @@ class SaleOrder(models.Model):
                 })
             if vals.get('potential_return_date') and rec.potential_return_task_id:
                 rec.potential_return_task_id.date_deadline = rec.potential_return_date
-            if vals.get('study_delivery_date') and rec.study_delivery_task_id:
-                rec.study_delivery_task_id.date_deadline = rec.study_delivery_date
+
+            if vals.get('study_delivery_date'):
+                if rec.potential_return:
+                    task = rec.study_delivery_task_id
+                else:
+                    task = rec.study_global_task_id
+                task.write({
+                    'date_deadline': rec.study_delivery_date
+                })
+
             if vals.get('presentation_date') and rec.presentation_task_id:
                 rec.presentation_task_id.date_deadline = rec.presentation_date
 
