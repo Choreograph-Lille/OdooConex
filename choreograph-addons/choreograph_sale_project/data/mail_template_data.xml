@@ -13,11 +13,10 @@
                 <div style="margin: 0px; padding: 0px;">
                     <p style="margin: 0px; padding: 0px; font-size: 13px;">
                         <t t-set="info_task" t-value="object.tasks_ids.filtered(lambda t: t.task_number == '75')"/>
+                        <t t-if="object.project_ids[0].stage_id.stage_number == '50'">
+                            <t t-set="info_task" t-value="object.tasks_ids.filtered(lambda t: t.task_number == '85')"/>
+                        </t>
                         <t t-if="info_task">
-
-                            <t t-if="object.project_ids[0].stage_id.stage_number == '60'">
-                                <t t-set="info_task" t-value="object.tasks_ids.filtered(lambda t: t.task_number == '85')"/>
-                            </t>
                             <t t-set="delivery_address" t-value="info_task.provider_delivery_address"/>
                             <t t-set="file_name" t-value="info_task.provider_file_name"/>
                             Hello,

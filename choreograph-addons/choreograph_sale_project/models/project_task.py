@@ -77,7 +77,7 @@ class ProjectTask(models.Model):
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
     folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
-    segment_ids = fields.Many2many('operation.segment', compute='compute_segment_ids')
+    segment_ids = fields.Many2many('operation.segment')
     operation_condition_ids = fields.Many2many('operation.condition', compute='compute_operation_condition_ids')
 
     trap_address_ids = fields.One2many('trap.address', 'task_id')
@@ -101,13 +101,9 @@ class ProjectTask(models.Model):
             ]
             task.folder_key = '_'.join([str(item) for item in combinaison_value if item])
 
-    @api.depends('sale_order_id', 'sale_order_id.segment_ids', 'sale_order_id.repatriate_information')
-    def compute_segment_ids(self):
-        if self.sale_order_id.repatriate_information:
-            self.segment_ids = [
-                (6, 0, self.env['operation.segment'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
-        else:
-            self.segment_ids = False
+    def repatriate_quantity_information(self):
+        self.segment_ids = [
+            (6, 0, self.env['operation.segment'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
 
     @api.depends('sale_order_id', 'sale_order_id.operation_condition_ids')
     def compute_operation_condition_ids(self):
@@ -344,3 +340,9 @@ class ProjectTask(models.Model):
                                          ('sale_order_id.commitment_date', '!=', False),
                                          ('sale_order_id.commitment_date', '<=', date)])
         return tasks.write({'stage_id': to_do_stage.id})
+
+    @api.onchange('segment_ids')
+    def onchange_segment_sequence(self):
+        for rec in self:
+            for i, l in enumerate(rec.segment_ids):
+                l.segment_number = i + 1

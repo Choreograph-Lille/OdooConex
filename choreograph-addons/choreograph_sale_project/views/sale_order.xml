@@ -22,8 +22,7 @@
                             <field name="return_production_potential_date"
                                 attrs="{'invisible':[('return_production_potential', '=', False)]}" />
                             <field name="study_delivery" force_save="1" />
-                            <field name="study_delivery_date"
-                                attrs="{'invisible':[('study_delivery', '=', False)]}" />
+                            <field name="study_delivery_date"/>
                             <field name="presta_delivery" />
                             <field name="presta_delivery_date"
                                 attrs="{'invisible':[('presta_delivery', '=', False)]}" />
@@ -36,7 +35,7 @@
                             <field name="presentation_task_id"
                                 attrs="{'invisible':[('presentation', '=', False)]}" readonly="1"
                                 force_save="1" />
-                            <field name="study_global_task_id" invisible="1" readonly="1" />
+                            <field name="study_global_task_id" invisible="1" readonly="1" force_save="1"/>
                         </group>
                         <group>
                             <field name="delivery_info_task_id" />
