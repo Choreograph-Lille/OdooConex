@@ -98,8 +98,7 @@ class SaleOrder(models.Model):
             rec.can_display_livery_project = rec.operation_type_id.stage_id.id in STAGE_DELIVERY_PROJECT if rec.operation_type_id else False
             rec.can_display_to_plan = rec.operation_type_id.stage_id.id in STAGE_TO_PLAN_PROJECT if rec.operation_type_id else False
 
-    @api.onchange('potential_return')
-    def onchange_potential_return(self):
+    def update_potential_return(self):
         if self.potential_return:
             self._unarchive_task('potential_return')
             self._archive_task('study_global')
@@ -107,15 +106,13 @@ class SaleOrder(models.Model):
             self._archive_task('potential_return')
             self._unarchive_task('study_global')
 
-    @api.onchange('study_delivery')
-    def onchange_study_delivery(self):
+    def update_study_delivery(self):
         if self.study_delivery:
             self._unarchive_task('study_delivery')
         else:
             self._archive_task('study_delivery')
 
-    @api.onchange('presentation')
-    def onchange_presentation(self):
+    def update_presentation(self):
         if self.presentation:
             self._unarchive_task('presentation')
         else:
@@ -209,9 +206,9 @@ class SaleOrder(models.Model):
             })
 
     def compute_task_operations(self):
-        self.with_context(is_operation_generation=True).onchange_potential_return()
-        self.with_context(is_operation_generation=True).onchange_study_delivery()
-        self.with_context(is_operation_generation=True).onchange_presentation()
+        self.with_context(is_operation_generation=True).update_potential_return()
+        self.with_context(is_operation_generation=True).update_study_delivery()
+        self.with_context(is_operation_generation=True).update_presentation()
 
     def check_project_count(func):
         def wrapper(self):
@@ -252,6 +249,13 @@ class SaleOrder(models.Model):
             self.update_task_email_campaign()
         if vals.get('repatriate_information'):
             self.repatriate_quantity_information_on_task()
+        if vals.get('potential_return'):
+            self.update_potential_return()
+        if vals.get('study_delivery'):
+            self.update_study_delivery()
+        if vals.get('presentation'):
+            self.update_presentation()
+
         return res
 
     @api.model
