@@ -133,7 +133,8 @@ class SaleOrder(models.Model):
         if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
             values['state_specific'] = values['state']
         res = super().write(values)
-        openration_condition = self.operation_condition_ids.filtered(lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
+        openration_condition = self.operation_condition_ids.filtered(
+            lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
         if self.project_ids and openration_condition:
             self.action_create_task_from_condition()
         return res
@@ -149,6 +150,14 @@ class SaleOrder(models.Model):
 
     def action_draft_native(self):
         self.write({'state_specific': 'draft'})
+
+    def copy_for_next_year(self):
+        no_delivery_date = self.filtered(lambda order: not order.commitment_date)
+        if no_delivery_date:
+            raise ValidationError(_('the record %s has no delivery date.') % (no_delivery_date))
+        for order_id in self:
+            next_year = order_id.commitment_date.replace(year=order_id.commitment_date.year + 1)
+            order_id.copy({'commitment_date': next_year})
 
     @api.model
     def default_get(self, fields_list):
