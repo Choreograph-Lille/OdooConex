@@ -192,21 +192,21 @@
                 </xpath>
                 <button name="payment_action_capture" position="before">
                     <button name="action_lead"
-                            attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','forecast')]}"
-                            string="Lead"
-                            type="object" />
+                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','forecast')]}"
+                        string="Lead"
+                        type="object" />
                     <button name="action_prospecting"
-                            attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','lead')]}"
-                            string="Propecting"
-                            type="object" />
+                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','lead')]}"
+                        string="Propecting"
+                        type="object" />
                     <button name="action_qualif"
-                            attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','prospecting')]}"
-                            string="Qualif"
-                            type="object" />
+                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','prospecting')]}"
+                        string="Qualif"
+                        type="object" />
                     <button name="action_draft_native"
-                            attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','qualif')]}"
-                            string="Quotation"
-                            type="object" />
+                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','qualif')]}"
+                        string="Quotation"
+                        type="object" />
                 </button>
             </field>
         </record>
@@ -239,5 +239,13 @@
             </field>
         </record>
 
+        <record id="model_sale_order_action_duplicate_for_next_year" model="ir.actions.server">
+            <field name="name">Duplicate for next year</field>
+            <field name="model_id" ref="sale.model_sale_order" />
+            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="binding_view_types">list</field>
+            <field name="state">code</field>
+            <field name="code">action = records.copy_for_next_year()</field>
+        </record>
     </data>
 </odoo>
