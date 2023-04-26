@@ -308,7 +308,7 @@ class SaleOrder(models.Model):
             if vals.get('is_info_validated'):
                 rec._get_operation_task(['50', '55', '60']).update_task_stage(TODO_TASK_STAGE)
             if vals.get('email_is_info_validated'):
-                rec._get_operation_task(['45', '55', '60']).update_task_stage(TODO_TASK_STAGE)
+                rec._get_operation_task(['45', '60']).update_task_stage(TODO_TASK_STAGE)
 
     @api.onchange('is_info_validated')
     def _onchange_sms_info_validated(self):
