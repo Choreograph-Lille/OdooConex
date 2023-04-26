@@ -10,3 +10,7 @@
 	path = oca-addons/web
 	url = https://github.com/OCA/web.git
 	branch = 16.0
+[submodule "oca-addons/tools"]
+        path = oca-addons/tools
+        url = https://github.com/OCA/server-tools.git
+        branch = 16.0
