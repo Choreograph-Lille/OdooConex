@@ -196,14 +196,6 @@ class SaleOrder(models.Model):
         self.order_line.sudo().with_company(self.company_id).with_context(
             is_operation_generation=True, user_id=self.user_id.id)._timesheet_service_generation()
         self.project_ids.write({'type_of_project': 'operation'})
-
-        if self.commitment_date:
-            self.tasks_ids.write({
-                'date_deadline': self.commitment_date.date()
-            })
-            self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
-                'date_deadline': self.commitment_date - relativedelta(days=2),
-            })
         self.write({'show_operation_generation_button': False})
 
     def action_create_task_from_condition(self):
