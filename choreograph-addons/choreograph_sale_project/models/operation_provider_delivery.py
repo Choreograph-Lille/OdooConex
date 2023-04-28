@@ -30,8 +30,7 @@ class OperationProviderDelivery(models.Model):
             if not self._context.get('no_create_delivery_task'):
                 task_template = rec.order_id.get_provider_delivery_template()
                 if task_template:
-                    rec.task_id = task_template[0].copy()
-                    rec.task_id.write({
+                    rec.task_id = task_template[0].copy({
                         'name': '%s (%s)' % (task_template[0].name, str(len(task_template))),
                         'date_deadline': rec.delivery_date,
                         'project_id': rec.order_id.get_operation_product().project_id.id
