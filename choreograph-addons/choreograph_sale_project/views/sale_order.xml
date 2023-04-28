@@ -21,10 +21,9 @@
                             <field name="return_production_potential" attrs="{'invisible':[('operation_code', 'not in', ['ENR_EMAIL', 'ENR_SMS'])]}" />
                             <field name="return_production_potential_date"
                                 attrs="{'invisible':[('return_production_potential', '=', False)]}" />
-                            <field name="study_delivery" force_save="1" />
                             <field name="study_delivery_date"/>
                             <field name="study_delivery_task_id"
-                                attrs="{'invisible':[('study_delivery', '=', False)]}" readonly="1"
+                                attrs="{'invisible':[('potential_return', '=', False)]}" readonly="1"
                                 force_save="1" />
                             <field name="presentation" force_save="1" />
                             <field name="presentation_date"

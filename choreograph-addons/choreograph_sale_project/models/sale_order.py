@@ -102,16 +102,12 @@ class SaleOrder(models.Model):
     def update_potential_return(self):
         if self.potential_return:
             self._unarchive_task('potential_return')
+            self._unarchive_task('study_delivery')
             self._archive_task('study_global')
         else:
             self._archive_task('potential_return')
-            self._unarchive_task('study_global')
-
-    def update_study_delivery(self):
-        if self.study_delivery:
-            self._unarchive_task('study_delivery')
-        else:
             self._archive_task('study_delivery')
+            self._unarchive_task('study_global')
 
     def update_presentation(self):
         if self.presentation:
@@ -122,10 +118,9 @@ class SaleOrder(models.Model):
     def _get_operation_task(self, task_number_list, active=True):
         # return self.project_ids.mapped('task_ids').filtered(lambda item: item.task_number in task_number_list and item.active == active)
         return self.env['project.task'].search([
-            '&', ('display_project_id', '!=', 'False'),
-            '|', ('sale_line_id', 'in', self.order_line.ids),
-            ('sale_order_id', '=', self.id), ('active', '=', active),
-            ('task_number', 'in', task_number_list)])
+            ('project_id', 'in', self.project_ids.ids),
+            ('task_number', 'in', task_number_list),
+            ('active', '=', active)])
 
     def _unarchive_task(self, operation_task):
         for rec in self:
@@ -156,17 +151,17 @@ class SaleOrder(models.Model):
                     'active': False,
                 })
 
-    @api.depends('potential_return', 'study_delivery', 'presentation')
+    @api.depends('potential_return', 'presentation')
     def _compute_operation_task(self):
         for rec in self:
             rec.potential_return_task_id = rec.tasks_ids.filtered(
-                lambda t: t.task_number == OPERATION_TASK_NUMBER['potential_return']).id or False
+                lambda t: t.task_number == OPERATION_TASK_NUMBER['potential_return']).id
             rec.study_delivery_task_id = rec.tasks_ids.filtered(
-                lambda t: t.task_number == OPERATION_TASK_NUMBER['study_delivery']).id or False
+                lambda t: t.task_number == OPERATION_TASK_NUMBER['study_delivery']).id
             rec.presentation_task_id = rec.tasks_ids.filtered(
-                lambda t: t.task_number == OPERATION_TASK_NUMBER['presentation']).id or False
+                lambda t: t.task_number == OPERATION_TASK_NUMBER['presentation']).id
             rec.study_global_task_id = rec.tasks_ids.filtered(
-                lambda t: t.task_number == OPERATION_TASK_NUMBER['study_global']).id or False
+                lambda t: t.task_number == OPERATION_TASK_NUMBER['study_global']).id
 
     @api.depends('order_line')
     def get_provider_delivery_template(self):
@@ -195,7 +190,7 @@ class SaleOrder(models.Model):
         self.compute_task_operations()
         self._manage_task_assignation()
         self.initiate_provider_delivery()
-        self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
+        # self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
 
     def initiate_provider_delivery(self):
         provider_delivery_template = self.get_provider_delivery_template()
@@ -209,7 +204,6 @@ class SaleOrder(models.Model):
 
     def compute_task_operations(self):
         self.with_context(is_operation_generation=True).update_potential_return()
-        self.with_context(is_operation_generation=True).update_study_delivery()
         self.with_context(is_operation_generation=True).update_presentation()
 
     def check_project_count(func):
@@ -251,11 +245,9 @@ class SaleOrder(models.Model):
             self.update_task_email_campaign()
         if vals.get('repatriate_information'):
             self.repatriate_quantity_information_on_task()
-        if vals.get('potential_return'):
+        if 'potential_return' in vals:
             self.update_potential_return()
-        if vals.get('study_delivery'):
-            self.update_study_delivery()
-        if vals.get('presentation'):
+        if 'presentation' in vals:
             self.update_presentation()
 
         return res
@@ -281,8 +273,7 @@ class SaleOrder(models.Model):
         return order_id
 
     def repatriate_quantity_information_on_task(self):
-        if self.repatriate_information:
-            self.tasks_ids.filtered(lambda t: t.task_number == '80').repatriate_quantity_information()
+        self.tasks_ids.filtered(lambda t: t.task_number == '80').repatriate_quantity_information()
 
     def _update_date_deadline(self, vals={}):
         for rec in self:
@@ -291,8 +282,8 @@ class SaleOrder(models.Model):
             if (is_operation_generation or vals.get('commitment_date')) and rec.commitment_date:
                 tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
                 tz_date = utc.localize(rec.commitment_date).astimezone(tz)
-                values.extend([(rec.tasks_ids.filtered(lambda t: t.task_number in ['85', '90']), {'date_deadline': tz_date}),
-                              (rec.tasks_ids.filtered(lambda t: t.task_number in ['65', '80']), {'date_deadline': tz_date - relativedelta(days=2)})])
+                values.extend([(rec._get_operation_task(['85', '90']), {'date_deadline': tz_date}),
+                              (rec._get_operation_task(['65', '80']), {'date_deadline': tz_date - relativedelta(days=2)})])
 
             if (is_operation_generation or vals.get('potential_return_date')) and rec.potential_return_task_id:
                 values.append((rec.potential_return_task_id, {'date_deadline': rec.potential_return_date}))
@@ -325,7 +316,7 @@ class SaleOrder(models.Model):
         :return:
         """
         for task, value in values:
-            task.write(value)
+                task.write(value)
 
     def _check_info_validated(self, vals):
         for rec in self:
