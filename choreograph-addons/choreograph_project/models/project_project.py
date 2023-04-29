@@ -156,18 +156,23 @@ class ProjectProject(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         project_task_obj = self.env['project.task']
+        project_project_obj = self.env['project.project']
         sequence_obj = self.env['ir.sequence']
         for vals in vals_list:
             if self._context.get('is_operation_generation') or self._context.get('default_type_of_project') == 'operation':
                 types = project_task_obj.get_operation_project_task_type()
                 name_seq = sequence_obj.next_by_code('project.project.operation')
+                project_name = False
+                if vals.get('project_template_id', False):
+                    project_name = project_project_obj.browse(vals['project_template_id']).name
+                    project_name = project_name.replace('(TEMPLATE)', '').replace('(COPY)', '')
                 vals.update({
                     'type_of_project': 'operation',
                     'code_sequence': name_seq,
                     'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id,
                     'type_ids': [(6, 0, types.ids)],
                     'user_id': self._context.get('user_id', vals.get('user_id')),
-                    'name': '%s - %s' % (name_seq, vals.get('name'))
+                    'name': '%s - %s' % (name_seq, vals.get('name') or project_name)
                 })
         return super(ProjectProject, self).create(vals_list)
 

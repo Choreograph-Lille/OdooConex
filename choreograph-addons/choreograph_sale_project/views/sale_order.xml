@@ -17,11 +17,13 @@
                             <field name="potential_return_task_id"
                                 attrs="{'invisible':[('potential_return', '=', False)]}"
                                 readonly="1" force_save="1" />
-                            <field name="study_delivery" readonly="1" force_save="1" />
-                            <field name="study_delivery_date"
-                                attrs="{'invisible':[('study_delivery', '=', False)]}" />
+                            <field name="operation_code" invisible="1"/>
+                            <field name="return_production_potential" attrs="{'invisible':[('operation_code', 'not in', ['ENR_EMAIL', 'ENR_SMS'])]}" />
+                            <field name="return_production_potential_date"
+                                attrs="{'invisible':[('return_production_potential', '=', False)]}" />
+                            <field name="study_delivery_date"/>
                             <field name="study_delivery_task_id"
-                                attrs="{'invisible':[('study_delivery', '=', False)]}" readonly="1"
+                                attrs="{'invisible':[('potential_return', '=', False)]}" readonly="1"
                                 force_save="1" />
                             <field name="presentation" force_save="1" />
                             <field name="presentation_date"
@@ -29,7 +31,8 @@
                             <field name="presentation_task_id"
                                 attrs="{'invisible':[('presentation', '=', False)]}" readonly="1"
                                 force_save="1" />
-                            <field name="study_global_task_id" invisible="1" readonly="1" />
+                            <field name="study_global_task_id" invisible="1" readonly="1" force_save="1"/>
+                            <field name="presta_delivery_date" invisible="1"/>
                         </group>
                         <group>
                             <field name="delivery_info_task_id" />
@@ -48,7 +51,7 @@
                     <h3>
                         <label for="operation_condition_ids" />
                     </h3>
-                    <field name="operation_condition_ids" />
+                    <field name="operation_condition_ids" context="{'default_partner_id': partner_id}"/>
                     <h3>
                         <label for="comment" />
                     </h3>
@@ -62,7 +65,7 @@
                         </group>
                         <field name="segment_ids">
                             <tree editable="bottom">
-                                <field name="segment_number" />
+                                <field name="segment_number" readonly="1"/>
                                 <field name="model_selection" />
                                 <field name="name" />
                                 <field name="ranking" />
@@ -143,12 +146,18 @@
         <field name="inherit_id" ref="choreograph_sale.view_order_form_inherit" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='excluded_provider']" position="before">
-                <field name="has_enrichment_email_op" invisible="1"/>
+                <field name="has_enrichment_email_op" invisible="1" />
             </xpath>
             <xpath expr="//field[@name='excluded_provider']" position="attributes">
                 <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
             </xpath>
             <xpath expr="//field[@name='optout_link']" position="attributes">
+                <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='routing_base']" position="attributes">
+                <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
+            </xpath>
+            <xpath expr="//group[@name='bat']/separator[2]" position="attributes">
                 <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
             </xpath>
         </field>

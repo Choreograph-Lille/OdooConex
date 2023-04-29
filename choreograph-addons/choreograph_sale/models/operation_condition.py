@@ -38,6 +38,7 @@ class OperationCondition(models.Model):
     order_ids = fields.Many2many('sale.order', 'operation_condition_sale_order_rel',
                                  'condition_id', 'sale_order_id', 'Sale Order')
     task_id = fields.Many2one('project.task')
+    partner_id = fields.Many2one('res.partner')
 
     @api.depends('operation_type', 'condition_subtype', 'exclusion_subtype')
     def _compute_subtype(self):
@@ -49,6 +50,21 @@ class OperationCondition(models.Model):
         for rec in self:
             rec.task_number = SUBTYPE_TASK_NUMBER[rec.operation_type + '_'
                                                   + rec.subtype] if rec.subtype in ['client_file', 'update', 'update_repoussoir'] else False
+
+    def write(self, vals):
+        res = super(OperationCondition, self).write(vals)
+        self._update_task_values()
+        return res
+
+    def _update_task_values(self):
+        for rec in self:
+            if rec.task_id:
+                rec.task_id.write({
+                    'note': rec.note,
+                    'date_deadline': rec.operation_date,
+                    'campaign_file_name': rec.file_name,
+                    'task_number': rec.task_number,
+                })
 
 
 class OperationConditionType(models.Model):

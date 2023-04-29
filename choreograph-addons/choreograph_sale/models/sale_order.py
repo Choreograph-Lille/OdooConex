@@ -66,6 +66,7 @@ class SaleOrder(models.Model):
     desired_finished_volume = fields.Char()
     volume_detail = fields.Text()
     sender = fields.Char()
+    id_title = fields.Char()
 
     reception_date = fields.Date()
     reception_location = fields.Char('Where to find ?')
@@ -131,7 +132,12 @@ class SaleOrder(models.Model):
     def write(self, values):
         if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
             values['state_specific'] = values['state']
-        return super().write(values)
+        res = super().write(values)
+        openration_condition = self.operation_condition_ids.filtered(
+            lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
+        if self.project_ids and openration_condition:
+            self.action_create_task_from_condition()
+        return res
 
     def action_lead(self):
         self.write({'state_specific': 'lead'})
@@ -144,6 +150,14 @@ class SaleOrder(models.Model):
 
     def action_draft_native(self):
         self.write({'state_specific': 'draft'})
+
+    def copy_for_next_year(self):
+        no_delivery_date = self.filtered(lambda order: not order.commitment_date)
+        if no_delivery_date:
+            raise ValidationError(_('the record %s has no delivery date.') % (no_delivery_date))
+        for order_id in self:
+            next_year = order_id.commitment_date.replace(year=order_id.commitment_date.year + 1)
+            order_id.copy({'commitment_date': next_year})
 
     @api.model
     def default_get(self, fields_list):
@@ -182,14 +196,6 @@ class SaleOrder(models.Model):
         self.order_line.sudo().with_company(self.company_id).with_context(
             is_operation_generation=True, user_id=self.user_id.id)._timesheet_service_generation()
         self.project_ids.write({'type_of_project': 'operation'})
-
-        if self.commitment_date:
-            self.tasks_ids.write({
-                'date_deadline': self.commitment_date.date()
-            })
-            self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
-                'date_deadline': self.commitment_date - relativedelta(days=2),
-            })
         self.write({'show_operation_generation_button': False})
 
     def action_create_task_from_condition(self):
@@ -197,18 +203,20 @@ class SaleOrder(models.Model):
             for condition in self.operation_condition_ids.filtered(
                     lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order']):
                 vals = {
-                    'name': rec.name + '/' + OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
+                    'name': OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
                         condition.subtype]),
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
                     'note': condition.note,
                     'sale_order_id': rec.id,
+                    'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
                     'user_ids': False,
                     'date_deadline': condition.operation_date,
                     'campaign_file_name': condition.file_name,
                     'task_number': condition.task_number,
                 }
                 condition.task_id = self.env['project.task'].sudo().create(vals)
+                condition.task_id.onchange_role_id()
                 rec.project_ids.task_ids = [(4, condition.task_id.id)]
                 condition.is_task_created = True
 

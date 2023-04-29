@@ -8,6 +8,7 @@ from odoo.addons.choreograph_project.models.project_project import (
     TERMINATED_TASK_STAGE,
     FILE_RECEIVED_TASK_STAGE,
     WAITING_FILE_TASK_STAGE,
+    TODO_TASK_STAGE
 )
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
@@ -27,14 +28,14 @@ class ProjectTask(models.Model):
     type = fields.Char()  # this should take the type in cond/excl but another task
 
     bat_from = fields.Many2one('choreograph.campaign.de', related='sale_order_id.bat_from')
-    bat_internal = fields.Char(related='sale_order_id.bat_internal')
-    bat_client = fields.Char(related='sale_order_id.bat_client')
-    bat_comment = fields.Text('BAT Comment', related='sale_order_id.bat_comment')
+    bat_internal = fields.Char()
+    bat_client = fields.Char()
+    bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
     # optout_comment = fields.Text(related='sale_order_id.optout_comment')
     optout_link = fields.Text(related='sale_order_id.optout_comment')
-    witness_file_name = fields.Char('File Name', related='sale_order_id.witness_file_name')
-    witness_comment = fields.Text(related='sale_order_id.witness_comment')
+    witness_file_name = fields.Char('File Name')
+    witness_comment = fields.Text()
     file_name = fields.Char()
     file_quantity = fields.Char()
     volume = fields.Integer()
@@ -45,7 +46,7 @@ class ProjectTask(models.Model):
     provider_delivery_address = fields.Char('Delivery Address')
 
     provider_comment = fields.Text()
-    desired_finished_volume = fields.Char(related='sale_order_id.desired_finished_volume')
+    desired_finished_volume = fields.Char()
     start_date = fields.Date()
     routing_base = fields.Char(related='sale_order_id.routing_base')
     specific_counting = fields.Text()
@@ -55,27 +56,29 @@ class ProjectTask(models.Model):
     deposit_date_3 = fields.Date()
 
     is_info_validated = fields.Boolean('Infos Validated', related='sale_order_id.is_info_validated')
-    po_livedata_number = fields.Char('PO Livedata Number', related='sale_order_id.livedata_po_number')
+    po_livedata_number = fields.Char('PO Livedata Number')
     campaign_name = fields.Char(related='sale_order_id.email_campaign_name')
-    reception_date = fields.Date(related='sale_order_id.reception_date')
-    reception_location = fields.Char('Where to find ?', related='sale_order_id.reception_location')
-    personalization = fields.Boolean(related='sale_order_id.sms_personalization')
-    routing_date = fields.Date(related='sale_order_id.routing_date')
-    routing_end_date = fields.Date(related='sale_order_id.routing_end_date')
+    reception_date = fields.Date()
+    reception_location = fields.Char('Where to find ?')
+    personalization = fields.Boolean()
+    personalization_text = fields.Text('If yes specify')
+    routing_date = fields.Date()
+    routing_end_date = fields.Date()
     campaign_type = fields.Selection(related='sale_order_id.campaign_type')
     volume_detail = fields.Text(related='sale_order_id.email_volume_detail')
-    sender = fields.Char(related='sale_order_id.sender')
+    sender = fields.Char()
     quantity_to_deliver = fields.Integer(related='sale_order_id.quantity_to_deliver')
     to_validate = fields.Boolean(related='sale_order_id.to_validate')
     object = fields.Char(related='sale_order_id.object')
-    ab_test = fields.Boolean('A/B Test', related='sale_order_id.ab_test')
-    is_preheader_available = fields.Boolean('Preheader available in HTML',
-                                            related='sale_order_id.is_preheader_available')
-    comment = fields.Text(related='sale_order_id.comment')
+    ab_test = fields.Boolean('A/B Test')
+    ab_test_text = fields.Text('If so, on what?')
+    is_preheader_available = fields.Boolean('Preheader available in HTML')
+    is_preheader_available_text = fields.Text('If not, indicate where to find it')
+    comment = fields.Text()
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
     folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
-    segment_ids = fields.Many2many('operation.segment', compute='compute_segment_ids')
+    segment_ids = fields.Many2many('operation.segment')
     operation_condition_ids = fields.Many2many('operation.condition', compute='compute_operation_condition_ids')
 
     trap_address_ids = fields.One2many('trap.address', 'task_id')
@@ -85,6 +88,7 @@ class ProjectTask(models.Model):
         'operation.provider.delivery', 'task_id', 'Provider Delivery Tasks')
     customer_commitment_date = fields.Datetime(related='sale_order_id.commitment_date')
     complexity = fields.Char()
+    delivery_date = fields.Date()
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):
@@ -98,13 +102,9 @@ class ProjectTask(models.Model):
             ]
             task.folder_key = '_'.join([str(item) for item in combinaison_value if item])
 
-    @api.depends('sale_order_id', 'sale_order_id.segment_ids', 'sale_order_id.repatriate_information')
-    def compute_segment_ids(self):
-        if self.sale_order_id.repatriate_information:
-            self.segment_ids = [
-                (6, 0, self.env['operation.segment'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
-        else:
-            self.segment_ids = False
+    def repatriate_quantity_information(self):
+        self.segment_ids = [
+            (6, 0, self.env['operation.segment'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
 
     @api.depends('sale_order_id', 'sale_order_id.operation_condition_ids')
     def compute_operation_condition_ids(self):
@@ -287,28 +287,42 @@ class ProjectTask(models.Model):
                         getattr(task.project_id, method_name)()
                     if task.task_number in ['10', '80']:
                         task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
+                    if task.task_number == '60' and task.project_id.sale_order_id.has_enrichment_email_op:
+                        task.project_id._update_task_stage('55', TODO_TASK_STAGE)
                 elif (task.task_number in ['5', '10', '15'] and stage_id.stage_number == FILE_RECEIVED_TASK_STAGE) or (task.task_number in ['20', '25', '35'] and stage_id.stage_number == WAITING_FILE_TASK_STAGE):
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '45' and stage_id.stage_number == '50':
                     task.project_id._hook_task_45_in_stage_50()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
-            if 'provider_file_name' in vals or 'provider_delivery_address' in vals:
+            provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex', 'trap_address_ids', 'provider_comment']
+            if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
         return res
 
     def update_provider_data(self):
         for rec in self:
             targeted_task = False
+            data = {
+                    'provider_file_name': rec.provider_file_name,
+                    'provider_delivery_address': rec.provider_delivery_address,
+                }
             if rec.task_number == '70':
                 targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '75')
             elif rec.task_number == '80':
                 targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '85')
-            if targeted_task:
-                targeted_task.write({
-                    'provider_file_name': rec.provider_file_name,
-                    'provider_delivery_address': rec.provider_delivery_address,
+                new_traps = self.env['trap.address'].create([{
+                        'name': trap.name,
+                        'segment_number': trap.segment_number,
+                        'bc_number': trap.bc_number,
+                    } for trap in rec.trap_address_ids])
+                data.update({
+                    'family_conex': rec.family_conex,
+                    'provider_comment': rec.provider_comment,
+                    'trap_address_ids': [(6, 0, new_traps.ids)]
                 })
+            if targeted_task:
+                targeted_task.write(data)
 
     def _schedule_move_task_95_to_15_stage(self, limit=1):
         """
@@ -329,3 +343,9 @@ class ProjectTask(models.Model):
                                          ('sale_order_id.commitment_date', '!=', False),
                                          ('sale_order_id.commitment_date', '<=', date)])
         return tasks.write({'stage_id': to_do_stage.id})
+
+    @api.onchange('segment_ids')
+    def onchange_segment_sequence(self):
+        for rec in self:
+            for i, l in enumerate(rec.segment_ids):
+                l.segment_number = i + 1

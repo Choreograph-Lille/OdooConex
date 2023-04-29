@@ -101,9 +101,7 @@ class ResPartner(models.Model):
             partner.message_post(body=body)
         return True
 
-    def _post_roles_message(self, categories={}):
-        if not categories:
-            return False
+    def _post_roles_message(self, roles={}):
         for partner in self:
             body = _("""
                 <ul>
@@ -119,7 +117,7 @@ class ResPartner(models.Model):
                             </ul>
                     </ul>
                 </ul>
-            """) % (self._manage_previous_role_message_structure(categories.get(partner.id)),
+            """) % (self._manage_previous_role_message_structure(roles.get(partner.id, {})),
                     self._manage_new_role_message_structure(partner.role_ids))
             partner.message_post(body=body)
         return True

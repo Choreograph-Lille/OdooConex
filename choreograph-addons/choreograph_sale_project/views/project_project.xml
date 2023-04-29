@@ -6,6 +6,9 @@
         <field name="model">project.project</field>
         <field name="inherit_id" ref="project.project_project_view_form_simplified" />
         <field name="arch" type="xml">
+            <field name="name" position="attributes">
+                <attribute name="required">0</attribute>
+            </field>
             <field name="user_id" position="before">
                 <group>
                     <group>
