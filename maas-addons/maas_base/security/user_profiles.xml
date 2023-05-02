@@ -8,7 +8,7 @@
                                                      ref('maas_base.group_start_modeling'),
                                                      ref('maas_base.group_operation_perform'),
                                                      ref('maas_base.group_operation_order'),
-                                                     ref('base.group_portal'),
+                                                     ref('maas_base.group_campaign_management'),
                                                      ref('maas_base.group_download_operation_ordered')])]"/>
         </record>
 
@@ -18,45 +18,49 @@
                                                      ref('maas_base.group_start_modeling'),
                                                      ref('maas_base.group_operation_perform'),
                                                      ref('maas_base.group_operation_order'),
+                                                     ref('maas_base.group_campaign_management'),
                                                      ref('maas_base.group_download_operation_ordered'),
-                                                     ref('base.group_portal'),
                                                      ref('maas_base.group_validate_next_package')])]"/>
         </record>
 
         <record id="dsi_user_role" model="res.users.role">
             <field name="name">My Model / Profile DSI</field>
-            <field name="implied_ids" eval="[(4, ref('maas_base.group_user_management'))]"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('maas_base.group_start_modeling'),
+                                                     ref('maas_base.group_operation_perform'),
+                                                     ref('maas_base.group_operation_order'),
+                                                     ref('maas_base.group_campaign_management'),
+                                                     ref('maas_base.group_download_operation_ordered')])]"/>
         </record>
 
         <record id="studies_user_role" model="res.users.role">
             <field name="name">My Model / Profile Etude</field>
-            <field name="implied_ids" eval="[(4, ref('maas_base.group_campaign_management')),
-                                             (4, ref('maas_base.group_start_modeling')),
-                                             (4, ref('maas_base.group_operation_perform'))]"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('maas_base.group_campaign_management'),
+                                             ref('maas_base.group_start_modeling'),
+                                             ref('maas_base.group_operation_perform')])]"/>
         </record>
 
         <record id="commercial_user_role" model="res.users.role">
             <field name="name">My Model / Profile Commercial</field>
-            <field name="implied_ids" eval="[(4, ref('maas_base.group_customer_management')),
-                                             (4, ref('maas_base.group_subscription_management')),
-                                             (4, ref('maas_base.group_package_management')),
-                                             (4, ref('maas_base.group_campaign_management')),
-                                             (4, ref('maas_base.group_operation_order')),
-                                             (4, ref('maas_base.group_validate_next_package'))]"/>
+            <field name="implied_ids" eval="[(6, 0, [ref('maas_base.group_customer_management'),
+                                             ref('maas_base.group_subscription_management'),
+                                             ref('maas_base.group_package_management'),
+                                             ref('maas_base.group_campaign_management'),
+                                             ref('maas_base.group_operation_order'),
+                                             ref('maas_base.group_validate_next_package')])]"/>
         </record>
 
         <record id="admin_user_role" model="res.users.role">
             <field name="name">My Model / Profile Admin</field>
-            <field name="implied_ids" eval="[(4, ref('maas_base.group_customer_management')),
-                                             (4, ref('maas_base.group_subscription_management')),
-                                             (4, ref('maas_base.group_package_management')),
-                                             (4, ref('maas_base.group_campaign_management')),
-                                             (4, ref('maas_base.group_start_modeling')),
-                                             (4, ref('maas_base.group_operation_perform')),
-                                             (4, ref('maas_base.group_operation_order')),
-                                             (4, ref('maas_base.group_validate_next_package')),
-                                             (4, ref('maas_base.group_download_operation_ordered')),
-                                             (4, ref('maas_base.group_user_management'))]"/>
+            <field name="implied_ids" eval="[(6, 0,[ref('maas_base.group_customer_management'),
+                                             ref('maas_base.group_subscription_management'),
+                                             ref('maas_base.group_package_management'),
+                                             ref('maas_base.group_campaign_management'),
+                                             ref('maas_base.group_operation_perform'),
+                                             ref('maas_base.group_operation_order'),
+                                             ref('maas_base.group_start_modeling'),
+                                             ref('maas_base.group_validate_next_package'),
+                                             ref('maas_base.group_download_operation_ordered'),
+                                             ref('maas_base.group_user_management')])]"/>
             <field name="users" eval="[(4, ref('base.user_admin'))]"/>
         </record>
 
