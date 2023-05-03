@@ -103,7 +103,6 @@ class SaleSubscription(models.Model):
             'product_uom': product.uom_id.id,
             'price_unit': price,
             'date': fields.Datetime.now(),
-            'qty_cumulative': 1,
         }
 
     def _prepare_subscription_rent_line_values(self, product=False):
@@ -198,23 +197,30 @@ class SaleSubscription(models.Model):
         invoiceable_lines = super(SaleSubscription, self)._get_invoiceable_lines(final)
         invoiceable_lines = invoiceable_lines.filtered(lambda invl: not invl.order_id.is_subscription)
 
-        states = ['subscription_rent', 'start_subscription', 'consumption']
-
         date = fields.Datetime.now()
 
         start_period = date.replace(hour=0, minute=0, second=0) + relativedelta(day=1)
         end_period = date.replace(hour=23, minute=59, second=59, microsecond=999) + relativedelta(day=31)
 
         for subscription in self.filtered(lambda sub: sub.is_subscription):
-            lines = subscription.order_line.filtered(
-                lambda l: l.state_subscription in states and start_period <= l.date <= end_period
+            rent_line = subscription.order_line.filtered(
+                lambda l: l.state_subscription == 'subscription_rent' and start_period <= l.date <= end_period
             )
-            if lines:
-                invoiceable_lines |= lines[0]
-                invoiceable_lines |= lines[-1:]
+            consumption_lines = subscription.order_line.filtered(
+                lambda l: l.state_subscription == 'consumption' and start_period <= l.date <= end_period
+            )
+            if consumption_lines and rent_line:
+                invoiceable_lines |= rent_line[0]
+                invoiceable_lines |= consumption_lines[-1:]
             else:
-                invoiceable_lines |= lines[0]
-                invoiceable_lines |= lines[1]
+                start_subscription_line = subscription.order_line.filtered(
+                    lambda l: l.state_subscription == 'start_subscription' and start_period <= l.date <= end_period
+                )
+                if start_subscription_line and rent_line:
+                    invoiceable_lines |= rent_line[0]
+                    invoiceable_lines |= start_subscription_line[0]
+                else:
+                    continue
         return invoiceable_lines
 
     @api.model
