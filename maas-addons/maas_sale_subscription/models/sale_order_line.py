@@ -48,7 +48,10 @@ class SaleSubscriptionLine(models.Model):
                     line.price_subtotal += price_rent[0].price_unit
 
     def _reset_subscription_qty_to_invoice(self):
-        super()._reset_subscription_qty_to_invoice()
-        for line in self:
-            if line.order_id.package_id:
+        res = super(SaleSubscriptionLine, self)._reset_subscription_qty_to_invoice()
+        for line in self.filtered(lambda l: l.order_id.package_id):
+            if line.qty_cumulative:
                 line.qty_to_invoice = line.qty_cumulative
+            else:
+                line.qty_to_invoice = line.product_uom_qty
+        return res
