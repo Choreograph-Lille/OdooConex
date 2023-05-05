@@ -20,4 +20,6 @@
         <field name="name">Sale order</field>
         <field name="model_id" ref="sale.model_sale_order" />
     </record>
+
+    <function model="auditlog.rule" name="auto_subscribe" />
 </odoo>

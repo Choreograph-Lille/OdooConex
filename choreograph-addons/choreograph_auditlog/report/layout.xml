@@ -48,14 +48,17 @@
             <tbody>
                 <tr>
                     <td class="fw-bold">Reference :</td>
-                    <td t-out="''" />
-                    <td class="fw-bold">Period :</td>
+                    <td t-out="sequence" />
+                    <td class="fw-bold">
+                        <span t-if="is_periode">Period :</span>
+                        <span t-else="">Date :</span>
+                    </td>
                     <td
                         t-out="start_date" />
                     <td class="fw-bold">Type :</td>
                     <td class="fw-bold">Manual</td>
                 </tr>
-                <tr>
+                <tr t-if="is_periode">
                     <td />
                     <td />
                     <td />

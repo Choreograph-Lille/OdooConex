@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
-from odoo import fields, models
-from odoo.tools.misc import format_datetime
+import json
+import re
+
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
+from odoo.tools.misc import format_datetime, format_date, formatLang
 
 FORMAT_DATE_TIME = 'dd/MM/yyyy HH:mm'
 FORMAT_DATE = 'dd/MM/yyyy'
@@ -10,9 +14,15 @@ class AuditlogReport(models.TransientModel):
     _name = 'auditlog.report.wizard'
 
     is_period = fields.Boolean('Period')
-    start_date = fields.Date()
+    start_date = fields.Date('Date')
     end_date = fields.Date()
     ir_action_report_id = fields.Many2one('ir.actions.report', 'Rule')
+
+    @api.constrains('start_date', 'end_date', 'is_period')
+    def _check_date(self):
+        for report in self:
+            if report.is_period and report.start_date > report.end_date:
+                raise ValidationError(_('The start date cannot be greater than the end date'))
 
     def export(self):
         rule_report_ids = [
@@ -26,7 +36,8 @@ class AuditlogReport(models.TransientModel):
             self.env.ref('choreograph_auditlog.action_report_sox_role_permissions'): self._data_user_sox_roles,
             self.env.ref('choreograph_auditlog.action_report_supplier_bank_details'): self._data_supplier_bank_details,
             self.env.ref('choreograph_auditlog.action_report_accounting'): self._data_accounting,
-            self.env.ref('choreograph_auditlog.action_report_quote_purchase_order'): self._data_quote_po
+            self.env.ref('choreograph_auditlog.action_report_quote_purchase_order'): self._data_quote_po,
+            self.env.ref('choreograph_auditlog.action_report_purchase_closing'): self._data_puchase_closing,
         }
         report_data_func = report_data_map.get(self.ir_action_report_id)
         if not report_data_func:
@@ -68,8 +79,10 @@ class AuditlogReport(models.TransientModel):
         else:
             data = report_data_func()
         data.update({
-            'end_date': self.end_date.strftime('%D') if self.end_date else None,
-            'start_date': self.start_date.strftime('%D') if self.start_date else None,
+            'end_date': format_date(self.env, self.end_date, FORMAT_DATE) if self.end_date else None,
+            'start_date': format_date(self.env, self.start_date, FORMAT_DATE) if self.start_date else None,
+            'is_periode': self.is_period,
+            'sequence': self.env['ir.sequence'].next_by_code('auditlog.report.wizard')
         })
         return self.ir_action_report_id.report_action(None, data=data)
 
@@ -177,7 +190,7 @@ class AuditlogReport(models.TransientModel):
                 'credit_note_number': move_id.name,
                 'commercial': move_id.invoice_user_id.name,
                 'origin_document': move_id.invoice_origin,
-                'subtotal': move_id.amount_total,
+                'subtotal': formatLang(self.env, move_id.amount_total),
                 'creator': move_id.create_uid.name,
                 'validator': log_line_id.log_id.user_id.name if log_line_id else None,
                 'validation_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE_TIME),
@@ -212,3 +225,55 @@ class AuditlogReport(models.TransientModel):
                 'name': order.name
             })
         return data
+
+    def _data_puchase_closing(self):
+        log_obj = self.env['auditlog.log.line']
+        end_date = self.end_date if self.is_period else self.start_date
+        order_ids = self.env['sale.order'].search([
+            ('state', '=', 'sale'),
+            ('date_order', '>=', self.start_date),
+            ('date_order', '<=', end_date)
+        ])
+        datas = {
+            'orders': []
+        }
+
+        def find_purchase_validor(res_id):
+            entry_ids = self.env['studio.approval.entry'].search([
+                ('res_id', '=', res_id),
+                ('approved', '=', True)
+            ])
+            return entry_ids.mapped(lambda entry: entry and "%s (%s)" % (entry.user_id.name, re.findall(r'\b[12]', entry.rule_id.name or '')[0]))
+        for order_id in order_ids:
+            purchase_order_ids = order_id._get_purchase_orders()
+            po_list = purchase_order_ids.mapped(lambda po: {
+                'purchase': {
+                    'po_number': po.name,
+                    'supplier': po.partner_id.name,
+                    'date_approve': format_date(self.env, po.date_approve, FORMAT_DATE),
+                    'date_planned': format_date(self.env, po.date_planned, FORMAT_DATE),
+                    'amount': formatLang(self.env, po.amount_total),
+                },
+                'invoices': po.invoice_ids.mapped(lambda invoice: {
+                    'invoice_name': invoice.name,
+                    'invoice_date': format_date(self.env, invoice.invoice_date, FORMAT_DATE),
+                    'amount': formatLang(self.env, invoice.amount_total),
+                    'diff': ''
+                }),
+                'informations': {
+                    'difference_amount': '',
+                    'comment': '',
+                    'po_preparer': '',
+                    'po_validor': ','.join(find_purchase_validor(po.id)),
+                    'net_marging': ''
+                }
+            })
+            datas['orders'].append({
+                'name': order_id.name,
+                'client': order_id.partner_id.name,
+                'amount': formatLang(self.env, order_id.amount_total),
+                'delivery_date': format_datetime(self.env, order_id.commitment_date, dt_format=FORMAT_DATE),
+                'purchase_data': po_list
+
+            })
+        return datas

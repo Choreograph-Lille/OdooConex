@@ -14,7 +14,7 @@
                         <tbody>
                             <tr>
                                 <td class="fw-bold">Reference :</td>
-                                <td t-esc="''" />
+                                <td t-esc="sequence" />
                                 <td class="fw-bold">Type :</td>
                                 <td>Manual</td>
                             </tr>

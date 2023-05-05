@@ -80,4 +80,15 @@
         <field name="is_auditreport" eval="True" />
     </record>
 
+    <record id="action_report_purchase_closing" model="ir.actions.report">
+        <field name="name">Purchase closing</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_purchase_closing</field>
+        <field name="report_file">choreograph_auditlog.report_purchase_closing</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="is_auditreport" eval="True" />
+    </record>
+
 </odoo>

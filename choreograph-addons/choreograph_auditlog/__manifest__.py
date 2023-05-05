@@ -18,13 +18,14 @@
         'report/user_roles_and_right_template.xml',
         'report/sox_role_permissions_template.xml',
         'report/auditlog_log_template.xml',
-        'report/closing_purchase_template.xml',
+        'report/purchase_closing_template.xml',
         'report/supplier_bank_details_template.xml',
         'report/account_template.xml',
         'report/quote_purchase_order_template.xml',
         'report/auditlog_report_wizard.xml',
 
         'data/auditlog_rule.xml',
+        'data/ir_sequence.xml',
 
         'wizards/auditlog_report_wizard.xml',
     ],

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="purchase_closing_template">
+        <t t-call="choreograph_auditlog.layout">
+            <div class="page">
+                <t t-call="choreograph_auditlog.header_audit_report" />
+                <div class="row">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <td class="fw-bold">Name order</td>
+                                <td class="fw-bold">Client</td>
+                                <td class="fw-bold">Amount order</td>
+                                <td class="fw-bold">Delivery date</td>
+                                <td class="fw-bold">Purchase order</td>
+                                <td class="fw-bold">Purchase invoices</td>
+                                <td class="fw-bold">Informations</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="orders" t-as="order">
+                                <tr>
+                                    <td t-out="order['name']" />
+                                    <td t-out="order['client']" />
+                                    <td t-out="order['amount']" />
+                                    <td t-out="order['delivery_date']" />
+                                    <t t-foreach="order['purchase_data']" t-as="purchase_bloc">
+                                        <t t-set="purchase" t-value="purchase_bloc['purchase']" />
+                                        <t t-set="invoice"
+                                            t-value="purchase_bloc['invoices'][0] if purchase_bloc['invoices'] else {}" />
+                                        <t t-set="infos" t-value="purchase_bloc['informations']" />
+                                        <td>
+                                            <p>
+                                                <strong>N° PO : </strong>
+                                                <span t-out="purchase['po_number']" />
+                                            </p>
+                                            <p>
+                                                <strong>Supplier : </strong>
+                                                <span t-out="purchase['supplier']" />
+                                            </p>
+                                            <p>
+                                                <strong>PO date : </strong>
+                                                <span t-out="purchase['date_approve']" />
+                                            </p>
+                                            <p>
+                                                <strong>Date planned : </strong>
+                                                <span t-out="purchase['date_planned']" />
+                                            </p>
+                                            <p>
+                                                <strong>Amount: </strong>
+                                                <span t-out="purchase['amount']" />
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <strong>N° invoice : </strong>
+                                                <span t-out="invoice.get('invoice_name') or ''" />
+                                            </p>
+                                            <p>
+                                                <strong>Invoice date : </strong>
+                                                <span t-out="invoice.get('invoice_date') or ''" />
+                                            </p>
+                                            <p>
+                                                <strong>Amount TTC : </strong>
+                                                <span t-out="invoice.get('amount') or ''" />
+                                            </p>
+                                            <p>
+                                                <strong>Difference : </strong>
+                                                <span t-out="invoice.get('diff') or ''" />
+                                            </p>
+                                        </td>
+                                        <td>
+                                            <p>
+                                                <strong>Difference amount : </strong>
+                                                <span t-out="infos.get('difference_amount') or ''" />
+                                            </p>
+                                            <p>
+                                                <strong>Comment : </strong>
+                                                <span t-out="infos.get('comment') or ''" />
+                                            </p>
+                                            <p>
+                                                <strong>PO preparator : </strong>
+                                                <span t-out="infos.get('po_preparer') or ''" />
+                                            </p>
+                                            <p>
+                                                <strong>PO validor : </strong>
+                                                <span t-out="infos.get('po_validor') or ''" />
+                                            </p>
+                                            <p>
+                                                <strong>Net margin : </strong>
+                                                <span t-out="infos.get('net_marging') or ''" />
+                                            </p>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="report_purchase_closing">
+        <t t-set="full_width" t-value="True" />
+        <t t-set="data_report_landscape" t-value="True" />
+        <t t-call="web.html_container">
+            <t t-call="choreograph_auditlog.purchase_closing_template" />
+        </t>
+    </template>
+</odoo>
