@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="closing_purchase_template">
+        <t t-set="full_width" t-value="True" />
+        <t t-set="data_report_landscape" t-value="True" />
+        <t t-call="web.html_container">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                    <t t-call="choreograph_auditlog.header_audit_report" />
+                    <div class="row">
+                        <table class="table table-borderless">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Client</th>
+                                    <th>Opportunity amount</th>
+                                    <th>Delivery date</th>
+                                    <th>Purchase order</th>
+                                    <th>Purchase invoices</th>
+                                    <th>Informations</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>
