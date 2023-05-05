@@ -1,0 +1,517 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_auditlog
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e-20230208\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-05 12:21+0000\n"
+"PO-Revision-Date: 2023-05-05 12:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>Amount TTC : </strong>"
+msgstr "<strong>Montant TTC : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>Amount: </strong>"
+msgstr "<strong>Montant HT : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>Comment : </strong>"
+msgstr "<strong>Commentaire : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>Date planned : </strong>"
+msgstr "<strong>Date prévue : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>Difference : </strong>"
+msgstr "<strong>Différence : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>Difference amount : </strong>"
+msgstr "<strong>Montant de l'écart : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>Invoice date : </strong>"
+msgstr "<strong>Date de facture : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>Net margin : </strong>"
+msgstr "<strong>Marge nette : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>N° PO : </strong>"
+msgstr "<strong>N° du PO : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>N° invoice : </strong>"
+msgstr "<strong>N° de la facture achat : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>PO date : </strong>"
+msgstr "<strong>Date de commande : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>PO preparator : </strong>"
+msgstr "<strong>Préparateur du PO: </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>PO validor : </strong>"
+msgstr "<strong>Valideur du PO : </strong>"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "<strong>Supplier : </strong>"
+msgstr "<strong>Fournisseur : </strong>"
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_accounting
+msgid "Accounting"
+msgstr "Avoir"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+msgid "Action"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Affectation date :"
+msgstr "Date d'affectation :"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "Amount order"
+msgstr "Montant de la commande"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
+msgid "Audit reports"
+msgstr "Rapport d'audits"
+
+#. module: choreograph_auditlog
+#: model:ir.model,name:choreograph_auditlog.model_auditlog_log_line
+msgid "Auditlog - Log details (fields updated)"
+msgstr "Auditlog - Détails (champs modifiés)"
+
+#. module: choreograph_auditlog
+#: model:ir.model,name:choreograph_auditlog.model_auditlog_rule
+msgid "Auditlog - Rule"
+msgstr "Auditlog - Règle"
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_ir_actions_report__auditlog_model_id
+msgid "Auditlog Model"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.quote_purchase_order_template
+msgid "Author"
+msgstr "Auteur"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.sox_role_permissions_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Author :"
+msgstr "Auteur :"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.supplier_bank_details_template
+msgid "BIC"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_sox_role_changing
+msgid "Changing SOX roles"
+msgstr "Modification des rôles SOX"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "Client"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+msgid "Comment"
+msgstr "Commentaire"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+msgid "Commercial"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Create"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+msgid "Creator"
+msgstr "Créateur"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+msgid "Credit note number"
+msgstr "N° de l'avoir"
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__start_date
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+msgid "Date"
+msgstr "Date"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
+msgid "Date :"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.quote_purchase_order_template
+msgid "Delivery date"
+msgstr "Date de livraison"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_report_wizard_form_view
+msgid "Discard"
+msgstr "Annuler"
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.supplier_bank_details_template
+msgid "EXEMPT TO VAT"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__end_date
+msgid "End Date"
+msgstr "Date de fin"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_report_wizard_form_view
+msgid "Export"
+msgstr "Exporter"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Extract date :"
+msgstr "Date de l'extraction :"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.supplier_bank_details_template
+msgid "Extracted on"
+msgstr "Extrait le"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.sox_role_permissions_template
+msgid "Extraction date :"
+msgstr "Date de l'extraction :"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+msgid "Field"
+msgstr "Champs"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.sox_role_permissions_template
+msgid "Groups :"
+msgstr "Groupes :"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.supplier_bank_details_template
+msgid "IBAN"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "Informations"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+msgid "Invoice date"
+msgstr "Date de facture"
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_ir_actions_report__is_auditreport
+msgid "Is Auditreport"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.layout_standard
+msgid "Logo"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.sox_role_permissions_template
+msgid "Manual"
+msgstr "Manuel"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.supplier_bank_details_template
+msgid "NAME"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.quote_purchase_order_template
+msgid "Name"
+msgstr "Nom"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "Name order"
+msgstr "Nom de la commande"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+msgid "New value"
+msgstr "Nouvelle valeur"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Object"
+msgstr "Objet"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+msgid "Old value"
+msgstr "Ancienne valeur"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+msgid "Origin document"
+msgstr "Document d'origin"
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__is_period
+msgid "Period"
+msgstr "Période"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
+msgid "Period :"
+msgstr "Périodes :"
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_purchase_closing
+msgid "Purchase closing"
+msgstr "Clôture d'achats"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "Purchase invoices"
+msgstr "Factures achat"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "Purchase order"
+msgstr "Bons de commande"
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_quote_purchase_order
+msgid "Quote / Purchase order"
+msgstr "Devis/BC"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Read"
+msgstr "Lecture"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.sox_role_permissions_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Reference :"
+msgstr "Réference :"
+
+#. module: choreograph_auditlog
+#: model:ir.model,name:choreograph_auditlog.model_ir_actions_report
+msgid "Report Action"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_report_wizard_form_view
+msgid "Report Auditlog"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model:ir.actions.act_window,name:choreograph_auditlog.auditlog_report_action
+#: model:ir.ui.menu,name:choreograph_auditlog.report_log_menu
+msgid "Report log"
+msgstr "Rapport audits"
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_user_roles_and_right
+msgid "Rights and roles"
+msgstr "Droits & Rôles"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Role :"
+msgstr "Rôle :"
+
+#. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__ir_action_report_id
+msgid "Rule"
+msgstr "Règle"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.supplier_bank_details_template
+msgid "SIRET"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.quote_purchase_order_template
+msgid "SOX"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.quote_purchase_order_template
+msgid "SOX date"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.sox_role_permissions_template
+msgid "SOX role permissions"
+msgstr "Droits d'accès des rôles SOX"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Status of user roles and rights"
+msgstr "Etat des rôles et droits utilisateurs"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+msgid "Subtotal"
+msgstr "Sous total"
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_res_partner_rib
+msgid "Supplier RIB modification extraction"
+msgstr "Extraction modification RIB fournisseur"
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_supplier_bank_details
+msgid "Supplier bank details"
+msgstr "RIB des fournisseurs"
+
+#. module: choreograph_auditlog
+#. odoo-python
+#: code:addons/choreograph_auditlog/wizards/auditlog_report_wizard.py:0
+#, python-format
+msgid "The start date cannot be greater than the end date"
+msgstr "La date de début ne peut pas être supérieure à la date de fin"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.quote_purchase_order_template
+msgid "True"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.sox_role_permissions_template
+msgid "Type :"
+msgstr ""
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Unlink"
+msgstr "Suppression"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.sox_role_permissions_template
+msgid "User :"
+msgstr "Utilisateur :"
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_sox_role_permissions
+msgid "User SOX roles"
+msgstr "Rôles SOX des utilisateurs"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "User name :"
+msgstr "Nom de l'utilisateur :"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+msgid "Validation date"
+msgstr "Date de validation"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+msgid "Validator"
+msgstr "Validateur"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+msgid "Write"
+msgstr "Ecriture"
+
+#. module: choreograph_auditlog
+#: model:ir.model,name:choreograph_auditlog.model_auditlog_report_wizard
+msgid "auditlog.report.wizard"
+msgstr ""
