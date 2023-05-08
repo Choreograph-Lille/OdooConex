@@ -133,9 +133,9 @@ class SaleOrder(models.Model):
         if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
             values['state_specific'] = values['state']
         res = super().write(values)
-        openration_condition = self.operation_condition_ids.filtered(
+        operation_condition = self.operation_condition_ids.filtered(
             lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
-        if self.project_ids and openration_condition:
+        if self.project_ids and operation_condition:
             self.action_create_task_from_condition()
         return res
 
