@@ -3,6 +3,7 @@
     <menuitem name="Operation"
         id="menu_operation_root"
         web_icon="choreograph_project,static/description/app_icon.png"
+        groups="project.group_project_user"
         sequence="71">
         <menuitem
             id="operation"

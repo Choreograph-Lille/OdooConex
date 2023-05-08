@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="auditlog_report_wizard_form_view" model="ir.ui.view">
+        <field name="name">auditlog.report.wizard.form.view</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Auditlog">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="ir_action_report_id"
+                                required="1"
+                                domain="[('is_auditreport', '=', True)]"
+                                options="{'no_create': True}" />
+                            <field name="start_date" required="1"/>
+                            <field name="is_period" />
+                            <field name="end_date" attrs="{'required': [('is_period','=', True)], 'invisible': [('is_period','=', False)]}" />
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button string="Export" type="object" name="export" class="btn-primary" />
+                    <button string="Discard" class="btn-secondary" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="auditlog_report_action" model="ir.actions.act_window">
+        <field name="name">Report log</field>
+        <field name="res_model">auditlog.report.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="choreograph_auditlog.auditlog_report_wizard_form_view" />
+    </record>
+
+    <menuitem
+        id="report_log_menu"
+        name="Report log"
+        parent="auditlog.menu_audit"
+        action="choreograph_auditlog.auditlog_report_action"
+    />
+</odoo>
