@@ -64,9 +64,9 @@
                         <group>
                             <field name="to_validate" />
                         </group>
-                        <field name="segment_ids">
+                        <field name="segment_ids" force_save="1" >
                             <tree editable="bottom">
-                                <field name="segment_number" readonly="1"/>
+                                <field name="segment_number" readonly="1" force_save="1"/>
                                 <field name="model_selection" />
                                 <field name="name" />
                                 <field name="ranking" />

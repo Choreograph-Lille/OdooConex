@@ -106,6 +106,7 @@ class SaleOrder(models.Model):
             self._unarchive_task('potential_return')
             self._unarchive_task('study_delivery')
             self._archive_task('study_global')
+            self.update_operation_task_comment()
         else:
             self._archive_task('potential_return')
             self._archive_task('study_delivery')
@@ -260,7 +261,8 @@ class SaleOrder(models.Model):
             self.update_potential_return()
         if 'presentation' in vals:
             self.update_presentation()
-
+        if 'comment' in vals:
+            self.update_operation_task_comment()
         return res
 
     @api.model
@@ -282,6 +284,12 @@ class SaleOrder(models.Model):
                 order_id._update_date_deadline(vals)
                 # order_id._manage_task_assignation()
         return order_id
+
+    def update_operation_task_comment(self):
+        for rec in self:
+            rec._get_operation_task(['25', '30']).write({
+                'comment': rec.comment
+            })
 
     def repatriate_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number == '80').repatriate_quantity_information()
