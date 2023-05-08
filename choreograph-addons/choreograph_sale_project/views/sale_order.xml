@@ -36,6 +36,7 @@
                         </group>
                         <group>
                             <field name="delivery_info_task_id" />
+                            <field name="presta_delivery_info_task_id" />
                             <field
                                 name="operation_provider_delivery_ids"
                                 attrs="{'invisible':[('operation_provider_delivery_ids', '=', [])]}"
@@ -43,7 +44,7 @@
                                 <tree editable="bottom">
                                     <field name="order_id" invisible="1" />
                                     <field name="delivery_date" />
-                                    <field name="task_id" readonly="1" />
+                                    <field name="task_id" readonly="1" invisible="1"/>
                                 </tree>
                             </field>
                         </group>

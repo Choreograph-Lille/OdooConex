@@ -58,11 +58,13 @@ class SaleOrder(models.Model):
     can_display_livery_project = fields.Boolean(compute='_compute_can_display_delivery')
     can_display_to_plan = fields.Boolean(compute='_compute_can_display_delivery')
     delivery_email_to = fields.Char()
-    delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_task_id')
+    delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_tasks')
+    presta_delivery_info_task_id = fields.Many2one('project.task', 'Presta Delivery Info', compute='compute_delivery_info_tasks')
     has_enrichment_email_op = fields.Boolean(compute='_compute_has_enrichment_email_op', store=True)
 
-    def compute_delivery_info_task_id(self):
+    def compute_delivery_info_tasks(self):
         self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
+        self.presta_delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '70').id or False
 
     @api.depends('project_ids')
     def _compute_operation_type_id(self):
@@ -142,6 +144,9 @@ class SaleOrder(models.Model):
                     task.write({
                         'date_deadline': vals[operation_task]
                     })
+                # CNXMIG-102
+                if rec.project_ids and rec.project_ids[0].stage_id.id == self.env.ref('choreograph_project.planning_project_stage_planified').id and operation_task == 'potential_return':
+                    rec.update_task_stage_to_15(task)
 
     def _archive_task(self, operation_task):
         for rec in self:
@@ -150,6 +155,12 @@ class SaleOrder(models.Model):
                 task.write({
                     'active': False,
                 })
+
+    def update_task_stage_to_15(self, task=False):
+        to_do_stage = self.env.ref('choreograph_project.project_task_type_to_do', raise_if_not_found=False)
+        task.write({
+            'stage_id': to_do_stage.id
+        })
 
     @api.depends('potential_return', 'presentation')
     def _compute_operation_task(self):
