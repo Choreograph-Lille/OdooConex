@@ -8,6 +8,7 @@ from odoo.addons.choreograph_project.models.project_project import (
     TODO_TASK_STAGE,
     WAITING_FILE_TASK_STAGE,
     WAITING_QTY_TASK_STAGE,
+    BAT_CLIENT_TASK_STAGE
 )
 
 
@@ -164,14 +165,14 @@ class ProjectProject(models.Model):
         task_55 = self._find_task_by_task_number('55')
         task_45 = self._find_task_by_task_number('45')
         task_55_in_80 = task_55 and task_55.stage_id.stage_number == TERMINATED_TASK_STAGE
-        task_45_in_80 = task_45 and task_45.stage_id.stage_number == TERMINATED_TASK_STAGE
+        task_45_in_80 = task_45 and task_45.stage_id.stage_number == BAT_CLIENT_TASK_STAGE
         if (task_55_in_80 or not task_55) and (task_45_in_80 or not task_45):
             self._update_task_stage('75', TODO_TASK_STAGE)
 
     def _hook_task_55_in_stage_80(self):
         task_70 = self._find_task_by_task_number('55')
         task_45 = self._find_task_by_task_number('45')
-        task_45_in_80 = task_45 and task_45.stage_id.stage_number == TERMINATED_TASK_STAGE
+        task_45_in_80 = task_45 and task_45.stage_id.stage_number == BAT_CLIENT_TASK_STAGE
         task_70_in_80 = task_70 and task_70.stage_id.stage_number == TERMINATED_TASK_STAGE
         if (task_70_in_80 or not task_70) and (task_45_in_80 or not task_45):
             self._update_task_stage('75', TODO_TASK_STAGE)
