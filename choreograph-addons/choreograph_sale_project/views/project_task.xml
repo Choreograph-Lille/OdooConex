@@ -39,7 +39,7 @@
 
                 <field name="task_properties" position="before">
                     <field name="operation_condition_ids"
-                           attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['20', '25' '30', '35'])]}"/>
+                           attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
                     <group attrs="{'invisible': [('task_number', '=', False)]}">
                         <group>
                             <field name="type"
