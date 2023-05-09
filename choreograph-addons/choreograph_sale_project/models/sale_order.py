@@ -284,7 +284,7 @@ class SaleOrder(models.Model):
         return order_id
 
     def repatriate_quantity_information_on_task(self):
-        self.tasks_ids.filtered(lambda t: t.task_number == '80').repatriate_quantity_information()
+        self.tasks_ids.filtered(lambda t: t.task_number in ['20', '25', '30', '70', '75', '85', '80']).repatriate_quantity_information()
 
     def _update_date_deadline(self, vals={}):
         for rec in self:
