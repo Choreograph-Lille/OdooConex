@@ -57,7 +57,7 @@ class ProjectTask(models.Model):
 
     is_info_validated = fields.Boolean('Infos Validated', related='sale_order_id.is_info_validated')
     po_livedata_number = fields.Char('PO Livedata Number')
-    campaign_name = fields.Char(related='sale_order_id.email_campaign_name')
+    campaign_name = fields.Char()
     reception_date = fields.Date()
     reception_location = fields.Char('Where to find ?')
     personalization = fields.Boolean()
