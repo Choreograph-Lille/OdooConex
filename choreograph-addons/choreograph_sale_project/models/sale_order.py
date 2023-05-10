@@ -188,10 +188,8 @@ class SaleOrder(models.Model):
             operation_template = line_with_project[0].operation_template_id
         elif self.project_ids:
             operation_template = self.project_ids[0]
-        provider_template = operation_template.task_ids.filtered(
-            lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER)
 
-        return provider_template
+        return operation_template.task_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER) if operation_template else False
 
     # def archive_required_tasks(self):
     #     for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
