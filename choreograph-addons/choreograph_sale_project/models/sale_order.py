@@ -202,8 +202,8 @@ class SaleOrder(models.Model):
             project.name = project.name.replace(' (TEMPLATE)', '').replace(f'{project.sale_order_id.name} - ', '')
 
         # self.archive_required_tasks()
-        self.compute_task_operations()
         self._manage_task_assignation()
+        self.compute_task_operations()
         self.initiate_provider_delivery()
         # self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
 

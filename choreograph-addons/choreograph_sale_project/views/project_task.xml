@@ -261,7 +261,7 @@
                 </field>
 
                 <field name="sale_order_id" position="after">
-                    <field name="customer_commitment_date" widget="date" attrs="{'invisible': [('task_number', 'not in', ['20', '30'])]}"/>
+                    <field name="customer_commitment_date" widget="date" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30'])]}"/>
                 </field>
 
 <!--                <xpath expr="//header/field[@name='stage_id']" position="attributes">-->
