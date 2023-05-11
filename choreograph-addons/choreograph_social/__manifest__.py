@@ -1,21 +1,17 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Choreograph APP',
+    'name': 'Choreograph Social',
     'version': '16.0.0.1',
     'license': 'LGPL-3',
     'category': 'Tools',
-    'summary': 'Manage Choreograph Environment',
-    'sequence': -96,
-    'description': """This module allows to install Choreograph's applications""",
+    'summary': 'Manage Choreograph Social',
+    'sequence': -85,
+    'description': """This module allows to install Choreograph Social Features""",
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
-        'choreograph_hr',
-        'choreograph_i18n',
-        'choreograph_social',
-        'choreograph_website',
-        'choreograph_purchase',
-        'choreograph_sale_project'
+        'choreograph_base',
+        'mail_optional_follower_notification',
     ],
     'data': [
         # data
@@ -28,5 +24,5 @@
         'web.assets_frontend': [],
     },
     'installable': True,
-    'application': True,
+    'application': False,
 }
