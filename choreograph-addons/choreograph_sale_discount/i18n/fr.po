@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_sale_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e-20230208\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-11 11:43+0000\n"
+"PO-Revision-Date: 2023-05-11 11:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_sale_discount
+#: model:ir.model.fields,field_description:choreograph_sale_discount.field_sale_order_line__discount_source_line_id
+msgid "Discount Source Line"
+msgstr ""
+
+#. module: choreograph_sale_discount
+#. odoo-python
+#: code:addons/choreograph_sale_discount/models/sale_order.py:0
+#, python-format
+msgid "Discount XXX %s %s"
+msgstr "Remise XXX %s %s"
+
+#. module: choreograph_sale_discount
+#: model:ir.model,name:choreograph_sale_discount.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: choreograph_sale_discount
+#: model:ir.model,name:choreograph_sale_discount.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de commande"
