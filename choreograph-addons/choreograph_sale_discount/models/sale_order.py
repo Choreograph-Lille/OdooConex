@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import _, fields, models
-
+from odoo.tools.misc import formatLang
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -27,7 +27,7 @@ class SaleOrder(models.Model):
                 qty = line.product_uom_qty or 1.0
                 uom = line.product_uom
                 percentage_discount = [self.get_discount(pricelist_rule)]
-                current_list_price = product.list_price
+                current_list_price = product.list_price * qty
                 pricelist_item = pricelist_rule
                 if pricelist_item.pricelist_id.discount_policy == 'without_discount':
                     while pricelist_item.base == 'pricelist' and pricelist_item.base_pricelist_id.discount_policy == 'without_discount':
@@ -38,7 +38,8 @@ class SaleOrder(models.Model):
                 discount_value = []
                 for percentage in filter(lambda item: item, percentage_discount):
                     discount = current_list_price * percentage / 100
-                    discount_value.append((str(percentage), discount))
+                    format_discount = formatLang(self.env, self.currency_id.round(discount), currency_obj=self.currency_id)
+                    discount_value.append((str(percentage), format_discount))
                     current_list_price -= discount
                 display_discount = "\n".join([_('Discount XXX %s %s') % (
                     f'{int(float(p))}%', d) for p, d in discount_value])
