@@ -222,6 +222,9 @@
                                    attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
 
                             <field name="start_date" attrs="{'invisible': [('task_number', 'not in', ['90'])]}"/>
+
+                            <br/>
+                            <br/>
                             <field name="routing_base"
                                    attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}"/>
                         </group>
