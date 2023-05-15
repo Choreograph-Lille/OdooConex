@@ -300,7 +300,7 @@ class SaleOrder(models.Model):
 
     def update_operation_task_comment(self):
         for rec in self:
-            rec._get_operation_task(['25', '30']).write({
+            rec._get_operation_task(['25', '30', '40']).write({
                 'comment': rec.comment
             })
 

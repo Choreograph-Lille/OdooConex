@@ -33,7 +33,7 @@ class ProjectTask(models.Model):
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
     # optout_comment = fields.Text(related='sale_order_id.optout_comment')
-    optout_link = fields.Text(related='sale_order_id.optout_comment')
+    optout_link = fields.Text()
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
     file_name = fields.Char()
