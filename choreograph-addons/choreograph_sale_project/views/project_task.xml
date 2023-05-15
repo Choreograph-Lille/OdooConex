@@ -26,7 +26,9 @@
                 </field>
 
                 <field name="partner_id" position="after">
-                    <field name="complexity" attrs="{'invisible': [('task_number', 'not in', ['20', '30'])]}"/>
+                    <field name="stage_number" invisible="1"/>
+                    <field name="complexity"
+                           attrs="{'required': [('stage_number', '=', '80')], 'invisible': [('task_number', 'not in', ['20', '30'])]}"/>
                     <field name="id_title"
                            attrs="{'invisible': [('task_number', 'in', ['45', '20', '25', '30', '35', False])]}"/>
                     <field name="sale_order_id" attrs="{'invisible': [('task_number', '=', False)]}"/>
@@ -220,6 +222,9 @@
                                    attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}"/>
 
                             <field name="start_date" attrs="{'invisible': [('task_number', 'not in', ['90'])]}"/>
+
+                            <br/>
+                            <br/>
                             <field name="routing_base"
                                    attrs="{'invisible': [('task_number', 'not in', ['90', '45'])]}"/>
                         </group>

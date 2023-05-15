@@ -267,6 +267,10 @@ class SaleOrder(models.Model):
                 rec.update_presentation()
             if 'comment' in vals:
                 rec.update_operation_task_comment()
+            if 'bat_from' in vals:
+                rec.update_task_bat_from(rec.bat_from.id)
+            if 'email_bat_from' in vals:
+                rec.update_task_bat_from(rec.email_bat_from.id)
         return res
 
     @api.model
@@ -289,9 +293,14 @@ class SaleOrder(models.Model):
                 # order_id._manage_task_assignation()
         return order_id
 
+    def update_task_bat_from(self, value=''):
+        self.tasks_ids.write({
+            'bat_from': value
+        })
+
     def update_operation_task_comment(self):
         for rec in self:
-            rec._get_operation_task(['25', '30']).write({
+            rec._get_operation_task(['25', '30', '40']).write({
                 'comment': rec.comment
             })
 

@@ -82,34 +82,27 @@
                                 <field name="routing_end_date" />
                                 <field name="desired_finished_volume" />
                                 <field name="id_title" />
+                                <field name="volume_detail"/>
+                                <field name="sender"/>
+                                <separator string="Message Kit (wording)"/>
+                                    <field name="reception_date"/>
+                                    <field name="reception_location"/>
+                                    <field name="sms_personalization"/>
+                                    <field name="sms_personalization_text"
+                                           attrs="{'invisible': [('sms_personalization','=',False)]}"/>
+                                    <field name="sms_comment"/>
                             </group>
                             <group>
-                                <field name="is_info_validated" />
+                                <field name="is_info_validated"/>
+                                <separator string="BAT"/>
+                                    <field name="bat_from"/>
+                                    <field name="bat_internal"/>
+                                    <field name="bat_client"/>
+                                    <field name="bat_comment"/>
+                                <separator string="Witnesses"/>
+                                    <field name="witness_file_name"/>
+                                    <field name="witness_comment"/>
                             </group>
-                            <label for="volume_detail" />
-                            <field name="volume_detail" />
-                            <label for="sender" />
-                            <field name="sender" />
-                            <group string="Message Kit (wording)">
-                                <field name="reception_date" />
-                                <field name="reception_location" />
-                                <field name="sms_personalization" />
-                                <field name="sms_personalization_text"
-                                    attrs="{'invisible': [('sms_personalization','=',False)]}" />
-                                <field name="sms_comment" />
-                            </group>
-                        </group>
-                        <group string="BAT">
-                            <field name="bat_from" />
-                            <field name="bat_internal" />
-                            <field name="bat_client" />
-                            <field name="bat_comment" />
-                        </group>
-                        <group>
-                        </group>
-                        <group string="Witnesses">
-                            <field name="witness_file_name" />
-                            <field name="witness_comment" />
                         </group>
                     </page>
                     <page name="email_campaign" string="Email Campaign"

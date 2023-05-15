@@ -27,13 +27,13 @@ class ProjectTask(models.Model):
     campaign_file_name = fields.Char('File Name')
     type = fields.Char()  # this should take the type in cond/excl but another task
 
-    bat_from = fields.Many2one('choreograph.campaign.de', related='sale_order_id.bat_from')
+    bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
     # optout_comment = fields.Text(related='sale_order_id.optout_comment')
-    optout_link = fields.Text(related='sale_order_id.optout_comment')
+    optout_link = fields.Text()
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
     file_name = fields.Char()
@@ -87,8 +87,12 @@ class ProjectTask(models.Model):
     operation_provider_delivery_ids = fields.One2many(
         'operation.provider.delivery', 'task_id', 'Provider Delivery Tasks')
     customer_commitment_date = fields.Datetime(related='sale_order_id.commitment_date')
-    complexity = fields.Char()
+    complexity = fields.Selection([
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3')])
     delivery_date = fields.Date()
+    stage_number = fields.Selection(related='stage_id.stage_number')
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):
