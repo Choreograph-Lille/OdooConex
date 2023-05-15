@@ -27,7 +27,7 @@ class ProjectTask(models.Model):
     campaign_file_name = fields.Char('File Name')
     type = fields.Char()  # this should take the type in cond/excl but another task
 
-    bat_from = fields.Many2one('choreograph.campaign.de', related='sale_order_id.bat_from')
+    bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
@@ -92,6 +92,7 @@ class ProjectTask(models.Model):
         ('2', '2'),
         ('3', '3')])
     delivery_date = fields.Date()
+    stage_number = fields.Selection(related='stage_id.stage_number')
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):
