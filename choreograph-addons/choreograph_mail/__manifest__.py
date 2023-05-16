@@ -12,7 +12,7 @@
         'mail',
     ],
     'data': [
-        'views/res_config_settings.xml'
+        'data/mail_followers.xml'
     ],
     'assets': {},
     'installable': True,
