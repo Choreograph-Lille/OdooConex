@@ -11,6 +11,7 @@
     'website': 'https://arkeup.com',
     'depends': [
         'choreograph_base',
+        'mail_optional_follower_notification',
     ],
     'data': [
         # data
