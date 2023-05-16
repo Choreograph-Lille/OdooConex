@@ -12,7 +12,7 @@
                        attrs="{'invisible': ['|', ('stage_category', 'not in', ['progress', 'paused']) , ('recurrence_id', '=', False)],
                                'required': [('recurrence_id', '!=', False), ('state', 'in', ['sale', 'done'])]}"
                        position="move"/>
-                <field name="balance" attrs="{'invisible': [('recurrence_id', '=', False)]}"/>
+                <field name="balance" attrs="{'invisible': [('recurrence_id', '=', False)]}" force_save="1"/>
             </field>
 
             <field name="date_order" position="after">

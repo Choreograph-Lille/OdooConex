@@ -37,6 +37,20 @@ REQUIRED_TASK_NUMBER = {
 }
 SUBTYPES = dict(SUBTYPE)
 
+CUSTOM_STATE_SEQUENCE_MAP = {
+    'forecast': 0,
+    'lead': 1,
+    'prospecting': 2,
+    'qualif': 3,
+    'draft': 4,
+    'sent': 5,
+    'sale': 6,
+    'done': 7,
+    'closed_won': 8,
+    'adjustment': 9,
+    'cancel': 10
+}
+
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -120,13 +134,14 @@ class SaleOrder(models.Model):
         ('forecast', 'Forecast'),
         ('lead', 'Lead'),
         ('prospecting', 'Prospecting'),
-        ('qualif', 'Qualif'),
         ('draft', 'Quotation'),
         ('sent', 'Quotation Sent'),
         ('sale', 'Sales Order'),
         ('done', 'Locked'),
+        ('closed_won', 'Closed Won'),
+        ('adjustment', 'Adjustment'),
         ('cancel', 'Cancelled'),
-    ], default='forecast', string='State')
+    ], string="C9H State", default='forecast')
 
     def write(self, values):
         if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
@@ -143,9 +158,6 @@ class SaleOrder(models.Model):
 
     def action_prospecting(self):
         self.write({'state_specific': 'prospecting'})
-
-    def action_qualif(self):
-        self.write({'state_specific': 'qualif'})
 
     def action_draft_native(self):
         self.write({'state_specific': 'draft'})
@@ -203,7 +215,7 @@ class SaleOrder(models.Model):
                     lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order']):
                 vals = {
                     'name': OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
-                        condition.subtype]),
+                                                                                   condition.subtype]),
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
                     'note': condition.note,
@@ -239,3 +251,28 @@ class SaleOrder(models.Model):
     def compute_show_other_conservation_duration(self):
         self.show_other_conservation_duration = self.data_conservation_id.id == self.env.ref(
             'choreograph_sale.sale_data_conservation_other').id
+
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        res = super(SaleOrder, self).read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)
+        if 'state_specific' in groupby:
+            return sorted(res, key=lambda g: CUSTOM_STATE_SEQUENCE_MAP.get(g.get('state_specific'), 1000))
+        return res
+
+    def button_closed_won(self):
+        """
+        set so in custom state closed won
+        :return:
+        """
+        self.ensure_one()
+        self.state_specific = "closed_won"
+        return True
+
+    def button_adjustment(self):
+        """
+        set so in adjustment custom state
+        :return:
+        """
+        self.ensure_one()
+        self.state_specific = "adjustment"
+        return True

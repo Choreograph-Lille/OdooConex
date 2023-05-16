@@ -9,7 +9,7 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
-        'sale',
+        'choreograph_sale',
     ],
     'data': [],
     'installable': True,

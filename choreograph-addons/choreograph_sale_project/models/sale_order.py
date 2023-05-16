@@ -76,8 +76,8 @@ class SaleOrder(models.Model):
     @api.depends('order_line')
     def _compute_has_email_op(self):
         for rec in self:
-            enrichment_email = self.env.ref('choreograph_sale_project.project_project_email_enrichment')
-            prospection_email = self.env.ref('choreograph_sale_project.project_project_email_prospecting')
+            enrichment_email = self.env.ref('choreograph_sale_project.project_project_email_enrichment', raise_if_not_found=False)
+            prospection_email = self.env.ref('choreograph_sale_project.project_project_email_prospecting', raise_if_not_found=False)
             rec.has_enrichment_email_op = any(
                 [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == enrichment_email])
             rec.has_prospection_email_op = any(
@@ -86,20 +86,20 @@ class SaleOrder(models.Model):
     @api.depends('operation_type_id.stage_id')
     def _compute_can_display_delivery(self):
         STAGE_REDELIVERY_PROJECT = [
-            self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
-            self.env.ref('choreograph_project.planning_project_stage_to_deliver').id,
-            self.env.ref('choreograph_project.planning_project_stage_terminated').id,
-            self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
+            self.env.ref('choreograph_project.planning_project_stage_in_progress', raise_if_not_found=False).id,
+            self.env.ref('choreograph_project.planning_project_stage_to_deliver', raise_if_not_found=False).id,
+            self.env.ref('choreograph_project.planning_project_stage_terminated', raise_if_not_found=False).id,
+            self.env.ref('choreograph_project.planning_project_stage_presta_delivery', raise_if_not_found=False).id,
         ]
         STAGE_DELIVERY_PROJECT = [
-            self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
-            self.env.ref('choreograph_project.planning_project_stage_to_deliver').id,
+            self.env.ref('choreograph_project.planning_project_stage_presta_delivery', raise_if_not_found=False).id,
+            self.env.ref('choreograph_project.planning_project_stage_to_deliver', raise_if_not_found=False).id,
         ]
         STAGE_TO_PLAN_PROJECT = [
-            self.env.ref('choreograph_project.planning_project_stage_draft').id
+            self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id
         ]
         STAGE_TO_PLAN_PROJECT = [
-            self.env.ref('choreograph_project.planning_project_stage_draft').id
+            self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id
         ]
         for rec in self:
             rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_REDELIVERY_PROJECT if rec.operation_type_id else False
