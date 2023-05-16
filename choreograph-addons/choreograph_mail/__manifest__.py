@@ -10,7 +10,6 @@
     'website': 'https://arkeup.com',
     'depends': [
         'mail',
-        'choreograph_base'
     ],
     'data': [
         'views/res_config_settings.xml'
