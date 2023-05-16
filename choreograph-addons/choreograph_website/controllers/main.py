@@ -1,10 +1,10 @@
 from odoo import http
 
-from odoo.addons.portal.controllers.web import Home
+from odoo.addons.maas_base.controllers.main import MaasWebsiteBase
+from odoo.addons.website.controllers.main import Website
 
-
-class Website(Home):
+class WebsiteCnx(MaasWebsiteBase):
 
     @http.route('/web/bo/login', website=True, auth="public", sitemap=False)
-    def web_login(self, *args, **kw):
-        return super().web_login(*args, **kw)
+    def web_native_login(self, *args, **kw):
+        return Website().web_login(*args, **kw)
