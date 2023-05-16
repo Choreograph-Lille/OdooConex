@@ -10,9 +10,12 @@
     'website': 'https://arkeup.com',
     'depends': [
         'mail',
+        'sale',
+        'purchase',
+        'project'
     ],
     'data': [
-        'views/res_config_settings.xml'
+        'data/mail_followers.xml'
     ],
     'assets': {},
     'installable': True,
