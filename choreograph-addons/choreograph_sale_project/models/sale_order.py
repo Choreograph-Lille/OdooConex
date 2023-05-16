@@ -477,6 +477,7 @@ class SaleOrder(models.Model):
                 'website_sale_send_recovery_email': True,
                 'active_ids': self.ids,
                 'operation_email_process': True,
+                'default_email_to': self._get_operation_task([75]).provider_delivery_address
             },
         }
 

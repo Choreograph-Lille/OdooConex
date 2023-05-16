@@ -4,7 +4,7 @@
         <record id="email_template_choreograph_delivery" model="mail.template">
             <field name="name">Choreograph: Delivery Email Template</field>
             <field name="model_id" ref="sale.model_sale_order"/>
-            <field name="email_to">{{ object.delivery_email_to }}</field>
+            <field name="email_to">{{ object._get_operation_task([75]).provider_delivery_address }}</field>
             <field name="partner_to"></field>
             <field name="email_cc">production.data@choreograph.com</field>
             <field name="description">Template used on SO when we push the button Delivery</field>
