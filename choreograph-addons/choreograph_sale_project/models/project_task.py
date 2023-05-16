@@ -32,8 +32,7 @@ class ProjectTask(models.Model):
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
-    # optout_comment = fields.Text(related='sale_order_id.optout_comment')
-    optout_link = fields.Text()
+    optout_link = fields.Text("Output Links")
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
     file_name = fields.Char()
@@ -57,8 +56,8 @@ class ProjectTask(models.Model):
 
     is_info_validated = fields.Boolean('Infos Validated', related='sale_order_id.is_info_validated')
     po_livedata_number = fields.Char('PO Livedata Number')
-    campaign_name = fields.Char()
-    reception_date = fields.Date(related='sale_order_id.email_reception_date')
+    campaign_name = fields.Char("Campaign Name")
+    reception_date = fields.Date(related='sale_order_id.email_reception_date', string="Reception Date")
     reception_location = fields.Char('Where to find ?', related='sale_order_id.email_reception_location')
     personalization = fields.Boolean(related='sale_order_id.email_personalization')
     personalization_text = fields.Text('If yes specify', related='sale_order_id.email_personalization_text')
@@ -84,9 +83,8 @@ class ProjectTask(models.Model):
     trap_address_ids = fields.One2many('trap.address', 'task_id')
     project_task_campaign_ids = fields.Many2many('project.task.campaign', compute='compute_project_task_campaign_ids',
                                                  inverse='_inverse_project_task_campaign_ids')
-    operation_provider_delivery_ids = fields.One2many(
-        'operation.provider.delivery', 'task_id', 'Provider Delivery Tasks')
-    customer_commitment_date = fields.Datetime(related='sale_order_id.commitment_date')
+    operation_provider_delivery_ids = fields.One2many('operation.provider.delivery', 'task_id', 'Provider Delivery')
+    customer_commitment_date = fields.Datetime(related='sale_order_id.commitment_date', string="Customer Delivery Date")
     complexity = fields.Selection([
         ('1', '1'),
         ('2', '2'),

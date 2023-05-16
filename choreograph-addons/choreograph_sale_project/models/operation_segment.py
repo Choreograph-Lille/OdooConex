@@ -9,7 +9,7 @@ class OperationSegment(models.Model):
     order_id = fields.Many2one('sale.order', 'Sale Order')
     segment_number = fields.Integer()
     model_selection = fields.Char('Model/Selection')
-    name = fields.Char()
+    name = fields.Char("Segment Name")
     quantity = fields.Integer()
     depth = fields.Integer()
     keycode = fields.Char()
