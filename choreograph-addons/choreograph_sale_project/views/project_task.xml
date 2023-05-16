@@ -150,7 +150,7 @@
                         </group>
                         <group>
                             <field name="send_with" attrs="{'invisible': [('task_number', 'not in', ['80'])]}"/>
-                            <field name="is_info_validated" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>
+<!--                            <field name="is_info_validated" attrs="{'invisible': [('task_number', 'not in', ['45'])]}"/>-->
                         </group>
                     </group>
                     <group attrs="{'invisible': [('task_number', '=', False)]}">
