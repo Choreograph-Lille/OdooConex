@@ -11,11 +11,14 @@
     'website': 'https://arkeup.com',
     'depends': [
         'choreograph_hr',
+        'choreograph_sox',
         'choreograph_i18n',
         'choreograph_social',
         'choreograph_website',
+        'choreograph_auditlog',
         'choreograph_purchase',
-        'choreograph_sale_project'
+        'choreograph_sale_project',
+        'choreograph_sale_discount',
     ],
     'data': [
         # data

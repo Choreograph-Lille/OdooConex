@@ -5,56 +5,56 @@
         <record id="view_order_form_inherit" model="ir.ui.view">
             <field name="name">sale.order.form.inherit</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="type">form</field>
             <field name="arch" type="xml">
                 <header position="inside">
-                    <field name="show_operation_generation_button" invisible="1" />
-                    <field name="new_condition_count" invisible="1" />
-                    <field name="project_count" invisible="1" />
-                    <field name="id" invisible="1" />
+                    <field name="show_operation_generation_button" invisible="1"/>
+                    <field name="new_condition_count" invisible="1"/>
+                    <field name="project_count" invisible="1"/>
+                    <field name="id" invisible="1"/>
                     <button
-                        name="action_generate_operation"
-                        id="action_generate_operation"
-                        string="Generate The Operation"
-                        class="btn-primary"
-                        type="object"
-                        attrs="{'invisible': ['|', ('show_operation_generation_button', '=', False), ('recurrence_id', '!=', False)]}"
+                            name="action_generate_operation"
+                            id="action_generate_operation"
+                            string="Generate The Operation"
+                            class="btn-primary"
+                            type="object"
+                            attrs="{'invisible': ['|', ('show_operation_generation_button', '=', False), ('recurrence_id', '!=', False)]}"
                     />
                     <button
-                        name="action_create_task_from_condition"
-                        id="action_create_task_from_condition"
-                        string="Task generation"
-                        class="btn-primary"
-                        type="object"
-                        attrs="{'invisible': ['|', ('new_condition_count', '=', 0), ('project_count', '=', 0)]}"
+                            name="action_create_task_from_condition"
+                            id="action_create_task_from_condition"
+                            string="Task generation"
+                            class="btn-primary"
+                            type="object"
+                            attrs="{'invisible': ['|', ('new_condition_count', '=', 0), ('project_count', '=', 0)]}"
                     />
                 </header>
                 <field name="payment_term_id" position="after">
                     <field
-                        name="catalogue_ids"
-                        widget="many2many_tags"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)]}"
-                        options="{'color_field': 'color', 'no_create_edit': True}"
-                        context="{'filter_by_partner_catalogue': partner_id}"
+                            name="catalogue_ids"
+                            widget="many2many_tags"
+                            attrs="{'invisible': [('recurrence_id', '!=', False)]}"
+                            options="{'color_field': 'color', 'no_create_edit': True}"
+                            context="{'filter_by_partner_catalogue': partner_id}"
                     />
-                    <field name="show_other_conservation_duration" invisible="1" />
+                    <field name="show_other_conservation_duration" invisible="1"/>
                     <field name="data_conservation_id"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)]}"
-                        options="{'no_open': True, 'no_create': True}" />
+                           attrs="{'invisible': [('recurrence_id', '!=', False)]}"
+                           options="{'no_open': True, 'no_create': True}"/>
                     <field name="other_conservation_duration"
-                        attrs="{'invisible': [('show_other_conservation_duration', '=', False)]}" />
+                           attrs="{'invisible': [('show_other_conservation_duration', '=', False)]}"/>
                     <field name="related_base"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)], 'required': [('recurrence_id', '=', False)]}" />
+                           attrs="{'invisible': [('recurrence_id', '!=', False)], 'required': [('recurrence_id', '=', False)]}"/>
                 </field>
                 <field name="partner_shipping_id" position="after">
-                    <field name="send_with" attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
-                    <field name="receiver" attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
-                    <field name="sox" attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
+                    <field name="send_with" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
+                    <field name="receiver" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
+                    <field name="sox" attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
                 </field>
 
                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']"
-                    position="attributes">
+                       position="attributes">
                     <attribute name="domain">
                         [('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id',
                         '=',
@@ -63,98 +63,108 @@
                     </attribute>
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']"
-                    position="after">
+                       position="after">
                     <field name="retribution_cost"
-                        attrs="{'column_invisible': [('parent.is_subscription','=',True)]}"
-                        optional="show"
-                        string="Retribution"
+                           attrs="{'column_invisible': [('parent.is_subscription','=',True)]}"
+                           optional="show"
+                           string="Retribution"
                     />
                 </xpath>
+                <button id="create_invoice" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('invoice_status', '!=', 'to invoice'), ('state_specific', '!=',
+                        'closed_won')]}
+                    </attribute>
+                </button>
+                <button id="create_invoice_percentage" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', '|', ('invoice_status', '!=', 'no'), ('state', '!=', 'sale'),
+                        ('state_specific', '!=', 'closed_won')]}
+                    </attribute>
+                </button>
 
                 <notebook position="inside">
                     <page name="sms_campaign" string="SMS Campaign"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)]}">
+                          attrs="{'invisible': [('recurrence_id', '!=', False)]}">
                         <group>
                             <group>
-                                <field name="po_number" />
-                                <field name="campaign_name" />
-                                <field name="routing_date" />
-                                <field name="routing_end_date" />
-                                <field name="desired_finished_volume" />
-                                <field name="id_title" />
+                                <field name="po_number"/>
+                                <field name="campaign_name"/>
+                                <field name="routing_date"/>
+                                <field name="routing_end_date"/>
+                                <field name="desired_finished_volume"/>
+                                <field name="id_title"/>
                                 <field name="volume_detail"/>
                                 <field name="sender"/>
                                 <separator string="Message Kit (wording)"/>
-                                    <field name="reception_date"/>
-                                    <field name="reception_location"/>
-                                    <field name="sms_personalization"/>
-                                    <field name="sms_personalization_text"
-                                           attrs="{'invisible': [('sms_personalization','=',False)]}"/>
-                                    <field name="sms_comment"/>
+                                <field name="reception_date"/>
+                                <field name="reception_location"/>
+                                <field name="sms_personalization"/>
+                                <field name="sms_personalization_text"
+                                       attrs="{'invisible': [('sms_personalization','=',False)]}"/>
+                                <field name="sms_comment"/>
                             </group>
                             <group>
                                 <field name="is_info_validated"/>
                                 <separator string="BAT"/>
-                                    <field name="bat_from"/>
-                                    <field name="bat_internal"/>
-                                    <field name="bat_client"/>
-                                    <field name="bat_comment"/>
+                                <field name="bat_from"/>
+                                <field name="bat_internal"/>
+                                <field name="bat_client"/>
+                                <field name="bat_comment"/>
                                 <separator string="Witnesses"/>
-                                    <field name="witness_file_name"/>
-                                    <field name="witness_comment"/>
+                                <field name="witness_file_name"/>
+                                <field name="witness_comment"/>
                             </group>
                         </group>
                     </page>
                     <page name="email_campaign" string="Email Campaign"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)]}">
+                          attrs="{'invisible': [('recurrence_id', '!=', False)]}">
                         <group>
                             <group>
-                                <field name="livedata_po_number" />
-                                <field name="email_campaign_name" />
+                                <field name="livedata_po_number"/>
+                                <field name="email_campaign_name"/>
                             </group>
                             <group>
-                                <field name="email_is_info_validated" />
+                                <field name="email_is_info_validated"/>
                             </group>
                             <group string="Email Kit Detail">
-                                <field name="email_reception_date" />
-                                <field name="email_reception_location" />
-                                <field name="email_personalization" />
+                                <field name="email_reception_date"/>
+                                <field name="email_reception_location"/>
+                                <field name="email_personalization"/>
                                 <field name="email_personalization_text"
-                                    attrs="{'invisible': [('email_personalization','=',False)]}" />
-                                <field name="email_routing_date" />
-                                <field name="email_routing_end_date" />
-                                <field name="campaign_type" />
-                                <field name="email_desired_finished_volume" />
-                                <field name="email_volume_detail" />
-                                <field name="email_sender" />
-                                <field name="object" />
-                                <field name="ab_test" />
+                                       attrs="{'invisible': [('email_personalization','=',False)]}"/>
+                                <field name="email_routing_date"/>
+                                <field name="email_routing_end_date"/>
+                                <field name="campaign_type"/>
+                                <field name="email_desired_finished_volume"/>
+                                <field name="email_volume_detail"/>
+                                <field name="email_sender"/>
+                                <field name="object"/>
+                                <field name="ab_test"/>
                                 <field name="ab_test_text"
-                                    attrs="{'invisible': [('ab_test','=',False)]}" />
-                                <field name="is_preheader_available" />
+                                       attrs="{'invisible': [('ab_test','=',False)]}"/>
+                                <field name="is_preheader_available"/>
                                 <field name="is_preheader_available_text"
-                                    attrs="{'invisible': [('is_preheader_available','=',True)]}" />
-                                <field name="email_comment" />
+                                       attrs="{'invisible': [('is_preheader_available','=',True)]}"/>
+                                <field name="email_comment"/>
                             </group>
                             <group name="bat" string="BAT">
-                                <field name="email_bat_from" />
-                                <field name="email_bat_internal" />
-                                <field name="email_bat_client" />
-                                <field name="bat_desired_date" />
+                                <field name="email_bat_from"/>
+                                <field name="email_bat_internal"/>
+                                <field name="email_bat_client"/>
+                                <field name="bat_desired_date"/>
 
-                                <separator string="Witnesses" />
-                                <field name="email_witness_file_name" />
+                                <separator string="Witnesses"/>
+                                <field name="email_witness_file_name"/>
 
-                                <separator string="Optout" />
-                                <field name="excluded_provider" />
-                                <field name="optout_link" />
-                                <field name="routing_base" />
+                                <separator string="Optout"/>
+                                <field name="excluded_provider"/>
+                                <field name="optout_link"/>
+                                <field name="routing_base"/>
                             </group>
                         </group>
                         <field name="project_task_campaign_ids">
                             <tree editable="bottom">
-                                <field name="id_campaign" />
-                                <field name="name" />
+                                <field name="id_campaign"/>
+                                <field name="name"/>
                             </tree>
                         </field>
                     </page>
@@ -162,12 +172,12 @@
 
                 <field name="validity_date" position="before">
                     <field name="commitment_date" widget="date"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)], 'required': [('is_subscription', '=', False)]}" />
+                           attrs="{'invisible': [('recurrence_id', '!=', False)], 'required': [('is_subscription', '=', False)]}"/>
                 </field>
 
                 <group name="sale_shipping" position="after">
                     <field name="validity_date"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
+                           attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
                 </group>
 
                 <group name="sale_shipping" position="attributes">
@@ -179,27 +189,37 @@
                 </xpath>
                 <xpath expr="//field[@name='state']" position="after">
                     <field name="state_specific"
-                        widget="statusbar"
-                        statusbar_visible="forecast,lead,prospecting,qualif,draft,sent,sale"
-                        attrs="{'invisible': [('recurrence_id','!=', False)]}" />
+                           widget="statusbar"
+                           statusbar_visible="forecast,lead,prospecting,draft,sent,sale,closed_won,adjustment"
+                           attrs="{'invisible': [('recurrence_id','!=', False)]}"/>
                 </xpath>
                 <button name="payment_action_capture" position="before">
                     <button name="action_lead"
-                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','forecast')]}"
-                        string="Lead"
-                        type="object" />
+                            string="Lead"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible': ['|', ('recurrence_id','!=', False), ('state_specific','!=','forecast')]}"/>
                     <button name="action_prospecting"
-                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','lead')]}"
-                        string="Propecting"
-                        type="object" />
-                    <button name="action_qualif"
-                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','prospecting')]}"
-                        string="Qualif"
-                        type="object" />
+                            string="Prospecting"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible': ['|', ('recurrence_id','!=', False), ('state_specific','!=','lead')]}"/>
                     <button name="action_draft_native"
-                        attrs="{'invisible': ['|', ('recurrence_id','!=', False),('state_specific','!=','qualif')]}"
-                        string="Quotation"
-                        type="object" />
+                            string="Quotation"
+                            type="object"
+                            class="btn-primary"
+                            attrs="{'invisible': ['|', ('recurrence_id','!=', False), ('state_specific','!=','prospecting')]}"/>
+                    <button name="button_closed_won"
+                            string="Closed Won"
+                            class="btn-primary"
+                            type="object"
+                            attrs="{'invisible': ['|', ('recurrence_id','!=', False), ('state_specific', 'not in', ['sale', 'done'])]}"/>
+                    <button name="button_adjustment"
+                            class="btn-primary"
+                            string="Adjustment"
+                            type="object"
+                            attrs="{'invisible': ['|', ('recurrence_id','!=', False), ('state_specific','!=','closed_won')]}"/>
+
                 </button>
             </field>
         </record>
@@ -207,14 +227,14 @@
         <record model="ir.ui.view" id="retribution_sale_order">
             <field name="name">sale.order.retribution.total.view.form</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_order_form" />
+            <field name="inherit_id" ref="sale.view_order_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='tax_totals']" position="before">
                     <label for="total_retribution" groups="base.group_user"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)]}" />
+                           attrs="{'invisible': [('recurrence_id', '!=', False)]}"/>
                     <div class="text-nowrap" groups="base.group_user"
-                        attrs="{'invisible': [('recurrence_id', '!=', False)]}">
-                        <field name="total_retribution" widget="monetary" class="oe_inline" />
+                         attrs="{'invisible': [('recurrence_id', '!=', False)]}">
+                        <field name="total_retribution" widget="monetary" class="oe_inline"/>
                     </div>
                 </xpath>
             </field>
@@ -223,10 +243,10 @@
         <record model="ir.ui.view" id="sale_order_form_purchase_inherit">
             <field name="name">sale.order.form.purchase.inherit</field>
             <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale_purchase.sale_order_inherited_form_purchase" />
+            <field name="inherit_id" ref="sale_purchase.sale_order_inherited_form_purchase"/>
             <field name="arch" type="xml">
                 <xpath expr="//button[@name='action_view_purchase_orders']" position="attributes">
-                    <label for="total_retribution" groups="base.group_user" />
+                    <label for="total_retribution" groups="base.group_user"/>
                     <attribute name="attrs">{}</attribute>
                 </xpath>
             </field>
@@ -234,11 +254,25 @@
 
         <record id="model_sale_order_action_duplicate_for_next_year" model="ir.actions.server">
             <field name="name">Duplicate for next year</field>
-            <field name="model_id" ref="sale.model_sale_order" />
-            <field name="binding_model_id" ref="sale.model_sale_order" />
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="binding_model_id" ref="sale.model_sale_order"/>
             <field name="binding_view_types">list</field>
             <field name="state">code</field>
             <field name="code">action = records.copy_for_next_year()</field>
         </record>
+
+        <record id="sales_order_view_search_inherit" model="ir.ui.view">
+            <field name="name">sales.order.view.search.inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sales_order_filter"/>
+            <field name="arch" type="xml">
+
+                <filter name="order_month" position="after">
+                     <filter string="C9H State" name="c9h_state" domain="[]" context="{'group_by': 'state_specific'}"/>
+                </filter>
+
+            </field>
+        </record>
+
     </data>
 </odoo>
