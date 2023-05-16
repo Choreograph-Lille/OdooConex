@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 07:24+0000\n"
-"PO-Revision-Date: 2023-04-18 07:24+0000\n"
+"POT-Creation-Date: 2023-05-16 21:21+0000\n"
+"PO-Revision-Date: 2023-05-16 21:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,41 +20,41 @@ msgstr ""
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
-"                        <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '75')\"/>\n"
+"                        <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '75')\"></t>\n"
 "                        <t t-if=\"object.project_ids[0].stage_id.stage_number == '50'\">\n"
-"                            <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '85')\"/>\n"
+"                            <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '85')\"></t>\n"
 "                        </t>\n"
 "                        <t t-if=\"info_task\">\n"
-"                            <t t-set=\"delivery_address\" t-value=\"info_task.provider_delivery_address\"/>\n"
-"                            <t t-set=\"file_name\" t-value=\"info_task.provider_file_name\"/>\n"
+"                            <t t-set=\"delivery_address\" t-value=\"info_task.provider_delivery_address\"></t>\n"
+"                            <t t-set=\"file_name\" t-value=\"info_task.provider_file_name\"></t>\n"
 "                            Hello,\n"
-"                            <br/><br/>\n"
-"                            Kindly find on your <t t-out=\"delivery_address\"/> FTP the file from choreograph for the\n"
-"                            <t t-out=\"object.operation_type_id.name\"/> Campaign <t t-out=\"object.partner_id.name\"/>\n"
-"                            <br/><br/>\n"
-"                            The file name is <t t-out=\"file_name\"/>\n"
-"                            <br/><br/>\n"
+"                            <br><br>\n"
+"                            Kindly find on your <t t-out=\"delivery_address\"></t> FTP the file from choreograph for the\n"
+"                            <t t-out=\"object.operation_type_id.name\"></t> Campaign <t t-out=\"object.partner_id.name\"></t>\n"
+"                            <br><br>\n"
+"                            The file name is <t t-out=\"file_name\"></t>\n"
+"                            <br><br>\n"
 "                            The distribution of addresses is as follows:\n"
-"                            <br/>\n"
+"                            <br>\n"
 "                            <t t-if=\"object.repatriate_information\">\n"
-"                                <t t-set=\"count\" t-value=\"1\"/>\n"
+"                                <t t-set=\"count\" t-value=\"1\"></t>\n"
 "                                <t t-foreach=\"object.segment_ids\" t-as=\"segment\">\n"
-"                                    Segment <t t-out=\"count\"/>: <t t-out=\"segment.name\"/><br/>\n"
-"                                    Quantité: <t t-out=\"segment.quantity\"/><br/>\n"
-"                                    Keycode: <t t-out=\"segment.keycode\"/><br/><br/>\n"
-"                                    <t t-set=\"count\" t-value=\"count + 1\"/>\n"
+"                                    Segment <t t-out=\"count\"></t>: <t t-out=\"segment.name\"></t><br>\n"
+"                                    Quantité: <t t-out=\"segment.quantity\"></t><br>\n"
+"                                    Keycode: <t t-out=\"segment.keycode\"></t><br><br>\n"
+"                                    <t t-set=\"count\" t-value=\"count + 1\"></t>\n"
 "                                </t>\n"
 "                            </t>\n"
-"                            <br/>\n"
+"                            <br>\n"
 "                            IMPORTANT: Please confirm receipt of the file to production.data@conexancemd.com\n"
-"                            <br/><br/>\n"
+"                            <br><br>\n"
 "                            The password is: xxxxxxx.\n"
-"                            <br/><br/>\n"
-"                            For any questions, please contact: <br/>\n"
+"                            <br><br>\n"
+"                            For any questions, please contact: <br>\n"
 "                            production.data@conexancemd.com\n"
-"                            <br/><br/>\n"
+"                            <br><br>\n"
 "                            Regards,\n"
-"                            <br/><br/>\n"
+"                            <br><br>\n"
 "                            Production Service\n"
 "                        </t>\n"
 "                    </p>\n"
@@ -169,6 +169,11 @@ msgid "CAMPAIGN COUNTS"
 msgstr "COMPTAGES CAMPAGNE"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_name
+msgid "Campaign Name"
+msgstr "Nom Campagne"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__can_display_livery_project
 msgid "Can Display Livery Project"
 msgstr "Peut afficher la livraison projet"
@@ -220,11 +225,6 @@ msgid "Comment"
 msgstr "Commentaire"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__comment
-msgid "Email Comment"
-msgstr "Commentaire"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__complexity
 msgid "Complexity"
 msgstr "Complexité"
@@ -254,6 +254,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__create_date
 msgid "Created on"
 msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__customer_commitment_date
+msgid "Customer Delivery Date"
+msgstr "Date de livraison client"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_ddn_enrichment
@@ -294,11 +299,6 @@ msgstr "Numéro titre Dédup."
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__provider_delivery_address
 msgid "Delivery Address"
 msgstr "Adresse de livraison"
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__customer_commitment_date
-msgid "Delivery Date"
-msgstr "Date de livraison client"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__delivery_date
@@ -361,14 +361,14 @@ msgid "Email Campaign"
 msgstr "Campagne email"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_name
-msgid "Email Campaign Name"
-msgstr "Nom Campagne"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__campaign_type
 msgid "Email Campaign Type"
 msgstr "Type de campagne"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__comment
+msgid "Email Comment"
+msgstr "Commentaire"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_email_enrichment
@@ -391,9 +391,9 @@ msgid "Email Object"
 msgstr "Objet"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__optout_link
-msgid "Email Optout Comment"
-msgstr "Liens Optout"
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__personalization
+msgid "Email Personalization"
+msgstr "Personnalisation"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_email_prospecting
@@ -404,6 +404,21 @@ msgstr "Prospection Email (TEMPLATE)"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__routing_base
 msgid "Email Routing Base"
 msgstr "Base routage"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__routing_date
+msgid "Email Routing Date"
+msgstr "Date de routage"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__routing_end_date
+msgid "Email Routing End Date"
+msgstr "Fin de routage"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__sender
+msgid "Email Sender"
+msgstr "Expéditeur"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume_detail
@@ -456,6 +471,11 @@ msgstr "Clé de dossier"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__has_enrichment_email_op
 msgid "Has Enrichment Email Op"
 msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__has_prospection_email_op
+msgid "Has Prospection Email Op"
+msgstr "A une prospection email Op"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__id
@@ -565,11 +585,6 @@ msgid "Name"
 msgstr "Nom"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__name
-msgid "Name"
-msgstr "Nom du segment"
-
-#. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_operation
 msgid "OPERATION"
 msgstr ""
@@ -578,6 +593,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
 msgid "Operation"
 msgstr "Opération"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__operation_code
+msgid "Operation Code"
+msgstr "Code Opération"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__operation_condition_ids
@@ -605,6 +625,11 @@ msgid "Others"
 msgstr "Mixtes"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__optout_link
+msgid "Output Links"
+msgstr "Liens Optout"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__po_livedata_number
 msgid "PO Livedata Number"
 msgstr "N° PO Livedata"
@@ -618,11 +643,6 @@ msgstr "LIVRAISON PRESTA"
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_info_presta
 msgid "PRESTA INFORMATION"
 msgstr "INFO PRESTA"
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__personalization
-msgid "Email Personalization"
-msgstr "Personnalisation"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_postal_prospecting
@@ -685,11 +705,6 @@ msgid "Presentation Task"
 msgstr "Tâche présentation"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_delivery
-msgid "Presta Delivery"
-msgstr "Livraison presta"
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_delivery_date
 msgid "Presta Delivery Date"
 msgstr "Date livraison presta"
@@ -727,8 +742,8 @@ msgstr "Commentaire"
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__operation_provider_delivery_ids
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__operation_provider_delivery_ids
-msgid "Provider Delivery Tasks"
-msgstr "Infos Livraison Presta"
+msgid "Provider Delivery"
+msgstr "Livraison Presta"
 
 #. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_task_form2_inherit2
@@ -747,7 +762,6 @@ msgstr "Quantité"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__quantity_to_deliver
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__quantity_to_deliver
 msgid "Quantity To Deliver"
 msgstr "Quantité à livrer"
@@ -774,7 +788,7 @@ msgstr "Réactivation (TEMPLATE)"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__reception_date
-msgid "Email Reception Date"
+msgid "Reception Date"
 msgstr "Date de réception"
 
 #. module: choreograph_sale_project
@@ -801,16 +815,6 @@ msgstr "Rapatrier les informations sur l'onglet informations livraison"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__return_production_potential
 msgid "Return of production potential"
 msgstr "Retour de potentiel production"
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__routing_date
-msgid "Email Routing Date"
-msgstr "Date de routage"
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__routing_end_date
-msgid "Email Routing End Date"
-msgstr "Fin de routage"
 
 #. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_sms_campaign
@@ -857,6 +861,11 @@ msgid "Segment"
 msgstr ""
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__name
+msgid "Segment Name"
+msgstr "Nom du segment"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__segment_number
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__segment_number
 msgid "Segment Number"
@@ -866,11 +875,6 @@ msgstr "N° segment"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__send_with
 msgid "Send With"
 msgstr "Envoi via"
-
-#. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__sender
-msgid "Email Sender"
-msgstr "Expéditeur"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_sms_enrichment
@@ -886,6 +890,11 @@ msgstr "Prospection SMS (TEMPLATE)"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__specific_counting
 msgid "Specific Counting"
 msgstr "Comptages spécifiques"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__stage_number
+msgid "Stage Number"
+msgstr "Numéro d'étape"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__start_date
@@ -990,6 +999,16 @@ msgid "The task is in progress, you can't check/uncheck this field"
 msgstr "La tâche est en cours, vous ne pouvez pas cocher/décocher cette case"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,help:choreograph_sale_project.field_project_task__customer_commitment_date
+msgid ""
+"This is the delivery date promised to the customer. If set, the delivery "
+"order will be scheduled based on this date rather than product lead times."
+msgstr ""
+"Il s'agit de la date de livraison promise au client. Si elle est définie, le"
+" bon de livraison se basera sur cette date plutôt que celle définie grâce au"
+" délai indiqué sur le produit. "
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__to_validate
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__to_validate
 msgid "To Validate"
@@ -1014,6 +1033,11 @@ msgstr "Adresses pièges"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__type
 msgid "Type"
 msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume
+msgid "Volume"
+msgstr "Quantité à livrer"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__reception_location

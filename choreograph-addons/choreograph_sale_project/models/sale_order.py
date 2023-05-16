@@ -46,8 +46,7 @@ class SaleOrder(models.Model):
     return_production_potential_date = fields.Date('Date of return of production potential')
     operation_code = fields.Char(compute='compute_operation_code', store=True)
 
-    operation_provider_delivery_ids = fields.One2many(
-        'operation.provider.delivery', 'order_id', 'Provider Delivery Tasks')
+    operation_provider_delivery_ids = fields.One2many('operation.provider.delivery', 'order_id', 'Provider Delivery')
     comment = fields.Text()
     quantity_to_deliver = fields.Integer()
     to_validate = fields.Boolean()

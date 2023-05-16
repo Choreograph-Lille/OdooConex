@@ -72,7 +72,7 @@ class SaleOrder(models.Model):
     total_retribution = fields.Float(compute="_compute_total_retribution", store=True)
 
     po_number = fields.Char('PO Number')
-    campaign_name = fields.Char()
+    campaign_name = fields.Char("Campaign Name")
     is_info_validated = fields.Boolean('Infos Validated', copy=False)
     routing_date = fields.Date()
     routing_end_date = fields.Date()
@@ -81,7 +81,7 @@ class SaleOrder(models.Model):
     sender = fields.Char()
     id_title = fields.Char()
 
-    reception_date = fields.Date()
+    reception_date = fields.Date("Reception Date")
     reception_location = fields.Char('Where to find ?')
     sms_personalization = fields.Boolean('Personalization')
     sms_personalization_text = fields.Text('If yes specify')
@@ -129,7 +129,7 @@ class SaleOrder(models.Model):
     optout_comment = fields.Text('Email Optout Comment')
     optout_link = fields.Text('Email Optout Link')
     routing_base = fields.Char('Email Routing Base')
-    project_task_campaign_ids = fields.One2many('project.task.campaign', 'order_id', 'Email Campaign')
+    project_task_campaign_ids = fields.One2many('project.task.campaign', 'order_id', 'Campaigns')
     state_specific = fields.Selection([
         ('forecast', 'Forecast'),
         ('lead', 'Lead'),
