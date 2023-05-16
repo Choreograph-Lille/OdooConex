@@ -55,6 +55,11 @@ body {
     position: absolute;
     left: 10px;
 }
+.dropdown-menu [data-lang="en_US"]::before {
+    content: url(/maas_website/static/src/img/ico-us.png);
+    position: absolute;
+    left: 10px;
+}
 .js_change_lang {
     background-color: #fff !important;
     color: #394F74 !important;
