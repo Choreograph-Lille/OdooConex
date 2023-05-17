@@ -132,7 +132,7 @@ class AuditlogReport(models.TransientModel):
                 details = {
                     'name': group_id.name,
                     'date_from': None,
-                    'access': group_id.model_access.mapped(lambda access: {
+                    'access': group_id.role_ids.model_access_ids.mapped(lambda access: {
                         'object': access.model_id.name,
                         'read': access.perm_read,
                         'write': access.perm_write,
