@@ -12,6 +12,7 @@ FORMAT_DATE = 'dd/MM/yyyy'
 
 class AuditlogReport(models.TransientModel):
     _name = 'auditlog.report.wizard'
+    _description = "Audit Log Report Assistant"
 
     is_period = fields.Boolean('Period')
     start_date = fields.Date('Date')
