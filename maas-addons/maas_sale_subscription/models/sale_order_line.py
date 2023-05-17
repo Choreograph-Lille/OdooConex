@@ -55,3 +55,22 @@ class SaleSubscriptionLine(models.Model):
             else:
                 line.qty_to_invoice = line.product_uom_qty
         return res
+
+    def _prepare_invoice_line(self, **optional_values):
+        """
+        override to move subscription duration in invoice line description
+        :param optional_values:
+        :return:
+        """
+        res = super(SaleSubscriptionLine)._prepare_invoice_line(optional_values)
+        if self.temporal_type == 'subscription' or self.order_id.subscription_management == 'upsell':
+            res.update({
+                'name': self._get_invoice_line_name(),
+            })
+        return res
+
+    def _get_invoice_line_name(self):
+        self.insure_one()
+        if self.qty_cumulative:
+            return self.name + "\n%s Ids" % self.qty_cumulative
+        return self.name
