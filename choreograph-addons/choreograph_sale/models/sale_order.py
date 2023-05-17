@@ -2,7 +2,6 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from dateutil.relativedelta import relativedelta
 from .operation_condition import SUBTYPE
 
 TASK_NAME = {
@@ -38,6 +37,20 @@ REQUIRED_TASK_NUMBER = {
 }
 SUBTYPES = dict(SUBTYPE)
 
+CUSTOM_STATE_SEQUENCE_MAP = {
+    'forecast': 0,
+    'lead': 1,
+    'prospecting': 2,
+    'qualif': 3,
+    'draft': 4,
+    'sent': 5,
+    'sale': 6,
+    'done': 7,
+    'closed_won': 8,
+    'adjustment': 9,
+    'cancel': 10
+}
+
 
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
@@ -59,7 +72,7 @@ class SaleOrder(models.Model):
     total_retribution = fields.Float(compute="_compute_total_retribution", store=True)
 
     po_number = fields.Char('PO Number')
-    campaign_name = fields.Char()
+    campaign_name = fields.Char("Campaign Name")
     is_info_validated = fields.Boolean('Infos Validated', copy=False)
     routing_date = fields.Date()
     routing_end_date = fields.Date()
@@ -68,7 +81,7 @@ class SaleOrder(models.Model):
     sender = fields.Char()
     id_title = fields.Char()
 
-    reception_date = fields.Date()
+    reception_date = fields.Date("Reception Date")
     reception_location = fields.Char('Where to find ?')
     sms_personalization = fields.Boolean('Personalization')
     sms_personalization_text = fields.Text('If yes specify')
@@ -116,26 +129,27 @@ class SaleOrder(models.Model):
     optout_comment = fields.Text('Email Optout Comment')
     optout_link = fields.Text('Email Optout Link')
     routing_base = fields.Char('Email Routing Base')
-    project_task_campaign_ids = fields.One2many('project.task.campaign', 'order_id', 'Email Campaign')
+    project_task_campaign_ids = fields.One2many('project.task.campaign', 'order_id', 'Campaigns')
     state_specific = fields.Selection([
         ('forecast', 'Forecast'),
         ('lead', 'Lead'),
         ('prospecting', 'Prospecting'),
-        ('qualif', 'Qualif'),
         ('draft', 'Quotation'),
         ('sent', 'Quotation Sent'),
         ('sale', 'Sales Order'),
         ('done', 'Locked'),
+        ('closed_won', 'Closed Won'),
+        ('adjustment', 'Adjustment'),
         ('cancel', 'Cancelled'),
-    ], default='forecast', string='State')
+    ], string="C9H State", default='forecast')
 
     def write(self, values):
         if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
             values['state_specific'] = values['state']
         res = super().write(values)
-        openration_condition = self.operation_condition_ids.filtered(
+        operation_condition = self.operation_condition_ids.filtered(
             lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
-        if self.project_ids and openration_condition:
+        if self.project_ids and operation_condition:
             self.action_create_task_from_condition()
         return res
 
@@ -144,9 +158,6 @@ class SaleOrder(models.Model):
 
     def action_prospecting(self):
         self.write({'state_specific': 'prospecting'})
-
-    def action_qualif(self):
-        self.write({'state_specific': 'qualif'})
 
     def action_draft_native(self):
         self.write({'state_specific': 'draft'})
@@ -204,7 +215,7 @@ class SaleOrder(models.Model):
                     lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order']):
                 vals = {
                     'name': OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
-                        condition.subtype]),
+                                                                                   condition.subtype]),
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
                     'note': condition.note,
@@ -240,3 +251,28 @@ class SaleOrder(models.Model):
     def compute_show_other_conservation_duration(self):
         self.show_other_conservation_duration = self.data_conservation_id.id == self.env.ref(
             'choreograph_sale.sale_data_conservation_other').id
+
+    @api.model
+    def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
+        res = super(SaleOrder, self).read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)
+        if 'state_specific' in groupby:
+            return sorted(res, key=lambda g: CUSTOM_STATE_SEQUENCE_MAP.get(g.get('state_specific'), 1000))
+        return res
+
+    def button_closed_won(self):
+        """
+        set so in custom state closed won
+        :return:
+        """
+        self.ensure_one()
+        self.state_specific = "closed_won"
+        return True
+
+    def button_adjustment(self):
+        """
+        set so in adjustment custom state
+        :return:
+        """
+        self.ensure_one()
+        self.state_specific = "adjustment"
+        return True

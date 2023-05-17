@@ -27,13 +27,12 @@ class ProjectTask(models.Model):
     campaign_file_name = fields.Char('File Name')
     type = fields.Char()  # this should take the type in cond/excl but another task
 
-    bat_from = fields.Many2one('choreograph.campaign.de', related='sale_order_id.bat_from')
+    bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
-    # optout_comment = fields.Text(related='sale_order_id.optout_comment')
-    optout_link = fields.Text(related='sale_order_id.optout_comment')
+    optout_link = fields.Text("Output Links")
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
     file_name = fields.Char()
@@ -57,24 +56,24 @@ class ProjectTask(models.Model):
 
     is_info_validated = fields.Boolean('Infos Validated', related='sale_order_id.is_info_validated')
     po_livedata_number = fields.Char('PO Livedata Number')
-    campaign_name = fields.Char(related='sale_order_id.email_campaign_name')
-    reception_date = fields.Date()
-    reception_location = fields.Char('Where to find ?')
-    personalization = fields.Boolean()
-    personalization_text = fields.Text('If yes specify')
-    routing_date = fields.Date()
-    routing_end_date = fields.Date()
+    campaign_name = fields.Char("Campaign Name")
+    reception_date = fields.Date(related='sale_order_id.email_reception_date', string="Reception Date")
+    reception_location = fields.Char('Where to find ?', related='sale_order_id.email_reception_location')
+    personalization = fields.Boolean(related='sale_order_id.email_personalization')
+    personalization_text = fields.Text('If yes specify', related='sale_order_id.email_personalization_text')
+    routing_date = fields.Date(related='sale_order_id.email_routing_date')
+    routing_end_date = fields.Date(related='sale_order_id.email_routing_end_date')
     campaign_type = fields.Selection(related='sale_order_id.campaign_type')
     volume_detail = fields.Text(related='sale_order_id.email_volume_detail')
-    sender = fields.Char()
+    sender = fields.Char(related='sale_order_id.email_sender')
     quantity_to_deliver = fields.Integer(related='sale_order_id.quantity_to_deliver')
     to_validate = fields.Boolean(related='sale_order_id.to_validate')
     object = fields.Char(related='sale_order_id.object')
-    ab_test = fields.Boolean('A/B Test')
-    ab_test_text = fields.Text('If so, on what?')
-    is_preheader_available = fields.Boolean('Preheader available in HTML')
-    is_preheader_available_text = fields.Text('If not, indicate where to find it')
-    comment = fields.Text()
+    ab_test = fields.Boolean('A/B Test', related='sale_order_id.ab_test')
+    ab_test_text = fields.Text('If so, on what?', related='sale_order_id.ab_test_text')
+    is_preheader_available = fields.Boolean('Preheader available in HTML', related='sale_order_id.is_preheader_available')
+    is_preheader_available_text = fields.Text('If not, indicate where to find it', related='sale_order_id.is_preheader_available_text')
+    comment = fields.Text(compute='compute_comment')
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
     folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
@@ -84,11 +83,19 @@ class ProjectTask(models.Model):
     trap_address_ids = fields.One2many('trap.address', 'task_id')
     project_task_campaign_ids = fields.Many2many('project.task.campaign', compute='compute_project_task_campaign_ids',
                                                  inverse='_inverse_project_task_campaign_ids')
-    operation_provider_delivery_ids = fields.One2many(
-        'operation.provider.delivery', 'task_id', 'Provider Delivery Tasks')
-    customer_commitment_date = fields.Datetime(related='sale_order_id.commitment_date')
-    complexity = fields.Char()
+    operation_provider_delivery_ids = fields.One2many('operation.provider.delivery', 'task_id', 'Provider Delivery')
+    customer_commitment_date = fields.Datetime(related='sale_order_id.commitment_date', string="Customer Delivery Date")
+    complexity = fields.Selection([
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3')])
     delivery_date = fields.Date()
+    stage_number = fields.Selection(related='stage_id.stage_number')
+
+    @api.depends('sale_order_id.comment')
+    def compute_comment(self):
+        for rec in self:
+            rec.comment = rec.sale_order_id.comment if rec.task_number in ['25', '30'] else False
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):
@@ -272,6 +279,7 @@ class ProjectTask(models.Model):
                     '25': '_hook_task_25_in_stage_80',
                     '30': '_hook_task_30_in_stage_80',
                     '45': '_hook_task_45_in_stage_80',
+                    '55': '_hook_task_55_in_stage_80',
                     '70': '_hook_task_70_in_stage_80',
                     '75': '_hook_task_75_in_stage_80',
                     '80': '_hook_task_80_in_stage_80',

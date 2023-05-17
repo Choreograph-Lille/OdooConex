@@ -36,6 +36,7 @@
                         </group>
                         <group>
                             <field name="delivery_info_task_id" />
+                            <field name="presta_delivery_info_task_id" />
                             <field
                                 name="operation_provider_delivery_ids"
                                 attrs="{'invisible':[('operation_provider_delivery_ids', '=', [])]}"
@@ -43,7 +44,7 @@
                                 <tree editable="bottom">
                                     <field name="order_id" invisible="1" />
                                     <field name="delivery_date" />
-                                    <field name="task_id" readonly="1" />
+                                    <field name="task_id" readonly="1" invisible="1"/>
                                 </tree>
                             </field>
                         </group>
@@ -63,9 +64,9 @@
                         <group>
                             <field name="to_validate" />
                         </group>
-                        <field name="segment_ids">
+                        <field name="segment_ids" force_save="1" >
                             <tree editable="bottom">
-                                <field name="segment_number" readonly="1"/>
+                                <field name="segment_number" readonly="1" force_save="1"/>
                                 <field name="model_selection" />
                                 <field name="name" />
                                 <field name="ranking" />
@@ -154,9 +155,9 @@
             <xpath expr="//field[@name='optout_link']" position="attributes">
                 <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
             </xpath>
-            <xpath expr="//field[@name='routing_base']" position="attributes">
+            <!--<xpath expr="//field[@name='routing_base']" position="attributes">
                 <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
-            </xpath>
+            </xpath>-->
             <xpath expr="//group[@name='bat']/separator[2]" position="attributes">
                 <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
             </xpath>

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-26 14:07+0000\n"
-"PO-Revision-Date: 2023-04-26 14:07+0000\n"
+"POT-Creation-Date: 2023-05-16 21:20+0000\n"
+"PO-Revision-Date: 2023-05-16 21:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -177,6 +177,13 @@ msgid "Add a new retribution base"
 msgstr "Ajouter une nouvelle base concernée"
 
 #. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__adjustment
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__adjustment
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Adjustment"
+msgstr ""
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_generation__operation_selection__association
 msgid "Associate order with an existing operation"
 msgstr "Associer la commande à une opération existante"
@@ -191,7 +198,7 @@ msgstr ""
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Audit"
-msgstr "Audit"
+msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
@@ -231,26 +238,39 @@ msgid "Bat Internal"
 msgstr "BAT interne"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__state_specific
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__state_specific
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.sales_order_view_search_inherit
+msgid "C9H State"
+msgstr "Statut C9H"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__campaign_id
+msgid "Campaign"
+msgstr "Campagne"
+
+#. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Campaign Couting"
 msgstr "Comptages campagne"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__campaign_id
-#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
-msgid "Campaign"
-msgstr "Campagne"
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__id_campaign
+msgid "Campaign ID"
+msgstr ""
 
 #. module: choreograph_sale
-#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
-msgid "SMS Campaign"
-msgstr "Campagne SMS"
-
-#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__name
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__campaign_name
 msgid "Campaign Name"
 msgstr "Nom campagne"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__project_task_campaign_ids
+msgid "Campaigns"
+msgstr "Campagnes"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
@@ -259,6 +279,7 @@ msgstr "Annuler"
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__cancel
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__cancel
 msgid "Cancelled"
 msgstr "Annulé"
 
@@ -273,20 +294,46 @@ msgid "Choreograph Campaign DE"
 msgstr "DE"
 
 #. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_choreograph_campaign_de
+msgid "Choreograph Campign DE"
+msgstr "DE"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__campaign_type__classic
+msgid "Classic"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
+#: code:addons/choreograph_sale/models/sale_order.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__client_file
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__client_file
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__client_file
+#, python-format
 msgid "Client File"
 msgstr "Fichier client"
 
 #. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__closed_won
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__closed_won
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Closed Won"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__code
+msgid "Code"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
-#: code:addons/choreograph_sale/models/sale_order.py:0
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__comment
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sms_comment
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__comment
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__comment
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__comment
+#, python-format
 msgid "Comment"
 msgstr "Commentaires"
 
@@ -306,13 +353,21 @@ msgid "Condition/Exclusion"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_generation__operation_selection__creation
 msgid "Create a new operation"
 msgstr "Créer une nouvelle opération"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__create_uid
@@ -320,15 +375,19 @@ msgid "Created by"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__create_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__create_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__create_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__create_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__create_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__create_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__create_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Customer Fulfillment"
@@ -337,6 +396,11 @@ msgstr "Fulfillment client"
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__access_url
 msgid "Customer Portal URL"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.ui.menu,name:choreograph_sale.choreograph_campaign_de_menu
+msgid "DE"
 msgstr ""
 
 #. module: choreograph_sale
@@ -354,6 +418,7 @@ msgid "Delivery Info"
 msgstr "Info livraison"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Deposit Date"
@@ -370,8 +435,11 @@ msgid "Desired Finished Volume"
 msgstr "Volume abouti souhaité"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__display_name
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__display_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__display_name
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__display_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__display_name
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__display_name
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__display_name
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__display_name
@@ -414,18 +482,10 @@ msgid "Email BAT Internal"
 msgstr "BAT interne"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
-#, python-format
-msgid "Email Campaign"
-msgstr "Campagne email"
-
-#. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__project_task_campaign_ids
-msgid "Email Campaign"
-msgstr "Campagnes"
-
-#. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+#, python-format
 msgid "Email Campaign"
 msgstr "Campagne Email"
 
@@ -571,9 +631,10 @@ msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_from
-msgid "From"
-msgstr "DE"
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__forecast
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__forecast
+msgid "Forecast"
+msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
@@ -586,12 +647,20 @@ msgid "Has Message"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__id
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__id
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__id
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__id
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__id
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__id
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__id
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__id
 msgid "ID"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__campaign_type__instant_classic
+msgid "IM and Classic"
 msgstr ""
 
 #. module: choreograph_sale
@@ -647,6 +716,11 @@ msgid "Infos Validated"
 msgstr "Infos validées"
 
 #. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__campaign_type__instant
+msgid "Instant Mail"
+msgstr ""
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_is_follower
 msgid "Is Follower"
 msgstr ""
@@ -657,8 +731,11 @@ msgid "Is Task Created?"
 msgstr "Tâche crée"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de____last_update
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition____last_update
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype____last_update
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation____last_update
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign____last_update
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base____last_update
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line____last_update
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation____last_update
@@ -666,8 +743,11 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__write_uid
@@ -675,8 +755,11 @@ msgid "Last Updated by"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__write_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__write_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__write_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__write_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__write_date
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__write_date
@@ -720,6 +803,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "Message Kit (wording)"
 msgstr "Kit message (wording)"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_partner__sale_warn_msg
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_users__sale_warn_msg
+msgid "Message for Sales Order"
+msgstr "Message sur les commandes de vente"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_ids
@@ -829,11 +918,6 @@ msgid "Operation Selection"
 msgstr ""
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__operation_type_id
-msgid "Operation Type"
-msgstr "Type d'opération"
-
-#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_type
 msgid "Operation Type"
 msgstr "Type"
@@ -842,6 +926,11 @@ msgstr "Type"
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_date
 msgid "Operation date"
 msgstr "Date"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Optout"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__order_id
@@ -865,6 +954,11 @@ msgid "PO Number"
 msgstr "N° PO"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__partner_id
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sms_personalization
 msgid "Personalization"
 msgstr "Personnalisation"
@@ -886,6 +980,7 @@ msgid "Postal address"
 msgstr "Adresse Postale"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Potential Return"
@@ -897,18 +992,21 @@ msgid "Pre-fulfill study"
 msgstr "Prefulfill Etude"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Prefulfillment"
-msgstr "Prefulfillment"
+msgstr ""
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Presta Delivery"
 msgstr "Livraison presta"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Presta Info"
@@ -932,6 +1030,13 @@ msgstr "Nom du projet"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__operation_template_id
 msgid "Project Template"
 msgstr "Modèle de projet"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__prospecting
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__prospecting
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Prospecting"
+msgstr "Prospecting"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__quota_base_ids
@@ -973,7 +1078,6 @@ msgid "Responsible User"
 msgstr "Responsable"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__retribution_cost
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__retribution
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "Retribution"
@@ -1027,7 +1131,9 @@ msgid "SFTP"
 msgstr ""
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 #, python-format
 msgid "SMS Campaign"
 msgstr "Campagne SMS"
@@ -1069,9 +1175,16 @@ msgstr "Bon de commande"
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Ligne de bons de commande"
+msgstr "Ligne de commande"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_partner__sale_warn
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_users__sale_warn
+msgid "Sales Warnings"
+msgstr "Bon de commande"
+
+#. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Scoring Presentation"
@@ -1081,6 +1194,19 @@ msgstr "Présentation de score"
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__access_token
 msgid "Security Token"
 msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_res_partner__sale_warn
+#: model:ir.model.fields,help:choreograph_sale.field_res_users__sale_warn
+msgid ""
+"Selecting the \"Warning\" option will notify user with the message, "
+"Selecting \"Blocking Message\" will throw an exception with the message and "
+"block the flow. The Message has to be written in the next field."
+msgstr ""
+"Sélectionner l'option 'Avertissement' notifiera l'utilisateur avec le "
+"Message. Sélectionner 'Message Bloquant' lancera une exception avec le "
+"message et bloquera le flux. Le Message doit être encodé dans le champ "
+"suivant."
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__send_with
@@ -1108,16 +1234,6 @@ msgid "Source"
 msgstr ""
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__state_specific
-msgid "State"
-msgstr "Statut"
-
-#. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__state_specific
-msgid "State Specific"
-msgstr "Statut spéc"
-
-#. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_state
 msgid ""
 "Status based on activities\n"
@@ -1127,6 +1243,7 @@ msgid ""
 msgstr ""
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Study Delivery"
@@ -1153,6 +1270,7 @@ msgid "Task generation"
 msgstr "Générer tâches"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid ""
@@ -1164,7 +1282,9 @@ msgstr "Le modèle d'opération doit avoir des tâches de numéros: {0}, {1}, {2
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "There is no operation to generate for the items selected in the quote"
-msgstr "Il n'y a pas d'opération à générer pour les articles sélectionnés dans le devis"
+msgstr ""
+"Il n'y a pas d'opération à générer pour les articles sélectionnés dans le "
+"devis"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__campaign_id
@@ -1191,28 +1311,27 @@ msgid "Total Retribution"
 msgstr "Total rétribution"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__type
-msgid "Type"
-msgstr ""
-
-#. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__update
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__update
+#, python-format
 msgid "Update"
 msgstr "Mise à jour"
 
 #. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__update_repoussoir
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__update_repoussoir
+#, python-format
 msgid "Update Repoussoir"
 msgstr "Mise à jour repoussoir"
 
@@ -1269,8 +1388,39 @@ msgid "Witnesses"
 msgstr "Témoins"
 
 #. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_operation_condition_subtype
+msgid "operation.condition.subtype"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "potential_return"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "presentation"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_project_task_campaign
+msgid "project.task.campaign"
+msgstr ""
+
+#. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_sale_data_conservation
 msgid "sale.data.conservation"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "study_delivery"
 msgstr ""
 
 #. module: choreograph_sale

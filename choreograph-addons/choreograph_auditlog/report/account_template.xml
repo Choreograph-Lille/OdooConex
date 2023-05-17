@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="accounting_template">
+        <t t-call="choreograph_auditlog.layout">
+            <div class="page">
+                <t t-call="choreograph_auditlog.header_audit_report" />
+                <div class="row">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <td class="fw-bold">Client</td>
+                                <td class="fw-bold">Invoice date</td>
+                                <td class="fw-bold">Credit note number</td>
+                                <td class="fw-bold">Commercial</td>
+                                <td class="fw-bold">Origin document</td>
+                                <td class="fw-bold">Subtotal</td>
+                                <td class="fw-bold">Creator</td>
+                                <td class="fw-bold">Validator</td>
+                                <td class="fw-bold">Validation date</td>
+                                <td class="fw-bold">Comment</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="accounts" t-as="account">
+                                <tr>
+                                    <td t-out="account.get('client')"/>
+                                    <td t-out="account.get('invoice_date')"/>
+                                    <td t-out="account.get('credit_note_number')"/>
+                                    <td t-out="account.get('commercial')"/>
+                                    <td t-out="account.get('origin_document')"/>
+                                    <td t-out="account.get('subtotal')"/>
+                                    <td t-out="account.get('creator')"/>
+                                    <td t-out="account.get('validator')"/>
+                                    <td t-out="account.get('validation_date')"/>
+                                    <td t-out="account.get('comment')"/>
+                                    <td t-out="account.get('comment')"/>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="report_accounting">
+        <t t-call="web.html_container">
+            <t t-call="choreograph_auditlog.accounting_template" />
+        </t>
+    </template>
+
+</odoo>

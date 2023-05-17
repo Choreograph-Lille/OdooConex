@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Choreograph Sox : User rights management',
+    'name': 'Choreograph Sox',
     'version': '16.0.0.1',
     'license': 'LGPL-3',
     'category': 'Tools',

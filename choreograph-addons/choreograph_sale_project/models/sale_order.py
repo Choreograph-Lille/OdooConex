@@ -46,8 +46,7 @@ class SaleOrder(models.Model):
     return_production_potential_date = fields.Date('Date of return of production potential')
     operation_code = fields.Char(compute='compute_operation_code', store=True)
 
-    operation_provider_delivery_ids = fields.One2many(
-        'operation.provider.delivery', 'order_id', 'Provider Delivery Tasks')
+    operation_provider_delivery_ids = fields.One2many('operation.provider.delivery', 'order_id', 'Provider Delivery')
     comment = fields.Text()
     quantity_to_deliver = fields.Integer()
     to_validate = fields.Boolean()
@@ -58,11 +57,15 @@ class SaleOrder(models.Model):
     can_display_livery_project = fields.Boolean(compute='_compute_can_display_delivery')
     can_display_to_plan = fields.Boolean(compute='_compute_can_display_delivery')
     delivery_email_to = fields.Char()
-    delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_task_id')
-    has_enrichment_email_op = fields.Boolean(compute='_compute_has_enrichment_email_op', store=True)
+    delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_tasks')
+    presta_delivery_info_task_id = fields.Many2one(
+        'project.task', 'Presta Delivery Info', compute='compute_delivery_info_tasks')
+    has_enrichment_email_op = fields.Boolean(compute='_compute_has_email_op', store=True)
+    has_prospection_email_op = fields.Boolean(compute='_compute_has_email_op', store=True)
 
-    def compute_delivery_info_task_id(self):
+    def compute_delivery_info_tasks(self):
         self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
+        self.presta_delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '70').id or False
 
     @api.depends('project_ids')
     def _compute_operation_type_id(self):
@@ -70,29 +73,32 @@ class SaleOrder(models.Model):
             rec.operation_type_id = rec.project_ids[0] if rec.project_ids else False
 
     @api.depends('order_line')
-    def _compute_has_enrichment_email_op(self):
+    def _compute_has_email_op(self):
         for rec in self:
-            enrichment_email = self.env.ref('choreograph_sale_project.project_project_email_enrichment')
+            enrichment_email = self.env.ref('choreograph_sale_project.project_project_email_enrichment', raise_if_not_found=False)
+            prospection_email = self.env.ref('choreograph_sale_project.project_project_email_prospecting', raise_if_not_found=False)
             rec.has_enrichment_email_op = any(
                 [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == enrichment_email])
+            rec.has_prospection_email_op = any(
+                [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == prospection_email])
 
     @api.depends('operation_type_id.stage_id')
     def _compute_can_display_delivery(self):
         STAGE_REDELIVERY_PROJECT = [
-            self.env.ref('choreograph_project.planning_project_stage_in_progress').id,
-            self.env.ref('choreograph_project.planning_project_stage_to_deliver').id,
-            self.env.ref('choreograph_project.planning_project_stage_terminated').id,
-            self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
+            self.env.ref('choreograph_project.planning_project_stage_in_progress', raise_if_not_found=False).id,
+            self.env.ref('choreograph_project.planning_project_stage_to_deliver', raise_if_not_found=False).id,
+            self.env.ref('choreograph_project.planning_project_stage_terminated', raise_if_not_found=False).id,
+            self.env.ref('choreograph_project.planning_project_stage_presta_delivery', raise_if_not_found=False).id,
         ]
         STAGE_DELIVERY_PROJECT = [
-            self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id,
-            self.env.ref('choreograph_project.planning_project_stage_to_deliver').id,
+            self.env.ref('choreograph_project.planning_project_stage_presta_delivery', raise_if_not_found=False).id,
+            self.env.ref('choreograph_project.planning_project_stage_to_deliver', raise_if_not_found=False).id,
         ]
         STAGE_TO_PLAN_PROJECT = [
-            self.env.ref('choreograph_project.planning_project_stage_draft').id
+            self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id
         ]
         STAGE_TO_PLAN_PROJECT = [
-            self.env.ref('choreograph_project.planning_project_stage_draft').id
+            self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id
         ]
         for rec in self:
             rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_REDELIVERY_PROJECT if rec.operation_type_id else False
@@ -104,6 +110,7 @@ class SaleOrder(models.Model):
             self._unarchive_task('potential_return')
             self._unarchive_task('study_delivery')
             self._archive_task('study_global')
+            self.update_operation_task_comment()
         else:
             self._archive_task('potential_return')
             self._archive_task('study_delivery')
@@ -142,6 +149,9 @@ class SaleOrder(models.Model):
                     task.write({
                         'date_deadline': vals[operation_task]
                     })
+                # CNXMIG-102
+                if rec.project_ids and rec.project_ids[0].stage_id.id == self.env.ref('choreograph_project.planning_project_stage_planified').id and operation_task == 'potential_return':
+                    rec.update_task_stage_to_15(task)
 
     def _archive_task(self, operation_task):
         for rec in self:
@@ -150,6 +160,12 @@ class SaleOrder(models.Model):
                 task.write({
                     'active': False,
                 })
+
+    def update_task_stage_to_15(self, task=False):
+        to_do_stage = self.env.ref('choreograph_project.project_task_type_to_do', raise_if_not_found=False)
+        task.write({
+            'stage_id': to_do_stage.id
+        })
 
     @api.depends('potential_return', 'presentation')
     def _compute_operation_task(self):
@@ -171,10 +187,8 @@ class SaleOrder(models.Model):
             operation_template = line_with_project[0].operation_template_id
         elif self.project_ids:
             operation_template = self.project_ids[0]
-        provider_template = operation_template.task_ids.filtered(
-            lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER)
 
-        return provider_template
+        return operation_template.task_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER) if operation_template else False
 
     # def archive_required_tasks(self):
     #     for task in self.tasks_ids.filtered(lambda t: t.task_number in REQUIRED_TASK_NUMBER.values()):
@@ -187,8 +201,8 @@ class SaleOrder(models.Model):
             project.name = project.name.replace(' (TEMPLATE)', '').replace(f'{project.sale_order_id.name} - ', '')
 
         # self.archive_required_tasks()
-        self.compute_task_operations()
         self._manage_task_assignation()
+        self.compute_task_operations()
         self.initiate_provider_delivery()
         # self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
 
@@ -237,19 +251,25 @@ class SaleOrder(models.Model):
 
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
-        self._update_date_deadline(vals)
-        self._check_info_validated(vals)
-        if vals.get('is_info_validated', False):
-            self.update_task_sms_campaign()
-        if vals.get('email_is_info_validated', False):
-            self.update_task_email_campaign()
-        if vals.get('repatriate_information'):
-            self.repatriate_quantity_information_on_task()
-        if 'potential_return' in vals:
-            self.update_potential_return()
-        if 'presentation' in vals:
-            self.update_presentation()
-
+        for rec in self:
+            rec._update_date_deadline(vals)
+            rec._check_info_validated(vals)
+            if vals.get('is_info_validated', False):
+                rec.update_task_sms_campaign()
+            if vals.get('email_is_info_validated', False):
+                rec.update_task_email_campaign()
+            if vals.get('repatriate_information'):
+                rec.repatriate_quantity_information_on_task()
+            if 'potential_return' in vals:
+                rec.update_potential_return()
+            if 'presentation' in vals:
+                rec.update_presentation()
+            if 'comment' in vals:
+                rec.update_operation_task_comment()
+            if 'bat_from' in vals:
+                rec.update_task_bat_from(rec.bat_from.id)
+            if 'email_bat_from' in vals:
+                rec.update_task_bat_from(rec.email_bat_from.id)
         return res
 
     @api.model
@@ -272,8 +292,20 @@ class SaleOrder(models.Model):
                 # order_id._manage_task_assignation()
         return order_id
 
+    def update_task_bat_from(self, value=''):
+        self.tasks_ids.write({
+            'bat_from': value
+        })
+
+    def update_operation_task_comment(self):
+        for rec in self:
+            rec._get_operation_task(['25', '30', '40']).write({
+                'comment': rec.comment
+            })
+
     def repatriate_quantity_information_on_task(self):
-        self.tasks_ids.filtered(lambda t: t.task_number == '80').repatriate_quantity_information()
+        self.tasks_ids.filtered(lambda t: t.task_number in [
+                                '20', '25', '30', '70', '75', '85', '80']).repatriate_quantity_information()
 
     def _update_date_deadline(self, vals={}):
         for rec in self:
@@ -296,13 +328,16 @@ class SaleOrder(models.Model):
                 values.append((rec.presentation_task_id, {'date_deadline': rec.presentation_date}))
 
             if is_operation_generation or vals.get('return_production_potential_date'):
-                values.append((rec._get_operation_task(['40'], True), {'date_deadline': rec.return_production_potential_date}))
+                values.append((rec._get_operation_task(['40'], True), {
+                              'date_deadline': rec.return_production_potential_date}))
 
             if is_operation_generation or vals.get('operation_provider_delivery_ids') or vals.get('is_info_validated', False) or vals.get('email_is_info_validated', False):
-                values.extend([(rec._get_operation_task(['45', '50'], True), {'delivery_date': rec.operation_provider_delivery_ids[0].delivery_date if rec.operation_code in ['ENR_EMAIL', 'ENR_SMS'] and rec.operation_provider_delivery_ids else rec.commitment_date})])
-                
+                values.extend([(rec._get_operation_task(['45', '50'], True), {'delivery_date': rec.operation_provider_delivery_ids[0].delivery_date if rec.operation_code in [
+                              'ENR_EMAIL', 'ENR_SMS'] and rec.operation_provider_delivery_ids else rec.commitment_date})])
+
             if (is_operation_generation or vals.get('operation_provider_delivery_ids')) and rec.operation_provider_delivery_ids:
-                values.extend([(rec._get_operation_task(['60', '70'], True), {'date_deadline': rec.operation_provider_delivery_ids[0].delivery_date})])
+                values.extend([(rec._get_operation_task(['60', '70'], True), {
+                              'date_deadline': rec.operation_provider_delivery_ids[0].delivery_date})])
 
             if is_operation_generation or vals.get('bat_desired_date'):
                 values.append((rec._get_operation_task(['55'], True), {'date_deadline': rec.bat_desired_date}))
@@ -316,14 +351,17 @@ class SaleOrder(models.Model):
         :return:
         """
         for task, value in values:
-                task.write(value)
+            task.write(value)
 
     def _check_info_validated(self, vals):
         for rec in self:
             if vals.get('is_info_validated'):
                 rec._get_operation_task(['50', '55', '60']).update_task_stage(TODO_TASK_STAGE)
             if vals.get('email_is_info_validated'):
-                rec._get_operation_task(['45', '60']).update_task_stage(TODO_TASK_STAGE)
+                tasks = ['45', '60']
+                if self.has_prospection_email_op:
+                    tasks.append('55')
+                rec._get_operation_task(tasks).update_task_stage(TODO_TASK_STAGE)
 
     @api.onchange('is_info_validated')
     def _onchange_sms_info_validated(self):
@@ -438,6 +476,7 @@ class SaleOrder(models.Model):
                 'website_sale_send_recovery_email': True,
                 'active_ids': self.ids,
                 'operation_email_process': True,
+                'default_email_to': self._get_operation_task([75]).provider_delivery_address
             },
         }
 
@@ -455,7 +494,7 @@ class SaleOrder(models.Model):
     @api.depends('project_ids')
     def compute_operation_code(self):
         self.operation_code = self.project_ids[0].code if self.project_ids else ''
-        
+
     @api.onchange('segment_ids')
     def onchange_segment_sequence(self):
         for rec in self:
