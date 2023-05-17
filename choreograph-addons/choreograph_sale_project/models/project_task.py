@@ -73,7 +73,7 @@ class ProjectTask(models.Model):
     ab_test_text = fields.Text('If so, on what?', related='sale_order_id.ab_test_text')
     is_preheader_available = fields.Boolean('Preheader available in HTML', related='sale_order_id.is_preheader_available')
     is_preheader_available_text = fields.Text('If not, indicate where to find it', related='sale_order_id.is_preheader_available_text')
-    comment = fields.Text(related='sale_order_id.email_comment')
+    comment = fields.Text(compute='compute_comment')
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
     folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
@@ -91,6 +91,11 @@ class ProjectTask(models.Model):
         ('3', '3')])
     delivery_date = fields.Date()
     stage_number = fields.Selection(related='stage_id.stage_number')
+
+    @api.depends('sale_order_id.comment')
+    def compute_comment(self):
+        for rec in self:
+            rec.comment = rec.sale_order_id.comment if rec.task_number in ['25', '30'] else False
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):
