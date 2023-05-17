@@ -126,12 +126,12 @@ class AuditlogReport(models.TransientModel):
         }
         for user_id in user_ids:
             user_detail = {'name': user_id.name, 'roles': []}
-            role_line_ids = user_id.role_line_ids
-            for line_id in role_line_ids:
-                role_detail = {
-                    'name': line_id.role_id.name,
-                    'date_from': line_id.date_from,
-                    'access': line_id.role_id.model_access_ids.mapped(lambda access: {
+            groups_ids = user_id.groups_id
+            for group_id in groups_ids:
+                details = {
+                    'name': group_id.name,
+                    'date_from': None,
+                    'access': group_id.model_access.mapped(lambda access: {
                         'object': access.model_id.name,
                         'read': access.perm_read,
                         'write': access.perm_write,
@@ -139,7 +139,7 @@ class AuditlogReport(models.TransientModel):
                         'create': access.perm_create
                     })
                 }
-                user_detail['roles'].append(role_detail)
+                user_detail['roles'].append(details)
             datas['users'].append(user_detail)
         return datas
 
@@ -149,7 +149,7 @@ class AuditlogReport(models.TransientModel):
         for user_id in user_ids:
             data['users'].append({
                 'user': user_id.name,
-                'groups': user_id.role_line_ids.mapped('role_id').mapped('name')
+                'groups': user_id.groups_id.mapped('name')
             })
         return data
 
