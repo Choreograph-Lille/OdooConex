@@ -127,7 +127,7 @@ class AuditlogReport(models.TransientModel):
         for user_id in user_ids:
             user_detail = {'name': user_id.name, 'roles': []}
             sox = self.env.ref("base_user_role.ir_module_category_role", raise_if_not_found=False)
-            groups_ids = user_id.groups_id.filtered(lambda grp: grp.group_category_id == sox)
+            groups_ids = user_id.groups_id.filtered(lambda grp: grp.category_id == sox)
             for group_id in groups_ids:
                 details = {
                     'name': group_id.name,
@@ -151,7 +151,7 @@ class AuditlogReport(models.TransientModel):
         for user_id in user_ids:
             data['users'].append({
                 'user': user_id.name,
-                'groups': user_id.groups_id.filtered(lambda grp: grp.group_category_id == sox).mapped('name')
+                'groups': user_id.groups_id.filtered(lambda grp: grp.category_id == sox).mapped('name')
             })
         return data
 
