@@ -221,9 +221,13 @@ class SaleSubscription(models.Model):
                     invoiceable_lines |= start_subscription_line[0]
                 else:
                     continue
+        _logger.info(_("Lines to invoice: %s") % str(invoiceable_lines.mapped("name")))
         return invoiceable_lines
 
     @api.model
     def _cron_recurring_create_invoice(self):
         self._manage_recurring_invoice_lines()
-        return super(SaleSubscription, self)._cron_recurring_create_invoice()
+        invoices = super(SaleSubscription, self)._cron_recurring_create_invoice()
+        _logger.info(_("Invoices created: %s") % str(invoices))
+        return invoices
+

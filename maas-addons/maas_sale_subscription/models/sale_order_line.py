@@ -62,7 +62,7 @@ class SaleSubscriptionLine(models.Model):
         :param optional_values:
         :return:
         """
-        res = super(SaleSubscriptionLine)._prepare_invoice_line(optional_values)
+        res = super(SaleSubscriptionLine, self)._prepare_invoice_line(**optional_values)
         if self.temporal_type == 'subscription' or self.order_id.subscription_management == 'upsell':
             res.update({
                 'name': self._get_invoice_line_name(),
@@ -70,7 +70,7 @@ class SaleSubscriptionLine(models.Model):
         return res
 
     def _get_invoice_line_name(self):
-        self.insure_one()
-        if self.qty_cumulative:
+        self.ensure_one()
+        if self.qty_cumulative and self.state_subscription == "consumption":
             return self.name + "\n%s Ids" % self.qty_cumulative
         return self.name
