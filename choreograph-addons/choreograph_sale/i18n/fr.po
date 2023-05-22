@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-16 21:20+0000\n"
-"PO-Revision-Date: 2023-05-16 21:20+0000\n"
+"POT-Creation-Date: 2023-05-22 11:37+0000\n"
+"PO-Revision-Date: 2023-05-22 11:37+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -129,6 +129,63 @@ msgstr ""
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__95
 msgid "95"
 msgstr ""
+
+#. module: choreograph_sale
+#: model:mail.template,body_html:choreograph_sale.mail_template_sale_confirmation
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 12px;\">\n"
+"        Hello,\n"
+"        <br/><br/>\n"
+"        <t t-set=\"transaction\" t-value=\"object.get_portal_last_transaction()\"/>\n"
+"        Please find attached our Order Confirmation <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">S00049</span> for <span t-out=\"object.partner_id.name\">Mitchell Admin</span>.<br/>\n"
+"        Once you’ve reviewed it, could you please return it signed?\n"
+"        <br/><br/>\n"
+"        I look forward to hearing from you.<br/>\n"
+"        If you have any questions, please don’t hesitate to contact me.\n"
+"        <br/><br/>\n"
+"        Best regards,\n"
+"        <t t-if=\"not is_html_empty(object.user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <t t-out=\"object.user_id.name or ''\">--<br/>Mitchell Admin</t><br/>\n"
+"            <t t-out=\"object.user_id.partner_id.email or ''\">--<br/>mitchell@odoo.com</t>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>"
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 12px;\">\n"
+"        Bonjour,\n"
+"        <br/><br/>\n"
+"        <t t-set=\"transaction\" t-value=\"object.get_portal_last_transaction()\"/>\n"
+"        Vous trouverez en pièce jointe notre bon de commande <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">S00049</span>.<br/>\n"
+"        Pouvez-vous le retourner signé, svp ?\n"
+"        <br/><br/>\n"
+"        Vous en remerciant par avance, je reste à votre disposition pour toute question.\n"
+"        <br/><br/>\n"
+"        Cordialement,\n"
+"        <t t-if=\"not is_html_empty(object.user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <t t-out=\"object.user_id.name or ''\">--<br/>Mitchell Admin</t><br/>\n"
+"            <t t-out=\"object.user_id.partner_id.email or ''\">--<br/>mitchell@odoo.com</t>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "<strong> Terms and conditions </strong>"
+msgstr "<strong> Conditions de règlement </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "<strong>Client instruction:</strong>"
+msgstr "<strong>Instruction du client:</strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "<strong>Database involved:</strong>"
+msgstr "<strong>Base concernée:</strong>"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__access_warning
@@ -358,6 +415,11 @@ msgid "Contact"
 msgstr ""
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Contact details choreograph:"
+msgstr "Contact Choreograph:"
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_generation__operation_selection__creation
 msgid "Create a new operation"
 msgstr "Créer une nouvelle opération"
@@ -416,6 +478,11 @@ msgstr "Conservation des données"
 #, python-format
 msgid "Delivery Info"
 msgstr "Info livraison"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Delivery date"
+msgstr "Date de livraison"
 
 #. module: choreograph_sale
 #. odoo-python
@@ -593,6 +660,11 @@ msgstr "Détail volume"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_reception_location
 msgid "Email Where to find ?"
 msgstr "Où le trouver ?"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Encoding standard"
+msgstr "Sous-type média"
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__operation_type__exclusion
@@ -790,6 +862,11 @@ msgid "Main Attachment"
 msgstr ""
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Media type"
+msgstr "Type média"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__medium_id
 msgid "Medium"
 msgstr ""
@@ -814,6 +891,11 @@ msgstr "Message sur les commandes de vente"
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_ids
 msgid "Messages"
 msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Model"
+msgstr "Dessin d'enregistrement"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__multi_base_id
@@ -1068,6 +1150,16 @@ msgid "Reception Date"
 msgstr "Date de réception"
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Recipient of data"
+msgstr "Destinataire du fichier"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Recipient of service"
+msgstr "Destinataire de la prestation"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__related_base
 msgid "Related Base"
 msgstr "Base concernée"
@@ -1076,6 +1168,11 @@ msgstr "Base concernée"
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_user_id
 msgid "Responsible User"
 msgstr "Responsable"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Retention"
+msgstr "Conservations des données"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__retribution
@@ -1184,6 +1281,16 @@ msgid "Sales Warnings"
 msgstr "Bon de commande"
 
 #. module: choreograph_sale
+#: model:mail.template,name:choreograph_sale.mail_template_sale_confirmation
+msgid "Sales: Order Confirmation"
+msgstr "Ventes : Confirmation de commande"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Salesperson:"
+msgstr "Vendeur:"
+
+#. module: choreograph_sale
 #. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
@@ -1217,6 +1324,11 @@ msgstr "Envoi via"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sender
 msgid "Sender"
 msgstr "Expéditeur"
+
+#. module: choreograph_sale
+#: model:mail.template,description:choreograph_sale.mail_template_sale_confirmation
+msgid "Sent to customers on order confirmation"
+msgstr "Envoyé aux clients lors de la confirmation de commande"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__show_operation_generation_button
@@ -1309,6 +1421,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__total_retribution
 msgid "Total Retribution"
 msgstr "Total rétribution"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Transmission method"
+msgstr "Canal d'envoi"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_exception_decoration
@@ -1429,3 +1546,16 @@ msgstr ""
 #, python-format
 msgid "the record %s has no delivery date."
 msgstr "L'enregistrement %s n'a pas de date de livraison"
+
+#. module: choreograph_sale
+#: model:mail.template,subject:choreograph_sale.mail_template_sale_confirmation
+msgid ""
+"{{ (object.get_portal_last_transaction().state == 'pending') and "
+"object.company_id.name }} {{ (object.get_portal_last_transaction().state == "
+"'pending') and 'Pending Order' or 'Order confirmation' }} (Ref {{ "
+"object.name or 'n/a' }})"
+msgstr ""
+"{{ (object.get_portal_last_transaction().state == 'pending') and "
+"object.company_id.name }} {{ (object.get_portal_last_transaction().state == "
+"'pending') and 'Commande en attente' or 'Bon de commande' }} (Ref {{ "
+"object.name or 'n/a' }})"
