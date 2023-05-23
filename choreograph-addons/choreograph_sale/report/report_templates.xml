@@ -50,7 +50,7 @@
                     </table>
                 </div>
                 <div class="col-auto col-6 mw-100 mb-2">
-                    <br/>
+                    <br />
                     <table style="width:90%; border: 1px solid transparent;">
                         <tr style="border: 0px">
                             <td style="border: 0px" class="fw-bold">Retention</td>
@@ -89,6 +89,9 @@
         </xpath>
         <xpath expr="//td[@name='td_taxes']" position="attributes">
             <attribute name="t-att-class">'d-none' if not doc.recurrence_id else 'text-end'</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('page')]" position="after">
+            <t t-call="choreograph_sale.term_and_conditions" />
         </xpath>
     </template>
 </odoo>

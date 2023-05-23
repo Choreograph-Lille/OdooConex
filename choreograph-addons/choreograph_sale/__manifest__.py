@@ -23,6 +23,7 @@
         # wizards
         'wizards/operation_generation_views.xml',
         # report
+        'report/report_terms_templates.xml',
         'report/report_templates.xml',
         # views
         'views/sale_order_views.xml',
