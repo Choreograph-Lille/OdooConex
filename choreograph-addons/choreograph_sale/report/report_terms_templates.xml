@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
   <template id="term_and_conditions">
+  <t t-set="choreo_fs" t-value="'font-size:6pt;'"/>
     <t t-set="choreo_style_p"
-      t-value="'font-style:normal;font-weight:normal;font-size:6pt;font-family:DejaVu Sans;color:#000000;margin-top: 1px;margin-bottom: 5px;'" />
+      t-value="'font-style:normal;font-weight:normal;margin-top: 1px;margin-bottom: 5px;'+choreo_fs" />
     <t t-set="choreo_style_p_title"
-      t-value="'font-style:normal;font-weight:bold;font-size:6pt;font-family:DejaVu Sans;color:#000000'" />
+      t-value="'font-style:normal;font-weight:bold;'+choreo_fs" />
     <t t-set="choreo_style_p_title_2"
-      t-value="'font-style:italic;font-weight:bold;font-size:6pt;font-family:DejaVu Sans;color:#000000;'" />
+      t-value="'font-style:italic;font-weight:bold;'+choreo_fs" />
     <t t-set="choreo_br" t-value="'margin-top: 2px;margin-bottom: 2px;'" />
     <div class="row" style="page-break-before: always! important; width:100%; marin-top:0px">
       <div style="width: 33.33%; padding: 10px;">
