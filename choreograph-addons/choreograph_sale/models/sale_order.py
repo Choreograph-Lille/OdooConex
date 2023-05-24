@@ -276,3 +276,6 @@ class SaleOrder(models.Model):
         self.ensure_one()
         self.state_specific = "adjustment"
         return True
+
+    def _get_confirmation_template(self):
+        return self.env.ref('choreograph_sale.mail_template_sale_confirmation', raise_if_not_found=False)

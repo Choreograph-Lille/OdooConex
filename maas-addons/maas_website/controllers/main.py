@@ -291,7 +291,7 @@ class OperationWebsite(http.Controller):
         operation = operation_obj.browse(operation_id)
         operation.command_download()
         if operation.modeled_file_url:
-            return http.request.redirect(operation.modeled_file_url)
+            return http.request.redirect(operation.modeled_file_url, local=False)
         else:
             return http.request.redirect('/operation/list')
 

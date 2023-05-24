@@ -17,10 +17,14 @@
     'data': [
         # data
         'data/sale_data_conservation_data.xml',
+        'data/mail_template_data.xml',
         # security
         'security/ir.model.access.csv',
         # wizards
         'wizards/operation_generation_views.xml',
+        # report
+        'report/report_terms_templates.xml',
+        'report/report_templates.xml',
         # views
         'views/sale_order_views.xml',
         'views/res_partner_views.xml',

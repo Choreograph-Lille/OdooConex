@@ -114,7 +114,7 @@
                                                 data-toggle="dropdown">
                                                 <t t-foreach="languages" t-as="lg">
                                                     <t t-if="request.context.get('lang') == lg[0]">
-                                                        <t t-esc="lg[2].split('/').pop() if lg[1] == 'fr' else lg[2].split(' ')[0]" />
+                                                        <t t-esc="lg[2].split('/').pop() if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]" />
                                                     </t>
                                                 </t>
                                                 <span class="caret"></span>
@@ -132,7 +132,7 @@
                                                                 t-att-data-url_code="lg[1]"
                                                                 class="js_change_lang"
                                                             >
-                                                                <t t-esc="lg[2].split('/')[0] if lg[1] == 'fr' else lg[2].split(' ')[0]" />
+                                                                <t t-esc="lg[2].split('/')[0] if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]" />
                                                             </a>
                                                         </li>
                                                     </t>
@@ -545,7 +545,7 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <t t-foreach="languages" t-as="lg">
                                                 <t t-if="request.context.get('lang') == lg[0]">
-                                                    <t t-esc="lg[2].split('/').pop() if lg[1] == 'fr' else lg[2].split(' ')[0]" />
+                                                    <t t-esc="lg[2].split('/').pop() if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]" />
                                                 </t>
                                             </t>
                                             <span class="caret"></span>
@@ -562,7 +562,7 @@
                                                             t-att-data-url_code="lg[1]"
                                                             class="js_change_lang"
                                                         >
-                                                        <t t-esc="lg[2].split('/')[0] if lg[1] == 'fr' else lg[2].split(' ')[0]" />
+                                                        <t t-esc="lg[2].split('/')[0] if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]" />
                                                         </a>
                                                     </li>
                                                 </t>
@@ -1807,7 +1807,7 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <t t-foreach="languages" t-as="lg">
                                                 <t t-if="request.context.get('lang') == lg[0]">
-                                                    <t t-esc="lg[2].split('/').pop() if lg[1] == 'fr' else lg[2].split(' ')[0]" />
+                                                    <t t-esc="lg[2].split('/').pop() if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]" />
                                                 </t>
                                             </t>
                                             <span class="caret"></span>
@@ -1824,7 +1824,7 @@
                                                             t-att-data-url_code="lg[1]"
                                                             class="js_change_lang"
                                                         >
-                                                            <t t-esc="lg[2].split('/')[0] if lg[1] == 'fr' else lg[2].split(' ')[0]" />
+                                                            <t t-esc="lg[2].split('/')[0] if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]" />
                                                         </a>
                                                     </li>
                                                 </t>
@@ -2329,7 +2329,7 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                             <t t-foreach="languages" t-as="lg">
                                                 <t t-if="request.context.get('lang') == lg[0]">
-                                                    <t t-esc="lg[2].split('/').pop() if lg[1] == 'fr' else lg[2].split(' ')[0]" />
+                                                    <t t-esc="lg[2].split('/').pop() if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]" />
                                                 </t>
                                             </t>
                                             <span class="caret"></span>
@@ -2346,7 +2346,7 @@
                                                             t-att-data-url_code="lg[1]"
                                                             class="js_change_lang"
                                                         >
-                                                            <t t-esc="lg[2].split('/')[0] if lg[1] == 'fr' else lg[2].split(' ')[0]" />
+                                                            <t t-esc="lg[2].split('/')[0] if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]" />
                                                         </a>
                                                     </li>
                                                 </t>
