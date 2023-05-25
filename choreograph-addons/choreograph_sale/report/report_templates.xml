@@ -6,7 +6,7 @@
         </xpath>
         <xpath expr="//div[@id='informations']/div[4]/strong" position="replace">
             <strong t-if="doc.recurrence_id">Salesperson:</strong>
-            <strong t-else="">Contact details choreograph:</strong>
+            <strong t-if="not doc.recurrence_id">Contact details choreograph:</strong>
         </xpath>
         <xpath expr="//div[@id='informations']/div[4]/p" position="after">
             <p t-if="not doc.recurrence_id" class="m-0" t-field="doc.user_id.partner_id.email" />
