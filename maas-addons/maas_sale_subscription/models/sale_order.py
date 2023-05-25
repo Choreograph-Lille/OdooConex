@@ -227,6 +227,9 @@ class SaleSubscription(models.Model):
     @api.model
     def _cron_recurring_create_invoice(self):
         self._manage_recurring_invoice_lines()
+        config_obj = self.env['ir.config_parameter'].sudo()
+        if not config_obj.get_param('recurring.invoice.scheduler.enabled'):
+            return False
         invoices = super(SaleSubscription, self)._cron_recurring_create_invoice()
         _logger.info(_("Invoices created: %s") % str(invoices))
         return invoices
