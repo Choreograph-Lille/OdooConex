@@ -406,11 +406,13 @@ class SaleOrder(models.Model):
             ('comment', 'email_comment'),
             ('bat_internal', 'email_bat_internal'),
             ('bat_client', 'email_bat_client'),
+            ('bat_desired_date', 'bat_desired_date'),
             ('witness_file_name', 'email_witness_file_name'),
             ('po_livedata_number', 'livedata_po_number'),
             ('campaign_name', 'email_campaign_name'),
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
+        values.update({'bat_from': self.email_bat_from.id if self.email_bat_from else None})
         self.update_tasks(values, EMAIL_TASK_NUMBER)
 
     def update_task_bat_file_witness(self):
@@ -420,7 +422,7 @@ class SaleOrder(models.Model):
             ('witness_file_name', 'email_witness_file_name'),
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
-        values.update({'bat_from': self.email_bat_from.id})
+        values.update({'bat_from': self.email_bat_from.id if self.email_bat_from else None})
         self.update_tasks(values, BAT_FILE_WITNESS_TASK_NUMBER)
 
     def update_task_sms_campaign(self):
