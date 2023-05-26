@@ -12,6 +12,7 @@ from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STA
 PROVIDER_DELIVERY_NUMBER = '75'
 SMS_TASK_NUMBER = '50'
 EMAIL_TASK_NUMBER = '45'
+BAT_FILE_WITNESS_TASK_NUMBER = '55'
 CHECK_TASK_STAGE_NUMBER = '10'
 OPERATION_TASK_NUMBER = {
     'potential_return': '25',
@@ -75,8 +76,10 @@ class SaleOrder(models.Model):
     @api.depends('order_line')
     def _compute_has_email_op(self):
         for rec in self:
-            enrichment_email = self.env.ref('choreograph_sale_project.project_project_email_enrichment', raise_if_not_found=False)
-            prospection_email = self.env.ref('choreograph_sale_project.project_project_email_prospecting', raise_if_not_found=False)
+            enrichment_email = self.env.ref(
+                'choreograph_sale_project.project_project_email_enrichment', raise_if_not_found=False)
+            prospection_email = self.env.ref(
+                'choreograph_sale_project.project_project_email_prospecting', raise_if_not_found=False)
             rec.has_enrichment_email_op = any(
                 [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == enrichment_email])
             rec.has_prospection_email_op = any(
@@ -258,6 +261,7 @@ class SaleOrder(models.Model):
                 rec.update_task_sms_campaign()
             if vals.get('email_is_info_validated', False):
                 rec.update_task_email_campaign()
+                rec.update_task_bat_file_witness()
             if vals.get('repatriate_information'):
                 rec.repatriate_quantity_information_on_task()
             if 'potential_return' in vals:
@@ -408,6 +412,16 @@ class SaleOrder(models.Model):
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
         self.update_tasks(values, EMAIL_TASK_NUMBER)
+
+    def update_task_bat_file_witness(self):
+        values_list = [
+            ('bat_internal', 'email_bat_internal'),
+            ('bat_client', 'email_bat_client'),
+            ('witness_file_name', 'email_witness_file_name'),
+        ]
+        values = {task_key: self[so_key] for task_key, so_key in values_list}
+        values.update({'bat_from': self.email_bat_from.id})
+        self.update_tasks(values, BAT_FILE_WITNESS_TASK_NUMBER)
 
     def update_task_sms_campaign(self):
         values_list = [
