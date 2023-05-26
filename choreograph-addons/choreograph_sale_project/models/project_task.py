@@ -95,7 +95,7 @@ class ProjectTask(models.Model):
     @api.depends('sale_order_id.comment')
     def compute_comment(self):
         for rec in self:
-            rec.comment = rec.sale_order_id.comment if rec.task_number in ['25', '30'] else False
+            rec.comment = rec.sale_order_id.comment if rec.task_number in ['20', '25', '30'] else False
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):
