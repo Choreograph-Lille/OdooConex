@@ -340,7 +340,7 @@ class SaleOrder(models.Model):
                               'ENR_EMAIL', 'ENR_SMS'] and rec.operation_provider_delivery_ids else rec.commitment_date})])
 
             if (is_operation_generation or vals.get('operation_provider_delivery_ids')) and rec.operation_provider_delivery_ids:
-                values.extend([(rec._get_operation_task(['60', '70'], True), {
+                values.extend([(rec._get_operation_task(['60', '70', '75'], True), {
                               'date_deadline': rec.operation_provider_delivery_ids[0].delivery_date})])
 
             if is_operation_generation or vals.get('bat_desired_date'):
