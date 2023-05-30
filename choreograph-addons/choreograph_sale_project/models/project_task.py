@@ -33,7 +33,7 @@ class ProjectTask(models.Model):
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
-    optout_link = fields.Text("Output Links")
+    optout_link = fields.Text("Output Links", related='sale_order_id.optout_link')
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
     file_name = fields.Char()
@@ -92,6 +92,7 @@ class ProjectTask(models.Model):
         ('3', '3')])
     delivery_date = fields.Date()
     stage_number = fields.Selection(related='stage_id.stage_number')
+    has_enrichment_email_op = fields.Boolean(related='project_id.sale_order_id.has_enrichment_email_op', store=True)
 
     @api.depends('sale_order_id.comment')
     def compute_comment(self):
