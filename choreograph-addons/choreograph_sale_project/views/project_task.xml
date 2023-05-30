@@ -115,7 +115,9 @@
                             </h4>
                             <br attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
                             <field name="bat_from"
-                                   attrs="{'invisible': [('task_number', 'not in', ['40', '55', '70', '75', '85', '80', '50'])]}"/>
+                                   attrs="{'invisible': [('task_number', 'not in', ['55', '70', '75', '85', '80', '50'])]}"/>
+                            <field name="bat_from_for_40"
+                                   attrs="{'invisible': [('task_number', 'not in', ['40'])]}"/>
                             <field name="bat_internal"
                                    readonly="1"
                                    attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}"/>
