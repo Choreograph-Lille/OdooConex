@@ -28,11 +28,12 @@ class ProjectTask(models.Model):
     type = fields.Char()  # this should take the type in cond/excl but another task
 
     bat_from = fields.Many2one('choreograph.campaign.de')
+    bat_from_for_40 = fields.Char(string='From', default='IDSEQ | TOP_CANAL_SOURCE(0/1) | TOP_CANAL_ENRICHISSABLE(0/1/2) |')
     bat_internal = fields.Char()
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
-    optout_link = fields.Text("Output Links")
+    optout_link = fields.Text("Output Links", related='sale_order_id.optout_link')
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
     file_name = fields.Char()
@@ -91,11 +92,12 @@ class ProjectTask(models.Model):
         ('3', '3')])
     delivery_date = fields.Date()
     stage_number = fields.Selection(related='stage_id.stage_number')
+    has_enrichment_email_op = fields.Boolean(related='project_id.sale_order_id.has_enrichment_email_op', store=True)
 
     @api.depends('sale_order_id.comment')
     def compute_comment(self):
         for rec in self:
-            rec.comment = rec.sale_order_id.comment if rec.task_number in ['25', '30'] else False
+            rec.comment = rec.sale_order_id.comment if rec.task_number in ['20', '25', '30'] else False
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):

@@ -262,7 +262,7 @@ class SaleOrder(models.Model):
             if vals.get('email_is_info_validated', False):
                 rec.update_task_email_campaign()
                 rec.update_task_bat_file_witness()
-            if vals.get('repatriate_information'):
+            if vals.get('repatriate_information') or ('segment_ids' in vals and self.repatriate_information):
                 rec.repatriate_quantity_information_on_task()
             if 'potential_return' in vals:
                 rec.update_potential_return()
@@ -309,7 +309,7 @@ class SaleOrder(models.Model):
 
     def repatriate_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in [
-                                '20', '25', '30', '70', '75', '85', '80']).repatriate_quantity_information()
+                                '20', '25', '30', '75', '85', '80']).repatriate_quantity_information()
 
     def _update_date_deadline(self, vals={}):
         for rec in self:
@@ -499,13 +499,14 @@ class SaleOrder(models.Model):
     def action_create_task_from_condition(self):
         super().action_create_task_from_condition()
         project_id = self.project_ids[0] if self.project_ids else False
-        if project_id and project_id.stage_id == self.env.ref('choreograph_project.planning_project_stage_planified'):
+        if project_id and project_id.stage_id != self.env.ref('choreograph_project.planning_project_stage_draft'):
             task_draft_stage_id = self.env.ref('choreograph_project.project_task_type_draft')
             for condition_id in self.operation_condition_ids.filtered(lambda item: item.task_id.stage_id == task_draft_stage_id):
-                if condition_id.task_id.task_number in ('5', '10', '15'):
-                    project_id._update_task_stage(condition_id.task_id.task_number, WAITING_FILE_TASK_STAGE)
-                elif condition_id.task_id.task_number in ('20', '25', '35'):
-                    project_id._update_task_stage(condition_id.task_id.task_number, TODO_TASK_STAGE)
+                condition_id.task_id.update_task_stage(WAITING_FILE_TASK_STAGE)
+                # if condition_id.task_id.task_number in ('5', '10', '15'):
+                #     project_id._update_task_stage(condition_id.task_id.task_number, WAITING_FILE_TASK_STAGE)
+                # elif condition_id.task_id.task_number in ('20', '25', '35'):
+                #     project_id._update_task_stage(condition_id.task_id.task_number, TODO_TASK_STAGE)
 
     @api.depends('project_ids')
     def compute_operation_code(self):

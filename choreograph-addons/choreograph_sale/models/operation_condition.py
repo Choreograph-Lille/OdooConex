@@ -66,6 +66,10 @@ class OperationCondition(models.Model):
                     'task_number': rec.task_number,
                 })
 
+    def unlink(self):
+        self.task_id.unlink()
+        return super(OperationCondition, self).unlink()
+
 
 class OperationConditionType(models.Model):
     _name = 'operation.condition.subtype'

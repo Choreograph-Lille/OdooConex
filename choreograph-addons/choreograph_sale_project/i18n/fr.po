@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 21:21+0000\n"
-"PO-Revision-Date: 2023-05-16 21:21+0000\n"
+"PO-Revision-Date: 2023-05-30 09:41+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -466,6 +466,11 @@ msgstr "Quantité du fichier"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__folder_key
 msgid "Folder Key"
 msgstr "Clé de dossier"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_from_for_40
+msgid "From"
+msgstr "DE"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__has_enrichment_email_op
