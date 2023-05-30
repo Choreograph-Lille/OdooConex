@@ -306,7 +306,7 @@ class ProjectTask(models.Model):
                     task.project_id._hook_task_45_in_stage_50()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
-            provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex', 'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number']
+            provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex', 'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
         return res
@@ -321,18 +321,17 @@ class ProjectTask(models.Model):
             } for trap in rec.trap_address_ids])
 
             data = {
-                    'provider_file_name': rec.provider_file_name,
-                    'provider_delivery_address': rec.provider_delivery_address,
-                    'family_conex': rec.family_conex,
-                    'provider_comment': rec.provider_comment,
-                    'trap_address_ids': [(6, 0, new_traps.ids)]
-                }
+                'provider_file_name': rec.provider_file_name,
+                'provider_delivery_address': rec.provider_delivery_address,
+                'family_conex': rec.family_conex,
+                'provider_comment': rec.provider_comment,
+                'trap_address_ids': [(6, 0, new_traps.ids)],
+                'dedup_title_number': rec.dedup_title_number,
+                'volume': rec.volume,
+                'bat_from': rec.bat_from,
+            }
             if rec.task_number == '70':
                 targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '75')
-                data.update({
-                    'dedup_title_number': rec.dedup_title_number,
-                    'volume': rec.volume,
-                })
             elif rec.task_number == '80':
                 targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '85')
             if targeted_task:
