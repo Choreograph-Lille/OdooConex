@@ -79,6 +79,7 @@ class ProjectTask(models.Model):
     folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
     segment_ids = fields.Many2many('operation.segment')
+    task_segment_ids = fields.One2many('operation.segment', 'task_id')
     operation_condition_ids = fields.Many2many('operation.condition', compute='compute_operation_condition_ids')
 
     trap_address_ids = fields.One2many('trap.address', 'task_id')
@@ -93,6 +94,7 @@ class ProjectTask(models.Model):
     delivery_date = fields.Date()
     stage_number = fields.Selection(related='stage_id.stage_number')
     has_enrichment_email_op = fields.Boolean(related='project_id.sale_order_id.has_enrichment_email_op', store=True)
+    repatriate_information = fields.Boolean(related='sale_order_id.repatriate_information')
 
     @api.depends('sale_order_id.comment')
     def compute_comment(self):
@@ -359,4 +361,10 @@ class ProjectTask(models.Model):
     def onchange_segment_sequence(self):
         for rec in self:
             for i, l in enumerate(rec.segment_ids):
+                l.segment_number = i + 1
+
+    @api.onchange('task_segment_ids')
+    def onchange_task_segment_sequence(self):
+        for rec in self:
+            for i, l in enumerate(rec.task_segment_ids):
                 l.segment_number = i + 1

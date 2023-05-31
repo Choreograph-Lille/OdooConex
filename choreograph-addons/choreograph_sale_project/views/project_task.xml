@@ -188,8 +188,10 @@
                                 attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30'])]}" />
                         </group>
                     </group>
+                    <field name="repatriate_information" invisible="1"/>
                     <field name="segment_ids"
-                        attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['70', '75', '85', '80', '20', '25', '30'])]}"
+                        attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['75', '85', '80', '20', '25', '30'])],
+                                'readonly': [('task_number', 'in', ['80']), ('repatriate_information', '=', True)]}"
                         widget="one2many"
                         domain="[('order_id', '=', sale_order_id)]"
                         force_save="1">
@@ -207,6 +209,39 @@
                             <field name="civility" />
                             <field name="comment"
                                 attrs="{'column_invisible': [('parent.task_number', 'not in', ['20', '25', '30'])]}" />
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group>
+                                    <group>
+                                        <field name="order_id" invisible="1" />
+                                        <field name="segment_number" invisible="1" />
+                                        <field name="model_selection" />
+                                        <field name="name" />
+                                        <field name="ranking" />
+                                        <field name="quantity" />
+                                    </group>
+                                    <group>
+                                        <field name="depth" />
+                                        <field name="keycode" />
+                                        <field name="civility" />
+                                        <field name="comment" />
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                    <field name="task_segment_ids"
+                        attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['70'])]}"
+                        force_save="1">
+                        <tree editable="bottom">
+                            <field name="task_id" invisible="1" />
+                            <field name="segment_number" force_save="1" />
+                            <field name="name" />
+                            <field name="ranking" />
+                            <field name="quantity" />
+                            <field name="keycode" />
+                            <field name="civility" />
                         </tree>
                         <form>
                             <sheet>
