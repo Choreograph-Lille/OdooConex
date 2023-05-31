@@ -20,3 +20,4 @@ class OperationSegment(models.Model):
         ('other', 'Others')
     ])
     comment = fields.Char()
+    task_id = fields.Many2one('project.task', 'Task')
