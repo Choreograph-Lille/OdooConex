@@ -411,6 +411,7 @@ class SaleOrder(models.Model):
             ('witness_file_name', 'email_witness_file_name'),
             ('po_livedata_number', 'livedata_po_number'),
             ('campaign_name', 'email_campaign_name'),
+            ('comment', 'email_comment')
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
         values.update({'bat_from': self.email_bat_from.id if self.email_bat_from else None})
