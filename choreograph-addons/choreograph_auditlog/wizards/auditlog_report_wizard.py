@@ -56,9 +56,10 @@ class AuditlogReport(models.TransientModel):
         if self.ir_action_report_id in rule_report_ids:
             fields_check = None
             partner_report = self.ir_action_report_id == rule_report_ids[1]
+            suppliers = self.ir_action_report_id == rule_report_ids[2]
             if partner_report:
                 fields_check = ['property_account_position_id', 'siret']
-            data = self._data_auditlog_log(fields_check)
+            data = self.with_context(supplier=suppliers)._data_auditlog_log(fields_check)
             if partner_report:
                 end_date = self.end_date if self.is_period else self.start_date
                 res_partner_bank_logs = self.env['auditlog.log.line'].search([
@@ -107,6 +108,9 @@ class AuditlogReport(models.TransientModel):
         ]
         if self.user_ids:
             domain.append(('user_id', 'in', self.user_ids.ids))
+        if self.env.context.get('supplier', False):
+            user_ids = self.env['res.partner'].search([('supplier_rank', '!=', 0)])
+            domain.append(('res_id', 'in', user_ids.ids))
         logs_ids = self.env['auditlog.log'].search(domain)
         data = {
             'logs': []
