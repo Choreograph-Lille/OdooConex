@@ -85,7 +85,7 @@ class SaleOrder(models.Model):
             rec.has_prospection_email_op = any(
                 [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == prospection_email])
 
-    @api.depends('operation_type_id.stage_id')
+    @api.depends('operation_type_id.stage_id', 'project_id')
     def _compute_can_display_delivery(self):
         STAGE_REDELIVERY_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_in_progress', raise_if_not_found=False).id,
@@ -106,7 +106,8 @@ class SaleOrder(models.Model):
         for rec in self:
             rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_REDELIVERY_PROJECT if rec.operation_type_id else False
             rec.can_display_livery_project = rec.operation_type_id.stage_id.id in STAGE_DELIVERY_PROJECT if rec.operation_type_id else False
-            rec.can_display_to_plan = rec.operation_type_id.stage_id.id in STAGE_TO_PLAN_PROJECT if rec.operation_type_id else False
+            operation_id = rec.operation_type_id or rec.project_id
+            rec.can_display_to_plan = operation_id.stage_id.id in STAGE_TO_PLAN_PROJECT if operation_id else False
 
     def update_potential_return(self):
         if self.potential_return:
