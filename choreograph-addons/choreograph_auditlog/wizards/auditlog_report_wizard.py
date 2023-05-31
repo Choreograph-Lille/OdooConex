@@ -18,6 +18,14 @@ class AuditlogReport(models.TransientModel):
     start_date = fields.Date('Date')
     end_date = fields.Date()
     ir_action_report_id = fields.Many2one('ir.actions.report', 'Rule')
+    user_ids = fields.Many2many('res.users')
+    is_extracts_from_supplier = fields.Boolean(compute='_compute_is_extracts_from_supplier', store=True)
+
+    @api.depends('ir_action_report_id')
+    def _compute_is_extracts_from_supplier(self):
+        for audit in self:
+            self.is_extracts_from_supplier = audit.ir_action_report_id == self.env.ref(
+                'choreograph_auditlog.action_report_extracts_from_suppliers')
 
     @api.constrains('start_date', 'end_date', 'is_period')
     def _check_date(self):
@@ -28,11 +36,13 @@ class AuditlogReport(models.TransientModel):
     def export(self):
         rule_report_ids = [
             self.env.ref('choreograph_auditlog.action_report_sox_role_changing'),
-            self.env.ref('choreograph_auditlog.action_report_res_partner_rib')
+            self.env.ref('choreograph_auditlog.action_report_res_partner_rib'),
+            self.env.ref('choreograph_auditlog.action_report_extracts_from_suppliers')
         ]
         report_data_map = {
             rule_report_ids[0]: self._data_auditlog_log,
             rule_report_ids[1]: self._data_auditlog_log,
+            rule_report_ids[2]: self._data_auditlog_log,
             self.env.ref('choreograph_auditlog.action_report_user_roles_and_right'): self._data_rights_and_roles,
             self.env.ref('choreograph_auditlog.action_report_sox_role_permissions'): self._data_user_sox_roles,
             self.env.ref('choreograph_auditlog.action_report_supplier_bank_details'): self._data_supplier_bank_details,
@@ -90,11 +100,14 @@ class AuditlogReport(models.TransientModel):
     def _data_auditlog_log(self, check_fields=None):
         role_model_id = self.ir_action_report_id.auditlog_model_id.id
         end_date = self.end_date if self.is_period else self.start_date
-        logs_ids = self.env['auditlog.log'].search([
+        domain = [
             ('create_date', '>=', self.start_date),
             ('create_date', '<=', end_date),
             ('model_id', '=', role_model_id)
-        ])
+        ]
+        if self.user_ids:
+            domain.append(('user_id', 'in', self.user_ids.ids))
+        logs_ids = self.env['auditlog.log'].search(domain)
         data = {
             'logs': []
         }
