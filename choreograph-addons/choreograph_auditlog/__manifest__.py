@@ -9,7 +9,8 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
-        'auditlog'
+        'auditlog',
+        'choreograph_base',
     ],
     'data': [
         'security/ir.model.access.csv',

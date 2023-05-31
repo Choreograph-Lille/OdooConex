@@ -12,6 +12,7 @@ from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STA
 PROVIDER_DELIVERY_NUMBER = '75'
 SMS_TASK_NUMBER = '50'
 EMAIL_TASK_NUMBER = '45'
+BAT_FILE_WITNESS_TASK_NUMBER = '55'
 CHECK_TASK_STAGE_NUMBER = '10'
 OPERATION_TASK_NUMBER = {
     'potential_return': '25',
@@ -75,14 +76,16 @@ class SaleOrder(models.Model):
     @api.depends('order_line')
     def _compute_has_email_op(self):
         for rec in self:
-            enrichment_email = self.env.ref('choreograph_sale_project.project_project_email_enrichment', raise_if_not_found=False)
-            prospection_email = self.env.ref('choreograph_sale_project.project_project_email_prospecting', raise_if_not_found=False)
+            enrichment_email = self.env.ref(
+                'choreograph_sale_project.project_project_email_enrichment', raise_if_not_found=False)
+            prospection_email = self.env.ref(
+                'choreograph_sale_project.project_project_email_prospecting', raise_if_not_found=False)
             rec.has_enrichment_email_op = any(
                 [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == enrichment_email])
             rec.has_prospection_email_op = any(
                 [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == prospection_email])
 
-    @api.depends('operation_type_id.stage_id')
+    @api.depends('operation_type_id.stage_id', 'project_id')
     def _compute_can_display_delivery(self):
         STAGE_REDELIVERY_PROJECT = [
             self.env.ref('choreograph_project.planning_project_stage_in_progress', raise_if_not_found=False).id,
@@ -103,7 +106,8 @@ class SaleOrder(models.Model):
         for rec in self:
             rec.can_display_redelivery = rec.operation_type_id.stage_id.id in STAGE_REDELIVERY_PROJECT if rec.operation_type_id else False
             rec.can_display_livery_project = rec.operation_type_id.stage_id.id in STAGE_DELIVERY_PROJECT if rec.operation_type_id else False
-            rec.can_display_to_plan = rec.operation_type_id.stage_id.id in STAGE_TO_PLAN_PROJECT if rec.operation_type_id else False
+            operation_id = rec.operation_type_id or rec.project_id
+            rec.can_display_to_plan = operation_id.stage_id.id in STAGE_TO_PLAN_PROJECT if operation_id else False
 
     def update_potential_return(self):
         if self.potential_return:
@@ -258,7 +262,8 @@ class SaleOrder(models.Model):
                 rec.update_task_sms_campaign()
             if vals.get('email_is_info_validated', False):
                 rec.update_task_email_campaign()
-            if vals.get('repatriate_information'):
+                rec.update_task_bat_file_witness()
+            if vals.get('repatriate_information') or ('segment_ids' in vals and self.repatriate_information):
                 rec.repatriate_quantity_information_on_task()
             if 'potential_return' in vals:
                 rec.update_potential_return()
@@ -305,7 +310,7 @@ class SaleOrder(models.Model):
 
     def repatriate_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in [
-                                '20', '25', '30', '70', '75', '85', '80']).repatriate_quantity_information()
+                                '20', '25', '30', '75', '85', '80']).repatriate_quantity_information()
 
     def _update_date_deadline(self, vals={}):
         for rec in self:
@@ -336,7 +341,7 @@ class SaleOrder(models.Model):
                               'ENR_EMAIL', 'ENR_SMS'] and rec.operation_provider_delivery_ids else rec.commitment_date})])
 
             if (is_operation_generation or vals.get('operation_provider_delivery_ids')) and rec.operation_provider_delivery_ids:
-                values.extend([(rec._get_operation_task(['60', '70'], True), {
+                values.extend([(rec._get_operation_task(['60', '70', '75'], True), {
                               'date_deadline': rec.operation_provider_delivery_ids[0].delivery_date})])
 
             if is_operation_generation or vals.get('bat_desired_date'):
@@ -402,12 +407,25 @@ class SaleOrder(models.Model):
             ('comment', 'email_comment'),
             ('bat_internal', 'email_bat_internal'),
             ('bat_client', 'email_bat_client'),
+            ('bat_desired_date', 'bat_desired_date'),
             ('witness_file_name', 'email_witness_file_name'),
             ('po_livedata_number', 'livedata_po_number'),
             ('campaign_name', 'email_campaign_name'),
+            ('comment', 'email_comment')
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
+        values.update({'bat_from': self.email_bat_from.id if self.email_bat_from else None})
         self.update_tasks(values, EMAIL_TASK_NUMBER)
+
+    def update_task_bat_file_witness(self):
+        values_list = [
+            ('bat_internal', 'email_bat_internal'),
+            ('bat_client', 'email_bat_client'),
+            ('witness_file_name', 'email_witness_file_name'),
+        ]
+        values = {task_key: self[so_key] for task_key, so_key in values_list}
+        values.update({'bat_from': self.email_bat_from.id if self.email_bat_from else None})
+        self.update_tasks(values, BAT_FILE_WITNESS_TASK_NUMBER)
 
     def update_task_sms_campaign(self):
         values_list = [
@@ -483,13 +501,14 @@ class SaleOrder(models.Model):
     def action_create_task_from_condition(self):
         super().action_create_task_from_condition()
         project_id = self.project_ids[0] if self.project_ids else False
-        if project_id and project_id.stage_id == self.env.ref('choreograph_project.planning_project_stage_planified'):
+        if project_id and project_id.stage_id != self.env.ref('choreograph_project.planning_project_stage_draft'):
             task_draft_stage_id = self.env.ref('choreograph_project.project_task_type_draft')
             for condition_id in self.operation_condition_ids.filtered(lambda item: item.task_id.stage_id == task_draft_stage_id):
-                if condition_id.task_id.task_number in ('5', '10', '15'):
-                    project_id._update_task_stage(condition_id.task_id.task_number, WAITING_FILE_TASK_STAGE)
-                elif condition_id.task_id.task_number in ('20', '25', '35'):
-                    project_id._update_task_stage(condition_id.task_id.task_number, TODO_TASK_STAGE)
+                condition_id.task_id.update_task_stage(WAITING_FILE_TASK_STAGE)
+                # if condition_id.task_id.task_number in ('5', '10', '15'):
+                #     project_id._update_task_stage(condition_id.task_id.task_number, WAITING_FILE_TASK_STAGE)
+                # elif condition_id.task_id.task_number in ('20', '25', '35'):
+                #     project_id._update_task_stage(condition_id.task_id.task_number, TODO_TASK_STAGE)
 
     @api.depends('project_ids')
     def compute_operation_code(self):

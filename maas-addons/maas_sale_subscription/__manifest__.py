@@ -21,6 +21,7 @@
         # data
         'data/product_template_data.xml',
         'data/ir_cron.xml',
+        'data/ir_config_parameter_data.xml',
         # security
         'security/ir_rule.xml',
         'security/ir.model.access.csv',

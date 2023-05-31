@@ -3,13 +3,15 @@
 from odoo import _, fields, models
 from odoo.tools.misc import formatLang
 
+
 class SaleOrder(models.Model):
     _inherit = 'sale.order'
 
     def write(self, values):
-        res = super().write(values)
+        res = super(SaleOrder, self).write(values)
         if 'order_line' in values:
-            self.update_discount_note()
+            for order in self:
+                order.update_discount_note()
         return res
 
     @staticmethod
@@ -17,6 +19,7 @@ class SaleOrder(models.Model):
         return p.price_discount if p.compute_price == 'formula' else p.percent_price
 
     def update_discount_note(self):
+        self.ensure_one()
         if self.recurrence_id:
             return
         for line in self.order_line.filtered(lambda line: not line.display_type):
@@ -31,8 +34,7 @@ class SaleOrder(models.Model):
                 pricelist_item = pricelist_rule
                 if pricelist_item.pricelist_id.discount_policy == 'without_discount':
                     while pricelist_item.base == 'pricelist' and pricelist_item.base_pricelist_id.discount_policy == 'without_discount':
-                        rule_id = pricelist_item.base_pricelist_id._get_product_rule(
-                            product, qty, uom=uom, date=order_date)
+                        rule_id = pricelist_item.base_pricelist_id._get_product_rule(product, qty, uom=uom, date=order_date)
                         pricelist_item = self.env['product.pricelist.item'].browse(rule_id)
                         percentage_discount.append(self.get_discount(pricelist_item))
                 discount_value = []
@@ -59,4 +61,4 @@ class SaleOrder(models.Model):
 
     def action_update_prices(self):
         self.update_discount_note()
-        return super().action_update_prices()
+        return super(SaleOrder, self).action_update_prices()

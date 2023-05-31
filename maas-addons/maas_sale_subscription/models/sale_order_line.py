@@ -35,17 +35,17 @@ class SaleSubscriptionLine(models.Model):
             if line.date:
                 line.period = fields.Datetime.from_string(line.date).strftime('%b-%y')
 
-    @api.depends('price_unit', 'product_uom_qty', 'discount', 'order_id.pricelist_id')
-    def _compute_amount(self):
-        super(SaleSubscriptionLine, self)._compute_amount()
-        for line in self.filtered(lambda l: l.state_subscription != 'to_invoice' and l.order_id.is_subscription):
-            if line.order_id.package_id:
-                line.price_subtotal = 0
-        for line in self.filtered(lambda l: l.state_subscription == 'to_invoice' and l.order_id.is_subscription):
-            if line.order_id.package_id:
-                price_rent = self.filtered(lambda l: l.state_subscription == 'subscription_rent').sorted(key='date', reverse=True)
-                if price_rent:
-                    line.price_subtotal += price_rent[0].price_unit
+    # @api.depends('price_unit', 'product_uom_qty', 'discount', 'order_id.pricelist_id')
+    # def _compute_amount(self):
+    #     super(SaleSubscriptionLine, self)._compute_amount()
+    #     for line in self.filtered(lambda l: l.state_subscription != 'to_invoice' and l.order_id.is_subscription):
+    #         if line.order_id.package_id:
+    #             line.price_subtotal = 0
+    #     for line in self.filtered(lambda l: l.state_subscription == 'to_invoice' and l.order_id.is_subscription):
+    #         if line.order_id.package_id:
+    #             price_rent = self.filtered(lambda l: l.state_subscription == 'subscription_rent').sorted(key='date', reverse=True)
+    #             if price_rent:
+    #                 line.price_subtotal += price_rent[0].price_unit
 
     def _reset_subscription_qty_to_invoice(self):
         res = super(SaleSubscriptionLine, self)._reset_subscription_qty_to_invoice()

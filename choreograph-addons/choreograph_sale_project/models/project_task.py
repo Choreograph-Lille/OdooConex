@@ -28,11 +28,13 @@ class ProjectTask(models.Model):
     type = fields.Char()  # this should take the type in cond/excl but another task
 
     bat_from = fields.Many2one('choreograph.campaign.de')
+    bat_from_for_40 = fields.Char(
+        string='From', default='IDSEQ | TOP_CANAL_SOURCE(0/1) | TOP_CANAL_ENRICHISSABLE(0/1/2) |')
     bat_internal = fields.Char()
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
-    optout_link = fields.Text("Output Links")
+    optout_link = fields.Text("Output Links", related='sale_order_id.optout_link')
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
     file_name = fields.Char()
@@ -71,13 +73,16 @@ class ProjectTask(models.Model):
     object = fields.Char(related='sale_order_id.object')
     ab_test = fields.Boolean('A/B Test', related='sale_order_id.ab_test')
     ab_test_text = fields.Text('If so, on what?', related='sale_order_id.ab_test_text')
-    is_preheader_available = fields.Boolean('Preheader available in HTML', related='sale_order_id.is_preheader_available')
-    is_preheader_available_text = fields.Text('If not, indicate where to find it', related='sale_order_id.is_preheader_available_text')
-    comment = fields.Text(compute='compute_comment')
+    is_preheader_available = fields.Boolean('Preheader available in HTML',
+                                            related='sale_order_id.is_preheader_available')
+    is_preheader_available_text = fields.Text(
+        'If not, indicate where to find it', related='sale_order_id.is_preheader_available_text')
+    comment = fields.Text(compute='compute_comment', store=True)
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
     folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
     segment_ids = fields.Many2many('operation.segment')
+    task_segment_ids = fields.One2many('operation.segment', 'task_id')
     operation_condition_ids = fields.Many2many('operation.condition', compute='compute_operation_condition_ids')
 
     trap_address_ids = fields.One2many('trap.address', 'task_id')
@@ -91,11 +96,13 @@ class ProjectTask(models.Model):
         ('3', '3')])
     delivery_date = fields.Date()
     stage_number = fields.Selection(related='stage_id.stage_number')
+    has_enrichment_email_op = fields.Boolean(related='project_id.sale_order_id.has_enrichment_email_op', store=True)
+    repatriate_information = fields.Boolean(related='sale_order_id.repatriate_information')
 
     @api.depends('sale_order_id.comment')
     def compute_comment(self):
         for rec in self:
-            rec.comment = rec.sale_order_id.comment if rec.task_number in ['25', '30'] else False
+            rec.comment = rec.sale_order_id.comment if rec.task_number in ['20', '25', '30'] else False
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):
@@ -278,6 +285,7 @@ class ProjectTask(models.Model):
                     '20': '_hook_task_20_in_stage_80',
                     '25': '_hook_task_25_in_stage_80',
                     '30': '_hook_task_30_in_stage_80',
+                    '40': '_hook_task_40_in_stage_80',
                     '45': '_hook_task_45_in_stage_80',
                     '55': '_hook_task_55_in_stage_80',
                     '70': '_hook_task_70_in_stage_80',
@@ -303,7 +311,8 @@ class ProjectTask(models.Model):
                     task.project_id._hook_task_45_in_stage_50()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
-            provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex', 'trap_address_ids', 'provider_comment']
+            provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex',
+                               'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
         return res
@@ -311,24 +320,26 @@ class ProjectTask(models.Model):
     def update_provider_data(self):
         for rec in self:
             targeted_task = False
+            new_traps = self.env['trap.address'].create([{
+                'name': trap.name,
+                'segment_number': trap.segment_number,
+                'bc_number': trap.bc_number,
+            } for trap in rec.trap_address_ids])
+
             data = {
-                    'provider_file_name': rec.provider_file_name,
-                    'provider_delivery_address': rec.provider_delivery_address,
-                }
+                'provider_file_name': rec.provider_file_name,
+                'provider_delivery_address': rec.provider_delivery_address,
+                'family_conex': rec.family_conex,
+                'provider_comment': rec.provider_comment,
+                'trap_address_ids': [(6, 0, new_traps.ids)],
+                'dedup_title_number': rec.dedup_title_number,
+                'volume': rec.volume,
+                'bat_from': rec.bat_from,
+            }
             if rec.task_number == '70':
                 targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '75')
             elif rec.task_number == '80':
                 targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '85')
-                new_traps = self.env['trap.address'].create([{
-                        'name': trap.name,
-                        'segment_number': trap.segment_number,
-                        'bc_number': trap.bc_number,
-                    } for trap in rec.trap_address_ids])
-                data.update({
-                    'family_conex': rec.family_conex,
-                    'provider_comment': rec.provider_comment,
-                    'trap_address_ids': [(6, 0, new_traps.ids)]
-                })
             if targeted_task:
                 targeted_task.write(data)
 
@@ -356,4 +367,10 @@ class ProjectTask(models.Model):
     def onchange_segment_sequence(self):
         for rec in self:
             for i, l in enumerate(rec.segment_ids):
+                l.segment_number = i + 1
+
+    @api.onchange('task_segment_ids')
+    def onchange_task_segment_sequence(self):
+        for rec in self:
+            for i, l in enumerate(rec.task_segment_ids):
                 l.segment_number = i + 1
