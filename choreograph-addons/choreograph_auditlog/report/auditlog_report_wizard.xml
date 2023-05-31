@@ -91,4 +91,16 @@
         <field name="is_auditreport" eval="True" />
     </record>
 
+    <record id="action_report_extracts_from_suppliers" model="ir.actions.report">
+        <field name="name">Extracts from suppliers</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="auditlog_model_id" ref="base.model_res_partner" />
+        <field name="is_auditreport" eval="True" />
+    </record>
+
 </odoo>
