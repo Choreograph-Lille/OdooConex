@@ -28,7 +28,8 @@ class ProjectTask(models.Model):
     type = fields.Char()  # this should take the type in cond/excl but another task
 
     bat_from = fields.Many2one('choreograph.campaign.de')
-    bat_from_for_40 = fields.Char(string='From', default='IDSEQ | TOP_CANAL_SOURCE(0/1) | TOP_CANAL_ENRICHISSABLE(0/1/2) |')
+    bat_from_for_40 = fields.Char(
+        string='From', default='IDSEQ | TOP_CANAL_SOURCE(0/1) | TOP_CANAL_ENRICHISSABLE(0/1/2) |')
     bat_internal = fields.Char()
     bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
@@ -72,9 +73,11 @@ class ProjectTask(models.Model):
     object = fields.Char(related='sale_order_id.object')
     ab_test = fields.Boolean('A/B Test', related='sale_order_id.ab_test')
     ab_test_text = fields.Text('If so, on what?', related='sale_order_id.ab_test_text')
-    is_preheader_available = fields.Boolean('Preheader available in HTML', related='sale_order_id.is_preheader_available')
-    is_preheader_available_text = fields.Text('If not, indicate where to find it', related='sale_order_id.is_preheader_available_text')
-    comment = fields.Text(compute='compute_comment')
+    is_preheader_available = fields.Boolean('Preheader available in HTML',
+                                            related='sale_order_id.is_preheader_available')
+    is_preheader_available_text = fields.Text(
+        'If not, indicate where to find it', related='sale_order_id.is_preheader_available_text')
+    comment = fields.Text(compute='compute_comment', store=True)
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
     folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
@@ -308,7 +311,8 @@ class ProjectTask(models.Model):
                     task.project_id._hook_task_45_in_stage_50()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
-            provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex', 'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
+            provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex',
+                               'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
         return res
