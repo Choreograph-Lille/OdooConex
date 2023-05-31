@@ -24,8 +24,11 @@ class AuditlogReport(models.TransientModel):
     @api.depends('ir_action_report_id')
     def _compute_is_extracts_from_supplier(self):
         for audit in self:
-            self.is_extracts_from_supplier = audit.ir_action_report_id == self.env.ref(
-                'choreograph_auditlog.action_report_extracts_from_suppliers')
+            extract_supplier = self.env.ref('choreograph_auditlog.action_report_extracts_from_suppliers', raise_if_not_found=False)
+            is_extracts_from_supplier = False
+            if audit.ir_action_report_id == extract_supplier:
+                is_extracts_from_supplier = True
+            audit.is_extracts_from_supplier = is_extracts_from_supplier
 
     @api.constrains('start_date', 'end_date', 'is_period')
     def _check_date(self):
