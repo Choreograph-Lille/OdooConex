@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_project_postal_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PRPOST</field>
+        <field name="name">Postal Prospecting (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_postal_prospecting_telfixebox" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PRPOSTTEL</field>
+        <field name="name">Postal Prospecting + Telfixebox (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_telfixebox_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PRTEL</field>
+        <field name="name">Telfixebox Prospecting (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_postal_prospecting_email" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PRPOSTE</field>
+        <field name="name">Postal Prospecting + Email (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_email_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PREMAIL</field>
+        <field name="name">Email Prospecting (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_postal_prospecting_sms" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PRPOSTSMS</field>
+        <field name="name">Postal Prospecting + Sms (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_sms_prospecting" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PRSMS</field>
+        <field name="name">Sms Prospecting (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_postal_prospecting_telportable" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PRPOSTPORT</field>
+        <field name="name">Postal Prospecting + Telportable (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_prospection_telportable" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PRPORT</field>
+        <field name="name">Prospecting Telportable (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_reactivation" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">RE</field>
+        <field name="name">Reactivation (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_loyalty" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">FID</field>
+        <field name="name">Fidelization (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_activation" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">AC</field>
+        <field name="name">Activation (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_ddn_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">ENR_DDN</field>
+        <field name="name">DDN Enrichment (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_telportable_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">ENR_PORT</field>
+        <field name="name">Supportable Enrichment (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_sms_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">ENR_SMS</field>
+        <field name="name">Sms Enrichment (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_email_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">ENR_EMAIL</field>
+        <field name="name">Email Enrichment (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_telfixebox_enrichment" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">ENR_TEL</field>
+        <field name="name">Telfixebox Enrichment (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_extraction" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">EXTR</field>
+        <field name="name">Extraction (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_study" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">ET_SPE</field>
+        <field name="name">Study (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_count" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">CP</field>
+        <field name="name">Counting (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_yield_calculation" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">CAL_RDMT</field>
+        <field name="name">Yield Calculation (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_matchback" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">MATCHB</field>
+        <field name="name">Matchback (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+
+    <record id="project_project_score_presentation" model="project.project">
+        <field name="is_template" eval="True" />
+        <field name="type_of_project">operation</field>
+        <field name="privacy_visibility">portal</field>
+        <field name="code">PREZ_SCORE</field>
+        <field name="name">Score Presentation (TEMPLATE)</field>
+        <field name="task_ids" eval="[Command.clear()]" />
+        <field name="stage_id" ref="choreograph_project.planning_project_stage_template" />
+    </record>
+    <data noupdate="1">
+        <function model="project.project" name="set_task_project" />
+    </data>
+</odoo>

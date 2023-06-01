@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <menuitem id="retribution_base_menu"
+                  action="retribution_base_action"
+                  name="Retribution Bases"
+                  sequence="90" parent="sale.menu_sale_config"/>
+
+        <menuitem id="sale_data_conservation_menu"
+                  action="sale_data_conservation_action"
+                  name="Data Conservation"
+                  sequence="100"
+                  parent="sale.menu_sale_config"
+                  groups="base.group_no_one"/>
+
+        <menuitem id="choreograph_campaign_de_menu"
+                  action="choreograph_campaign_de_action"
+                  name="DE"
+                  sequence="110" parent="sale.menu_sale_config"/>
+
+    </data>
+</odoo>

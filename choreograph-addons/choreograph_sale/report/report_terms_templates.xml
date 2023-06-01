@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="term_and_conditions">
+        <div class="row"
+             style="page-break-before: always! important;text-align: justify; font-size: 8px">
+            <t t-set="choreo_p" t-value="'margin: 4.2px'"/>
+            <div class="col-4" style="padding-right: 5px;">
+                <p t-att-style="choreo_p">
+                    <strong>
+                        GENERAL TERMS AND CONDITIONS OF BUSINESS
+                    </strong>
+                </p>
+                
+                <p t-att-style="choreo_p">
+                    <strong>
+                        1. Object of the Contract
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    This document constitutes the General Terms and Conditions of Business of choreograph which shall apply to all direct
+                    marketing Services offered by the company choreograph (hereinafter referred to as "choreograph"), SAS a company with a
+                    capital of 397 313 euros, registered in Lille Trade and Companies Register under number 489 496 331 and headquartered at
+                    27 bis, rue du Vieux Faubourg, 59000 LILLE (FRANCE).
+                    <br/>
+                    choreograph uses information and data provided by data providers in order to build and improve shared databases of which
+                    choreograph is both the author, within the meaning of article L112-3 et seq. of the French Intellectual Property Code,
+                    and the producer within the meaning of article L341-1 et seq. of the same Code.
+                    <br/>
+                    choreograph uses the data of the shared databases (hereinafter referred to as “the Data”) to provide a number of
+                    marketing Services such as prospection, optimization, customer loyalty, e-commerce, ISA etc. (hereinafter referred to as
+                    “the Services”) for its clients companies. It is specified herein that the term "CLIENT" encompass the client company
+                    for which choreograph provides Services, as well as all and any intermediaries (agents, service providers, agencies,
+                    etc.), that the client company may appoint to act on its behalf for the performance of its obligations under the present
+                    General Terms and Conditions of Business. It is understood that (i) the client company is fully liable for its
+                    intermediaries and shall ensure that they comply with the obligations hereunder, (ii) the client company and its
+                    intermediaries are jointly liable, and (iii) the client company guarantees choreograph in this respect. As part of the
+                    Services, choreograph provides its CLIENTS with a mix of Data.
+                    <br/>
+                    It is specified that since the Services are being carried out on behalf of the CLIENT, the latter is responsible for the
+                    processing carried out as part of the Services.
+                    <br/>
+                    The Data is comprised of transactional data, demographic data, lifestyle data, as well as personal data within the
+                    meaning of the French Data Protection Act of January 6th 1978 as amended by the Act of August 6th 2004 and Regulation
+                    No. 2016/679 known as the General Regulation on the Protection of Personal Data or "GDPR" (hereinafter jointly referred
+                    to as the "Data Protection Regulation").
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        2. Scope
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    These General Terms and Conditions of Business shall apply to any CLIENT wishing to use the Services offered by
+                    choreograph. The CLIENT agrees that their General Conditions of Purchase shall under no circumstances prevail over
+                    choreograph’s General Terms and Conditions of Business which the CLIENT is deemed to have accepted from the moment
+                    choreograph provides the Services.
+                    <br/>
+                    The present General Terms and Conditions of Business are systematically sent or delivered by choreograph to each CLIENT
+                    at the same time as the quote submitted in response to its request.
+                    <br/>
+                    Accordingly, requesting the right to use one or several database files which belong to choreograph implies full and
+                    unconditional acceptance by the CLIENT of these General Terms and Conditions of Business.
+                    <br/>
+                    Only special provisions specified on a particular contract or Specific Conditions agreed in writing between choreograph
+                    and the CLIENT may deviate from these Terms and Conditions of Business.
+                    <br/>
+                    choreograph's failure to object to provisions contained in communications from the CLIENT shall not be construed as a
+                    waiver of these Terms and Conditions.
+                    <br/>
+                    choreograph reserves the right to update or modify these General Terms and Conditions of Business at any time. These
+                    modifications shall only be applicable to Services performed after communication by any appropriate mean of the modified
+                    General Terms and Conditions of Business to the CLIENT.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        3. Order Process and Validity of the Offer
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    Upon CLIENT's request, choreograph shall send the latter a quote or the rates chargeable for its Services. If the
+                    Services are chargeable, the quotation, or the rates list, lays down choreograph's conditions of intervention for the
+                    use of the Data requested by the CLIENT as well as their availability.
+                    <br/>
+                    The quote or the rates offered to the CLIENT will remain valid for a period of thirty (30) calendar days from the date
+                    it is sent to the CLIENT.
+                    <br/>
+                    The order shall be deemed final only upon a written confirmation by a representative of the CLIENT.
+                    <br/>
+                    The term of the Services is specified in the quotation. If not specified, the term of the Services may not exceed the
+                    date on which payment is due, in accordance with article 7.2.
+                    <br/>
+                    The Data requested by the CLIENT shall be delivered to the latter by digital medium in accordance with the provisions
+                    specified in the quote or the purchase order.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        4. Obligations of the Parties
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        <i>
+                            4.1 CLIENT's Obligations
+                        </i>
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    In the event that a security breach is detected by the CLIENT concerning the Data transmitted by choreograph, the CLIENT
+                    undertakes to inform choreograph of the breach, in writing, as soon as possible.
+                    <br/>
+                    At the end of the Services, the CLIENT must permanently delete all Data transmitted by choreograph as well as all and
+                    any copies that could have been made.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        <i>
+                            4.2 choreograph's Obligations
+                        </i>
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    Regarding the Data transmitted to the CLIENT, choreograph undertakes and declares that it complies with the Data
+                    Protection Regulations.
+                    <br/>
+                    choreograph also undertakes to take all its care in the quality of the Services provided and the information contained
+                    in the Data it makes available to the CLIENT.
+                </p>
+            </div>
+            
+            <div class="col-4" style="padding-left: 5px;">
+                <p t-att-style="choreo_p">
+                    <strong>
+                        5. Intellectual Property
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        <i>
+                            5.1 Database
+                        </i>
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    choreograph grants the CLIENT a non-exclusive, non-transferable, and personal, right of use on the Data transmitted by
+                    choreograph, for the term of the Services.
+                    <br/>
+                    The shared databases developed and enriched by choreograph are protected by copyright in accordance with articles 112-3,
+                    and L341-1 to L343-7 of the French Intellectual Property Code, regarding the legal protection of databases. choreograph
+                    is in this respect the producer of the shared databases.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        <i>
+                            5.2 Software
+                        </i>
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    choreograph certifies that it holds the rights of use or property rights in the software used to perform its Services.
+                    <br/>
+                    These General Terms and Conditions of Business shall not confer any rights to the CLIENT on the aforementioned software.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        6. Data Protection Act ("Informatique et Libertés")
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    The CLIENT shall not assign nor transfer to a third party the Data provided by choreograph. The CLIENT undertakes not to
+                    store nor archive the Data on any medium whatsoever beyond the term of the Services or for any other use than those
+                    agreed between the parties. It is understood that any alleged breach of these provisions may constitute a criminal
+                    offence for which the CLIENT would then be fully liable.
+                    <br/>
+                    The CLIENT undertakes to ensure the security and confidentiality of the Data and, in particular, to prevent it from
+                    being distorted, damaged, or accessed by unauthorized third parties.
+                    <br/>
+                    As a rule, and unless otherwise specifically stipulated, Data are intended solely for internal use and for a single use.
+                    It can only be transmitted to a third party provided that they respect the confidentiality and are able to guarantee the
+                    integrity and security of the Data entrusted.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        7. Financial Terms
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        <i>
+                            7.1 Price
+                        </i>
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    The prices of the Services provided by choreograph shall be those in effect on the day the CLIENT places its order.
+                    <br/>
+                    The prices specified under the confirmation order shall be excluding Value Added Taxes and any other taxes.
+                    <br/>
+                    Prices are net and without any discount.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        <i>
+                            7.2 Payment Terms and Delays
+                        </i>
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    Payment by the CLIENT of the Services shall be due within thirty (30) days of the invoice date.
+                    <br/>
+                    The CLIENT shall be liable for late payment penalties in case of failure to comply with the payment terms, whether
+                    totally or partially. The penalties rate will be equal to three times the legal interest rate in effect at the time this
+                    clause is applied and may be charged ipso jure by choreograph from the first day following the due date.
+                    <br/>
+                    In
+                    the event of total or partial non-payment of more than fifteen days after the due date, choreograph shall have the right
+                    to suspend ipso jure the delivery of any or all of its Services without any formality whatsoever and without prejudice
+                    to any remaining sums due and to any other rights and remedies.
+                    <br/>
+                    If the Client failed to comply with the payment terms, a fixed recovery cost compensation of forty (40 €) euros applies
+                    ipso jure.
+                    <br/>
+                    In addition, the CLIENT undertakes to reimburse choreograph for all legal, or consulting fees, and/or recovery costs,
+                    incurred by choreograph to recover unpaid amounts due by the CLIENT.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        8. Warranty and Liability
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    choreograph is under an obligation to use its best endeavors towards the CLIENT and does not provide any guarantee,
+                    expressed or implied, including any guarantee of quality and suitability for a particular use of the Data transmitted to
+                    the CLIENT by choreograph.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        <i>
+                            8.1 Towards the CLIENT
+                        </i>
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    choreograph cannot be held responsible in the following cases:
+                    <br/>
+                    1) In case the CLIENT does not comply with the provisions of the Data Protection Regulation;
+                    <br/>
+                    2) When choreograph has formally drawn the CLIENT's attention to the existence of potential legal and/or technical
+                    risks, which the CLIENT has accepted by any appropriate means (email, etc.) in full knowledge of the facts;
+                    <br/>
+                    3) When the CLIENT has not complied with its obligations towards third parties or more generally its legal obligations;
+                    <br/>
+                    4) When the dispute originates outside the French territory.
+                    <br/>
+                    IN ANY CASE, choreograph'S LIABILITY IS LIMITED TO THE PROVEN, DIRECT AND CERTAIN DAMAGE SUFFURED BY THE CLIENT WITHIN
+                    THE MEANING OF ARTICLE 1150 OF THE FRENCH CIVIL CODE AND WITHIN THE LIMIT OF THE PRICE OF THE SERVICES AS DEFINED IN THE
+                    QUOTATION REFERRED TO UNDER ARTICLE 3
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        <i>
+                            8.2. Towards third parties
+                        </i>
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    <i>
+                        8.2.1. Third party complaints
+                    </i>
+                </p>
+                <p t-att-style="choreo_p">
+                    choreograph and the CLIENT execute their respective obligations by complying with the principle of loyalty.
+                    <br/>
+                    If, during the Services, a complaint arises from an individual or a third party concerned by the Data, the party to whom
+                    the complaint is addressed must immediately inform the other party by email confirmed by registered letter with
+                    acknowledgement of receipt within seven (7) calendar days following the date on which the concerned party became aware
+                    of the complaint, with regard to the Data Protection Regulation. As such, choreograph has developed an internal
+                    management procedure to process requests for rights issued directly by individuals or through the Data Controller.
+                </p>
+            </div>
+            <div class="col-4" style="padding-left: 10px;">
+                <p t-att-style="choreo_p">
+                    <i>
+                        8.2.2. Breach of Data
+                    </i>
+                </p>
+                <p t-att-style="choreo_p">
+                    If during the Services, one of the parties finds that the Data have been or are being brought to the knowledge of
+                    unauthorized third parties, illegally transmitted, or breached in any way, it must inform the other party exhaustively
+                    and in writing, of the nature and scope of the incident, and of the measures it has taken to urgently stop the illegal
+                    transmission and/or unauthorized knowledge by third parties, and prevent such occurrence from happening in the future.
+                    This information must be provided within forty-eight (48) hours from the date on which the concerned party becomes aware
+                    of the violation itself or the facts suggesting a violation.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        9. Force Majeure
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    choreograph cannot be held responsible, or considered as having failed hereto, for any delay or non-performance, when
+                    the cause of the delay or non-performance is due to a case of “Force Majeure” as defined by article 1218 of the French
+                    Civil Code and subsequent French jurisprudence, including the interruption, suspension, reduction and/or power issues or
+                    any interruptions of electronic communications networks.
+                    <br/>
+                    The party invoking Force Majeure undertakes to notify the other party of the nature and extent of the event by email
+                    confirmed by registered letter with acknowledgement of receipt, within forty (48) hours of its occurrence and to confirm
+                    the suspension of the Services as a result. The Services will resume automatically and without further formalities upon
+                    the disappearance of the cause of the suspension.
+                    <br/>
+                    After thirty (30) days following the occurrence of the event and in the absence of resumption, each of the Parties will
+                    have the option to terminate the Agreement, without any compensation being due on both side in this respect
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        10. Transfer of Data
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    All Data are deemed to have been transferred as soon as they are received by the CLIENT in their electronic format by
+                    means of the secure devices offered by choreograph.
+                    <br/>
+                    The transfer of risks is effective from the date of the notification of availability. The notification shall take place
+                    by means of a delivery note in particular.
+                    <br/>
+                    The transfer of Data is carried out at the CLIENT's risk
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        11. Bloctel
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    When the CLIENT asks for a delivery of French consumer’s telephone numbers requiring a Bloctel processing to be done, it
+                    is specified that choreograph is only an intermediary between the telephone numbers' service provider and the CLIENT. As
+                    such, telephone numbers are directly delivered by the provider to the CLIENT. Phone numbers do not transit to
+                    choreograph, which consequently cannot access them nor compare the telephone number database to the opposition list of
+                    the Bloctel Service.
+                    <br/>
+                    In the event that choreograph is aware of an exception to the obligation to compare the telephone database with the
+                    opposition list, recognized by the legislation and the administrative and/or judicial authorities, it informs the other
+                    parties. Any action concerning the Bloctel Service has to be done either by the provider or the CLIENT.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        12. Operating Retention Clause
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    choreograph shall remain free to object to the processing of the Data which has been transferred until the full
+                    effective payment of the principal total amount due, as well as the incidentals.
+                    <br/>
+                    Default of payment on any due date whatsoever may entail a claim for the return of the Data.
+                    <br/>
+                    This operating retention clause shall not prevent the transfer of risk as specified in Article 10.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        13. Confidentiality
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    Both parties undertake to treat as strictly confidential all shared information and all documents and information
+                    produced under these Terms and Conditions of Business or any contracts between them.
+                    <br/>
+                    The CLIENT agrees not to use the Data transmitted by choreograph for purposes other than the performance of its
+                    obligations arising hereof.
+                    <br/>
+                    During and after the execution of the Services provided by choreograph, each party and its agents undertake not to
+                    disclose to any third party, without the other party's permission, the methods and tools which are the exclusive
+                    property of the other Party.
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        14. Severability
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    Invalidation of one or more clauses of these General Terms and Conditions of Business shall not lead to cancellation of
+                    these Terms and Conditions.
+                    <br/>
+                    The titles of the articles are given for information only.
+                    <br/>
+                </p>
+                <p t-att-style="choreo_p">
+                    <strong>
+                        15. WPP Code of Conduct
+                    </strong>
+                </p>
+                <p t-att-style="choreo_p">
+                    choreograph is a part of the WPP Group and as such wishes to see its CLIENTS respect the rules of the Code of Business
+                    Conduct and Social Policy of WPP during the performance of the Services. The full text of these codes and policies is
+                    available on the website www.wpp.com.
+                </p>
+                <t t-if="doc.partner_id.lang != 'fr_FR'">
+                    <p t-att-style="choreo_p">
+                        <strong>
+                            16. Official Language, Applicable Law and Jurisdiction
+                        </strong>
+                    </p>
+                    <p t-att-style="choreo_p">
+                        <strong>
+                            <i>
+                                16.1. Official language
+                            </i>
+                        </strong>
+                        <p t-att-style="choreo_p">
+                            These General Terms and Conditions were initially drawn up in the French language and can be provided by
+                            choreograph upon request. This English translation is provided for information purposes only. The French version
+                            is the sole legally binding instrument and prevails in case of ambiguities or discrepancies.
+                        </p>
+                    </p>
+                    <p t-att-style="choreo_p">
+                        <strong>
+                            16.2. Applicable Law
+                        </strong>
+                    
+                    </p>
+                    <p t-att-style="choreo_p">
+                        These General Terms and Conditions of Business are subject to the French law.
+                    </p>
+                    <p t-att-style="choreo_p">
+                        <strong>
+                            16.3. Applicable Jurisdiction
+                        </strong>
+                    </p>
+                    <p t-att-style="choreo_p">
+                        The Courts of Lille, France, will have sole and exclusive jurisdiction in the event of a dispute arising from the
+                        interpretation or enforcement of these General Terms and Conditions.
+                    </p>
+                </t>
+                <t t-else="">
+                    <p t-att-style="choreo_p">
+                        <strong>
+                            16. Applicable law – Attribution of jurisdiction
+                        </strong>
+                    </p>
+                    <p t-att-style="choreo_p">
+                        These general conditions of sale are subject to French law.
+                        <br/>
+                        Any dispute arising from these presents or from its execution is within the jurisdiction exclusive to the courts of
+                        Lille.
+                    </p>
+                </t>
+            
+            </div>
+        </div>
+    </template>
+</odoo>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-inherit="web.KanbanView.Buttons" t-inherit-mode="primary" owl="1"
+        t-name="choreograph_project.buttons">
+        <xpath expr="//button[hasclass('o-kanban-button-new')]" position="after">
+            <button type="button" class="btn btn-secondary"
+                t-on-click="onRedeliveryStudies">
+                Redelivery studies
+            </button>
+            <button type="button" class="btn btn-secondary"
+                t-on-click="onRedeliveryProd">
+                Redelivery Prod
+            </button>
+            <button type="button" class="btn btn-primary"
+                t-on-click="onLiveryProject">
+                Livery
+            </button>
+        </xpath>
+    </t>
+</templates>

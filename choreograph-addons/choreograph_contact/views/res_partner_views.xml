@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="res_partner_form_view_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.view.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <page name="internal_notes" position="before">
+                    <page name="partner_role_pg" string="Roles">
+                        <field name="role_ids">
+                            <tree editable="bottom">
+                                <field name="role_id"/>
+                                <field name="user_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="client_data_pg" string="Partner Data" attrs="{'invisible': ['|', ('customer_rank', '=', 0), ('is_company', '=', False)]}">
+                        <group>
+                            <group name="client_data_left">
+                                <field name="customer_rank" invisible="1" readonly="1"/>
+                                <field name="update_frequency" readonly="1"/>
+                                <field name="last_conexup_date" readonly="1"/>
+                                <field name="last_revival_date" readonly="1"/>
+                                <field name="base_entry_date" readonly="1"/>
+                            </group>
+                            <group name="client_data_right">
+                                <field name="last_transaction_date" readonly="1"/>
+                                <field name="last_receipt_date" readonly="1"/>
+                                <field name="private_title" readonly="1"/>
+                                <field name="data_destruction_date" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </page>
+                <field name="category_id" position="after">
+                    <field name="is_dpo" attrs="{'invisible': [('is_company', '=', True)]}"/>
+                    <field name="catalogue_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+                </field>
+                <xpath expr="//page[@name='sales_purchases']//field[@name='user_id']" position="after">
+                    <field name="country_base"/>
+                    <field name="category_name" force_save="True" readonly="1"/>
+                </xpath>
+                <group name="misc" position="after">
+                    <group string="Contract">
+                        <field name="first_contract_date"/>
+                        <field name="contract_update_date"/>
+                        <field name="rescission_date"/>
+                    </group>
+                </group>
+                <field name="vat" position="after">
+                    <field name="agency_id" options="{'no_create': True, 'no_open': True}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

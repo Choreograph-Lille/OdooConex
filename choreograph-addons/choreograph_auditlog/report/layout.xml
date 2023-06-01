@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="layout_standard">
+        <div t-attf-class="header o_company_#{company.id}_layout">
+            <div class="row">
+                <div class="col-3 mb4">
+                    <img src="/choreograph_auditlog/static/src/img/connexance.png"
+                        style="max-height: 100px;" alt="Logo" />
+                </div>
+            </div>
+        </div>
+
+        <div
+            t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
+            t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id"
+            t-att-data-oe-lang="o and o.env.context.get('lang')">
+            <t t-out="0" />
+        </div>
+    </template>
+    <template id="layout">
+        <t t-if="not o" t-set="o" t-value="doc" />
+
+        <t t-if="not company">
+            <t t-if="company_id">
+                <t t-set="company" t-value="company_id" />
+            </t>
+            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                <t t-set="company" t-value="o.company_id.sudo()" />
+            </t>
+            <t t-else="else">
+                <t t-set="company" t-value="res_company" />
+            </t>
+        </t>
+
+        <t t-call="choreograph_auditlog.layout_standard">
+            <t t-out="0" />
+        </t>
+
+    </template>
+    <template id="header_audit_report">
+        <div class="row text-left">
+            <div class="mb32">
+                <h2>Audit reports</h2>
+            </div>
+            <div class="col-3"></div>
+        </div>
+        <table class="table table-borderless">
+            <tbody>
+                <tr>
+                    <td class="fw-bold">Reference :</td>
+                    <td t-out="sequence" />
+                    <td class="fw-bold">
+                        <span t-if="is_periode">Period :</span>
+                        <span t-else="">Date :</span>
+                    </td>
+                    <td
+                        t-out="start_date" />
+                    <td class="fw-bold">Type :</td>
+                    <td class="fw-bold">Manual</td>
+                </tr>
+                <tr t-if="is_periode">
+                    <td />
+                    <td />
+                    <td />
+                    <td t-out="end_date" />
+                </tr>
+                <tr>
+                    <td class="fw-bold">Author :</td>
+                    <td t-out="user.name" />
+                </tr>
+                <tr>
+                    <td class="fw-bold">Extract date :</td>
+                    <td
+                        t-out="context_timestamp(datetime.datetime.now()).strftime('%d/%m/%Y %H:%M:%S')" />
+                </tr>
+            </tbody>
+        </table>
+    </template>
+</odoo>

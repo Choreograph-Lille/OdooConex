@@ -1,0 +1,524 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_project
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-09 18:31+0000\n"
+"PO-Revision-Date: 2023-03-09 18:31+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__10
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__10
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__10
+msgid "10"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__100
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__100
+msgid "100"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__110
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__110
+msgid "110"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__120
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__120
+msgid "120"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__130
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__130
+msgid "130"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__140
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__140
+msgid "140"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__15
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__15
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__15
+msgid "15"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__20
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__20
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__20
+msgid "20"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__25
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__25
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__25
+msgid "25"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__30
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__30
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__30
+msgid "30"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__35
+msgid "35"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__40
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__40
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__40
+msgid "40"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__45
+msgid "45"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__50
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__50
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__50
+msgid "50"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__55
+msgid "55"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__60
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__60
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__60
+msgid "60"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__65
+msgid "65"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__70
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__70
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__70
+msgid "70"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__75
+msgid "75"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__80
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__80
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__80
+msgid "80"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__85
+msgid "85"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__90
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__90
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__stage_number__90
+msgid "90"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__task_number__95
+msgid "95"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.ui.menu,name:choreograph_project.analysis
+#: model:ir.ui.menu,name:choreograph_project.analysis_root
+msgid "Analysis"
+msgstr "Analyse"
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.action_project_task_user_tree
+msgid ""
+"Analyze the progress of your projects and the performance of your employees."
+msgstr ""
+"Analysez l'avancée de vos projets et les performances de vos employés."
+
+#. module: choreograph_project
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_canceled
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_done
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_draft
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_expectation_precision
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_file_receipt
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_in_progress
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_preparation
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_received_file
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_to_do
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_validation_bat_client
+#: model:project.task.type,legend_blocked:choreograph_project.project_task_type_waiting_quantities
+msgid "Blocked"
+msgstr "Bloqué"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_canceled
+#: model:project.task.type,name:choreograph_project.project_task_type_canceled
+msgid "Canceled"
+msgstr "Annulé"
+
+#. module: choreograph_project
+#: model:ir.ui.menu,name:choreograph_project.configuration
+msgid "Configuration"
+msgstr ""
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.project_project_stage_configure
+msgid ""
+"Define the steps your projects move through from creation to completion."
+msgstr ""
+"Définissez les étapes à travers lesquelles vos projets passent de la "
+"création à l'achèvement."
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.open_task_type_form
+msgid "Define the steps your tasks move through from creation to completion."
+msgstr ""
+"Définissez les étapes à travers lesquelles vos tâches passent de la création"
+" à l'achèvement."
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_delivery
+msgid "Delivery"
+msgstr "Livraison"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_done
+msgid "Done"
+msgstr "Terminé"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_draft
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_draft
+msgid "Draft / waiting"
+msgstr "Brouillon / en attente"
+
+#. module: choreograph_project
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_canceled
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_done
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_draft
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_expectation_precision
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_file_receipt
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_in_progress
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_preparation
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_received_file
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_to_do
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_validation_bat_client
+#: model:project.task.type,legend_normal:choreograph_project.project_task_type_waiting_quantities
+msgid "En cours"
+msgstr ""
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_expectation_precision
+msgid "Expectation precision"
+msgstr "Attente précision"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_extraction
+msgid "Extraction"
+msgstr ""
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_file_receipt
+msgid "File receipt / Update"
+msgstr "Réception fichier / MAJ"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_in_progress
+#: model:project.task.type,name:choreograph_project.project_task_type_in_progress
+msgid "In progress"
+msgstr "En cours"
+
+#. module: choreograph_project
+#. odoo-javascript
+#: code:addons/choreograph_project/static/src/xml/project_update.xml:0
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_livery
+#, python-format
+msgid "Livery"
+msgstr "Livrer"
+
+#. module: choreograph_project
+#: model:ir.actions.act_window,name:choreograph_project.action_view_all_task
+#: model:ir.ui.menu,name:choreograph_project.taks
+msgid "My Tasks"
+msgstr "Mes tâches"
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.action_project_task_user_tree
+msgid "No data yet!"
+msgstr "Pas encore de données !"
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.open_view_operation_all_group_stage
+msgid "No operation found. Let's create one!"
+msgstr "Aucune opération trouvée. Créons-en un !"
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.open_view_project_all_config_group_stage
+msgid "No projects found. Let's create one!"
+msgstr "Aucun projet trouvé. Créons-en un!"
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.open_task_type_form
+#: model_terms:ir.actions.act_window,help:choreograph_project.project_project_stage_configure
+msgid "No stages found. Let's create one!"
+msgstr "Aucune étape trouvée. Créons-en une !"
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.action_view_all_task
+msgid "No tasks found. Let's create one!"
+msgstr "Aucune tâche trouvée. Créons-en une !"
+
+#. module: choreograph_project
+#: model:ir.actions.act_window,name:choreograph_project.open_view_operation_all_group_stage
+#: model:ir.ui.menu,name:choreograph_project.menu_operation_root
+#: model:ir.ui.menu,name:choreograph_project.operation
+msgid "Operation"
+msgstr "Opérations"
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.open_view_operation_all_group_stage
+msgid ""
+"Operation contain tasks on the same topic, and each has its own dashboard."
+msgstr ""
+"Les opérations contiennent des tâches sur le même sujet, et chacun d'eux a "
+"son propre tableau de bord."
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.action_view_all_task
+msgid ""
+"Organize your tasks by dispatching them across the pipeline.<br> Collaborate\n"
+"                efficiently by chatting in real-time or via email."
+msgstr ""
+"Organisez vos tâches en les répartissant à travers le pipeline.<br>\n"
+"                    Collaborez efficacement en discutant en temps réel ou par email."
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_planified
+msgid "Planned"
+msgstr "Planifié"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_preparation
+msgid "Preparation"
+msgstr "Préparation"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_presta_delivery
+msgid "Presta delivery"
+msgstr "Livraison Presta"
+
+#. module: choreograph_project
+#: model:ir.model,name:choreograph_project.model_project_project
+#: model:ir.ui.menu,name:choreograph_project.project_config
+msgid "Project"
+msgstr "Projet"
+
+#. module: choreograph_project
+#: model:ir.model,name:choreograph_project.model_project_project_stage
+msgid "Project Stage"
+msgstr "Étape du projet"
+
+#. module: choreograph_project
+#: model:ir.actions.act_window,name:choreograph_project.project_project_stage_configure
+msgid "Project Stages"
+msgstr "Étapes de projet"
+
+#. module: choreograph_project
+#: model:ir.model,name:choreograph_project.model_project_update
+msgid "Project Update"
+msgstr "Mise à Jour du Projet"
+
+#. module: choreograph_project
+#: model:ir.ui.menu,name:choreograph_project.project_stage
+msgid "Project stage"
+msgstr "Étapes de projet"
+
+#. module: choreograph_project
+#: model:ir.actions.act_window,name:choreograph_project.open_view_project_all_config_group_stage
+msgid "Projects"
+msgstr "Projets"
+
+#. module: choreograph_project
+#: model_terms:ir.actions.act_window,help:choreograph_project.open_view_project_all_config_group_stage
+msgid ""
+"Projects contain tasks on the same topic, and each has its own dashboard."
+msgstr ""
+"Les projets contiennent des tâches sur le même sujet, et chacun a son propre"
+" tableau de bord."
+
+#. module: choreograph_project
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_canceled
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_done
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_draft
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_expectation_precision
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_file_receipt
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_in_progress
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_preparation
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_received_file
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_to_do
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_validation_bat_client
+#: model:project.task.type,legend_done:choreograph_project.project_task_type_waiting_quantities
+msgid "Prêt"
+msgstr ""
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_received_file
+msgid "Received File"
+msgstr "Fichier reçu"
+
+#. module: choreograph_project
+#. odoo-javascript
+#: code:addons/choreograph_project/static/src/xml/project_update.xml:0
+#, python-format
+msgid "Redelivery Prod"
+msgstr "Relivraison prod"
+
+#. module: choreograph_project
+#. odoo-javascript
+#: code:addons/choreograph_project/static/src/xml/project_update.xml:0
+#, python-format
+msgid "Redelivery studies"
+msgstr "Relivraison études"
+
+#. module: choreograph_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task__role_id
+msgid "Role"
+msgstr "Rôle"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_routing
+msgid "Routing"
+msgstr ""
+
+#. module: choreograph_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_project_stage__stage_number
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task_type__stage_number
+msgid "Stage Number"
+msgstr "Numéro étape"
+
+#. module: choreograph_project
+#: model:ir.model,name:choreograph_project.model_project_task
+msgid "Task"
+msgstr "Tâche"
+
+#. module: choreograph_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task__task_number
+msgid "Task Number"
+msgstr "Numéro de tâche"
+
+#. module: choreograph_project
+#: model:ir.model,name:choreograph_project.model_project_task_type
+msgid "Task Stage"
+msgstr "Étape de tâche"
+
+#. module: choreograph_project
+#: model:ir.actions.act_window,name:choreograph_project.open_task_type_form
+msgid "Task Stages"
+msgstr "Étapes de tâches"
+
+#. module: choreograph_project
+#: model:ir.actions.act_window,name:choreograph_project.action_project_task_user_tree
+#: model:ir.model,name:choreograph_project.model_report_project_task_user
+msgid "Tasks Analysis"
+msgstr "Analyse des tâches"
+
+#. module: choreograph_project
+#: model:ir.ui.menu,name:choreograph_project.task_stage
+msgid "Tasks stage"
+msgstr "Étapes de tâches"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_template
+msgid "Template"
+msgstr ""
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_terminated
+msgid "Terminated"
+msgstr "Terminé"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_to_do
+msgid "To Do"
+msgstr "A faire"
+
+#. module: choreograph_project
+#: model:project.project.stage,name:choreograph_project.planning_project_stage_to_deliver
+msgid "To deliver"
+msgstr "A livrer"
+
+#. module: choreograph_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_project__type_of_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_project_stage__type_of_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task__type_of_project
+#: model:ir.model.fields,field_description:choreograph_project.field_project_task_type__type_of_project
+#: model:ir.model.fields,field_description:choreograph_project.field_report_project_task_user__type_of_project
+msgid "Type Of Project"
+msgstr "Type de projet"
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_validation_bat_client
+msgid "Validation BAT client / interne"
+msgstr ""
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_waiting_quantities
+msgid "Waiting quantities"
+msgstr "Attente Quantités"
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project__type_of_project__operation
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__type_of_project__operation
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__type_of_project__operation
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__type_of_project__operation
+#: model:ir.model.fields.selection,name:choreograph_project.selection__report_project_task_user__type_of_project__operation
+msgid "operation"
+msgstr "Opérations"
+
+#. module: choreograph_project
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project__type_of_project__standard
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__type_of_project__standard
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task__type_of_project__standard
+#: model:ir.model.fields.selection,name:choreograph_project.selection__project_task_type__type_of_project__standard
+#: model:ir.model.fields.selection,name:choreograph_project.selection__report_project_task_user__type_of_project__standard
+msgid "standard"
+msgstr "Standard"

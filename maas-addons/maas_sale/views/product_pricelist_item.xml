@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="product_pricelist_item_form_inherit" model="ir.ui.view">
+            <field name="name">product.pricelist.item.inherit</field>
+            <field name="model">product.pricelist.item</field>
+            <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form/sheet/group[3]" position="after">
+                    <separator string="Subscription" attrs="{'invisible':[('applied_on','!=','1_product')]}"/>
+                    <group attrs="{'invisible':[('applied_on','!=','1_product')]}">
+                        <group>
+                            <label for="subscription_rent"/>
+                            <div>
+                                <field name="subscription_rent"/>
+                            </div>
+                        </group>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

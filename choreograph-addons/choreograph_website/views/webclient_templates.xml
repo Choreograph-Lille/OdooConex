@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="backoffice_login" inherit_id="web.login">
+        <xpath expr="//form[hasclass('oe_login_form')]" position="attributes">
+            <attribute name="t-attf-action">/web/bo/login</attribute>
+            <attribute name="onsubmit">this.action = '/web/bo/login' + location.hash</attribute>
+        </xpath>
+    </template>
+    <template id="auth_reset_password" inherit_id="auth_signup.reset_password">
+        <xpath expr="//div[hasclass('oe_login_form')]/a[@href='/web/login']" position="attributes">
+            <attribute name="href">/web/bo/login</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('justify-content-between')]/a[2]" position="attributes">
+            <attribute name="href">/web/bo/login</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('justify-content-between')]/a[1]" position="attributes">
+            <attribute name="t-attf-href">/web/bo/login?{{ keep_query() }}</attribute>
+        </xpath>
+    </template>
+    <template id="user_signin" inherit_id="portal.user_sign_in">
+        <xpath expr="//a[@t-attf-href='/web/login']" position="attributes">
+            <attribute name="t-attf-href">/web/bo/login</attribute>
+        </xpath>
+    </template>
+    <template id="auth_signup" inherit_id="auth_signup.signup">
+        <xpath expr="//a[@t-attf-href='/web/login?{{ keep_query() }}']" position="attributes">
+            <attribute name="t-attf-href">/web/bo/login?{{ keep_query() }}</attribute>
+        </xpath>
+    </template>
+</odoo>

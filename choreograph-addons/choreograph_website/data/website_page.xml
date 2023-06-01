@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bo_homepage" model="website.page">
+        <field name="is_published">True</field>
+        <field name="url">/home/bo</field>
+        <field name="view_id" ref="choreograph_website.bo_home_page_view" />
+        <field name="website_indexed" eval="True" />
+    </record>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="bo_home_page_view" model="ir.ui.view">
+        <field name="name">Homepage</field>
+        <field name="type">qweb</field>
+        <field name="key">choreograph_website.homepage</field>
+        <field name="arch" type="xml">
+            <t name="Homepage" priority="29" t-name="choreograph_website.homepage">
+                <t t-call="website.layout">
+                    <div id="oe_structure" class="oe_structure oe_empty" />
+                </t>
+            </t>
+        </field>
+    </record>
+</odoo>

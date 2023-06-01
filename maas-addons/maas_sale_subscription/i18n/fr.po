@@ -1,0 +1,207 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* maas_sale_subscription
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-06 09:15+0000\n"
+"PO-Revision-Date: 2023-02-06 09:15+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields,field_description:maas_sale_subscription.field_sale_order_line__qty_cumulative
+msgid "Accrued Consumption"
+msgstr "Consommé cumulé"
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields,field_description:maas_sale_subscription.field_sale_order_line__state_subscription
+msgid "Action"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields,field_description:maas_sale_subscription.field_sale_order__allowance
+msgid "Allowance"
+msgstr "Type de prestation"
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields,field_description:maas_sale_subscription.field_sale_operation__balance
+msgid "Balance"
+msgstr "Solde"
+
+#. module: maas_sale_subscription
+#: model_terms:ir.ui.view,arch_db:maas_sale_subscription.sale_subscription_view_form_inherit
+msgid "Basic Package"
+msgstr "Forfait de base"
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields.selection,name:maas_sale_subscription.selection__sale_order__allowance__crm
+msgid "CRM"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields,field_description:maas_sale_subscription.field_sale_order_line__qty_consumed
+msgid "Consumed"
+msgstr "Consommé"
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields.selection,name:maas_sale_subscription.selection__sale_order_line__state_subscription__consumption
+msgid "Consumption"
+msgstr "Consommation"
+
+#. module: maas_sale_subscription
+#: model:ir.model,name:maas_sale_subscription.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model_terms:ir.ui.view,arch_db:maas_sale_subscription.sale_subscription_view_form_inherit
+msgid "Current Package"
+msgstr "Forfait courant"
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields,field_description:maas_sale_subscription.field_sale_order_line__date
+msgid "Date"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields,field_description:maas_sale_subscription.field_sale_order_line__identifiers
+msgid "Ids"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields.selection,name:maas_sale_subscription.selection__sale_order_line__state_subscription__invoiced
+msgid "Invoiced"
+msgstr "Facturé"
+
+#. module: maas_sale_subscription
+#: model_terms:ir.ui.view,arch_db:maas_sale_subscription.product_template_form_inherit
+msgid "MyModel"
+msgstr ""
+
+#. module: maas_sale_subscription
+#. odoo-python
+#: code:addons/maas_sale_subscription/models/sale_operation_child.py:0
+#, python-format
+msgid "No active subscription was found for this customer."
+msgstr "Aucun abonnement active n'a été trouvé pour ce client."
+
+#. module: maas_sale_subscription
+#. odoo-python
+#: code:addons/maas_sale_subscription/models/sale_operation_child.py:0
+#, python-format
+msgid ""
+"No upper level to propose in product pricelist. Please contact your system "
+"administrator."
+msgstr ""
+"Pas de forfait supérieure à proposer dans la liste de prix. Veuillez "
+"contacter votre administrateur."
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields.selection,name:maas_sale_subscription.selection__sale_order__allowance__prm
+msgid "PRM"
+msgstr ""
+
+#. module: maas_sale_subscription
+#. odoo-python
+#: code:addons/maas_sale_subscription/models/sale_operation_child.py:0
+#, python-format
+msgid "Package Upgrade Assistant"
+msgstr "Assistance de mise à jour du forfait"
+
+#. module: maas_sale_subscription
+#: model:product.template,name:maas_sale_subscription.product_template_1000000_ids
+msgid "Palier 1000000 Ids"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:product.template,name:maas_sale_subscription.product_template_200000_ids
+msgid "Palier 200000 Ids"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:product.template,name:maas_sale_subscription.product_template_500000_ids
+msgid "Palier 500000 Ids"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:product.template,name:maas_sale_subscription.product_template_unlimited_ids
+msgid "Palier Illimité"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields,field_description:maas_sale_subscription.field_sale_order_line__period
+msgid "Period"
+msgstr "Période"
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields.selection,name:maas_sale_subscription.selection__sale_order_line__state_subscription__subscription_rent
+msgid "Rent"
+msgstr "Loyer"
+
+#. module: maas_sale_subscription
+#: model:ir.model,name:maas_sale_subscription.model_sale_operation
+msgid "Sale Operation"
+msgstr "Opération"
+
+#. module: maas_sale_subscription
+#: model:ir.model,name:maas_sale_subscription.model_sale_operation_child
+msgid "Sale Operation Child"
+msgstr "Ligne de l'opération"
+
+#. module: maas_sale_subscription
+#: model:ir.model,name:maas_sale_subscription.model_sale_order
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: maas_sale_subscription
+#: model:ir.model,name:maas_sale_subscription.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de bons de commande"
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields.selection,name:maas_sale_subscription.selection__sale_order_line__state_subscription__start_subscription
+msgid "Start Subscription / Article"
+msgstr "Début Abonnement / Article"
+
+#. module: maas_sale_subscription
+#. odoo-python
+#: code:addons/maas_sale_subscription/models/sale_order.py:0
+#, python-format
+msgid "Start subscription line added in subscription %s"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields.selection,name:maas_sale_subscription.selection__sale_order_line__state_subscription__subscription_change
+msgid "Subscription change / Article"
+msgstr "Chgt Abonnement / Article"
+
+#. module: maas_sale_subscription
+#. odoo-python
+#: code:addons/maas_sale_subscription/models/sale_operation.py:0
+#, python-format
+msgid "The balance is not enough."
+msgstr "Le solde Ids n'est pas suffisant"
+
+#. module: maas_sale_subscription
+#: model:ir.model.fields.selection,name:maas_sale_subscription.selection__sale_order_line__state_subscription__to_invoice
+msgid "To Invoice"
+msgstr "A facturer"
+
+#. module: maas_sale_subscription
+#. odoo-python
+#: code:addons/maas_sale_subscription/models/sale_order.py:0
+#, python-format
+msgid "To invoice line added in subscription %s"
+msgstr ""
+
+#. module: maas_sale_subscription
+#: model:ir.model,name:maas_sale_subscription.model_res_users
+msgid "User"
+msgstr "Utilisateur"
