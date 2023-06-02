@@ -1659,7 +1659,7 @@ msgstr "Date de réception"
 msgid ""
 "Recipient of\n"
 "                                service"
-msgstr "Destinataire de \\\t\t\t\tla prestation"
+msgstr "Destinataire de la prestation"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
