@@ -30,6 +30,10 @@
                             <td style="border: 0px">
                                 <t t-out="doc.partner_id.name" />
                             </td>
+                            <td style="border: 0px; text-decoration: underline;">Retention</td>
+                            <td style="border: 0px">
+                                <t t-out="doc.data_conservation_id.name" />
+                            </td>
                         </tr>
                         <tr style="border: 0px">
                             <td style="border: 0px; text-decoration: underline;">Recipient of data</td>
@@ -51,31 +55,6 @@
                         </tr>
                         <tr>
                             <td />
-                            <td />
-                        </tr>
-                    </table>
-                </div>
-                <div class="col-auto col-6 mw-100 mb-2">
-                    <table style="width:90%; border: 1px solid transparent;">
-                        <tr style="border: 0px">
-                            <td style="border: 0px; text-decoration: underline;">Retention</td>
-                            <td style="border: 0px">
-                                <t t-out="doc.data_conservation_id.name" />
-                            </td>
-                        </tr>
-                        <tr style="border: 0px" class="d-none">
-                            <td style="border: 0px; text-decoration: underline;">Media type</td>
-                            <td style="border: 0px" />
-                        </tr>
-                        <tr style="border: 0px" class="d-none">
-                            <td style="border: 0px; text-decoration: underline;">Encoding standard</td>
-                            <td style="border: 0px" />
-                        </tr>
-                        <tr style="border: 0px" class="d-none">
-                            <td style="border: 0px; text-decoration: underline;">Model</td>
-                            <td style="border: 0px" />
-                        </tr>
-                        <tr>
                             <td />
                             <td />
                         </tr>
