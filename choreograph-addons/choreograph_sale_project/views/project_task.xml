@@ -59,7 +59,8 @@
                             <field name="file_quantity" readonly="1"
                                 attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}" />
                             <field name="volume"
-                                attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}" />
+                                attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])],
+                                    'readonly': [('task_number', 'in', ['80']), ('repatriate_information', '=', True)]}" />
                             <field name="po_livedata_number"
                                 readonly="1"
                                 attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}" />
