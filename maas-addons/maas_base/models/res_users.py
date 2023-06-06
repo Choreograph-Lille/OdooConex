@@ -15,6 +15,7 @@ class ResUsers(models.Model):
     default_email = fields.Boolean()
     customer_ids = fields.Many2many('res.partner', 'res_users_customer_rel',
                                     'user_id', 'partner_id', string='Customers')
+    is_user_profile  = fields.Boolean()
 
     @api.onchange('default_sms')
     def onchange_default_sms(self):
