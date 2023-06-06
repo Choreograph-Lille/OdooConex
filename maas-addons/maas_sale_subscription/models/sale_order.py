@@ -117,13 +117,15 @@ class SaleSubscription(models.Model):
         subscription_obj = self.env['sale.order']
         subscription_line_obj = self.env['sale.order.line']
 
-        subscriptions = subscription_obj.search([('is_subscription', '=', True), ('next_invoice_date', '=', fields.Date.today()),
-                                                 ('current_package_id', '!=', False), ('stage_id.category', '=', 'progress')])
-        date_now = fields.Datetime.now()
-        _logger.info("Subscription CRON launched at %s" % date_now)
+        invoice_date = fields.Date.today() + relativedelta(months=1, day=1, days=-1)
 
-        start_period = date_now.replace(hour=0, minute=0, second=0) + relativedelta(day=1)
-        end_period = date_now.replace(hour=23, minute=59, second=59, microsecond=999) + relativedelta(day=31)
+        subscriptions = subscription_obj.search([('is_subscription', '=', True), ('next_invoice_date', '=', invoice_date),
+                                                 ('current_package_id', '!=', False), ('stage_id.category', '=', 'progress')])
+        current_datetime = fields.Datetime.now()
+        _logger.info("Subscription CRON launched at %s" % current_datetime)
+
+        start_period = current_datetime.replace(hour=2, minute=0, second=0) + relativedelta(day=1)
+        end_period = current_datetime.replace(hour=21, minute=59, second=59, microsecond=999) + relativedelta(day=31)
 
         for subscription in subscriptions:
             lines = subscription.order_line.filtered(
@@ -132,6 +134,7 @@ class SaleSubscription(models.Model):
             if lines:
                 line = lines[-1:]
                 vals = subscription._prepare_line_to_invoice_values(line)
+                vals.update({'date': end_period})
                 _logger.info(_('To invoice line added in subscription %s') % subscription.name)
                 new_line = subscription_line_obj.new(vals)
                 new_line._compute_amount()
@@ -139,16 +142,17 @@ class SaleSubscription(models.Model):
                 self.env.cr.commit()
             product = subscription.package_id
             vals = subscription._prepare_start_subscription_line_values(product)
-            vals.update({'date': date_now + relativedelta(months=1, day=1)})
-            _logger.info(_('Start subscription line added in subscription %s') % (subscription.name))
-            subscription.create_subscription_rent()
+            date_start_rent = end_period + relativedelta(months=1, day=1)
+            vals.update({'date': date_start_rent})
+            _logger.info(_('Start subscription line added in subscription %s') % subscription.name)
+            subscription.create_subscription_rent(date_start_rent)
             subscription.write({'balance': subscription.package_id.identifiers,
                                 'current_cumulative_quantity': 0,
                                 'current_package_id': subscription.package_id.id})
             new_line = subscription_line_obj.new(vals)
             new_line._compute_amount()
             subscription_line_obj.create(new_line._convert_to_write(new_line._cache))
-        return True
+        return subscriptions
 
     def get_subscription_rent_items(self):
         self.ensure_one()
@@ -156,7 +160,7 @@ class SaleSubscription(models.Model):
         items_rent = items.filtered(lambda j: j.subscription_rent)
         return items_rent
 
-    def create_subscription_rent(self):
+    def create_subscription_rent(self, date_start_rent=False):
         self.ensure_one()
         items = self.get_subscription_rent_items()
         pricelist = self._get_pricelist()
@@ -170,7 +174,7 @@ class SaleSubscription(models.Model):
             })
             if not self._context.get('come_from_action_confirm'):
                 vals.update({
-                    'date': fields.Datetime.now() + relativedelta(months=1, day=1)
+                    'date': date_start_rent
                 })
             self.order_line = [(0, 0, vals)]
         return True
@@ -226,11 +230,11 @@ class SaleSubscription(models.Model):
 
     @api.model
     def _cron_recurring_create_invoice(self):
-        self._manage_recurring_invoice_lines()
+        subscriptions = self._manage_recurring_invoice_lines()
         config_obj = self.env['ir.config_parameter'].sudo()
         if not config_obj.get_param('recurring.invoice.scheduler.enabled'):
             return False
-        invoices = super(SaleSubscription, self)._cron_recurring_create_invoice()
+        invoices = super(SaleSubscription, subscriptions)._cron_recurring_create_invoice()
         _logger.info(_("Invoices created: %s") % str(invoices))
         return invoices
 
