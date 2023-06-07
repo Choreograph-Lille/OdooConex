@@ -263,10 +263,13 @@ class SaleOrder(models.Model):
             if vals.get('email_is_info_validated', False):
                 rec.update_task_email_campaign()
                 rec.update_task_bat_file_witness()
-            if vals.get('repatriate_information') or ('segment_ids' in vals and self.repatriate_information):
-                rec.repatriate_quantity_information_on_task()
+
+            if any(field in vals for field in ['repatriate_information', 'segment_ids', 'quantity_to_deliver']):
+                if vals.get('repatriate_information') or rec.repatriate_information:
+                    rec.repatriate_quantity_information_on_task()
             if 'repatriate_information' in vals and not vals.get('repatriate_information'):
                 rec.reset_quantity_information_on_task()
+
             if 'potential_return' in vals:
                 rec.update_potential_return()
             if 'presentation' in vals:
@@ -313,6 +316,7 @@ class SaleOrder(models.Model):
     def repatriate_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in [
                                 '20', '25', '30', '75', '85', '80']).repatriate_quantity_information()
+        self.tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
 
     def reset_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
