@@ -120,6 +120,9 @@ class ProjectTask(models.Model):
         self.segment_ids = [
             (6, 0, self.env['operation.segment'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
 
+    def repatriate_volume(self):
+        self.volume = self.sale_order_id.quantity_to_deliver
+
     @api.depends('sale_order_id', 'sale_order_id.operation_condition_ids')
     def compute_operation_condition_ids(self):
         self.operation_condition_ids = [
