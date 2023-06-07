@@ -21,6 +21,7 @@
 
 from dateutil.relativedelta import relativedelta
 from odoo import fields, models, api, _
+from odoo.tools import str2bool
 
 import logging
 
@@ -117,9 +118,7 @@ class SaleSubscription(models.Model):
         subscription_obj = self.env['sale.order']
         subscription_line_obj = self.env['sale.order.line']
 
-        invoice_date = fields.Date.today() + relativedelta(months=1, day=1, days=-1)
-
-        subscriptions = subscription_obj.search([('is_subscription', '=', True), ('next_invoice_date', '=', invoice_date),
+        subscriptions = subscription_obj.search([('is_subscription', '=', True), ('next_invoice_date', '=', fields.Date.today()),
                                                  ('current_package_id', '!=', False), ('stage_id.category', '=', 'progress')])
         current_datetime = fields.Datetime.now()
         _logger.info("Subscription CRON launched at %s" % current_datetime)
@@ -232,9 +231,18 @@ class SaleSubscription(models.Model):
     def _cron_recurring_create_invoice(self):
         subscriptions = self._manage_recurring_invoice_lines()
         config_obj = self.env['ir.config_parameter'].sudo()
-        if not config_obj.get_param('recurring.invoice.scheduler.enabled'):
+        if not str2bool(config_obj.get_param('recurring.invoice.scheduler.enabled')):
+            subscriptions._update_next_invoice_date()
+            subscriptions._set_next_invoice_date_to_end_of_month()
             return False
         invoices = super(SaleSubscription, subscriptions)._cron_recurring_create_invoice()
         _logger.info(_("Invoices created: %s") % str(invoices))
+        subscriptions._set_next_invoice_date_to_end_of_month()
         return invoices
 
+    def _set_next_invoice_date_to_end_of_month(self):
+        """
+        force the next invoice date to the end of month
+        """
+        for subscription in self:
+            subscription.write({'next_invoice_date':  subscription.next_invoice_date + relativedelta(months=1, day=1, days=-1)})
