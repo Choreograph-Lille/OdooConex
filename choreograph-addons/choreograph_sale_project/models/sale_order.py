@@ -316,7 +316,7 @@ class SaleOrder(models.Model):
 
     def reset_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
-            'segment_ids': False,
+            'segment_ids': [(6, 0, [])],
         })
 
     def _update_date_deadline(self, vals={}):
