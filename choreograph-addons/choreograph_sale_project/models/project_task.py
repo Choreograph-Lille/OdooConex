@@ -318,6 +318,10 @@ class ProjectTask(models.Model):
                                'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
+            if task.task_number == '70' and 'task_segment_ids' in vals:
+                task_75_id = task.project_id._find_task_by_task_number('75')
+                if task_75_id:
+                    task_75_id.write({'segment_ids': [(6, 0, self.task_segment_ids.ids)]})
         return res
 
     def update_provider_data(self):
