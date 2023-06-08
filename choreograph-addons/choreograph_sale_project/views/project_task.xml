@@ -113,10 +113,14 @@
                                 attrs="{'invisible': ['|',('task_number', 'not in', ['45']),('ab_test','=',False)]}" />
                             <field name="is_preheader_available"
                                 attrs="{'invisible': [('task_number', 'not in', ['45'])]}" />
+                            <field name="is_preheader_available_text"
+                                       attrs="{'invisible': ['|', ('task_number', 'not in', ['45']), ('is_preheader_available','=',True)]}"/>
                             <field name="comment"
-                                readonly="1"
-                                attrs="{'invisible': [('task_number', 'not in', ['45', '50', '20', '25', '30', '35'])]}" />
-
+                                attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}" />
+                            <field name="email_comment"
+                                attrs="{'invisible': [('task_number', 'not in', ['45'])]}" />
+                            <field name="sms_comment"
+                                attrs="{'invisible': [('task_number', 'not in', ['50'])]}" />
                             <h4
                                 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}">
                                 BAT
