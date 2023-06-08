@@ -183,14 +183,13 @@ class SaleOrder(models.Model):
             rec.study_global_task_id = rec.tasks_ids.filtered(
                 lambda t: t.task_number == OPERATION_TASK_NUMBER['study_global']).id
 
-    @api.depends('order_line')
-    def get_provider_delivery_template(self):
+    def get_provider_delivery_template(self, project=False):
         line_with_project = self.get_operation_product()
         operation_template = False
         if line_with_project:
             operation_template = line_with_project[0].operation_template_id
-        elif self.project_ids:
-            operation_template = self.project_ids[0]
+        elif project:
+            operation_template = project
 
         return operation_template.task_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER) if operation_template else False
 
@@ -207,16 +206,15 @@ class SaleOrder(models.Model):
         # self.archive_required_tasks()
         self._manage_task_assignation()
         self.compute_task_operations()
-        self.initiate_provider_delivery()
+        self.initiate_provider_delivery(self.project_ids[0])
         # self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
 
-    def initiate_provider_delivery(self):
-        provider_delivery_template = self.get_provider_delivery_template()
-        if provider_delivery_template:
-            self.with_context(no_create_delivery_task=True).write({
+    def initiate_provider_delivery(self, project=False):
+        provider_delivery_template = self.get_provider_delivery_template(project)
+        if provider_delivery_template and project:
+            self.write({
                 'operation_provider_delivery_ids': [(0, 0, {
-                    'delivery_date': provider_delivery_template.date_deadline,
-                    'task_id': self.project_ids[0].task_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER).id
+                    'task_id': project.task_ids.filtered(lambda t: t.task_number == PROVIDER_DELIVERY_NUMBER).id
                 })]
             })
 
@@ -295,11 +293,9 @@ class SaleOrder(models.Model):
                     'project_id': project.id,
                     'show_operation_generation_button': False
                 })
-                # order_id.archive_required_tasks()
                 order_id.compute_task_operations()
-                order_id.initiate_provider_delivery()
+                order_id.initiate_provider_delivery(project)
                 order_id._update_date_deadline(vals)
-                # order_id._manage_task_assignation()
         return order_id
 
     def update_task_bat_from(self, value=''):
@@ -352,7 +348,7 @@ class SaleOrder(models.Model):
                               'ENR_EMAIL', 'ENR_SMS'] and rec.operation_provider_delivery_ids else rec.commitment_date})])
 
             if (is_operation_generation or vals.get('operation_provider_delivery_ids')) and rec.operation_provider_delivery_ids:
-                values.extend([(rec._get_operation_task(['60', '70', '75'], True), {
+                values.extend([(rec._get_operation_task(['60', '70'], True), {
                               'date_deadline': rec.operation_provider_delivery_ids[0].delivery_date})])
 
             if is_operation_generation or vals.get('bat_desired_date'):
