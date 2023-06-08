@@ -13,11 +13,12 @@ class SaleOrderLine(models.Model):
         if self._context.get('is_operation_generation'):
             super(SaleOrderLine, self)._timesheet_service_generation()
 
-    @api.depends('product_uom_qty', 'price_unit', 'order_id.related_base')
+    @api.depends('product_uom_qty', 'price_unit', 'discount', 'order_id.related_base')
     def _compute_retribution_cost(self):
         for rec in self:
             if rec.product_id.concerned_base:
-                rec.retribution_cost = rec.product_uom_qty * rec.price_unit * rec.product_id.concerned_base.retribution_rate
+                price_unit = rec.price_unit - (rec.price_unit * rec.discount) / 100
+                rec.retribution_cost = rec.product_uom_qty * price_unit * rec.product_id.concerned_base.retribution_rate
                 if rec.product_id.concerned_base.is_multi_base:
                     is_postal_addr = rec.product_template_id == rec.product_id.concerned_base.product_template_id
                     rate = rec.product_id.concerned_base.postal_address if is_postal_addr else rec.product_id.concerned_base.postal_variable
