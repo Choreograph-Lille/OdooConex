@@ -311,7 +311,7 @@ class SaleOrder(models.Model):
 
     def repatriate_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in [
-                                '20', '25', '30', '75', '85', '80']).repatriate_quantity_information()
+                                '20', '25', '30', '85', '80']).repatriate_quantity_information()
         self.tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
 
     def reset_quantity_information_on_task(self):
