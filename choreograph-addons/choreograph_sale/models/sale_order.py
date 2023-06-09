@@ -79,7 +79,6 @@ class SaleOrder(models.Model):
     desired_finished_volume = fields.Char()
     volume_detail = fields.Text()
     sender = fields.Char()
-    id_title = fields.Char()
 
     reception_date = fields.Date("Reception Date")
     reception_location = fields.Char('Where to find ?')
@@ -89,7 +88,6 @@ class SaleOrder(models.Model):
 
     bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
-    bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
 
     witness_file_name = fields.Char('File Name')
@@ -122,7 +120,6 @@ class SaleOrder(models.Model):
 
     email_bat_from = fields.Many2one('choreograph.campaign.de', 'Email BAT From')
     email_bat_internal = fields.Char('Email BAT Internal')
-    email_bat_client = fields.Char('Email BAT Client')
     bat_desired_date = fields.Date('Email BAT Desired Date')
     email_witness_file_name = fields.Char('Email File Name')
     excluded_provider = fields.Char('Email Excluded Provider')

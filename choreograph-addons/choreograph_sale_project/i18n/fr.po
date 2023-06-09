@@ -144,11 +144,6 @@ msgid "BC Number"
 msgstr "N° BC"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_client
-msgid "Bat Client"
-msgstr ""
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_from
 msgid "Bat From"
 msgstr "DE"
@@ -156,7 +151,7 @@ msgstr "DE"
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_internal
 msgid "Bat Internal"
-msgstr "Bat interne"
+msgstr "Bat interne/client"
 
 #. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_campaign

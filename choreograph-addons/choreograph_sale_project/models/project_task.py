@@ -32,7 +32,6 @@ class ProjectTask(models.Model):
     bat_from_for_40 = fields.Char(
         string='From', default='IDSEQ | TOP_CANAL_SOURCE(0/1) | TOP_CANAL_ENRICHISSABLE(0/1/2) |')
     bat_internal = fields.Char()
-    bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
     optout_link = fields.Text("Output Links", related='sale_order_id.optout_link')
