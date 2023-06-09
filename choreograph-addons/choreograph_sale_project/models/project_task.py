@@ -8,7 +8,8 @@ from odoo.addons.choreograph_project.models.project_project import (
     TERMINATED_TASK_STAGE,
     FILE_RECEIVED_TASK_STAGE,
     WAITING_FILE_TASK_STAGE,
-    TODO_TASK_STAGE
+    TODO_TASK_STAGE,
+    BAT_CLIENT_TASK_STAGE
 )
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
@@ -312,6 +313,8 @@ class ProjectTask(models.Model):
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '45' and stage_id.stage_number == '50':
                     task.project_id._hook_task_45_in_stage_50()
+                elif task.task_number == '45' and stage_id.stage_number == BAT_CLIENT_TASK_STAGE:
+                    task.project_id._hook_task_45_in_stage_70()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
             provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex',
