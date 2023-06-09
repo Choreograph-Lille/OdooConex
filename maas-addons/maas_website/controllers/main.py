@@ -355,13 +355,11 @@ class OperationWebsite(http.Controller):
     @staticmethod
     def _get_path():
         module_path = modules.get_module_path('maas_website')
-        if '\\' in module_path:
-            src_path = '\\static\\src'
-            src_report_path = '\\static\\src\\report\\'
-        else:
-            src_path = '/static/src'
-            src_report_path = '/static/src/report/'
-        return module_path, src_path, src_report_path
+        src_path = '/static/src'
+        if not os.path.exists('/tmp/odoo'):
+            os.makedirs('/tmp/odoo')
+            os.system(f'cp -R {module_path}{src_path} /tmp/odoo')
+        return '/tmp/odoo', '/src', '/src/report/'
 
     @http.route('/report/<int:operation_id>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
     def get_report_bi(self, operation_id):
