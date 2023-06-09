@@ -34,7 +34,7 @@ class ProjectTask(models.Model):
     bat_internal = fields.Char()
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
-    optout_link = fields.Text("Output Links", related='sale_order_id.optout_link')
+    optout_link = fields.Text("Output Links")
     witness_file_name = fields.Char('File Name')
     witness_comment = fields.Text()
     file_name = fields.Char()
@@ -98,7 +98,7 @@ class ProjectTask(models.Model):
         ('3', '3')])
     delivery_date = fields.Date()
     stage_number = fields.Selection(related='stage_id.stage_number')
-    has_enrichment_email_op = fields.Boolean(related='project_id.sale_order_id.has_enrichment_email_op', store=True)
+    has_enrichment_email_op = fields.Boolean(related='sale_order_id.has_enrichment_email_op')
     repatriate_information = fields.Boolean(related='sale_order_id.repatriate_information')
 
     # def compute_comment(self):
@@ -331,6 +331,8 @@ class ProjectTask(models.Model):
                 task_75_id = task.project_id._find_task_by_task_number('75')
                 if task_75_id:
                     task_75_id.write({'segment_ids': [(6, 0, self.task_segment_ids.ids)]})
+            if task.task_number == '60' and 'optout_link' in vals:
+                task.sale_order_id.update_optout_link(vals.get('optout_link'))
         return res
 
     def update_provider_data(self):

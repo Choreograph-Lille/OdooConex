@@ -161,7 +161,6 @@
                             <field name="excluded_provider"
                                 attrs="{'invisible': ['|',('task_number', 'not in', ['60', '45']),('has_enrichment_email_op','=',False)]}" />
                             <field name="optout_link"
-                                readonly="1"
                                 attrs="{'invisible': ['|',('task_number', 'not in', ['60', '45']),('has_enrichment_email_op','=',False)]}" />
 
                             <field name="dedup_title_number"
