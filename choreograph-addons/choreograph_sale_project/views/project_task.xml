@@ -134,8 +134,7 @@
                                 readonly="1"
                                 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}" />
                             <field name="bat_comment"
-                                readonly="1"
-                                attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50'])]}" />
+                                attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50'])], 'readonly': [('task_number','!=','40')]}" />
                             <field name="bat_desired_date"
                                 attrs="{'invisible': [('task_number', 'not in', ['45'])]}" />
 

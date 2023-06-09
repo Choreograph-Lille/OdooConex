@@ -8,7 +8,8 @@ from odoo.addons.choreograph_project.models.project_project import (
     TERMINATED_TASK_STAGE,
     FILE_RECEIVED_TASK_STAGE,
     WAITING_FILE_TASK_STAGE,
-    TODO_TASK_STAGE
+    TODO_TASK_STAGE,
+    BAT_CLIENT_TASK_STAGE
 )
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
@@ -312,12 +313,18 @@ class ProjectTask(models.Model):
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '45' and stage_id.stage_number == '50':
                     task.project_id._hook_task_45_in_stage_50()
+                elif task.task_number == '45' and stage_id.stage_number == BAT_CLIENT_TASK_STAGE:
+                    task.project_id._hook_task_45_in_stage_70()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
             provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex',
                                'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
+            if task.task_number == '70' and 'task_segment_ids' in vals:
+                task_75_id = task.project_id._find_task_by_task_number('75')
+                if task_75_id:
+                    task_75_id.write({'segment_ids': [(6, 0, self.task_segment_ids.ids)]})
         return res
 
     def update_provider_data(self):
