@@ -254,7 +254,10 @@ class SaleOrder(models.Model):
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
         for rec in self:
-            rec._update_date_deadline(vals)
+            if any(date in vals for date in ['commitment_date', 'potential_return_date', 'study_delivery_date',
+                                             'presentation_date', 'return_production_potential_date',
+                                             'operation_provider_delivery_ids', 'bat_desired_date']):
+                rec._update_date_deadline(vals)
             rec._check_info_validated(vals)
             if vals.get('is_info_validated', False):
                 rec.update_task_sms_campaign()
@@ -291,11 +294,14 @@ class SaleOrder(models.Model):
                 project.initialize_order(order_id)
                 order_id.write({
                     'project_id': project.id,
+                    'project_ids': [(4, project.id)],
                     'show_operation_generation_button': False
                 })
+                order_id.compute_operation_code()
                 order_id.compute_task_operations()
                 order_id.initiate_provider_delivery(project)
-                order_id._update_date_deadline(vals)
+                order_id.with_context(is_operation_generation=True)._update_date_deadline(vals)
+                # order_id._manage_task_assignation()
         return order_id
 
     def update_task_bat_from(self, value=''):
@@ -319,13 +325,17 @@ class SaleOrder(models.Model):
             'segment_ids': [(6, 0, [])],
         })
 
+    def get_date_tz(self, datetime_to_convert):
+        tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
+        tz_date = utc.localize(datetime_to_convert).astimezone(tz)
+        return tz_date
+
     def _update_date_deadline(self, vals={}):
         for rec in self:
             values = []
             is_operation_generation = self._context.get('is_operation_generation')
             if (is_operation_generation or vals.get('commitment_date')) and rec.commitment_date:
-                tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
-                tz_date = utc.localize(rec.commitment_date).astimezone(tz)
+                tz_date = rec.get_date_tz(rec.commitment_date)
                 values.extend([(rec._get_operation_task(['85', '90']), {'date_deadline': tz_date}),
                               (rec._get_operation_task(['65', '80']), {'date_deadline': tz_date - relativedelta(days=2)})])
 
@@ -343,9 +353,9 @@ class SaleOrder(models.Model):
                 values.append((rec._get_operation_task(['40'], True), {
                               'date_deadline': rec.return_production_potential_date}))
 
-            if is_operation_generation or vals.get('operation_provider_delivery_ids') or vals.get('is_info_validated', False) or vals.get('email_is_info_validated', False):
+            if is_operation_generation or vals.get('operation_provider_delivery_ids') or vals.get('commitment_date') or vals.get('is_info_validated', False) or vals.get('email_is_info_validated', False):
                 values.extend([(rec._get_operation_task(['45', '50'], True), {'delivery_date': rec.operation_provider_delivery_ids[0].delivery_date if rec.operation_code in [
-                              'ENR_EMAIL', 'ENR_SMS'] and rec.operation_provider_delivery_ids else rec.commitment_date})])
+                              'ENR_EMAIL', 'ENR_SMS'] and rec.operation_provider_delivery_ids else rec.get_date_tz(rec.commitment_date)})])
 
             if (is_operation_generation or vals.get('operation_provider_delivery_ids')) and rec.operation_provider_delivery_ids:
                 values.extend([(rec._get_operation_task(['60', '70'], True), {
