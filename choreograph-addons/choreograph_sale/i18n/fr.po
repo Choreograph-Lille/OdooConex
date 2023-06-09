@@ -669,11 +669,6 @@ msgid "Base"
 msgstr ""
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_client
-msgid "Bat Client"
-msgstr "BAT client"
-
-#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_from
 msgid "Bat From"
 msgstr "DE"
@@ -681,7 +676,7 @@ msgstr "DE"
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal
 msgid "Bat Internal"
-msgstr "BAT interne"
+msgstr "BAT interne/client"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -941,11 +936,6 @@ msgid "Email A/B Test"
 msgstr "A/B Test"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_client
-msgid "Email BAT Client"
-msgstr "BAT Client"
-
-#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_desired_date
 msgid "Email BAT Desired Date"
 msgstr "Date de BAT souhaité"
@@ -958,7 +948,7 @@ msgstr "DE"
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_internal
 msgid "Email BAT Internal"
-msgstr "BAT interne"
+msgstr "BAT interne/client"
 
 #. module: choreograph_sale
 #. odoo-python
@@ -1156,11 +1146,6 @@ msgstr ""
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_exception_icon
 msgid "Icon to indicate an exception activity."
 msgstr ""
-
-#. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__id_title
-msgid "Id Title"
-msgstr "ID Titre"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_needaction
@@ -1980,7 +1965,6 @@ msgid ""
 "                        law."
 msgstr ""
 "Les présentes Conditions Générales de Vente sont soumises à la loi française."
-"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
