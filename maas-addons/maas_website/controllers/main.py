@@ -467,9 +467,7 @@ class OperationWebsite(http.Controller):
 
         result = {
             operation.id: {'id': operation_id,
-                           'report_bi_src': "{0}{1}{2}".format('/maas_website/static/src/report/',
-                                                               operation.access_token,
-                                                               '.html')}}
+                           'report_bi_src': "{0}{1}{2}".format('/tmp/odoo/src/report/', operation.access_token, '.html')}}
         return json.dumps(list(result.values()))
 
     @http.route('/close/report/<int:operation_id>', auth='user', methods=['POST'], website=True, csrf=False)
