@@ -423,7 +423,6 @@ class SaleOrder(models.Model):
             ('ab_test_text', 'ab_test_text'),
             ('comment', 'email_comment'),
             ('bat_internal', 'email_bat_internal'),
-            ('bat_client', 'email_bat_client'),
             ('bat_desired_date', 'bat_desired_date'),
             ('witness_file_name', 'email_witness_file_name'),
             ('po_livedata_number', 'livedata_po_number'),
@@ -437,7 +436,6 @@ class SaleOrder(models.Model):
     def update_task_bat_file_witness(self):
         values_list = [
             ('bat_internal', 'email_bat_internal'),
-            ('bat_client', 'email_bat_client'),
             ('witness_file_name', 'email_witness_file_name'),
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
@@ -452,7 +450,6 @@ class SaleOrder(models.Model):
             ('personalization_text', 'sms_personalization_text'),
             ('comment', 'sms_comment'),
             ('bat_internal', 'bat_internal'),
-            ('bat_client', 'bat_client'),
             ('desired_finished_volume', 'desired_finished_volume'),
             ('sender', 'sender'),
         ]
