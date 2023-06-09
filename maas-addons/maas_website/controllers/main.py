@@ -355,11 +355,13 @@ class OperationWebsite(http.Controller):
     @staticmethod
     def _get_path():
         module_path = modules.get_module_path('maas_website')
-        src_path = '/static/src'
-        if not os.path.exists('/tmp/odoo'):
-            os.makedirs('/tmp/odoo')
-            os.system(f'cp -R {module_path}{src_path} /tmp/odoo')
-        return '/tmp/odoo', '/src', '/src/report/'
+        if '\\' in module_path:
+            src_path = '\\static\\src'
+            src_report_path = '\\static\\src\\report\\'
+        else:
+            src_path = '/static/src'
+            src_report_path = '/static/src/report/'
+        return module_path, src_path, src_report_path
 
     @http.route('/report/<int:operation_id>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
     def get_report_bi(self, operation_id):
@@ -467,7 +469,9 @@ class OperationWebsite(http.Controller):
 
         result = {
             operation.id: {'id': operation_id,
-                           'report_bi_src': "{0}{1}{2}".format('/tmp/odoo/src/report/', operation.access_token, '.html')}}
+                           'report_bi_src': "{0}{1}{2}".format('/maas_website/static/src/report/',
+                                                               operation.access_token,
+                                                               '.html')}}
         return json.dumps(list(result.values()))
 
     @http.route('/close/report/<int:operation_id>', auth='user', methods=['POST'], website=True, csrf=False)
