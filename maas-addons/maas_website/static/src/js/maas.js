@@ -181,7 +181,7 @@ $(document).ready(function () {
 		                }, []);
 					var iframe = document.getElementById('report_bi_src');
 					var modal_restricted_access = $('#report_bi_iframe');
-					$(iframe).attr('src', data[0]['report_bi_src']);
+					$(iframe).attr('srcdoc', data[0]['report_bi_src']);
 					$('.close-report')[0].value = parseInt(data[0]['id']);
                     modal_restricted_access.modal('show');
 				});

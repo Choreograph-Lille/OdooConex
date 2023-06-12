@@ -24,7 +24,6 @@ import json
 import os
 
 from odoo import http, modules
-
 from odoo.addons.http_routing.models.ir_http import url_for
 
 
@@ -367,26 +366,27 @@ class OperationWebsite(http.Controller):
     def get_report_bi(self, operation_id):
         operation_obj = http.request.env['sale.operation']
         operation = operation_obj.browse(operation_id)
-        report_bi_src = b"""
+        report_bi_src = """
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
     <meta charset="utf-8">
     <title>Power BI embedded - Conexance</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="es6-promise.js"></script>
-    <script src="powerbi.js"></script>
+    <script src="/maas_website/static/src/report/es6-promise.js"></script>
+    <script src="/maas_website/static/src/report/powerbi.js"></script>
 </head>
 <body>
 
     <div id=embedContainer style="height:600px; width:100%; max-width:10000px;">
     </div>
 
-    <!--Add script to update the page and send messages.-->
+ <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
         $(function () {
 
-            $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url).encode() + b""")
+            $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """)
             .done(function( json ) {
                 console.log(json.ErrorMessage);
                 console.log(json.PowerBiEmbedInfo.EmbedToken);
@@ -405,11 +405,11 @@ class OperationWebsite(http.Controller):
             const filter = {
             $schema: "http://powerbi.com/product/schema#basic",
             target: {
-                table: """ + '"{}"'.format(operation.pbi_table_filter).encode() + b""", //Table contenant la colonne sur laquelle on souhaite filtrer
-                column: """ + '"{}"'.format(operation.pbi_column_filter).encode() + b""" //Colonne filtre
+                table: """ + '"{}"'.format(operation.pbi_table_filter) + """, //Table contenant la colonne sur laquelle on souhaite filtrer
+                column: """ + '"{}"'.format(operation.pbi_column_filter) + """ //Colonne filtre
             },
             operator: "In",
-            values: [""" + '"{}"'.format(operation.pbi_value_filter).encode() + b"""], //Valeur du filtre
+            values: [""" + '"{}"'.format(operation.pbi_value_filter) + """], //Valeur du filtre
             filterType: models.FilterType.BasicFilter
             };
 
@@ -452,38 +452,15 @@ class OperationWebsite(http.Controller):
 </body>
 </html>
 """
+        result = {}
         if operation.pbi_function_app_url:
-            module_path, src_path, src_report_path = self._get_path()
-            os.chdir("{0}{1}".format(module_path, src_path))
-            if not os.path.exists('report'):
-                os.makedirs('report')
-
-            file_path = "{0}{1}".format(module_path + src_report_path + str(operation.access_token),
-                                        '.html')
-            if not os.path.exists(str(operation.access_token)):
-                current_file = open(file_path, 'w+b')
-            else:
-                current_file = open(file_path, 'r+b')
-            current_file.write(report_bi_src)
-            current_file.close()
-
-        result = {
-            operation.id: {'id': operation_id,
-                           'report_bi_src': "{0}{1}{2}".format('/maas_website/static/src/report/',
-                                                               operation.access_token,
-                                                               '.html')}}
+            result = {operation.id: {'id': operation_id, 'report_bi_src': report_bi_src}}
         return json.dumps(list(result.values()))
 
     @http.route('/close/report/<int:operation_id>', auth='user', methods=['POST'], website=True, csrf=False)
     def close_report(self, operation_id):
         operation_obj = http.request.env['sale.operation']
         operation = operation_obj.browse(int(operation_id))
-        if operation.pbi_function_app_url:
-            module_path, src_path, src_report_path = self._get_path()
-            os.chdir("{0}{1}".format(module_path, src_path))
-            file_path = "{0}{1}".format(module_path + src_report_path + str(operation.access_token), '.html')
-            if os.path.exists(file_path):
-                os.remove(file_path)
         result = {operation.id: {'id': operation.id}}
         return json.dumps(list(result.values()))
 
