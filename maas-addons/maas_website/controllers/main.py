@@ -462,12 +462,6 @@ class OperationWebsite(http.Controller):
     def close_report(self, operation_id):
         operation_obj = http.request.env['sale.operation']
         operation = operation_obj.browse(int(operation_id))
-        if operation.pbi_function_app_url:
-            module_path, src_path, src_report_path = self._get_path()
-            os.chdir("{0}{1}".format(module_path, src_path))
-            file_path = "{0}{1}".format(module_path + src_report_path + str(operation.access_token), '.html')
-            if os.path.exists(file_path):
-                os.remove(file_path)
         result = {operation.id: {'id': operation.id}}
         return json.dumps(list(result.values()))
 
