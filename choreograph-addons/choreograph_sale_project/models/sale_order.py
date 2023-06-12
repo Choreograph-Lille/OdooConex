@@ -61,8 +61,8 @@ class SaleOrder(models.Model):
     delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_tasks')
     presta_delivery_info_task_id = fields.Many2one(
         'project.task', 'Presta Delivery Info', compute='compute_delivery_info_tasks')
-    has_enrichment_email_op = fields.Boolean(compute='_compute_has_email_op', store=True)
-    has_prospection_email_op = fields.Boolean(compute='_compute_has_email_op', store=True)
+    has_enrichment_email_op = fields.Boolean(compute='_compute_has_email_op')
+    has_prospection_email_op = fields.Boolean(compute='_compute_has_email_op')
 
     def compute_delivery_info_tasks(self):
         self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
@@ -73,17 +73,10 @@ class SaleOrder(models.Model):
         for rec in self:
             rec.operation_type_id = rec.project_ids[0] if rec.project_ids else False
 
-    @api.depends('order_line')
     def _compute_has_email_op(self):
         for rec in self:
-            enrichment_email = self.env.ref(
-                'choreograph_sale_project.project_project_email_enrichment', raise_if_not_found=False)
-            prospection_email = self.env.ref(
-                'choreograph_sale_project.project_project_email_prospecting', raise_if_not_found=False)
-            rec.has_enrichment_email_op = any(
-                [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == enrichment_email])
-            rec.has_prospection_email_op = any(
-                [True for line in rec.order_line if line.product_template_id and line.product_template_id.project_template_id == prospection_email])
+            rec.has_enrichment_email_op = True if rec.operation_code == 'ENR_EMAIL' else False
+            rec.has_prospection_email_op = True if rec.operation_code == 'PREMAIL' else False
 
     @api.depends('operation_type_id.stage_id', 'project_id')
     def _compute_can_display_delivery(self):
@@ -374,6 +367,11 @@ class SaleOrder(models.Model):
         """
         for task, value in values:
             task.write(value)
+
+    def update_optout_link(self, value=''):
+        for rec in self:
+            rec.optout_link = value
+            rec.update_tasks({'optout_link': value}, EMAIL_TASK_NUMBER)
 
     def _check_info_validated(self, vals):
         for rec in self:
