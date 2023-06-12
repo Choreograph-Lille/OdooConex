@@ -21,9 +21,8 @@
 
 import base64
 import json
-import os
 
-from odoo import http, modules
+from odoo import http
 from odoo.addons.http_routing.models.ir_http import url_for
 
 
@@ -350,17 +349,6 @@ class OperationWebsite(http.Controller):
             res = {operation.id: {'id': operation.id, 'show_popup': True, 'except': True, 'text': e.args[0]}}
 
         return json.dumps(list(res.values()))
-
-    @staticmethod
-    def _get_path():
-        module_path = modules.get_module_path('maas_website')
-        if '\\' in module_path:
-            src_path = '\\static\\src'
-            src_report_path = '\\static\\src\\report\\'
-        else:
-            src_path = '/static/src'
-            src_report_path = '/static/src/report/'
-        return module_path, src_path, src_report_path
 
     @http.route('/report/<int:operation_id>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
     def get_report_bi(self, operation_id):
