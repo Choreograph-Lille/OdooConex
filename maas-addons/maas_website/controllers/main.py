@@ -24,7 +24,6 @@ import json
 import os
 
 from odoo import http, modules
-
 from odoo.addons.http_routing.models.ir_http import url_for
 
 
@@ -366,12 +365,12 @@ class OperationWebsite(http.Controller):
     @http.route('/report/<int:operation_id>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
     def get_report_bi(self, operation_id):
         operation_obj = http.request.env['sale.operation']
-        attachment_obj = http.request.env['ir.attachment'].sudo()
         operation = operation_obj.browse(operation_id)
-        report_bi_src = b"""
+        report_bi_src = """
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
     <meta charset="utf-8">
     <title>Power BI embedded - Conexance</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -379,14 +378,15 @@ class OperationWebsite(http.Controller):
     <script src="/maas_website/static/src/report/powerbi.js"></script>
 </head>
 <body>
+
     <div id=embedContainer style="height:600px; width:100%; max-width:10000px;">
     </div>
 
-    <!--Add script to update the page and send messages.-->
+ <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
         $(function () {
 
-            $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url).encode() + b""")
+            $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """)
             .done(function( json ) {
                 console.log(json.ErrorMessage);
                 console.log(json.PowerBiEmbedInfo.EmbedToken);
@@ -405,11 +405,11 @@ class OperationWebsite(http.Controller):
             const filter = {
             $schema: "http://powerbi.com/product/schema#basic",
             target: {
-                table: """ + '"{}"'.format(operation.pbi_table_filter).encode() + b""", //Table contenant la colonne sur laquelle on souhaite filtrer
-                column: """ + '"{}"'.format(operation.pbi_column_filter).encode() + b""" //Colonne filtre
+                table: """ + '"{}"'.format(operation.pbi_table_filter) + """, //Table contenant la colonne sur laquelle on souhaite filtrer
+                column: """ + '"{}"'.format(operation.pbi_column_filter) + """ //Colonne filtre
             },
             operator: "In",
-            values: [""" + '"{}"'.format(operation.pbi_value_filter).encode() + b"""], //Valeur du filtre
+            values: [""" + '"{}"'.format(operation.pbi_value_filter) + """], //Valeur du filtre
             filterType: models.FilterType.BasicFilter
             };
 
@@ -449,28 +449,13 @@ class OperationWebsite(http.Controller):
             });
         });
      </script>
+   
 </body>
 </html>
 """
         result = {}
         if operation.pbi_function_app_url:
-
-            attachment = attachment_obj.search([('name', '=', str(operation.access_token) + '.html')], limit=1)
-            if attachment:
-                attachment.write({
-                    'datas': base64.b64encode(report_bi_src),
-                })
-            else:
-                attachment = attachment_obj.create({
-                    'name': str(operation.access_token) + '.html',
-                    'type': 'binary',
-                    'datas': base64.b64encode(report_bi_src),
-                    'public': True,
-            })
-            attachment._write({
-                'mimetype': 'text/html',
-            })
-            result = {operation.id: {'id': operation_id, 'report_bi_src': attachment.local_url}}
+            result = {operation.id: {'id': operation_id, 'report_bi_src': report_bi_src}}
         return json.dumps(list(result.values()))
 
     @http.route('/close/report/<int:operation_id>', auth='user', methods=['POST'], website=True, csrf=False)
