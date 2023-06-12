@@ -366,6 +366,7 @@ class OperationWebsite(http.Controller):
     @http.route('/report/<int:operation_id>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
     def get_report_bi(self, operation_id):
         operation_obj = http.request.env['sale.operation']
+        attachment_obj = http.request.env['ir.attachment'].sudo()
         operation = operation_obj.browse(operation_id)
         report_bi_src = b"""
 <!DOCTYPE html>
@@ -374,11 +375,10 @@ class OperationWebsite(http.Controller):
     <meta charset="utf-8">
     <title>Power BI embedded - Conexance</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="es6-promise.js"></script>
-    <script src="powerbi.js"></script>
+    <script src="/maas_website/static/src/report/es6-promise.js"></script>
+    <script src="/maas_website/static/src/report/powerbi.js"></script>
 </head>
 <body>
-
     <div id=embedContainer style="height:600px; width:100%; max-width:10000px;">
     </div>
 
@@ -452,26 +452,25 @@ class OperationWebsite(http.Controller):
 </body>
 </html>
 """
+        result = {}
         if operation.pbi_function_app_url:
-            module_path, src_path, src_report_path = self._get_path()
-            os.chdir("{0}{1}".format(module_path, src_path))
-            if not os.path.exists('report'):
-                os.makedirs('report')
 
-            file_path = "{0}{1}".format(module_path + src_report_path + str(operation.access_token),
-                                        '.html')
-            if not os.path.exists(str(operation.access_token)):
-                current_file = open(file_path, 'w+b')
+            attachment = attachment_obj.search([('name', '=', str(operation.access_token) + '.html')], limit=1)
+            if attachment:
+                attachment.write({
+                    'datas': base64.b64encode(report_bi_src),
+                })
             else:
-                current_file = open(file_path, 'r+b')
-            current_file.write(report_bi_src)
-            current_file.close()
-
-        result = {
-            operation.id: {'id': operation_id,
-                           'report_bi_src': "{0}{1}{2}".format('/maas_website/static/src/report/',
-                                                               operation.access_token,
-                                                               '.html')}}
+                attachment = attachment_obj.create({
+                    'name': str(operation.access_token) + '.html',
+                    'type': 'binary',
+                    'datas': base64.b64encode(report_bi_src),
+                    'public': True,
+            })
+            attachment._write({
+                'mimetype': 'text/html',
+            })
+            result = {operation.id: {'id': operation_id, 'report_bi_src': attachment.local_url}}
         return json.dumps(list(result.values()))
 
     @http.route('/close/report/<int:operation_id>', auth='user', methods=['POST'], website=True, csrf=False)
