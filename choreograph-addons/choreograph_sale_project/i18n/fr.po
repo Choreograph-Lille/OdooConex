@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 21:21+0000\n"
-"PO-Revision-Date: 2023-05-30 09:41+0000\n"
+"PO-Revision-Date: 2023-06-08 16:11+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -144,11 +144,6 @@ msgid "BC Number"
 msgstr "N° BC"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_client
-msgid "Bat Client"
-msgstr ""
-
-#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_from
 msgid "Bat From"
 msgstr "DE"
@@ -156,7 +151,7 @@ msgstr "DE"
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__bat_internal
 msgid "Bat Internal"
-msgstr "Bat interne"
+msgstr "Bat interne/client"
 
 #. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_campaign
@@ -220,6 +215,8 @@ msgstr "Civilités"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__sms_comment
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__comment
 msgid "Comment"
 msgstr "Commentaire"
@@ -366,7 +363,7 @@ msgid "Email Campaign Type"
 msgstr "Type de campagne"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__email_comment
 msgid "Email Comment"
 msgstr "Commentaire"
 
@@ -832,6 +829,11 @@ msgstr "CAMPAGNE SMS"
 #, python-format
 msgid "SMS Campaign"
 msgstr "Campagne SMS"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__sms_comment
+msgid "Sms Comment"
+msgstr "Commentaire"
 
 #. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_study
