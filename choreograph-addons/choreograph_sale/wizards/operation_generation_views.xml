@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+
+        <record id="operation_generation_view_form" model="ir.ui.view">
+            <field name="name">operation.generation.view.form</field>
+            <field name="model">operation.generation</field>
+            <field name="arch" type="xml">
+                <form>
+                    <h3>
+                        What do you want to do ?
+                    </h3>
+                    <field name="operation_selection" widget="radio"/>
+                    <group>
+                        <field name="project_id" domain="[('sale_line_id', '=', False), ('is_template', '=', False)]"
+                               options="{'no_create':True}"
+                               attrs="{'invisible':[('operation_selection', '=', 'creation')], 'required':[('operation_selection', '=', 'association')]}"/>
+                        <field name="order_id" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="Validate" type="object" name="action_validate" class="btn-primary"/>
+                        <button string="Cancel" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="operation_generation_action" model="ir.actions.act_window">
+            <field name="name">Operation Generation</field>
+            <field name="res_model">operation.generation</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

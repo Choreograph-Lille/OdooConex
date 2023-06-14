@@ -1,0 +1,1100 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* maas_website
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e-20221017\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-01-27 12:26+0000\n"
+"PO-Revision-Date: 2023-01-27 12:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "&amp;times;"
+msgstr "&amp;times;"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"* You have to select a campaign.\n"
+"                      <br/>\n"
+"                      ** Information that has to be given for both populations.\n"
+"                      <br/>\n"
+"                      Upload your file."
+msgstr ""
+"* Sélectionnez au moins une campagne.\n"
+"                      <br/>\n"
+"                      ** Champs obligatoires. Pour «Profil recherché» et «Population à scorer».\n"
+"                      <br/>\n"
+"                      Téléchargez au moins un fichier .csv pour chaque étape."
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "*My modeling"
+msgstr "*Ma modélisation"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "10"
+msgstr "10"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "100"
+msgstr "100"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "25"
+msgstr "25"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "50"
+msgstr "50"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"<b class=\"barlow_medium\">The MyModel</b>\n"
+"                  <span class=\"barlow_light\">by</span>\n"
+"                  <b class=\"barlow_medium\">Conexance revolution</b>\n"
+"                  <br class=\"no\"/>\n"
+"                  <span class=\"barlow_light\">is on its way !\n"
+"                  </span>"
+msgstr ""
+"<b class=\"barlow_medium\">La révolution MyModel</b>\n"
+"                  <span class=\"barlow_light\">by</span>\n"
+"                  <b class=\"barlow_medium\">Conexance</b>\n"
+"                  <br class=\"no\"/>\n"
+"                  <span class=\"barlow_light\">est en marche !\n"
+"                  </span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"<b>A simplified platform easily accessible from your desk</b>,\n"
+"                            <br/>\n"
+"                            with dynamically updated data,\n"
+"                            <br/>\n"
+"                            thanks to the contribution\n"
+"                            <br/>\n"
+"                            of 600 companies\n"
+"                            <br/>\n"
+"                            to model yourself, in one click"
+msgstr ""
+"<b>Accédez en libre-service à notre plateforme depuis votre poste de travail</b>,\n"
+"                            <br/>\n"
+"                            et définissez en un clic vos meilleurs profils clients,\n"
+"                            <br/>\n"
+"                            Grâce à l'apport de 600 enseignes\n"
+"                            <br/>\n"
+"                            enrichissez vos modèles\n"
+"                            <br/>\n"
+"                            d'une data sans cesse renouvelée !"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"<b>Faster, more efficient and more economical,</b>\n"
+"                          <br/>\n"
+"                          MyModel will help you generate additional growth,\n"
+"                          <br/>\n"
+"                          simultaneously freeing up time\n"
+"                          <br/>\n"
+"                          for your key operational people."
+msgstr ""
+"<b>Libérez du temps pour vos opérationnels !</b>\n"
+"                          <br/>\n"
+"                          MyModel permet de générer de\n"
+"                          <br/>\n"
+"                          la croissance additionnelle, en travaillant\n"
+"                          <br/>\n"
+"                          rapidement et en autonomie"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"<b>More profitable and autonomous</b>, MyModel\n"
+"                            <br/>\n"
+"                            by Conexance revolutionizes<br/>your CRM campaigns by working\n"
+"                            <br/>several models at once and using powerful<br/>and\n"
+"                            self-learning technology.\n"
+"                            <br/>"
+msgstr ""
+"<b>Plus rentable et autonome</b>, MyModel\n"
+"                            <br/>\n"
+"                            by Conexance révolutionne<br/>vos campagnes CRM en faisant travailler\n"
+"                            <br/>plussierus modèles à la fois<br/>et en mettant\n"
+"                            en place une technologie puissante et auto-apprenante.\n"
+"                            <br/>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"<b>With MyModel by Conexance,</b>\n"
+"                          <br/>\n"
+"                          you no longer have to wait days to predict the best-performing\n"
+"                          scenario.\n"
+"                          <br/>\n"
+"                          Thanks to artificial intelligence and machine learning,\n"
+"                          <br/>\n"
+"                          we offer you the best on demand targeting\n"
+"                          <br/>\n"
+"                          in record time!\n"
+"                          <br/>\n"
+"                          <br/>"
+msgstr ""
+"<b>N’attendez plus pour modéliser vos ciblages !</b>\n"
+"                          <br/>\n"
+"                          Grâce à l’Intelligence Artificielle\n"
+"                          scenario.\n"
+"                          <br/>\n"
+"                          et au Machine Learning, MyModel\n"
+"                          <br/>\n"
+"                          vous offre la quintessence de vos ciblages\n"
+"                          <br/>\n"
+"                          en temps record… et à la demande.\n"
+"                          <br/>\n"
+"                          <br/>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "<span class=\"bg-btn-connexion\">REGISTRATION</span>"
+msgstr "<span class=\"bg-btn-connexion\">CONNEXION</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "<span class=\"big-title\">Broadcast channel</span>"
+msgstr "<span class=\"big-title\">Canal de diffusion</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "<span class=\"big-title\">Operation name *</span>"
+msgstr "<span class=\"big-title\">Nom de l'opération *</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "<span class=\"big-title\">Population to score :</span>"
+msgstr "<span class=\"big-title\">Population à scorer :</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "<span class=\"big-title\">Required Profile**</span>"
+msgstr "<span class=\"big-title\">Profil recherché**</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "<span class=\"head-title\">CAMPAIGNS</span>"
+msgstr "<span class=\"head-title\">CAMPAGNES</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"<span class=\"my\">My</span>\n"
+"                      <span class=\"model\">Model</span>"
+msgstr ""
+"<span class=\"my\">My</span>\n"
+"                      <span class=\"model\">Model</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"<span class=\"txt-tooltip\">Clients and/or internal prospects the score\n"
+"                          will be applied to, in order to find which of them match the\n"
+"                          searched profile\n"
+"                        </span>"
+msgstr ""
+"<span class=\"txt-tooltip\">Clients et/ou prospects internes sur lesquels\n"
+"                          le score sera appliqué, afin de trouver parmi eux lesquels ressemblent\n"
+"                          au profil recherché\n"
+"                        </span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"<span class=\"txt-tooltip\">Population which interests you and which you\n"
+"                          wish to identify among your other clients and/or internal prospects.\n"
+"                        </span>"
+msgstr ""
+"<span class=\"txt-tooltip\">Population qui vous intéresse et que vous cherchez\n"
+"                          à identifier parmi vos autres clients et/ou prospects internes.\n"
+"                        </span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"<span style=\"text-decoration: underline;\">\n"
+"                                              Complete your order:\n"
+"                                            </span>"
+msgstr ""
+"<span style=\"text-decoration: underline;\">\n"
+"                                              Complétez votre commande:\n"
+"                                            </span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"<span style=\"vertical-align: middle;padding-left:8px;\">Create</span>\n"
+"                    <br/>\n"
+"                    <span style=\"vertical-align: middle;padding-left:8px;\">your Action</span>"
+msgstr ""
+"<span style=\"vertical-align: middle;padding-left:8px;\">Créer</span>\n"
+"                    <br/>\n"
+"                    <span style=\"vertical-align: middle;padding-left:8px;\">une action</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"<span style=\"vertical-align: middle;padding-left:8px;\">Create</span>\n"
+"                    <br/>\n"
+"                    <span style=\"vertical-align: middle;padding-left:8px;\">your Campaign</span>"
+msgstr ""
+"<span style=\"vertical-align: middle;padding-left:8px;\">Créer</span>\n"
+"                    <br/>\n"
+"                    <span style=\"vertical-align: middle;padding-left:8px;\">une campagne</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"<span>\n"
+"                                                Enter the <span style=\"text-decoration: underline;\">additional</span> volume and file type.\n"
+"                                              </span>"
+msgstr ""
+"<span>\n"
+"                                                Saisissez le volume <span style=\"text-decoration: underline;\">supplémentaire</span> et le type de fichier.\n"
+"                                              </span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"<span>\n"
+"                                            Enter the desired volume and desired direction (the best scored or the least scored).\n"
+"                                          </span>"
+msgstr ""
+"<span>\n"
+"                                            Saisissez le volume souhaité et le sens souhaité (les mieux scorés ou les moins bien scorés).\n"
+"                                          </span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.indication
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_contact
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "<span>Disconnect</span>"
+msgstr "<span>Déconnexion</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "<span>Filter operations :</span>"
+msgstr "<span>Filtrer les opérations :</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "<span>THEMES</span>"
+msgstr "<span>OPÉRATIONS</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "<span>Your orders on the operation</span>"
+msgstr "<span>Vos commandes relatives à l' </span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "<strong>INFORMATION ON THE OPERATION</strong>"
+msgstr "<strong>INFORMATION SUR L'OPÉRATION</strong>"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__all-operations
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "All operations"
+msgstr "Toutes les opérations"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"At Conexance, our asset,\n"
+"                <br/>\n"
+"                is a\n"
+"                <br/>\n"
+"                <span class=\"bolded\">continuously growing database</span>"
+msgstr ""
+"Chez Conexance, notre atout,\n"
+"                <br/>\n"
+"                c'est une \n"
+"                <br/>\n"
+"                <span class=\"bolded\">base de données qui s'enrichit en permanence</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "BRING POWER"
+msgstr "MONTEZ EN PUISSANCE"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "BY CONEXANCE"
+msgstr "BY CONEXANCE"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Best scored"
+msgstr "Mieux scorés"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Browse"
+msgstr "Téléchargez"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Campaign theme"
+msgstr "Votre modélisation"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.collapse_menu
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Campaigns"
+msgstr "Campagnes"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"Choose or create your campaign and then your\n"
+"                    action"
+msgstr ""
+"Définissez la campagne puis\n"
+"                    l'action"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Choose the broadcasting channel :"
+msgstr "Choisissez le canal de diffusion :"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"Choreograph (anciennement Conexance) procède uniquement au dépôt de cookies techniques fonctionnels pour une navigation\n"
+"              optimale sur le site. Vous pouvez vous y opposer et les supprimer en utilisant les paramètres de votre navigateur.\n"
+"              <span class=\"acceptCookies\" onclick=\"$('#cookies').hide()\">OK</span>"
+msgstr ""
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"Choreograph (formerly known as Conexance) only deposits technical cookies necessary for the proper functioning of the\n"
+"              website. You can oppose and delete them by using your browser settings.\n"
+"              <span class=\"acceptCookies\" onclick=\"$('#cookies').hide()\">OK</span>"
+msgstr ""
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Close"
+msgstr "Fermer"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"Conexance MD\n"
+"                      <br/>\n"
+"                      28 Place de la Gare - 59000 Lille\n"
+"                      27 bis, rue du Vieux Faubourg - 59000 Lille\n"
+"                      <br/>\n"
+"                      <br/>\n"
+"                      Phone : 03 28 04 74 40\n"
+"                      <br/>\n"
+"                      Email : contact@conexancemd.com"
+msgstr ""
+"Conexance MD\n"
+"                      <br/>\n"
+"                      28 Place de la Gare - 59000 Lille\n"
+"                      27 bis, rue du Vieux Faubourg - 59000 Lille\n"
+"                      <br/>\n"
+"                      <br/>\n"
+"                      Phone : 03 28 04 74 40\n"
+"                      <br/>\n"
+"                      Email : contact@conexancemd.com"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.login
+msgid "Connection"
+msgstr "Connexion"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.collapse_menu
+msgid "Contact"
+msgstr "Contact"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Create a new campaign\n"
+"                      theme"
+msgstr ""
+"Créer une\n"
+"                      opération"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"Create your\n"
+"                      <br/>Action"
+msgstr ""
+"Créer une\n"
+"                      <br/>Action"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"Create your\n"
+"                      <br/>Campaign"
+msgstr ""
+"Créer une\n"
+"                      <br/>Campagne"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.login
+msgid "Database"
+msgstr "Base de données"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Date"
+msgstr "Date "
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Date\n"
+"                              <i class=\"fa fa-sort\"/>"
+msgstr ""
+"Date\n"
+"                              <i class=\"fa fa-sort\"/>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Delete the operation"
+msgstr "Supprimer l'opération"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Deleted operations"
+msgstr "Opérations supprimées"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.indication
+msgid "Demo Logo"
+msgstr "Logo de Démo"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"Describe the desired\n"
+"                                profiles file :"
+msgstr ""
+"Decrivez le fichier des\n"
+"                                profils :"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"Describe the profiles\n"
+"                                that will be scored :"
+msgstr ""
+"Décrivez le fichier de la population\n"
+"                                à scorer :"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"Designed in close collaboration with\n"
+"                    <br class=\"no\"/>\n"
+"                    Microsoft data experts,\n"
+"                    <br class=\"no\"/>\n"
+"                    you are just a few clicks away from\n"
+"                    <br class=\"no\"/>\n"
+"                    a bright future with MyModel"
+msgstr ""
+"Pensé en étroite collaboration avec\n"
+"                    <br class=\"no\"/>\n"
+"                    les experts data de Microsoft\n"
+"                    <br class=\"no\"/>\n"
+"                    MyModel a tout pour\n"
+"                    <br class=\"no\"/>\n"
+"                    vous prédire un bel avenir !"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Difference"
+msgstr "Différence"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Displayed Themes:"
+msgstr "Opérations Affichées:"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Download"
+msgstr "Télécharger"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.indication
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_contact
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Downloaded ID"
+msgstr "ID consommés"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Enter the operation name :"
+msgstr "Donnez un nom à l’opération :"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Filled in"
+msgstr "Renseigné"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Full Cancel and replace"
+msgstr "Annule et remplace complet"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "I send a validation request to go to the next level"
+msgstr "J’envoie une demande de validation de passage au palier supérieur."
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "ID balance"
+msgstr "Solde ID"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "IN COLLABORATION WITH"
+msgstr "EN PARTENARIAT AVEC"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "INCREASE YOUR PERFORMANCE"
+msgstr "BOOSTEZ VOS PERFORMANCES"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.login
+msgid "Identifier"
+msgstr "Identifier"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.login
+msgid "Identify yourself"
+msgstr "Identifiez-vous"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.collapse_menu
+msgid "Indication"
+msgstr "Indication"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Information"
+msgstr "Information"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Invalid File"
+msgstr "Fichier Invalide"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"LEARN\n"
+"                      MORE"
+msgstr ""
+"EN SAVOIR\n"
+"                      PLUS"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__last-12-months
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Last 12 months"
+msgstr "Les 12 derniers mois"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__last-3-months
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Last 3 months"
+msgstr "Les 3 derniers mois"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__last-30-days
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Last 30 days"
+msgstr "Les 30 derniers jours"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__last-6-months
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Last 6 months"
+msgstr "Les 6 derniers mois"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Least scored"
+msgstr "Moins bien scorés"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "Legal notices"
+msgstr ""
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.indication
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_contact
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Logo of YourCompany"
+msgstr "Logo de Votre Société"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "MASTER YOUR FUTURE"
+msgstr "CHANGEZ LA DONNE"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "MUCH MORE THAN<br/>DATA SUCCESS"
+msgstr "MUCH MORE THAN<br/>DATA SUCCESS"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "Mentions légales"
+msgstr ""
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Message"
+msgstr "Message"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Model your targets<br/>in just a few clicks !"
+msgstr "Créez votre opération<br/>en quelques clics !"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"My\n"
+"                  <span class=\"model\">Model</span>"
+msgstr ""
+"My\n"
+"                  <span class=\"model\">Model</span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Name your campaign theme"
+msgstr "Nommez votre opération"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "No selected file"
+msgstr "Aucun fichier séléctionné"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"N°\n"
+"                              <i class=\"fa fa-sort\"/>"
+msgstr ""
+"N°\n"
+"                              <i class=\"fa fa-sort\"/>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "OK"
+msgstr "OK"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Only delta"
+msgstr "Delta uniquement"
+
+#. module: maas_website
+#: code:addons/maas_website/controllers/web.py:0
+#, python-format
+msgid ""
+"Only employees can access this database. Please contact the administrator."
+msgstr ""
+"Seuls les employés peuvent accéder à cette base de données. Contactez "
+"l'administrateur."
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.collapse_menu
+msgid "Operation <br/>creation"
+msgstr "Création d'une<br/>opération"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.indication
+msgid "Partner additional data update :"
+msgstr "Date MAJ vars additionnelles :"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.indication
+msgid "Partner data update :"
+msgstr "Date MAJ titre :"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.login
+msgid "Password"
+msgstr "Mot de passe"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Please confirm the next level by ticking the box"
+msgstr "Merci de valider le palier suivant en cochant la case"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Population to score"
+msgstr "Description de votre cible"
+
+#. module: maas_website
+#: model:ir.model.fields,field_description:maas_website.field_res_users__portal_filter
+msgid "Portal Filter"
+msgstr "Portal Filter"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "Privacy Policy"
+msgstr "Politique de confidentialité"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Quantity"
+msgstr "Quantité"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Request received."
+msgstr "Nous vous remercions."
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Required profile"
+msgstr "Description de vos profils recherchés"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "SAVE TIME"
+msgstr "GAGNEZ DU TEMPS"
+
+#. module: maas_website
+#: model:ir.model,name:maas_website.model_sale_operation
+msgid "Sale Operation"
+msgstr "Opération"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Score will be applied to those profiles"
+msgstr "Paramétrez la population à scorer"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Search…"
+msgstr "Rechercher…"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.login
+msgid ""
+"Select\n"
+"                        <i class=\"fa fa-database\"/>"
+msgstr ""
+"Sélectionner\n"
+"                        <i class=\"fa fa-database\"/>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Select a theme in order\n"
+"                    <br/>\n"
+"                    to view its details"
+msgstr ""
+"Sélectionner une opération\n"
+"                    <br/>\n"
+"                    pour voir les détails"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Sorting"
+msgstr "Sens"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Start scoring"
+msgstr "Lancer la modélisation"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Status"
+msgstr "État"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Status\n"
+"                              <i class=\"fa fa-sort\"/>"
+msgstr ""
+"État\n"
+"                              <i class=\"fa fa-sort\"/>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_contact
+msgid "Support address :"
+msgstr "Adresse du support :"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "The needed volume is superior to your remaining Ids"
+msgstr "Le volume renseigné est supérieur à vos ids restants"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_contact
+msgid ""
+"The requests will be received by our My Model team from Monday to Friday "
+"from 9am to 6 pm (French time)."
+msgstr ""
+"Les demandes seront réceptionnées par notre équipe My Model du lundi au vendredi "
+"de 9h à 18h."
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Theme Name\n"
+"                              <i class=\"fa fa-sort\"/>"
+msgstr ""
+"Nom de l'opération\n"
+"                              <i class=\"fa fa-sort\"/>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "This type of file is not supported!"
+msgstr "Ce type de fichier n'est pas pris en charge!"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-1
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 1"
+msgstr "Trimestre 1"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-2
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 2"
+msgstr "Trimestre 2"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-3
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-4
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 3"
+msgstr "Trimestre 3"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 4"
+msgstr "Trimestre 4"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Type"
+msgstr "Type"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Type your text..."
+msgstr "Tapez un texte..."
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"Upload your file\n"
+"                              (*.csv) :"
+msgstr ""
+"Téléchargez votre fichier\n"
+"                              (*.csv) :"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid ""
+"Upload your file\n"
+"                            (*.csv) :"
+msgstr ""
+"Téléchargez votre fichier\n"
+"                            (*.csv) :"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Use as default filter"
+msgstr "Utiliser comme filtre par défaut"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Use your remaining ids"
+msgstr "Utiliser vos IDS restants"
+
+#. module: maas_website
+#: model:ir.model,name:maas_website.model_res_users
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Validate"
+msgstr "Valider"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "Vidéo HTML5 n'est pas supportée par ce navigateur"
+msgstr "Vidéo HTML5 n'est pas supportée par ce navigateur"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "Vie Privée"
+msgstr ""
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "View"
+msgstr "Visualiser"
+
+#. module: maas_website
+#: code:addons/maas_website/controllers/web.py:0
+#, python-format
+msgid "Wrong login/password"
+msgstr "Mauvais nom d'utilisateur ou mot de passe"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"You are about to delete the operation<span style=\"color: red;\" "
+"class=\"operation-name\"/>."
+msgstr ""
+"Vous êtes sur le point de supprimer l'opération <span style=\"color: red;\" "
+"class=\"operation-name\"/>."
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"You are about to discard the operation<span style=\"color: red;\" "
+"class=\"operation-name\"/>."
+msgstr ""
+"Vous êtes sur le point d'abandonner l'opération <span style=\"color: red;\" "
+"class=\"operation-name\"/>."
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid ""
+"You were expecting it ? MyModel by\n"
+"                    <br class=\"no\"/>\n"
+"                    Conexance enables you\n"
+"                    <br class=\"no\"/>\n"
+"                    to model, <span class=\"blk\"/>from your desktop, the top clients\n"
+"                    <br class=\"no\"/>\n"
+"                    for your marketing campaigns ! Thanks to\n"
+"                    <br class=\"no\"/>\n"
+"                    a simple<span class=\"blk\"/> platform\n"
+"                    <br class=\"no\"/>\n"
+"                    obtain the best of\n"
+"                    <b>Artificial</b>\n"
+"                    <br class=\"no\"/>\n"
+"                    <b>Intelligence</b>\n"
+"                    and\n"
+"                    <b>Machine Learning</b>\n"
+"                    <br/>\n"
+"                    to continuously improve your<br class=\"no\"/>targeting"
+msgstr ""
+"Vous l'attendiez ? MyModel by\n"
+"                    <br class=\"no\"/>\n"
+"                    Conexance vous permet enfin de\n"
+"                    <br class=\"no\"/>\n"
+"                    réaliser, <span class=\"blk\"/>vous-même la modélisation\n"
+"                    <br class=\"no\"/>\n"
+"                    de vos profils clients ! Grâce à\n"
+"                    <br class=\"no\"/>\n"
+"                    une plateforme<span class=\"blk\"/> simple et intuitive,\n"
+"                    <br class=\"no\"/>\n"
+"                    obtenez le meilleur de\n"
+"                    l'<b>Intelligence</b>\n"
+"                    <br class=\"no\"/>\n"
+"                    <b>Artificielle</b>\n"
+"                    et du\n"
+"                    <b>Machine Learning</b>\n"
+"                    <br/>\n"
+"                    pour enrichir vos ciblages <br class=\"no\"/>en continu..."
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"You won't be able to undo your choice. Are you sure you wish to continue?"
+msgstr ""
+"Vous ne pourrez plus revenir sur votre choix. Etes-vous sûr de vouloir continuer?"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "Your target"
+msgstr "Paramétrez le profil recherché"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.indication
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_contact
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "YourCompany"
+msgstr "Votre Société"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.login
+msgid "forgotten password ?"
+msgstr "mot de passe oublié ?"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "http://www.conexancemd.com/"
+msgstr "http://www.conexancemd.com/"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.homepage
+msgid "in 1 click"
+msgstr "en 1 clic"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+msgid "is being modeled"
+msgstr "a été prise en compte"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_contact
+msgid "support-mymodel@conexancemd.com"
+msgstr "support-mymodel@conexancemd.com"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.login
+msgid "to access your space :"
+msgstr "pour accéder à votre espace :"
+

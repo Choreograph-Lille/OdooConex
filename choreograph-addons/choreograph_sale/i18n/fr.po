@@ -1,0 +1,2533 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-01 08:19+0000\n"
+"PO-Revision-Date: 2023-06-01 08:19+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__retribution_percentage
+msgid "%retribution"
+msgstr "%rétribution"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__volume_percentage
+msgid "%vol"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__10
+msgid "10"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__15
+msgid "15"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__20
+msgid "20"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__25
+msgid "25"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:sale.data.conservation,name:choreograph_sale.sale_data_conservation_3_months
+msgid "3 months"
+msgstr "3 mois"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__30
+msgid "30"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__35
+msgid "35"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__40
+msgid "40"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__45
+msgid "45"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__50
+msgid "50"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__55
+msgid "55"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:sale.data.conservation,name:choreograph_sale.sale_data_conservation_6_months
+msgid "6 months"
+msgstr "6 mois"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__60
+msgid "60"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__65
+msgid "65"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__70
+msgid "70"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__75
+msgid "75"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__80
+msgid "80"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__85
+msgid "85"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:sale.data.conservation,name:choreograph_sale.sale_data_conservation_9_months
+msgid "9 months"
+msgstr "9 mois"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__90
+msgid "90"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__task_number__95
+msgid "95"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:mail.template,body_html:choreograph_sale.mail_template_sale_confirmation
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 12px;\">\n"
+"        Hello,\n"
+"        <br/><br/>\n"
+"        <t t-set=\"transaction\" t-value=\"object.get_portal_last_transaction()\"/>\n"
+"        Please find attached our Order Confirmation <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">S00049</span> for <span t-out=\"object.partner_id.name\">Mitchell Admin</span>.<br/>\n"
+"        Once you’ve reviewed it, could you please return it signed?\n"
+"        <br/><br/>\n"
+"        I look forward to hearing from you.<br/>\n"
+"        If you have any questions, please don’t hesitate to contact me.\n"
+"        <br/><br/>\n"
+"        Best regards,\n"
+"        <t t-if=\"not is_html_empty(object.user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <t t-out=\"object.user_id.name or ''\">--<br/>Mitchell Admin</t><br/>\n"
+"            <t t-out=\"object.user_id.partner_id.email or ''\">--<br/>mitchell@odoo.com</t>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>"
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"    <p style=\"margin: 0px; padding: 0px; font-size: 12px;\">\n"
+"        Bonjour,\n"
+"        <br/><br/>\n"
+"        <t t-set=\"transaction\" t-value=\"object.get_portal_last_transaction()\"/>\n"
+"        Vous trouverez en pièce jointe notre bon de commande <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">S00049</span>.<br/>\n"
+"        Pouvez-vous le retourner signé, svp ?\n"
+"        <br/><br/>\n"
+"        Vous en remerciant par avance, je reste à votre disposition pour toute question.\n"
+"        <br/><br/>\n"
+"        Cordialement,\n"
+"        <t t-if=\"not is_html_empty(object.user_id.signature)\">\n"
+"            <br/><br/>\n"
+"            <t t-out=\"object.user_id.name or ''\">--<br/>Mitchell Admin</t><br/>\n"
+"            <t t-out=\"object.user_id.partner_id.email or ''\">--<br/>mitchell@odoo.com</t>\n"
+"        </t>\n"
+"    </p>\n"
+"</div>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<i>\n"
+"                        8.2.1. Third party complaints\n"
+"                    </i>"
+msgstr ""
+"<i>\n"
+"                        8.2.1. Réclamations des tiers\n"
+"                    </i>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<i>\n"
+"                        8.2.2. Breach of Data\n"
+"                    </i>"
+msgstr ""
+"<i>\n"
+"                        8.2.2. Violation des données\n"
+"                    </i>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                            16. Applicable law – Attribution of jurisdiction\n"
+"                        </strong>"
+msgstr ""
+"<strong>\n"
+"                            16. Loi applicable – Attribution de compétence\n"
+"                        </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                            16. Official Language, Applicable Law and Jurisdiction\n"
+"                        </strong>"
+msgstr ""
+"<strong>\n"
+"                            16. Langue officielle, loi applicable et juridiction\n"
+"                        </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                            16.2. Applicable Law\n"
+"                        </strong>"
+msgstr ""
+"<strong>\n"
+"                            16.2. Loi applicable\n"
+"                        </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                            16.3. Applicable Jurisdiction\n"
+"                        </strong>"
+msgstr ""
+"<strong>\n"
+"                            16.3. Juridiction applicable\n"
+"                        </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                            <i>\n"
+"                                16.1. Official language\n"
+"                            </i>\n"
+"                        </strong>"
+msgstr ""
+"<strong>\n"
+"                            <i>\n"
+"                                16.1. Langue officielle\n"
+"                            </i>\n"
+"                        </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        1. Object of the Contract\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        1. Objet\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        10. Transfer of Data\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        10. Transfert des Données\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        11. Bloctel\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        11. Confrontation à Bloctel\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        12. Operating Retention Clause\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        12. Clause de réserve d’exploitation\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        13. Confidentiality\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        13. Confidentialité\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        14. Severability\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        14. Indépendance des clauses\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        15. WPP Code of Conduct\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        15. Code de conduite WPP\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        2. Scope\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        2. Champ d’Application\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        3. Order Process and Validity of the Offer\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        3. Processus de commande et validité de l’offre\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        4. Obligations of the Parties\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        4. Obligations des parties\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        5. Intellectual Property\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        5. Propriété intellectuelle\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        6. Data Protection Act (\"Informatique et Libertés\")\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        6. Informatique et Libertés\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        7. Financial Terms\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        7. Conditions financières\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        8. Warranty and Liability\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        8. Responsabilité\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        9. Force Majeure\n"
+"                    </strong>"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        <i>\n"
+"                            4.1 CLIENT's Obligations\n"
+"                        </i>\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        <i>\n"
+"                            4.1 Obligations du CLIENT\n"
+"                        </i>\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        <i>\n"
+"                            4.2 choreograph's Obligations\n"
+"                        </i>\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        <i>\n"
+"                            4.2 Obligations de choreograph\n"
+"                        </i>\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        <i>\n"
+"                            5.1 Database\n"
+"                        </i>\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        <i>\n"
+"                            5.1 Base de données\n"
+"                        </i>\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        <i>\n"
+"                            5.2 Software\n"
+"                        </i>\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        <i>\n"
+"                            5.2 Logiciels\n"
+"                        </i>\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        <i>\n"
+"                            7.1 Price\n"
+"                        </i>\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        <i>\n"
+"                            7.1 Prix\n"
+"                        </i>\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        <i>\n"
+"                            7.2 Payment Terms and Delays\n"
+"                        </i>\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        <i>\n"
+"                            7.2 Délais et retards de paiement\n"
+"                        </i>\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        <i>\n"
+"                            8.1 Towards the CLIENT\n"
+"                        </i>\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        <i>\n"
+"                            8.1 Responsabilité de choreograph vis-à-vis du CLIENT\n"
+"                        </i>\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        <i>\n"
+"                            8.2. Towards third parties\n"
+"                        </i>\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        <i>\n"
+"                            8.2. Responsabilité vis-à-vis des tiers\n"
+"                        </i>\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"<strong>\n"
+"                        GENERAL TERMS AND CONDITIONS OF BUSINESS\n"
+"                    </strong>"
+msgstr ""
+"<strong>\n"
+"                        CONDITIONS GENERALES DE VENTE\n"
+"                    </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "<strong> Terms and conditions </strong>"
+msgstr "<strong> Conditions de règlement </strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "<strong>Client instruction:</strong>"
+msgstr "<strong>Instruction du client:</strong>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "<strong>Database involved:</strong>"
+msgstr "<strong>Base concernée:</strong>"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__access_warning
+msgid "Access warning"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__active
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.actions.act_window,help:choreograph_sale.sale_data_conservation_action
+msgid "Add a new data conservation"
+msgstr "Ajouter une nouvelle durée de conservation de données"
+
+#. module: choreograph_sale
+#: model_terms:ir.actions.act_window,help:choreograph_sale.retribution_base_action
+msgid "Add a new retribution base"
+msgstr "Ajouter une nouvelle base concernée"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__adjustment
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__adjustment
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Adjustment"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"All Data are deemed to have been transferred as soon as\n"
+"                    they are received by the CLIENT in their electronic format by means of the\n"
+"                    secure devices offered by choreograph. <br/> The transfer of risks is effective\n"
+"                    from the date of the notification of availability. The notification shall take\n"
+"                    place by means of a delivery note in particular. <br/> The transfer of Data is\n"
+"                    carried out at the CLIENT's risk"
+msgstr ""
+"Les Données sont réputées transférées dès leur réception par le CLIENT sous\n"
+"leur forme électronique au moyen des dispositifs sécurisés proposés par\n"
+"choreograph.<br/>Le transfert des risques est parfait à dater de la notification, notamment par\n"
+"bon de livraison, de cette mise à disposition.<br/>Le transfert des Données s'exécute aux risques et périls du CLIENT"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_generation__operation_selection__association
+msgid "Associate order with an existing operation"
+msgstr "Associer la commande à une opération existante"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Audit"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "BAT"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_comment
+msgid "BAT Comment"
+msgstr "Commentaire"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "BAT/Witness File"
+msgstr "Fichier BAT/Témoin"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__base_id
+msgid "Base"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_client
+msgid "Bat Client"
+msgstr "BAT client"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_from
+msgid "Bat From"
+msgstr "DE"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_internal
+msgid "Bat Internal"
+msgstr "BAT interne"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"Both parties undertake to treat as strictly confidential\n"
+"                    all shared information and all documents and information produced under these\n"
+"                    Terms and Conditions of Business or any contracts between them. <br/> The\n"
+"                    CLIENT agrees not to use the Data transmitted by choreograph for purposes other\n"
+"                    than the performance of its obligations arising hereof. <br/> During and after\n"
+"                    the execution of the Services provided by choreograph, each party and its agents\n"
+"                    undertake not to disclose to any third party, without the other party's\n"
+"                    permission, the methods and tools which are the exclusive property of the other\n"
+"                    Party."
+msgstr ""
+"Les parties s’engagent à conserver strictement confidentiels les informations\n"
+"échangées et tous documents et éléments produits dans le cadre de\n"
+"l’exécution des contrats conclus entre eux.<br/>\n"
+"Le CLIENT s’engage à ne pas utiliser les Données transmises par choreograph\n"
+"à des fins extérieures à l’exécution de ses obligations nées des présentes.<br/>\n"
+"Pendant et à l’issue de l’exécution des prestations de choreograph, chaque\n"
+"partie et ses préposés s’engagent à ne pas divulguer aux tiers, sans\n"
+"l’autorisation de l’autre partie, les méthodes et outils qui sont la propriété\n"
+"exclusive de l’autre partie."
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__state_specific
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__state_specific
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.sales_order_view_search_inherit
+msgid "C9H State"
+msgstr "Statut C9H"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__campaign_id
+msgid "Campaign"
+msgstr "Campagne"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Campaign Couting"
+msgstr "Comptages campagne"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__id_campaign
+msgid "Campaign ID"
+msgstr "ID Campagne"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__name
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__campaign_name
+msgid "Campaign Name"
+msgstr "Nom campagne"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__project_task_campaign_ids
+msgid "Campaigns"
+msgstr "Campagnes"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__cancel
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__cancel
+msgid "Cancelled"
+msgstr "Annulé"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__catalogue_ids
+msgid "Catalogues"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.actions.act_window,name:choreograph_sale.choreograph_campaign_de_action
+msgid "Choreograph Campaign DE"
+msgstr "DE"
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_choreograph_campaign_de
+msgid "Choreograph Campign DE"
+msgstr "DE"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__campaign_type__classic
+msgid "Classic"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/operation_condition.py:0
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__client_file
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__client_file
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__client_file
+#, python-format
+msgid "Client File"
+msgstr "Fichier client"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__closed_won
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__closed_won
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Closed Won"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__code
+msgid "Code"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/operation_condition.py:0
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sms_comment
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__comment
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__comment
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__comment
+#, python-format
+msgid "Comment"
+msgstr "Commentaires"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__operation_type__condition
+msgid "Condition"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__condition_subtype
+msgid "Condition Subtype"
+msgstr "Sous-type Condition"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_condition_view_form
+msgid "Condition/Exclusion"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Contact details choreograph:"
+msgstr "Contact Choreograph:"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_generation__operation_selection__creation
+msgid "Create a new operation"
+msgstr "Créer une nouvelle opération"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__create_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__create_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__create_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__create_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__create_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__create_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__create_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Customer Fulfillment"
+msgstr "Fulfillment client"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__access_url
+msgid "Customer Portal URL"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.ui.menu,name:choreograph_sale.choreograph_campaign_de_menu
+msgid "DE"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.actions.act_window,name:choreograph_sale.sale_data_conservation_action
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__data_conservation_id
+#: model:ir.ui.menu,name:choreograph_sale.sale_data_conservation_menu
+msgid "Data Conservation"
+msgstr "Conservation des données"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Delivery Info"
+msgstr "Info livraison"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Delivery date"
+msgstr "Date de livraison"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Deposit Date"
+msgstr "Date de dépôt"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__description
+msgid "Description"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__desired_finished_volume
+msgid "Desired Finished Volume"
+msgstr "Volume abouti souhaité"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__display_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__display_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__display_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__display_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__display_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__display_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__display_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.actions.server,name:choreograph_sale.model_sale_order_action_duplicate_for_next_year
+msgid "Duplicate for next year"
+msgstr "Dupliquer pour l'année suivante"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__send_with__email
+msgid "Email"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__ab_test
+msgid "Email A/B Test"
+msgstr "A/B Test"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_client
+msgid "Email BAT Client"
+msgstr "BAT Client"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_desired_date
+msgid "Email BAT Desired Date"
+msgstr "Date de BAT souhaité"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_from
+msgid "Email BAT From"
+msgstr "DE"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_internal
+msgid "Email BAT Internal"
+msgstr "BAT interne"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+#, python-format
+msgid "Email Campaign"
+msgstr "Campagne Email"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_campaign_name
+msgid "Email Campaign Name"
+msgstr "Nom Campagne"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__campaign_type
+msgid "Email Campaign Type"
+msgstr "Type de campagne"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_comment
+msgid "Email Comment"
+msgstr "Commentaire"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_desired_finished_volume
+msgid "Email Desired Finished Volume"
+msgstr "Volume abouti souhaité"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__excluded_provider
+msgid "Email Excluded Provider"
+msgstr "Provider à exclure"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_witness_file_name
+msgid "Email File Name"
+msgstr "Nom du fichier"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_is_info_validated
+msgid "Email Infos Validated"
+msgstr "Infos validées"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Email Kit Detail"
+msgstr "Détail Kit email"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__object
+msgid "Email Object"
+msgstr "Objet"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__optout_comment
+msgid "Email Optout Comment"
+msgstr "Commentaire"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__optout_link
+msgid "Email Optout Link"
+msgstr "Liens Optout"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__livedata_po_number
+msgid "Email PO Livedata Number"
+msgstr "N° PO Livedata"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_personalization
+msgid "Email Personalization"
+msgstr "Personnalisation"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__is_preheader_available
+msgid "Email Preheader Available In HTML"
+msgstr "Préheader dispo dans le HTML"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_reception_date
+msgid "Email Reception Date"
+msgstr "Date de réception"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__routing_base
+msgid "Email Routing Base"
+msgstr "Base routage"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_routing_date
+msgid "Email Routing Date"
+msgstr "Date de routage"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_routing_end_date
+msgid "Email Routing End Date"
+msgstr "Fin de routage"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_sender
+msgid "Email Sender"
+msgstr "Expéditeur"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_volume_detail
+msgid "Email Volume Detail"
+msgstr "Détail volume"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_reception_location
+msgid "Email Where to find ?"
+msgstr "Où le trouver ?"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Encoding standard"
+msgstr "Sous-type média"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__operation_type__exclusion
+msgid "Exclusion"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__exclusion_subtype
+msgid "Exclusion Subtype"
+msgstr "Sous-type d'exclusion"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__send_with__ftp
+msgid "FTP"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__file_name
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__witness_file_name
+msgid "File Name"
+msgstr "Nom du fichier"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__forecast
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__forecast
+msgid "Forecast"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Generate The Operation"
+msgstr "Générer l'opération"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__id
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__id
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__id
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__id
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__id
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__id
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__id
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__id
+msgid "ID"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__campaign_type__instant_classic
+msgid "IM and Classic"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__id_title
+msgid "Id Title"
+msgstr "ID Titre"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_has_error
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"If during the Services, one of the parties finds that the Data have been or are\n"
+"                    being brought to the knowledge of\n"
+"                    unauthorized third parties, illegally transmitted, or breached in any way, it\n"
+"                    must inform the other party exhaustively\n"
+"                    and in writing, of the nature and scope of the incident, and of the measures it\n"
+"                    has taken to urgently stop the illegal\n"
+"                    transmission and/or unauthorized knowledge by third parties, and prevent such\n"
+"                    occurrence from happening in the future.\n"
+"                    This information must be provided within forty-eight (48) hours from the date on\n"
+"                    which the concerned party becomes aware\n"
+"                    of the violation itself or the facts suggesting a violation."
+msgstr ""
+"Si durant l’exécution des Services, l’une des Parties constate que les Données\n"
+"traitées sont illégalement transmises, illégalement portées à la connaissance\n"
+"de tiers ou que des faits permettent de supposer une violation des Données\n"
+"traitées, d’une quelconque manière, elle doit informer l’autre Partie de façon\n"
+"exhaustive, par un écrit, de la nature et de la portée de l’incident, et des\n"
+"mesures qu’elle a prises pour empêcher en urgence et à l’avenir toute\n"
+"transmission illégale et/ou toute prise de connaissance non autorisée par des\n"
+"tiers ou la violation de données à caractère personnel. Cette information doit\n"
+"être faite dans les quarante-huit (48) heures suivant la date à laquelle la\n"
+"Partie concernée a pris connaissance de la violation ou des faits laisser\n"
+"supposer une violation."
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__is_preheader_available_text
+msgid "If not, indicate where to find it"
+msgstr "Si non, indiquer où le trouver"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__ab_test_text
+msgid "If so, on what?"
+msgstr "Si oui, sur quoi?"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_personalization_text
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sms_personalization_text
+msgid "If yes specify"
+msgstr "Si oui préciser"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"In the event that a security breach is detected by the\n"
+"                    CLIENT concerning the Data transmitted by choreograph, the CLIENT undertakes to\n"
+"                    inform choreograph of the breach, in writing, as soon as possible. <br/> At the\n"
+"                    end of the Services, the CLIENT must permanently delete all Data transmitted by\n"
+"                    choreograph as well as all and any copies that could have been made."
+msgstr ""
+"Dans l’hypothèse où une faille de sécurité des Données serait détectée par le\n"
+"CLIENT concernant les Données transmises par choreograph, le CLIENT\n"
+"s’engage à en informer choreograph par écrit dans les plus brefs délais.<br/>\n"
+"A l’issue des Services, le CLIENT est tenu de supprimer définitivement toutes\n"
+"les Données qui lui ont été transmises ainsi que toutes les copies qui auraient\n"
+"pu en être faites."
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__note
+msgid "Information"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__is_info_validated
+msgid "Infos Validated"
+msgstr "Infos validées"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__campaign_type__instant
+msgid "Instant Mail"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"Invalidation of one or more clauses of these General\n"
+"                    Terms and Conditions of Business shall not lead to cancellation of these Terms\n"
+"                    and Conditions. <br/> The titles of the articles are given for information\n"
+"                    only. <br/>"
+msgstr ""
+"L'invalidité d'une ou plusieurs clauses des dispositions des présentes\n"
+"Conditions Générales de Vente de choreograph n'entraînera pas la nullité de\n"
+"celles-ci.<br/>\n"
+"Les titres des articles sont donnés à titre indicatif.<br/>"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__is_task_created
+msgid "Is Task Created?"
+msgstr "Tâche crée"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de____last_update
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition____last_update
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype____last_update
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation____last_update
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign____last_update
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base____last_update
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line____last_update
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__write_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__write_date
+msgid "Last Updated on"
+msgstr "Date de mis à jour"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__lead
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__lead
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Lead"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__done
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__done
+msgid "Locked"
+msgstr "Bloqué"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__send_with__mft
+msgid "MFT"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Media type"
+msgstr "Type média"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__medium_id
+msgid "Medium"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Message Kit (wording)"
+msgstr "Kit message (wording)"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_partner__sale_warn_msg
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_users__sale_warn_msg
+msgid "Message for Sales Order"
+msgstr "Message sur les commandes de vente"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Model"
+msgstr "Dessin d'enregistrement"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__multi_base_id
+msgid "Multi-Base"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__is_multi_base
+msgid "Multi-Bases"
+msgstr "Multi-base"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__name
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__name
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__name
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__new_condition_count
+msgid "New Condition Count"
+msgstr "Nombre nouveaux conditions"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "OPT-OUT Link"
+msgstr "Lien OPT-OUT"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__is_open
+msgid "Open"
+msgstr "Ouverte"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__project_id
+msgid "Operation"
+msgstr "Opération"
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_operation_condition
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__operation_condition_ids
+msgid "Operation Condition"
+msgstr "Condition/Exclusion"
+
+#. module: choreograph_sale
+#: model:ir.actions.act_window,name:choreograph_sale.operation_generation_action
+#: model:ir.model,name:choreograph_sale.model_operation_generation
+msgid "Operation Generation"
+msgstr "Génération de l'opération"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__operation_selection
+msgid "Operation Selection"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_type
+msgid "Operation Type"
+msgstr "Type"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__operation_date
+msgid "Operation date"
+msgstr "Date"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Optout"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__order_id
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_generation__order_id
+msgid "Order"
+msgstr "Commande"
+
+#. module: choreograph_sale
+#: model:sale.data.conservation,name:choreograph_sale.sale_data_conservation_other
+msgid "Other"
+msgstr "Autre"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__other_conservation_duration
+msgid "Other Duration"
+msgstr "Autre durée"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__po_number
+msgid "PO Number"
+msgstr "N° PO"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__partner_id
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"Payment by the CLIENT of the Services shall be due within\n"
+"                    thirty (30) days of the invoice date. <br/> The CLIENT shall be liable for late\n"
+"                    payment penalties in case of failure to comply with the payment terms, whether\n"
+"                    totally or partially. The penalties rate will be equal to three times the legal\n"
+"                    interest rate in effect at the time this clause is applied and may be charged\n"
+"                    ipso jure by choreograph from the first day following the due date. <br/> In\n"
+"                    the event of total or partial non-payment of more than fifteen days after the\n"
+"                    due date, choreograph shall have the right to suspend ipso jure the delivery of\n"
+"                    any or all of its Services without any formality whatsoever and without\n"
+"                    prejudice to any remaining sums due and to any other rights and remedies. <br/>\n"
+"                    If the Client failed to comply with the payment terms, a fixed recovery cost\n"
+"                    compensation of forty (40 €) euros applies ipso jure. <br/> In addition, the\n"
+"                    CLIENT undertakes to reimburse choreograph for all legal, or consulting fees,\n"
+"                    and/or recovery costs, incurred by choreograph to recover unpaid amounts due by\n"
+"                    the CLIENT."
+msgstr ""
+"Le règlement des Services de choreograph est dû par le CLIENT à trente (30)\n"
+"jours de la date d’émission de la facture.<br/>\n"
+"Dans le cas de non-respect du paiement total ou partiel par le CLIENT dans le\n"
+"délai fixé, ce dernier est redevable de pénalités de retard exigibles de plein\n"
+"droit par choreograph à partir du jour qui suit la date de règlement figurant\n"
+"sur la facture et égales à trois fois le taux d’intérêt légal en vigueur au\n"
+"moment de l’application de la présente clause.<br/>\n"
+"En cas de retard de paiement partiel ou total de plus de quinze jours,\n"
+"choreograph se réserve le droit de suspendre de plein droit la fourniture de\n"
+"ses Services sans formalité, sans préjudice des sommes restant dues et de\n"
+"tous dommages et intérêts.<br/>\n"
+"Le CLIENT en situation de retard de paiement est de plein droit débiteur, à\n"
+"l’égard de choreograph, d’une indemnité forfaitaire pour frais de\n"
+"recouvrement d’un montant de 40€.<br/>\n"
+"En outre, le CLIENT s’engage à rembourser à choreograph tous les frais\n"
+"d’avocats, de conseils et/ou de recouvrement qu’il aura engagés pour le\n"
+"recouvrement de toute somme dont il ne se serait pas acquitté."
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sms_personalization
+msgid "Personalization"
+msgstr "Personnalisation"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__access_url
+msgid "Portal Access URL"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__postal_variable
+msgid "Postal Variable"
+msgstr "Variable Postale"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__postal_address
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.retribution_base_view_form
+msgid "Postal address"
+msgstr "Adresse Postale"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Potential Return"
+msgstr "Retour de potentiel"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__prefulfill_study
+msgid "Pre-fulfill study"
+msgstr "Prefulfill Etude"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Prefulfillment"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Presta Delivery"
+msgstr "Livraison presta"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Presta Info"
+msgstr "Info presta"
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_product_template
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__product_template_id
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.retribution_base_view_form
+msgid "Product"
+msgstr "Article"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Project Name"
+msgstr "Nom du projet"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__operation_template_id
+msgid "Project Template"
+msgstr "Modèle de projet"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__prospecting
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__prospecting
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Prospecting"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__quota_base_ids
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.retribution_base_view_form
+msgid "Quotas"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__draft
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__draft
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Quotation"
+msgstr "Devis"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__sent
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__sent
+msgid "Quotation Sent"
+msgstr "Devis envoyé"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__receiver
+msgid "Receiver"
+msgstr "A destination de"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__reception_date
+msgid "Reception Date"
+msgstr "Date de réception"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid ""
+"Recipient of\n"
+"                                service"
+msgstr "Destinataire de la prestation"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Recipient of data"
+msgstr "Destinataire du fichier"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"Regarding the Data transmitted to the CLIENT, choreograph\n"
+"                    undertakes and declares that it complies with the Data Protection Regulations. <br/>\n"
+"                    choreograph also undertakes to take all its care in the quality of the Services\n"
+"                    provided and the information contained in the Data it makes available to the\n"
+"                    CLIENT."
+msgstr ""
+"S’agissant des Données transmises au CLIENT, choreograph s’engage et\n"
+"déclare respecter la Règlementation sur la protection des données.<br/>\n"
+"choreograph s’engage également à apporter tous ses soins à la qualité des\n"
+"Services fournis et des informations contenues dans les Données qu’elle met\n"
+"à la disposition du CLIENT."
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__related_base
+msgid "Related Base"
+msgstr "Base concernée"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_user_id
+msgid "Responsible User"
+msgstr "Responsable"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Retention"
+msgstr "Conservations des données"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_report__retribution
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Retribution"
+msgstr "Rétribution"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_product_product__concerned_base
+#: model:ir.model.fields,field_description:choreograph_sale.field_product_template__concerned_base
+msgid "Retribution Base"
+msgstr "Base concernée"
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_retribution_base_line
+msgid "Retribution Base Line"
+msgstr "Ligne de rétribution de base"
+
+#. module: choreograph_sale
+#: model:ir.ui.menu,name:choreograph_sale.retribution_base_menu
+msgid "Retribution Bases"
+msgstr "Bases concernées"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_line__retribution_cost
+msgid "Retribution Cost"
+msgstr "Coût des rétributions"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__retribution_rate
+msgid "Retribution Rate"
+msgstr "Taux de rétribution"
+
+#. module: choreograph_sale
+#: model:ir.actions.act_window,name:choreograph_sale.retribution_base_action
+#: model:ir.model,name:choreograph_sale.model_retribution_base
+msgid "Retribution base"
+msgstr "Bases concernées"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__routing_date
+msgid "Routing Date"
+msgstr "Date de routage"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__routing_end_date
+msgid "Routing End Date"
+msgstr "Fin de routage"
+
+#. module: choreograph_sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__send_with__sftp
+msgid "SFTP"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+#, python-format
+msgid "SMS Campaign"
+msgstr "Campagne SMS"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sox
+msgid "SOX"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/operation_condition.py:0
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__order_ids
+#: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__order_id
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__sale_order
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__sale_order
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__sale_order
+#, python-format
+msgid "Sale Order"
+msgstr "Bons de commande"
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_sale_report
+msgid "Sales Analysis Report"
+msgstr "Rapport d'analyse des ventes"
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_sale_order
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__sale
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__sale
+msgid "Sales Order"
+msgstr "Bon de commande"
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Ligne de commande"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_partner__sale_warn
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_users__sale_warn
+msgid "Sales Warnings"
+msgstr "Bon de commande"
+
+#. module: choreograph_sale
+#: model:mail.template,name:choreograph_sale.mail_template_sale_confirmation
+msgid "Sales: Order Confirmation"
+msgstr "Ventes : Confirmation de commande"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Salesperson:"
+msgstr "Vendeur:"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Scoring Presentation"
+msgstr "Présentation de score"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__access_token
+msgid "Security Token"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_res_partner__sale_warn
+#: model:ir.model.fields,help:choreograph_sale.field_res_users__sale_warn
+msgid ""
+"Selecting the \"Warning\" option will notify user with the message, "
+"Selecting \"Blocking Message\" will throw an exception with the message and "
+"block the flow. The Message has to be written in the next field."
+msgstr ""
+"Sélectionner l'option 'Avertissement' notifiera l'utilisateur avec le "
+"Message. Sélectionner 'Message Bloquant' lancera une exception avec le "
+"message et bloquera le flux. Le Message doit être encodé dans le champ "
+"suivant."
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__send_with
+msgid "Send With"
+msgstr "Envoi via"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sender
+msgid "Sender"
+msgstr "Expéditeur"
+
+#. module: choreograph_sale
+#: model:mail.template,description:choreograph_sale.mail_template_sale_confirmation
+msgid "Sent to customers on order confirmation"
+msgstr "Envoyé aux clients lors de la confirmation de commande"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__show_operation_generation_button
+msgid "Show Operation Generation Button"
+msgstr "Afficher bouton génération de l'opération"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__show_other_conservation_duration
+msgid "Show Other Conservation Duration"
+msgstr "Afficher autre durée de conservation"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__source_id
+msgid "Source"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "Study Delivery"
+msgstr "Livraison études"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__subtype
+msgid "Subtype"
+msgstr "Sous-type"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__task_id
+msgid "Task"
+msgstr "Tâche"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__task_number
+msgid "Task Number"
+msgstr "N° tâche"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Task generation"
+msgstr "Générer tâches"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"The CLIENT shall not assign nor transfer to a third party\n"
+"                    the Data provided by choreograph. The CLIENT undertakes not to store nor archive\n"
+"                    the Data on any medium whatsoever beyond the term of the Services or for any\n"
+"                    other use than those agreed between the parties. It is understood that any\n"
+"                    alleged breach of these provisions may constitute a criminal offence for which\n"
+"                    the CLIENT would then be fully liable. <br/> The CLIENT undertakes to ensure\n"
+"                    the security and confidentiality of the Data and, in particular, to prevent it\n"
+"                    from being distorted, damaged, or accessed by unauthorized third parties. <br/>\n"
+"                    As a rule, and unless otherwise specifically stipulated, Data are intended\n"
+"                    solely for internal use and for a single use. It can only be transmitted to a\n"
+"                    third party provided that they respect the confidentiality and are able to\n"
+"                    guarantee the integrity and security of the Data entrusted."
+msgstr ""
+"Le CLIENT s’engage à ne pas stocker ou archiver les Données transmises par\n"
+"choreograph sur quelque support que ce soit au-delà de la durée des Services\n"
+"ou de l’utilisation convenue entre les Parties étant précisé que tout\n"
+"manquement de ce point de vue peut constituer une infraction pénale dont le\n"
+"CLIENT serait alors entièrement responsable.<br/>\n"
+"Le CLIENT s’engage à assurer la sécurité et la confidentialité des Données et,\n"
+"notamment, empêcher qu’elles soient déformées, endommagées, ou que des\n"
+"tiers non autorisés y aient accès.<br/>\n"
+"En principe et sauf stipulation expresse, les Données doivent être utilisées\n"
+"uniquement en interne et pour un seul usage. Elles ne se communiquent qu’à\n"
+"des tiers tenus à la confidentialité et qui assurent la sécurité physique et\n"
+"logique des Données qui leur sont confiées."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"The Courts of Lille, France, will have sole and exclusive jurisdiction in\n"
+"                        the event of a dispute arising from the\n"
+"                        interpretation or enforcement of these General Terms and Conditions."
+msgstr ""
+"Les Tribunaux de Lille, France, seront seuls et exclusifs compétents pour\n"
+"cas de litige né de l'interprétation ou de l'exécution des présentes\n"
+"Conditions Générales"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid ""
+"The operation template must have the following task number: {0}, {1}, {2}"
+msgstr "Le modèle d'opération doit avoir des tâches de numéros: {0}, {1}, {2}"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"The prices of the Services provided by choreograph shall\n"
+"                    be those in effect on the day the CLIENT places its order. <br/> The prices\n"
+"                    specified under the confirmation order shall be excluding Value Added Taxes and\n"
+"                    any other taxes. <br/> Prices are net and without any discount."
+msgstr ""
+"Les prix des Services de choreograph sont ceux en vigueur au jour de la\n"
+"commande par le CLIENT.<br/>\n"
+"Les prix indiqués dans l'acceptation de la commande s'entendent hors taxe.<br/>\n"
+"Les prix sont calculés nets et sans escompte."
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "There is no operation to generate for the items selected in the quote"
+msgstr ""
+"Il n'y a pas d'opération à générer pour les articles sélectionnés dans le "
+"devis"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"These General Terms and Conditions of Business are subject to the French\n"
+"                        law."
+msgstr ""
+"Les présentes Conditions Générales de Vente sont soumises à la loi française."
+"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"These General Terms and Conditions of Business shall\n"
+"                    apply to any CLIENT wishing to use the Services offered by choreograph. The\n"
+"                    CLIENT agrees that their General Conditions of Purchase shall under no\n"
+"                    circumstances prevail over choreograph’s General Terms and Conditions of\n"
+"                    Business which the CLIENT is deemed to have accepted from the moment choreograph\n"
+"                    provides the Services. <br/> The present General Terms and Conditions of\n"
+"                    Business are systematically sent or delivered by choreograph to each CLIENT at\n"
+"                    the same time as the quote submitted in response to its request. <br/>\n"
+"                    Accordingly, requesting the right to use one or several database files which\n"
+"                    belong to choreograph implies full and unconditional acceptance by the CLIENT of\n"
+"                    these General Terms and Conditions of Business. <br/> Only special provisions\n"
+"                    specified on a particular contract or Specific Conditions agreed in writing\n"
+"                    between choreograph and the CLIENT may deviate from these Terms and Conditions\n"
+"                    of Business. <br/> choreograph's failure to object to provisions contained in\n"
+"                    communications from the CLIENT shall not be construed as a waiver of these Terms\n"
+"                    and Conditions. <br/> choreograph reserves the right to update or modify these\n"
+"                    General Terms and Conditions of Business at any time. These modifications shall\n"
+"                    only be applicable to Services performed after communication by any appropriate\n"
+"                    mean of the modified General Terms and Conditions of Business to the CLIENT."
+msgstr ""
+"Les présentes Conditions Générales de Vente sont applicables à toutes les\n"
+"sociétés CLIENT souhaitant bénéficier des Services de choreograph. La\n"
+"fourniture au CLIENT d’un Service de choreograph emporte acceptation des\n"
+"présentes Conditions Générales de Vente prévalant à toutes les conditions\n"
+"générales d’achat du CLIENT ainsi que celui-ci l’accepte.<br/>\n"
+"Les présentes Conditions Générales sont systématiquement adressées ou\n"
+"remises par choreograph à chaque CLIENT concomitamment au devis qui lui\n"
+"est soumis en réponse à sa demande.<br/>\n"
+"En conséquence, le fait de solliciter un droit d’usage de Données extraites des\n"
+"bases de données de choreograph implique l’adhésion entière et sans réserve\n"
+"du CLIENT aux présentes Conditions Générales de Vente.<br/>\n"
+"Seules les stipulations portées sur un contrat signé ou des Conditions\n"
+"Particulières conclues entre choreograph et le CLIENT pourront déroger aux\n"
+"présentes.<br/>\n"
+"Le fait pour choreograph de ne pas présenter d'objections aux stipulations\n"
+"contenues dans une communication quelconque reçue du CLIENT ne pourra\n"
+"pas être considéré comme une renonciation à se prévaloir des présentes.<br/>\n"
+"choreograph se réserve la possibilité de modifier à tout moment les présentes\n"
+"Conditions Générales de Vente. Ces modifications ne seront applicables\n"
+"qu’aux prestations acceptées postérieurement à la communication aux\n"
+"CLIENTS par tous moyens des Conditions Générales de Vente modifiées."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"These General Terms and Conditions were initially drawn up in the French\n"
+"                            language and can be provided by\n"
+"                            choreograph upon request. This English translation is provided for\n"
+"                            information purposes only. The French version\n"
+"                            is the sole legally binding instrument and prevails in case of\n"
+"                            ambiguities or discrepancies."
+msgstr ""
+"Les présentes Conditions Générales ont été initialement rédigées en langue française\n"
+"langue et peut être fourni par chorégraphe sur demande. Cet anglais\n"
+"la traduction est fournie à titre indicatif seulement. La version française est\n"
+"le seul instrument juridiquement contraignant et prévaut en cas d'ambiguïtés ou\n"
+"divergences."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"These general conditions of sale are subject to\n"
+"                        French law. <br/> Any dispute arising from these presents or from its\n"
+"                        execution is within the jurisdiction exclusive to the courts of Lille."
+msgstr ""
+"Les présentes conditions générales de vente sont soumises à la loi française.<br/>\n"
+"Tout litige né des présentes ou de son exécution est de la compétence\n"
+"exclusive des tribunaux de Lille."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"This document constitutes the General Terms and\n"
+"                    Conditions of Business of choreograph which shall apply to all direct marketing\n"
+"                    Services offered by the company choreograph (hereinafter referred to as\n"
+"                    \"choreograph\"), SAS a company with a capital of 397 313 euros, registered in\n"
+"                    Lille Trade and Companies Register under number 489 496 331 and headquartered at\n"
+"                    27 bis, rue du Vieux Faubourg, 59000 LILLE (FRANCE). <br/> choreograph uses\n"
+"                    information and data provided by data providers in order to build and improve\n"
+"                    shared databases of which choreograph is both the author, within the meaning of\n"
+"                    article L112-3 et seq. of the French Intellectual Property Code, and the\n"
+"                    producer within the meaning of article L341-1 et seq. of the same Code. <br/>\n"
+"                    choreograph uses the data of the shared databases (hereinafter referred to as\n"
+"                    “the Data”) to provide a number of marketing Services such as prospection,\n"
+"                    optimization, customer loyalty, e-commerce, ISA etc. (hereinafter referred to as\n"
+"                    “the Services”) for its clients companies. It is specified herein that the term\n"
+"                    \"CLIENT\" encompass the client company for which choreograph provides Services,\n"
+"                    as well as all and any intermediaries (agents, service providers, agencies,\n"
+"                    etc.), that the client company may appoint to act on its behalf for the\n"
+"                    performance of its obligations under the present General Terms and Conditions of\n"
+"                    Business. It is understood that (i) the client company is fully liable for its\n"
+"                    intermediaries and shall ensure that they comply with the obligations hereunder,\n"
+"                    (ii) the client company and its intermediaries are jointly liable, and (iii) the\n"
+"                    client company guarantees choreograph in this respect. As part of the Services,\n"
+"                    choreograph provides its CLIENTS with a mix of Data. <br/> It is specified that\n"
+"                    since the Services are being carried out on behalf of the CLIENT, the latter is\n"
+"                    responsible for the processing carried out as part of the Services. <br/> The\n"
+"                    Data is comprised of transactional data, demographic data, lifestyle data, as\n"
+"                    well as personal data within the meaning of the French Data Protection Act of\n"
+"                    January 6th 1978 as amended by the Act of August 6th 2004 and Regulation No.\n"
+"                    2016/679 known as the General Regulation on the Protection of Personal Data or\n"
+"                    \"GDPR\" (hereinafter jointly referred to as the \"Data Protection Regulation\")."
+msgstr ""
+"Les présentes constituent les Conditions générales de vente de choreograph\n"
+"et s’appliquent à toutes les prestations de marketing proposées par la société\n"
+"choreograph (ci-après dénommée « choreograph »), société au capital de 397\n"
+"313 euros, immatriculée au Registre du Commerce et des Sociétés de Lille\n"
+"sous le numéro 489 496 331, dont le siège social est situé : 27 bis, rue du\n"
+"Vieux Faubourg, 59000 LILLE.<br/>\n"
+"choreograph utilise les informations et données fournies par des sociétés\n"
+"fournisseurs de données afin de constituer et d’enrichir des bases de données\n"
+"mutualisées dont elle est l’Auteur au sens de l’article L 112-3 et suivants du\n"
+"Code de la Propriété Intellectuelle et le producteur au sens de l’article L 341-1\n"
+"et suivants dudit Code.<br/>\n"
+"choreograph utilise les données contenues dans lesdites bases de données\n"
+"mutualisées (ci-après les « Données ») dans le cadre de la fourniture de\n"
+"services de marketing notamment des services de prospection,\n"
+"d’optimisation, de fidélisation, e-commerce, ISA etc. (ci-après les « Services »)\n"
+"auprès de sociétés clientes. Dans le cadre des présentes, il est précisé que le\n"
+"terme « CLIENT », comprend la société cliente pour laquelle choreograph\n"
+"fournit des Services, ainsi que l’ensemble des intermédiaires, quels qu’ils\n"
+"soient (mandataires, prestataires, agence etc.), auxquels la société cliente fait\n"
+"appel pour agir en son nom pour l’exécution de ses obligations en vertu des\n"
+"présentes. Il est entendu que (i) la société cliente est entièrement\n"
+"responsable de ses intermédiaires et se porte fort qu'ils respectent les\n"
+"obligations à sa charge découlant des présentes, (ii) la société cliente et ses\n"
+"intermédiaires sont solidairement responsables et (iii) la société cliente\n"
+"garantit, choreograph, à ce titre.<br/>\n"
+"Dans le cadre des Services, choreograph partage avec ses CLIENTS, les\n"
+"Données. Il est précisé que les Services étant effectués pour le compte du\n"
+"CLIENT, ce dernier est responsable des traitements spécifiques effectués pour\n"
+"les besoins des Services.<br/>\n"
+"Les Données sont des données de transaction, démographique, de style de\n"
+"vie correspondant à une adresse, ainsi que des données à caractère\n"
+"personnel au sens de la loi Informatique et liberté du 6 janvier 1978 modifiée\n"
+"par la loi du 6 août 2004 et du règlement n°2016/679 dit règlement général\n"
+"sur la protection des données personnelles ou « RGPD » (ci-après dénommées\n"
+"conjointement « Règlementation sur la protection des données »)."
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__campaign_id
+msgid ""
+"This is a name that helps you keep track of your different campaign efforts,"
+" e.g. Fall_Drive, Christmas_Special"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__medium_id
+msgid "This is the method of delivery, e.g. Postcard, Email, or Banner Ad"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__source_id
+msgid ""
+"This is the source of the link, e.g. Search Engine, another domain, or name "
+"of email list"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__total_retribution
+msgid "Total Retribution"
+msgstr "Total rétribution"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Transmission method"
+msgstr "Canal d'envoi"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/operation_condition.py:0
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__update
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__update
+#, python-format
+msgid "Update"
+msgstr "Mise à jour"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/operation_condition.py:0
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__update_repoussoir
+#: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__subtype__update_repoussoir
+#, python-format
+msgid "Update Repoussoir"
+msgstr "Mise à jour repoussoir"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"Upon CLIENT's request, choreograph shall send the latter\n"
+"                    a quote or the rates chargeable for its Services. If the Services are\n"
+"                    chargeable, the quotation, or the rates list, lays down choreograph's conditions\n"
+"                    of intervention for the use of the Data requested by the CLIENT as well as their\n"
+"                    availability. <br/> The quote or the rates offered to the CLIENT will remain\n"
+"                    valid for a period of thirty (30) calendar days from the date it is sent to the\n"
+"                    CLIENT. <br/> The order shall be deemed final only upon a written confirmation\n"
+"                    by a representative of the CLIENT. <br/> The term of the Services is specified\n"
+"                    in the quotation. If not specified, the term of the Services may not exceed the\n"
+"                    date on which payment is due, in accordance with article 7.2. <br/> The Data\n"
+"                    requested by the CLIENT shall be delivered to the latter by digital medium in\n"
+"                    accordance with the provisions specified in the quote or the purchase order."
+msgstr ""
+"Les présentes Conditions Générales de Vente sont applicables à toutes les\n"
+"sociétés CLIENT souhaitant bénéficier des Services de choreograph. La\n"
+"fourniture au CLIENT d’un Service de choreograph emporte acceptation des\n"
+"présentes Conditions Générales de Vente prévalant à toutes les conditions\n"
+"générales d’achat du CLIENT ainsi que celui-ci l’accepte.<br/>\n"
+"Les présentes Conditions Générales sont systématiquement adressées ou\n"
+"remises par choreograph à chaque CLIENT concomitamment au devis qui lui\n"
+"est soumis en réponse à sa demande.<br/>\n"
+"En conséquence, le fait de solliciter un droit d’usage de Données extraites des\n"
+"bases de données de choreograph implique l’adhésion entière et sans réserve\n"
+"du CLIENT aux présentes Conditions Générales de Vente.<br/>\n"
+"Seules les stipulations portées sur un contrat signé ou des Conditions\n"
+"Particulières conclues entre choreograph et le CLIENT pourront déroger aux\n"
+"présentes.<br/>\n"
+"Le fait pour choreograph de ne pas présenter d'objections aux stipulations\n"
+"contenues dans une communication quelconque reçue du CLIENT ne pourra\n"
+"pas être considéré comme une renonciation à se prévaloir des présentes.\n"
+"choreograph se réserve la possibilité de modifier à tout moment les présentes\n"
+"Conditions Générales de Vente. Ces modifications ne seront applicables\n"
+"qu’aux prestations acceptées postérieurement à la communication aux\n"
+"CLIENTS par tous moyens des Conditions Générales de Vente modifiées."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
+msgid "Validate"
+msgstr "Valider"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__volume
+msgid "Volume"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__volume_detail
+msgid "Volume Detail"
+msgstr "Détail volume"
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/retribution_base.py:0
+#, python-format
+msgid "Volume percentage is {0}%, this should be at 100%"
+msgstr "Le pourcentage actuel est de {0}%, il doit être de 100%"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_retribution_base__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
+msgid "What do you want to do ?"
+msgstr "Que souhaitez vous faire ?"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"When the CLIENT asks for a delivery of French consumer’s\n"
+"                    telephone numbers requiring a Bloctel processing to be done, it is specified\n"
+"                    that choreograph is only an intermediary between the telephone numbers' service\n"
+"                    provider and the CLIENT. As such, telephone numbers are directly delivered by\n"
+"                    the provider to the CLIENT. Phone numbers do not transit to choreograph, which\n"
+"                    consequently cannot access them nor compare the telephone number database to the\n"
+"                    opposition list of the Bloctel Service. <br/> In the event that choreograph is\n"
+"                    aware of an exception to the obligation to compare the telephone database with\n"
+"                    the opposition list, recognized by the legislation and the administrative and/or\n"
+"                    judicial authorities, it informs the other parties. Any action concerning the\n"
+"                    Bloctel Service has to be done either by the provider or the CLIENT."
+msgstr ""
+"Dans l’hypothèse où les Services convenues entre les parties comprennent\n"
+"une livraison de numéros de téléphone de consommateurs par choreograph\n"
+"nécessitant un traitement Bloctel, il est précisé qu’en tant qu’intermédiaire\n"
+"entre un prestataire (propriétaire d’une base de données de téléphone) et le\n"
+"CLIENT, choreograph ne peut ni accéder, ni héberger la base de données des\n"
+"consommateurs objet de la prospection téléphonique. Les numéros de\n"
+"téléphone étant directement livrés par le prestataire au CLIENT, sans transiter\n"
+"par choreograph, choreograph ne peut effectuer de confrontation à la liste\n"
+"d’opposition au démarchage téléphonique, à charge pour les autres parties\n"
+"concernées de l’accomplir.<br/>\n"
+"Dans l’hypothèse où choreograph a connaissance d’une exception à\n"
+"l’obligation de confrontation du fichier à la liste d’opposition reconnue par les\n"
+"textes et les autorités administratives et judiciaire, il en informe les autres\n"
+"parties."
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__reception_location
+msgid "Where to find ?"
+msgstr "Où le trouver ?"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__witness_comment
+msgid "Witness Comment"
+msgstr "Commentaire"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
+msgid "Witnesses"
+msgstr "Témoins"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"choreograph and the CLIENT execute their respective\n"
+"                    obligations by complying with the principle of loyalty. <br/> If, during the\n"
+"                    Services, a complaint arises from an individual or a third party concerned by\n"
+"                    the Data, the party to whom the complaint is addressed must immediately inform\n"
+"                    the other party by email confirmed by registered letter with acknowledgement of\n"
+"                    receipt within seven (7) calendar days following the date on which the concerned\n"
+"                    party became aware of the complaint, with regard to the Data Protection\n"
+"                    Regulation. As such, choreograph has developed an internal management procedure\n"
+"                    to process requests for rights issued directly by individuals or through the\n"
+"                    Data Controller."
+msgstr ""
+"choreograph et le CLIENT exécutent leurs obligations respectives, en\n"
+"respectant le principe de loyauté.<br/>\n"
+"Si durant l’exécution des Services, il survient une réclamation d’une personne\n"
+"ou d’un tiers concerné par les Données transférées, la partie à qui la\n"
+"réclamation est adressée devra immédiatement en informer l’autre partie par\n"
+"email confirmé par lettre recommandée avec demande d’avis de réception au\n"
+"plus tard dans les sept (7) jours calendaires suivant la date à laquelle la partie\n"
+"concernée a eu connaissance de la réclamation, au regard de la\n"
+"Réglementation sur la protection des données. A ce titre, choreograph a\n"
+"développé une procédure de gestion interne des demandes de droit exercées\n"
+"directement par les personnes ou par le biais du Responsable du traitement."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"choreograph cannot be held responsible in the following\n"
+"                    cases: <br/> 1) In case the CLIENT does not comply with the provisions of the\n"
+"                    Data Protection Regulation; <br/> 2) When choreograph has formally drawn the\n"
+"                    CLIENT's attention to the existence of potential legal and/or technical risks,\n"
+"                    which the CLIENT has accepted by any appropriate means (email, etc.) in full\n"
+"                    knowledge of the facts; <br/> 3) When the CLIENT has not complied with its\n"
+"                    obligations towards third parties or more generally its legal obligations; <br/>\n"
+"                    4) When the dispute originates outside the French territory. <br/> IN ANY CASE,\n"
+"                    choreograph'S LIABILITY IS LIMITED TO THE PROVEN, DIRECT AND CERTAIN DAMAGE\n"
+"                    SUFFURED BY THE CLIENT WITHIN THE MEANING OF ARTICLE 1150 OF THE FRENCH CIVIL\n"
+"                    CODE AND WITHIN THE LIMIT OF THE PRICE OF THE SERVICES AS DEFINED IN THE\n"
+"                    QUOTATION REFERRED TO UNDER ARTICLE 3"
+msgstr ""
+"La responsabilité de choreograph ne pourra pas être mise en œuvre dans les\n"
+"hypothèses suivantes :<br/>\n"
+"1) En cas de non-respect par le CLIENT des dispositions de protection des\n"
+"Données résultant de la Règlementation en matière de protection des\n"
+"données;<br/>\n"
+"2) Lorsque choreograph aura formellement attiré l’attention du CLIENT sur\n"
+"l’existence de risques juridiques et/ou techniques potentiels, que ce dernier\n"
+"aura acceptés par tout moyen approprié (mail, compte-rendu de réunion\n"
+"etc.) en toute connaissance de cause;<br/>\n"
+"3) Lorsque le CLIENT n’aura pas respecté ses obligations à l'égard des tiers\n"
+"ou plus généralement ses obligations légales;<br/>\n"
+"4) Lorsque la contestation trouve son origine hors du territoire français.<br/>\n"
+"DANS TOUS LES CAS, LA RESPONSABILITE DE choreograph EST LIMITEE A LA\n"
+"REPARATION DU PREJUDICE PROUVE, DIRECT ET CERTAIN AU SENS DE\n"
+"L'ARTICLE 1150 DU CODE CIVIL ET DANS LA LIMITE DU PRIX DES SERVICES DE\n"
+"choreograph TEL QUE DEFINI DANS LE DEVIS VISE A L'ARTICLE 3."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"choreograph cannot be held responsible, or considered as\n"
+"                    having failed hereto, for any delay or non-performance, when the cause of the\n"
+"                    delay or non-performance is due to a case of “Force Majeure” as defined by\n"
+"                    article 1218 of the French Civil Code and subsequent French jurisprudence,\n"
+"                    including the interruption, suspension, reduction and/or power issues or any\n"
+"                    interruptions of electronic communications networks. <br/> The party invoking\n"
+"                    Force Majeure undertakes to notify the other party of the nature and extent of\n"
+"                    the event by email confirmed by registered letter with acknowledgement of\n"
+"                    receipt, within forty (48) hours of its occurrence and to confirm the suspension\n"
+"                    of the Services as a result. The Services will resume automatically and without\n"
+"                    further formalities upon the disappearance of the cause of the suspension. <br/>\n"
+"                    After thirty (30) days following the occurrence of the event and in the absence\n"
+"                    of resumption, each of the Parties will have the option to terminate the\n"
+"                    Agreement, without any compensation being due on both side in this respect"
+msgstr ""
+"choreograph ne pourra être tenue pour responsable, ou considérée comme\n"
+"ayant failli aux présentes, pour tout retard ou inexécution, lorsque la cause du\n"
+"retard ou de l'inexécution est liée à un cas de force majeure tel que défini par\n"
+"l’article 1218 du Code Civil et la jurisprudence française y compris\n"
+"l'interruption, la suspension, la réduction ou les problèmes de l'électricité ou\n"
+"toutes interruptions de réseaux de communications électroniques.<br/>\n"
+"La Partie qui invoquera la force majeure s'engage à notifier par email\n"
+"confirmé par lettre recommandée avec accusé de réception, à l'autre Partie\n"
+"de la nature et de l'étendue de l'évènement dans les quarante (48) heures de\n"
+"sa survenance et confirmer la suspension des Services de ce fait. Les Services\n"
+"reprendront de plein droit et sans autres formalités lors de la disparition de la\n"
+"cause de la suspension.<br/>\n"
+"Passé le délai de trente (30) jours suivant la survenance du cas, à défaut de\n"
+"reprise, chacune des parties aura la possibilité de résilier le Contrat, sans\n"
+"qu’une quelconque indemnité ne soit due de part et d’autre à ce titre."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"choreograph certifies that it holds the rights of use or\n"
+"                    property rights in the software used to perform its Services. <br/> These\n"
+"                    General Terms and Conditions of Business shall not confer any rights to the\n"
+"                    CLIENT on the aforementioned software."
+msgstr ""
+"choreograph déclare être titulaire des droits d’utilisation ou des droits de\n"
+"propriété des logiciels utilisés dans le cadre de ses Services.<br/>\n"
+"Les présentes Conditions Générales de Vente ne confèrent aucun droit sur ces\n"
+"logiciels au CLIENT."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"choreograph grants the CLIENT a non-exclusive,\n"
+"                    non-transferable, and personal, right of use on the Data transmitted by\n"
+"                    choreograph, for the term of the Services. <br/> The shared databases developed\n"
+"                    and enriched by choreograph are protected by copyright in accordance with\n"
+"                    articles 112-3, and L341-1 to L343-7 of the French Intellectual Property Code,\n"
+"                    regarding the legal protection of databases. choreograph is in this respect the\n"
+"                    producer of the shared databases."
+msgstr ""
+"choreograph concède au CLIENT un droit d’utilisation non exclusif, non\n"
+"cessible et personnel, sur les Données transmises par choreograph, pour la\n"
+"durée des Services.<br/>\n"
+"Les bases de données constituées et enrichies par choreograph sont\n"
+"protégées par le droit d’auteur conformément aux articles 112-3 ainsi que\n"
+"L341-1 à L343-7 du Code de la propriété intellectuelle, relatifs à la protection\n"
+"juridique des bases de données. choreograph ayant à cet égard la qualité de\n"
+"producteur de la base de données."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"choreograph is a part of the WPP Group and as such wishes to see its CLIENTS\n"
+"                    respect the rules of the Code of Business\n"
+"                    Conduct and Social Policy of WPP during the performance of the Services. The\n"
+"                    full text of these codes and policies is\n"
+"                    available on the website www.wpp.com."
+msgstr ""
+"choreograph est une société du groupe WPP et à ce titre souhaite voir ses\n"
+"CLIENTS respecter les règles du Code de Conduite des Affaires et de la\n"
+"Politique Sociale de WPP à l’occasion de la vente des Services. Le texte\n"
+"intégral de ces codes et politiques est disponible sur le site web\n"
+"www.wpp.com."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"choreograph is under an obligation to use its best endeavors towards the CLIENT\n"
+"                    and does not provide any guarantee,\n"
+"                    expressed or implied, including any guarantee of quality and suitability for a\n"
+"                    particular use of the Data transmitted to\n"
+"                    the CLIENT by choreograph."
+msgstr ""
+"choreograph n’est tenue à l’égard du CLIENT qu’à une obligation de moyens\n"
+"et ne fournit aucune garantie, expresse ou implicite, y compris, toute garantie\n"
+"de qualité et d’adéquation à un usage particulier des Données transmises au\n"
+"CLIENT par choreograph."
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"choreograph shall remain free to object to the processing\n"
+"                    of the Data which has been transferred until the full effective payment of the\n"
+"                    principal total amount due, as well as the incidentals. <br/> Default of\n"
+"                    payment on any due date whatsoever may entail a claim for the return of the\n"
+"                    Data. <br/> This operating retention clause shall not prevent the transfer of\n"
+"                    risk as specified in Article 10."
+msgstr ""
+"choreograph conserve la liberté de s’opposer à l’exploitation des Données\n"
+"transférées jusqu'au paiement effectif de l'intégralité du prix en principal et\n"
+"accessoires.<br/>\n"
+"Le défaut de paiement de l'une quelconque des échéances pourra entraîner la\n"
+"revendication de ces Données.<br/>\n"
+"La présente clause de réserve d’exploitation ne fait pas obstacle au transfert\n"
+"des risques tels que précisés à l’article 10."
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_operation_condition_subtype
+msgid "operation.condition.subtype"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "potential_return"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "presentation"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_project_task_campaign
+msgid "project.task.campaign"
+msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_sale_data_conservation
+msgid "sale.data.conservation"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "study_delivery"
+msgstr ""
+
+#. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/sale_order.py:0
+#, python-format
+msgid "the record %s has no delivery date."
+msgstr "L'enregistrement %s n'a pas de date de livraison"
+
+#. module: choreograph_sale
+#: model:mail.template,subject:choreograph_sale.mail_template_sale_confirmation
+msgid ""
+"{{ (object.get_portal_last_transaction().state == 'pending') and "
+"object.company_id.name }} {{ (object.get_portal_last_transaction().state == "
+"'pending') and 'Pending Order' or 'Order confirmation' }} (Ref {{ "
+"object.name or 'n/a' }})"
+msgstr ""
+"{{ (object.get_portal_last_transaction().state == 'pending') and "
+"object.company_id.name }} {{ (object.get_portal_last_transaction().state == "
+"'pending') and 'Commande en attente' or 'Bon de commande' }} (Ref {{ "
+"object.name or 'n/a' }})"
+
+#. module: choreograph_sale
+#: model:mail.template,report_name:choreograph_sale.mail_template_sale_confirmation
+msgid "{{ (object.name or '').replace('/','_') }}"
+msgstr ""

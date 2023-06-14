@@ -1,0 +1,211 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* maas_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-04-09 01:27+0000\n"
+"PO-Revision-Date: 2023-04-09 01:27+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: maas_base
+#: model:ir.model,name:maas_base.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr "Combinaison d'activités"
+
+#. module: maas_base
+#: model_terms:ir.ui.view,arch_db:maas_base.view_users_form_inherit
+msgid "Canal"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model,name:maas_base.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users__customer_ids
+msgid "Customers"
+msgstr "Clients"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users__default_email
+msgid "Default Email"
+msgstr "E-mail par défaut"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users__default_print
+msgid "Default Print"
+msgstr "Imprimer par défaut"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users__default_sms
+msgid "Default Sms"
+msgstr "SMS par défaut"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users__bool_email
+msgid "Email?"
+msgstr "E-mai?"
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users__groups_id
+msgid "Groups"
+msgstr "Groupes"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_user_management
+msgid "Gérer les utilisateurs"
+msgstr ""
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_subscription_management
+msgid "Gérer un abonnement"
+msgstr ""
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_customer_management
+msgid "Gérer un client"
+msgstr ""
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_package_management
+msgid "Gérer un forfait (article)"
+msgstr ""
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_campaign_management
+msgid "Gérer une campagne/action"
+msgstr ""
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_start_modeling
+msgid "Lancer la modélisation"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model,name:maas_base.model_mail_message
+msgid "Message"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_mail_mail__message_body
+#: model:ir.model.fields,field_description:maas_base.field_mail_message__message_body
+msgid "Message Body"
+msgstr "Corps du message"
+
+#. module: maas_base
+#: model_terms:ir.ui.view,arch_db:maas_base.view_users_form_inherit
+msgid "Multicanal"
+msgstr ""
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.admin_user_role_res_groups
+msgid "My Model / Profile Admin"
+msgstr "My Model / Profil Admin"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.commercial_user_role_res_groups
+msgid "My Model / Profile Commercial"
+msgstr "My Model / Profil Commercial"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.dsi_user_role_res_groups
+msgid "My Model / Profile DSI"
+msgstr "My Model / Profil DSI"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.studies_user_role_res_groups
+msgid "My Model / Profile Etude"
+msgstr "My Model / Profil Etude"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.standard_user_role_res_groups
+msgid "My Model / Profile Standard"
+msgstr "My Model / Profil Standard"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.validator_user_role_res_groups
+msgid "My Model / Profile Valideur"
+msgstr "My Model / Profil Valideur"
+
+#. module: maas_base
+#: model:ir.module.category,name:maas_base.module_category_my_model_access
+msgid "My Model Access"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_hr_employee__activity_date_deadline
+#: model:ir.model.fields,field_description:maas_base.field_mail_activity_mixin__activity_date_deadline
+#: model:ir.model.fields,field_description:maas_base.field_res_partner__activity_date_deadline
+#: model:ir.model.fields,field_description:maas_base.field_res_users__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'activité à venir"
+
+#. module: maas_base
+#: model_terms:ir.ui.view,arch_db:maas_base.view_users_form_inherit
+msgid "Par Défaut"
+msgstr ""
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_operation_order
+msgid "Passer commande"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users__bool_print
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_operation_perform
+msgid "Réaliser une opération"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_res_users__bool_sms
+msgid "SMS"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model.fields,field_description:maas_base.field_mail_mail__stage
+#: model:ir.model.fields,field_description:maas_base.field_mail_message__stage
+msgid "Stage"
+msgstr "Étape"
+
+#. module: maas_base
+#: model:ir.model.fields.selection,name:maas_base.selection__mail_message__stage__stage_01
+msgid "Stage 01"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model.fields.selection,name:maas_base.selection__mail_message__stage__stage_02
+msgid "Stage 02"
+msgstr ""
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_download_operation_ordered
+msgid "Télécharger le fichier commandé"
+msgstr ""
+
+#. module: maas_base
+#: model:ir.model,name:maas_base.model_res_users
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: maas_base
+#: model:res.groups,name:maas_base.group_validate_next_package
+msgid "Valider le choix de passer au palier supérieur"
+msgstr ""
+
+#. module: maas_base
+#: model_terms:ir.ui.view,arch_db:maas_base.fields
+msgid "Your password expired."
+msgstr "Votre mot de passe a expiré."

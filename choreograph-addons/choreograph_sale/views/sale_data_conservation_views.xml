@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sale_data_conservation_view_tree" model="ir.ui.view">
+            <field name="name">sale.data.conservation.view.tree</field>
+            <field name="model">sale.data.conservation</field>
+            <field name="arch" type="xml">
+                <tree editable="top">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="sale_data_conservation_action" model="ir.actions.act_window">
+            <field name="name">Data Conservation</field>
+            <field name="res_model">sale.data.conservation</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new data conservation
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="project_update_view_kanban_inherit" model="ir.ui.view">
+        <field name="name">project.update.view.kanban.inherit</field>
+        <field name="model">project.update</field>
+        <field name="inherit_id" ref="project.project_update_view_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="js_class">project_update_redelivery</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

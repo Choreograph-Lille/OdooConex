@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <!-- project task -->
+        <record id="view_task_form2_inherit" model="ir.ui.view">
+            <field name="name">project.task.form.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2" />
+            <field name="arch" type="xml">
+                <field name="user_ids" position="before">
+                    <field name="type_of_project" invisible="1"/>
+                    <field name="role_id" attrs="{'invisible': [('type_of_project', '=', 'standard')]}"/>
+                </field>
+            </field>
+        </record>
+        <record id="view_task_tree2_inherit" model="ir.ui.view">
+            <field name="name">project.task.tree.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2" />
+            <field name="arch" type="xml">
+                <field name="user_ids" position="before">
+                    <field name="role_id"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--Reset password -->
+    <template id="fields" name="Reset password" inherit_id="auth_signup.fields">
+        <xpath expr="//div[hasclass('mb-3','field-login')]/label[1]" position="before">
+            <t t-if="expired">
+                <div style="font-size:22px">Your password expired.</div>
+                <br />
+            </t>
+        </xpath>
+    </template>
+</odoo>

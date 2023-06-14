@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo noupdate="0">
+
+    <record id="sale_subscription.account_analytic_cron_for_invoice" model="ir.cron">
+        <field name="active" eval="True" />
+    </record>
+
+    <record id="sale_subscription.account_analytic_cron" model="ir.cron">
+        <field name="active" eval="True" />
+    </record>
+
+</odoo>

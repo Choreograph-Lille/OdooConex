@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_role_reader,access_res_role reader,model_res_role,,1,0,0,0
+access_res_role_user,access_res_role  user,model_res_role,base.group_user,1,1,1,0
+access_res_role_manager,access_res_role manager,model_res_role,base.group_erp_manager,1,1,1,1
+
+access_res_partner_role_reader,access_res_partner_role reader,model_res_partner_role,,1,0,0,0
+access_res_partner_role_user,access_res_partner_role user,model_res_partner_role,base.group_user,1,1,1,0
+access_res_partner_role_manager,access_res_partner_role manager,model_res_partner_role,base.group_erp_manager,1,1,1,1
+
+access_res_partner_catalogue_reader,access_res_partner_catalogue reader,model_res_partner_catalogue,,1,0,0,0
+access_res_partner_catalogue_user,access_res_partner_catalogue user,model_res_partner_catalogue,base.group_user,1,1,1,0
+access_res_partner_catalogue_manager,access_res_partner_catalogue manager,model_res_partner_catalogue,base.group_system,1,1,1,1

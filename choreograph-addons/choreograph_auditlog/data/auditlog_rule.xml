@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="auditlog_sox_roles" model="auditlog.rule">
+        <field name="name">Changing SOX roles</field>
+        <field name="model_id" ref="base_user_role.model_res_users_role" />
+    </record>
+    <record id="auditlog_res_partner_bank" model="auditlog.rule">
+        <field name="name">Res Partner Bank</field>
+        <field name="model_id" ref="base.model_res_partner_bank" />
+    </record>
+    <record id="auditlog_res_partner" model="auditlog.rule">
+        <field name="name">Supplier RIB modification</field>
+        <field name="model_id" ref="base.model_res_partner" />
+    </record>
+    <record id="auditlog_account_move" model="auditlog.rule">
+        <field name="name">Account move</field>
+        <field name="model_id" ref="account.model_account_move" />
+    </record>
+    <record id="auditlog_sale_order" model="auditlog.rule">
+        <field name="name">Sale order</field>
+        <field name="model_id" ref="sale.model_sale_order" />
+    </record>
+
+    <function model="auditlog.rule" name="auto_subscribe" />
+</odoo>

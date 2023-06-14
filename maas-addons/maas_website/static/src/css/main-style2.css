@@ -1,0 +1,30 @@
+/* Bloc 02 :  */
+
+.separator {
+	background-color: #0864c2;
+	width: 30px;
+	height: 3px;
+}
+
+
+
+
+/* ******************************* */
+
+/* Footer :  */
+.footer {
+	background-color: #ffffff;
+}
+.address-footer {
+	font-family: muliregular;
+	font-size: 15px;
+	line-height: 22px;
+}
+
+#div-address-footer {
+	height: 157px;
+}
+
+#div-address-footer2 {
+	height: 157px;
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <record id="choreograph_project_task_type_study" model="choreograph.project.task.type">
+            <field name="name">STUDY</field>
+        </record>
+        <record id="choreograph_project_task_type_operation" model="choreograph.project.task.type">
+            <field name="name">OPERATION</field>
+        </record>
+        <record id="choreograph_project_task_type_delivery" model="choreograph.project.task.type">
+            <field name="name">DELIVERY</field>
+        </record>
+        <record id="choreograph_project_task_type_audit" model="choreograph.project.task.type">
+            <field name="name">AUDIT</field>
+        </record>
+        <record id="choreograph_project_task_type_campaign" model="choreograph.project.task.type">
+            <field name="name">CAMPAIGN</field>
+        </record>
+        <record id="choreograph_project_task_type_sms_campaign" model="choreograph.project.task.type">
+            <field name="name">SMS CAMPAIGN</field>
+        </record>
+        <record id="choreograph_project_task_type_bat_witness_file" model="choreograph.project.task.type">
+            <field name="name">BAT / WITNESS FILE</field>
+        </record>
+        <record id="choreograph_project_task_type_link_opt_out" model="choreograph.project.task.type">
+            <field name="name">LINK OPT-OUT</field>
+        </record>
+        <record id="choreograph_project_task_type_info_presta" model="choreograph.project.task.type">
+            <field name="name">PRESTA INFORMATION</field>
+        </record>
+        <record id="choreograph_project_task_type_delivery_presta" model="choreograph.project.task.type">
+            <field name="name">PRESTA DELIVERY</field>
+        </record>
+        <record id="choreograph_project_task_type_delivery_infos" model="choreograph.project.task.type">
+            <field name="name">DELIVERY INFORMATIONS</field>
+        </record>
+        <record id="choreograph_project_task_campaign_counts" model="choreograph.project.task.type">
+            <field name="name">CAMPAIGN COUNTS</field>
+        </record>
+        <record id="choreograph_project_task_type_deposit_date" model="choreograph.project.task.type">
+            <field name="name">DEPOSIT DATE</field>
+        </record>
+
+    </data>
+</odoo>

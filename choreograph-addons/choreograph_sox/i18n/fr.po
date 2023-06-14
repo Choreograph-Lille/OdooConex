@@ -1,0 +1,116 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_sox
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-02-03 14:30+0000\n"
+"PO-Revision-Date: 2023-02-03 14:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_accounting_profile_res_groups
+msgid "C9H / Accounting"
+msgstr "C9H / Comptabilité"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_accounting_guest_profile_res_groups
+msgid "C9H / Accounting Guest"
+msgstr "C9H / Invité Comptabilité"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_admin_profile_res_groups
+msgid "C9H / Admin"
+msgstr "C9H / Admin"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_cac_profile_res_groups
+msgid "C9H / CAC"
+msgstr "C9H / CAC"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_creator_supplier_profile_res_groups
+msgid "C9H / Creator Supplier"
+msgstr "C9H / Créateur Fournisseur"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_credit_note_preparer_profile_res_groups
+msgid "C9H / Credit note preparer"
+msgstr "C9H / Prépateur Avoir"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_credit_note_validator_profile_res_groups
+msgid "C9H / Credit note validator"
+msgstr "C9H / Valideur des avoirs"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_customer_creator_profile_res_groups
+msgid "C9H / Customer Creator"
+msgstr "C9H / Créateur Client"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_guest_purchase_profile_res_groups
+msgid "C9H / Guest Purchase"
+msgstr "C9H / Invité Achat"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_guest_sale_profile_res_groups
+msgid "C9H / Guest Sale"
+msgstr "C9H / Invité vente"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_gao_hidden_fields_res_groups
+msgid "C9H / Hidden Fields GAO"
+msgstr "C9H / GAO Hidden Fields"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_manager_profile_res_groups
+msgid "C9H / Manager"
+msgstr "C9H / Manager"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_purchasing_preparer_profile_res_groups
+msgid "C9H / Purchasing Preparer"
+msgstr "C9H / Préparateur Achat"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_gao_responsible_profile_res_groups
+msgid "C9H / Responsible GAO"
+msgstr "C9H / GAO Responsable"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_sales_preparer_profile_res_groups
+msgid "C9H / Sales Preparer"
+msgstr "C9H / Préparateur Vente"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_super_user_profile_res_groups
+msgid "C9H / Super User"
+msgstr "C9H / Super User"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_user_gao_profile_res_groups
+msgid "C9H / User GAO"
+msgstr "C9H / User GAO"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_validator_1_purchase_profile_res_groups
+msgid "C9H / Validator 1 Purchase"
+msgstr "C9H / Valideur 1 Achat"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_validator_2_purchase_profile_res_groups
+msgid "C9H / Validator 2 Purchase"
+msgstr "C9H / Valideur 2 Achat"
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_validator_sale_profile_res_groups
+msgid "C9H / Validator Sale"
+msgstr "C9H / Valideur Vente"

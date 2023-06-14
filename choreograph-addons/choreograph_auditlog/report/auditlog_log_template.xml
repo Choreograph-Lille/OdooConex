@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="auditlog_log_template">
+        <t t-call="choreograph_auditlog.layout">
+            <div class="page">
+                <t t-call="choreograph_auditlog.header_audit_report" />
+                <div class="row">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <td class="fw-bold">Object</td>
+                                <td class="fw-bold">Name</td>
+                                <td class="fw-bold">Field</td>
+                                <td class="fw-bold">Old value</td>
+                                <td class="fw-bold">New value</td>
+                                <td class="fw-bold">Date</td>
+                                <td class="fw-bold">Action</td>
+                                <td class="fw-bold">Author</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="logs" t-as="log">
+                                <t t-foreach="log['lines']" t-as="line">
+                                    <tr>
+                                        <td t-out="log.get('object', '')" />
+                                        <td t-out="log.get('display_name', '')" />
+                                        <td t-out="line.get('field_name', '')" />
+                                        <td t-out="line.get('old_value_text') or ''" />
+                                        <td t-out="line.get('new_value_text') or ''" />
+                                        <td t-out="line.get('create_date_formatted', '')" />
+                                        <td t-out="log.get('method', '')" />
+                                        <td t-out="log.get('user', '')" />
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="report_auditlog_log">
+        <t t-call="web.html_container">
+            <t t-call="choreograph_auditlog.auditlog_log_template" />
+        </t>
+    </template>
+</odoo>

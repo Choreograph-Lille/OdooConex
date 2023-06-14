@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_user_roles_and_right" model="ir.actions.report">
+        <field name="name">Rights and roles</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_user_roles_and_right</field>
+        <field name="report_file">choreograph_auditlog.report_user_roles_and_right</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="is_auditreport" eval="True" />
+    </record>
+
+    <record id="action_report_sox_role_permissions" model="ir.actions.report">
+        <field name="name">User SOX roles</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_sox_role_permissions</field>
+        <field name="report_file">choreograph_auditlog.report_sox_role_permissions</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="is_auditreport" eval="True" />
+    </record>
+
+    <record id="action_report_sox_role_changing" model="ir.actions.report">
+        <field name="name">Changing SOX roles</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
+        <field name="report_file">choreograph_auditlog.report_auditlog_log</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="auditlog_model_id" ref="base_user_role.model_res_users_role" />
+        <field name="is_auditreport" eval="True" />
+    </record>
+
+    <record id="action_report_supplier_bank_details" model="ir.actions.report">
+        <field name="name">Supplier bank details</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_supplier_bank_details</field>
+        <field name="report_file">choreograph_auditlog.report_supplier_bank_details</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="is_auditreport" eval="True" />
+    </record>
+
+    <record id="action_report_res_partner_rib" model="ir.actions.report">
+        <field name="name">Supplier RIB modification extraction</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
+        <field name="report_file">choreograph_auditlog.report_auditlog_log</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="auditlog_model_id" ref="base.model_res_partner" />
+        <field name="is_auditreport" eval="True" />
+    </record>
+
+    <record id="action_report_accounting" model="ir.actions.report">
+        <field name="name">Accounting</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_accounting</field>
+        <field name="report_file">choreograph_auditlog.report_accounting</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="is_auditreport" eval="True" />
+    </record>
+
+    <record id="action_report_quote_purchase_order" model="ir.actions.report">
+        <field name="name">Quote / Purchase order</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_quote_purchase_order</field>
+        <field name="report_file">choreograph_auditlog.report_quote_purchase_order</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="is_auditreport" eval="True" />
+    </record>
+
+    <record id="action_report_purchase_closing" model="ir.actions.report">
+        <field name="name">Purchase closing</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_purchase_closing</field>
+        <field name="report_file">choreograph_auditlog.report_purchase_closing</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="is_auditreport" eval="True" />
+    </record>
+
+    <record id="action_report_extracts_from_suppliers" model="ir.actions.report">
+        <field name="name">Extracts from suppliers</field>
+        <field name="model">auditlog.report.wizard</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
+        <field name="binding_model_id" ref="model_auditlog_report_wizard" />
+        <field name="binding_type">report</field>
+        <field name="auditlog_model_id" ref="base.model_res_partner" />
+        <field name="is_auditreport" eval="True" />
+    </record>
+
+</odoo>

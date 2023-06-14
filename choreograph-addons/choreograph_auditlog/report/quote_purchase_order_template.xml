@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="quote_purchase_order_template">
+        <t t-call="choreograph_auditlog.layout">
+            <div class="page">
+                <t t-call="choreograph_auditlog.header_audit_report" />
+                <div class="row">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <td class="fw-bold">Name</td>
+                                <td class="fw-bold">SOX</td>
+                                <td class="fw-bold">Author</td>
+                                <td class="fw-bold">SOX date</td>
+                                <td class="fw-bold">Delivery date</td>
+                            </tr>
+                        </thead>
+                        <t t-foreach="orders" t-as="order">
+                            <tr>
+                                <td t-out="order['name']"/>
+                                <td>True</td>
+                                <td t-out="order['author']"/>
+                                <td t-out="order['sox_date']"/>
+                                <td t-out="order['delivery_date']"/>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="report_quote_purchase_order">
+        <t t-call="web.html_container">
+            <t t-call="choreograph_auditlog.quote_purchase_order_template" />
+        </t>
+    </template>
+</odoo>

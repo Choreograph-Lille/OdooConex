@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+
+    <record id="product_template_200000_ids" model="product.template">
+        <field name="default_code">Ref. 001</field>
+        <field name="name">Palier 200000 Ids</field>
+        <field name="standard_price">0.00</field>
+        <field name="list_price">1500.00</field>
+        <field name="type">service</field>
+        <field name="identifiers">200000</field>
+        <field name="is_basic_package" eval="True" />
+        <field name="recurring_invoice" eval="True" />
+    </record>
+
+    <record id="product_template_500000_ids" model="product.template">
+        <field name="default_code">Ref. 002</field>
+        <field name="name">Palier 500000 Ids</field>
+        <field name="standard_price">0.00</field>
+        <field name="list_price">3000.00</field>
+        <field name="type">service</field>
+        <field name="identifiers">500000</field>
+        <field name="recurring_invoice" eval="True" />
+    </record>
+
+    <record id="product_template_1000000_ids" model="product.template">
+        <field name="default_code">Ref. 003</field>
+        <field name="name">Palier 1000000 Ids</field>
+        <field name="standard_price">0.00</field>
+        <field name="list_price">5500.00</field>
+        <field name="type">service</field>
+        <field name="identifiers">1000000</field>
+        <field name="recurring_invoice" eval="True" />
+    </record>
+
+    <record id="product_template_unlimited_ids" model="product.template">
+        <field name="default_code">Ref. 004</field>
+        <field name="name">Palier Illimité</field>
+        <field name="standard_price">0.00</field>
+        <field name="list_price">8000.00</field>
+        <field name="type">service</field>
+        <field name="identifiers">99999999</field>
+        <field name="recurring_invoice" eval="True" />
+    </record>
+
+</odoo>
