@@ -15,7 +15,12 @@
         'choreograph_base'
     ],
     'data': [
-        'views/purchase_order_views.xml'
+        # data
+        'data/mail_template_data.xml',
+        # views
+        'views/purchase_order_views.xml',
+        # report
+        'report/purchase_order_templates.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],
