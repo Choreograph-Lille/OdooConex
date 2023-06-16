@@ -3,14 +3,14 @@
     <record id="purchase_order_form_inherit" model="ir.ui.view">
         <field name="name">purchase.order.form.inherit</field>
         <field name="model">purchase.order</field>
-        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
         <field name="arch" type="xml">
             <xpath expr="//form[1]/header[1]/button[@name='button_confirm'][1]"
-                position="attributes">
+                   position="attributes">
                 <attribute name="studio_approval">True</attribute>
             </xpath>
             <xpath expr="//form[1]/header[1]/button[@name='button_confirm'][2]"
-                position="attributes">
+                   position="attributes">
                 <attribute name="studio_approval">True</attribute>
             </xpath>
             <xpath expr="//field[@name='partner_id']" position="attributes">
@@ -22,6 +22,10 @@
             <xpath expr="//field[@name='date_planned']" position="attributes">
                 <attribute name="string">Predicted date</attribute>
             </xpath>
+            
+            <button name="action_create_invoice" position="attributes">
+                <attribute name="studio_approval">True</attribute>
+            </button>
         </field>
     </record>
 </odoo>
