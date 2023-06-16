@@ -17,53 +17,49 @@
                 <p class="m-0" t-field="doc.related_base.name" />
             </div>
         </xpath>
-        <xpath expr="//div[hasclass('page')]/h2/span[2]" position="attributes">
-            <attribute name="t-elif">(doc.state == 'sent' and not doc.recurrence_id) or doc.state in
-                ['draft', 'sent']</attribute>
-        </xpath>
-        <xpath expr="//div[@name='informations_date']/strong[1]" position="attributes">
-            <attribute name="t-if">(doc.state == 'sent' and not doc.recurrence_id) or doc.state in
-                ['draft', 'sent']</attribute>
-        </xpath>
-        <xpath expr="//span[@t-field='line.price_unit']" position="replace">
-            <span t-out='"{:.2f}".format(round(line.price_unit, 2)).replace(".", ",")' />
-        </xpath>
         <xpath expr="//div[@id='informations']" position="after">
             <div t-if="not doc.recurrence_id" class="row mt-4">
                 <strong>Client instruction:</strong>
             </div>
             <div t-if="not doc.recurrence_id" class="row mb-4">
-                <table style="width:90%; border: 1px solid transparent;">
-                    <tr style="border: 0px; ">
-                        <td style="border: 0px; text-decoration: underline;">Recipient of
-                            service</td>
-                        <td style="border: 0px">
-                            <t t-out="doc.partner_id.name" />
-                        </td>
-                        <td style="border: 0px; text-decoration: underline;">Retention</td>
-                        <td style="border: 0px">
-                            <t t-out="doc.data_conservation_id.name" />
-                        </td>
-                    </tr>
-                    <tr style="border: 0px">
-                        <td style="border: 0px; text-decoration: underline;">Recipient of data</td>
-                        <td style="border: 0px">
-                            <t t-out="doc.receiver" />
-                        </td>
-                    </tr>
-                    <tr style="border: 0px; margin-top:50px">
-                        <td style="border: 0px; text-decoration: underline;">Delivery date</td>
-                        <td style="border: 0px">
-                            <t t-out="doc.commitment_date" t-options='{"widget": "date"}' />
-                        </td>
-                    </tr>
-                    <tr style="border: 0px">
-                        <td style="border: 0px; text-decoration: underline;">Transmission method </td>
-                        <td style="border: 0px">
-                            <t t-out="doc.send_with" />
-                        </td>
-                    </tr>
-                </table>
+                <div class="col-auto col-6 mw-100 mb-2">
+                    <table style="width:90%; border: 1px solid transparent;">
+                        <tr style="border: 0px; ">
+                            <td style="border: 0px; text-decoration: underline;">Recipient of
+                                service</td>
+                            <td style="border: 0px">
+                                <t t-out="doc.partner_id.name" />
+                            </td>
+                            <td style="border: 0px; text-decoration: underline;">Retention</td>
+                            <td style="border: 0px">
+                                <t t-out="doc.data_conservation_id.name" />
+                            </td>
+                        </tr>
+                        <tr style="border: 0px">
+                            <td style="border: 0px; text-decoration: underline;">Recipient of data</td>
+                            <td style="border: 0px">
+                                <t t-out="doc.receiver" />
+                            </td>
+                        </tr>
+                        <tr style="border: 0px; margin-top:50px">
+                            <td style="border: 0px; text-decoration: underline;">Delivery date</td>
+                            <td style="border: 0px">
+                                <t t-out="doc.commitment_date" t-options='{"widget": "date"}' />
+                            </td>
+                        </tr>
+                        <tr style="border: 0px">
+                            <td style="border: 0px; text-decoration: underline;">Transmission method </td>
+                            <td style="border: 0px">
+                                <t t-out="doc.send_with" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td />
+                            <td />
+                            <td />
+                        </tr>
+                    </table>
+                </div>
             </div>
             <div t-if="not doc.recurrence_id" class="row">
                 <div class="col-auto col-3 mw-100 mb-2">
