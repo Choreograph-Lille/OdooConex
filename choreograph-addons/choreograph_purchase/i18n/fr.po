@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 10:49+0000\n"
-"PO-Revision-Date: 2023-06-15 10:49+0000\n"
+"POT-Creation-Date: 2023-06-16 12:28+0000\n"
+"PO-Revision-Date: 2023-06-16 12:28+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -108,6 +108,25 @@ msgid "<strong>Taxes</strong>"
 msgstr ""
 
 #. module: choreograph_purchase
+#: model:ir.model.fields,field_description:choreograph_purchase.field_account_bank_statement_line__is_gap
+#: model:ir.model.fields,field_description:choreograph_purchase.field_account_move__is_gap
+#: model:ir.model.fields,field_description:choreograph_purchase.field_account_payment__is_gap
+msgid "Is Gap"
+msgstr "Est-ce que l'écart ?"
+
+#. module: choreograph_purchase
+#: model:ir.model.fields,field_description:choreograph_purchase.field_account_bank_statement_line__is_gap_validated
+#: model:ir.model.fields,field_description:choreograph_purchase.field_account_move__is_gap_validated
+#: model:ir.model.fields,field_description:choreograph_purchase.field_account_payment__is_gap_validated
+msgid "Is Gap Validated"
+msgstr "L'écart est-il validé ?"
+
+#. module: choreograph_purchase
+#: model:ir.model,name:choreograph_purchase.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: choreograph_purchase
 #: model:ir.model.fields,field_description:choreograph_purchase.field_purchase_order__date_approve
 msgid "Order Date"
 msgstr "Date de commande"
@@ -138,6 +157,19 @@ msgid "Sent to vendor with the purchase order in attachment"
 msgstr "Envoyé au fournisseur avec le bon de commande en pièce jointe"
 
 #. module: choreograph_purchase
+#: model_terms:ir.ui.view,arch_db:choreograph_purchase.account_move_view_form_inherit
+msgid "Validate Gap"
+msgstr "Valider l'écart"
+
+#. module: choreograph_purchase
 #: model:mail.template,subject:choreograph_purchase.email_template_purchase_done
 msgid "{{ object.company_id.name }} order n°{{ object.name or 'n/a' }}"
 msgstr "Commande {{ object.company_id.name }} n°{{ object.name or 'n/a' }}"
+
+#. module: choreograph_purchase
+#: model_terms:ir.ui.view,arch_db:choreograph_purchase.account_move_view_form_inherit
+msgid ""
+"⚠️There is a difference of more than 10% or 250 excluding VAT between the "
+"purchase order and the invoice."
+msgstr ""
+"⚠️Il y a un écart de plus de 10% ou de 250 € HT entre la commande et la facture. Voulez-vous validez ?"
