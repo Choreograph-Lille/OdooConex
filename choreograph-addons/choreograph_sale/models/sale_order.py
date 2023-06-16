@@ -140,21 +140,6 @@ class SaleOrder(models.Model):
         ('cancel', 'Cancelled'),
     ], string="C9H State", default='forecast')
 
-    @api.depends('order_line.tax_id', 'order_line.price_unit', 'amount_total', 'amount_untaxed', 'currency_id')
-    def _compute_tax_totals(self):
-        super()._compute_tax_totals()
-        tax_key = _('Total (excluding taxes)')
-        old_key = _('Untaxed Amount')
-        for rec in self:
-            data = rec.tax_totals
-            if old_key in data['groups_by_subtotal']:
-                data['groups_by_subtotal'][tax_key] = data['groups_by_subtotal'].pop(old_key)
-                data['subtotals_order'][data['subtotals_order'].index(old_key)] = tax_key
-                for subtotal in data['subtotals']:
-                    if subtotal['name'] == old_key:
-                        subtotal['name'] = tax_key
-                rec.tax_totals = data
-
     def write(self, values):
         if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
             values['state_specific'] = values['state']
@@ -227,7 +212,7 @@ class SaleOrder(models.Model):
                     lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order']):
                 vals = {
                     'name': OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
-                        condition.subtype]),
+                                                                                   condition.subtype]),
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
                     'note': condition.note,
@@ -266,8 +251,7 @@ class SaleOrder(models.Model):
 
     @api.model
     def read_group(self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True):
-        res = super(SaleOrder, self).read_group(domain, fields, groupby,
-                                                offset=offset, limit=limit, orderby=orderby, lazy=lazy)
+        res = super(SaleOrder, self).read_group(domain, fields, groupby, offset=offset, limit=limit, orderby=orderby, lazy=lazy)
         if 'state_specific' in groupby:
             return sorted(res, key=lambda g: CUSTOM_STATE_SEQUENCE_MAP.get(g.get('state_specific'), 1000))
         return res
@@ -292,8 +276,3 @@ class SaleOrder(models.Model):
 
     def _get_confirmation_template(self):
         return self.env.ref('choreograph_sale.mail_template_sale_confirmation', raise_if_not_found=False)
-
-    def _find_mail_template(self):
-        if self.state == 'draft' and not self.recurrence_id:
-            return self._get_confirmation_template()
-        return super()._find_mail_template(self)
