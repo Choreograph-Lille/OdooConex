@@ -25,3 +25,16 @@ class AccountMove(models.Model):
         self.is_gap_validated = True
         return True
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super(AccountMove, self).create(vals_list)
+        records.filtered(lambda inv: inv.move_type == "in_invoice" and inv.invoice_origin).manage_invoice_followers()
+        return records
+
+    def manage_invoice_followers(self):
+        po_obj = self.env["purchase.order"]
+        for record in self:
+            pos = po_obj.search([("name", "in", record.invoice_origin.split(","))])
+            if pos:
+                record.message_subscribe(partner_ids=pos.mapped("message_follower_ids").mapped("partner_id").ids)
+        return True
