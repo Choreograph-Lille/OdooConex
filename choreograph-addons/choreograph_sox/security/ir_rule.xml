@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <record id="customer_creator_rule" model="ir.rule">
+            <field name="name">Customer Creator: Create Only Contact Type Customer.</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">[('customer_rank', '>=', 1), '|', ('type', '!=', 'private'), ('type', '=', False)]</field>
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" model="res.groups" search="[('name', '=', 'C9H / Customer Creator')]"/>
+        </record>
+        
+        <record id="supplier_creator_rule" model="ir.rule">
+            <field name="name">Supplier Creator: Create Only Contact Type Supplier.</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">[('supplier_rank', '>=', 1), '|', ('type', '!=', 'private'), ('type', '=', False)]</field>
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" model="res.groups" search="[('name', '=', 'C9H / Supplier Creator')]"/>
+        </record>
+        
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'base'), ('name', '=', 'res_partner_rule_private_employee')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        
+        <record id="base.res_partner_rule_private_employee" model="ir.rule">
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+        
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'base'), ('name', '=', 'res_partner_rule_private_employee')]"/>
+            </function>
+            <value eval="{'noupdate': True}"/>
+        </function>
+    
+    
+    </data>
+</odoo>

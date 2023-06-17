@@ -3,7 +3,7 @@
     <data noupdate="0">
         
         <record id="group_creator_supplier_profile" model="res.users.role">
-            <field name="name">C9H / Creator Supplier</field>
+            <field name="name">C9H / Supplier Creator</field>
             <field name="implied_ids"
                    eval="[(6, 0, [ref('purchase.group_purchase_user')])]"/>
         </record>
@@ -11,7 +11,7 @@
         <record id="group_purchasing_preparer_profile" model="res.users.role">
             <field name="name">C9H / Purchasing Preparer</field>
             <field name="implied_ids"
-                   eval="[(6, 0, [ref('purchase.group_purchase_user')])]"/>
+                   eval="[(6, 0, [ref('purchase.group_purchase_manager')])]"/>
         </record>
         
         <record id="group_validator_1_purchase_profile" model="res.users.role">
