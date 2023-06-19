@@ -1,24 +1,24 @@
 # -*- coding: utf-8 -*-
 
-from odoo import _, fields, models
+from odoo import _, fields, models, api
 from odoo.tools.misc import formatLang
 
 
 class SaleOrder(models.Model):
-    _inherit = 'sale.order'
+    _inherit = "sale.order"
 
-    def write(self, values):
-        res = super(SaleOrder, self).write(values)
-        if 'order_line' in values:
-            for order in self:
-                order.update_discount_note()
-        return res
+    @api.model_create_multi
+    def create(self, values_list):
+        records = super(SaleOrder, self).create(values_list)
+        for record in records:
+            record.manage_discount_note()
+        return records
 
     @staticmethod
     def get_discount(p):
         return p.price_discount if p.compute_price == 'formula' else p.percent_price
 
-    def update_discount_note(self):
+    def manage_discount_note(self):
         self.ensure_one()
         if self.recurrence_id:
             return
@@ -60,5 +60,6 @@ class SaleOrder(models.Model):
                 self.env['sale.order.line'].search([('discount_source_line_id', '=', line.id)]).unlink()
 
     def action_update_prices(self):
-        self.update_discount_note()
-        return super(SaleOrder, self).action_update_prices()
+        result = super(SaleOrder, self).action_update_prices()
+        self.manage_discount_note()
+        return result
