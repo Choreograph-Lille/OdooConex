@@ -12,7 +12,8 @@
             <field name="user_id" position="before">
                 <group>
                     <group>
-                        <field name="project_template_id" options="{'no_create': True}" />
+                        <field name="type_of_project" invisible="1"/>
+                        <field name="project_template_id" options="{'no_create': True}" domain="[('type_of_project', '=', type_of_project)]"/>
                     </group>
                     <group />
                 </group>
