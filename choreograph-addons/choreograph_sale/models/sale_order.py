@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+
+from odoo import _, api, fields, models
 from .operation_condition import SUBTYPE
 
 TASK_NAME = {
@@ -240,8 +241,7 @@ class SaleOrder(models.Model):
         return action
 
     def _get_purchase_orders(self):
-        purchases = super(SaleOrder, self)._get_purchase_orders(
-        ) | self.env['purchase.order'].search([('origin', '=', self.name)])
+        purchases = super(SaleOrder, self)._get_purchase_orders() | self.env['purchase.order'].search([('origin', '=', self.name)])
         return purchases
 
     @api.depends('data_conservation_id')
@@ -274,5 +274,12 @@ class SaleOrder(models.Model):
         self.state_specific = "adjustment"
         return True
 
-    def _get_confirmation_template(self):
-        return self.env.ref('choreograph_sale.mail_template_sale_confirmation', raise_if_not_found=False)
+    def action_quotation_send(self):
+        result = super(SaleOrder, self).action_quotation_send()
+        if not self.recurrence_id:
+            template = self.env.ref('choreograph_sale.mail_template_sale_confirmation', raise_if_not_found=False)
+            result['context'].update({
+                'default_use_template': bool(template),
+                'default_template_id': template.id
+            })
+        return result
