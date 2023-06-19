@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        <template id="document_tax_totals" inherit_id="account.document_tax_totals" primary="True">
+            <xpath expr="//td" position="replace">
+                <td><strong>Untaxed Amount</strong></td>
+            </xpath>
+        </template>
+    
+    </data>
+</odoo>

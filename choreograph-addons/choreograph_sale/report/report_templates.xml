@@ -77,6 +77,9 @@
         <xpath expr="//td[@name='td_taxes']" position="attributes">
             <attribute name="t-att-class">'d-none' if not doc.recurrence_id else 'text-end'</attribute>
         </xpath>
+        <xpath expr="//t[@t-call='account.document_tax_totals']" position="replace">
+            <t t-call="choreograph_account.document_tax_totals"/>
+        </xpath>
         <xpath expr="//div[hasclass('page')]" position="after">
             <t t-call="choreograph_sale.term_and_conditions"/>
         </xpath>
