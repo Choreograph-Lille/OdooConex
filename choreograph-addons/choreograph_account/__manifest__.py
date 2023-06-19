@@ -20,6 +20,8 @@
         # security
         # views
         'views/res_partner_views.xml',
+        # report
+        'report/report_invoice_document.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],
