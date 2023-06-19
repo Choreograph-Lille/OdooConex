@@ -40,6 +40,9 @@
                     <field name="sale_order_id" attrs="{'invisible': [('task_number', '=', False)]}" />
                 </field>
 
+                <field name="project_id" position="attributes">
+                    <attribute name="domain">[('type_of_project', '=', type_of_project)]</attribute>
+                </field>
                 <field name="project_id" position="before">
                     <field name="folder_key"
                         attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['20', '25', '30', '35'])]}" />
