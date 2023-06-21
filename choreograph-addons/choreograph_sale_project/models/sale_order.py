@@ -318,6 +318,7 @@ class SaleOrder(models.Model):
     def reset_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
             'segment_ids': [(6, 0, [])],
+            'task_segment_ids': [(6, 0, [])],
         })
 
     def get_date_tz(self, datetime_to_convert):
