@@ -252,10 +252,39 @@ class SaleOrder(models.Model):
                                              'operation_provider_delivery_ids', 'bat_desired_date']):
                 rec._update_date_deadline(vals)
             rec._check_info_validated(vals)
-            if vals.get('is_info_validated', False):
+            if vals.get('is_info_validated', False) or any(field in vals for field in [
+                'po_number',
+                'campaign_name',
+                'sms_personalization',
+                'sms_personalization_text',
+                'sms_comment',
+                'bat_internal',
+                'desired_finished_volume',
+                'sender',
+            ]) and rec.is_info_validated:
                 rec.update_task_sms_campaign()
                 rec.update_task_campaign_90('sms')
-            if vals.get('email_is_info_validated', False):
+            if vals.get('email_is_info_validated', False) or any(field in vals for field in [
+                'email_reception_date',
+                'email_routing_date',
+                'email_reception_location',
+                'email_routing_end_date',
+                'email_desired_finished_volume',
+                'email_sender',
+                'email_personalization',
+                'email_personalization_text',
+                'is_preheader_available',
+                'is_preheader_available_text',
+                'ab_test',
+                'ab_test_text',
+                'email_comment',
+                'email_bat_internal',
+                'bat_desired_date',
+                'email_witness_file_name',
+                'livedata_po_number',
+                'email_campaign_name',
+                'email_comment',
+            ]) and rec.email_is_info_validated:
                 rec.update_task_email_campaign()
                 rec.update_task_campaign_90('email')
                 rec.update_task_bat_file_witness()
@@ -318,6 +347,7 @@ class SaleOrder(models.Model):
     def reset_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
             'segment_ids': [(6, 0, [])],
+            'task_segment_ids': [(6, 0, [])],
         })
 
     def get_date_tz(self, datetime_to_convert):
@@ -473,7 +503,7 @@ class SaleOrder(models.Model):
             vals = {
                 'start_date': self.email_routing_date,
                 'desired_finished_volume': self.email_desired_finished_volume,
-                'date_deadline': self.email_routing_end_date + relativedelta(days=5),
+                'date_deadline': self.email_routing_end_date + relativedelta(days=5) if self.email_routing_end_date else False,
             }
         self.update_tasks(vals, '90')
 
