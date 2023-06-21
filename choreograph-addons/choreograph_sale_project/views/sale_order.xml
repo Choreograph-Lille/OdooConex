@@ -47,9 +47,10 @@
                                 options="{'create': False}"
                             >
                                 <tree editable="bottom" create="false" delete="false">
+                                    <field name="sequence" widget="handle" />
                                     <field name="order_id" invisible="1" />
                                     <field name="delivery_date" />
-                                    <field name="task_id" readonly="1"/>
+                                    <field name="task_id" readonly="1" />
                                 </tree>
                             </field>
                         </group>
@@ -72,6 +73,7 @@
                         </group>
                         <field name="segment_ids" force_save="1">
                             <tree editable="bottom">
+                                <field name="sequence" widget="handle" />
                                 <field name="segment_number" readonly="1" force_save="1" />
                                 <field name="model_selection" />
                                 <field name="name" />
