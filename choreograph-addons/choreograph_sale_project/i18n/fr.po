@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-16 21:21+0000\n"
-"PO-Revision-Date: 2023-06-08 16:11+0000\n"
+"POT-Creation-Date: 2023-06-21 11:44+0000\n"
+"PO-Revision-Date: 2023-06-21 11:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -64,9 +64,6 @@ msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
 "                        <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '75')\"></t>\n"
-"                        <t t-if=\"object.project_ids[0].stage_id.stage_number == '50'\">\n"
-"                            <t t-set=\"info_task\" t-value=\"object.tasks_ids.filtered(lambda t: t.task_number == '85')\"></t>\n"
-"                        </t>\n"
 "                        <t t-if=\"info_task\">\n"
 "\n"
 "                            <t t-set=\"delivery_address\" t-value=\"info_task.provider_delivery_address\"></t>\n"
@@ -225,6 +222,13 @@ msgstr "Commentaire"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__complexity
 msgid "Complexity"
 msgstr "Complexité"
+
+#. module: choreograph_sale_project
+#. odoo-python
+#: code:addons/choreograph_sale_project/models/mail_message.py:0
+#, python-format
+msgid "Condition/Exclusion line : %s"
+msgstr "Ligne Condition / Exclusion : %s"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_count
@@ -470,6 +474,7 @@ msgid "From"
 msgstr "DE"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__has_enrichment_email_op
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__has_enrichment_email_op
 msgid "Has Enrichment Email Op"
 msgstr ""
@@ -707,6 +712,13 @@ msgid "Presentation Task"
 msgstr "Tâche présentation"
 
 #. module: choreograph_sale_project
+#. odoo-python
+#: code:addons/choreograph_sale_project/models/mail_message.py:0
+#, python-format
+msgid "Presta Delivery : %s"
+msgstr "Livraison Presta : %s"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_delivery_date
 msgid "Presta Delivery Date"
 msgstr "Date livraison presta"
@@ -809,6 +821,7 @@ msgid "Related Base"
 msgstr "Base"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__repatriate_information
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__repatriate_information
 msgid "Repatriate Informations On Delivery Informations Tab"
 msgstr "Rapatrier les informations sur l'onglet informations livraison"
@@ -879,9 +892,22 @@ msgid "Segment Number"
 msgstr "N° segment"
 
 #. module: choreograph_sale_project
+#. odoo-python
+#: code:addons/choreograph_sale_project/models/mail_message.py:0
+#, python-format
+msgid "Segment line : %s"
+msgstr "Ligne de segment : %s"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__send_with
 msgid "Send With"
 msgstr "Envoi via"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__sequence
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__sequence
+msgid "Sequence"
+msgstr "Séquence"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_sms_enrichment
@@ -941,6 +967,7 @@ msgstr "Enrichissement Teleportable (TEMPLATE)"
 #. module: choreograph_sale_project
 #: model:ir.model,name:choreograph_sale_project.model_project_task
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__task_id
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__task_id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__task_id
 msgid "Task"
 msgstr "Tâche"

@@ -29,40 +29,73 @@ CAMPAIGN_TASK_NAME = {
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    potential_return = fields.Boolean(copy=False)
-    return_production_potential = fields.Boolean('Return of production potential')
-    study_delivery = fields.Boolean(copy=False)
-    presentation = fields.Boolean(copy=False)
+    potential_return = fields.Boolean(copy=False, tracking=True)
+    return_production_potential = fields.Boolean('Return of production potential', tracking=True)
+    study_delivery = fields.Boolean(copy=False, tracking=True)
+    presentation = fields.Boolean(copy=False, tracking=True)
 
     potential_return_task_id = fields.Many2one(
-        'project.task', 'Potential Return Task', copy=False)
-    study_delivery_task_id = fields.Many2one('project.task', 'Study Delivery Task', copy=False)
-    presentation_task_id = fields.Many2one('project.task', 'Presentation Task', copy=False)
-    study_global_task_id = fields.Many2one('project.task', 'Study Global Task', copy=False)
+        'project.task', 'Potential Return Task', copy=False, tracking=True)
+    study_delivery_task_id = fields.Many2one('project.task', 'Study Delivery Task', copy=False, tracking=True)
+    presentation_task_id = fields.Many2one('project.task', 'Presentation Task', copy=False, tracking=True)
+    study_global_task_id = fields.Many2one('project.task', 'Study Global Task', copy=False, tracking=True)
 
-    potential_return_date = fields.Date(copy=False)
-    study_delivery_date = fields.Date(copy=False)
-    presta_delivery_date = fields.Date(copy=False)
-    presentation_date = fields.Date(copy=False)
-    return_production_potential_date = fields.Date('Date of return of production potential')
+    potential_return_date = fields.Date(copy=False, tracking=True)
+    study_delivery_date = fields.Date(copy=False, tracking=True)
+    presta_delivery_date = fields.Date(copy=False, tracking=True)
+    presentation_date = fields.Date(copy=False, tracking=True)
+    return_production_potential_date = fields.Date('Date of return of production potential', tracking=True)
     operation_code = fields.Char(compute='compute_operation_code', store=True)
 
     operation_provider_delivery_ids = fields.One2many('operation.provider.delivery', 'order_id', 'Provider Delivery')
-    comment = fields.Text()
-    quantity_to_deliver = fields.Integer()
-    to_validate = fields.Boolean()
+    comment = fields.Text(tracking=True)
+    quantity_to_deliver = fields.Integer(tracking=True)
+    to_validate = fields.Boolean(tracking=True)
     segment_ids = fields.One2many('operation.segment', 'order_id', 'Segment')
-    repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab')
-    operation_type_id = fields.Many2one('project.project', compute='_compute_operation_type_id', store=True)
+    repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab', tracking=True)
+    operation_type_id = fields.Many2one(
+        'project.project', compute='_compute_operation_type_id', store=True, tracking=True)
     can_display_redelivery = fields.Boolean(compute='_compute_can_display_delivery')
     can_display_livery_project = fields.Boolean(compute='_compute_can_display_delivery')
     can_display_to_plan = fields.Boolean(compute='_compute_can_display_delivery')
-    delivery_email_to = fields.Char()
+    delivery_email_to = fields.Char(tracking=True)
     delivery_info_task_id = fields.Many2one('project.task', 'Delivery Info', compute='compute_delivery_info_tasks')
     presta_delivery_info_task_id = fields.Many2one(
         'project.task', 'Presta Delivery Info', compute='compute_delivery_info_tasks')
     has_enrichment_email_op = fields.Boolean(compute='_compute_has_email_op')
     has_prospection_email_op = fields.Boolean(compute='_compute_has_email_op')
+
+    @api.model
+    def get_operation_fields(self):
+        return [
+            self.env.ref('choreograph_sale_project.field_sale_order__potential_return').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__return_production_potential').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__study_delivery').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__presentation').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__potential_return_task_id').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__study_delivery_task_id').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__presentation_task_id').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__study_global_task_id').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__potential_return_date').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__study_delivery_date').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__presta_delivery_date').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__presentation_date').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__return_production_potential_date').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__comment').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__quantity_to_deliver').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__to_validate').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__repatriate_information').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__delivery_email_to').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__delivery_info_task_id').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__presta_delivery_info_task_id').id,
+        ]
+
+    @api.model
+    def get_mail_field_to_operation(self):
+        result = super().get_mail_field_to_operation()
+        operation_field = self.get_operation_fields()
+        result.extend(operation_field)
+        return result
 
     def compute_delivery_info_tasks(self):
         self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
@@ -540,6 +573,8 @@ class SaleOrder(models.Model):
         return True
 
     def action_send_delivery_email(self):
+        self.ensure_one()
+        self.env['res.partner'].sudo().find_or_create(self._get_operation_task([80]).provider_delivery_address)
         composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form')
         template_id = self.env.ref('choreograph_sale_project.email_template_choreograph_delivery')
         return {
@@ -558,7 +593,6 @@ class SaleOrder(models.Model):
                 'website_sale_send_recovery_email': True,
                 'active_ids': self.ids,
                 'operation_email_process': True,
-                'default_email_to': self._get_operation_task([75]).provider_delivery_address
             },
         }
 

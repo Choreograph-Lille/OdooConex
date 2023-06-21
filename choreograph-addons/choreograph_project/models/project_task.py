@@ -52,7 +52,10 @@ class ProjectTask(models.Model):
             values.update({
                 'stage_id': self.env.ref('choreograph_project.project_task_type_draft').id,
             })
-        return super().create(values)
+        res =  super().create(values)
+        self.env['mail.followers']._insert_followers(
+                'project.project', res.project_id.ids, res.user_ids.partner_id.ids)
+        return res
 
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
@@ -60,3 +63,10 @@ class ProjectTask(models.Model):
         if self.project_id.type_of_project == 'operation':
             message.copy({'res_id': self.project_id.id, 'model': 'project.project'})
         return message
+
+    def write(self, values):
+        res = super().write(values)
+        if 'user_ids' in values:
+            self.env['mail.followers']._insert_followers(
+                'project.project', self.project_id.ids, self.user_ids.partner_id.ids)
+        return res
