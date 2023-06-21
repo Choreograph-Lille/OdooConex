@@ -1,70 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_saleorder_document" inherit_id="sale.report_saleorder_document">
-        <xpath expr="//t[@t-set='information_block']" position="attributes">
-            <attribute name="t-if">False</attribute>
+        <xpath expr="//t[@t-set='information_block']" position="replace"/>
+        <xpath expr="//t[@t-set='address']" position="replace">
+            <t t-set="address">
+                <div t-field="doc.partner_invoice_id"
+                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                <p t-if="doc.partner_invoice_id.vat"><t t-out="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>:
+                    <span t-field="doc.partner_invoice_id.vat"/>
+                </p>
+            </t>
         </xpath>
-        <xpath expr="//div[@id='informations']/div[4]/strong" position="replace">
-            <strong t-if="doc.recurrence_id">Salesperson:</strong>
-            <strong t-if="not doc.recurrence_id">Contact details choreograph:</strong>
-        </xpath>
-        <xpath expr="//div[@id='informations']/div[4]/p" position="after">
-            <p t-if="not doc.recurrence_id" class="m-0" t-field="doc.user_id.partner_id.email" />
+        <xpath expr="//div[@t-if='doc.user_id.name']" position="replace">
+            <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2">
+                <strong t-if="doc.recurrence_id">Salesperson:</strong>
+                <strong t-if="not doc.recurrence_id">Contact details choreograph:</strong>
+                <p class="m-0" t-field="doc.user_id"/>
+                <p t-if="not doc.recurrence_id" class="m-0" t-field="doc.user_id.partner_id.email"/>
+            </div>
         </xpath>
         <xpath expr="//div[@id='informations']" position="inside">
             <div t-if="not doc.recurrence_id" class="col-auto col-3 mw-100 mb-2">
                 <strong>Database involved:</strong>
-                <p class="m-0" t-field="doc.related_base.name" />
+                <p class="m-0" t-field="doc.related_base.name"/>
             </div>
         </xpath>
         <xpath expr="//div[@id='informations']" position="after">
-            <div t-if="not doc.recurrence_id" class="row mt-4">
+            <div t-if="not doc.recurrence_id">
                 <strong>Client instruction:</strong>
             </div>
-            <div t-if="not doc.recurrence_id" class="row mb-4">
-                <div class="col-auto col-6 mw-100 mb-2">
-                    <table style="width:90%; border: 1px solid transparent;">
-                        <tr style="border: 0px; ">
-                            <td style="border: 0px; text-decoration: underline;">Recipient of
-                                service</td>
-                            <td style="border: 0px">
-                                <t t-out="doc.partner_id.name" />
-                            </td>
-                            <td style="border: 0px; text-decoration: underline;">Retention</td>
-                            <td style="border: 0px">
-                                <t t-out="doc.data_conservation_id.name" />
-                            </td>
-                        </tr>
-                        <tr style="border: 0px">
-                            <td style="border: 0px; text-decoration: underline;">Recipient of data</td>
-                            <td style="border: 0px">
-                                <t t-out="doc.receiver" />
-                            </td>
-                        </tr>
-                        <tr style="border: 0px; margin-top:50px">
-                            <td style="border: 0px; text-decoration: underline;">Delivery date</td>
-                            <td style="border: 0px">
-                                <t t-out="doc.commitment_date" t-options='{"widget": "date"}' />
-                            </td>
-                        </tr>
-                        <tr style="border: 0px">
-                            <td style="border: 0px; text-decoration: underline;">Transmission method </td>
-                            <td style="border: 0px">
-                                <t t-out="doc.send_with" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td />
-                            <td />
-                            <td />
-                        </tr>
+            <div t-if="not doc.recurrence_id" class="row">
+                <div class="col-6">
+                    <table class="table table-sm o_main_table table-borderless mt-4" style="border: 0px !important">
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th style="text-decoration: underline; text-align: left !important;">Recipient of service</th>
+                                <th style="padding-left: 10px !important;; text-align: left !important;" t-out="doc.partner_id.name"/>
+                            </tr>
+                            <tr>
+                                <th style="text-decoration: underline; text-align: left !important;">Recipient of data</th>
+                                <th style="padding-left: 10px !important;; text-align: left !important;" t-out="doc.receiver"/>
+                            </tr>
+                            <tr>
+                                <th style="text-decoration: underline; text-align: left !important;">Delivery date</th>
+                                <th style="padding-left: 10px !important;; text-align: left !important;" t-out="doc.commitment_date" t-options="{'widget': 'date'}"/>
+                            </tr>
+                            <tr>
+                                <th style="text-decoration: underline; text-align: left !important;">Transmission method</th>
+                                <th style="padding-left: 10px !important;; text-align: left !important;" t-out="doc.send_with"/>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+                <div class="col-6">
+                    <table class="table table-sm o_main_table table-borderless mt-4" style="border: 0px !important">
+                        <thead style="display: table-row-group">
+                            <tr>
+                                <th style="text-decoration: underline;">Retention</th>
+                                <th t-out="doc.data_conservation_id.name"/>
+                            </tr>
+                        </thead>
                     </table>
                 </div>
             </div>
+            <br/>
             <div t-if="not doc.recurrence_id" class="row">
                 <div class="col-auto col-3 mw-100 mb-2">
-                    <strong> Terms and conditions </strong>
-                    <p class="m-0" t-field="doc.payment_term_id.name" />
+                    <strong>Terms and conditions</strong>
+                    <p class="m-0" t-field="doc.payment_term_id.name"/>
                 </div>
             </div>
         </xpath>
@@ -74,8 +77,11 @@
         <xpath expr="//td[@name='td_taxes']" position="attributes">
             <attribute name="t-att-class">'d-none' if not doc.recurrence_id else 'text-end'</attribute>
         </xpath>
+        <xpath expr="//t[@t-call='account.document_tax_totals']" position="replace">
+            <t t-call="choreograph_account.document_tax_totals"/>
+        </xpath>
         <xpath expr="//div[hasclass('page')]" position="after">
-            <t t-call="choreograph_sale.term_and_conditions" />
+            <t t-call="choreograph_sale.term_and_conditions"/>
         </xpath>
     </template>
 </odoo>

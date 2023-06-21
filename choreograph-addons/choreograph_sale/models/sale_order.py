@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
+
+from odoo import _, api, fields, models
 from .operation_condition import SUBTYPE
 
 TASK_NAME = {
@@ -79,7 +80,6 @@ class SaleOrder(models.Model):
     desired_finished_volume = fields.Char()
     volume_detail = fields.Text()
     sender = fields.Char()
-    id_title = fields.Char()
 
     reception_date = fields.Date("Reception Date")
     reception_location = fields.Char('Where to find ?')
@@ -89,7 +89,6 @@ class SaleOrder(models.Model):
 
     bat_from = fields.Many2one('choreograph.campaign.de')
     bat_internal = fields.Char()
-    bat_client = fields.Char()
     bat_comment = fields.Text('BAT Comment')
 
     witness_file_name = fields.Char('File Name')
@@ -122,7 +121,6 @@ class SaleOrder(models.Model):
 
     email_bat_from = fields.Many2one('choreograph.campaign.de', 'Email BAT From')
     email_bat_internal = fields.Char('Email BAT Internal')
-    email_bat_client = fields.Char('Email BAT Client')
     bat_desired_date = fields.Date('Email BAT Desired Date')
     email_witness_file_name = fields.Char('Email File Name')
     excluded_provider = fields.Char('Email Excluded Provider')
@@ -243,8 +241,7 @@ class SaleOrder(models.Model):
         return action
 
     def _get_purchase_orders(self):
-        purchases = super(SaleOrder, self)._get_purchase_orders(
-        ) | self.env['purchase.order'].search([('origin', '=', self.name)])
+        purchases = super(SaleOrder, self)._get_purchase_orders() | self.env['purchase.order'].search([('origin', '=', self.name)])
         return purchases
 
     @api.depends('data_conservation_id')
@@ -277,5 +274,12 @@ class SaleOrder(models.Model):
         self.state_specific = "adjustment"
         return True
 
-    def _get_confirmation_template(self):
-        return self.env.ref('choreograph_sale.mail_template_sale_confirmation', raise_if_not_found=False)
+    def action_quotation_send(self):
+        result = super(SaleOrder, self).action_quotation_send()
+        if not self.recurrence_id:
+            template = self.env.ref('choreograph_sale.mail_template_sale_confirmation', raise_if_not_found=False)
+            result['context'].update({
+                'default_use_template': bool(template),
+                'default_template_id': template.id
+            })
+        return result

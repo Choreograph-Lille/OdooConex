@@ -40,6 +40,9 @@
                     <field name="sale_order_id" attrs="{'invisible': [('task_number', '=', False)]}" />
                 </field>
 
+                <field name="project_id" position="attributes">
+                    <attribute name="domain">[('type_of_project', '=', type_of_project)]</attribute>
+                </field>
                 <field name="project_id" position="before">
                     <field name="folder_key"
                         attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['20', '25', '30', '35'])]}" />
@@ -113,10 +116,14 @@
                                 attrs="{'invisible': ['|',('task_number', 'not in', ['45']),('ab_test','=',False)]}" />
                             <field name="is_preheader_available"
                                 attrs="{'invisible': [('task_number', 'not in', ['45'])]}" />
+                            <field name="is_preheader_available_text"
+                                       attrs="{'invisible': ['|', ('task_number', 'not in', ['45']), ('is_preheader_available','=',True)]}"/>
                             <field name="comment"
-                                readonly="1"
-                                attrs="{'invisible': [('task_number', 'not in', ['45', '50', '20', '25', '30', '35'])]}" />
-
+                                attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}" />
+                            <field name="email_comment"
+                                attrs="{'invisible': [('task_number', 'not in', ['45'])]}" />
+                            <field name="sms_comment"
+                                attrs="{'invisible': [('task_number', 'not in', ['50'])]}" />
                             <h4
                                 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}">
                                 BAT
@@ -130,12 +137,8 @@
                             <field name="bat_internal"
                                 readonly="1"
                                 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}" />
-                            <field name="bat_client"
-                                readonly="1"
-                                attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}" />
                             <field name="bat_comment"
-                                readonly="1"
-                                attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50'])]}" />
+                                attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50'])], 'readonly': [('task_number','!=','40')]}" />
                             <field name="bat_desired_date"
                                 attrs="{'invisible': [('task_number', 'not in', ['45'])]}" />
 
@@ -161,7 +164,6 @@
                             <field name="excluded_provider"
                                 attrs="{'invisible': ['|',('task_number', 'not in', ['60', '45']),('has_enrichment_email_op','=',False)]}" />
                             <field name="optout_link"
-                                readonly="1"
                                 attrs="{'invisible': ['|',('task_number', 'not in', ['60', '45']),('has_enrichment_email_op','=',False)]}" />
 
                             <field name="dedup_title_number"

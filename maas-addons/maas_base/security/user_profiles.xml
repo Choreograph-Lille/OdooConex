@@ -59,8 +59,7 @@
                                              ref('maas_base.group_operation_order'),
                                              ref('maas_base.group_start_modeling'),
                                              ref('maas_base.group_validate_next_package'),
-                                             ref('maas_base.group_download_operation_ordered'),
-                                             ref('maas_base.group_user_management')])]"/>
+                                             ref('maas_base.group_download_operation_ordered')])]"/>
             <field name="users" eval="[(4, ref('base.user_admin'))]"/>
         </record>
 

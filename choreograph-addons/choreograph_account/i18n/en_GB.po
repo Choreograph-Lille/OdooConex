@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 19:33+0000\n"
-"PO-Revision-Date: 2023-06-19 19:33+0000\n"
+"POT-Creation-Date: 2023-06-19 19:31+0000\n"
+"PO-Revision-Date: 2023-06-19 19:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,73 +18,73 @@ msgstr ""
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_30days_invoice_date
 msgid "30 Days from invoice date"
-msgstr "30 jours date de facturation"
+msgstr ""
 
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_30days_month_end
 msgid "30 Days month-end"
-msgstr "30 jours fin de mois"
+msgstr ""
 
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_30days_end_month_10
 msgid "30 Days month-end 10"
-msgstr "30 jours fin de mois le 10"
+msgstr ""
 
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_30days_month_end_invoice_date
 msgid "30 Days month-end from invoice date"
-msgstr "30 jours fin de mois à date de facture"
+msgstr ""
 
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_45days_invoice_date
 msgid "45 Days from invoice date"
-msgstr "45 jours date de facturation"
+msgstr ""
 
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_45days_month_end
 msgid "45 Days month-end"
-msgstr "45 jours fin de mois"
+msgstr ""
 
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_60days_month_end
 msgid "60 Days from month-end"
-msgstr "60 jours fin de mois"
+msgstr ""
 
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_60days_invoice_date
 msgid "60 Days invoice date"
-msgstr "60 jours date de facturation"
+msgstr ""
 
 #. module: choreograph_account
 #: model_terms:ir.ui.view,arch_db:choreograph_account.document_tax_totals
 msgid "<strong>Untaxed Amount</strong>"
-msgstr "<strong>Montant HT</strong>"
+msgstr "<strong>Total (excluding taxes)</strong>"
 
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_30_to_50_down_payment
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30_to_50_down_payment
 msgid "Newly registered customers: 30% to 50% down payment"
-msgstr "Clients nouvellement immatriculés : de 30% à 50% d'acompte"
+msgstr ""
 
 #. module: choreograph_account
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30days_invoice_date
 msgid "Payment terms: 30 Days from invoice date"
-msgstr "Conditions de paiement :  30 jours date de facturation"
+msgstr ""
 
 #. module: choreograph_account
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30days_month_end
 msgid "Payment terms: 30 Days month-end"
-msgstr "Conditions de paiement : 30 jours fin de mois"
+msgstr ""
 
 #. module: choreograph_account
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30days_end_month_10
 msgid "Payment terms: 30 Days month-end 10"
-msgstr "Conditions de paiement : 30 jours fin de mois le 10"
+msgstr ""
 
 #. module: choreograph_account
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30days_month_end_invoice_date
 msgid "Payment terms: 30 Days month-end from invoice date"
-msgstr "Conditions de paiement : 30 jours fin de mois à date de facture"
+msgstr ""
 
 #. module: choreograph_account
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_45days_invoice_date
@@ -94,14 +94,14 @@ msgstr ""
 #. module: choreograph_account
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_45days_month_end
 msgid "Payment terms: 45 Days month-end"
-msgstr "Conditions de paiement : 45 jours fin de mois"
+msgstr ""
 
 #. module: choreograph_account
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_60days_invoice_date
 msgid "Payment terms: 60 Days from invoice date"
-msgstr "Conditions de paiement : 60 jours date de facturation"
+msgstr ""
 
 #. module: choreograph_account
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_60days_month_end
 msgid "Payment terms: 60 Days month-end"
-msgstr "Conditions de paiement : 60 jours fin de mois"
+msgstr ""

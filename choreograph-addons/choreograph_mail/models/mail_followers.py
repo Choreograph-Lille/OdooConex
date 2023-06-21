@@ -20,11 +20,13 @@ class MailFollowers(models.Model):
             return super(MailFollowers, self).create(vals_list)
         tmp_vals_list = copy.deepcopy(vals_list)
         for values in vals_list:
-            if values.get('res_id', False):
+            if values.get('res_id', False) and values in tmp_vals_list:
                 source_id = self.env[values['res_model']].browse(values['res_id']).exists()
-                if self.check_field_followers(source_id, 'partner_id') and source_id.partner_id.id == values['partner_id'] and values in tmp_vals_list:
+                if self.check_field_followers(source_id, 'partner_id') and source_id.partner_id.id == values['partner_id']:
                     tmp_vals_list.remove(values)
-                if self.check_field_followers(source_id, 'user_ids') and values['partner_id'] in source_id.user_ids.mapped('partner_id').ids and values in tmp_vals_list:
+                if self.check_field_followers(source_id, 'user_ids') and values['partner_id'] in source_id.user_ids.mapped('partner_id').ids:
+                    tmp_vals_list.remove(values)
+                if source_id._name == 'res.partner' and (source_id.parent_id.id == values['partner_id'] or source_id.user_id.partner_id.id == values['partner_id']):
                     tmp_vals_list.remove(values)
         res = super(MailFollowers, self).create(tmp_vals_list)
         res._invalidate_documents(tmp_vals_list)

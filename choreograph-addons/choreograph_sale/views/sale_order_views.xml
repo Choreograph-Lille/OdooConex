@@ -91,7 +91,6 @@
                                 <field name="routing_date"/>
                                 <field name="routing_end_date"/>
                                 <field name="desired_finished_volume"/>
-                                <field name="id_title"/>
                                 <field name="volume_detail"/>
                                 <field name="sender"/>
                                 <separator string="Message Kit (wording)"/>
@@ -107,7 +106,6 @@
                                 <separator string="BAT"/>
                                 <field name="bat_from"/>
                                 <field name="bat_internal"/>
-                                <field name="bat_client"/>
                                 <field name="bat_comment"/>
                                 <separator string="Witnesses"/>
                                 <field name="witness_file_name"/>
@@ -149,7 +147,6 @@
                             <group name="bat" string="BAT">
                                 <field name="email_bat_from"/>
                                 <field name="email_bat_internal"/>
-                                <field name="email_bat_client"/>
                                 <field name="bat_desired_date"/>
 
                                 <separator string="Witnesses"/>
