@@ -192,7 +192,8 @@
                     </group>
                     <field name="repatriate_information" invisible="1"/>
                     <field name="segment_ids"
-                        attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['75', '85', '80', '20', '25', '30'])],
+                        attrs="{'invisible': ['|', '|', ('task_number', '=', False), ('task_number', 'not in', ['75', '80', '85', '20', '25', '30']),
+                                '&amp;', ('task_number', 'in', ['80']), ('repatriate_information', '=', False)],
                                 'readonly': [('task_number', 'in', ['80']), ('repatriate_information', '=', True)]}"
                         widget="one2many"
                         domain="[('order_id', '=', sale_order_id)]"
@@ -234,7 +235,8 @@
                         </form>
                     </field>
                     <field name="task_segment_ids"
-                        attrs="{'invisible': ['|', ('task_number', '=', False), ('task_number', 'not in', ['70'])]}"
+                        attrs="{'invisible': ['|', '|', ('task_number', '=', False), ('task_number', 'not in', ['70', '80']),
+                                '&amp;', ('task_number', 'in', ['80']), ('repatriate_information', '=', True)]}"
                         force_save="1">
                         <tree editable="bottom">
                             <field name="task_id" invisible="1" />

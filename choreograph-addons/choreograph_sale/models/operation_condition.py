@@ -19,26 +19,28 @@ SUBTYPE_TASK_NUMBER = {
 
 class OperationCondition(models.Model):
     _name = 'operation.condition'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Operation Condition'
 
-    operation_date = fields.Date('Operation date')
-    note = fields.Text('Information')
+    operation_date = fields.Date('Operation date', tracking=True)
+    note = fields.Text('Information', tracking=True)
     order_id = fields.Many2one('sale.order')
     is_task_created = fields.Boolean('Is Task Created?')
     operation_type = fields.Selection([
         ('condition', 'Condition'),
         ('exclusion', 'Exclusion')],
         default='condition',
-        required=True)
-    file_name = fields.Char()
+        required=True, tracking=True)
+    file_name = fields.Char(tracking=True)
     task_number = fields.Selection(TASK_NUMBER, compute='_compute_task_number')
-    subtype = fields.Selection(SUBTYPE, required=True, compute='_compute_subtype')
-    condition_subtype = fields.Selection(CONDITION_SUBTYPE, required=True, default='client_file')
+    subtype = fields.Selection(SUBTYPE, required=True, compute='_compute_subtype', tracking=True)
+    condition_subtype = fields.Selection(CONDITION_SUBTYPE, required=True, default='client_file', tracking=True)
     exclusion_subtype = fields.Selection(EXCLUSION_SUBTYPE, required=True, default='client_file')
     order_ids = fields.Many2many('sale.order', 'operation_condition_sale_order_rel',
                                  'condition_id', 'sale_order_id', 'Sale Order')
     task_id = fields.Many2one('project.task')
     partner_id = fields.Many2one('res.partner')
+    sequence = fields.Integer(default=1)
 
     @api.depends('operation_type', 'condition_subtype', 'exclusion_subtype')
     def _compute_subtype(self):
