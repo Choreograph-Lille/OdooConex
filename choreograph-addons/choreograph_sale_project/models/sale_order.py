@@ -540,6 +540,8 @@ class SaleOrder(models.Model):
         return True
 
     def action_send_delivery_email(self):
+        self.ensure_one()
+        self.env['res.partner'].sudo().find_or_create(self._get_operation_task([80]).provider_delivery_address)
         composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form')
         template_id = self.env.ref('choreograph_sale_project.email_template_choreograph_delivery')
         return {
@@ -558,7 +560,6 @@ class SaleOrder(models.Model):
                 'website_sale_send_recovery_email': True,
                 'active_ids': self.ids,
                 'operation_email_process': True,
-                'default_email_to': self._get_operation_task([75]).provider_delivery_address
             },
         }
 
