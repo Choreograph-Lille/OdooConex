@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+spreadsheet_dashboard_user,spreadsheet_dashboard user,spreadsheet_dashboard.model_spreadsheet_dashboard,base.group_user,1,1,1,1
+spreadsheet_revision_user,spreadsheet_revision user,spreadsheet_edition.model_spreadsheet_revision,base.group_user,1,1,1,0

@@ -30,7 +30,7 @@
                 <strong>Client instruction:</strong>
             </div>
             <div t-if="not doc.recurrence_id" class="row">
-                <div class="col-6">
+                <div class="col-7">
                     <table class="table table-sm o_main_table table-borderless mt-4" style="border: 0px !important">
                         <thead style="display: table-row-group">
                             <tr>
@@ -52,7 +52,7 @@
                         </thead>
                     </table>
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                     <table class="table table-sm o_main_table table-borderless mt-4" style="border: 0px !important">
                         <thead style="display: table-row-group">
                             <tr>
