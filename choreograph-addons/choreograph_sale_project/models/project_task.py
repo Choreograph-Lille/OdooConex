@@ -315,7 +315,7 @@ class ProjectTask(models.Model):
                         task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
                     if task.task_number == '60' and task.project_id.sale_order_id.has_enrichment_email_op:
                         task.project_id._update_task_stage('55', TODO_TASK_STAGE)
-                elif (task.task_number in ['5', '10', '15'] and stage_id.stage_number == FILE_RECEIVED_TASK_STAGE) or (task.task_number in ['20', '25', '35'] and stage_id.stage_number == WAITING_FILE_TASK_STAGE):
+                elif stage_id.stage_number in [FILE_RECEIVED_TASK_STAGE, WAITING_FILE_TASK_STAGE]:
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '45' and stage_id.stage_number == '50':
                     task.project_id._hook_task_45_in_stage_50()
