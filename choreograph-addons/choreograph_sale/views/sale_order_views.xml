@@ -147,6 +147,7 @@
                             <group name="bat" string="BAT">
                                 <field name="email_bat_from"/>
                                 <field name="email_bat_internal"/>
+                                <field name="email_bat_client"/>
                                 <field name="bat_desired_date"/>
 
                                 <separator string="Witnesses"/>

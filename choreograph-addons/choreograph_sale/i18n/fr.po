@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-19 17:31+0000\n"
-"PO-Revision-Date: 2023-06-19 17:31+0000\n"
+"POT-Creation-Date: 2023-06-22 18:18+0000\n"
+"PO-Revision-Date: 2023-06-22 18:18+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -208,6 +208,18 @@ msgstr ""
 "<i>\n"
 "                        8.2.2. Violation des données\n"
 "                    </i>"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.res_config_settings_invoice_terms_c9h_view_form
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" "
+"groups=\"base.group_multi_company\" role=\"img\"/>"
+msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Les valeurs définies ici sont"
+" spécifiques à l'entreprise.\" aria-label=\"Les valeurs définies ici sont "
+"spécifiques à l'entreprise.\" groups=\"base.group_multi_company\" "
+"role=\"img\"/>"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -582,6 +594,7 @@ msgid "Access warning"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_needaction
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_needaction
 msgid "Action Needed"
 msgstr ""
@@ -593,21 +606,25 @@ msgid "Active"
 msgstr "Actif"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_ids
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_ids
 msgid "Activities"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_exception_decoration
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_exception_decoration
 msgid "Activity Exception Decoration"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_state
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_state
 msgid "Activity State"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_type_icon
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_type_icon
 msgid "Activity Type Icon"
 msgstr ""
@@ -621,6 +638,11 @@ msgstr "Ajouter une nouvelle durée de conservation de données"
 #: model_terms:ir.actions.act_window,help:choreograph_sale.retribution_base_action
 msgid "Add a new retribution base"
 msgstr "Ajouter une nouvelle base concernée"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.res_config_settings_invoice_terms_c9h_view_form
+msgid "Add your terms &amp; conditions at the bottom of invoices"
+msgstr "Ajoutez vos conditions au pied de page des factures"
 
 #. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__adjustment
@@ -650,6 +672,7 @@ msgid "Associate order with an existing operation"
 msgstr "Associer la commande à une opération existante"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_attachment_count
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
@@ -817,6 +840,11 @@ msgid "Comment"
 msgstr "Commentaires"
 
 #. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__operation_type__condition
 msgid "Condition"
 msgstr ""
@@ -830,6 +858,11 @@ msgstr "Sous-type Condition"
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_condition_view_form
 msgid "Condition/Exclusion"
 msgstr ""
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_res_partner
@@ -924,6 +957,11 @@ msgid "Desired Finished Volume"
 msgstr "Volume abouti souhaité"
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.res_company_invoice_terms_c9h_view_form
+msgid "Discard"
+msgstr "Annuler"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__display_name
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__display_name
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition_subtype__display_name
@@ -961,9 +999,14 @@ msgid "Email BAT From"
 msgstr "DE"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_client
+msgid "Email BAT Client"
+msgstr "BAT client"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_internal
 msgid "Email BAT Internal"
-msgstr "BAT interne/client"
+msgstr "BAT interne"
 
 #. module: choreograph_sale
 #. odoo-python
@@ -1100,16 +1143,19 @@ msgid "File Name"
 msgstr "Nom du fichier"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_follower_ids
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_follower_ids
 msgid "Followers"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_partner_ids
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_partner_ids
 msgid "Followers (Partners)"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__activity_type_icon
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
 msgstr ""
@@ -1126,6 +1172,7 @@ msgid "Generate The Operation"
 msgstr "Générer l'opération"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__has_message
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__has_message
 msgid "Has Message"
 msgstr ""
@@ -1148,21 +1195,26 @@ msgid "IM and Classic"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_exception_icon
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_exception_icon
 msgid "Icon"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__activity_exception_icon
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_exception_icon
 msgid "Icon to indicate an exception activity."
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__message_needaction
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_needaction
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__message_has_error
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__message_has_sms_error
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_has_error
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
@@ -1238,6 +1290,11 @@ msgid "Infos Validated"
 msgstr "Infos validées"
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.res_config_settings_invoice_terms_c9h_view_form
+msgid "Insert your terms & conditions here..."
+msgstr "Insérez vos conditions ici ..."
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__campaign_type__instant
 msgid "Instant Mail"
 msgstr ""
@@ -1256,6 +1313,18 @@ msgstr ""
 "Les titres des articles sont donnés à titre indicatif.<br/>"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_company__invoice_terms_c9h
+msgid "Invoice Default Terms and Conditions"
+msgstr "Termes et conditions par défaut de la facture"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_config_settings__invoice_terms_c9h
+#: model:ir.model.fields,field_description:choreograph_sale.field_res_config_settings__use_invoice_terms_c9h
+msgid "Invoice Terms & Conditions"
+msgstr "Termes et conditions de facture "
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_is_follower
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_is_follower
 msgid "Is Follower"
 msgstr ""
@@ -1320,6 +1389,7 @@ msgid "MFT"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_main_attachment_id
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_main_attachment_id
 msgid "Main Attachment"
 msgstr ""
@@ -1330,6 +1400,7 @@ msgid "Medium"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_has_error
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_has_error
 msgid "Message Delivery error"
 msgstr ""
@@ -1346,6 +1417,7 @@ msgid "Message for Sales Order"
 msgstr "Message sur les commandes de vente"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_ids
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_ids
 msgid "Messages"
 msgstr ""
@@ -1361,6 +1433,7 @@ msgid "Multi-Bases"
 msgstr "Multi-base"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__my_activity_date_deadline
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__my_activity_date_deadline
 msgid "My Activity Deadline"
 msgstr ""
@@ -1379,41 +1452,49 @@ msgid "New Condition Count"
 msgstr "Nombre nouveaux conditions"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_calendar_event_id
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_calendar_event_id
 msgid "Next Activity Calendar Event"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_date_deadline
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_date_deadline
 msgid "Next Activity Deadline"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_summary
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_summary
 msgid "Next Activity Summary"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_type_id
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_type_id
 msgid "Next Activity Type"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_needaction_counter
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_needaction_counter
 msgid "Number of Actions"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_has_error_counter
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_has_error_counter
 msgid "Number of errors"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__message_needaction_counter
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_needaction_counter
 msgid "Number of messages which requires an action"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__message_has_error_counter
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_has_error_counter
 msgid "Number of messages with delivery error"
 msgstr ""
@@ -1629,6 +1710,16 @@ msgid "Quotation"
 msgstr "Devis"
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Quotation #"
+msgstr "Devis #"
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+msgid "Quotation Date:"
+msgstr "Date du devis :"
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_order__state_specific__sent
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__sent
 msgid "Quotation Sent"
@@ -1675,6 +1766,7 @@ msgid "Related Base"
 msgstr "Base concernée"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__activity_user_id
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__activity_user_id
 msgid "Responsible User"
 msgstr "Responsable"
@@ -1746,6 +1838,7 @@ msgid "SMS Campaign"
 msgstr "Campagne SMS"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__message_has_sms_error
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__message_has_sms_error
 msgid "SMS Delivery error"
 msgstr ""
@@ -1801,6 +1894,11 @@ msgid "Salesperson:"
 msgstr "Vendeur:"
 
 #. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.res_company_invoice_terms_c9h_view_form
+msgid "Save"
+msgstr "Sauvegarder"
+
+#. module: choreograph_sale
 #. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
@@ -1841,6 +1939,11 @@ msgid "Sent to customers on order confirmation"
 msgstr "Envoyé aux clients lors de la confirmation de commande"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__show_operation_generation_button
 msgid "Show Operation Generation Button"
 msgstr "Afficher bouton génération de l'opération"
@@ -1856,6 +1959,7 @@ msgid "Source"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__activity_state
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_state
 msgid ""
 "Status based on activities\n"
@@ -2142,6 +2246,7 @@ msgid "Transmission method"
 msgstr "Canal d'envoi"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__activity_exception_decoration
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr ""
@@ -2227,11 +2332,13 @@ msgid "Volume percentage is {0}%, this should be at 100%"
 msgstr "Le pourcentage actuel est de {0}%, il doit être de 100%"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__website_message_ids
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__website_message_ids
 msgid "Website Messages"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,help:choreograph_sale.field_operation_condition__website_message_ids
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__website_message_ids
 msgid "Website communication history"
 msgstr ""

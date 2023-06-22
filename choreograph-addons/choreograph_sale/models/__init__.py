@@ -10,3 +10,5 @@ from . import sale_data_conservation
 from . import project_task_campaign
 from . import res_partner
 from . import choreograph_campaign_de
+from . import res_config_settings
+from . import res_company
