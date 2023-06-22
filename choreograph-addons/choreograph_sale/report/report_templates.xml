@@ -83,5 +83,11 @@
         <xpath expr="//div[hasclass('page')]" position="after">
             <t t-call="choreograph_sale.term_and_conditions"/>
         </xpath>
+        
+        <xpath expr="//td[@name='td_quantity']//span[@t-field='line.product_uom']" position="replace"/>
+        <span t-field="line.price_unit" position="attributes">
+            <attribute name="t-options">{"decimal_precision": "Product Unit of Measure"}</attribute>
+        </span>
+        
     </template>
 </odoo>
