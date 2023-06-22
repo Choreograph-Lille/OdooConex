@@ -121,6 +121,7 @@ class SaleOrder(models.Model):
 
     email_bat_from = fields.Many2one('choreograph.campaign.de', 'Email BAT From', tracking=True)
     email_bat_internal = fields.Char('Email BAT Internal', tracking=True)
+    email_bat_client = fields.Char('Email BAT Client', tracking=True)
     bat_desired_date = fields.Date('Email BAT Desired Date', tracking=True)
     email_witness_file_name = fields.Char('Email File Name', tracking=True)
     excluded_provider = fields.Char('Email Excluded Provider', tracking=True)
