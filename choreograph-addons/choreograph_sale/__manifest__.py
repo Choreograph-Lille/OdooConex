@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 {
     'name': 'Choreograph Sale',
     'version': '16.0.0.1',
@@ -33,6 +35,8 @@
         'views/retribution_base_views.xml',
         'views/sale_data_conservation_views.xml',
         'views/choreograph_campaign_de.xml',
+        'views/res_company_views.xml',
+        'views/res_config_settings_views.xml',
         'views/ir_ui_menu_views.xml',
     ],
     'assets': {
@@ -43,4 +47,3 @@
     'installable': True,
     'application': False,
 }
-# -*- coding: utf-8 -*-

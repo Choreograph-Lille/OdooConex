@@ -348,3 +348,14 @@ class SaleOrder(models.Model):
                 'default_template_id': template.id
             })
         return result
+
+    def _prepare_invoice(self):
+        result = super(SaleOrder, self)._prepare_invoice()
+        result.update({
+            "narration": self._get_invoice_narration()
+        })
+        return result
+
+    def _get_invoice_narration(self):
+        self.ensure_one()
+        return self.with_context(lang=self.partner_invoice_id.lang).env.company.invoice_terms_c9h
