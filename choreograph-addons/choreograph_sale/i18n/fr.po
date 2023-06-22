@@ -967,9 +967,14 @@ msgid "Email BAT From"
 msgstr "DE"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_client
+msgid "Email BAT Client"
+msgstr "BAT client"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_internal
 msgid "Email BAT Internal"
-msgstr "BAT interne/client"
+msgstr "BAT interne"
 
 #. module: choreograph_sale
 #. odoo-python
