@@ -11,6 +11,12 @@
                 </p>
             </t>
         </xpath>
+        <span t-elif="doc.state in ['draft','sent']" position="replace">
+            <span t-elif="doc.is_subscription and doc.state in ['draft','sent']">Quotation # </span>
+        </span>
+        <strong t-if="doc.state in ['draft', 'sent']" position="replace">
+            <strong t-if="doc.is_subscription and doc.state in ['draft', 'sent']">Quotation Date:</strong>
+        </strong>
         <xpath expr="//div[@t-if='doc.user_id.name']" position="replace">
             <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2">
                 <strong t-if="doc.recurrence_id">Salesperson:</strong>
@@ -30,7 +36,7 @@
                 <strong>Client instruction:</strong>
             </div>
             <div t-if="not doc.recurrence_id" class="row">
-                <div class="col-6">
+                <div class="col-7">
                     <table class="table table-sm o_main_table table-borderless mt-4" style="border: 0px !important">
                         <thead style="display: table-row-group">
                             <tr>
@@ -52,7 +58,7 @@
                         </thead>
                     </table>
                 </div>
-                <div class="col-6">
+                <div class="col-5">
                     <table class="table table-sm o_main_table table-borderless mt-4" style="border: 0px !important">
                         <thead style="display: table-row-group">
                             <tr>
@@ -83,5 +89,8 @@
         <xpath expr="//div[hasclass('page')]" position="after">
             <t t-call="choreograph_sale.term_and_conditions"/>
         </xpath>
+        
+        <xpath expr="//td[@name='td_quantity']//span[@t-field='line.product_uom']" position="replace"/>
+        
     </template>
 </odoo>

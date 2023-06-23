@@ -19,6 +19,7 @@
         'choreograph_auditlog',
         'choreograph_sale_project',
         'choreograph_sale_discount',
+        'choreograph_spreadsheet_dashboard',
     ],
     'data': [
         # data

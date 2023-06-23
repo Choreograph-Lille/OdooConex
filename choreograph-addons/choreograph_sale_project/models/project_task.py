@@ -32,10 +32,14 @@ class ProjectTask(models.Model):
     bat_from_for_40 = fields.Char(
         string='From', default='IDSEQ | TOP_CANAL_SOURCE(0/1) | TOP_CANAL_ENRICHISSABLE(0/1/2) |')
     bat_internal = fields.Char()
+    bat_client = fields.Char()
+    email_bat_internal = fields.Char(related='sale_order_id.email_bat_internal')
+    email_bat_client = fields.Char(related='sale_order_id.email_bat_client')
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
     optout_link = fields.Text("Output Links")
     witness_file_name = fields.Char('File Name')
+    email_witness_file_name = fields.Char(related='sale_order_id.email_witness_file_name')
     witness_comment = fields.Text()
     file_name = fields.Char()
     file_quantity = fields.Char()
@@ -315,7 +319,7 @@ class ProjectTask(models.Model):
                         task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
                     if task.task_number == '60' and task.project_id.sale_order_id.has_enrichment_email_op:
                         task.project_id._update_task_stage('55', TODO_TASK_STAGE)
-                elif (task.task_number in ['5', '10', '15'] and stage_id.stage_number == FILE_RECEIVED_TASK_STAGE) or (task.task_number in ['20', '25', '35'] and stage_id.stage_number == WAITING_FILE_TASK_STAGE):
+                elif stage_id.stage_number in [FILE_RECEIVED_TASK_STAGE, WAITING_FILE_TASK_STAGE]:
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '45' and stage_id.stage_number == '50':
                     task.project_id._hook_task_45_in_stage_50()
