@@ -358,7 +358,7 @@ class SaleOrder(models.Model):
                 order_id.compute_task_operations()
                 order_id.initiate_provider_delivery(project)
                 order_id.with_context(is_operation_generation=True)._update_date_deadline(vals)
-                # order_id._manage_task_assignation()
+                order_id._manage_task_assignation()
         return order_id
 
     def update_task_bat_from(self, value=''):
