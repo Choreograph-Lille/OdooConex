@@ -19,14 +19,14 @@
         'maas_base'
     ],
     'data': [
-        # data
-        'data/studio_approval_rule.xml',
         # security
         'security/ir_rule.xml',
         'security/res_groups.xml',
         'security/ir_model_access.xml',
         # views
-        'views/ir_ui_menu_views.xml'
+        'views/ir_ui_menu_views.xml',
+        # data
+        'data/studio_approval_rule.xml',
     ],
     'installable': True,
     'application': False,
