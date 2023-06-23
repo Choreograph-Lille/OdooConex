@@ -56,7 +56,7 @@ class MailMessage(models.Model):
         order_obj = self.env['sale.order']
         sale_order_field_list = order_obj.get_mail_field_to_operation()
         valid_stage = order_id.project_ids.stage_id.stage_number != '10'
-        for tracking_value_id in values['tracking_value_ids']:
+        for tracking_value_id in values.get('tracking_value_ids', []):
             field_id = tracking_value_id[2]['field']
             if field_id in sale_order_field_list:
                 if valid_stage:
