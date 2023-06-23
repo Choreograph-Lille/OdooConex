@@ -82,8 +82,8 @@
                 </div>
             </div>
             
-            <div name="due_date" position="replace">
-                <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.related_base" name="due_date">
+            <div name="due_date" position="after">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.related_base" name="related_base">
                     <strong>Base involved:</strong>
                     <p class="m-0" t-field="o.sale_order_id.related_base"/>
                 </div>
