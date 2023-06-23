@@ -15,17 +15,19 @@ class MailMessage(models.Model):
     def create(self, values_list):
         order_obj = self.env['sale.order']
         operation_value_extend = []
+        subtype_id = self.env.ref('mail.mt_note').id
         for values in values_list:
-            if values.get('model', False) in X2MANY_MODEL:
-                vals = self.so_x2many_fields_to_project(values)
-                if vals:
-                    values.update(vals)
-            if values.get('model', False) == 'sale.order':
-                order_id = order_obj.browse(values['res_id'])
-                if order_id and order_id.project_ids:
-                    order_tracking_value_ids, operation_value = self.so_basic_fields_to_project(values, order_id)
-                    values['tracking_value_ids'] = order_tracking_value_ids
-                    operation_value_extend.append(operation_value)
+            if values.get('is_internal', False) and values.get('subtype_id', False) == subtype_id:
+                if values.get('model', False) in X2MANY_MODEL:
+                    vals = self.so_x2many_fields_to_project(values)
+                    if vals:
+                        values.update(vals)
+                if values.get('model', False) == 'sale.order':
+                    order_id = order_obj.browse(values['res_id'])
+                    if order_id and order_id.project_ids:
+                        order_tracking_value_ids, operation_value = self.so_basic_fields_to_project(values, order_id)
+                        values['tracking_value_ids'] = order_tracking_value_ids
+                        operation_value_extend.append(operation_value)
         values_list.extend(operation_value_extend)
         return super().create(values_list)
 
