@@ -346,9 +346,11 @@
                     <field name="type_of_project" invisible="1" />
                 </field>
 
-                <field name="user_ids" position="attributes">
+            
+                <!-- HT01765 : disable this features
+                    <field name="user_ids" position="attributes">
                     <attribute name="attrs">{'readonly': [('task_number', 'in', ['5', '10', '15'])]}</attribute>
-                </field>
+                </field> -->
 
                 <field name="sale_order_id" position="after">
                     <field name="customer_commitment_date" widget="date"
