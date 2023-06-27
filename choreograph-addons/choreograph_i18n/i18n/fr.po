@@ -51,3 +51,13 @@ msgstr "Secteur d'activité"
 #: model:ir.model.fields,field_description:purchase.field_purchase_order__payment_term_id
 msgid "Payment Terms"
 msgstr "Conditions de règlement"
+
+#. module: base_user_role
+#: model:ir.module.category,name:base_user_role.ir_module_category_role
+msgid "User roles"
+msgstr "Rôles SOX"
+
+#. module: purchase
+#: model_terms:ir.ui.view,arch_db:purchase.report_purchaseorder_document
+msgid "<strong>Purchase Representative:</strong>"
+msgstr "<strong>Gestionnaire de compte :</strong>"

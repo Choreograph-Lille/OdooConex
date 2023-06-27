@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="email_template_purchase_done" model="mail.template">
+            <field name="name">Purchase: Purchase Order C9H</field>
+            <field name="model_id" ref="purchase.model_purchase_order"/>
+            <field name="subject">{{ object.company_id.name }} order n°{{ object.name or 'n/a' }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="description">Sent to vendor with the purchase order in attachment</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Dear supplier,
+                        <br/>
+                        <br/>
+                        You will find enclosed the order N°
+                        <span style="font-weight:bold;" t-out="object.name or ''">P00015</span>
+                        <br/>
+                        <br/>
+                        Please send your invoice to
+                        <a href="mailto:compta.france@choreograph.com" target="_blank">
+                            <u>compta.france@choreograph.com,</u>
+                        </a>
+                        specifying the PO number on it.
+                        <br/>
+                        <br/>
+                        Please do not hesitate to contact us for any further information,
+                        <br/>
+                        <br/>
+                        Yours sincerely,
+                        <br/>
+                        <br/>
+                        <t t-out="object.company_id.name"/>
+                        <br/>
+                        <t t-out="object.company_id.street"/>
+                        <t t-if="object.company_id.street2">,
+                            <t t-out="object.company_id.street2"/>
+                        </t>
+                        <br/>
+                        <t t-out="object.company_id.zip"/>
+                        <t t-out="object.company_id.city"/>
+                        <br/>
+                        Tel:
+                        <t t-out="object.company_id.phone"/>
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="purchase.action_report_purchase_order"/>
+            <field name="report_name">PO_{{ (object.name or '').replace('/','_') }}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    
+    </data>
+</odoo>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        
+        <template id="document_tax_totals" inherit_id="account.document_tax_totals" primary="True">
+            <xpath expr="//td" position="replace">
+                <td>
+                    <strong>Untaxed Amount</strong>
+                </td>
+            </xpath>
+        </template>
+        
+        <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+            <div class="row" position="replace">
+                <div class="row">
+                    <div class="col-6">
+                        <t t-set="information_block">
+                            <table class="table table-sm o_main_table table-borderless mt-4">
+                                <thead style="display: table-row-group;">
+                                    <tr/>
+                                    <tr>
+                                        <td style="text-decoration: underline; text-align: left !important;">Sales:</td>
+                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                            <span t-field="o.invoice_user_id"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-decoration: underline; text-align: left !important;">Email address:</td>
+                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                            <span t-field="o.invoice_user_id.email"/>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-decoration: underline; text-align: left !important;">Account contact:</td>
+                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                            <span>Mandy Bercker</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-decoration: underline; text-align: left !important;">Email address:</td>
+                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                            <span>mandy.bercker@choreograph.com</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-decoration: underline; text-align: left !important;">Phone:</td>
+                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                            <span>+33 362 14 51 00</span>
+                                        </td>
+                                    </tr>
+                                    <tr/>
+                                </thead>
+                            </table>
+                        </t>
+                    </div>
+                    <div class="col-6" name="address_not_same_as_shipping">
+                        <t t-set="address">
+                            <address class="mb-0" t-field="o.partner_id"
+                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                            <div t-if="o.partner_id.vat">
+                                <t t-if="o.company_id.account_fiscal_country_id.vat_label"
+                                   t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
+                                <t t-else="">Tax ID</t>:
+                                <span t-field="o.partner_id.vat"/>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+            
+            <div name="customer_code" position="replace">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.date_order" name="customer_code">
+                    <strong>Order date:</strong>
+                    <p class="m-0" t-field="o.sale_order_id.date_order" t-options="{'widget': 'date'}"/>
+                </div>
+            </div>
+            
+            <div name="customer_code" position="after">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.partner_id" name="customer">
+                    <strong>Client:</strong>
+                    <p class="m-0" t-field="o.sale_order_id.partner_id"/>
+                </div>
+            </div>
+            
+            <div name="due_date" position="after">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.related_base" name="related_base">
+                    <strong>Base involved:</strong>
+                    <p class="m-0" t-field="o.sale_order_id.related_base"/>
+                </div>
+            </div>
+            
+            <div name="reference" position="replace">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.commitment_date" name="reference">
+                    <strong>Delivery date order:</strong>
+                    <p class="m-0" t-field="o.sale_order_id.commitment_date" t-options="{'widget': 'date'}"/>
+                </div>
+            </div>
+            
+            <div name="origin" position="replace">
+                <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_origin" name="origin">
+                    <strong>Sale Order:</strong>
+                    <p class="m-0" t-field="o.invoice_origin"/>
+                </div>
+            </div>
+            
+            <th name="th_taxes" position="replace"/>
+            <td t-attf-class="text-start {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" position="replace"/>
+        
+        </template>
+    
+    </data>
+</odoo>

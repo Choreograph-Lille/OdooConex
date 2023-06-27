@@ -1,0 +1,255 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-23 16:33+0000\n"
+"PO-Revision-Date: 2023-06-23 16:33+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_account
+#: model:account.payment.term,name:choreograph_account.account_payment_term_30days_invoice_date
+msgid "30 Days from invoice date"
+msgstr ""
+
+#. module: choreograph_account
+#: model:account.payment.term,name:choreograph_account.account_payment_term_30days_month_end
+msgid "30 Days month-end"
+msgstr ""
+
+#. module: choreograph_account
+#: model:account.payment.term,name:choreograph_account.account_payment_term_30days_end_month_10
+msgid "30 Days month-end 10"
+msgstr ""
+
+#. module: choreograph_account
+#: model:account.payment.term,name:choreograph_account.account_payment_term_30days_month_end_invoice_date
+msgid "30 Days month-end from invoice date"
+msgstr ""
+
+#. module: choreograph_account
+#: model:account.payment.term,name:choreograph_account.account_payment_term_45days_invoice_date
+msgid "45 Days from invoice date"
+msgstr ""
+
+#. module: choreograph_account
+#: model:account.payment.term,name:choreograph_account.account_payment_term_45days_month_end
+msgid "45 Days month-end"
+msgstr ""
+
+#. module: choreograph_account
+#: model:account.payment.term,name:choreograph_account.account_payment_term_60days_month_end
+msgid "60 Days from month-end"
+msgstr ""
+
+#. module: choreograph_account
+#: model:account.payment.term,name:choreograph_account.account_payment_term_60days_invoice_date
+msgid "60 Days invoice date"
+msgstr ""
+
+#. module: choreograph_account
+#: model:mail.template,body_html:choreograph_account.email_template_edi_invoice
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                    Hello,\n"
+"                    <br>\n"
+"                    <br>\n"
+"                    You will find joined the invoice\n"
+"                    <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">INV/2021/05/0005</span>\n"
+"                    for an amount of\n"
+"                    <span style=\"font-weight:bold;\" t-out=\"format_amount(object.amount_total, object.currency_id) or ''\">$ 143,750.00</span>\n"
+"                    <br>\n"
+"                    <br>\n"
+"                    Please indicate the following reference when paying:\n"
+"                    <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">INV/2021/05/0005</span>.\n"
+"                    <br>\n"
+"                    <br>\n"
+"                    Do not hesitate to contact us if you have an questions.\n"
+"                    <br>\n"
+"                    <br>\n"
+"                    Best regards\n"
+"                    <br>\n"
+"                    <br>\n"
+"                    <strong>mandy bercker</strong>\n"
+"                    <br>\n"
+"                    <span>administrative and commercial coordinator</span>\n"
+"                    <br>\n"
+"                    <br>\n"
+"                    <span t-field=\"object.company_id.street\"></span>\n"
+"                    <t t-if=\"object.company_id.street2\">,\n"
+"                        <span t-field=\"object.company_id.street2\"></span>\n"
+"                    </t>\n"
+"                    <br>\n"
+"                    <span t-field=\"object.company_id.zip\"></span>\n"
+"                    <span t-field=\"object.company_id.city\"></span>\n"
+"                    <br>\n"
+"                    <span t-field=\"object.company_id.country_id\"></span>\n"
+"                    <br>\n"
+"                    <br>\n"
+"                    Tel:\n"
+"                    <span t-field=\"object.company_id.phone\"></span>\n"
+"                    <br>\n"
+"                    <span>Choreograph.com</span>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "<span>+33 362 14 51 00</span>"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "<span>Mandy Bercker</span>"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "<span>mandy.bercker@choreograph.com</span>"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "<strong>Base involved:</strong>"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "<strong>Client:</strong>"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "<strong>Delivery date order:</strong>"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "<strong>Order date:</strong>"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "<strong>Sale Order:</strong>"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.document_tax_totals
+msgid "<strong>Untaxed Amount</strong>"
+msgstr "<strong>Total (excluding taxes)</strong>"
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "Account contact:"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "Email address:"
+msgstr ""
+
+#. module: choreograph_account
+#: model:mail.template,subject:choreograph_account.email_template_edi_invoice
+msgid "Invoice"
+msgstr ""
+
+#. module: choreograph_account
+#: model:mail.template,name:choreograph_account.email_template_edi_invoice
+msgid "Invoice: Sending - C9H"
+msgstr ""
+
+#. module: choreograph_account
+#: model:mail.template,report_name:choreograph_account.email_template_edi_invoice
+msgid ""
+"Invoice_{{ (object.name or '').replace('/','_') }}{{ object.state == 'draft'"
+" and '_draft' or '' }}"
+msgstr ""
+
+#. module: choreograph_account
+#: model:ir.model,name:choreograph_account.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: choreograph_account
+#: model:account.payment.term,name:choreograph_account.account_payment_term_30_to_50_down_payment
+#: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30_to_50_down_payment
+msgid "Newly registered customers: 30% to 50% down payment"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30days_invoice_date
+msgid "Payment terms: 30 Days from invoice date"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30days_month_end
+msgid "Payment terms: 30 Days month-end"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30days_end_month_10
+msgid "Payment terms: 30 Days month-end 10"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30days_month_end_invoice_date
+msgid "Payment terms: 30 Days month-end from invoice date"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:account.payment.term,note:choreograph_account.account_payment_term_45days_invoice_date
+msgid "Payment terms: 45 Days from invoice date"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:account.payment.term,note:choreograph_account.account_payment_term_45days_month_end
+msgid "Payment terms: 45 Days month-end"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:account.payment.term,note:choreograph_account.account_payment_term_60days_invoice_date
+msgid "Payment terms: 60 Days from invoice date"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:account.payment.term,note:choreograph_account.account_payment_term_60days_month_end
+msgid "Payment terms: 60 Days month-end"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "Phone:"
+msgstr ""
+
+#. module: choreograph_account
+#: model:ir.model.fields,field_description:choreograph_account.field_account_bank_statement_line__sale_order_id
+#: model:ir.model.fields,field_description:choreograph_account.field_account_move__sale_order_id
+#: model:ir.model.fields,field_description:choreograph_account.field_account_payment__sale_order_id
+msgid "Sale Order"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "Sales:"
+msgstr ""
+
+#. module: choreograph_account
+#: model:mail.template,description:choreograph_account.email_template_edi_invoice
+msgid "Sent to customers with their invoices in attachment"
+msgstr ""
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
+msgid "Tax ID"
+msgstr ""

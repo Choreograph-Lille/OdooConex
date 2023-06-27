@@ -8,7 +8,8 @@ from odoo.addons.choreograph_project.models.project_project import (
     TERMINATED_TASK_STAGE,
     FILE_RECEIVED_TASK_STAGE,
     WAITING_FILE_TASK_STAGE,
-    TODO_TASK_STAGE
+    TODO_TASK_STAGE,
+    BAT_CLIENT_TASK_STAGE
 )
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
@@ -32,10 +33,13 @@ class ProjectTask(models.Model):
         string='From', default='IDSEQ | TOP_CANAL_SOURCE(0/1) | TOP_CANAL_ENRICHISSABLE(0/1/2) |')
     bat_internal = fields.Char()
     bat_client = fields.Char()
+    email_bat_internal = fields.Char(related='sale_order_id.email_bat_internal')
+    email_bat_client = fields.Char(related='sale_order_id.email_bat_client')
     bat_comment = fields.Text('BAT Comment')
     excluded_provider = fields.Char(related='sale_order_id.excluded_provider')
-    optout_link = fields.Text("Output Links", related='sale_order_id.optout_link')
+    optout_link = fields.Text("Output Links")
     witness_file_name = fields.Char('File Name')
+    email_witness_file_name = fields.Char(related='sale_order_id.email_witness_file_name')
     witness_comment = fields.Text()
     file_name = fields.Char()
     file_quantity = fields.Char()
@@ -77,7 +81,9 @@ class ProjectTask(models.Model):
                                             related='sale_order_id.is_preheader_available')
     is_preheader_available_text = fields.Text(
         'If not, indicate where to find it', related='sale_order_id.is_preheader_available_text')
-    comment = fields.Text(compute='compute_comment', store=True)
+    comment = fields.Text(related='sale_order_id.comment')
+    email_comment = fields.Text(related='sale_order_id.email_comment')
+    sms_comment = fields.Text(related='sale_order_id.sms_comment')
     bat_desired_date = fields.Date(related='sale_order_id.bat_desired_date')
     folder_key = fields.Char(compute='_compute_folder_key', store=True)
 
@@ -96,13 +102,18 @@ class ProjectTask(models.Model):
         ('3', '3')])
     delivery_date = fields.Date()
     stage_number = fields.Selection(related='stage_id.stage_number')
-    has_enrichment_email_op = fields.Boolean(related='project_id.sale_order_id.has_enrichment_email_op', store=True)
+    has_enrichment_email_op = fields.Boolean(related='sale_order_id.has_enrichment_email_op')
     repatriate_information = fields.Boolean(related='sale_order_id.repatriate_information')
 
-    @api.depends('sale_order_id.comment')
-    def compute_comment(self):
-        for rec in self:
-            rec.comment = rec.sale_order_id.comment if rec.task_number in ['20', '25', '30'] else False
+    # def compute_comment(self):
+    #     for rec in self:
+    #         comment_values = {
+    #             '20': rec.sale_order_id.comment,
+    #             '25': rec.sale_order_id.comment,
+    #             '30': rec.sale_order_id.comment,
+    #             '45': rec.sale_order_id.email_comment
+    #         }
+    #         rec.comment = comment_values.get(rec.task_number) if rec.task_number in comment_values else False
 
     @api.depends('project_id', 'sale_order_id.name', 'partner_id.ref', 'related_base.code')
     def _compute_folder_key(self):
@@ -308,16 +319,24 @@ class ProjectTask(models.Model):
                         task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
                     if task.task_number == '60' and task.project_id.sale_order_id.has_enrichment_email_op:
                         task.project_id._update_task_stage('55', TODO_TASK_STAGE)
-                elif (task.task_number in ['5', '10', '15'] and stage_id.stage_number == FILE_RECEIVED_TASK_STAGE) or (task.task_number in ['20', '25', '35'] and stage_id.stage_number == WAITING_FILE_TASK_STAGE):
+                elif stage_id.stage_number in [FILE_RECEIVED_TASK_STAGE, WAITING_FILE_TASK_STAGE]:
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '45' and stage_id.stage_number == '50':
                     task.project_id._hook_task_45_in_stage_50()
+                elif task.task_number == '45' and stage_id.stage_number == BAT_CLIENT_TASK_STAGE:
+                    task.project_id._hook_task_45_in_stage_70()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
             provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex',
                                'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
+            if task.task_number == '70' and 'task_segment_ids' in vals:
+                task_75_id = task.project_id._find_task_by_task_number('75')
+                if task_75_id:
+                    task_75_id.write({'segment_ids': [(6, 0, self.task_segment_ids.ids)]})
+            if task.task_number == '60' and 'optout_link' in vals:
+                task.sale_order_id.update_optout_link(vals.get('optout_link'))
         return res
 
     def update_provider_data(self):

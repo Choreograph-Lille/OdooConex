@@ -16,10 +16,14 @@
     ],
     'data': [
         # data
+        'data/mail_template_data.xml',
         'data/account_payment_term_data.xml',
         # security
         # views
         'views/res_partner_views.xml',
+        'views/account_move_views.xml',
+        # report
+        'report/report_invoice_document.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],

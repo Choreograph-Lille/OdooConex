@@ -1,37 +1,23 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class OperationProviderDelivery(models.Model):
-    _name = "operation.provider.delivery"
+    _name = 'operation.provider.delivery'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     order_id = fields.Many2one('sale.order', 'Sale Order')
-    delivery_date = fields.Date('Date', required=1, compute='compute_delivery_date', inverse='inverse_delivery_date')
-    task_id = fields.Many2one('project.task', 'Task')
+    delivery_date = fields.Date('Date', required=1, tracking=True)
+    task_id = fields.Many2one('project.task', 'Task', tracking=True)
+    sequence = fields.Integer(default=1)
 
-    @api.model
-    def create(self, vals):
-        res = super(OperationProviderDelivery, self).create(vals)
-        res.create_delivery_task()
+    def write(self, vals):
+        res = super(OperationProviderDelivery, self).write(vals)
+        for rec in self:
+            if 'delivery_date' in vals:
+                rec.update_task_date_deadline()
         return res
 
-    @api.depends('task_id.date_deadline')
-    def compute_delivery_date(self):
-        for rec in self:
-            rec.delivery_date = rec.task_id.date_deadline
-
-    def inverse_delivery_date(self):
-        for rec in self:
-            rec.task_id.date_deadline = rec.delivery_date
-
-    def create_delivery_task(self):
-        for rec in self:
-            if not self._context.get('no_create_delivery_task'):
-                task_template = rec.order_id.get_provider_delivery_template()
-                if task_template:
-                    rec.task_id = task_template[0].copy({
-                        'name': '%s (%s)' % (task_template[0].name, str(len(task_template))),
-                        'date_deadline': rec.delivery_date,
-                        'project_id': rec.order_id.get_operation_product().project_id.id
-                    })
+    def update_task_date_deadline(self):
+        self.task_id.date_deadline = self.delivery_date

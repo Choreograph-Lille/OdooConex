@@ -13,17 +13,20 @@
                         <group>
                             <field name="potential_return" force_save="1" />
                             <field name="potential_return_date"
-                                attrs="{'invisible':[('potential_return', '=', False)]}" />
+                                attrs="{'invisible':[('potential_return', '=', False)], 'required': [('potential_return','=',True)]}" />
                             <field name="potential_return_task_id"
                                 attrs="{'invisible':[('potential_return', '=', False)]}"
                                 readonly="1" force_save="1" />
-                            <field name="operation_code" invisible="1"/>
-                            <field name="return_production_potential" attrs="{'invisible':[('operation_code', 'not in', ['ENR_EMAIL', 'ENR_SMS'])]}" />
+                            <field name="operation_code" invisible="1" />
+                            <field name="return_production_potential"
+                                attrs="{'invisible':[('operation_code', 'not in', ['ENR_EMAIL', 'ENR_SMS'])]}" />
                             <field name="return_production_potential_date"
                                 attrs="{'invisible':[('return_production_potential', '=', False)]}" />
-                            <field name="study_delivery_date"/>
+                            <field name="study_delivery_date"
+                                attrs="{'required': [('potential_return','=',True)]}" />
                             <field name="study_delivery_task_id"
-                                attrs="{'invisible':[('potential_return', '=', False)]}" readonly="1"
+                                attrs="{'invisible':[('potential_return', '=', False)]}"
+                                readonly="1"
                                 force_save="1" />
                             <field name="presentation" force_save="1" />
                             <field name="presentation_date"
@@ -31,8 +34,9 @@
                             <field name="presentation_task_id"
                                 attrs="{'invisible':[('presentation', '=', False)]}" readonly="1"
                                 force_save="1" />
-                            <field name="study_global_task_id" invisible="1" readonly="1" force_save="1"/>
-                            <field name="presta_delivery_date" invisible="1"/>
+                            <field name="study_global_task_id" invisible="1" readonly="1"
+                                force_save="1" />
+                            <field name="presta_delivery_date" invisible="1" />
                         </group>
                         <group>
                             <field name="delivery_info_task_id" />
@@ -40,11 +44,13 @@
                             <field
                                 name="operation_provider_delivery_ids"
                                 attrs="{'invisible':[('operation_provider_delivery_ids', '=', [])]}"
+                                options="{'create': False}"
                             >
-                                <tree editable="bottom">
+                                <tree editable="bottom" create="false" delete="false">
+                                    <field name="sequence" widget="handle" />
                                     <field name="order_id" invisible="1" />
                                     <field name="delivery_date" />
-                                    <field name="task_id" readonly="1" invisible="1"/>
+                                    <field name="task_id" readonly="1" />
                                 </tree>
                             </field>
                         </group>
@@ -52,7 +58,8 @@
                     <h3>
                         <label for="operation_condition_ids" />
                     </h3>
-                    <field name="operation_condition_ids" context="{'default_partner_id': partner_id}"/>
+                    <field name="operation_condition_ids"
+                        context="{'default_partner_id': partner_id}" />
                     <h3>
                         <label for="comment" />
                     </h3>
@@ -64,9 +71,10 @@
                         <group>
                             <field name="to_validate" />
                         </group>
-                        <field name="segment_ids" force_save="1" >
+                        <field name="segment_ids" force_save="1">
                             <tree editable="bottom">
-                                <field name="segment_number" readonly="1" force_save="1"/>
+                                <field name="sequence" widget="handle" />
+                                <field name="segment_number" readonly="1" force_save="1" />
                                 <field name="model_selection" />
                                 <field name="name" />
                                 <field name="ranking" />
@@ -155,7 +163,8 @@
             <xpath expr="//field[@name='optout_link']" position="attributes">
                 <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
             </xpath>
-            <!--<xpath expr="//field[@name='routing_base']" position="attributes">
+            <!--<xpath
+            expr="//field[@name='routing_base']" position="attributes">
                 <attribute name="attrs">{'invisible': [('has_enrichment_email_op','=',False)]}</attribute>
             </xpath>-->
             <xpath expr="//group[@name='bat']/separator[2]" position="attributes">

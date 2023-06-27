@@ -539,11 +539,6 @@ msgid "Base"
 msgstr ""
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_client
-msgid "Bat Client"
-msgstr ""
-
-#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_from
 msgid "Bat From"
 msgstr ""
@@ -802,11 +797,6 @@ msgid "Email A/B Test"
 msgstr ""
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_client
-msgid "Email BAT Client"
-msgstr ""
-
-#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__bat_desired_date
 msgid "Email BAT Desired Date"
 msgstr ""
@@ -1016,11 +1006,6 @@ msgstr ""
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
-
-#. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__id_title
-msgid "Id Title"
 msgstr ""
 
 #. module: choreograph_sale

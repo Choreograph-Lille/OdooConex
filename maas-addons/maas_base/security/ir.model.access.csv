@@ -14,9 +14,9 @@ access_res_company_customer_management,access_res_company_customer_management,ba
 access_res_partner_user,access_res_partner user,base.model_res_partner,maas_base.group_operation_perform,1,0,0,0
 access_res_company_management,access_res_company user,base.model_res_company,maas_base.group_operation_perform,1,0,0,0
 access_res_users_user,access_res_users user,base.model_res_users,maas_base.group_operation_perform,1,0,0,0
-access_res_partner_customer_admin,access_res_partner_customer admin,base.model_res_partner,maas_base.group_user_management,1,1,1,0
-access_res_company_customer_admin,access_res_company_customer admin,base.model_res_company,maas_base.group_user_management,1,1,1,0
-access_res_users_user_admin,access_res_users_user admin,base.model_res_users,maas_base.group_user_management,1,1,1,0
+access_res_partner_customer_admin,access_res_partner_customer admin,base.model_res_partner,maas_base.group_user_management,1,0,0,0
+access_res_company_customer_admin,access_res_company_customer admin,base.model_res_company,maas_base.group_user_management,1,0,0,0
+access_res_users_user_admin,access_res_users_user admin,base.model_res_users,maas_base.group_user_management,1,0,0,0
 
 access_res_users_role_reader,access_res_users_role reader,base_user_role.model_res_users_role,,1,0,0,0
 access_res_users_role_line_reader,access_res_users_role_line reader,base_user_role.model_res_users_role_line,,1,0,0,0

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <record id="spreadsheet_dashboard.access_spreadsheet_dashboard_group_user" model="ir.model.access">
+            <field name="perm_create" eval="1"/>
+            <field name="perm_write" eval="1"/>
+        </record>
+    
+    </data>
+</odoo>
