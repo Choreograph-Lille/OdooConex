@@ -21,18 +21,41 @@
                 </td>
             </xpath>
             
-            <xpath expr="//p[@t-field='o.date_approve']" position="attributes">
+            <!--<xpath expr="//p[@t-field='o.date_approve']" position="attributes">
                 <attribute name="t-options">{'widget': 'date'}</attribute>
-            </xpath>
+            </xpath>-->
             
             <xpath expr="//div[@t-field='o.partner_id']" position="attributes">
                 <attribute name="t-options">{"widget": "contact", "fields": ["address", "name", "vat"], "no_marker": True}</attribute>
             </xpath>
             
-            <xpath expr="//p[@t-field='o.user_id']" position="after">
+            <!--<xpath expr="//p[@t-field='o.user_id']" position="after">
                 <p t-field="o.user_id.email" class="m-0"/>
+            </xpath>-->
+
+            <xpath expr="//div[@id='informations']" position="replace">
+                <div id="informations" class="row mt-4 mb32">
+                    <div t-if="o.user_id" class="col-6 bm-2">
+                        <strong>Purchase Representative:</strong>
+                        <p t-field="o.user_id" class="m-0"/>
+                        <p t-field="o.user_id.email" class="m-0"/>
+                    </div>
+                    <div t-if="o.partner_ref" class="col-6 bm-2">
+                        <strong>Your Order Reference:</strong>
+                        <p t-field="o.partner_ref" class="m-0"/>
+                    </div>
+                </div>
+                <div id="informations2" class="row mt-4 mb32">
+                    <div t-if="o.state in ['purchase','done'] and o.date_approve" class="col-6 bm-2">
+                        <strong>Order Date:</strong>
+                        <p t-field="o.date_approve" class="m-0"  t-options='{"widget": "date"}'/>
+                    </div>
+                    <div t-elif="o.date_order" class="col-6 bm-2">
+                        <strong>Order Deadline:</strong>
+                        <p t-field="o.date_order" class="m-0"/>
+                    </div>
+                </div>
             </xpath>
-        
         </template>
     
     </data>
