@@ -91,6 +91,8 @@
         </xpath>
         
         <xpath expr="//td[@name='td_quantity']//span[@t-field='line.product_uom']" position="replace"/>
-        
+
+        <xpath expr="//p[@t-if='not is_html_empty(doc.payment_term_id.note)']" position="replace"/>
+
     </template>
 </odoo>
