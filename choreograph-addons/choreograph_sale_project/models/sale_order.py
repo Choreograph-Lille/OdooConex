@@ -394,8 +394,8 @@ class SaleOrder(models.Model):
             is_operation_generation = self._context.get('is_operation_generation')
             if (is_operation_generation or vals.get('commitment_date')) and rec.commitment_date:
                 tz_date = rec.get_date_tz(rec.commitment_date)
-                values.extend([(rec._get_operation_task(['85']), {'date_deadline': tz_date}),
-                              (rec._get_operation_task(['65', '80']), {'date_deadline': tz_date - relativedelta(days=2)})])
+                values.extend([(rec._get_operation_task(['85']), {'date_deadline': tz_date + relativedelta(days=1)}),
+                              (rec._get_operation_task(['65', '80']), {'date_deadline': tz_date - relativedelta(days=1)})])
 
             if (is_operation_generation or vals.get('potential_return_date')) and rec.potential_return_task_id:
                 values.append((rec.potential_return_task_id, {'date_deadline': rec.potential_return_date}))
@@ -574,7 +574,9 @@ class SaleOrder(models.Model):
 
     def action_send_delivery_email(self):
         self.ensure_one()
-        self.env['res.partner'].sudo().find_or_create(self._get_operation_task([80]).provider_delivery_address)
+        email_to = self._get_operation_task([80]).provider_delivery_address
+        if email_to:
+            self.env['res.partner'].sudo().find_or_create(email_to)
         composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form')
         template_id = self.env.ref('choreograph_sale_project.email_template_choreograph_delivery')
         return {
