@@ -72,7 +72,7 @@
             <br/>
             <div t-if="not doc.recurrence_id" class="row">
                 <div class="col-auto col-3 mw-100 mb-2">
-                    <strong>Terms and conditions</strong>
+                    <strong>Payment Terms</strong>
                     <p class="m-0" t-field="doc.payment_term_id.name"/>
                 </div>
             </div>
