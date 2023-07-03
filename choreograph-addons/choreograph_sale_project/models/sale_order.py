@@ -394,8 +394,8 @@ class SaleOrder(models.Model):
             is_operation_generation = self._context.get('is_operation_generation')
             if (is_operation_generation or vals.get('commitment_date')) and rec.commitment_date:
                 tz_date = rec.get_date_tz(rec.commitment_date)
-                values.extend([(rec._get_operation_task(['85']), {'date_deadline': tz_date}),
-                              (rec._get_operation_task(['65', '80']), {'date_deadline': tz_date - relativedelta(days=2)})])
+                values.extend([(rec._get_operation_task(['85']), {'date_deadline': tz_date + relativedelta(days=1)}),
+                              (rec._get_operation_task(['65', '80']), {'date_deadline': tz_date - relativedelta(days=1)})])
 
             if (is_operation_generation or vals.get('potential_return_date')) and rec.potential_return_task_id:
                 values.append((rec.potential_return_task_id, {'date_deadline': rec.potential_return_date}))
