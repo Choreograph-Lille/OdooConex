@@ -52,7 +52,7 @@ class ProjectTask(models.Model):
             values.update({
                 'stage_id': self.env.ref('choreograph_project.project_task_type_draft').id,
             })
-        res =  super().create(values)
+        res = super().create(values)
         self.env['mail.followers']._insert_followers(
                 'project.project', res.project_id.ids, res.user_ids.partner_id.ids)
         return res
