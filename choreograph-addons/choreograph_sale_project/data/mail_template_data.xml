@@ -21,7 +21,7 @@
                             <t t-set="file_name" t-value="info_task.provider_file_name"/>
                             Hello,
                             <br/><br/>
-                            Kindly find on your <t t-out="delivery_address"/> FTP the file from choreograph for the
+                            Kindly find on your <t t-out="object.receiver"/> FTP the file from choreograph for the
                             <t t-out="object.operation_type_id.name"/> Campaign <t t-out="object.partner_id.name"/>
                             <br/><br/>
                             The file name is <t t-out="file_name"/>
