@@ -322,9 +322,11 @@ class SaleOrder(models.Model):
                 rec.update_task_campaign_90('email')
                 rec.update_task_bat_file_witness()
 
-            if any(field in vals for field in ['repatriate_information', 'segment_ids', 'quantity_to_deliver']):
+            if any(field in vals for field in ['repatriate_information', 'segment_ids']):
                 if vals.get('repatriate_information') or rec.repatriate_information:
                     rec.repatriate_quantity_information_on_task()
+            if 'quantity_to_deliver' in vals:
+                rec.repatriate_volume_on_task()
             if 'repatriate_information' in vals and not vals.get('repatriate_information'):
                 rec.reset_quantity_information_on_task()
 
@@ -375,6 +377,8 @@ class SaleOrder(models.Model):
     def repatriate_quantity_information_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in [
                                 '20', '25', '30', '85', '80']).repatriate_quantity_information()
+
+    def repatriate_volume_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
 
     def reset_quantity_information_on_task(self):

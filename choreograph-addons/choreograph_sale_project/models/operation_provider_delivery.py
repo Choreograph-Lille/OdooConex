@@ -8,7 +8,7 @@ class OperationProviderDelivery(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     order_id = fields.Many2one('sale.order', 'Sale Order')
-    delivery_date = fields.Date('Date', required=1, tracking=True)
+    delivery_date = fields.Date('Date', tracking=True)
     task_id = fields.Many2one('project.task', 'Task', tracking=True)
     sequence = fields.Integer(default=1)
 
