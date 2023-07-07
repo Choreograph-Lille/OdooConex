@@ -20,6 +20,20 @@
                 <field name="user_ids" position="before">
                     <field name="role_id"/>
                 </field>
+                <field name="date_deadline" position="attributes">
+                    <attribute name="widget"></attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_task_kanban_inherit" model="ir.ui.view">
+            <field name="name">project.task.kanban.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_kanban" />
+            <field name="arch" type="xml">
+                <field name="date_deadline" position="attributes">
+                    <attribute name="widget"></attribute>
+                </field>
             </field>
         </record>
     </data>
