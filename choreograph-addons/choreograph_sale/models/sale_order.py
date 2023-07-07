@@ -287,9 +287,10 @@ class SaleOrder(models.Model):
                     'date_deadline': condition.operation_date,
                     'campaign_file_name': condition.file_name,
                     'task_number': condition.task_number,
-                    'project_id': rec.project_ids[0].id ,
+                    'project_id': rec.project_ids[0].id,
                 }
                 condition.task_id = self.env['project.task'].sudo().create(vals)
+                condition.task_id._compute_type_of_project()
                 condition.task_id.onchange_role_id()
                 condition.is_task_created = True
 
