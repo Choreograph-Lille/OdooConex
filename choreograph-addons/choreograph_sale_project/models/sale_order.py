@@ -233,7 +233,7 @@ class SaleOrder(models.Model):
         self._manage_task_assignation()
         self.compute_task_operations()
         self.initiate_provider_delivery(self.project_ids[0])
-        # self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
+        self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
 
     def initiate_provider_delivery(self, project=False):
         provider_delivery_template = self.get_provider_delivery_template(project)
