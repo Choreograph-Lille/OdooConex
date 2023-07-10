@@ -159,6 +159,11 @@ class SaleOrder(models.Model):
             ('task_number', 'in', task_number_list),
             ('active', '=', active)])
 
+    def get_operation_template_name(self):
+        for rec in self:
+            template = self.env['project.project'].search([('code', '=', rec.operation_type_id.code), ('type_of_project', '=', 'operation'), ('is_template', '=', True)], limit=1)
+            return template.name.replace(' (TEMPLATE)', '')
+
     def _unarchive_task(self, operation_task):
         for rec in self:
             task = rec._get_operation_task([OPERATION_TASK_NUMBER[operation_task]], False) or rec._get_operation_task([
