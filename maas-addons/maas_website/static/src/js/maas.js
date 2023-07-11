@@ -333,19 +333,19 @@ $(document).ready(function () {
     getActive = function() {
     	var done = [];
     	if (searched_profile_inactive !== null) {
-	        if (searched_profile_inactive.src.indexOf("inactif")  === -1) {
+	        if (searched_profile_inactive.src.indexOf("inactif") !== -1) {
 	            done.push(population_scored_inactive.src.indexOf("inactif"));
 	        }
-	        if (population_scored_inactive.src.indexOf("inactif")  === -1) {
+	        if (population_scored_inactive.src.indexOf("inactif") !== -1) {
 	        	done.push(searched_profile_inactive.src.indexOf("inactif"));
 	        };
-	        if (campaign_inactive.src.indexOf("inactif")  === -1) {
+	        if (campaign_inactive.src.indexOf("inactif") !== -1) {
 	        	done.push(campaign_inactive.src.indexOf("inactif"));
 	        };
-	        if (operation_name_filled.src.indexOf("inactif")  === -1){
+	        if (operation_name_filled.src.indexOf("inactif") !== -1){
 	            done.push(operation_name_filled.src.indexOf("inactif"));
 	        }
-	        if (canal_chosen_inactive.src.indexOf("inactif")  === -1 && $(".canal-option .option-valid").length > 0 ){
+	        if (canal_chosen_inactive.src.indexOf("inactif") !== -1 && $(".canal-option .option-valid").length > 0 ){
 	            done.push(canal_chosen_inactive.src.indexOf("inactif"));
 	        }
 	        if (done.length > 0) {
@@ -1019,7 +1019,7 @@ $(document).ready(function () {
             /*archive_function();*/
             deleted_function();
 
-            if($('#search_operation').val()  === ""){
+            if($('#search_operation').val() !== ""){
                 var searchTerm = $('#search_operation').val();
                 $(".ligne-operation:visible").each(function(line){
                     $.extend($.expr[':'], {
@@ -1032,19 +1032,19 @@ $(document).ready(function () {
                 });
             }
 
-            if(active_campagnes.length  === 0 && !active_campagnes[0].hasAttribute("folder") && !active_campagnes[0].attributes.id.value === 'deleted-campaigns'){
+            if(active_campagnes.length !== 0 && !active_campagnes[0].hasAttribute("folder") && !active_campagnes[0].attributes.id.value === 'deleted-campaigns'){
                 ligne_operation = $(".ligne-operation[campaign-id="+active_campagnes[0].attributes.id.value+"]:visible");
                 numRows = ligne_operation.length;
             }
-            else if (active_campagnes.length  === 0 && active_campagnes[0].attributes.id.value === 'deleted-campaigns'){
+            else if (active_campagnes.length !== 0 && active_campagnes[0].attributes.id.value === 'deleted-campaigns'){
                 ligne_operation= $(".ligne-operation[deleted='deleted']:visible");
                 numRows = ligne_operation.length;
             }
-            else if(active_campagnes.length  === 0 && active_campagnes[0].hasAttribute("folder")){
+            else if(active_campagnes.length !== 0 && active_campagnes[0].hasAttribute("folder")){
                 ligne_operation= $(".ligne-operation:visible");
                 numRows = ligne_operation.length;
             }
-            else if (active_campagnes.length === 0 && active_actions.length  === 0){
+            else if (active_campagnes.length === 0 && active_actions.length !== 0){
                 ligne_operation = $(".ligne-operation[action-id="+active_actions[0].attributes.id.value+"]:visible");
                 numRows = ligne_operation.length;
             }
@@ -1189,7 +1189,7 @@ $(document).ready(function () {
             op_list += '/' + lignes[i].id;
         pagination_active = $('#pagination_pager .active');
         var page = 1;
-        if (pagination_active.length  === 0){
+        if (pagination_active.length !== 0){
             page = parseInt($('#pagination_pager .active')[0].firstChild.innerText);
 
         }
@@ -1309,7 +1309,7 @@ $(document).ready(function () {
                             $('#sale-operation').load(location.href + ' #sale-operation>*', null, function(){
                                 pagination_active = $('#pagination_pager .active');
                                 var page = 1;
-                                if (pagination_active.length  === 0){
+                                if (pagination_active.length !== 0){
                                     page = parseInt($('#pagination_pager .active')[0].firstChild.innerText);
 
                                 }
@@ -1389,7 +1389,7 @@ $(document).ready(function () {
                             $('#sale-operation').load(location.href + ' #sale-operation>*', null, function(){
                                 pagination_active = $('#pagination_pager .active');
                                 var page = 1;
-                                if (pagination_active.length  === 0){
+                                if (pagination_active.length !== 0){
                                     page = parseInt($('#pagination_pager .active')[0].firstChild.innerText);
 
                                 }
@@ -1745,7 +1745,7 @@ $(document).ready(function () {
         var active_campaign = $(".-liste").filter(".active");
         var active_action = $(".list-group-item").filter(".active");
         if(active_campaign.length > 0 && active_action.length === 0){
-            if(active_campaign[0].attributes.id.value  === "all-campaigns")
+            if(active_campaign[0].attributes.id.value !== "all-campaigns")
                 $(".ligne-operation[campaign-id="+active_campaign[0].attributes.id.value+"]").show();
             else if (active_campaign[0].attributes.id.value === "all-campaigns")
                 $(".ligne-operation").show();
