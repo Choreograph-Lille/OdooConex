@@ -1032,7 +1032,7 @@ $(document).ready(function () {
                 });
             }
 
-            if(active_campagnes.length !== 0 && !active_campagnes[0].hasAttribute("folder") && !active_campagnes[0].attributes.id.value === 'deleted-campaigns'){
+            if(active_campagnes.length !== 0 && !active_campagnes[0].hasAttribute("folder") && !active_campagnes[0].attributes.id.value == 'deleted-campaigns'){
                 ligne_operation = $(".ligne-operation[campaign-id="+active_campagnes[0].attributes.id.value+"]:visible");
                 numRows = ligne_operation.length;
             }
@@ -1081,7 +1081,6 @@ $(document).ready(function () {
             }
             paginate_all_operation_child();
         });
-        //console.log(operations);
         return operations
     };
 
@@ -1180,7 +1179,6 @@ $(document).ready(function () {
     });
     $("body").trigger("mousemove");
     function reloadOperationList(){
-        console.log('Operation list refreshed!');
         lignes = document.getElementsByClassName('ligne-operation');
         op_list = '';
         if(lignes.length>0)
@@ -1204,7 +1202,6 @@ $(document).ready(function () {
                 $("td[colspan=9]").find("div").filter("#collapse-child").hide();
                 $("td[colspan=9]").find("div").filter("#collapse-child[parent='"+slide_this[0].attributes.parent.value+"'][id='"+slide_this[0].attributes.id.value+"']").addClass("slide-this");
                 $("td[colspan=9]").find("div").filter("#collapse-child[parent='"+slide_this[0].attributes.parent.value+"'][id='"+slide_this[0].attributes.id.value+"']").show();
-                //console.log($("td[colspan=9]").find("div").filter("#collapse-child[parent='"+slide_this[0].attributes.parent.value+"'][id='"+slide_this[0].attributes.id.value+"']"))
 
 
                 //$("#collapse-child").filter(":not([parent='"+slide_this[0].attributes.parent.value+"'][id='"+slide_this[0].attributes.id.value+"'])").slideUp();
@@ -1698,7 +1695,6 @@ $(document).ready(function () {
             proccessData: false,
             data: {},
             }).then(function(records) {
-                console.log(records.filter);
                 if (records.filter){
                     $("#filter-operation").val(records.filter).trigger("change");
                 }
@@ -1725,7 +1721,6 @@ $(document).ready(function () {
                         proccessData: false,
                         data: {},
                     }).then(function(){
-                        console.log("Filter updated!");
                         $("#campaign").load(location.href + ' #campaign>*', null, function(){
 			                    add_liste_click();
 			                    add_list_group_item_click();
