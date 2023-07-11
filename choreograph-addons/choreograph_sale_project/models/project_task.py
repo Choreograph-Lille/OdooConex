@@ -396,3 +396,11 @@ class ProjectTask(models.Model):
         for rec in self:
             for i, l in enumerate(rec.task_segment_ids):
                 l.segment_number = i + 1
+
+    @api.depends('sale_line_id', 'project_id', 'commercial_partner_id')
+    def _compute_sale_order_id(self, sale_order=False):
+        if sale_order:
+            for task in self:
+                task.sale_order_id = sale_order.id
+        else:
+            super(ProjectTask, self)._compute_sale_order_id()
