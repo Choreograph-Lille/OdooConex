@@ -568,6 +568,7 @@ class SaleOrder(models.Model):
         project_id = self.env['project.project'].browse(action['context'].get('default_project_id', False)).exists()
         if project_id:
             action['context'].update({'default_type_of_project': project_id.type_of_project})
+        action['context'].pop('search_default_sale_order_id')
         return action
 
     def _manage_task_assignation(self):
