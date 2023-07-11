@@ -111,13 +111,9 @@ class ProjectProject(models.Model):
             'user_id': order_id.user_id.id
         })
         self.task_ids.write({
-            'sale_order_id': order_id.id,
             'partner_id': order_id.partner_id.id,
-            'date_deadline': order_id.commitment_date
         })
-        self.task_ids.filtered(lambda t: t.task_number in ['80']).write({
-            'date_deadline': order_id.commitment_date - relativedelta(days=2) if order_id.commitment_date else False,
-        })
+        self.task_ids._compute_sale_order_id(order_id)
 
     def write(self, vals):
         res = super(ProjectProject, self).write(vals)
