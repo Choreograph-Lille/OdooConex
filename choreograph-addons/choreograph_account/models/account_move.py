@@ -23,3 +23,11 @@ class AccountMove(models.Model):
         for move in self:
             orders = move.line_ids.mapped("sale_line_ids").mapped("order_id")
             move.sale_order_id = orders and orders[0].id or False
+
+    @api.model
+    def _get_mail_partner(self):
+        adresses = self.partner_id
+        if self.partner_id.child_ids:
+            adresses |= self.partner_id.child_ids.filtered(lambda rp: rp.type == 'invoice')
+        return ','.join([str(rp.id) for rp in adresses])
+
