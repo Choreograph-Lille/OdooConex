@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-21 11:44+0000\n"
-"PO-Revision-Date: 2023-07-10 11:30+0000\n"
+"PO-Revision-Date: 2023-07-17 08:57+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -846,6 +846,16 @@ msgid "Return of production potential"
 msgstr "Retour de potentiel production"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__routing_date
+msgid "Routing Date"
+msgstr "Date de routage"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__routing_end_date
+msgid "Routing End Date"
+msgstr "Fin de routage"
+
+#. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_sms_campaign
 msgid "SMS CAMPAIGN"
 msgstr "CAMPAGNE SMS"
@@ -916,6 +926,11 @@ msgstr "Ligne de segment : %s"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__send_with
 msgid "Send With"
 msgstr "Envoi via"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__sender
+msgid "Sender"
+msgstr "Expéditeur"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__sequence
@@ -1086,6 +1101,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume
 msgid "Volume"
 msgstr "Quantité à livrer"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume_detail
+msgid "Volume Detail"
+msgstr "Détail volume"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__reception_location
