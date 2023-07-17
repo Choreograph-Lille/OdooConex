@@ -40,15 +40,17 @@ class MailMessage(models.Model):
         }
         line = self.env[values['model']].browse(values['res_id'])
         body = None
-        operation_id = line.order_id.project_ids[0]
-        if not values.get('body', False):
-            body = line_name[values['model']]
-            body = body % line.sequence
-        return {
-            'model': 'project.project',
-            'res_id': operation_id.id,
-            'body': body or values['body']
-        } if operation_id.stage_id.stage_number != '10' else None
+        if line.order_id.project_ids:
+            operation_id = line.order_id.project_ids[0]
+            if not values.get('body', False):
+                body = line_name[values['model']]
+                body = body % line.sequence
+            return {
+                'model': 'project.project',
+                'res_id': operation_id.id,
+                'body': body or values['body']
+                } if operation_id.stage_id.stage_number != '10' else None
+        return None
 
     @api.model
     def so_basic_fields_to_project(self, values: dict, order_id) -> tuple:
