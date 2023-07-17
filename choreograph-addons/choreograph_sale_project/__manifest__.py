@@ -11,6 +11,7 @@
     'website': 'https://arkeup.com',
     'depends': [
         'sale_project',
+        'sale_timesheet',
         'choreograph_sale',
         'choreograph_project',
     ],
