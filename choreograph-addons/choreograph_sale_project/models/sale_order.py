@@ -297,8 +297,16 @@ class SaleOrder(models.Model):
                 'sms_personalization_text',
                 'sms_comment',
                 'bat_internal',
+                'bat_comment',
                 'desired_finished_volume',
                 'sender',
+                'reception_date',
+                'reception_location',
+                'routing_date',
+                'routing_end_date',
+                'volume_detail',
+                'witness_file_name',
+                'witness_comment',
             ]) and rec.is_info_validated:
                 rec.update_task_sms_campaign()
                 rec.update_task_campaign_90('sms')
@@ -493,7 +501,6 @@ class SaleOrder(models.Model):
             ('is_preheader_available_text', 'is_preheader_available_text'),
             ('ab_test', 'ab_test'),
             ('ab_test_text', 'ab_test_text'),
-            ('comment', 'email_comment'),
             ('bat_internal', 'email_bat_internal'),
             ('bat_desired_date', 'bat_desired_date'),
             ('witness_file_name', 'email_witness_file_name'),
@@ -522,10 +529,17 @@ class SaleOrder(models.Model):
             ('campaign_name', 'campaign_name'),
             ('personalization', 'sms_personalization'),
             ('personalization_text', 'sms_personalization_text'),
-            ('comment', 'sms_comment'),
             ('bat_internal', 'bat_internal'),
+            ('bat_comment', 'bat_comment'),
             ('desired_finished_volume', 'desired_finished_volume'),
             ('sender', 'sender'),
+            ('reception_date', 'reception_date'),
+            ('reception_location', 'reception_location'),
+            ('routing_date', 'routing_date'),
+            ('routing_end_date', 'routing_end_date'),
+            ('volume_detail', 'volume_detail'),
+            ('witness_file_name', 'witness_file_name'),
+            ('witness_comment', 'witness_comment'),
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
         values.update({
@@ -539,7 +553,7 @@ class SaleOrder(models.Model):
             vals = {
                 'start_date': self.routing_date,
                 'desired_finished_volume': self.desired_finished_volume,
-                'date_deadline': self.routing_end_date + relativedelta(days=5),
+                'date_deadline': self.routing_end_date + relativedelta(days=5) if self.routing_end_date else False,
             }
         elif type == 'email':
             vals = {
