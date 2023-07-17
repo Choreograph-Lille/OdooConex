@@ -624,15 +624,17 @@ class SaleOrder(models.Model):
 
     def action_create_task_from_condition(self):
         super().action_create_task_from_condition()
-        project_id = self.project_ids[0] if self.project_ids else False
-        if project_id and project_id.stage_id != self.env.ref('choreograph_project.planning_project_stage_draft'):
-            task_draft_stage_id = self.env.ref('choreograph_project.project_task_type_draft')
-            for condition_id in self.operation_condition_ids.filtered(lambda item: item.task_id.stage_id == task_draft_stage_id):
-                condition_id.task_id.update_task_stage(WAITING_FILE_TASK_STAGE)
-                # if condition_id.task_id.task_number in ('5', '10', '15'):
-                #     project_id._update_task_stage(condition_id.task_id.task_number, WAITING_FILE_TASK_STAGE)
-                # elif condition_id.task_id.task_number in ('20', '25', '35'):
-                #     project_id._update_task_stage(condition_id.task_id.task_number, TODO_TASK_STAGE)
+        for rec in self:
+            rec.operation_condition_ids.task_id._compute_sale_order_id(rec)
+            project_id = rec.project_ids[0] if rec.project_ids else False
+            if project_id and project_id.stage_id != self.env.ref('choreograph_project.planning_project_stage_draft'):
+                task_draft_stage_id = self.env.ref('choreograph_project.project_task_type_draft')
+                for condition_id in self.operation_condition_ids.filtered(lambda item: item.task_id.stage_id == task_draft_stage_id):
+                    condition_id.task_id.update_task_stage(WAITING_FILE_TASK_STAGE)
+                    # if condition_id.task_id.task_number in ('5', '10', '15'):
+                    #     project_id._update_task_stage(condition_id.task_id.task_number, WAITING_FILE_TASK_STAGE)
+                    # elif condition_id.task_id.task_number in ('20', '25', '35'):
+                    #     project_id._update_task_stage(condition_id.task_id.task_number, TODO_TASK_STAGE)
 
     @api.depends('project_ids')
     def compute_operation_code(self):

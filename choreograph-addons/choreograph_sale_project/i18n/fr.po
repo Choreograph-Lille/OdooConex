@@ -188,7 +188,7 @@ msgstr ""
 #: model:mail.template,subject:choreograph_sale_project.email_template_choreograph_delivery
 msgid ""
 "Choreograph/ I-Behavior: The {{ object.get_operation_template_name() }} "
-"campaign for {{ object.partner_id.name }} UK has been delivered"
+"campaign for {{ object.partner_id.name }} has been delivered"
 msgstr ""
 "Fichier choreograph pour la campagne de {{ object.get_operation_template_name() }} "
 "/ {{ object.partner_id.name }} / {{ object.name }}"
