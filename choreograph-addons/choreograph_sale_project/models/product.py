@@ -7,6 +7,5 @@ class ProductTemplate(models.Model):
 	_inherit = 'product.template'
 
 	project_template_id = fields.Many2one(
-		domain="[('is_template', '=', True), ('company_id', '=', current_company_id), ('allow_billable', '=', True), "
-				"('allow_timesheets', 'in', [service_policy == 'delivered_timesheet', True])]"
+		domain="[('is_template', '=', True)]"
 	)
