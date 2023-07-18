@@ -159,6 +159,11 @@ class SaleOrder(models.Model):
             ('task_number', 'in', task_number_list),
             ('active', '=', active)])
 
+    def get_operation_template_name(self):
+        for rec in self:
+            template = self.env['project.project'].search([('code', '=', rec.operation_type_id.code), ('type_of_project', '=', 'operation'), ('is_template', '=', True)], limit=1)
+            return template.name.replace(' (TEMPLATE)', '')
+
     def _unarchive_task(self, operation_task):
         for rec in self:
             task = rec._get_operation_task([OPERATION_TASK_NUMBER[operation_task]], False) or rec._get_operation_task([
@@ -233,7 +238,7 @@ class SaleOrder(models.Model):
         self._manage_task_assignation()
         self.compute_task_operations()
         self.initiate_provider_delivery(self.project_ids[0])
-        # self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
+        self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
 
     def initiate_provider_delivery(self, project=False):
         provider_delivery_template = self.get_provider_delivery_template(project)
@@ -292,8 +297,16 @@ class SaleOrder(models.Model):
                 'sms_personalization_text',
                 'sms_comment',
                 'bat_internal',
+                'bat_comment',
                 'desired_finished_volume',
                 'sender',
+                'reception_date',
+                'reception_location',
+                'routing_date',
+                'routing_end_date',
+                'volume_detail',
+                'witness_file_name',
+                'witness_comment',
             ]) and rec.is_info_validated:
                 rec.update_task_sms_campaign()
                 rec.update_task_campaign_90('sms')
@@ -488,7 +501,6 @@ class SaleOrder(models.Model):
             ('is_preheader_available_text', 'is_preheader_available_text'),
             ('ab_test', 'ab_test'),
             ('ab_test_text', 'ab_test_text'),
-            ('comment', 'email_comment'),
             ('bat_internal', 'email_bat_internal'),
             ('bat_desired_date', 'bat_desired_date'),
             ('witness_file_name', 'email_witness_file_name'),
@@ -517,10 +529,17 @@ class SaleOrder(models.Model):
             ('campaign_name', 'campaign_name'),
             ('personalization', 'sms_personalization'),
             ('personalization_text', 'sms_personalization_text'),
-            ('comment', 'sms_comment'),
             ('bat_internal', 'bat_internal'),
+            ('bat_comment', 'bat_comment'),
             ('desired_finished_volume', 'desired_finished_volume'),
             ('sender', 'sender'),
+            ('reception_date', 'reception_date'),
+            ('reception_location', 'reception_location'),
+            ('routing_date', 'routing_date'),
+            ('routing_end_date', 'routing_end_date'),
+            ('volume_detail', 'volume_detail'),
+            ('witness_file_name', 'witness_file_name'),
+            ('witness_comment', 'witness_comment'),
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
         values.update({
@@ -534,7 +553,7 @@ class SaleOrder(models.Model):
             vals = {
                 'start_date': self.routing_date,
                 'desired_finished_volume': self.desired_finished_volume,
-                'date_deadline': self.routing_end_date + relativedelta(days=5),
+                'date_deadline': self.routing_end_date + relativedelta(days=5) if self.routing_end_date else False,
             }
         elif type == 'email':
             vals = {
@@ -563,6 +582,7 @@ class SaleOrder(models.Model):
         project_id = self.env['project.project'].browse(action['context'].get('default_project_id', False)).exists()
         if project_id:
             action['context'].update({'default_type_of_project': project_id.type_of_project})
+        action['context'].pop('search_default_sale_order_id')
         return action
 
     def _manage_task_assignation(self):

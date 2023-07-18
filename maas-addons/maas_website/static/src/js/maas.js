@@ -73,7 +73,7 @@ $(document).ready(function () {
 
     function mouseOverOps(operations){
         for (var i = 0; i < operations.length; i++) {
-            if (operations[i].attributes.deleted.value == 'not deleted'){
+            if (operations[i].attributes.deleted.value === 'not deleted'){
                 operations[i].addEventListener("dragstart", function(event){
                     event.dataTransfer.setData("text", (event.target.id).replace('operation',''));
 
@@ -210,10 +210,10 @@ $(document).ready(function () {
 	        		if (data[0]['campaign_id'] !== false && data[0]['action_id'] !== false){
 	        		    self.$(".campaign-action-selected").text(data[0]['campaign_id'] + " - " +data[0]['action_id']);
 	        		}
-	        		else if (data[0]['campaign_id'] !== false && data[0]['action_id'] == false){
+	        		else if (data[0]['campaign_id'] !== false && data[0]['action_id'] === false){
 	        		    self.$(".campaign-action-selected").text(data[0]['campaign_id']);
 	        		}
-	        		else if (data[0]['campaign_id'] == false && data[0]['action_id'] !== false){
+	        		else if (data[0]['campaign_id'] === false && data[0]['action_id'] !== false){
 	        		    self.$(".campaign-action-selected").text(data[0]['action_id']);
 	        		}
 	        		else{
@@ -333,19 +333,19 @@ $(document).ready(function () {
     getActive = function() {
     	var done = [];
     	if (searched_profile_inactive !== null) {
-	        if (searched_profile_inactive.src.indexOf("inactif") != -1) {
+	        if (searched_profile_inactive.src.indexOf("inactif") !== -1) {
 	            done.push(population_scored_inactive.src.indexOf("inactif"));
 	        }
-	        if (population_scored_inactive.src.indexOf("inactif") != -1) {
+	        if (population_scored_inactive.src.indexOf("inactif") !== -1) {
 	        	done.push(searched_profile_inactive.src.indexOf("inactif"));
 	        };
-	        if (campaign_inactive.src.indexOf("inactif") != -1) {
+	        if (campaign_inactive.src.indexOf("inactif") !== -1) {
 	        	done.push(campaign_inactive.src.indexOf("inactif"));
 	        };
-	        if (operation_name_filled.src.indexOf("inactif") != -1){
+	        if (operation_name_filled.src.indexOf("inactif") !== -1){
 	            done.push(operation_name_filled.src.indexOf("inactif"));
 	        }
-	        if (canal_chosen_inactive.src.indexOf("inactif") != -1 && $(".canal-option .option-valid").length > 0 ){
+	        if (canal_chosen_inactive.src.indexOf("inactif") !== -1 && $(".canal-option .option-valid").length > 0 ){
 	            done.push(canal_chosen_inactive.src.indexOf("inactif"));
 	        }
 	        if (done.length > 0) {
@@ -582,19 +582,19 @@ $(document).ready(function () {
     	 	test_input++;
     		}
     	});
-    	if (test_input == 0){
+    	if (test_input === 0){
     	    var active_campaign = $(".-liste").filter(".active");
             var active_action = $(".list-group-item").filter(".active");
             var parent_to;
             var campaign_id;
-            if (active_campaign.length > 0 && active_action.length == 0){
+            if (active_campaign.length > 0 && active_action.length === 0){
                 parent_to = active_campaign.parent().find(".panel-collapse[id=collapse"+String(active_campaign[0].attributes.id.value)+"]");
                 if(!$("#collapse"+active_campaign[0].attributes.id.value+"").is(":visible"))
                     active_campaign.click();
                 campaign_id = parseInt(active_campaign[0].attributes.id.value);
 
             }
-            else if (active_campaign.length == 0 && active_action.length > 0){
+            else if (active_campaign.length === 0 && active_action.length > 0){
                 parent_to = active_action.parent();
                 campaign_id = parseInt(active_action[0].attributes.campaign.value);
             }
@@ -690,7 +690,7 @@ $(document).ready(function () {
 
     $("#input-profile-search").add("#input-population-scored").change(function () {
         var fileExtension = ['csv'];
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) === -1) {
             var input_value = $("#input_value");
             var input_value2 = $("#input_value2");
             input_value.replaceWith(input_value.val('').clone(true))
@@ -753,7 +753,7 @@ $(document).ready(function () {
 		var searchTerm, ContainerID;
 		searchTerm = $(this).val();
 		var active_menu = $('.-liste.active');
-		if (active_menu.length == 0)
+		if (active_menu.length === 0)
 		    active_menu = $('.list-group-item.active');
 		$('.ligne-operation').each(function() {
 			ContainerID = '#' + $(this).attr('id');
@@ -785,7 +785,7 @@ $(document).ready(function () {
             var parent = $(this);
             var campaign_id = $(this)[0].parentElement.attributes.id.value.split('list-group')[1];
             $('.ligne-operation').each(function(){
-               if ($(this).context.hasAttribute("campaign-id") && $(this).context.attributes['campaign-id'].value == campaign_id){
+               if ($(this).context.hasAttribute("campaign-id") && $(this).context.attributes['campaign-id'].value === campaign_id){
                     $(this).show();
                }
             });
@@ -803,7 +803,7 @@ $(document).ready(function () {
 
                                 var ContainerID =  '#'+($(this).context.attributes.id.value).replace('collapse-infos','');
                                 var text= $(this).context.attributes["action-id"].value;
-                                if (text == value){
+                                if (text === value){
                                     $(ContainerID).show();
                                     $(ContainerID).addClass('topaginated');
                                 }
@@ -918,16 +918,16 @@ $(document).ready(function () {
                     if ($(this).context.hasAttribute('campaign-id')){
                         var ContainerID =  '#'+($(this).context.attributes.id.value).replace('collapse-infos','');
                         var text= $(this).context.attributes["campaign-id"].value;
-                        if (text == value){
+                        if (text === value){
                             $(ContainerID).addClass('topaginated');
                             $(ContainerID).show();
                         }
 
-                        else if (value == "all-campaigns"){
+                        else if (value === "all-campaigns"){
                             $(ContainerID).filter("[deleted='deleted']").hide();
 
                         }
-                        else if (value == "deleted-campaigns"){
+                        else if (value === "deleted-campaigns"){
                            $(ContainerID).filter("[deleted='deleted']").show();
 
                         }
@@ -1019,7 +1019,7 @@ $(document).ready(function () {
             /*archive_function();*/
             deleted_function();
 
-            if($('#search_operation').val() != ""){
+            if($('#search_operation').val() !== ""){
                 var searchTerm = $('#search_operation').val();
                 $(".ligne-operation:visible").each(function(line){
                     $.extend($.expr[':'], {
@@ -1032,19 +1032,19 @@ $(document).ready(function () {
                 });
             }
 
-            if(active_campagnes.length != 0 && !active_campagnes[0].hasAttribute("folder") && !active_campagnes[0].attributes.id.value == 'deleted-campaigns'){
+            if(active_campagnes.length !== 0 && !active_campagnes[0].hasAttribute("folder") && !active_campagnes[0].attributes.id.value == 'deleted-campaigns'){
                 ligne_operation = $(".ligne-operation[campaign-id="+active_campagnes[0].attributes.id.value+"]:visible");
                 numRows = ligne_operation.length;
             }
-            else if (active_campagnes.length != 0 && active_campagnes[0].attributes.id.value == 'deleted-campaigns'){
+            else if (active_campagnes.length !== 0 && active_campagnes[0].attributes.id.value === 'deleted-campaigns'){
                 ligne_operation= $(".ligne-operation[deleted='deleted']:visible");
                 numRows = ligne_operation.length;
             }
-            else if(active_campagnes.length != 0 && active_campagnes[0].hasAttribute("folder")){
+            else if(active_campagnes.length !== 0 && active_campagnes[0].hasAttribute("folder")){
                 ligne_operation= $(".ligne-operation:visible");
                 numRows = ligne_operation.length;
             }
-            else if (active_campagnes.length == 0 && active_actions.length != 0){
+            else if (active_campagnes.length === 0 && active_actions.length !== 0){
                 ligne_operation = $(".ligne-operation[action-id="+active_actions[0].attributes.id.value+"]:visible");
                 numRows = ligne_operation.length;
             }
@@ -1060,7 +1060,7 @@ $(document).ready(function () {
             if (numRows <= numPerPage) {
                 $(".table_pager").hide();
             }
-            if(page == null)
+            if(page === null)
                 page = 1;
             if (numRows > numPerPage) {
                 $('#pagination_pager').replaceWith($('<ul id="pagination_pager" class="pagination-sm"></ul>'));
@@ -1081,7 +1081,6 @@ $(document).ready(function () {
             }
             paginate_all_operation_child();
         });
-        //console.log(operations);
         return operations
     };
 
@@ -1159,7 +1158,7 @@ $(document).ready(function () {
     }
     $(window).keydown(function(event){
         if ($("#popup-information").is(":visible")) {
-            if(event.keyCode == 13) {
+            if(event.keyCode === 13) {
                 $("#btn-info-ok").click();
                 event.preventDefault();
                 return false;
@@ -1180,7 +1179,6 @@ $(document).ready(function () {
     });
     $("body").trigger("mousemove");
     function reloadOperationList(){
-        console.log('Operation list refreshed!');
         lignes = document.getElementsByClassName('ligne-operation');
         op_list = '';
         if(lignes.length>0)
@@ -1189,7 +1187,7 @@ $(document).ready(function () {
             op_list += '/' + lignes[i].id;
         pagination_active = $('#pagination_pager .active');
         var page = 1;
-        if (pagination_active.length != 0){
+        if (pagination_active.length !== 0){
             page = parseInt($('#pagination_pager .active')[0].firstChild.innerText);
 
         }
@@ -1204,7 +1202,6 @@ $(document).ready(function () {
                 $("td[colspan=9]").find("div").filter("#collapse-child").hide();
                 $("td[colspan=9]").find("div").filter("#collapse-child[parent='"+slide_this[0].attributes.parent.value+"'][id='"+slide_this[0].attributes.id.value+"']").addClass("slide-this");
                 $("td[colspan=9]").find("div").filter("#collapse-child[parent='"+slide_this[0].attributes.parent.value+"'][id='"+slide_this[0].attributes.id.value+"']").show();
-                //console.log($("td[colspan=9]").find("div").filter("#collapse-child[parent='"+slide_this[0].attributes.parent.value+"'][id='"+slide_this[0].attributes.id.value+"']"))
 
 
                 //$("#collapse-child").filter(":not([parent='"+slide_this[0].attributes.parent.value+"'][id='"+slide_this[0].attributes.id.value+"'])").slideUp();
@@ -1248,9 +1245,9 @@ $(document).ready(function () {
                 $target.next().removeClass("hidden");
             }
             function get_type(value){
-                if (value == 'initial_command')
+                if (value === 'initial_command')
                     return 'initial_command'
-                else if(value == 'other'){
+                else if(value === 'other'){
                     return $(".op_sens[parent='"+$target[0].attributes.parent.value+"']")[0].value;
                 }
             }
@@ -1292,7 +1289,7 @@ $(document).ready(function () {
                             $('.modeling-operation')[0].value = parseInt(data[0].id);
                             $('.available_identifiers')[0].value = parseInt(data[0].available_identifiers);
                             $('.volume_filled')[0].value = parseInt(data[0].volume_filled);
-                            if(data[0].available_identifiers == 0){
+                            if(data[0].available_identifiers === 0){
                                 $("#use_available_identifiers").prop( "disabled", true );
                                 $("#use_available_identifiers").attr("checked",false);
                                 $("#error-message").show();
@@ -1309,7 +1306,7 @@ $(document).ready(function () {
                             $('#sale-operation').load(location.href + ' #sale-operation>*', null, function(){
                                 pagination_active = $('#pagination_pager .active');
                                 var page = 1;
-                                if (pagination_active.length != 0){
+                                if (pagination_active.length !== 0){
                                     page = parseInt($('#pagination_pager .active')[0].firstChild.innerText);
 
                                 }
@@ -1371,7 +1368,7 @@ $(document).ready(function () {
                             $('.modeling-operation')[0].value = parseInt(data[0].id);
                             $('.available_identifiers')[0].value = parseInt(data[0].available_identifiers);
                             $('.volume_filled')[0].value = parseInt(data[0].volume_filled);
-                            if(data[0].available_identifiers == 0){
+                            if(data[0].available_identifiers === 0){
                                 $("#use_available_identifiers").prop( "disabled", true );
                                 $("#use_available_identifiers").attr("checked",false);
                                 $("#error-message").show();
@@ -1389,7 +1386,7 @@ $(document).ready(function () {
                             $('#sale-operation').load(location.href + ' #sale-operation>*', null, function(){
                                 pagination_active = $('#pagination_pager .active');
                                 var page = 1;
-                                if (pagination_active.length != 0){
+                                if (pagination_active.length !== 0){
                                     page = parseInt($('#pagination_pager .active')[0].firstChild.innerText);
 
                                 }
@@ -1698,7 +1695,6 @@ $(document).ready(function () {
             proccessData: false,
             data: {},
             }).then(function(records) {
-                console.log(records.filter);
                 if (records.filter){
                     $("#filter-operation").val(records.filter).trigger("change");
                 }
@@ -1725,7 +1721,6 @@ $(document).ready(function () {
                         proccessData: false,
                         data: {},
                     }).then(function(){
-                        console.log("Filter updated!");
                         $("#campaign").load(location.href + ' #campaign>*', null, function(){
 			                    add_liste_click();
 			                    add_list_group_item_click();
@@ -1744,13 +1739,13 @@ $(document).ready(function () {
         var operations = [];
         var active_campaign = $(".-liste").filter(".active");
         var active_action = $(".list-group-item").filter(".active");
-        if(active_campaign.length > 0 && active_action.length == 0){
-            if(active_campaign[0].attributes.id.value != "all-campaigns")
+        if(active_campaign.length > 0 && active_action.length === 0){
+            if(active_campaign[0].attributes.id.value !== "all-campaigns")
                 $(".ligne-operation[campaign-id="+active_campaign[0].attributes.id.value+"]").show();
-            else if (active_campaign[0].attributes.id.value == "all-campaigns")
+            else if (active_campaign[0].attributes.id.value === "all-campaigns")
                 $(".ligne-operation").show();
         }
-        else if(active_campaign.length == 0 && active_action.length > 0){
+        else if(active_campaign.length === 0 && active_action.length > 0){
             $(".ligne-operation[action-id="+active_action[0].attributes.id.value+"]").show();
         }
         switch(filter){
@@ -1890,17 +1885,17 @@ $(document).ready(function () {
     /* ---------------------- DELETED function() --------------------------*/
     function deleted_function(){
         var active_side_menu = $(".-liste.active");
-        if (active_side_menu.length == 0)
+        if (active_side_menu.length === 0)
             active_side_menu = $(".list-group-item.active")
         if (active_side_menu.length > 0 && active_side_menu[0].hasAttribute("deleted")){
-            if (active_side_menu[0].attributes.deleted.value == "deleted"){
+            if (active_side_menu[0].attributes.deleted.value === "deleted"){
                 $(".ligne-operation[deleted='deleted']:visible").show();
                 $(".ligne-operation[child_deleted='child_deleted']:visible").show();
                 $(".ligne-operation[deleted='not deleted']:visible").filter("[child_deleted='no_child_deleted']").hide();
                 child_deleted_function('deleted');
 
             }
-            else if (active_side_menu[0].attributes.deleted.value == "not deleted"){
+            else if (active_side_menu[0].attributes.deleted.value === "not deleted"){
                 $(".ligne-operation[deleted='deleted']:visible").hide();
                 $(".ligne-operation[deleted='not deleted']:visible").show();
                 child_deleted_function('not deleted');
@@ -1912,12 +1907,12 @@ $(document).ready(function () {
     function child_deleted_function(arg){
         $(".ligne-operation:visible").each(function(){
             var $target = $(this);
-            if(arg == 'deleted'){
+            if(arg === 'deleted'){
                 $target.next().find(".child-element[deleted='deleted']").show();
                 $target.next().find(".child-element[deleted='not deleted']").hide();
                 $target.next().find(".child-element-add").hide();
             }
-            else if (arg == 'not deleted'){
+            else if (arg === 'not deleted'){
                 $target.next().find(".child-element[deleted='deleted']").hide();
                 $target.next().find(".child-element[deleted='not deleted']").show();
                 $target.next().find(".child-element-add").show();
@@ -1946,27 +1941,27 @@ $(document).ready(function () {
                 gutter:40,
               });
         $grid.masonry( 'on', 'layoutComplete', function() {
-            if(number_indication == 1){
+            if(number_indication === 1){
                 $('.lgrid').css({'left':'200px'});
             }
-            if(number_indication == 2){
+            if(number_indication === 2){
                  $('.lgrid').css({'left':'100px'});
             }
-            if(number_indication == 3){
+            if(number_indication === 3){
                 $('.lgrid').css({'left':'100px'});
                 $('.lgrid-item:last').css({'left':'20%'});
             }
-            if(number_indication == 4){
+            if(number_indication === 4){
                 $('.lgrid').css({'left':'100px'});
             }
-            if(number_indication == 5){
+            if(number_indication === 5){
                 $('.lgrid-item:last').prev("div").css({'left':'50%'});
                 $('.lgrid-item:last').css({'left':'15%'});
             }
-            if(number_indication == 7){
+            if(number_indication === 7){
                 $('.lgrid-item:last').css({'left':'33%'});
             }
-            if(number_indication == 8){
+            if(number_indication === 8){
                 $('.lgrid-item:last').prev("div").css({'left':'50%'});
                 $('.lgrid-item:last').css({'left':'15%'});
             }

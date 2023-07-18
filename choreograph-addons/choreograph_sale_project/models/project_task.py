@@ -63,15 +63,15 @@ class ProjectTask(models.Model):
     is_info_validated = fields.Boolean('Infos Validated', related='sale_order_id.is_info_validated')
     po_livedata_number = fields.Char('PO Livedata Number')
     campaign_name = fields.Char("Campaign Name")
-    reception_date = fields.Date(related='sale_order_id.email_reception_date', string="Reception Date")
-    reception_location = fields.Char('Where to find ?', related='sale_order_id.email_reception_location')
-    personalization = fields.Boolean(related='sale_order_id.email_personalization')
-    personalization_text = fields.Text('If yes specify', related='sale_order_id.email_personalization_text')
-    routing_date = fields.Date(related='sale_order_id.email_routing_date')
-    routing_end_date = fields.Date(related='sale_order_id.email_routing_end_date')
+    reception_date = fields.Date(string="Reception Date")
+    reception_location = fields.Char('Where to find ?')
+    personalization = fields.Boolean()
+    personalization_text = fields.Text('If yes specify')
+    routing_date = fields.Date()
+    routing_end_date = fields.Date()
     campaign_type = fields.Selection(related='sale_order_id.campaign_type')
-    volume_detail = fields.Text(related='sale_order_id.email_volume_detail')
-    sender = fields.Char(related='sale_order_id.email_sender')
+    volume_detail = fields.Text()
+    sender = fields.Char()
     quantity_to_deliver = fields.Integer(related='sale_order_id.quantity_to_deliver')
     to_validate = fields.Boolean(related='sale_order_id.to_validate')
     object = fields.Char(related='sale_order_id.object')
@@ -396,3 +396,11 @@ class ProjectTask(models.Model):
         for rec in self:
             for i, l in enumerate(rec.task_segment_ids):
                 l.segment_number = i + 1
+
+    @api.depends('sale_line_id', 'project_id', 'commercial_partner_id')
+    def _compute_sale_order_id(self, sale_order=False):
+        if sale_order:
+            for task in self:
+                task.sale_order_id = sale_order.id
+        else:
+            super(ProjectTask, self)._compute_sale_order_id()

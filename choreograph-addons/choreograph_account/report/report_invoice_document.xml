@@ -67,19 +67,8 @@
                     </div>
                 </div>
             </div>
-            
+
             <div name="customer_code" position="replace">
-                <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.date_order" name="customer_code">
-                    <strong>Order date:</strong>
-                    <p class="m-0" t-field="o.sale_order_id.date_order" t-options="{'widget': 'date'}"/>
-                </div>
-            </div>
-            
-            <div name="customer_code" position="after">
-                <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.partner_id" name="customer">
-                    <strong>Client:</strong>
-                    <p class="m-0" t-field="o.sale_order_id.partner_id"/>
-                </div>
             </div>
             
             <div name="due_date" position="after">
@@ -88,18 +77,33 @@
                     <p class="m-0" t-field="o.sale_order_id.related_base"/>
                 </div>
             </div>
-            
+
             <div name="reference" position="replace">
-                <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.commitment_date" name="reference">
-                    <strong>Delivery date order:</strong>
-                    <p class="m-0" t-field="o.sale_order_id.commitment_date" t-options="{'widget': 'date'}"/>
-                </div>
             </div>
             
             <div name="origin" position="replace">
                 <div class="col-auto col-3 mw-100 mb-2" t-if="o.invoice_origin" name="origin">
                     <strong>Sale Order:</strong>
                     <p class="m-0" t-field="o.invoice_origin"/>
+                </div>
+            </div>
+
+            <div id="informations" position="after">
+                <div id="informations2" class="row mt-4 mb-4">
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.date_order" name="order_date">
+                        <strong>Order date:</strong>
+                        <p class="m-0" t-field="o.sale_order_id.date_order" t-options="{'widget': 'date'}"/>
+                    </div>
+
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.partner_id" name="customer">
+                        <strong>Client:</strong>
+                        <p class="m-0" t-field="o.sale_order_id.partner_id"/>
+                    </div>
+
+                    <div class="col-auto col-3 mw-100 mb-2" t-if="o.sale_order_id.commitment_date" name="reference">
+                        <strong>Delivery date order:</strong>
+                        <p class="m-0" t-field="o.sale_order_id.commitment_date" t-options="{'widget': 'date'}"/>
+                    </div>
                 </div>
             </div>
             
