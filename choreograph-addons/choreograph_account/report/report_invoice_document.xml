@@ -11,40 +11,56 @@
         </template>
         
         <template id="report_invoice_document" inherit_id="account.report_invoice_document">
+            <div class="row" position="before">
+                <style>
+                    .header-info{
+                        text-decoration: underline;
+                        text-align: left !important;
+                        width: 35%;
+                    }
+                    .header-value{
+                        padding-left: 10px !important;
+                        text-align: left !important;
+                    }
+                    .low-font-size{
+                        font-size: 0.8em;
+                    }
+                </style>
+            </div>
             <div class="row" position="replace">
-                <div class="row">
+                <div class="row custom-row">
                     <div class="col-6">
                         <t t-set="information_block">
                             <table class="table table-sm o_main_table table-borderless mt-4">
-                                <thead style="display: table-row-group;">
+                                <thead style="display: table-row-group;" class="low-font-size">
                                     <tr/>
                                     <tr>
-                                        <td style="text-decoration: underline; text-align: left !important;">Sales:</td>
-                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                        <td class="header-info">Sales:</td>
+                                        <td class="header-value">
                                             <span t-field="o.invoice_user_id"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-decoration: underline; text-align: left !important;">Email address:</td>
-                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                        <td class="header-info">Email address:</td>
+                                        <td class="header-value">
                                             <span t-field="o.invoice_user_id.email"/>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-decoration: underline; text-align: left !important;">Account contact:</td>
-                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                        <td class="header-info">Account contact:</td>
+                                        <td class="header-value">
                                             <span>Mandy Bercker</span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-decoration: underline; text-align: left !important;">Email address:</td>
-                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                        <td class="header-info">Email address:</td>
+                                        <td class="header-value">
                                             <span>mandy.bercker@choreograph.com</span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td style="text-decoration: underline; text-align: left !important;">Phone:</td>
-                                        <td style="padding-left: 10px !important; text-align: left !important;">
+                                        <td class="header-info">Phone:</td>
+                                        <td class="header-value">
                                             <span>+33 362 14 51 00</span>
                                         </td>
                                     </tr>
@@ -55,18 +71,22 @@
                     </div>
                     <div class="col-6" name="address_not_same_as_shipping">
                         <t t-set="address">
-                            <address class="mb-0" t-field="o.partner_id"
+                            <address class="mb-0 low-font-size" t-field="o.partner_id"
                                      t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
                             <div t-if="o.partner_id.vat">
-                                <t t-if="o.company_id.account_fiscal_country_id.vat_label"
-                                   t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label"/>
-                                <t t-else="">Tax ID</t>:
-                                <span t-field="o.partner_id.vat"/>
+                                <span t-if="o.company_id.account_fiscal_country_id.vat_label"
+                                   t-esc="o.company_id.account_fiscal_country_id.vat_label" id="inv_tax_id_label" class="low-font-size"/>
+                                <span t-else="" class="low-font-size">Tax ID</span>:
+                                <span class="low-font-size" t-field="o.partner_id.vat"/>
                             </div>
                         </t>
                     </div>
                 </div>
             </div>
+
+            <xpath expr="//div[@name='comment']/span" position="attributes">
+                <attribute name="class">low-font-size</attribute>
+            </xpath>
 
             <div name="customer_code" position="replace">
             </div>
