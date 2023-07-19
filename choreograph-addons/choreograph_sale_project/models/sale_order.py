@@ -7,7 +7,7 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from dateutil.relativedelta import relativedelta
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
-from odoo.addons.choreograph_project.models.project_project import TODO_TASK_STAGE, WAITING_FILE_TASK_STAGE
+from odoo.addons.choreograph_project.models.project_project import WAITING_TASK_STAGE, TODO_TASK_STAGE, WAITING_FILE_TASK_STAGE
 
 PROVIDER_DELIVERY_NUMBER = '75'
 SMS_TASK_NUMBER = '50'
@@ -611,7 +611,7 @@ class SaleOrder(models.Model):
             'target': 'new',
             'context': {
                 'default_composition_mode': 'comment',
-                'default_email_layout_xmlid': 'mail.mail_notification_light',
+                'default_email_layout_xmlid': 'choreograph_sale_project.mail_delivery',
                 'default_res_id': self.id,
                 'default_model': 'sale.order',
                 'default_use_template': bool(template_id),
@@ -625,7 +625,11 @@ class SaleOrder(models.Model):
     def action_create_task_from_condition(self):
         super().action_create_task_from_condition()
         for rec in self:
-            rec.operation_condition_ids.task_id._compute_sale_order_id(rec)
+            conditions = rec.get_operation_condition_lines()
+            conditions.mapped('task_id').update_task_stage(WAITING_TASK_STAGE)
+            conditions.write({
+                'is_task_created': True
+            })
             project_id = rec.project_ids[0] if rec.project_ids else False
             if project_id and project_id.stage_id != self.env.ref('choreograph_project.planning_project_stage_draft'):
                 task_draft_stage_id = self.env.ref('choreograph_project.project_task_type_draft')
