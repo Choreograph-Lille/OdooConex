@@ -611,7 +611,7 @@ class SaleOrder(models.Model):
             'target': 'new',
             'context': {
                 'default_composition_mode': 'comment',
-                'default_email_layout_xmlid': 'mail.mail_notification_light',
+                'default_email_layout_xmlid': 'choreograph_sale_project.mail_delivery',
                 'default_res_id': self.id,
                 'default_model': 'sale.order',
                 'default_use_template': bool(template_id),
