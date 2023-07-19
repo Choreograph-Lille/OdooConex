@@ -271,10 +271,13 @@ class SaleOrder(models.Model):
         self.project_ids.write({'type_of_project': 'operation'})
         self.write({'show_operation_generation_button': False})
 
+    def get_operation_condition_lines(self):
+        return self.operation_condition_ids.filtered(
+                    lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
+
     def action_create_task_from_condition(self):
         for rec in self:
-            for condition in self.operation_condition_ids.filtered(
-                    lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order']):
+            for condition in rec.get_operation_condition_lines():
                 vals = {
                     'name': OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
                         condition.subtype]),
@@ -291,8 +294,8 @@ class SaleOrder(models.Model):
                 }
                 condition.task_id = self.env['project.task'].sudo().create(vals)
                 condition.task_id._compute_type_of_project()
+                condition.task_id._compute_sale_order_id(rec)
                 condition.task_id.onchange_role_id()
-                condition.is_task_created = True
 
     def _compute_new_condition_count(self):
         self.new_condition_count = len(self.operation_condition_ids.filtered(
