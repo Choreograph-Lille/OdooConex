@@ -8,7 +8,7 @@
             <field name="partner_to"></field>
             <field name="email_cc">production.data@choreograph.com</field>
             <field name="description">Template used on SO when we push the button Delivery</field>
-            <field name="subject">Choreograph/ I-Behavior: The {{ object.get_operation_template_name() }} campaign for {{ object.partner_id.name }} UK has been delivered</field>
+            <field name="subject">Choreograph/ I-Behavior: The {{ object.get_operation_template_name() }} campaign for {{ object.partner_id.name }} has been delivered</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
                     <p style="margin: 0px; padding: 0px; font-size: 13px;">
