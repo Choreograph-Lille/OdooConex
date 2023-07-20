@@ -2,7 +2,8 @@
 <odoo>
     <record id="project.open_view_project_all_group_stage" model="ir.actions.act_window">
         <field name="context">{'search_default_groupby_stage': 1,
-            'default_type_of_project':'standard'}</field>
+            'default_type_of_project':'standard',
+            'hide_custom_dates': 1}</field>
         <field name="domain">[('type_of_project','=','standard')]</field>
     </record>
 
@@ -10,7 +11,9 @@
         <field name="name">Operation</field>
         <field name="res_model">project.project</field>
         <field name="context">{'search_default_groupby_stage': 1,
-            'default_type_of_project':'operation'}</field>
+            'default_type_of_project':'operation',
+            'hide_dates': 1}
+        </field>
         <field name="domain">[('type_of_project','=','operation')]</field>
         <field name="view_mode">kanban,tree,form,calendar,activity</field>
         <field name="view_id" ref="project.view_project_kanban" />
