@@ -17,6 +17,17 @@ class ProjectProject(models.Model):
 
     project_template_id = fields.Many2one('project.project', 'Operation Template',
                                           domain=[('is_template', '=', True)], copy=False)
+    return_studies_date = fields.Date('Return To Studies Date', compute='compute_date_from_so')
+    commitment_date = fields.Date('Commitment Date', compute='compute_date_from_so')
+
+    def compute_date_from_so(self):
+        for rec in self:
+            if rec.sale_line_id:
+                sale_order = rec.sale_order_id
+            else:
+                sale_order = self.env['sale.order'].search([('project_id', '=', rec.id)], limit=1)
+            rec.return_studies_date = sale_order.potential_return_date or sale_order.study_delivery_date
+            rec.commitment_date = sale_order.get_date_tz(sale_order.commitment_date) if sale_order.commitment_date else False
 
     @api.model
     def set_task_project(self):
