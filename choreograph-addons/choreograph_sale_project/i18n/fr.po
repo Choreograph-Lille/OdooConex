@@ -674,6 +674,11 @@ msgid "PRESTA INFORMATION"
 msgstr "INFO PRESTA"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__provider_delivery_partner_id
+msgid "Partner Delivery Address"
+msgstr "Adresse de livraison"
+
+#. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_postal_prospecting
 msgid "Postal Prospecting (TEMPLATE)"
 msgstr "Prospection postale (TEMPLATE)"

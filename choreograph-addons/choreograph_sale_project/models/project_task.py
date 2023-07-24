@@ -49,6 +49,7 @@ class ProjectTask(models.Model):
 
     provider_file_name = fields.Char()
     provider_delivery_address = fields.Char('Delivery Address')
+    provider_delivery_partner_id = fields.Many2one('res.partner', 'Partner Delivery Address')
 
     provider_comment = fields.Text()
     desired_finished_volume = fields.Char()
@@ -327,7 +328,7 @@ class ProjectTask(models.Model):
                     task.project_id._hook_task_45_in_stage_70()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
-            provider_fields = ['provider_file_name', 'provider_delivery_address', 'family_conex',
+            provider_fields = ['provider_file_name', 'provider_delivery_partner_id', 'family_conex',
                                'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
@@ -350,7 +351,7 @@ class ProjectTask(models.Model):
 
             data = {
                 'provider_file_name': rec.provider_file_name,
-                'provider_delivery_address': rec.provider_delivery_address,
+                'provider_delivery_address': rec.provider_delivery_partner_id.email,
                 'family_conex': rec.family_conex,
                 'provider_comment': rec.provider_comment,
                 'trap_address_ids': [(6, 0, new_traps.ids)],
