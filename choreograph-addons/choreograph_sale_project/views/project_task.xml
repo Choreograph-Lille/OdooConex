@@ -294,9 +294,15 @@
                                 attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}" />
                             <field name="provider_file_name"
                                 attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])], 'readonly': [('task_number', 'in', ['75', '85'])]}" />
+
                             <field name="provider_delivery_address"
-                                attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])], 'readonly': [('task_number', 'in', ['75', '85'])]}"
-                                widget="email" />
+                                   readonly="1"
+                                   attrs="{'invisible': [('task_number', 'not in', ['75', '85'])]}"
+                                   widget="email"/>
+                            <field name="provider_delivery_partner_id"
+                                   domain="[('email', '!=', False)]"
+                                   attrs="{'invisible': [('task_number', 'not in', ['70', '80'])]}"/>
+
                             <field name="provider_comment"
                                 attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}" />
 

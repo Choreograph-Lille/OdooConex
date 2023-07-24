@@ -598,7 +598,7 @@ class SaleOrder(models.Model):
 
     def action_send_delivery_email(self):
         self.ensure_one()
-        email_to = self._get_operation_task([80]).provider_delivery_address
+        email_to = self._get_operation_task([85]).provider_delivery_address
         if email_to:
             self.env['res.partner'].sudo().find_or_create(email_to)
         composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form')
