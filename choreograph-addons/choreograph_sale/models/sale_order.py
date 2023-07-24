@@ -364,3 +364,20 @@ class SaleOrder(models.Model):
     def _get_invoice_narration(self):
         self.ensure_one()
         return self.with_context(lang=self.partner_invoice_id.lang).env.company.invoice_terms_c9h
+
+    @api.depends('partner_shipping_id', 'partner_id', 'company_id', 'partner_invoice_id')
+    def _compute_fiscal_position_id(self):
+        cache = {}
+        super()._compute_fiscal_position_id()
+        for order in self:
+            if not order.partner_id:
+                order.fiscal_position_id = False
+                continue
+            if order.partner_invoice_id:
+                key = (order.company_id.id, order.partner_id.id, order.partner_invoice_id.id)
+                if key not in cache:
+                    cache[key] = self.env['account.fiscal.position'].with_company(order.company_id) \
+                        ._get_fiscal_position(order.partner_id, order.partner_invoice_id)
+            order.fiscal_position_id = cache[key]
+            order.order_line._compute_tax_id()
+            order.show_update_fpos = False
