@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-21 11:44+0000\n"
-"PO-Revision-Date: 2023-07-17 08:57+0000\n"
+"PO-Revision-Date: 2023-07-20 09:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -216,6 +216,11 @@ msgstr "Civilités"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__comment
 msgid "Comment"
 msgstr "Commentaire"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_project__commitment_date
+msgid "Commitment Date"
+msgstr "Livraison client"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__complexity
@@ -839,6 +844,11 @@ msgstr "Base"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__repatriate_information
 msgid "Repatriate Informations On Delivery Informations Tab"
 msgstr "Rapatrier les informations sur l'onglet informations livraison"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_project__return_studies_date
+msgid "Return To Studies Date"
+msgstr "Date de retour études"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__return_production_potential
