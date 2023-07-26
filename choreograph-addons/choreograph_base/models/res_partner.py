@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, api
 
 
 class ResPartner(models.Model):
@@ -31,3 +31,13 @@ class ResPartner(models.Model):
 
     def _valid_field_parameter(self, field, name):
         return name == 'tracking' or super()._valid_field_parameter(field, name)
+
+    @api.model_create_multi
+    def create(self, values):
+        for value in values:
+            if value.get('is_company'):
+                next_ref = self.env['ir.sequence'].next_by_code('res.partner.company.ref')
+                value.update({
+                    'ref': next_ref
+                })
+        return super(ResPartner, self).create(values)
