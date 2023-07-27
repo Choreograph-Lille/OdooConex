@@ -14,6 +14,11 @@
             <xpath expr="//field[@name='tag_ids']" position="after">
                 <field name="code" attrs="{'invisible': [('is_template','=',False)]}"/>
             </xpath>
+
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="sale_order_id"/>
+            </xpath>
+
         </field>
     </record>
 </odoo>
