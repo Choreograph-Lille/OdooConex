@@ -16,7 +16,6 @@
 	],
 	'data': [
 		# data
-		"data/ir_config_parameter.xml",
 		'data/ir_sequence.xml',
 		# security
 		# views
