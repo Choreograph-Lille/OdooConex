@@ -49,7 +49,7 @@ class ProjectTask(models.Model):
 
     provider_file_name = fields.Char()
     provider_delivery_address = fields.Char('Delivery Address')
-    provider_delivery_partner_id = fields.Many2one('res.partner', 'Partner Delivery Address')
+    provider_delivery_partner_ids = fields.Many2many('res.partner', string='Partner Delivery Address')
 
     provider_comment = fields.Text()
     desired_finished_volume = fields.Char()
@@ -174,7 +174,7 @@ class ProjectTask(models.Model):
                 'role_id': self.env.ref('choreograph_contact.res_role_ce').id,
                 'task_number': '25',
                 'type_of_project':
-                'operation',
+                    'operation',
                 'sequence': 5
             },
             'delivery_study': {
@@ -219,7 +219,8 @@ class ProjectTask(models.Model):
             },
             'file_bat': {
                 'name': 'Fichier BAT / Témoin',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_bat_witness_file').id,
+                'task_type_id': self.env.ref(
+                    'choreograph_sale_project.choreograph_project_task_type_bat_witness_file').id,
                 'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
                 'task_number': '55',
                 'type_of_project': 'operation',
@@ -251,7 +252,8 @@ class ProjectTask(models.Model):
             },
             'delivery_presta': {
                 'name': 'Livraison presta',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_delivery_presta').id,
+                'task_type_id': self.env.ref(
+                    'choreograph_sale_project.choreograph_project_task_type_delivery_presta').id,
                 'role_id': self.env.ref('choreograph_contact.res_role_cp').id,
                 'task_number': '75',
                 'type_of_project': 'operation',
@@ -259,7 +261,8 @@ class ProjectTask(models.Model):
             },
             'delivery_infos': {
                 'name': 'Infos livraison',
-                'task_type_id': self.env.ref('choreograph_sale_project.choreograph_project_task_type_delivery_infos').id,
+                'task_type_id': self.env.ref(
+                    'choreograph_sale_project.choreograph_project_task_type_delivery_infos').id,
                 'role_id': self.env.ref('choreograph_contact.res_role_adv').id,
                 'task_number': '80',
                 'type_of_project': 'operation',
@@ -294,7 +297,8 @@ class ProjectTask(models.Model):
     def write(self, vals):
         res = super(ProjectTask, self).write(vals)
         for task in self:
-            if task.type_of_project == 'operation' and vals.get('stage_id', False) and not self.env.context.get('task_stage_init', False):
+            if task.type_of_project == 'operation' and vals.get('stage_id', False) and not self.env.context.get(
+                    'task_stage_init', False):
                 stage_id = self.env['project.task.type'].browse(vals['stage_id'])
                 method_dict = {
                     '20': '_hook_task_20_in_stage_80',
@@ -328,7 +332,7 @@ class ProjectTask(models.Model):
                     task.project_id._hook_task_45_in_stage_70()
                 elif task.task_number == '90' and stage_id.stage_number == '15':
                     task.project_id._hook_task_90_in_stage_15()
-            provider_fields = ['provider_file_name', 'provider_delivery_partner_id', 'family_conex',
+            provider_fields = ['provider_file_name', 'provider_delivery_partner_ids', 'family_conex',
                                'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
@@ -351,7 +355,8 @@ class ProjectTask(models.Model):
 
             data = {
                 'provider_file_name': rec.provider_file_name,
-                'provider_delivery_address': rec.provider_delivery_partner_id.email,
+                'provider_delivery_address': ",".join(
+                    [e for e in rec.provider_delivery_partner_ids.mapped("email") if e]),
                 'family_conex': rec.family_conex,
                 'provider_comment': rec.provider_comment,
                 'trap_address_ids': [(6, 0, new_traps.ids)],
