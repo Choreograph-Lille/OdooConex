@@ -61,10 +61,18 @@
                 <div class="col-5">
                     <table class="table table-sm o_main_table table-borderless mt-4" style="border: 0px !important">
                         <thead style="display: table-row-group">
-                            <tr>
-                                <th style="text-decoration: underline;">Retention</th>
-                                <th t-out="doc.data_conservation_id.name"/>
-                            </tr>
+                            <t t-if="doc.data_conservation_id.id == doc.env.ref('choreograph_sale.sale_data_conservation_other').id">
+                                <tr>
+                                    <th style="text-decoration: underline;">Retention</th>
+                                    <th t-out="doc.other_conservation_duration"/>
+                                </tr>
+                            </t>
+                            <t t-else="">
+                                <tr>
+                                    <th style="text-decoration: underline;">Retention</th>
+                                    <th t-out="doc.data_conservation_id.name"/>
+                                </tr>
+                            </t>
                         </thead>
                     </table>
                 </div>
