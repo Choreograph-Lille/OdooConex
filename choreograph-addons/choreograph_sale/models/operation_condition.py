@@ -70,8 +70,12 @@ class OperationCondition(models.Model):
 
     def unlink(self):
         self.task_id.unlink()
+        self._log_unlinked_operation_condition()
         return super(OperationCondition, self).unlink()
 
+    def _log_unlinked_operation_condition(self):
+        bodies = {rec.id: _("Condition/Exclusion deleted") for rec in self}
+        self._message_log_batch(bodies=bodies)
 
 class OperationConditionType(models.Model):
     _name = 'operation.condition.subtype'

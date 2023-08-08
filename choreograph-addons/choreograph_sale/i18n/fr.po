@@ -862,6 +862,13 @@ msgid "Condition/Exclusion"
 msgstr ""
 
 #. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/operation_condition.py:0
+#, python-format
+msgid "Condition/Exclusion deleted"
+msgstr "Condition/Exclusion supprimé"
+
+#. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_res_config_settings
 msgid "Config Settings"
 msgstr "Paramètres de configuration"

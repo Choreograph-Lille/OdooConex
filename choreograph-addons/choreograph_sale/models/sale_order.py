@@ -213,6 +213,11 @@ class SaleOrder(models.Model):
             lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
         if self.project_ids and operation_condition:
             self.action_create_task_from_condition()
+        field_list = [self._fields[key] for key in values.keys() if
+                      self.env['ir.model.fields']._get(self._name, key).id in self.get_mail_field_to_operation()]
+        if field_list:
+            for rec in self:
+                rec.project_ids.notify_field_change(field_list)
         return res
 
     def action_lead(self):
@@ -273,14 +278,14 @@ class SaleOrder(models.Model):
 
     def get_operation_condition_lines(self):
         return self.operation_condition_ids.filtered(
-                    lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
+            lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
 
     def action_create_task_from_condition(self):
         for rec in self:
             for condition in rec.get_operation_condition_lines():
                 vals = {
                     'name': OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
-                        condition.subtype]),
+                                                                                   condition.subtype]),
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
                     'note': condition.note,
@@ -373,6 +378,7 @@ class SaleOrder(models.Model):
                 order.fiscal_position_id = False
                 continue
             if order.partner_invoice_id:
-                order.fiscal_position_id = order.partner_invoice_id.with_company(order.company_id).property_account_position_id.id
+                order.fiscal_position_id = order.partner_invoice_id.with_company(
+                    order.company_id).property_account_position_id.id
             order.order_line._compute_tax_id()
             order.show_update_fpos = False
