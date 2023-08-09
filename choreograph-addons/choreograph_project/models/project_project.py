@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.tools import html_escape
 
 state_done = {'kanban_state': 'done'}
 state_normal = {'kanban_state': 'normal'}
@@ -46,6 +47,7 @@ def filter_by_type_of_project(func):
         type_of_project = self._context.get('default_type_of_project', 'standard')
         result = func(self, stages, domain, order)
         return result.filtered(lambda item: item.type_of_project == type_of_project)
+
     return wrapper
 
 
@@ -159,7 +161,8 @@ class ProjectProject(models.Model):
         project_project_obj = self.env['project.project']
         sequence_obj = self.env['ir.sequence']
         for vals in vals_list:
-            if self._context.get('is_operation_generation') or self._context.get('default_type_of_project') == 'operation':
+            if self._context.get('is_operation_generation') or self._context.get(
+                    'default_type_of_project') == 'operation':
                 types = project_task_obj.get_operation_project_task_type()
                 name_seq = sequence_obj.next_by_code('project.project.operation')
                 project_name = False
@@ -169,7 +172,8 @@ class ProjectProject(models.Model):
                 vals.update({
                     'type_of_project': 'operation',
                     'code_sequence': name_seq,
-                    'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id,
+                    'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft',
+                                             raise_if_not_found=False).id,
                     'type_ids': [(6, 0, types.ids)],
                     'user_id': self._context.get('user_id', vals.get('user_id')),
                     'name': '%s - %s' % (name_seq, vals.get('name') or project_name)
@@ -183,3 +187,50 @@ class ProjectProject(models.Model):
 
     def action_to_plan(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_planified').id})
+
+    @api.model
+    def _get_fields_to_track_notification(self):
+        SaleOrder = self.env['sale.order']
+        return SaleOrder.get_operation_fields() + SaleOrder.get_sms_campaign_field() + SaleOrder.get_email_campaign_field()
+
+    def write(self, values):
+        res = super().write(values)
+        if "stage_id" in values and values["stage_id"] == self.env.ref(
+                'choreograph_project.planning_project_stage_planified').id:
+            self._notify_planned_operation()
+        return res
+
+    def _notify_project_change(self, subject, body):
+        self.ensure_one()
+        self.message_notify(
+            subject=subject,
+            body=body,
+            partner_ids=self.message_follower_ids.mapped('partner_id').ids,
+            record_name=self.display_name,
+            email_layout_xmlid='mail.mail_notification_layout',
+            model_description="Project",
+            mail_auto_delete=False,
+        )
+
+    def notify_field_change(self, field_list):
+        for project in self:
+            body = "<ul>"
+            subject = _("%s changed") % project.display_name
+            for f in field_list:
+                body += f"<li>{html_escape(f._description_string(self.env))}</li>"
+            body += "</ul>"
+            project._notify_project_change(subject, body)
+
+    def _notify_planned_operation(self):
+        for project in self:
+            self._notify_project_change(subject=(_('Planned operation %s') % project.display_name),
+                                        body=(_("The operations %s has been Planned") % project.name))
+
+    def name_get(self):
+        result = []
+        for project in self:
+            name = project.name
+            if project.partner_id:
+                name += " - %s" % project.partner_id.name
+            result.append((project.id, name))
+        return result
