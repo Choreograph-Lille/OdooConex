@@ -62,6 +62,7 @@ class ProjectProject(models.Model):
     type_of_project = fields.Selection(TYPE_OF_PROJECT, default='standard')
     code_sequence = fields.Char()
     code = fields.Char()
+    display_name = fields.Char(string='Display Name', automatic=True, compute='_compute_display_name', store=True)
 
     def get_waiting_task_stage(self):
         todo_stage_id = self.type_ids.filtered(lambda t: t.stage_number == TODO_TASK_STAGE)
