@@ -185,7 +185,9 @@ class SaleOrder(models.Model):
                         'date_deadline': vals[operation_task]
                     })
                 # CNXMIG-102
-                if rec.project_ids and rec.project_ids[0].stage_id.id == self.env.ref('choreograph_project.planning_project_stage_planified').id and operation_task == 'potential_return':
+                if rec.project_ids and rec.project_ids[0].stage_id.id in (
+                        self.env.ref('choreograph_project.planning_project_stage_planified') | self.env.ref(
+                        'choreograph_project.planning_project_stage_in_progress')).ids and operation_task == 'potential_return':
                     rec.update_task_stage_to_15(task)
 
     def _archive_task(self, operation_task):
