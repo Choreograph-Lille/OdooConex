@@ -382,3 +382,23 @@ class SaleOrder(models.Model):
                     order.company_id).property_account_position_id.id
             order.order_line._compute_tax_id()
             order.show_update_fpos = False
+
+    def _notify_get_recipients_groups(self, msg_vals=None):
+        """
+            Inherit this native function so all the recipients could be treated as portal customer and
+            granted access to the documents in the mail link without redirection to login page.
+            See compose_partners context in choreograph_base
+        :param msg_vals:
+        :return:
+        """
+        groups = super()._notify_get_recipients_groups(msg_vals=msg_vals)
+        customer = self._mail_get_partners()[self.id]
+        portal_customer_group = list(next(group for group in groups if group[0] == 'portal_customer'))
+        compose_partners = self._context.get('compose_partners', False)
+        if portal_customer_group and compose_partners:
+            compose_partners = compose_partners.filtered(lambda rp: not self.env['res.users'].sudo().search([('partner_id', '=', rp.id)]))
+            portal_customer_group[1] = lambda pdata: pdata['id'] == customer.id or pdata['id'] in compose_partners.ids
+        index = [i for i, e in enumerate(groups) if e[0] == 'portal_customer']
+        if index:
+            groups[index[0]] = tuple(portal_customer_group)
+        return groups
