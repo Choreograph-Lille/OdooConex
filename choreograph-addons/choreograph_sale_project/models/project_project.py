@@ -17,9 +17,10 @@ class ProjectProject(models.Model):
 
     project_template_id = fields.Many2one('project.project', 'Operation Template',
                                           domain=[('is_template', '=', True)], copy=False)
-    return_studies_date = fields.Date('Return To Studies Date', compute='compute_date_from_so')
-    commitment_date = fields.Date('Commitment Date', compute='compute_date_from_so')
+    return_studies_date = fields.Date('Return To Studies Date', compute='compute_date_from_so', store=True)
+    commitment_date = fields.Date('Commitment Date', compute='compute_date_from_so', store=True)
 
+    @api.depends('sale_order_id')
     def compute_date_from_so(self):
         for rec in self:
             if rec.sale_line_id:
