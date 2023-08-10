@@ -141,6 +141,7 @@ class SaleOrder(models.Model):
         ('adjustment', 'Adjustment'),
         ('cancel', 'Cancelled'),
     ], string="C9H State", default='forecast')
+    note = fields.Html(translate=True)
 
     @api.model
     def get_sms_campaign_field(self):

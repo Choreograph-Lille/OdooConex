@@ -102,5 +102,10 @@
 
         <xpath expr="//p[@t-if='not is_html_empty(doc.payment_term_id.note)']" position="replace"/>
 
+        <xpath expr="//td[@name='td_name']" position="replace">
+            <td name="td_name">
+                [<span t-field="line.product_id.default_code"/>] <span t-field="line.product_id.name"/>
+            </td>
+        </xpath>
     </template>
 </odoo>
