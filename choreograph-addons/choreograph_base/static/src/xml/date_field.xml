@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <!-- This is for reloading the Datepicker component on new data
+    	If we are on existing record on form view and click on 'New' there is a default date set on the picker -->
+
+    <t t-inherit="web.DateField" t-inherit-mode="extension" owl="1">
+        <xpath expr="//DatePicker" position="attributes">
+            <attribute name="t-key">env.model.root.resId</attribute>
+        </xpath>
+    </t>
+
+</templates>

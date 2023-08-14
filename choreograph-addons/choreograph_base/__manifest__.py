@@ -24,7 +24,9 @@
 	],
 	'assets': {
 		'web._assets_primary_variables': [],
-		'web.assets_backend': [],
+		'web.assets_backend': [
+			'choreograph_base/static/src/xml/*.xml'
+		],
 		'web.assets_frontend': [],
 	},
 	'installable': True,
