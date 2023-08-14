@@ -397,3 +397,9 @@ class SaleOrder(models.Model):
         if index:
             groups[index[0]] = tuple(portal_customer_group)
         return groups
+
+    @api.depends('partner_id', 'partner_invoice_id')
+    def _compute_payment_term_id(self):
+        for order in self:
+            order = order.with_company(order.company_id)
+            order.payment_term_id = order.partner_invoice_id.property_payment_term_id
