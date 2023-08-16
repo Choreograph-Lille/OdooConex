@@ -1200,3 +1200,8 @@ msgstr "Le SO contient plusieurs opérations"
 #: model:ir.model,name:choreograph_sale_project.model_trap_address
 msgid "trap.address"
 msgstr ""
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_project_inherit
+msgid "Project Name"
+msgstr "Nom du projet"
