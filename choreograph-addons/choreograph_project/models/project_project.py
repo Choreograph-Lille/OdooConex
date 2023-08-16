@@ -60,7 +60,12 @@ class ProjectProject(models.Model):
     type_of_project = fields.Selection(TYPE_OF_PROJECT, default='standard')
     code_sequence = fields.Char()
     code = fields.Char()
-    display_name = fields.Char(string='Display Name', automatic=True, compute='_compute_display_name', store=True)
+    display_name = fields.Char(string='Display Name', automatic=True, compute='_compute_display_name', store=True, translate=True)
+
+    def _auto_init(self):
+        res = super()._auto_init()
+        self.env['project.project'].search([]).flush_model(['display_name'])
+        return res
 
     def get_waiting_task_stage(self):
         todo_stage_id = self.type_ids.filtered(lambda t: t.stage_number == TODO_TASK_STAGE)
