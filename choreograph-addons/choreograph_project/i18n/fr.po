@@ -6,14 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-09 18:31+0000\n"
-"PO-Revision-Date: 2023-03-09 18:31+0000\n"
+"POT-Creation-Date: 2023-08-07 14:10+0000\n"
+"PO-Revision-Date: 2023-08-07 14:10+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: choreograph_project
+#. odoo-python
+#: code:addons/choreograph_project/models/project_project.py:0
+#, python-format
+msgid "%s changed"
+msgstr "%s modifié"
 
 #. module: choreograph_project
 #: model:ir.model.fields.selection,name:choreograph_project.selection__project_project_stage__stage_number__10
@@ -337,6 +344,13 @@ msgid "Planned"
 msgstr "Planifié"
 
 #. module: choreograph_project
+#. odoo-python
+#: code:addons/choreograph_project/models/project_project.py:0
+#, python-format
+msgid "Planned operation %s"
+msgstr "Opération planifiée %s"
+
+#. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_preparation
 msgid "Preparation"
 msgstr "Préparation"
@@ -475,6 +489,13 @@ msgstr ""
 #: model:project.project.stage,name:choreograph_project.planning_project_stage_terminated
 msgid "Terminated"
 msgstr "Terminé"
+
+#. module: choreograph_project
+#. odoo-python
+#: code:addons/choreograph_project/models/project_project.py:0
+#, python-format
+msgid "The operations %s has been Planned"
+msgstr "L'opération %s a été planifiée"
 
 #. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_to_do
