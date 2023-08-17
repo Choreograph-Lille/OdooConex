@@ -9,7 +9,8 @@ from odoo.addons.choreograph_project.models.project_project import (
     FILE_RECEIVED_TASK_STAGE,
     WAITING_FILE_TASK_STAGE,
     TODO_TASK_STAGE,
-    BAT_CLIENT_TASK_STAGE
+    BAT_CLIENT_TASK_STAGE,
+    PLANIFIED_PROJECT_STAGE
 )
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
@@ -324,7 +325,7 @@ class ProjectTask(models.Model):
                         task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
                     if task.task_number == '60' and task.project_id.sale_order_id.has_enrichment_email_op:
                         task.project_id._update_task_stage('55', TODO_TASK_STAGE)
-                elif stage_id.stage_number in [FILE_RECEIVED_TASK_STAGE, WAITING_FILE_TASK_STAGE]:
+                elif stage_id.stage_number in [FILE_RECEIVED_TASK_STAGE, WAITING_FILE_TASK_STAGE] and task.project_id.stage_id.stage_number == PLANIFIED_PROJECT_STAGE:
                     task.project_id._hook_task_in_stage_20_25()
                 elif task.task_number == '45' and stage_id.stage_number == '50':
                     task.project_id._hook_task_45_in_stage_50()
