@@ -88,6 +88,8 @@ class SaleOrder(models.Model):
             self.env.ref('choreograph_sale_project.field_sale_order__delivery_email_to').id,
             self.env.ref('choreograph_sale_project.field_sale_order__delivery_info_task_id').id,
             self.env.ref('choreograph_sale_project.field_sale_order__presta_delivery_info_task_id').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__segment_ids').id,
+            self.env.ref('choreograph_sale.field_sale_order__operation_condition_ids').id,
         ]
 
     @api.model
