@@ -341,7 +341,7 @@ class SaleOrder(models.Model):
             if 'segment_ids' in vals:
                 rec.repatriate_quantity_information_on_task(['20', '25', '30'])
             if vals.get('repatriate_information') or rec.repatriate_information and 'segment_ids' in vals:
-                rec.repatriate_quantity_information_on_task('85', '80')
+                rec.repatriate_quantity_information_on_task(['85', '80'])
             if 'repatriate_information' in vals and not vals.get('repatriate_information'):
                 rec.reset_quantity_information_on_task()
 
