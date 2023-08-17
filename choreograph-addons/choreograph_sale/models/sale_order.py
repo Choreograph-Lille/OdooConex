@@ -141,6 +141,7 @@ class SaleOrder(models.Model):
         ('adjustment', 'Adjustment'),
         ('cancel', 'Cancelled'),
     ], string="C9H State", default='forecast')
+    note = fields.Html(translate=True)
 
     @api.model
     def get_sms_campaign_field(self):
@@ -364,3 +365,41 @@ class SaleOrder(models.Model):
     def _get_invoice_narration(self):
         self.ensure_one()
         return self.with_context(lang=self.partner_invoice_id.lang).env.company.invoice_terms_c9h
+
+    @api.depends('partner_shipping_id', 'partner_id', 'company_id', 'partner_invoice_id')
+    def _compute_fiscal_position_id(self):
+        super()._compute_fiscal_position_id()
+        for order in self:
+            if not order.partner_id:
+                order.fiscal_position_id = False
+                continue
+            if order.partner_invoice_id:
+                order.fiscal_position_id = order.partner_invoice_id.with_company(order.company_id).property_account_position_id.id
+            order.order_line._compute_tax_id()
+            order.show_update_fpos = False
+
+    def _notify_get_recipients_groups(self, msg_vals=None):
+        """
+            Inherit this native function so all the recipients could be treated as portal customer and
+            granted access to the documents in the mail link without redirection to login page.
+            See compose_partners context in choreograph_base
+        :param msg_vals:
+        :return:
+        """
+        groups = super()._notify_get_recipients_groups(msg_vals=msg_vals)
+        customer = self._mail_get_partners()[self.id]
+        portal_customer_group = list(next(group for group in groups if group[0] == 'portal_customer'))
+        compose_partners = self._context.get('compose_partners', False)
+        if portal_customer_group and compose_partners:
+            compose_partners = compose_partners.filtered(lambda rp: not self.env['res.users'].sudo().search([('partner_id', '=', rp.id)]))
+            portal_customer_group[1] = lambda pdata: pdata['id'] == customer.id or pdata['id'] in compose_partners.ids
+        index = [i for i, e in enumerate(groups) if e[0] == 'portal_customer']
+        if index:
+            groups[index[0]] = tuple(portal_customer_group)
+        return groups
+
+    @api.depends('partner_id', 'partner_invoice_id')
+    def _compute_payment_term_id(self):
+        for order in self:
+            order = order.with_company(order.company_id)
+            order.payment_term_id = order.partner_invoice_id.property_payment_term_id
