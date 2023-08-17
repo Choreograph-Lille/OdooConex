@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="1">
+    <data noupdate="0">
+        
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'choreograph_sale_project'), ('name', '=', 'email_template_choreograph_delivery')]"/>
+            </function>
+            <value eval="{'noupdate': False}"/>
+        </function>
+        
         <record id="email_template_choreograph_delivery" model="mail.template">
             <field name="name">Choreograph: Delivery Email Template</field>
             <field name="model_id" ref="sale.model_sale_order"/>
@@ -23,25 +31,33 @@
                             Hello,
                             <br/>
                             <br/>
-                            Kindly find on your <span style="font-weight:bold;" t-out="object.receiver"/>
-                            FTP the file from choreograph for the <span style="font-weight:bold;" t-esc="object.get_operation_template_name()"/>
-                            Campaign <span style="font-weight:bold;" t-out="object.partner_id.name"/>
+                            Kindly find on your
+                            <span style="font-weight:bold;" t-out="object.receiver"/>
+                            FTP the file from choreograph for the
+                            <span style="font-weight:bold;" t-esc="object.get_operation_template_name()"/>
+                            <br/>
+                            Campaign
+                            <span style="font-weight:bold;" t-out="object.partner_id.name"/>
                             <br/>
                             <br/>
-                            The file name is <span style="font-weight:bold;" t-out="file_name"/>
+                            The file name is
+                            <span style="font-weight:bold;" t-out="file_name"/>
                             <br/>
                             <br/>
                             The distribution of addresses is as follows:
                             <br/>
+                            <br/>
                             <t t-if="object.repatriate_information">
                                 <t t-set="count" t-value="1"/>
                                 <t t-foreach="object.segment_ids" t-as="segment">
-                                    Segment<t t-out="count"/>:
+                                    Segment <t t-out="count"/>:
                                     <t t-out="segment.name"/>
                                     <br/>
-                                    Quantity: <span style="font-weight:bold;" t-out="segment.quantity"/>
+                                    Quantity:
+                                    <span style="font-weight:bold;" t-out="segment.quantity"/>
                                     <br/>
-                                    Keycode: <span style="font-weight:bold;" t-out="segment.keycode"/>
+                                    Keycode:
+                                    <span style="font-weight:bold;" t-out="segment.keycode"/>
                                     <br/>
                                     <br/>
                                     <t t-set="count" t-value="count + 1"/>
@@ -49,17 +65,20 @@
                             </t>
                             <br/>
                             <span style="color: green;">IMPORTANT: Please confirm receipt of the file at</span>
-                            <span style="color: blue;">production.data@choreograph.com</span>
+                            <a href="mailto:production.data@choreograph.com"><u>production.data@choreograph.com</u></a>
                             <br/>
                             <br/>
                             The password is: <span style="font-size: 1.2em;">xxxxxxx</span>.
                             <br/>
                             <br/>
-                            For any questions, please contact: <br/>
-                            production.data@choreograph.com
-                            <br/><br/>
+                            For any questions, please contact:
+                            <br/>
+                            <a href="mailto:production.data@choreograph.com"><u>production.data@choreograph.com</u></a>
+                            <br/>
+                            <br/>
                             Regards,
-                            <br/><br/>
+                            <br/>
+                            <br/>
                             Production Service
                         </t>
                     </p>
@@ -68,25 +87,27 @@
             <field name="lang">{{ object.partner_id.lang }}</field>
             <field name="auto_delete" eval="True"/>
         </record>
-
+        
         <template id="mail_delivery">
-<html t-att-lang="lang">
-<header>
-    <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
-</header>
-<body>
-<table role="presentation" border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">
-<tbody>
-    <!-- CONTENT -->
-    <tr>
-        <td style="min-width: 590px;">
-            <t t-out="message.body"/>
-        </td>
-    </tr>
-</tbody>
-</table>
-</body>
-</html>
+            <html t-att-lang="lang">
+                <header>
+                    <meta http-equiv="Content-Type" content="text/html charset=UTF-8"/>
+                </header>
+                <body>
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="590"
+                           style="padding: 24px; background-color: white; color: #454748; border-collapse:separate;">
+                        <tbody>
+                            <!-- CONTENT -->
+                            <tr>
+                                <td style="min-width: 590px;">
+                                    <t t-out="message.body"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </body>
+            </html>
         </template>
+    
     </data>
 </odoo>
