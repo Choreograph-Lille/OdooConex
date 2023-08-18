@@ -143,7 +143,7 @@ class ProjectProject(models.Model):
         self._update_task_stage('25', TODO_TASK_STAGE)
         self._update_task_stage('35', TODO_TASK_STAGE)
 
-    def _hook_task_in_stage_20_25(self):
+    def _hook_task_in_stage_25_50(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
 
     def _hook_task_20_in_stage_80(self):
