@@ -112,15 +112,11 @@ class ProjectProject(models.Model):
         return bool(self.task_ids.filtered(lambda task: task.task_number in ['45', '50']))
 
     def livery_project(self):
-        delivery_task_number = '0'
         if self.stage_id.stage_number == '40':
             self._update_task_stage('80', TODO_TASK_STAGE)
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
         elif self.stage_id.stage_number == '50':
-            if self.task_ids.filtered(lambda task: task.task_number == '90'):
-                self._update_task_stage('90', TODO_TASK_STAGE)
-            else:
-                self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
+            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
         self.update_delivery_address()
         return True
 

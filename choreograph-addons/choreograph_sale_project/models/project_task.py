@@ -307,8 +307,10 @@ class ProjectTask(models.Model):
                     '25': '_hook_task_25_in_stage_80',
                     '30': '_hook_task_30_in_stage_80',
                     '40': '_hook_task_40_in_stage_80',
-                    '45': '_hook_task_45_in_stage_80',
+                    '45': '_hook_task_45_50_in_stage_80',
+                    '50': '_hook_task_45_50_in_stage_80',
                     '55': '_hook_task_55_in_stage_80',
+                    '65': '_hook_task_65_in_stage_80',
                     '70': '_hook_task_70_in_stage_80',
                     '75': '_hook_task_75_in_stage_80',
                     '80': '_hook_task_80_in_stage_80',
@@ -318,22 +320,14 @@ class ProjectTask(models.Model):
                 if stage_id.stage_number == TERMINATED_TASK_STAGE:
                     method_name = method_dict.get(task.task_number, None)
                     self.project_id._hook_check_all_task(task.id)
-                    if task.task_number in ['65', '5', '15']:
-                        task.project_id._hook_task_65_5_15_terminated(task.task_number)
-                    elif method_name:
+                    if method_name:
                         getattr(task.project_id, method_name)()
-                    if task.task_number in ['10', '80']:
-                        task.project_id._hook_task_10_and_80_in_stage_80(task.task_number)
                     if task.task_number == '60' and task.project_id.sale_order_id.has_enrichment_email_op:
                         task.project_id._update_task_stage('55', TODO_TASK_STAGE)
                 elif stage_id.stage_number in [FILE_RECEIVED_TASK_STAGE, IN_PROGRESS_TASK_STAGE] and task.project_id.stage_id.stage_number == PLANIFIED_PROJECT_STAGE:
                     task.project_id._hook_task_in_stage_25_50()
-                elif task.task_number == '45' and stage_id.stage_number == '50':
-                    task.project_id._hook_task_45_in_stage_50()
-                elif task.task_number == '45' and stage_id.stage_number == BAT_CLIENT_TASK_STAGE:
-                    task.project_id._hook_task_45_in_stage_70()
-                elif task.task_number == '90' and stage_id.stage_number == '15':
-                    task.project_id._hook_task_90_in_stage_15()
+                elif task.task_number in ['45', '50'] and stage_id.stage_number == '50':
+                    task.project_id._hook_task_45_50_in_stage_50()
             provider_fields = ['provider_file_name', 'provider_delivery_partner_ids', 'family_conex',
                                'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
