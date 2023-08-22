@@ -340,13 +340,6 @@ class SaleOrder(models.Model):
                 rec.update_task_campaign_90('email')
                 rec.update_task_bat_file_witness()
 
-            if 'segment_ids' in vals:
-                rec.repatriate_quantity_information_on_task(['20', '25', '30'])
-            if vals.get('repatriate_information') or rec.repatriate_information and 'segment_ids' in vals:
-                rec.repatriate_quantity_information_on_task(['85', '80'])
-            if 'repatriate_information' in vals and not vals.get('repatriate_information'):
-                rec.reset_quantity_information_on_task()
-
             if 'quantity_to_deliver' in vals:
                 rec.repatriate_volume_on_task()
             if 'potential_return' in vals:
@@ -359,6 +352,13 @@ class SaleOrder(models.Model):
                 rec.update_task_bat_from(rec.bat_from.id)
             if 'email_bat_from' in vals:
                 rec.update_task_bat_from(rec.email_bat_from.id)
+                
+            if 'segment_ids' in vals or 'potential_return' in vals:
+                rec.repatriate_quantity_information_on_task(['20', '25', '30'])
+            if vals.get('repatriate_information') or rec.repatriate_information and 'segment_ids' in vals:
+                rec.repatriate_quantity_information_on_task(['85', '80'])
+            if 'repatriate_information' in vals and not vals.get('repatriate_information'):
+                rec.reset_quantity_information_on_task()
         return res
 
     @api.model
