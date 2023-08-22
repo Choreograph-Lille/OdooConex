@@ -131,8 +131,7 @@ class ProjectTask(models.Model):
             task.folder_key = '_'.join([str(item) for item in combinaison_value if item])
 
     def repatriate_quantity_information(self):
-        self.segment_ids = [
-            (6, 0, self.env['operation.segment'].search([('order_id', '=', self.sale_order_id.id)]).ids)]
+        self.segment_ids = [(6, 0, self.sale_order_id.segment_ids.ids)]
 
     def repatriate_volume(self):
         self.volume = self.sale_order_id.quantity_to_deliver
