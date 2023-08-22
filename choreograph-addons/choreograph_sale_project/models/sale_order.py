@@ -394,13 +394,13 @@ class SaleOrder(models.Model):
             })
 
     def repatriate_quantity_information_on_task(self, tasks=[]):
-        self.tasks_ids.filtered(lambda t: t.task_number in tasks).repatriate_quantity_information()
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in tasks).repatriate_quantity_information()
 
     def repatriate_volume_on_task(self):
-        self.tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
 
     def reset_quantity_information_on_task(self):
-        self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
             'segment_ids': [(6, 0, [])],
             'task_segment_ids': [(6, 0, [])],
         })
