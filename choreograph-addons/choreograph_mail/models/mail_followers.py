@@ -18,18 +18,22 @@ class MailFollowers(models.Model):
     def create(self, vals_list):
         if not self.env.company.disable_followers:
             return super(MailFollowers, self).create(vals_list)
-        tmp_vals_list = copy.deepcopy(vals_list)
-        for values in vals_list:
-            if values.get('res_id', False) and values in tmp_vals_list:
-                source_id = self.env[values['res_model']].browse(values['res_id']).exists()
-                if self.check_field_followers(source_id, 'partner_id') and source_id.partner_id.id == values['partner_id']:
-                    tmp_vals_list.remove(values)
-                    continue
-                if self.check_field_followers(source_id, 'user_ids') and values['partner_id'] in source_id.user_ids.mapped('partner_id').ids:
-                    tmp_vals_list.remove(values)
-                    continue
-                if source_id._name == 'res.partner' and (source_id.parent_id.id == values['partner_id'] or source_id.user_id.partner_id.id == values['partner_id']):
-                    tmp_vals_list.remove(values)
+        tmp_vals_list = self.check_partner_group(vals_list)
         res = super(MailFollowers, self).create(tmp_vals_list)
         res._invalidate_documents(tmp_vals_list)
         return res
+
+    def check_partner_group(self, vals):
+        """
+        Check if the user related to the created record's partner_id exists and is an internal user
+        If not we don't create the follower
+        :param vals: value from create()
+        :return: vals without non-internal users
+        """
+        values = copy.deepcopy(vals)
+        for value in vals:
+            if value.get('partner_id'):
+                user = self.env['res.users'].search([('partner_id', '=', value['partner_id'])], limit=1)
+                if not user or not user.has_group('base.group_user'):
+                    values.remove(value)
+        return values
