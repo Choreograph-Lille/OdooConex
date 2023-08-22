@@ -353,7 +353,7 @@ class SaleOrder(models.Model):
             if 'email_bat_from' in vals:
                 rec.update_task_bat_from(rec.email_bat_from.id)
                 
-            if 'segment_ids' in vals or 'potential_return' in vals:
+            if 'segment_ids' in vals:
                 rec.repatriate_quantity_information_on_task(['20', '25', '30'])
             if vals.get('repatriate_information') or rec.repatriate_information and 'segment_ids' in vals:
                 rec.repatriate_quantity_information_on_task(['85', '80'])
@@ -394,7 +394,7 @@ class SaleOrder(models.Model):
             })
 
     def repatriate_quantity_information_on_task(self, tasks=[]):
-        self.tasks_ids.filtered(lambda t: t.task_number in tasks).repatriate_quantity_information()
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in tasks).repatriate_quantity_information()
 
     def repatriate_volume_on_task(self):
         self.tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
