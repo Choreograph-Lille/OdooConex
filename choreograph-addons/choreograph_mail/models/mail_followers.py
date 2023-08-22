@@ -31,9 +31,10 @@ class MailFollowers(models.Model):
         :return: vals without non-internal users
         """
         values = copy.deepcopy(vals)
-        for value in vals:
-            if value.get('partner_id'):
-                user = self.env['res.users'].search([('partner_id', '=', value['partner_id'])], limit=1)
-                if not user or not user.has_group('base.group_user'):
-                    values.remove(value)
+        if not self.env.context.get('manual_follower_add', False):
+            for value in vals:
+                if value.get('partner_id'):
+                    user = self.env['res.users'].search([('partner_id', '=', value['partner_id'])], limit=1)
+                    if not user or not user.has_group('base.group_user'):
+                        values.remove(value)
         return values
