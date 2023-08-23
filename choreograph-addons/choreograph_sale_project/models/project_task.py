@@ -309,6 +309,7 @@ class ProjectTask(models.Model):
                     '45': '_hook_task_45_50_in_stage_80',
                     '50': '_hook_task_45_50_in_stage_80',
                     '55': '_hook_task_55_in_stage_80',
+                    '60': '_hook_task_60_in_stage_80',
                     '65': '_hook_task_65_in_stage_80',
                     '70': '_hook_task_70_in_stage_80',
                     '75': '_hook_task_75_in_stage_80',
@@ -321,8 +322,6 @@ class ProjectTask(models.Model):
                     self.project_id._hook_check_all_task(task.id)
                     if method_name:
                         getattr(task.project_id, method_name)()
-                    if task.task_number == '60' and task.project_id.sale_order_id.has_enrichment_email_op:
-                        task.project_id._update_task_stage('55', TODO_TASK_STAGE)
                 elif stage_id.stage_number in [FILE_RECEIVED_TASK_STAGE, IN_PROGRESS_TASK_STAGE] and task.project_id.stage_id.stage_number == PLANIFIED_PROJECT_STAGE:
                     task.project_id._hook_task_in_stage_25_50()
                 elif task.task_number in ['45', '50'] and stage_id.stage_number == '50':
