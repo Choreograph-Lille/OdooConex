@@ -394,13 +394,13 @@ class SaleOrder(models.Model):
             })
 
     def repatriate_quantity_information_on_task(self, tasks=[]):
-        self.tasks_ids.filtered(lambda t: t.task_number in tasks).repatriate_quantity_information()
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in tasks).repatriate_quantity_information()
 
     def repatriate_volume_on_task(self):
-        self.tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
 
     def reset_quantity_information_on_task(self):
-        self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
             'segment_ids': [(6, 0, [])],
             'task_segment_ids': [(6, 0, [])],
         })
@@ -463,10 +463,12 @@ class SaleOrder(models.Model):
     def _check_info_validated(self, vals):
         for rec in self:
             if vals.get('is_info_validated'):
-                rec._get_operation_task(['50', '55', '60']).update_task_stage(TODO_TASK_STAGE)
+                rec._get_operation_task(['50', '55']).update_task_stage(TODO_TASK_STAGE)
             if vals.get('email_is_info_validated'):
-                tasks = ['45', '60']
-                if self.has_prospection_email_op:
+                tasks = ['45']
+                if rec._get_operation_task(['60']):
+                    tasks.append('60')
+                else:
                     tasks.append('55')
                 rec._get_operation_task(tasks).update_task_stage(TODO_TASK_STAGE)
 
