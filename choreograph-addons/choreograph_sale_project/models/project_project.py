@@ -161,6 +161,9 @@ class ProjectProject(models.Model):
         if self._is_task_terminated(['30']):
             self._update_task_stage('65', TODO_TASK_STAGE)
 
+    def _hook_task_60_in_stage_80(self):
+        self._update_task_stage('55', TODO_TASK_STAGE)
+
     def _hook_task_65_in_stage_80(self):
         self._update_task_stage('70', TODO_TASK_STAGE)
 
