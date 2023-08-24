@@ -19,6 +19,7 @@ class ProjectProject(models.Model):
                                           domain=[('is_template', '=', True)], copy=False)
     return_studies_date = fields.Date('Return To Studies Date', compute='compute_date_from_so', store=True)
     commitment_date = fields.Date('Commitment Date', compute='compute_date_from_so', store=True)
+    sale_order_id = fields.Many2one(readonly=False, store=True)
 
     @api.depends('sale_order_id')
     def compute_date_from_so(self):
