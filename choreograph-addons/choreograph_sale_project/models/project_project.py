@@ -199,8 +199,7 @@ class ProjectProject(models.Model):
 
     def _hook_task_fulfillement_terminated(self):
         tasks_in_80 = self.task_ids.filtered(lambda task: task.task_number not in ['35', '45,' '50', '90', '95'])
-        tasks_not_in_80 = self.task_ids.filtered(lambda task: task.task_number in ['35', '45,' '50', '90', '95'])
-        if all([task.stage_number == TERMINATED_TASK_STAGE for task in tasks_in_80]) and all([task.stage_number != TERMINATED_TASK_STAGE for task in tasks_not_in_80]):
+        if all([task.stage_number == TERMINATED_TASK_STAGE for task in tasks_in_80]):
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_to_deliver').id})
 
     def _hook_task_45_50_in_stage_80(self):

@@ -108,9 +108,6 @@ class ProjectProject(models.Model):
         if task_id:
             task_id.update_task_stage(stage_number)
 
-    def _is_compaign(self) -> bool:
-        return bool(self.task_ids.filtered(lambda task: task.task_number in ['45', '50']))
-
     def livery_project(self):
         if self.stage_id.stage_number == '40':
             self._update_task_stage('80', TODO_TASK_STAGE)
@@ -119,10 +116,6 @@ class ProjectProject(models.Model):
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
         self.update_delivery_address()
         return True
-
-    def livery_project_compaign(self):
-        self._update_task_stage('90', TODO_TASK_STAGE)
-        self.update_delivery_address()
 
     def get_delivery_task_number(self):
         stage_to_delivery = {
