@@ -81,3 +81,10 @@ class ProjectTask(models.Model):
             disable task assignation
         """
         return
+
+    def _populate_missing_personal_stages(self):
+        # HT02429: remove functionality for operations because creating unwanted task types
+        for rec in self:
+            if rec.type_of_project == 'operation':
+                return True
+        super()._populate_missing_personal_stages()
