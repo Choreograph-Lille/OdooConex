@@ -40,11 +40,22 @@ class FieldTrackingMessageMixin(models.AbstractModel):
         for rec in self:
             if rec._field_to_track():
                 body_msg += rec._format_tracked_field()
-            rec._message_log(body=body_msg)
+            project_id = self._get_project_id()
+            if project_id and project_id.stage_id.stage_number != '10':
+                project_id.message_post(body=body_msg,
+                                        partner_ids=project_id.message_follower_ids.mapped('partner_id').ids)
+
+    def _get_project_id(self):
+        return self.order_id.project_ids[0] if self.order_id.project_ids else False
 
     @api.model
     def _track_message_title_unlink(self):
         return
+
+    @api.model
+    def _track_message_title_create(self):
+        doc_name = self.env['ir.model']._get(self._name).name
+        return _('%s created', doc_name)
 
     def unlink(self):
         if self._track_message_title_unlink():
@@ -52,8 +63,12 @@ class FieldTrackingMessageMixin(models.AbstractModel):
                 rec._log_field_message(rec._track_message_title_unlink())
         return super(FieldTrackingMessageMixin, self).unlink()
 
-    def _creation_message(self):
-        res = super()._creation_message()
-        if self._field_to_track():
-            res += self._format_tracked_field()
+    @api.model_create_multi
+    def create(self, vals):
+        res = super(FieldTrackingMessageMixin, self).create(vals)
+        if self._track_message_title_create():
+            res._log_field_message(res._track_message_title_create())
         return res
+
+    def _creation_message(self):
+        return ""
