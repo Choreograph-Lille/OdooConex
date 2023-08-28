@@ -2,6 +2,8 @@
 
 from odoo import api, fields, models, _
 from odoo.tools import html_escape
+from odoo.tools.misc import format_date
+from datetime import date, datetime
 
 state_done = {'kanban_state': 'done'}
 state_normal = {'kanban_state': 'normal'}
@@ -214,7 +216,38 @@ class ProjectProject(models.Model):
     def _notify_planned_operation(self):
         for project in self:
             self._notify_project_change(subject=(_('Planned operation %s') % project.display_name),
-                                        body=(_("The operations %s has been Planned") % project.name))
+                                        body=(project._get_body_message_planned_operation(_("The operations %s has been Planned") % self.name)))
+
+    def _get_body_message_planned_operation(self, title):
+        self.ensure_one()
+        body_msg = title
+        field_to_notify = self._field_to_notify()
+        for key, value in field_to_notify.items():
+            if not value[0]:
+                field_value = _("<span class='text-muted'><i>Empty</i></span>")
+            elif isinstance(value[0], (date, datetime)):
+                field_value = format_date(self.env, value[0], date_format="dd/MM/yyyy")
+            else:
+                field_value = value[0]
+            body_msg += f"<li>{field_value} <i>({value[1]})</i></li>"
+        body_msg += _(
+            "</ul><p> You can access to this document: <a href='#' data-oe-model='project.project' data-oe-id='%s'>%s</a></p>") % (
+                        self.id, field_to_notify['operation'][0])
+        return body_msg
+
+    def _field_to_notify(self):
+        self.ensure_one()
+        split_name = self.name.split('-')
+        return {
+            "operation": (split_name[0] if len(split_name) > 0 else "", _('Operation')),
+            "type": (split_name[1] if len(split_name) > 1 else "", _('Type')),
+            "customer": (self.sale_order_id.partner_id.display_name, _('Customer')),
+            "order_id": (self.sale_order_id.display_name, _('Sale order')),
+            "base": (self.sale_order_id.related_base.display_name, _('Base')),
+            "commercial": (self.sale_order_id.user_id.display_name, _('Commercial')),
+            "study_delivery_date": (self.sale_order_id.study_delivery_date, _('Study delivery date')),
+            "commitment_date": (self.sale_order_id.study_delivery_date, _('Customer delivery date')),
+        }
 
     def name_get(self):
         result = []
@@ -224,3 +257,7 @@ class ProjectProject(models.Model):
                 name += " - %s" % project.partner_id.name
             result.append((project.id, name))
         return result
+
+    def _creation_message(self):
+        res = super()._creation_message()
+        return self._get_body_message_planned_operation(res)
