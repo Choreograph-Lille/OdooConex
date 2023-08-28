@@ -21,7 +21,7 @@ SUBTYPE_TASK_NUMBER = {
 
 class OperationCondition(models.Model):
     _name = 'operation.condition'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
+    _inherit = ['field.tracking.message.mixin', 'mail.thread', 'mail.activity.mixin']
     _description = 'Operation Condition'
 
     operation_date = fields.Date('Operation date', tracking=True)
@@ -39,7 +39,7 @@ class OperationCondition(models.Model):
     condition_subtype = fields.Selection(CONDITION_SUBTYPE, required=True, default='client_file', tracking=True)
     exclusion_subtype = fields.Selection(EXCLUSION_SUBTYPE, required=True, default='client_file')
     order_ids = fields.Many2many('sale.order', 'operation_condition_sale_order_rel',
-                                 'condition_id', 'sale_order_id', 'Sale Order')
+                                 'condition_id', 'sale_order_id', 'Sale Order', tracking=True)
     task_id = fields.Many2one('project.task')
     partner_id = fields.Many2one('res.partner')
     sequence = fields.Integer(default=1)
@@ -53,7 +53,8 @@ class OperationCondition(models.Model):
     def _compute_task_number(self):
         for rec in self:
             rec.task_number = SUBTYPE_TASK_NUMBER[rec.operation_type + '_'
-                                                  + rec.subtype] if rec.subtype in ['client_file', 'update', 'update_repoussoir'] else False
+                                                  + rec.subtype] if rec.subtype in ['client_file', 'update',
+                                                                                    'update_repoussoir'] else False
 
     def write(self, vals):
         res = super(OperationCondition, self).write(vals)
@@ -72,39 +73,23 @@ class OperationCondition(models.Model):
 
     def unlink(self):
         self.task_id.unlink()
-        self._log_unlinked_operation_condition()
         return super(OperationCondition, self).unlink()
 
-    def _log_unlinked_operation_condition(self):
-        for rec in self:
-            body_msg = _("Condition/Exclusion deleted")
-            tracking_msg = ""
-            for f in self._field_to_track_on_unlink():
-                tracking_msg += rec._format_tracked_field_on_unlink(f)
-            if tracking_msg:
-                body_msg += f"<ul> {tracking_msg} </ul>"
-            rec._message_log(body=body_msg)
-
     @api.model
-    def _field_to_track_on_unlink(self):
-        return ["operation_type", "subtype", "operation_date", "file_name", "note", "order_ids"]
+    def _track_message_title_unlink(self):
+        return _("Condition/Exclusion deleted")
 
-    def _format_tracked_field_on_unlink(self, field_name):
+    def _field_to_track(self):
         self.ensure_one()
-        field_obj = self._fields[field_name]
-        if getattr(self, field_name):
-            if field_obj.type == "date":
-                field_value = format_date(self.env, getattr(self, field_name), date_format="dd/MM/yyyy")
-            elif field_obj.type == "selection":
-                field_desc = field_obj.get_description(self.env)
-                field_info = dict(field_desc.get('selection'))
-                field_value = field_info.get(getattr(self, field_name))
-            elif field_obj.type == "many2many":
-                field_value = ", ".join(getattr(self, field_name).mapped("display_name"))
-            else:
-                field_value = getattr(self, field_name)
-            return f"<li>{field_value} <i>({html_escape(field_obj._description_string(self.env))})</i></li>"
-        return ""
+        field_to_track = ["operation_type", "subtype", "operation_date", "note"]
+        if (self.operation_type == "condition" and self.condition_subtype == "client_file") or (
+                self.operation_type == "exclusion" and self.exclusion_subtype == "client_file"):
+            field_to_track += ["file_name"]
+        elif (self.operation_type == "condition" and self.condition_subtype == "sale_order") or (
+                self.operation_type == "exclusion" and self.exclusion_subtype == "sale_order"):
+            field_to_track += ["order_ids"]
+        return field_to_track
+
 
 class OperationConditionType(models.Model):
     _name = 'operation.condition.subtype'

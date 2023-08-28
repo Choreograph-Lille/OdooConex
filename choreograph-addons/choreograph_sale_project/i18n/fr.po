@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-17 15:40+0000\n"
-"PO-Revision-Date: 2023-08-24 13:44+0000\n"
+"POT-Creation-Date: 2023-08-28 09:15+0000\n"
+"PO-Revision-Date: 2023-08-28 09:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1138,6 +1138,7 @@ msgid "Score Presentation (TEMPLATE)"
 msgstr "Presentation de score (TEMPLATE)"
 
 #. module: choreograph_sale_project
+#: model:ir.model,name:choreograph_sale_project.model_operation_segment
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__segment_ids
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__segment_ids
 msgid "Segment"
@@ -1153,6 +1154,13 @@ msgstr "Nom du segment"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__segment_number
 msgid "Segment Number"
 msgstr "N° segment"
+
+#. module: choreograph_sale_project
+#. odoo-python
+#: code:addons/choreograph_sale_project/models/operation_segment.py:0
+#, python-format
+msgid "Segment deleted"
+msgstr "Segment supprimé"
 
 #. module: choreograph_sale_project
 #. odoo-python
