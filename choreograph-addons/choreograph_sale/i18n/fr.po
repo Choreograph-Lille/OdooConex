@@ -224,6 +224,13 @@ msgstr ""
 "role=\"img\"/>"
 
 #. module: choreograph_sale
+#. odoo-python
+#: code:addons/choreograph_sale/models/field_tracking_message_mixin.py:0
+#, python-format
+msgid "<span class='text-muted'><i>Empty</i></span>"
+msgstr "<span class='text-muted'><i>Aucun</i></span>"
+
+#. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
 "<strong>\n"
