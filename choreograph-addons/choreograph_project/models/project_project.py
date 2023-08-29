@@ -192,31 +192,26 @@ class ProjectProject(models.Model):
             self._notify_planned_operation()
         return res
 
-    def _notify_project_change(self, subject, body):
+    def _notify_project_change(self, body):
         self.ensure_one()
-        self.message_notify(
-            subject=subject,
+        self.message_post(
             body=body,
             partner_ids=self.message_follower_ids.mapped('partner_id').ids,
-            record_name=self.display_name,
-            email_layout_xmlid='mail.mail_notification_layout',
-            model_description="Project",
-            mail_auto_delete=False,
         )
 
     def notify_field_change(self, field_list):
         for project in self:
-            body = "<ul>"
-            subject = _("%s changed") % project.display_name
+            body = _("%s changed") % project.display_name
+            body += "<ul>"
             for f in field_list:
                 body += f"<li>{html_escape(f._description_string(self.env))}</li>"
             body += "</ul>"
-            project._notify_project_change(subject, body)
+            project._notify_project_change(body)
 
     def _notify_planned_operation(self):
         for project in self:
-            self._notify_project_change(subject=(_('Planned operation %s') % project.display_name),
-                                        body=(project._get_body_message_planned_operation(_("The operations %s has been Planned") % self.name)))
+            self._notify_project_change(
+                body=(project._get_body_message_planned_operation(_("The operations %s has been Planned") % self.name)))
 
     def _get_body_message_planned_operation(self, title):
         self.ensure_one()
@@ -259,5 +254,6 @@ class ProjectProject(models.Model):
         return result
 
     def _creation_message(self):
-        res = super()._creation_message()
-        return self._get_body_message_planned_operation(res)
+        if self.type_of_project == 'operation':
+            return self._get_body_message_planned_operation(_('Operation created'))
+        return super()._creation_message()
