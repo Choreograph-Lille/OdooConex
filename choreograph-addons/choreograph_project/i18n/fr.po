@@ -390,6 +390,13 @@ msgstr ""
 "son propre tableau de bord."
 
 #. module: choreograph_project
+#. odoo-python
+#: code:addons/choreograph_project/models/project_project.py:0
+#, python-format
+msgid "Operation created"
+msgstr "Opération créée"
+
+#. module: choreograph_project
 #: model_terms:ir.actions.act_window,help:choreograph_project.action_view_all_task
 msgid ""
 "Organize your tasks by dispatching them across the pipeline.<br> Collaborate\n"
