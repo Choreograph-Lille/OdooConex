@@ -4,7 +4,7 @@
         <div t-attf-class="header o_company_#{company.id}_layout">
             <div class="row">
                 <div class="col-3 mb4">
-                    <img src="/choreograph_auditlog/static/src/img/connexance.png"
+                    <img src="/choreograph_auditlog/static/description/icon.png"
                         style="max-height: 100px;" alt="Logo" />
                 </div>
             </div>

@@ -2,6 +2,8 @@
 
 from odoo import api, fields, models, _
 from odoo.tools import html_escape
+from odoo.tools.misc import format_date
+from datetime import date, datetime
 
 state_done = {'kanban_state': 'done'}
 state_normal = {'kanban_state': 'normal'}
@@ -108,25 +110,14 @@ class ProjectProject(models.Model):
         if task_id:
             task_id.update_task_stage(stage_number)
 
-    def _is_compaign(self) -> bool:
-        return bool(self.task_ids.filtered(lambda task: task.task_number in ['45', '50']))
-
     def livery_project(self):
-        delivery_task_number = '0'
         if self.stage_id.stage_number == '40':
             self._update_task_stage('80', TODO_TASK_STAGE)
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
         elif self.stage_id.stage_number == '50':
-            if self.task_ids.filtered(lambda task: task.task_number == '90'):
-                self._update_task_stage('90', TODO_TASK_STAGE)
-            else:
-                self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
+            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
         self.update_delivery_address()
         return True
-
-    def livery_project_compaign(self):
-        self._update_task_stage('90', TODO_TASK_STAGE)
-        self.update_delivery_address()
 
     def get_delivery_task_number(self):
         stage_to_delivery = {
@@ -201,31 +192,57 @@ class ProjectProject(models.Model):
             self._notify_planned_operation()
         return res
 
-    def _notify_project_change(self, subject, body):
+    def _notify_project_change(self, body):
         self.ensure_one()
-        self.message_notify(
-            subject=subject,
+        self.message_post(
             body=body,
             partner_ids=self.message_follower_ids.mapped('partner_id').ids,
-            record_name=self.display_name,
-            email_layout_xmlid='mail.mail_notification_layout',
-            model_description="Project",
-            mail_auto_delete=False,
         )
 
     def notify_field_change(self, field_list):
         for project in self:
-            body = "<ul>"
-            subject = _("%s changed") % project.display_name
+            body = _("%s changed") % project.display_name
+            body += "<ul>"
             for f in field_list:
                 body += f"<li>{html_escape(f._description_string(self.env))}</li>"
             body += "</ul>"
-            project._notify_project_change(subject, body)
+            project._notify_project_change(body)
 
     def _notify_planned_operation(self):
         for project in self:
-            self._notify_project_change(subject=(_('Planned operation %s') % project.display_name),
-                                        body=(_("The operations %s has been Planned") % project.name))
+            self._notify_project_change(
+                body=(project._get_body_message_planned_operation(_("The operations %s has been Planned") % self.name)))
+
+    def _get_body_message_planned_operation(self, title):
+        self.ensure_one()
+        body_msg = title
+        field_to_notify = self._field_to_notify()
+        for key, value in field_to_notify.items():
+            if not value[0]:
+                field_value = _("<span class='text-muted'><i>Empty</i></span>")
+            elif isinstance(value[0], (date, datetime)):
+                field_value = format_date(self.env, value[0], date_format="dd/MM/yyyy")
+            else:
+                field_value = value[0]
+            body_msg += f"<li>{field_value} <i>({value[1]})</i></li>"
+        body_msg += _(
+            "</ul><p> You can access to this document: <a href='#' data-oe-model='project.project' data-oe-id='%s'>%s</a></p>") % (
+                        self.id, field_to_notify['operation'][0])
+        return body_msg
+
+    def _field_to_notify(self):
+        self.ensure_one()
+        split_name = self.name.split('-')
+        return {
+            "operation": (split_name[0] if len(split_name) > 0 else "", _('Operation')),
+            "type": (split_name[1] if len(split_name) > 1 else "", _('Type')),
+            "customer": (self.sale_order_id.partner_id.display_name, _('Customer')),
+            "order_id": (self.sale_order_id.display_name, _('Sale order')),
+            "base": (self.sale_order_id.related_base.display_name, _('Base')),
+            "commercial": (self.sale_order_id.user_id.display_name, _('Commercial')),
+            "study_delivery_date": (self.sale_order_id.study_delivery_date, _('Study delivery date')),
+            "commitment_date": (self.sale_order_id.study_delivery_date, _('Customer delivery date')),
+        }
 
     def name_get(self):
         result = []
@@ -235,3 +252,8 @@ class ProjectProject(models.Model):
                 name += " - %s" % project.partner_id.name
             result.append((project.id, name))
         return result
+
+    def _creation_message(self):
+        if self.type_of_project == 'operation':
+            return self._get_body_message_planned_operation(_('Operation created'))
+        return super()._creation_message()

@@ -6,30 +6,29 @@ from odoo import api, models
 class MailFollowers(models.Model):
     _inherit = 'mail.followers'
 
-    @staticmethod
-    def check_field_followers(source_id, field_name):
-        model_name = {
-            'partner_id': 'res.partner',
-            'user_ids': 'res.users'
-        }
-        return source_id and field_name in source_id and source_id[field_name]._name == model_name[field_name] and source_id[field_name]
-
     @api.model_create_multi
     def create(self, vals_list):
         if not self.env.company.disable_followers:
             return super(MailFollowers, self).create(vals_list)
-        tmp_vals_list = copy.deepcopy(vals_list)
-        for values in vals_list:
-            if values.get('res_id', False) and values in tmp_vals_list:
-                source_id = self.env[values['res_model']].browse(values['res_id']).exists()
-                if self.check_field_followers(source_id, 'partner_id') and source_id.partner_id.id == values['partner_id']:
-                    tmp_vals_list.remove(values)
-                    continue
-                if self.check_field_followers(source_id, 'user_ids') and values['partner_id'] in source_id.user_ids.mapped('partner_id').ids:
-                    tmp_vals_list.remove(values)
-                    continue
-                if source_id._name == 'res.partner' and (source_id.parent_id.id == values['partner_id'] or source_id.user_id.partner_id.id == values['partner_id']):
-                    tmp_vals_list.remove(values)
+        tmp_vals_list = self._check_is_internal_followers(vals_list)
         res = super(MailFollowers, self).create(tmp_vals_list)
         res._invalidate_documents(tmp_vals_list)
         return res
+
+    def _check_is_internal_followers(self, vals):
+        """
+        Check if the user related to the created record's partner_id exists and is an internal user
+        If not we don't create the follower
+        :param vals: value from create()
+        :return: vals without non-internal users
+        """
+        values = copy.deepcopy(vals)
+        if not self.env.context.get('manual_follower_add', False):
+            partner_obj = self.env['res.partner']
+            for value in vals:
+                if value.get('partner_id'):
+                    users = partner_obj.browse(value['partner_id']).user_ids
+                    if users and users[0].has_group('base.group_user'):
+                        continue
+                    values.remove(value)
+        return values
