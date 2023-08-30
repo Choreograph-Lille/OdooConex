@@ -17,3 +17,14 @@ class PurchaseOrder(models.Model):
                 'default_template_id': template.id,
             })
         return result
+
+    def button_cancel(self):
+        self.delete_all_confirm_approval('purchase.order', 'button_confirm', self.id)
+        super(PurchaseOrder, self).button_cancel()
+
+    def delete_all_confirm_approval(self, model, method, res_id):
+        existing_entry = self.env['studio.approval.entry'].search([
+            ('model', '=', model),
+            ('method', '=', method),
+            ('res_id', '=', res_id)])
+        return existing_entry.unlink()
