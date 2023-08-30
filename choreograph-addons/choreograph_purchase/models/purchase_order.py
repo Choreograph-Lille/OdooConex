@@ -19,12 +19,14 @@ class PurchaseOrder(models.Model):
         return result
 
     def button_cancel(self):
-        self.delete_all_confirm_approval('purchase.order', 'button_confirm', self.id)
-        super(PurchaseOrder, self).button_cancel()
+        res = super(PurchaseOrder, self).button_cancel()
+        for record in self:
+            record.delete_existing_approvals(record._name, 'button_confirm', record.id)
+        return res
 
-    def delete_all_confirm_approval(self, model, method, res_id):
-        existing_entry = self.env['studio.approval.entry'].search([
-            ('model', '=', model),
-            ('method', '=', method),
-            ('res_id', '=', res_id)])
-        return existing_entry.unlink()
+    def delete_existing_approvals(self, model, method, res_id):
+        self.ensure_one()
+        entry_obj = self.env['studio.approval.entry'].sudo()
+        entries = entry_obj.search([('model', '=', model), ('method', '=', method), ('res_id', '=', res_id)])
+        entries.unlink()
+        return True
