@@ -36,6 +36,12 @@
         <record id="hr_expense.menu_hr_expense_account_employee_expenses" model="ir.ui.menu">
             <field name="groups_id" model="res.groups" search="['|', ('name', '=', 'C9H / Accounting'), ('name', '=', 'All Approver')]"/>
         </record>
+        
+        <record id="choreograph_purchase.purchase_order_form_validator_inherit" model="ir.ui.view">
+            <field name="groups_id" model="res.groups" search="['|', ('name', '=', 'C9H / Validator 1 Purchase'), ('name', '=', 'C9H / Validator 2 Purchase')]"/>
+        </record>
+        
+        
     
     
     </data>
