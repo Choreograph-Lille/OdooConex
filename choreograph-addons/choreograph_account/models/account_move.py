@@ -31,4 +31,3 @@ class AccountMove(models.Model):
         if self.partner_id.child_ids:
             adresses |= self.partner_id.child_ids.filtered(lambda rp: rp.type == 'invoice')
         return ','.join([str(rp.id) for rp in adresses])
-

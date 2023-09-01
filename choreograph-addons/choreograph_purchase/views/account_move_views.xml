@@ -13,10 +13,13 @@
                     <div class="alert alert-danger mb-0" role="alert"
                          attrs="{'invisible': ['|', '|', ('move_type', '!=', 'in_invoice'), ('is_gap', '=', False), ('is_gap_validated', '=', True)]}">
                         ⚠️There is a difference of more than 10% or 250 excluding VAT between the purchase order and the invoice.
+                        <button name="button_justify_gap" type="object" string="Justify Gap" class="btn btn-link p-0" attrs="{'invisible': [('is_gap_justified', '=', True)]}"/>
+                        |
                         <button name="button_validate_gap" type="object" string="Validate Gap" class="btn btn-link p-0"/>
                     </div>
                     <field name="is_gap" invisible="1"/>
                     <field name="is_gap_validated" invisible="1"/>
+                    <field name="is_gap_justified" invisible="1"/>
                 </xpath>
                 
                 <button name="action_post" position="attributes">
