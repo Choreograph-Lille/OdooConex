@@ -8,6 +8,7 @@ class AccountMove(models.Model):
 
     is_gap = fields.Boolean(compute="_compute_is_gap", store=True)
     is_gap_validated = fields.Boolean("Is Gap Validated", tracking=True)
+    is_gap_justified = fields.Boolean("Is Gap Justified", tracking=True)
 
     @api.depends("line_ids.purchase_line_id.order_id.amount_untaxed", "amount_untaxed", "is_gap_validated")
     def _compute_is_gap(self):
@@ -38,3 +39,9 @@ class AccountMove(models.Model):
             if pos:
                 record.message_subscribe(partner_ids=pos.mapped("message_follower_ids").mapped("partner_id").ids)
         return True
+
+    def button_justify_gap(self):
+        self.ensure_one()
+        action = self.env['ir.actions.act_window']._for_xml_id("choreograph_purchase.account_move_wizard_act_window")
+        action["context"] = {"default_move_id": self.id}
+        return action
