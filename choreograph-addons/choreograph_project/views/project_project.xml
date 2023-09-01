@@ -16,7 +16,7 @@
             </xpath>
 
             <xpath expr="//field[@name='user_id']" position="after">
-                <field name="sale_order_id"/>
+                <field name="sale_order_id" readonly="1"/>
             </xpath>
 
         </field>
