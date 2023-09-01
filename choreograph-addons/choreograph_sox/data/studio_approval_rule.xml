@@ -78,7 +78,15 @@
             <field name="method">button_validate_gap</field>
             <field name="domain">[("move_type", "=", "in_invoice")]</field>
         </record>
-    
-    
+        
+        <record id="approval_button_justify_gap_group_purchasing_preparer_profile" model="studio.approval.rule">
+            <field name="model_id" ref="account.model_account_move"/>
+            <field name="group_id" model="res.groups" search="[('name', '=', 'C9H / Purchasing Preparer')]"/>
+            <field name="active" eval="True"/>
+            <field name="exclusive_user" eval="True"/>
+            <field name="method">button_justify_gap</field>
+            <field name="domain">[("move_type", "=", "in_invoice")]</field>
+        </record>
+        
     </data>
 </odoo>
