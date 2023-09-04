@@ -202,6 +202,8 @@ class ProjectProject(models.Model):
         tasks_in_80 = self.task_ids.filtered(lambda task: task.task_number not in ['35', '45,' '50', '90', '95'])
         if all([task.stage_number == TERMINATED_TASK_STAGE for task in tasks_in_80]):
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_to_deliver').id})
+        if not self.task_ids.filtered(lambda task: task.task_number in ['45', '50']):
+            self._update_task_stage('90', TODO_TASK_STAGE)
 
     def _hook_task_45_50_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_extraction').id})
