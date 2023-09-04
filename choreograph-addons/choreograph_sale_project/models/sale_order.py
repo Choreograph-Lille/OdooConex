@@ -88,6 +88,8 @@ class SaleOrder(models.Model):
             self.env.ref('choreograph_sale_project.field_sale_order__delivery_email_to').id,
             self.env.ref('choreograph_sale_project.field_sale_order__delivery_info_task_id').id,
             self.env.ref('choreograph_sale_project.field_sale_order__presta_delivery_info_task_id').id,
+            self.env.ref('choreograph_sale_project.field_sale_order__segment_ids').id,
+            self.env.ref('choreograph_sale.field_sale_order__operation_condition_ids').id,
         ]
 
     @api.model
@@ -275,9 +277,6 @@ class SaleOrder(models.Model):
     @check_project_count
     def action_livery_project(self):
         project_id = self.project_ids[0]
-        if project_id._is_compaign():
-            return project_id.livery_project_compaign()
-        # return project_id.livery_project()
         return self.action_send_delivery_email()
 
     @check_project_count
@@ -338,14 +337,15 @@ class SaleOrder(models.Model):
                 rec.update_task_campaign_90('email')
                 rec.update_task_bat_file_witness()
 
-            if any(field in vals for field in ['repatriate_information', 'segment_ids']):
-                if vals.get('repatriate_information') or rec.repatriate_information:
-                    rec.repatriate_quantity_information_on_task()
-            if 'quantity_to_deliver' in vals:
-                rec.repatriate_volume_on_task()
+            if 'segment_ids' in vals:
+                rec.repatriate_quantity_information_on_task(['20', '25', '30'])
+            if vals.get('repatriate_information') or rec.repatriate_information and 'segment_ids' in vals:
+                rec.repatriate_quantity_information_on_task(['85', '80'])
             if 'repatriate_information' in vals and not vals.get('repatriate_information'):
                 rec.reset_quantity_information_on_task()
 
+            if 'quantity_to_deliver' in vals:
+                rec.repatriate_volume_on_task()
             if 'potential_return' in vals:
                 rec.update_potential_return()
             if 'presentation' in vals:
@@ -390,15 +390,14 @@ class SaleOrder(models.Model):
                 'comment': rec.comment
             })
 
-    def repatriate_quantity_information_on_task(self):
-        self.tasks_ids.filtered(lambda t: t.task_number in [
-                                '20', '25', '30', '85', '80']).repatriate_quantity_information()
+    def repatriate_quantity_information_on_task(self, tasks=[]):
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in tasks).repatriate_quantity_information()
 
     def repatriate_volume_on_task(self):
-        self.tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in ['80']).repatriate_volume()
 
     def reset_quantity_information_on_task(self):
-        self.tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
+        self.with_context(active_test=False).tasks_ids.filtered(lambda t: t.task_number in ['80']).write({
             'segment_ids': [(6, 0, [])],
             'task_segment_ids': [(6, 0, [])],
         })
@@ -461,10 +460,12 @@ class SaleOrder(models.Model):
     def _check_info_validated(self, vals):
         for rec in self:
             if vals.get('is_info_validated'):
-                rec._get_operation_task(['50', '55', '60']).update_task_stage(TODO_TASK_STAGE)
+                rec._get_operation_task(['50', '55']).update_task_stage(TODO_TASK_STAGE)
             if vals.get('email_is_info_validated'):
-                tasks = ['45', '60']
-                if self.has_prospection_email_op:
+                tasks = ['45']
+                if rec._get_operation_task(['60']):
+                    tasks.append('60')
+                else:
                     tasks.append('55')
                 rec._get_operation_task(tasks).update_task_stage(TODO_TASK_STAGE)
 

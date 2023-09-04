@@ -10,7 +10,8 @@ class ProjectTask(models.Model):
     role_id = fields.Many2one('res.role', 'Role')
     task_number = fields.Selection(TASK_NUMBER)
     type_of_project = fields.Selection(
-        TYPE_OF_PROJECT, default='standard', required=True, compute='_compute_type_of_project', store=True, readonly=False)
+        TYPE_OF_PROJECT, default='standard', required=True, compute='_compute_type_of_project', store=True,
+        readonly=False)
 
     @api.onchange('role_id')
     def onchange_role_id(self):
@@ -55,13 +56,15 @@ class ProjectTask(models.Model):
             })
         res = super().create(values)
         self.env['mail.followers']._insert_followers(
-                'project.project', res.project_id.ids, res.user_ids.partner_id.ids)
+            'project.project', res.project_id.ids, res.user_ids.partner_id.ids)
         return res
 
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
         message = super(ProjectTask, self).message_post(**kwargs)
-        if self.project_id.type_of_project == 'operation':
+        no_tracking_subtypes = self.env.ref(
+                'project.mt_task_stage') | self.env.ref('project.mt_task_new')
+        if self.project_id.type_of_project == 'operation' and message.subtype_id not in no_tracking_subtypes:
             message.copy({'res_id': self.project_id.id, 'model': 'project.project'})
         return message
 
@@ -71,3 +74,15 @@ class ProjectTask(models.Model):
             self.env['mail.followers']._insert_followers(
                 'project.project', self.project_id.ids, self.user_ids.partner_id.ids)
         return res
+
+    @api.model
+    def _task_message_auto_subscribe_notify(self, users_per_task):
+        """
+            disable task assignation
+        """
+        return
+
+    def _populate_missing_personal_stages(self):
+        # HT02429: remove functionality for operations because creating unwanted task types
+        tasks = self.filtered(lambda task: task.type_of_project != 'operation')
+        super(ProjectTask, tasks)._populate_missing_personal_stages()

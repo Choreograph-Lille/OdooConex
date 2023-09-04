@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.tools import html_escape
+from odoo.tools.misc import format_date
+from datetime import date, datetime
 
 state_done = {'kanban_state': 'done'}
 state_normal = {'kanban_state': 'normal'}
@@ -46,6 +49,7 @@ def filter_by_type_of_project(func):
         type_of_project = self._context.get('default_type_of_project', 'standard')
         result = func(self, stages, domain, order)
         return result.filtered(lambda item: item.type_of_project == type_of_project)
+
     return wrapper
 
 
@@ -60,6 +64,7 @@ class ProjectProject(models.Model):
     type_of_project = fields.Selection(TYPE_OF_PROJECT, default='standard')
     code_sequence = fields.Char()
     code = fields.Char()
+    display_name = fields.Char(string='Display Name', automatic=True, compute='_compute_display_name', store=False)
 
     def get_waiting_task_stage(self):
         todo_stage_id = self.type_ids.filtered(lambda t: t.stage_number == TODO_TASK_STAGE)
@@ -105,25 +110,14 @@ class ProjectProject(models.Model):
         if task_id:
             task_id.update_task_stage(stage_number)
 
-    def _is_compaign(self) -> bool:
-        return bool(self.task_ids.filtered(lambda task: task.task_number in ['45', '50']))
-
     def livery_project(self):
-        delivery_task_number = '0'
         if self.stage_id.stage_number == '40':
             self._update_task_stage('80', TODO_TASK_STAGE)
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
         elif self.stage_id.stage_number == '50':
-            if self.task_ids.filtered(lambda task: task.task_number == '90'):
-                self._update_task_stage('90', TODO_TASK_STAGE)
-            else:
-                self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
+            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
         self.update_delivery_address()
         return True
-
-    def livery_project_compaign(self):
-        self._update_task_stage('90', TODO_TASK_STAGE)
-        self.update_delivery_address()
 
     def get_delivery_task_number(self):
         stage_to_delivery = {
@@ -159,7 +153,8 @@ class ProjectProject(models.Model):
         project_project_obj = self.env['project.project']
         sequence_obj = self.env['ir.sequence']
         for vals in vals_list:
-            if self._context.get('is_operation_generation') or self._context.get('default_type_of_project') == 'operation':
+            if self._context.get('is_operation_generation') or self._context.get(
+                    'default_type_of_project') == 'operation':
                 types = project_task_obj.get_operation_project_task_type()
                 name_seq = sequence_obj.next_by_code('project.project.operation')
                 project_name = False
@@ -169,7 +164,8 @@ class ProjectProject(models.Model):
                 vals.update({
                     'type_of_project': 'operation',
                     'code_sequence': name_seq,
-                    'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft', raise_if_not_found=False).id,
+                    'stage_id': self.env.ref('choreograph_project.planning_project_stage_draft',
+                                             raise_if_not_found=False).id,
                     'type_ids': [(6, 0, types.ids)],
                     'user_id': self._context.get('user_id', vals.get('user_id')),
                     'name': '%s - %s' % (name_seq, vals.get('name') or project_name)
@@ -183,3 +179,81 @@ class ProjectProject(models.Model):
 
     def action_to_plan(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_planified').id})
+
+    @api.model
+    def _get_fields_to_track_notification(self):
+        SaleOrder = self.env['sale.order']
+        return SaleOrder.get_operation_fields() + SaleOrder.get_sms_campaign_field() + SaleOrder.get_email_campaign_field()
+
+    def write(self, values):
+        res = super().write(values)
+        if "stage_id" in values and values["stage_id"] == self.env.ref(
+                'choreograph_project.planning_project_stage_planified').id:
+            self._notify_planned_operation()
+        return res
+
+    def _notify_project_change(self, body):
+        self.ensure_one()
+        self.message_post(
+            body=body,
+            partner_ids=self.message_follower_ids.mapped('partner_id').ids,
+        )
+
+    def notify_field_change(self, field_list):
+        for project in self:
+            body = _("%s changed") % project.display_name
+            body += "<ul>"
+            for f in field_list:
+                body += f"<li>{html_escape(f._description_string(self.env))}</li>"
+            body += "</ul>"
+            project._notify_project_change(body)
+
+    def _notify_planned_operation(self):
+        for project in self:
+            self._notify_project_change(
+                body=(project._get_body_message_planned_operation(_("The operations %s has been Planned") % self.name)))
+
+    def _get_body_message_planned_operation(self, title):
+        self.ensure_one()
+        body_msg = title
+        field_to_notify = self._field_to_notify()
+        for key, value in field_to_notify.items():
+            if not value[0]:
+                field_value = _("<span class='text-muted'><i>Empty</i></span>")
+            elif isinstance(value[0], (date, datetime)):
+                field_value = format_date(self.env, value[0], date_format="dd/MM/yyyy")
+            else:
+                field_value = value[0]
+            body_msg += f"<li>{field_value} <i>({value[1]})</i></li>"
+        body_msg += _(
+            "</ul><p> You can access to this document: <a href='#' data-oe-model='project.project' data-oe-id='%s'>%s</a></p>") % (
+                        self.id, field_to_notify['operation'][0])
+        return body_msg
+
+    def _field_to_notify(self):
+        self.ensure_one()
+        split_name = self.name.split('-')
+        return {
+            "operation": (split_name[0] if len(split_name) > 0 else "", _('Operation')),
+            "type": (split_name[1] if len(split_name) > 1 else "", _('Type')),
+            "customer": (self.sale_order_id.partner_id.display_name, _('Customer')),
+            "order_id": (self.sale_order_id.display_name, _('Sale order')),
+            "base": (self.sale_order_id.related_base.display_name, _('Base')),
+            "commercial": (self.sale_order_id.user_id.display_name, _('Commercial')),
+            "study_delivery_date": (self.sale_order_id.study_delivery_date, _('Study delivery date')),
+            "commitment_date": (self.sale_order_id.study_delivery_date, _('Customer delivery date')),
+        }
+
+    def name_get(self):
+        result = []
+        for project in self:
+            name = project.name
+            if project.partner_id:
+                name += " - %s" % project.partner_id.name
+            result.append((project.id, name))
+        return result
+
+    def _creation_message(self):
+        if self.type_of_project == 'operation':
+            return self._get_body_message_planned_operation(_('Operation created'))
+        return super()._creation_message()

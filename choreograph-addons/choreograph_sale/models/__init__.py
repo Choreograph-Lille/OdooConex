@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from . import field_tracking_message_mixin
 from . import operation_condition
 from . import sale_order
 from . import sale_order_line
@@ -12,3 +13,4 @@ from . import res_partner
 from . import choreograph_campaign_de
 from . import res_config_settings
 from . import res_company
+from . import mail_tracking_value

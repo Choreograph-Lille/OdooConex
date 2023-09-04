@@ -17,9 +17,11 @@ class ProjectProject(models.Model):
 
     project_template_id = fields.Many2one('project.project', 'Operation Template',
                                           domain=[('is_template', '=', True)], copy=False)
-    return_studies_date = fields.Date('Return To Studies Date', compute='compute_date_from_so')
-    commitment_date = fields.Date('Commitment Date', compute='compute_date_from_so')
+    return_studies_date = fields.Date('Return To Studies Date', compute='compute_date_from_so', store=True)
+    commitment_date = fields.Date('Commitment Date', compute='compute_date_from_so', store=True)
+    sale_order_id = fields.Many2one(readonly=False, store=True)
 
+    @api.depends('sale_order_id')
     def compute_date_from_so(self):
         for rec in self:
             if rec.sale_line_id:
@@ -142,7 +144,7 @@ class ProjectProject(models.Model):
         self._update_task_stage('25', TODO_TASK_STAGE)
         self._update_task_stage('35', TODO_TASK_STAGE)
 
-    def _hook_task_in_stage_20_25(self):
+    def _hook_task_in_stage_25_50(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_in_progress').id})
 
     def _hook_task_20_in_stage_80(self):
@@ -160,12 +162,11 @@ class ProjectProject(models.Model):
         if self._is_task_terminated(['30']):
             self._update_task_stage('65', TODO_TASK_STAGE)
 
-    def _hook_task_65_5_15_terminated(self, except_task):
-        if self._is_task_terminated(['65', '5', '15'], except_task):
-            if self.task_ids.filtered(lambda task: task.task_number == '70'):
-                self._update_task_stage('70', TODO_TASK_STAGE)
-            else:
-                self._update_task_stage('80', TODO_TASK_STAGE)
+    def _hook_task_60_in_stage_80(self):
+        self._update_task_stage('55', TODO_TASK_STAGE)
+
+    def _hook_task_65_in_stage_80(self):
+        self._update_task_stage('70', TODO_TASK_STAGE)
 
     def _is_task_terminated(self, task_number_list, task_number=False):
         if task_number and task_number in task_number_list:
@@ -176,9 +177,14 @@ class ProjectProject(models.Model):
     def _hook_task_70_in_stage_80(self):
         task_55 = self._find_task_by_task_number('55')
         task_45 = self._find_task_by_task_number('45')
-        task_45_in_80 = task_45 and task_45.stage_id.stage_number == BAT_CLIENT_TASK_STAGE
+        task_50 = self._find_task_by_task_number('50')
+        task_10 = self._find_task_by_task_number('10')
+
         task_55_in_80 = task_55 and task_55.stage_id.stage_number == TERMINATED_TASK_STAGE
-        if (task_55_in_80 or not task_55) and (task_45_in_80 or not task_45):
+        task_45_in_70 = task_45 and task_45.stage_id.stage_number == BAT_CLIENT_TASK_STAGE
+        task_50_in_70 = task_45 and task_50.stage_id.stage_number == BAT_CLIENT_TASK_STAGE
+        task_10_in_80 = task_45 and task_10.stage_id.stage_number == TERMINATED_TASK_STAGE
+        if (task_55_in_80 or not task_55) and ((task_45_in_70 or not task_45) or (task_50_in_70 or not task_45)) and (task_10_in_80 or not task_10):
             self._update_task_stage('75', TODO_TASK_STAGE)
 
     def _hook_task_55_in_stage_80(self):
@@ -189,38 +195,31 @@ class ProjectProject(models.Model):
         if (task_70_in_80 or not task_70) and (task_45_in_80 or not task_45):
             self._update_task_stage('75', TODO_TASK_STAGE)
 
-    def _hook_task_45_in_stage_70(self):
-        task_70 = self._find_task_by_task_number('70')
-        task_55 = self._find_task_by_task_number('55')
-        task_70_in_80 = task_70 and task_70.stage_id.stage_number == TERMINATED_TASK_STAGE
-        task_55_in_80 = task_55 and task_55.stage_id.stage_number == TERMINATED_TASK_STAGE
-        if (not task_70 or task_70_in_80) and (task_55 or task_55_in_80):
-            self._update_task_stage('75', TODO_TASK_STAGE)   
-
     def _hook_task_75_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id})
 
-    def _hook_task_10_and_80_in_stage_80(self, task_number):
-        if self._is_task_terminated(['10', '80'], task_number):
-            self._update_task_stage('85', TODO_TASK_STAGE)
-
     def _hook_task_fulfillement_terminated(self):
-        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_to_deliver').id})
+        tasks_in_80 = self.task_ids.filtered(lambda task: task.task_number not in ['35', '45,' '50', '90', '95'])
+        if all([task.stage_number == TERMINATED_TASK_STAGE for task in tasks_in_80]):
+            self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_to_deliver').id})
 
-    def _hook_task_45_in_stage_80(self):
+    def _hook_task_45_50_in_stage_80(self):
+        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_extraction').id})
         self._update_task_stage('90', TODO_TASK_STAGE)
 
-    def _hook_task_45_in_stage_50(self):
+    def _hook_task_45_50_in_stage_50(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_routing').id})
 
     def _hook_task_80_in_stage_80(self):
         self._update_task_stage('85', TODO_TASK_STAGE)
 
-    def _hook_task_90_in_stage_15(self):
-        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_extraction').id})
-
     def _hook_task_90_in_stage_80(self):
-        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
+        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
+        self._update_task_stage('95', TODO_TASK_STAGE)
+        so = self.sale_order_id or self.env['sale.order'].search([('project_id', '=', self.id)])
+        self._find_task_by_task_number('95').write({
+            'date_deadline': so.get_date_tz(so.commitment_date) + relativedelta(days=15)
+        })
 
     def _hook_check_all_task(self, task_id):
         not_terminated = self.task_ids.filtered(
