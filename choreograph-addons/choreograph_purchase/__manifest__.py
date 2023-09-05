@@ -11,7 +11,6 @@
     'website': 'https://arkeup.com',
     'depends': [
         'purchase',
-        'web_studio',
         'choreograph_account',
     ],
     'data': [
