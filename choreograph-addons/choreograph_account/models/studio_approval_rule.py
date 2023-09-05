@@ -10,8 +10,8 @@ class StudioApprovalRule(models.Model):
     _inherit = 'studio.approval.rule'
 
     @api.model
-    def check_approval(self, model, res_id, method, action_id, force=False):
-        if model == 'purchase.order' and method == 'button_confirm' and not force:
+    def check_approval(self, model, res_id, method, action_id):
+        if model == 'account.move' and method == 'action_post':
             return self.check_ordered_approval(model, res_id, method, action_id)
         res = super(StudioApprovalRule, self).check_approval(model, res_id, method, action_id)
         return res
