@@ -21,7 +21,7 @@ SUBTYPE_TASK_NUMBER = {
 
 class OperationCondition(models.Model):
     _name = 'operation.condition'
-    _inherit = ['field.tracking.message.mixin', 'mail.thread', 'mail.activity.mixin']
+    _inherit = ['field.tracking.message.mixin']
     _description = 'Operation Condition'
 
     operation_date = fields.Date('Operation date', tracking=True)
@@ -90,6 +90,8 @@ class OperationCondition(models.Model):
             field_to_track += ["order_ids"]
         return field_to_track
 
+    def _get_body_message_track(self):
+        return _('Condition/Exclusion line : %s') % self.sequence
 
 class OperationConditionType(models.Model):
     _name = 'operation.condition.subtype'
