@@ -375,6 +375,7 @@ class SaleOrder(models.Model):
                 })
                 order_id.compute_operation_code()
                 order_id.compute_task_operations()
+                order_id._manage_ce_role_project_following()
                 order_id.initiate_provider_delivery(project)
                 order_id.with_context(is_operation_generation=True)._update_date_deadline(vals)
                 order_id._manage_task_assignation()
