@@ -5,7 +5,7 @@ from odoo import fields, models, api, _
 
 class OperationSegment(models.Model):
     _name = 'operation.segment'
-    _inherit = ['field.tracking.message.mixin', 'mail.thread', 'mail.activity.mixin']
+    _inherit = ['field.tracking.message.mixin']
     _description = 'Segment'
 
     order_id = fields.Many2one('sale.order', 'Sale Order')
@@ -32,3 +32,6 @@ class OperationSegment(models.Model):
     def _field_to_track(self):
         self.ensure_one()
         return ["segment_number", "model_selection", "ranking", "quantity", "depth", "keycode", "civility", "comment"]
+
+    def _get_body_message_track(self):
+        return _('Segment line : %s') % self.sequence

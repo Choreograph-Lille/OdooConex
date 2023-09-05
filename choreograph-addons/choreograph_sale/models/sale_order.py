@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
 
-from odoo.exceptions import ValidationError
+import logging
+from odoo.exceptions import ValidationError, MissingError
 
 from odoo import _, api, fields, models
 from .operation_condition import SUBTYPE
+
+_logger = logging.getLogger(__name__)
 
 TASK_NAME = {
     '5': _('Update'),
@@ -142,6 +145,7 @@ class SaleOrder(models.Model):
         ('cancel', 'Cancelled'),
     ], string="C9H State", default='forecast')
     note = fields.Html(translate=True)
+    commitment_date = fields.Datetime(tracking=True)
 
     @api.model
     def get_sms_campaign_field(self):
@@ -204,6 +208,7 @@ class SaleOrder(models.Model):
         email_campaign_field = self.get_email_campaign_field()
         result.extend(sms_campaign_field)
         result.extend(email_campaign_field)
+        result.append(self.env.ref('sale.field_sale_order__commitment_date').id)
         return result
 
     def write(self, values):
@@ -214,11 +219,6 @@ class SaleOrder(models.Model):
             lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
         if self.project_ids and operation_condition:
             self.action_create_task_from_condition()
-        field_list = [self._fields[key] for key in values.keys() if
-                      self.env['ir.model.fields']._get(self._name, key).id in self.get_mail_field_to_operation()]
-        if field_list:
-            for rec in self:
-                rec.project_ids.notify_field_change(field_list)
         return res
 
     def action_lead(self):
@@ -409,3 +409,72 @@ class SaleOrder(models.Model):
         for order in self:
             order = order.with_company(order.company_id)
             order.payment_term_id = order.partner_invoice_id.property_payment_term_id
+
+
+    def _message_track(self, fields_iter, initial_values_dict):
+        if not fields_iter:
+            return {}
+
+        tracked_fields = self.fields_get(fields_iter)
+        tracking = dict()
+        for record in self:
+            try:
+                tracking[record.id] = record._mail_track(tracked_fields, initial_values_dict[record.id])
+            except MissingError:
+                continue
+
+        # find content to log as body
+        bodies = self.env.cr.precommit.data.pop(f'mail.tracking.message.{self._name}', {})
+        for record in self:
+            changes, tracking_value_ids = tracking.get(record.id, (None, None))
+            if not changes:
+                continue
+
+            # find subtypes and post messages or log if no subtype found
+            subtype = record._track_subtype(
+                dict((col_name, initial_values_dict[record.id][col_name])
+                     for col_name in changes)
+            )
+            if subtype:
+                if not subtype.exists():
+                    _logger.debug('subtype "%s" not found' % subtype.name)
+                    continue
+                record.message_post(
+                    body=bodies.get(record.id) or '',
+                    subtype_id=subtype.id,
+                    tracking_value_ids=tracking_value_ids
+                )
+            elif tracking_value_ids:
+                operation_tracking, order_tracking = record._split_project_field_to_track(tracking_value_ids)
+                if operation_tracking:
+                    operation_id = record.project_ids and record.project_ids[0]
+                    operation_id.message_post(
+                        body=bodies.get(record.id) or '',
+                        tracking_value_ids=tracking_value_ids,
+                        partner_ids=operation_id.message_follower_ids.mapped('partner_id').ids,
+                    )
+                if order_tracking:
+                    record._message_log(
+                        body=bodies.get(record.id) or '',
+                        tracking_value_ids=order_tracking
+                    )
+        return tracking
+
+    def _split_project_field_to_track(self, tracking_value_ids):
+        self.ensure_one()
+        operation_tracking = []
+        order_tracking = []
+        operation_field_list = self.get_mail_field_to_operation()
+        operation_id = self.project_ids and self.project_ids[0]
+        for tracking_value in tracking_value_ids:
+            field_id = tracking_value[2]['field']
+            if field_id in operation_field_list:
+                if operation_id.stage_id.stage_number != '10':
+                    if field_id in self.get_sms_campaign_field():
+                        tracking_value[2]['field_desc'] += ' - SMS'
+                    if field_id in self.get_email_campaign_field():
+                        tracking_value[2]['field_desc'] += ' - EMAIL'
+                    operation_tracking.append(tracking_value)
+            else:
+                order_tracking.append(tracking_value)
+        return operation_tracking, order_tracking
