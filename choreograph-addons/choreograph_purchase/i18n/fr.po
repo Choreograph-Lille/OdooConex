@@ -126,6 +126,14 @@ msgstr "<strong>Votre référence de commande :</strong>"
 msgid "Account Move Wizard"
 msgstr "Assistant de justification de l'écart"
 
+#. module: web_studio
+#: code:addons/web_studio/models/studio_approval_rule.py:0
+#, python-format
+msgid "Approvals can only be done on a method or an action, not both."
+msgstr ""
+"Les approbations ne peuvent porter que sur une méthode ou une action, et non"
+" sur les deux."
+
 #. module: choreograph_purchase
 #: model:ir.model.fields,field_description:choreograph_purchase.field_account_move_wizard__create_uid
 msgid "Created by"
