@@ -241,6 +241,7 @@ class SaleOrder(models.Model):
 
         # self.archive_required_tasks()
         self._manage_task_assignation()
+        self._manage_ce_role_project_following()
         self.compute_task_operations()
         self.initiate_provider_delivery(self.project_ids[0])
         self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
@@ -653,3 +654,23 @@ class SaleOrder(models.Model):
         for rec in self:
             for i, l in enumerate(rec.segment_ids):
                 l.segment_number = i + 1
+
+    def _manage_ce_role_project_following(self):
+        self.ensure_one()
+        mail_wizard_invite_obj = self.env["mail.wizard.invite"]
+        ce_role = self.env.ref("choreograph_contact.res_role_ce", raise_if_not_found=False)
+        if ce_role in self.partner_id.role_ids.mapped("role_id"):
+            users = self.partner_id.role_ids.filtered(lambda role: role.role_id == ce_role).mapped("user_ids")
+            if not users:
+                return False
+            values = {
+                "res_model": "project.task",
+                "partner_ids": [(6, 0, users.mapped("partner_id").ids)],
+                "send_mail": False
+            }
+            for task in self.with_context(active_test=False).tasks_ids:
+                values.update({"res_id": task.id})
+                mail_wizard_invite = mail_wizard_invite_obj.create(values)
+                mail_wizard_invite.add_followers()
+            return True
+        return False
