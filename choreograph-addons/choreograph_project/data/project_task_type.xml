@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="0">
+    
     <record id="project_task_type_draft" model="project.task.type">
         <field name="sequence">10</field>
         <field name="stage_number">10</field>
@@ -7,6 +8,7 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_to_do" model="project.task.type">
         <field name="sequence">15</field>
         <field name="stage_number">15</field>
@@ -14,13 +16,15 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_file_receipt" model="project.task.type">
         <field name="sequence">20</field>
         <field name="stage_number">20</field>
-        <field name="name">File receipt / Update</field>
+        <field name="name">Waiting File / Update</field>
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_received_file" model="project.task.type">
         <field name="sequence">25</field>
         <field name="stage_number">25</field>
@@ -28,6 +32,7 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_expectation_precision" model="project.task.type">
         <field name="sequence">30</field>
         <field name="stage_number">30</field>
@@ -35,6 +40,7 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_preparation" model="project.task.type">
         <field name="sequence">40</field>
         <field name="stage_number">40</field>
@@ -42,6 +48,7 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_validation_bat_client" model="project.task.type">
         <field name="sequence">49</field>
         <field name="stage_number">70</field>
@@ -49,6 +56,7 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_in_progress" model="project.task.type">
         <field name="sequence">50</field>
         <field name="stage_number">50</field>
@@ -56,6 +64,7 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_waiting_quantities" model="project.task.type">
         <field name="sequence">60</field>
         <field name="stage_number">60</field>
@@ -63,6 +72,7 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_done" model="project.task.type">
         <field name="sequence">80</field>
         <field name="stage_number">80</field>
@@ -70,6 +80,7 @@
         <field name="legend_blocked">Blocked</field>
         <field name="type_of_project">operation</field>
     </record>
+    
     <record id="project_task_type_canceled" model="project.task.type">
         <field name="sequence">90</field>
         <field name="stage_number">90</field>
