@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-27 13:29+0000\n"
-"PO-Revision-Date: 2023-08-27 13:29+0000\n"
+"POT-Creation-Date: 2023-09-05 09:07+0000\n"
+"PO-Revision-Date: 2023-09-05 09:07+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -275,9 +275,9 @@ msgstr ""
 " à l'achèvement."
 
 #. module: choreograph_project
-#: model:project.project.stage,name:choreograph_project.planning_project_stage_delivery
-msgid "Delivery"
-msgstr "Livraison"
+#: model:ir.model.fields,field_description:choreograph_project.field_project_project__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
 
 #. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_done
@@ -318,11 +318,6 @@ msgstr "Attente précision"
 #: model:project.project.stage,name:choreograph_project.planning_project_stage_extraction
 msgid "Extraction"
 msgstr ""
-
-#. module: choreograph_project
-#: model:project.task.type,name:choreograph_project.project_task_type_file_receipt
-msgid "File receipt / Update"
-msgstr "Réception fichier / MAJ"
 
 #. module: choreograph_project
 #: model:project.project.stage,name:choreograph_project.planning_project_stage_in_progress
@@ -373,7 +368,6 @@ msgstr "Aucune tâche trouvée. Créons-en une !"
 #. module: choreograph_project
 #. odoo-python
 #: code:addons/choreograph_project/models/project_project.py:0
-#: code:addons/choreograph_project/models/project_project.py:0
 #: model:ir.actions.act_window,name:choreograph_project.open_view_operation_all_group_stage
 #: model:ir.ui.menu,name:choreograph_project.menu_operation_root
 #: model:ir.ui.menu,name:choreograph_project.operation
@@ -409,13 +403,6 @@ msgstr ""
 #: model:project.project.stage,name:choreograph_project.planning_project_stage_planified
 msgid "Planned"
 msgstr "Planifié"
-
-#. module: choreograph_project
-#. odoo-python
-#: code:addons/choreograph_project/models/project_project.py:0
-#, python-format
-msgid "Planned operation %s"
-msgstr "Opération planifiée %s"
 
 #. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_preparation
@@ -508,11 +495,10 @@ msgstr "Rôle"
 #. module: choreograph_project
 #: model:project.project.stage,name:choreograph_project.planning_project_stage_routing
 msgid "Routing"
-msgstr ""
+msgstr "Routage"
 
 #. module: choreograph_project
 #. odoo-python
-#: code:addons/choreograph_project/models/project_project.py:0
 #: code:addons/choreograph_project/models/project_project.py:0
 #, python-format
 msgid "Sale order"
@@ -592,7 +578,6 @@ msgstr "A livrer"
 #. module: choreograph_project
 #. odoo-python
 #: code:addons/choreograph_project/models/project_project.py:0
-#: code:addons/choreograph_project/models/project_project.py:0
 #, python-format
 msgid "Type"
 msgstr ""
@@ -610,6 +595,11 @@ msgstr "Type de projet"
 #: model:project.task.type,name:choreograph_project.project_task_type_validation_bat_client
 msgid "Validation BAT client / interne"
 msgstr ""
+
+#. module: choreograph_project
+#: model:project.task.type,name:choreograph_project.project_task_type_file_receipt
+msgid "Waiting File / Update"
+msgstr "Attente Fichier / MAJ"
 
 #. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_waiting_quantities
