@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <record id="account_move_view_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.view.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="choreograph_purchase.account_move_view_form_inherit"/>
+            <field name="priority" eval="16"/>
+            <field name="arch" type="xml">
+                
+                <button name="button_justify_gap" position="attributes">
+                    <attribute name="groups">choreograph_sox.group_purchasing_preparer_profile_res_groups</attribute>
+                </button>
+                <button name="button_validate_gap" position="attributes">
+                    <attribute name="groups">choreograph_sox.group_validator_1_purchase_profile_res_groups</attribute>
+                </button>
+            
+            </field>
+        </record>
+    
+    </data>
+</odoo>

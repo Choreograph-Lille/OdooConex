@@ -25,6 +25,7 @@
         'security/ir_model_access.xml',
         # views
         'views/ir_ui_menu_views.xml',
+        'views/account_move_views.xml',
         # data
         'data/studio_approval_rule.xml',
     ],
