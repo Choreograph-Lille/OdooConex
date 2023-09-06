@@ -28,7 +28,9 @@
     ],
     'assets': {
         'web._assets_primary_variables': [],
-        'web.assets_backend': [],
+        'web.assets_backend': [
+            'choreograph_account/static/src/xml/approval_infos.xml',
+        ],
         'web.assets_frontend': [],
     },
     'installable': True,

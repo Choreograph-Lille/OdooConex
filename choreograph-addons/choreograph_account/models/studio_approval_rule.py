@@ -2,7 +2,7 @@
 
 from ast import literal_eval
 
-from odoo import models, api
+from odoo import models, api, _
 from odoo.exceptions import ValidationError, AccessError, UserError
 
 
