@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="StudioApprovalInfos.contents.inherit" t-inherit="web_studio.StudioApprovalInfos.contents" t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-if='state.rules === null']" position="before">
+            <t t-set="first_unapproved_rule" t-value="False"/>
+        </xpath>
+        <xpath expr="//div[hasclass('o_web_studio_approval_avatar')]" position="before">
+            <t t-if="!first_unapproved_rule" t-set="first_unapproved_rule" t-value="rule.id"/>
+        </xpath>
+        <xpath expr="//button[hasclass('o_web_approval_approve')]" position="attributes">
+            <attribute name="t-att-disabled">state.syncing || !approval.resId || approval.inStudio || first_unapproved_rule != rule.id</attribute>
+        </xpath>
+        <xpath expr="//button[hasclass('o_web_approval_reject')]" position="attributes">
+            <attribute name="t-att-disabled">state.syncing || !approval.resId || approval.inStudio || first_unapproved_rule != rule.id</attribute>
+        </xpath>
+    </t>
+
+</templates>
