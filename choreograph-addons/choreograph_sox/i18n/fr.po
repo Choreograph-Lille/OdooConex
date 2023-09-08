@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-17 20:42+0000\n"
-"PO-Revision-Date: 2023-06-17 20:42+0000\n"
+"PO-Revision-Date: 2023-09-08 08:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -94,3 +94,34 @@ msgstr "C9H / Valideur 1 Achat"
 #: model:res.groups,name:choreograph_sox.group_validator_2_purchase_profile_res_groups
 msgid "C9H / Validator 2 Purchase"
 msgstr "C9H / Valideur 2 Achat"
+
+#. module: choreograph_sox
+#: model_terms:ir.ui.view,arch_db:choreograph_sox.account_move_view_form_inherit2
+msgid "Confirm"
+msgstr "Confirmer"
+
+#. module: choreograph_sox
+#: model:ir.model.fields,field_description:choreograph_sox.field_account_bank_statement_line__is_preparer
+#: model:ir.model.fields,field_description:choreograph_sox.field_account_move__is_preparer
+#: model:ir.model.fields,field_description:choreograph_sox.field_account_payment__is_preparer
+msgid "Is Preparer"
+msgstr "Est un préparateur"
+
+#. module: choreograph_sox
+#: model:ir.model.fields,field_description:choreograph_sox.field_account_bank_statement_line__is_validator
+#: model:ir.model.fields,field_description:choreograph_sox.field_account_move__is_validator
+#: model:ir.model.fields,field_description:choreograph_sox.field_account_payment__is_validator
+msgid "Is Validator"
+msgstr "Est un validateur"
+
+#. module: choreograph_sox
+#: code:addons/choreograph_sox/models/account_move.py:0
+#, python-format
+msgid "The gap must be justified before confirmation"
+msgstr "L'écart doit être justifié avant de confirmer !"
+
+#. module: choreograph_sox
+#: code:addons/choreograph_sox/models/account_move.py:0
+#, python-format
+msgid "The gap must be validated before confirmation"
+msgstr "L'écart doit être validé avant de confirmer !"
