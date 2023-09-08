@@ -16,7 +16,8 @@
         'base_user_role',
         'mass_mailing',
         'choreograph_purchase',
-        'maas_base'
+        'maas_base',
+        'web_studio',
     ],
     'data': [
         # security
@@ -29,6 +30,13 @@
         # data
         'data/studio_approval_rule.xml',
     ],
+    'assets': {
+        'web._assets_primary_variables': [],
+        'web.assets_backend': [
+            'choreograph_sox/static/src/xml/approval_infos.xml',
+        ],
+        'web.assets_frontend': [],
+    },
     'installable': True,
     'application': False,
 }
