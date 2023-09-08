@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class AccountMove(models.Model):
@@ -23,6 +24,8 @@ class AccountMove(models.Model):
 
     def button_validate_gap(self):
         self.ensure_one()
+        if self.is_gap and not self.is_gap_justified:
+            raise ValidationError(_("The gap must be justified before its validation!"))
         self.is_gap_validated = True
         return True
 

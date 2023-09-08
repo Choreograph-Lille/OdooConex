@@ -12,7 +12,6 @@
     'depends': [
         'account',
         'l10n_fr',
-        'web_studio',
         'choreograph_base',
     ],
     'data': [
