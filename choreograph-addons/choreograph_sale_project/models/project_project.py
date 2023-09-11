@@ -13,23 +13,22 @@ from odoo.addons.choreograph_project.models.project_project import (
 
 
 class ProjectProject(models.Model):
-    _inherit = 'project.project'
+    _inherit = "project.project"
 
-    project_template_id = fields.Many2one('project.project', 'Operation Template',
-                                          domain=[('is_template', '=', True)], copy=False)
-    return_studies_date = fields.Date('Return To Studies Date', compute='compute_date_from_so', store=True)
-    commitment_date = fields.Date('Commitment Date', compute='compute_date_from_so', store=True)
+    project_template_id = fields.Many2one("project.project", "Operation Template", domain=[("is_template", "=", True)], copy=False)
+    return_studies_date = fields.Date("Return To Studies Date", compute="compute_date_from_so", store=True)
+    commitment_date = fields.Date("Commitment Date", compute="compute_date_from_so", store=True)
     sale_order_id = fields.Many2one(readonly=False, store=True)
 
-    @api.depends('sale_order_id')
+    @api.depends("sale_order_id", "sale_order_id.potential_return_date", "sale_order_id.study_delivery_date",
+                 "sale_order_id.commitment_date", "sale_order_id.potential_return")
     def compute_date_from_so(self):
-        for rec in self:
-            if rec.sale_line_id:
-                sale_order = rec.sale_order_id
-            else:
-                sale_order = self.env['sale.order'].search([('project_id', '=', rec.id)], limit=1)
-            rec.return_studies_date = sale_order.potential_return_date or sale_order.study_delivery_date
-            rec.commitment_date = sale_order.get_date_tz(sale_order.commitment_date) if sale_order.commitment_date else False
+        for record in self:
+            so = record.sale_order_id
+            return_studies_date = so.potential_return and so.potential_return_date or so.study_delivery_date
+            commitment_date = so.commitment_date and so.get_date_tz(so.commitment_date)
+            record.return_studies_date = return_studies_date
+            record.commitment_date = commitment_date
 
     @api.model
     def set_task_project(self):
