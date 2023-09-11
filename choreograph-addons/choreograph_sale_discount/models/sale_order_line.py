@@ -28,8 +28,6 @@ class SaleOrderLine(models.Model):
 			order = line.order_id
 			if order.recurrence_id:
 				continue
-			if order.show_update_pricelist:
-				continue
 			pricelist_rule = line.pricelist_item_id
 			if pricelist_rule:
 				order_date = order.date_order or fields.Date.today()
@@ -45,13 +43,13 @@ class SaleOrderLine(models.Model):
 						pricelist_item = self.env['product.pricelist.item'].browse(rule_id)
 						percentage_discount.append(self.get_discount(pricelist_item))
 				discount_value = []
-				for percentage in filter(lambda item: item, percentage_discount):
+				for percentage, display_discount in filter(lambda item: item[0], percentage_discount):
 					discount = current_list_price * percentage / 100
 					format_discount = formatLang(self.env, order.currency_id.round(discount), currency_obj=order.currency_id)
-					discount_value.append((str(percentage), format_discount))
+					discount_value.append((str(percentage), format_discount, display_discount))
 					current_list_price -= discount
-				display_discount = "\n".join([_('Discount XXX %s %s') % (
-					f'{int(float(p))}%', d) for p, d in discount_value])
+				display_discount = "\n".join(['%s %s %s' % (
+					display, f'{int(float(p))}%', d) for p, d, display in discount_value])
 				if not line.discount_line_ids and line.product_id:
 					line.discount_line_ids = [
 						(
@@ -85,4 +83,4 @@ class SaleOrderLine(models.Model):
 
 	@staticmethod
 	def get_discount(p):
-		return p.price_discount if p.compute_price == 'formula' else p.percent_price
+		return (p.price_discount if p.compute_price == 'formula' else p.percent_price, p.display_discount)
