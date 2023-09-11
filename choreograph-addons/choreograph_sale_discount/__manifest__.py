@@ -11,7 +11,9 @@
     'depends': [
         'choreograph_sale',
     ],
-    'data': [],
+    'data': [
+        'views/product_pricelist_item_views.xml'
+    ],
     'installable': True,
     'application': False,
 }

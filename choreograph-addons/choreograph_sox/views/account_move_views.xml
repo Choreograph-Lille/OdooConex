@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        
         <record id="account_move_view_form_inherit" model="ir.ui.view">
             <field name="name">account.move.view.form.inherit</field>
             <field name="model">account.move</field>
@@ -15,7 +16,7 @@
                 </button>
             </field>
         </record>
-
+        
         <record id="account_move_view_form_inherit2" model="ir.ui.view">
             <field name="name">account.move.view.form.inherit2</field>
             <field name="model">account.move</field>
@@ -24,45 +25,58 @@
                 <xpath expr="//button[@name='action_post'][2]" position="attributes">
                     <attribute name="attrs">
                         {'invisible':
-                            ['|', '|', '|', '|',
-                            ('hide_post_button', '=', True),
-                            ('move_type', '=', 'entry'),
-                            ('display_inactive_currency_warning','=',True),
-                            '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_justified', '=', False), ('is_preparer', '=', True),
-                            '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_validated', '=', False), ('is_validator', '=', True),
+                        ['|', '|', '|', '|',
+                        ('hide_post_button', '=', True),
+                        ('move_type', '=', 'entry'),
+                        ('display_inactive_currency_warning','=',True),
+                        '&amp;', '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_justified', '=', False), ('is_preparer', '=', True),
+                        ('is_accountant', '=', False),
+                        '&amp;', '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_validated', '=', False), ('is_validator', '=', True),
+                        ('is_accountant', '=', False)
                         ]}
                     </attribute>
                 </xpath>
                 <xpath expr="//button[@name='action_post'][2]" position="after">
                     <field name="is_preparer" invisible="1"/>
                     <field name="is_validator" invisible="1"/>
-
+                    <field name="is_accountant" invisible="1"/>
+                    
                     <button name="action_gap_not_justified"
                             string="Confirm"
                             class="oe_highlight"
                             type="object"
                             groups="choreograph_sox.group_purchasing_preparer_profile_res_groups"
-                            attrs="{'invisible': ['|', '|', '|', '|',
-                            ('hide_post_button', '=', True), ('move_type', '=', 'entry'),
+                            attrs="{'invisible': [
+                            '|', '|', '|', '|', '|',
+                            ('hide_post_button', '=', True),
+                            ('move_type', '=', 'entry'),
                             ('display_inactive_currency_warning','=',True),
+                            ('is_accountant', '=', True),
                             ('is_gap', '=', False),
-                            '&amp;', ('is_gap', '=', True), ('is_gap_justified', '=', True)]}"/>
+                            '&amp;',
+                            ('is_gap', '=', True),
+                            ('is_gap_justified', '=', True)]}"/>
+                    
                     <button name="action_gap_not_validated"
                             string="Confirm"
                             class="oe_highlight"
                             type="object"
                             groups="choreograph_sox.group_validator_1_purchase_profile_res_groups"
-                            attrs="{'invisible': ['|', '|', '|', '|',
-                            ('hide_post_button', '=', True), ('move_type', '=', 'entry'),
+                            attrs="{'invisible': [
+                            '|', '|', '|', '|', '|',
+                            ('hide_post_button', '=', True),
+                            ('move_type', '=', 'entry'),
                             ('display_inactive_currency_warning','=',True),
+                            ('is_accountant', '=', True),
                             ('is_gap', '=', False),
-                            '&amp;', ('is_gap', '=', True), ('is_gap_validated', '=', True)]}"/>
+                            '&amp;',
+                            ('is_gap', '=', True), ('is_gap_validated', '=', True)]}"/>
                 </xpath>
-                <xpath expr="//div[@name='journal_div']" position="after">
-                    <field name="is_gap"/>
-                    <field name="is_gap_justified"/>
-                    <field name="is_gap_validated"/>
-                </xpath>
+                <div name="journal_div" position="after">
+                    <field name="is_gap" invisible="1"/>
+                    <field name="is_gap_justified" invisible="1"/>
+                    <field name="is_gap_validated" invisible="1"/>
+                </div>
             </field>
         </record>
     </data>
