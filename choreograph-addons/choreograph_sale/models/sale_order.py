@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from odoo.exceptions import ValidationError, MissingError
+from pytz import timezone, utc
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError, MissingError
+
 from .operation_condition import SUBTYPE
 
 _logger = logging.getLogger(__name__)
@@ -145,7 +147,7 @@ class SaleOrder(models.Model):
         ('cancel', 'Cancelled'),
     ], string="C9H State", default='forecast')
     note = fields.Html(translate=True)
-    commitment_date = fields.Datetime(tracking=True)
+    commitment_date_tracked = fields.Date("Delivery Date", compute="compute_commitment_date_tracked", tracking=True, store=True)
 
     @api.model
     def get_sms_campaign_field(self):
@@ -208,7 +210,7 @@ class SaleOrder(models.Model):
         email_campaign_field = self.get_email_campaign_field()
         result.extend(sms_campaign_field)
         result.extend(email_campaign_field)
-        result.append(self.env.ref('sale.field_sale_order__commitment_date').id)
+        result.append(self._get_commitment_date_fields())
         return result
 
     def write(self, values):
@@ -478,3 +480,21 @@ class SaleOrder(models.Model):
             else:
                 order_tracking.append(tracking_value)
         return operation_tracking, order_tracking
+
+    @api.depends("commitment_date")
+    def compute_commitment_date_tracked(self):
+        for record in self:
+            record.commitment_date_tracked = record.commitment_date and self._get_date_tz(record.commitment_date)
+
+    def _get_commitment_date_fields(self):
+        return self.env.ref("choreograph_sale.field_sale_order__commitment_date_tracked", raise_if_not_found=False).id
+
+    def _get_date_tz(self, datetime_to_convert=False):
+        """
+            Convert datetime to date according to the TZ
+        """
+        if not datetime_to_convert:
+            return False
+        tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
+        tz_date = utc.localize(datetime_to_convert).astimezone(tz)
+        return tz_date
