@@ -85,11 +85,11 @@ class ProjectProject(models.Model):
         self.env.ref('choreograph_sale_project.project_project_prospection_telportable').write(get_vals(task_list))
 
     def create_operation_from_template(self):
-        action = self.project_template_id.create_project_from_template(self.name)
+        action = self.project_template_id.create_project_from_template()
         self.unlink()
         return action
 
-    def create_project_from_template(self, name=False):
+    def create_project_from_template(self):
         action = super(ProjectProject, self).create_project_from_template()
         project = self.browse(action.get('res_id')).exists()
         if project.type_of_project == 'operation':
@@ -99,7 +99,6 @@ class ProjectProject(models.Model):
             project.write({
                 'stage_id': project_stage.id,
                 'type_ids': [(6, 0, types.ids)],
-                'name': name if name else project.name
             })
             project.task_ids.with_context(task_stage_init=True).write({
                 'stage_id': task_stage.id,
