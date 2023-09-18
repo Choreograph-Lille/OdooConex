@@ -471,7 +471,7 @@ class SaleOrder(models.Model):
         for tracking_value in tracking_value_ids:
             field_id = tracking_value[2]['field']
             if field_id in operation_field_list:
-                if operation_id.stage_id.stage_number != '10':
+                if operation_id.stage_id and operation_id.stage_id.stage_number != '10':
                     if field_id in self.get_sms_campaign_field():
                         tracking_value[2]['field_desc'] += ' - SMS'
                     if field_id in self.get_email_campaign_field():
