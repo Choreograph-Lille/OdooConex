@@ -15,5 +15,11 @@ class PurchaseOrder(models.Model):
             view_id = self.env.ref("choreograph_purchase.purchase_order_form_validator_inherit").id
         return super(PurchaseOrder, self).get_view(view_id, view_type, **options)
 
-    def update_purchase_user(self, user):
-        self.user_id = user.id
+    def _set_validator_as_purchase_user(self, user=False):
+        """
+        Force user of purchase order as validator
+        """
+        self.ensure_one()
+        if not user:
+            return False
+        return self.write({"user_id": user.id})
