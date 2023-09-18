@@ -21,11 +21,9 @@ msgid "Discount Source Line"
 msgstr ""
 
 #. module: choreograph_sale_discount
-#. odoo-python
-#: code:addons/choreograph_sale_discount/models/sale_order.py:0
-#, python-format
-msgid "Discount XXX %s %s"
-msgstr "Remise XXX %s %s"
+#: model:ir.model.fields,field_description:choreograph_sale_discount.field_product_pricelist_item__display_discount
+msgid "Display discount"
+msgstr "Informations sur la remise"
 
 #. module: choreograph_sale_discount
 #: model:ir.model,name:choreograph_sale_discount.model_sale_order

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-28 09:15+0000\n"
-"PO-Revision-Date: 2023-08-28 09:15+0000\n"
+"POT-Creation-Date: 2023-09-05 08:20+0000\n"
+"PO-Revision-Date: 2023-09-05 08:20+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -308,13 +308,6 @@ msgstr "Livraison client"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__complexity
 msgid "Complexity"
 msgstr "Complexité"
-
-#. module: choreograph_sale_project
-#. odoo-python
-#: code:addons/choreograph_sale_project/models/mail_message.py:0
-#, python-format
-msgid "Condition/Exclusion line : %s"
-msgstr "Ligne Condition / Exclusion : %s"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_count
@@ -934,13 +927,6 @@ msgstr "Date présentation"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presentation_task_id
 msgid "Presentation Task"
 msgstr "Tâche présentation"
-
-#. module: choreograph_sale_project
-#. odoo-python
-#: code:addons/choreograph_sale_project/models/mail_message.py:0
-#, python-format
-msgid "Presta Delivery : %s"
-msgstr "Livraison Presta : %s"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_delivery_date

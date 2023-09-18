@@ -70,15 +70,5 @@
             <field name="domain">[("move_type", "=", "in_invoice")]</field>
         </record>
         
-        <record id="approval_button_validate_gap_group_validator_2_purchase_profile" model="studio.approval.rule">
-            <field name="model_id" ref="account.model_account_move"/>
-            <field name="group_id" model="res.groups" search="[('name', '=', 'C9H / Validator 2 Purchase')]"/>
-            <field name="active" eval="True"/>
-            <field name="exclusive_user" eval="True"/>
-            <field name="method">button_validate_gap</field>
-            <field name="domain">[("move_type", "=", "in_invoice")]</field>
-        </record>
-    
-    
     </data>
 </odoo>

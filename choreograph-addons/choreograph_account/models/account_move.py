@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import ValidationError
 
 
 class AccountMove(models.Model):
@@ -31,4 +32,3 @@ class AccountMove(models.Model):
         if self.partner_id.child_ids:
             adresses |= self.partner_id.child_ids.filtered(lambda rp: rp.type == 'invoice')
         return ','.join([str(rp.id) for rp in adresses])
-

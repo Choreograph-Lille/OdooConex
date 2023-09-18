@@ -17,3 +17,16 @@ class PurchaseOrder(models.Model):
                 'default_template_id': template.id,
             })
         return result
+
+    def button_cancel(self):
+        res = super(PurchaseOrder, self).button_cancel()
+        for record in self:
+            record.delete_existing_approvals(record._name, 'button_confirm', record.id)
+        return res
+
+    def delete_existing_approvals(self, model, method, res_id):
+        self.ensure_one()
+        entry_obj = self.env['studio.approval.entry'].sudo()
+        entries = entry_obj.search([('model', '=', model), ('method', '=', method), ('res_id', '=', res_id)])
+        entries.unlink()
+        return True

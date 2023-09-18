@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 
+import logging
+
 from odoo import api, fields, models, _
 from odoo.tools import html_escape
 from odoo.tools.misc import format_date
 
+from odoo.exceptions import MissingError
+
+_logger = logging.getLogger(__name__)
 
 class FieldTrackingMessageMixin(models.AbstractModel):
     _name = 'field.tracking.message.mixin'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Field Tracking Message Mixin'
 
     def _field_to_track(self):
@@ -72,3 +78,51 @@ class FieldTrackingMessageMixin(models.AbstractModel):
 
     def _creation_message(self):
         return ""
+
+
+    def _message_track(self, fields_iter, initial_values_dict):
+        if not fields_iter:
+            return {}
+
+        tracked_fields = self.fields_get(fields_iter)
+        tracking = dict()
+        for record in self:
+            try:
+                tracking[record.id] = record._mail_track(tracked_fields, initial_values_dict[record.id])
+            except MissingError:
+                continue
+
+        # find content to log as body
+        bodies = self.env.cr.precommit.data.pop(f'mail.tracking.message.{self._name}', {})
+        for record in self:
+            changes, tracking_value_ids = tracking.get(record.id, (None, None))
+            if not changes:
+                continue
+
+            # find subtypes and post messages or log if no subtype found
+            subtype = record._track_subtype(
+                dict((col_name, initial_values_dict[record.id][col_name])
+                     for col_name in changes)
+            )
+            if subtype:
+                if not subtype.exists():
+                    _logger.debug('subtype "%s" not found' % subtype.name)
+                    continue
+                record.message_post(
+                    body=bodies.get(record.id) or '',
+                    subtype_id=subtype.id,
+                    tracking_value_ids=tracking_value_ids
+                )
+            elif tracking_value_ids:
+                project_id = record._get_project_id()
+                project_id.message_post(
+                    body=record._get_body_message_track(),
+                    tracking_value_ids=tracking_value_ids,
+                    partner_ids=project_id.message_follower_ids.mapped('partner_id').ids
+                )
+
+        return tracking
+
+    def _get_body_message_track(self):
+        self.ensure_one()
+        return f"{self.sequence}"
