@@ -8,7 +8,6 @@
             <field name="subject">{{ object.company_id.name }} order n°{{ object.name or 'n/a' }}</field>
             <field name="partner_to">{{ object.partner_id.id }}</field>
             <field name="description">Sent to vendor with the purchase order in attachment</field>
-            <field name="user_url">gao</field>
             <field name="body_html" type="html">
                 <div style="margin: 0px; padding: 0px;">
                     <p style="margin: 0px; padding: 0px; font-size: 13px;">
