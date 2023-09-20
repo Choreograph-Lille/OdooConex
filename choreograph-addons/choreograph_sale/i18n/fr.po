@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-05 08:08+0000\n"
-"PO-Revision-Date: 2023-09-05 08:08+0000\n"
+"POT-Creation-Date: 2023-09-15 21:34+0000\n"
+"PO-Revision-Date: 2023-09-18 21:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -143,26 +143,26 @@ msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
 "                <p style=\"margin: 0px; padding: 0px; font-size: 12px;\">\n"
 "                    Hello,\n"
-"                    <br/>\n"
-"                    <br/>\n"
+"                    <br>\n"
+"                    <br>\n"
 "                    Please find attached our Order Confirmation <span style=\"font-weight:bold;\" t-out=\"object.name or ''\">S00049</span> for <span style=\"font-weight:bold;\" t-out=\"object.partner_id.name\">Mitchell Admin</span>.\n"
-"                    <br/>\n"
+"                    <br>\n"
 "                    Once you’ve reviewed it, could you please return it signed?\n"
-"                    <br/>\n"
-"                    <br/>\n"
+"                    <br>\n"
+"                    <br>\n"
 "                    I look forward to hearing from you.\n"
-"                    <br/>\n"
+"                    <br>\n"
 "                    If you have any questions, please don’t hesitate to contact me.\n"
-"                    <br/>\n"
-"                    <br/>\n"
+"                    <br>\n"
+"                    <br>\n"
 "                    Best regards,\n"
 "                    <t t-if=\"not is_html_empty(object.user_id.signature)\">\n"
-"                        <br/>\n"
-"                        <br/>\n"
-"                        <t t-out=\"object.user_id.name or ''\">--<br/>Mitchell Admin\n"
+"                        <br>\n"
+"                        <br>\n"
+"                        <t t-out=\"object.user_id.name or ''\">--<br>Mitchell Admin\n"
 "                        </t>\n"
-"                        <br/>\n"
-"                        <t t-out=\"object.user_id.partner_id.email or ''\">--<br/>mitchell@odoo.com\n"
+"                        <br>\n"
+"                        <t t-out=\"object.user_id.partner_id.email or ''\">--<br>mitchell@odoo.com\n"
 "                        </t>\n"
 "                    </t>\n"
 "                </p>\n"
@@ -591,6 +591,7 @@ msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "<strong>Client instruction:</strong>"
 msgstr "<strong>Instruction du client:</strong>"
 
@@ -601,6 +602,7 @@ msgstr "<strong>Base concernée:</strong>"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "<strong>Payment Terms</strong>"
 msgstr "<strong> Conditions de règlement </strong>"
 
@@ -964,7 +966,7 @@ msgid "Data Conservation"
 msgstr "Conservation des données"
 
 #. module: choreograph_sale
-#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__commitment_date
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__commitment_date_tracked
 msgid "Delivery Date"
 msgstr "Date de livraison"
 
@@ -977,6 +979,7 @@ msgstr "Info livraison"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Delivery date"
 msgstr "Date de livraison"
 
@@ -1562,7 +1565,7 @@ msgstr ""
 #: model:ir.model.fields,help:choreograph_sale.field_field_tracking_message_mixin__message_needaction_counter
 #: model:ir.model.fields,help:choreograph_sale.field_operation_condition__message_needaction_counter
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__message_needaction_counter
-msgid "Number of messages which requires an action"
+msgid "Number of messages requiring action"
 msgstr ""
 
 #. module: choreograph_sale
@@ -1810,11 +1813,13 @@ msgstr "Date de réception"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Recipient of data"
 msgstr "Destinataire du fichier"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Recipient of service"
 msgstr "Destinataire de la prestation"
 
@@ -1847,6 +1852,7 @@ msgstr "Responsable"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Retention"
 msgstr "Conservations des données"
 
@@ -2070,6 +2076,11 @@ msgstr "N° tâche"
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "Task generation"
 msgstr "Générer tâches"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__note
+msgid "Terms and conditions"
+msgstr "Termes et conditions"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -2318,6 +2329,7 @@ msgstr "Total rétribution"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Transmission method"
 msgstr "Canal d'envoi"
 
