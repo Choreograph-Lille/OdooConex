@@ -15,6 +15,7 @@ class AccountMoveWizard(models.TransientModel):
         self.move_id.write({
             "is_gap_justified": True
         })
+        self._cr.commit()
         self.move_id.message_post(
             body=self.note,
             partner_ids=self.move_id.message_follower_ids.mapped('partner_id').ids,
