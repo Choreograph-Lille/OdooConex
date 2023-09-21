@@ -302,12 +302,16 @@ class ProjectTask(models.Model):
                     'task_stage_init', False):
                 stage_id = self.env['project.task.type'].browse(vals['stage_id'])
                 method_dict = {
+                    '5': '_hook_task_70_in_stage_80',
+                    '10': '_hook_task_70_in_stage_80',
+                    '15': '_hook_task_fulfillement_terminated',
                     '20': '_hook_task_20_in_stage_80',
                     '25': '_hook_task_25_in_stage_80',
                     '30': '_hook_task_30_in_stage_80',
                     '40': '_hook_task_40_in_stage_80',
                     '45': '_hook_task_45_50_in_stage_80',
                     '50': '_hook_task_45_50_in_stage_80',
+                    '55': '_hook_task_70_in_stage_80',
                     '60': '_hook_task_60_in_stage_80',
                     '65': '_hook_task_65_in_stage_80',
                     '70': '_hook_task_70_in_stage_80',
@@ -323,8 +327,12 @@ class ProjectTask(models.Model):
                         getattr(task.project_id, method_name)()
                 elif stage_id.stage_number in [FILE_RECEIVED_TASK_STAGE, IN_PROGRESS_TASK_STAGE] and task.project_id.stage_id.stage_number == PLANIFIED_PROJECT_STAGE:
                     task.project_id._hook_task_in_stage_25_50()
-                elif task.task_number in ['45', '50'] and stage_id.stage_number == '50':
-                    task.project_id._hook_task_45_50_in_stage_50()
+                elif task.task_number in ['45', '50']:
+                    if stage_id.stage_number == BAT_CLIENT_TASK_STAGE:
+                        task.project_id._hook_task_70_in_stage_80()
+                    elif stage_id.stage_number == IN_PROGRESS_TASK_STAGE:
+                        task.project_id._hook_task_45_50_in_stage_50()
+
             provider_fields = ['provider_file_name', 'provider_delivery_partner_ids', 'family_conex',
                                'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
