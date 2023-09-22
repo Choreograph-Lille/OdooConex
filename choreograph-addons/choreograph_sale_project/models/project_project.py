@@ -97,8 +97,9 @@ class ProjectProject(models.Model):
             project_stage = self.env.ref('choreograph_project.planning_project_stage_draft')
             task_stage = self.env.ref('choreograph_project.project_task_type_draft')
             project.write({
-                'stage_id': project_stage.id,
-                'type_ids': [(6, 0, types.ids)],
+                "stage_id": project_stage.id,
+                "type_ids": [(6, 0, types.ids)],
+                "name": project.name.replace(" (COPY)", "")
             })
             project.task_ids.with_context(task_stage_init=True).write({
                 'stage_id': task_stage.id,
