@@ -72,3 +72,9 @@ msgstr "Vous avez été assigné(e) à "
 #: model_terms:ir.ui.view,arch_db:purchase.report_purchaseorder_document
 msgid "<strong>Purchase Representative:</strong>"
 msgstr "<strong>Gestionnaire de compte :</strong>"
+
+#. module: sale
+#: model:ir.model.fields,field_description:sale.field_sale_order__commitment_date
+#: model_terms:ir.ui.view,arch_db:sale.view_order_form
+msgid "Delivery Date"
+msgstr "Date de livraison"
