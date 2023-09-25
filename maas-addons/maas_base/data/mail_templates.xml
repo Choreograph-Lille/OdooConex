@@ -29,7 +29,7 @@
                         </p>
                     </div>
                     <div style="text-align: center; margin-top: 18px; padding-top:20px;">
-                        <a t-attf-href="{{ object.with_context(web_mymodel_url=True).signup_url }}"
+                        <a href="{{ object.signup_url }}"
                            style="width:180px;padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;">
                             Click here
                         </a>
@@ -53,7 +53,7 @@
                     <p>A password reset for your access on MyModel platform was requested.</p>
                     <p>You may change your password by following this link which will remain valid during 24 hours.</p>
                     <div style="text-align: center; margin-top: 32px;">
-                        <a href="{{ object.with_context(web_mymodel_url=True).signup_url }}"
+                        <a href="{{ object.signup_url }}"
                            style="padding: 12px 10px; font-size: 22px; line-height: 18px; color: #FFFFFF; border-color:#875A7B; text-decoration: none; display: inline-block; margin-bottom: 0px; font-weight: 400; text-align: center; cursor: pointer; white-space: nowrap; background-image: none; background-color: #875A7B; border: 1px solid #875A7B;">
                             Change password
                         </a>

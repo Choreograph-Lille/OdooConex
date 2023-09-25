@@ -240,11 +240,11 @@
                             <li>Campaign :
                                 <t t-out="object.operation_id.campaign_id.name"/>
                             </li>
-                            <t t-if="object.operation_id.action_id">
-                                <li>Action :
-                                    <t t-out="object.operation_id.action_id.name"/>
-                                </li>
-                            </t>
+                            % if object.action_id:
+                            <li>Action :
+                                <t t-out="object.operation_id.action_id.name"/>
+                            </li>
+                            % endif
                             <li>Operation :
                                 <t t-out="object.name"/>
                             </li>
@@ -255,7 +255,7 @@
                     </p>
                     <p>
                         You can access the platform:
-                        <a t-attf-href="{{ object.operation_id.get_login_url() }}">Click here.</a>
+                        <a href="{{ object.operation_id.get_login_url() }}">Click here.</a>
                     </p>
                     <p>The MyModel team.</p>
                 </div>

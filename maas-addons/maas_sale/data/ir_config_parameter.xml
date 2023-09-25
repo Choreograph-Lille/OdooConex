@@ -1,23 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <data noupdate="0">
+<data noupdate="0">
 
-        <record id="duration_availability_download" model="ir.config_parameter">
-            <field name="key">duration.availability.download</field>
-            <field name="value">30</field>
-        </record>
+    <record id="duration_availability_download" model="ir.config_parameter">
+        <field name="key">duration.availability.download</field>
+        <field name="value">30</field>
+    </record>
 
-        <record id="delay_notification_before_term_download" model="ir.config_parameter">
-            <field name="key">delay.notification.before.term.download</field>
-            <field name="value">5</field>
-        </record>
+    <record id="delay_notification_before_term_download" model="ir.config_parameter">
+        <field name="key">delay.notification.before.term.download</field>
+        <field name="value">5</field>
+    </record>
 
-    </data>
-
-    <data noupdate="1">
-        <record model="ir.config_parameter" id="web_mymodel_url" forcecreate="True">
-            <field name="key">web.mymodel.url</field>
-            <field name="value">https://www.mymodelbyconexance.com</field>
-        </record>
-    </data>
-</odoo>
+</data>
