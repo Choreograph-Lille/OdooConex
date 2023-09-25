@@ -41,3 +41,9 @@ class ResPartner(models.Model):
                     'ref': next_ref
                 })
         return super(ResPartner, self).create(values)
+
+    def get_base_url(self):
+        result = super(ResPartner, self).get_base_url()
+        if self.user_ids and self.user_ids[0].share:
+            return self.env["ir.config_parameter"].sudo().get_param("web.mymodel.url", result)
+        return result
