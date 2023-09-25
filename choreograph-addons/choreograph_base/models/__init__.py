@@ -4,3 +4,5 @@ from . import base
 from . import res_users
 from . import res_partner
 from . import base
+from . import mail_compose_message
+from . import mail_template

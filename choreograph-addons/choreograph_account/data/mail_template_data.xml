@@ -8,6 +8,7 @@
         <field name="partner_to">{{ object._get_mail_partner() }}</field>
         <field name="subject">Invoice</field>
         <field name="description">Sent to customers with their invoices in attachment</field>
+		<field name="user_url">gao</field>
         <field name="body_html" type="html">
             <div style="margin: 0px; padding: 0px;">
                 <p style="margin: 0px; padding: 0px; font-size: 13px;">
