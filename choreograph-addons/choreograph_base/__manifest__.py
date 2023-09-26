@@ -16,12 +16,10 @@
 	],
 	'data': [
 		# data
-		"data/ir_config_parameter.xml",
 		'data/ir_sequence.xml',
 		# security
 		# views
 		"views/res_partner_views.xml",
-		"views/mail_template_views.xml",
 	],
 	'assets': {
 		'web._assets_primary_variables': [],
