@@ -293,7 +293,7 @@ class SaleOperation(models.Model):
         return True
 
     def get_login_url(self):
-        return "%s/link" % (self.env['ir.config_parameter'].get_param('web.base.url'))
+        return "%s/link" % (self.env['ir.config_parameter'].get_param('web.mymodel.url'))
 
     @api.model
     def get_number_child(self, operation):
