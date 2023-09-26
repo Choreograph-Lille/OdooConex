@@ -85,11 +85,11 @@ class ProjectProject(models.Model):
         self.env.ref('choreograph_sale_project.project_project_prospection_telportable').write(get_vals(task_list))
 
     def create_operation_from_template(self):
-        action = self.project_template_id.create_project_from_template()
+        action = self.project_template_id.create_project_from_template(self.name)
         self.unlink()
         return action
 
-    def create_project_from_template(self):
+    def create_project_from_template(self, name=False):
         action = super(ProjectProject, self).create_project_from_template()
         project = self.browse(action.get('res_id')).exists()
         if project.type_of_project == 'operation':
@@ -97,9 +97,9 @@ class ProjectProject(models.Model):
             project_stage = self.env.ref('choreograph_project.planning_project_stage_draft')
             task_stage = self.env.ref('choreograph_project.project_task_type_draft')
             project.write({
-                "stage_id": project_stage.id,
-                "type_ids": [(6, 0, types.ids)],
-                "name": project.name.replace(" (COPY)", "")
+                'stage_id': project_stage.id,
+                'type_ids': [(6, 0, types.ids)],
+                'name': name if name else project.name
             })
             project.task_ids.with_context(task_stage_init=True).write({
                 'stage_id': task_stage.id,
@@ -148,30 +148,27 @@ class ProjectProject(models.Model):
 
     def _hook_task_20_in_stage_80(self):
         self._update_task_stage('65', TODO_TASK_STAGE)
-        self._hook_task_fulfillement_terminated()
 
     def _hook_task_25_in_stage_80(self):
         self._update_task_stage('30', WAITING_QTY_TASK_STAGE)
         self._update_task_stage('40', TODO_TASK_STAGE)
-        self._hook_task_fulfillement_terminated()
 
     def _hook_task_30_in_stage_80(self):
         if self._is_task_terminated(['40']):
             self._update_task_stage('65', TODO_TASK_STAGE)
-            self._hook_task_fulfillement_terminated()
 
     def _hook_task_40_in_stage_80(self):
         if self._is_task_terminated(['30']):
             self._update_task_stage('65', TODO_TASK_STAGE)
-            self._hook_task_fulfillement_terminated()
 
     def _hook_task_60_in_stage_80(self):
         self._update_task_stage('55', TODO_TASK_STAGE)
-        self._hook_task_fulfillement_terminated()
 
     def _hook_task_65_in_stage_80(self):
-        self._update_task_stage('70', TODO_TASK_STAGE)
-        self._hook_task_fulfillement_terminated()
+        if self._find_task_by_task_number('70'):
+            self._update_task_stage('70', TODO_TASK_STAGE)
+        else:
+            self._update_task_stage('80', TODO_TASK_STAGE)
 
     def _is_task_terminated(self, task_number_list, task_number=False):
         if task_number and task_number in task_number_list:
@@ -180,27 +177,31 @@ class ProjectProject(models.Model):
         return all([task.stage_id.stage_number == TERMINATED_TASK_STAGE for task in task_ids])
 
     def _hook_task_70_in_stage_80(self):
-        task_70 = self._find_task_by_task_number('70')
         task_55 = self._find_task_by_task_number('55')
-        task_45_50 = self._find_task_by_task_number('45') | self._find_task_by_task_number('50')
-        task_5_10 = self._find_task_by_task_number('5') | self._find_task_by_task_number('10')
-        task_75 = self._find_task_by_task_number('75')
+        task_45 = self._find_task_by_task_number('45')
+        task_50 = self._find_task_by_task_number('50')
+        task_10 = self._find_task_by_task_number('10')
 
-        task_70_in_80 = task_70 and task_70.stage_id.stage_number == TERMINATED_TASK_STAGE
         task_55_in_80 = task_55 and task_55.stage_id.stage_number == TERMINATED_TASK_STAGE
-        task_45_50_in_70 = task_45_50 and any(task.stage_id.stage_number == BAT_CLIENT_TASK_STAGE for task in task_45_50)
-        task_5_10_in_80 = task_5_10 and any(task.stage_id.stage_number == TERMINATED_TASK_STAGE for task in task_5_10)
-
-        if task_75 and task_75.stage_number == '10' and (task_70_in_80 or not task_70) and (task_55_in_80 or not task_55) and (task_45_50_in_70 or not task_45_50) and (task_5_10_in_80 or not task_5_10):
+        task_45_in_70 = task_45 and task_45.stage_id.stage_number == BAT_CLIENT_TASK_STAGE
+        task_50_in_70 = task_45 and task_50.stage_id.stage_number == BAT_CLIENT_TASK_STAGE
+        task_10_in_80 = task_45 and task_10.stage_id.stage_number == TERMINATED_TASK_STAGE
+        if (task_55_in_80 or not task_55) and ((task_45_in_70 or not task_45) or (task_50_in_70 or not task_45)) and (task_10_in_80 or not task_10):
             self._update_task_stage('75', TODO_TASK_STAGE)
-        self._hook_task_fulfillement_terminated()
+
+    def _hook_task_55_in_stage_80(self):
+        task_70 = self._find_task_by_task_number('70')
+        task_45 = self._find_task_by_task_number('45')
+        task_45_in_80 = task_45 and task_45.stage_id.stage_number == BAT_CLIENT_TASK_STAGE
+        task_70_in_80 = task_70 and task_70.stage_id.stage_number == TERMINATED_TASK_STAGE
+        if (task_70_in_80 or not task_70) and (task_45_in_80 or not task_45):
+            self._update_task_stage('75', TODO_TASK_STAGE)
 
     def _hook_task_75_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_presta_delivery').id})
-        self._hook_task_fulfillement_terminated()
 
     def _hook_task_fulfillement_terminated(self):
-        tasks_in_80 = self.task_ids.filtered(lambda task: task.task_number not in ['35', '45', '50', '90', '95'])
+        tasks_in_80 = self.task_ids.filtered(lambda task: task.task_number not in ['35', '45,' '50', '90', '95'])
         if all([task.stage_number == TERMINATED_TASK_STAGE for task in tasks_in_80]):
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_to_deliver').id})
         if not self.task_ids.filtered(lambda task: task.task_number in ['45', '50']):
