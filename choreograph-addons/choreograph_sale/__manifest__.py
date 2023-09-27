@@ -37,6 +37,7 @@
         'views/choreograph_campaign_de.xml',
         'views/res_company_views.xml',
         'views/res_config_settings_views.xml',
+        'views/sale_portal_templates.xml',
         'views/ir_ui_menu_views.xml',
     ],
     'assets': {
