@@ -216,7 +216,7 @@ class SaleOrder(models.Model):
     def write(self, values):
         if values.get('state', False) in ('draft', 'sent', 'sale', 'done', 'cancel'):
             values['state_specific'] = values['state']
-        res = super().write(values)
+        res = super(SaleOrder, self).write(values)
         operation_condition = self.operation_condition_ids.filtered(
             lambda c: not c.is_task_created and c.subtype not in ['comment', 'sale_order'])
         if self.project_ids and operation_condition:

@@ -170,7 +170,10 @@ class ProjectProject(models.Model):
         self._hook_task_fulfillement_terminated()
 
     def _hook_task_65_in_stage_80(self):
-        self._update_task_stage('70', TODO_TASK_STAGE)
+        if self._find_task_by_task_number('70'):
+            self._update_task_stage('70', TODO_TASK_STAGE)
+        else:
+            self._update_task_stage('80', TODO_TASK_STAGE)
         self._hook_task_fulfillement_terminated()
 
     def _is_task_terminated(self, task_number_list, task_number=False):
@@ -218,11 +221,6 @@ class ProjectProject(models.Model):
 
     def _hook_task_90_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
-        self._update_task_stage('95', TODO_TASK_STAGE)
-        so = self.sale_order_id or self.env['sale.order'].search([('project_id', '=', self.id)])
-        self._find_task_by_task_number('95').write({
-            'date_deadline': so.get_date_tz(so.commitment_date) + relativedelta(days=15)
-        })
 
     def _hook_check_all_task(self, task_id):
         not_terminated = self.task_ids.filtered(

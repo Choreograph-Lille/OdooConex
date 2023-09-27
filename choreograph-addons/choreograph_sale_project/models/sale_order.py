@@ -443,6 +443,9 @@ class SaleOrder(models.Model):
             if is_operation_generation or vals.get('bat_desired_date'):
                 values.append((rec._get_operation_task(['55'], True), {'date_deadline': rec.bat_desired_date}))
 
+            if is_operation_generation or vals.get("commitment_date"):
+                values.append((rec._get_operation_task(["90"], True), {"date_deadline": rec.commitment_date + relativedelta(days=15)}))
+
             rec.update_date_deadline(values)
 
     def update_date_deadline(self, values):
