@@ -14,7 +14,7 @@
                     <group>
                         <field name="type_of_project" invisible="1"/>
                         <field name="project_template_id" options="{'no_create': True}"
-                               domain="[('type_of_project', '=', type_of_project)]"/>
+                               domain="[('is_template', '=', True), ('type_of_project', '=', type_of_project)]"/>
                     </group>
                     <group/>
                 </group>
