@@ -982,7 +982,6 @@ msgstr "Info livraison"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
-#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Delivery date"
 msgstr "Date de livraison"
 
@@ -1816,13 +1815,11 @@ msgstr "Date de réception"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
-#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Recipient of data"
 msgstr "Destinataire du fichier"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
-#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Recipient of service"
 msgstr "Destinataire de la prestation"
 
@@ -1855,7 +1852,6 @@ msgstr "Responsable"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
-#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Retention"
 msgstr "Conservations des données"
 
@@ -2332,7 +2328,6 @@ msgstr "Total rétribution"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
-#: model_terms:ir.ui.view,arch_db:choreograph_sale.sale_order_portal_content
 msgid "Transmission method"
 msgstr "Canal d'envoi"
 
