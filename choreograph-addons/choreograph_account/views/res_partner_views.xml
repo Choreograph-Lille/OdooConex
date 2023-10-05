@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
+        
         <record id="res_partner_form_view_inherit" model="ir.ui.view">
             <field name="name">res.partner.form.view.inherit</field>
             <field name="model">res.partner</field>
@@ -12,6 +12,22 @@
                 </group>
             </field>
         </record>
-
+        
+        <record id="account.res_partner_action_customer" model="ir.actions.act_window">
+            <field name="view_ids"
+                   eval="[(5,0,0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.res_partner_kanban_view')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_partner_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_partner_form')})]"/>
+        </record>
+        
+        <record id="account.res_partner_action_supplier" model="ir.actions.act_window">
+            <field name="view_ids"
+                   eval="[(5,0,0),
+                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('base.res_partner_kanban_view')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_partner_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_partner_form')})]"/>
+        </record>
+    
     </data>
 </odoo>

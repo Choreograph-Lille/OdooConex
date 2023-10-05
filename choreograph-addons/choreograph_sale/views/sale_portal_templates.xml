@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+        <template id="sale_order_portal_template" name="Portal Layout : Quote Content" inherit_id="sale.sale_order_portal_template" priority="20">
+            
+            <xpath expr="//b[@t-field='sale_order.partner_id.commercial_partner_id']" position="replace">
+                <b t-field="sale_order.partner_invoice_id"/>
+            </xpath>
+            
+            <xpath expr="//t[@t-set='default_name']" position="replace">
+                <t t-set="default_name" t-value="sale_order.partner_invoice_id.name"/>
+            </xpath>
+            
+        </template>
+    
+    </data>
+</odoo>
