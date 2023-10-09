@@ -246,3 +246,9 @@ class SaleSubscription(models.Model):
         """
         for subscription in self:
             subscription.write({'next_invoice_date':  subscription.next_invoice_date + relativedelta(months=1, day=1, days=-1)})
+
+    def _handle_automatic_invoices(self, auto_commit, invoices):
+        """
+        Overwrite to bypass the validation auto of invoices
+        """
+        return invoices
