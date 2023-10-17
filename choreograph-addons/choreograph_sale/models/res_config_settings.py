@@ -11,5 +11,5 @@ class ResConfigSettings(models.TransientModel):
     use_invoice_terms_c9h = fields.Boolean(
         string="Invoice Terms & Conditions",
         config_parameter="invoice.terms.conditions",
-        default=False)
+        default=True)
     invoice_terms_c9h = fields.Html(related="company_id.invoice_terms_c9h", string="Invoice Terms & Conditions", readonly=False)
