@@ -14,3 +14,4 @@ from . import choreograph_campaign_de
 from . import res_config_settings
 from . import res_company
 from . import mail_tracking_value
+from . import account_move

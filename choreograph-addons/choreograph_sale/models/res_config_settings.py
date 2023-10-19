@@ -3,10 +3,8 @@
 from odoo import fields, models
 
 
-
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
-
 
     use_invoice_terms_c9h = fields.Boolean(
         string="Invoice Terms & Conditions",
