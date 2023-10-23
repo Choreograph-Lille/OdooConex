@@ -271,6 +271,66 @@ msgid "Trimester 4"
 msgstr "Trimestre 4"
 
 #. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"All\n"
+"                                                                    operations"
+msgstr "Toutes les opérations"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 30\n"
+"                                                                    days"
+msgstr "Les 30 derniers jours"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 3\n"
+"                                                                    months"
+msgstr "Les 3 derniers mois"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 6\n"
+"                                                                    months"
+msgstr "Les 6 derniers mois"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 12\n"
+"                                                                    months"
+msgstr "Les 12 derniers mois"
+
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-1
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 1"
+msgstr "Trimestre 1"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-2
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 2"
+msgstr "Trimestre 2"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-3
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-4
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 3"
+msgstr "Trimestre 3"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 4"
+msgstr "Trimestre 4"
+
+#. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.homepage
 msgid "<span class=\"bg-btn-connexion\">REGISTRATION</span>"
 msgstr "<span class=\"bg-btn-connexion\">CONNEXION</span>"
@@ -693,8 +753,7 @@ msgstr "Opérations Affichées:"
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid ""
-"Displayed Themes:\n"
-"                                        <select name=\"Operations rows\" aria-controls=\"example\" class=\"op_row_input\">\n"
+"Displayed Themes: <select name=\"Operations rows\" aria-controls=\"example\" class=\"op_row_input\">\n"
 "                                            <option value=\"5\" selected=\"1\">5</option>\n"
 "                                            <option value=\"10\">10</option>\n"
 "                                            <option value=\"25\">25</option>\n"
@@ -744,6 +803,11 @@ msgstr "Première page"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Full\n"
+"                                                                                                    Cancel\n"
+"                                                                                                    and\n"
+"                                                                                                    replace"
 msgid ""
 "<option value=\"cancel_replace\">\n"
 "                                                                                                    Full Cancel and\n"
