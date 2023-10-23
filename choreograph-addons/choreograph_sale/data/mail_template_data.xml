@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    
-    <record id="mail_template_sale_confirmation" model="mail.template">
-        <field name="name">Sales: Order Confirmation C9H</field>
-        <field name="model_id" ref="sale.model_sale_order"/>
-        <field name="subject">Order confirmation {{ object.name }}</field>
-        <field name="email_from">{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
-        <field name="email_to">{{ (object.user_id.email_formatted) }}</field>
-        <field name="partner_to">{{ object.partner_id.id }}</field>
-        <field name="description">Sent to customers on order confirmation</field>
-        <field name="body_html" type="html">
-            <div style="margin: 0px; padding: 0px;">
-                <p style="margin: 0px; padding: 0px; font-size: 12px;">
-                    Hello,
-                    <br/>
-                    <br/>
-                    Please find attached our Order Confirmation <span style="font-weight:bold;" t-out="object.name or ''">S00049</span> for <span style="font-weight:bold;" t-out="object.partner_id.name">Mitchell Admin</span>.
-                    <br/>
-                    Once you’ve reviewed it, could you please return it signed?
-                    <br/>
-                    <br/>
-                    I look forward to hearing from you.
-                    <br/>
-                    If you have any questions, please don’t hesitate to contact me.
-                    <br/>
-                    <br/>
-                    Best regards,
-                    <t t-if="not is_html_empty(object.user_id.signature)">
+    <data noupdate="1">
+        <record id="mail_template_sale_confirmation" model="mail.template">
+            <field name="name">Sales: Order Confirmation C9H</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Order confirmation {{ object.name }}</field>
+            <field name="email_from">{{ (object.user_id.email_formatted or user.email_formatted) }}</field>
+            <field name="email_to">{{ (object.user_id.email_formatted) }}</field>
+            <field name="partner_to">{{ object.partner_id.id }}</field>
+            <field name="description">Sent to customers on order confirmation</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 12px;">
+                        Hello,
                         <br/>
                         <br/>
-                        <t t-out="object.user_id.name or ''">--<br/>Mitchell Admin
+                        Please find attached our Order Confirmation <span style="font-weight:bold;"
+                                                                          t-out="object.name or ''">S00049
+                    </span> for <span style="font-weight:bold;" t-out="object.partner_id.name">Mitchell Admin</span>.
+                        <br/>
+                        Once you’ve reviewed it, could you please return it signed?
+                        <br/>
+                        <br/>
+                        I look forward to hearing from you.
+                        <br/>
+                        If you have any questions, please don’t hesitate to contact me.
+                        <br/>
+                        <br/>
+                        Best regards,
+                        <t t-if="not is_html_empty(object.user_id.signature)">
+                            <br/>
+                            <br/>
+                            <t t-out="object.user_id.name or ''">--<br/>Mitchell Admin
+                            </t>
+                            <br/>
+                            <t t-out="object.user_id.partner_id.email or ''">--<br/>mitchell@odoo.com
+                            </t>
                         </t>
-                        <br/>
-                        <t t-out="object.user_id.partner_id.email or ''">--<br/>mitchell@odoo.com
-                        </t>
-                    </t>
-                </p>
-            </div>
-        </field>
-        <field name="report_template" ref="sale.action_report_saleorder"/>
-        <field name="report_name">{{ (object.name or '').replace('/','_') }}</field>
-        <field name="lang">{{ object.partner_id.lang }}</field>
-        <field name="auto_delete" eval="True"/>
-    </record>
-    
+                    </p>
+                </div>
+            </field>
+            <field name="report_template" ref="sale.action_report_saleorder"/>
+            <field name="report_name">{{ (object.name or '').replace('/','_') }}</field>
+            <field name="lang">{{ object.partner_id.lang }}</field>
+            <field name="auto_delete" eval="True"/>
+        </record>
+    </data>
 </odoo>
