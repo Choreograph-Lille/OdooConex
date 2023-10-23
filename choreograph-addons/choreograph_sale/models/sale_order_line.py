@@ -32,3 +32,14 @@ class SaleOrderLine(models.Model):
         for line in self:
             line.margin -= line.retribution_cost
             line.margin_percent = line.price_subtotal and line.margin / line.price_subtotal
+
+    @api.depends('product_uom_qty')
+    def _compute_qty_delivered(self):
+        for rec in self:
+            rec.qty_delivered = rec.product_uom_qty
+
+    @api.depends('state', 'is_expense')
+    def _compute_qty_delivered_method(self):
+        """ Always allow write on qty_delivered"""
+        for line in self:
+            line.qty_delivered_method = 'manual'
