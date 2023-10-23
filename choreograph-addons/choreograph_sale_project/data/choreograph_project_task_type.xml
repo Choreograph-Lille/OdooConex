@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
 
         <record id="choreograph_project_task_type_study" model="choreograph.project.task.type">
             <field name="name">STUDY</field>
