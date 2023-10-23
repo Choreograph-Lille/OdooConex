@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-27 12:26+0000\n"
-"PO-Revision-Date: 2023-01-27 12:26+0000\n"
+"PO-Revision-Date: 2023-10-23 09:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -164,6 +164,66 @@ msgstr ""
 "                          en temps record… et à la demande.\n"
 "                          <br/>\n"
 "                          <br/>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"All\n"
+"                                                                    operations"
+msgstr "Toutes les opérations"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 30\n"
+"                                                                    days"
+msgstr "Les 30 derniers jours"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 3\n"
+"                                                                    months"
+msgstr "Les 3 derniers mois"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 6\n"
+"                                                                    months"
+msgstr "Les 6 derniers mois"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 12\n"
+"                                                                    months"
+msgstr "Les 12 derniers mois"
+
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-1
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 1"
+msgstr "Trimestre 1"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-2
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 2"
+msgstr "Trimestre 2"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-3
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-4
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 3"
+msgstr "Trimestre 3"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 4"
+msgstr "Trimestre 4"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.homepage
@@ -548,6 +608,27 @@ msgstr "Opérations Affichées:"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Displayed Themes: <select name=\"Operations rows\" aria-controls=\"example\" class=\"op_row_input\">\n"
+"                                            <option value=\"5\" selected=\"1\">5</option>\n"
+"                                            <option value=\"10\">10</option>\n"
+"                                            <option value=\"25\">25</option>\n"
+"                                            <option value=\"50\">50</option>\n"
+"                                            <option value=\"100\">100</option>\n"
+"                                        </select>"
+msgstr ""
+"Opérations Affichées:\n"
+"                                        <select name=\"Operations rows\" aria-controls=\"example\" class=\"op_row_input\">\n"
+"                                            <option value=\"5\" selected=\"1\">5</option>\n"
+"                                            <option value=\"10\">10</option>\n"
+"                                            <option value=\"25\">25</option>\n"
+"                                            <option value=\"50\">50</option>\n"
+"                                            <option value=\"100\">100</option>\n"
+"                                        </select>"
+
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid "Download"
 msgstr "Télécharger"
 
@@ -570,8 +651,19 @@ msgid "Filled in"
 msgstr "Renseigné"
 
 #. module: maas_website
+#. openerp-web
+#: code:addons/maas_website/static/src/js/jquery.twbsPagination.js:0
+#, python-format
+msgid "First page"
+msgstr "Première page"
+
+#. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
-msgid "Full Cancel and replace"
+msgid ""
+"Full\n"
+"                                                                                                    Cancel\n"
+"                                                                                                    and\n"
+"                                                                                                    replace"
 msgstr "Annule et remplace complet"
 
 #. module: maas_website
@@ -653,6 +745,13 @@ msgid "Last 6 months"
 msgstr "Les 6 derniers mois"
 
 #. module: maas_website
+#. openerp-web
+#: code:addons/maas_website/static/src/js/jquery.twbsPagination.js:0
+#, python-format
+msgid "Last page"
+msgstr "Dernière page"
+
+#. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid "Least scored"
 msgstr "Moins bien scorés"
@@ -708,6 +807,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
 msgid "Name your campaign theme"
 msgstr "Nommez votre opération"
+
+#. module: maas_website
+#. openerp-web
+#: code:addons/maas_website/static/src/js/jquery.twbsPagination.js:0
+#, python-format
+msgid "Next"
+msgstr "Suivant"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
@@ -776,6 +882,13 @@ msgstr "Description de votre cible"
 #: model:ir.model.fields,field_description:maas_website.field_res_users__portal_filter
 msgid "Portal Filter"
 msgstr "Portal Filter"
+
+#. module: maas_website
+#. openerp-web
+#: code:addons/maas_website/static/src/js/jquery.twbsPagination.js:0
+#, python-format
+msgid "Previous"
+msgstr "Précédent"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.homepage
