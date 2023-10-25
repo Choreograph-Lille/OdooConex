@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-27 12:26+0000\n"
-"PO-Revision-Date: 2023-01-27 12:26+0000\n"
+"PO-Revision-Date: 2023-10-23 09:32+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -164,6 +164,111 @@ msgstr ""
 "                          en temps record… et à la demande.\n"
 "                          <br/>\n"
 "                          <br/>"
+
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"<select id=\"filter-operation\" class=\"selectpicker\" name=\"filter-operation\" aria-controls=\"example\">\n"
+"                                                                <option selected=\"1\" disabled=\"1\"/>\n"
+"                                                                <option class=\"filter-option\" value=\"all-operations\">All\n"
+"                                                                    operations\n"
+"                                                                </option>\n"
+"                                                                <option class=\"filter-option\" value=\"last-30-days\">Last 30\n"
+"                                                                    days\n"
+"                                                                </option>\n"
+"                                                                <option class=\"filter-option\" value=\"last-3-months\">Last 3\n"
+"                                                                    months\n"
+"                                                                </option>\n"
+"                                                                <option class=\"filter-option\" value=\"last-6-months\">Last 6\n"
+"                                                                    months\n"
+"                                                                </option>\n"
+"                                                                <option class=\"filter-option\" value=\"last-12-months\">Last 12\n"
+"                                                                    months\n"
+"                                                                </option>\n"
+"                                                                <option class=\"filter-option\" value=\"trimester-1\">Trimester 1\n"
+"                                                                </option>\n"
+"                                                                <option class=\"filter-option\" value=\"trimester-2\">Trimester 2\n"
+"                                                                </option>\n"
+"                                                                <option class=\"filter-option\" value=\"trimester-3\">Trimester 3\n"
+"                                                                </option>\n"
+"                                                                <option class=\"filter-option\" value=\"trimester-4\">Trimester 4\n"
+"                                                                </option>\n"
+"                                                            </select>"
+msgstr ""
+"<select id=\"filter-operation\" class=\"selectpicker\" name=\"filter-operation\" aria-controls=\"example\">\n"
+"                                                                <option selected=\"1\" disabled=\"1\"/>\n"
+"                                                                <option class=\"filter-option\" value=\"all-operations\">Toutes les opérations</option>\n"
+"                                                                <option class=\"filter-option\" value=\"last-30-days\">Les 30 derniers jours</option>\n"
+"                                                                <option class=\"filter-option\" value=\"last-3-months\">Les 3 derniers mois</option>\n"
+"                                                                <option class=\"filter-option\" value=\"last-6-months\">Les 6 derniers mois</option>\n"
+"                                                                <option class=\"filter-option\" value=\"last-12-months\">Les 12 derniers mois</option>\n"
+"                                                                <option class=\"filter-option\" value=\"trimester-1\">Trimestre 1</option>\n"
+"                                                                <option class=\"filter-option\" value=\"trimester-2\">Trimestre 2</option>\n"
+"                                                                <option class=\"filter-option\" value=\"trimester-3\">Trimestre 3</option>\n"
+"                                                                <option class=\"filter-option\" value=\"trimester-4\">Trimestre 4</option>\n"
+"                                                            </select>"
+
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"All\n"
+"                                                                    operations"
+msgstr "Toutes les opérations"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 30\n"
+"                                                                    days"
+msgstr "Les 30 derniers jours"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 3\n"
+"                                                                    months"
+msgstr "Les 3 derniers mois"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 6\n"
+"                                                                    months"
+msgstr "Les 6 derniers mois"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Last 12\n"
+"                                                                    months"
+msgstr "Les 12 derniers mois"
+
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-1
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 1"
+msgstr "Trimestre 1"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-2
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 2"
+msgstr "Trimestre 2"
+
+#. module: maas_website
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-3
+#: model:ir.model.fields.selection,name:maas_website.selection__res_users__portal_filter__trimester-4
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 3"
+msgstr "Trimestre 3"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid "Trimester 4"
+msgstr "Trimestre 4"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.homepage
@@ -441,29 +546,68 @@ msgstr "Contact"
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid ""
-"Create a new campaign\n"
-"                      theme"
+"Create\n"
+"                                            a new campaign\n"
+"                                            theme"
 msgstr ""
 "Créer une\n"
-"                      opération"
+"                                            opération"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
 msgid ""
-"Create your\n"
-"                      <br/>Action"
+"Create\n"
+"                                            your<br/>Action"
 msgstr ""
 "Créer une\n"
-"                      <br/>Action"
+"                                            <br/>Action"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
 msgid ""
-"Create your\n"
-"                      <br/>Campaign"
+"Create\n"
+"                                            your<br/>Campaign"
 msgstr ""
 "Créer une\n"
-"                      <br/>Campagne"
+"                                            <br/>Campagne"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"<span style=\"vertical-align: middle;padding-left:8px;\">\n"
+"                                            Create\n"
+"                                        </span>\n"
+"                                        <br/>\n"
+"                                        <span style=\"vertical-align: middle;padding-left:8px;\">your\n"
+"                                            Action\n"
+"                                        </span>"
+msgstr ""
+"<span style=\"vertical-align: middle;padding-left:8px;\">\n"
+"                                            Créer\n"
+"                                        </span>\n"
+"                                        <br/>\n"
+"                                        <span style=\"vertical-align: middle;padding-left:8px;\">une\n"
+"                                            Action\n"
+"                                        </span>"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"<span style=\"vertical-align: middle;padding-left:8px;\">\n"
+"                                            Create\n"
+"                                        </span>\n"
+"                                        <br/>\n"
+"                                        <span style=\"vertical-align: middle;padding-left:8px;\">your\n"
+"                                            Campaign\n"
+"                                        </span>"
+msgstr ""
+"<span style=\"vertical-align: middle;padding-left:8px;\">\n"
+"                                            Créer\n"
+"                                        </span>\n"
+"                                        <br/>\n"
+"                                        <span style=\"vertical-align: middle;padding-left:8px;\">une\n"
+"                                            Campagne\n"
+"                                        </span>"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.login
@@ -548,6 +692,28 @@ msgstr "Opérations Affichées:"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Displayed Themes:\n"
+"                                        <select name=\"Operations rows\" aria-controls=\"example\" class=\"op_row_input\">\n"
+"                                            <option value=\"5\" selected=\"1\">5</option>\n"
+"                                            <option value=\"10\">10</option>\n"
+"                                            <option value=\"25\">25</option>\n"
+"                                            <option value=\"50\">50</option>\n"
+"                                            <option value=\"100\">100</option>\n"
+"                                        </select>"
+msgstr ""
+"Opérations Affichées:\n"
+"                                        <select name=\"Operations rows\" aria-controls=\"example\" class=\"op_row_input\">\n"
+"                                            <option value=\"5\" selected=\"1\">5</option>\n"
+"                                            <option value=\"10\">10</option>\n"
+"                                            <option value=\"25\">25</option>\n"
+"                                            <option value=\"50\">50</option>\n"
+"                                            <option value=\"100\">100</option>\n"
+"                                        </select>"
+
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid "Download"
 msgstr "Télécharger"
 
@@ -570,8 +736,32 @@ msgid "Filled in"
 msgstr "Renseigné"
 
 #. module: maas_website
+#. openerp-web
+#: code:addons/maas_website/static/src/js/jquery.twbsPagination.js:0
+#, python-format
+msgid "First page"
+msgstr "Première page"
+
+#. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
-msgid "Full Cancel and replace"
+msgid ""
+"<option value=\"cancel_replace\">\n"
+"                                                                                                    Full Cancel and\n"
+"                                                                                                    replace\n"
+"                                                                                                </option>\n"
+"                                                                                                <option value=\"only_delta\">\n"
+"                                                                                                    Only delta\n"
+"                                                                                                </option>"
+msgstr ""
+"<option value=\"cancel_replace\">Annule et remplace complet</option>\n"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Full\n"
+"                                                                                                    Cancel\n"
+"                                                                                                    and\n"
+"                                                                                                    replace"
 msgstr "Annule et remplace complet"
 
 #. module: maas_website
@@ -653,6 +843,13 @@ msgid "Last 6 months"
 msgstr "Les 6 derniers mois"
 
 #. module: maas_website
+#. openerp-web
+#: code:addons/maas_website/static/src/js/jquery.twbsPagination.js:0
+#, python-format
+msgid "Last page"
+msgstr "Dernière page"
+
+#. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid "Least scored"
 msgstr "Moins bien scorés"
@@ -708,6 +905,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
 msgid "Name your campaign theme"
 msgstr "Nommez votre opération"
+
+#. module: maas_website
+#. openerp-web
+#: code:addons/maas_website/static/src/js/jquery.twbsPagination.js:0
+#, python-format
+msgid "Next"
+msgstr "Suivant"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
@@ -778,6 +982,13 @@ msgid "Portal Filter"
 msgstr "Portal Filter"
 
 #. module: maas_website
+#. openerp-web
+#: code:addons/maas_website/static/src/js/jquery.twbsPagination.js:0
+#, python-format
+msgid "Previous"
+msgstr "Précédent"
+
+#. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.homepage
 msgid "Privacy Policy"
 msgstr "Politique de confidentialité"
@@ -833,6 +1044,18 @@ msgid ""
 "Select a theme in order\n"
 "                    <br/>\n"
 "                    to view its details"
+msgstr ""
+"Sélectionner une opération\n"
+"                    <br/>\n"
+"                    pour voir les détails"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Select a theme in\n"
+"                                        order\n"
+"                                        <br/>\n"
+"                                        to view its details"
 msgstr ""
 "Sélectionner une opération\n"
 "                    <br/>\n"

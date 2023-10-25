@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <data noupdate="0">
-
+    <data noupdate="1">
+        
         <function name="write" model="ir.model.data">
             <function name="search" model="ir.model.data">
                 <value eval="[('module', '=', 'sale'), ('name', 'in', ['sale_order_rule_portal', 'sale_order_line_rule_portal'])]"/>
             </function>
             <value eval="{'noupdate': False}"/>
         </function>
-
+        
         <record id="sale.sale_order_rule_portal" model="ir.rule">
             <field name="domain_force">
                 ['|',('message_partner_ids','child_of',[user.commercial_partner_id.id]),('is_subscription', '=', True)]
             </field>
         </record>
-
+        
         <record id="sale.sale_order_line_rule_portal" model="ir.rule">
             <field name="domain_force">
                 ['|',('order_id.message_partner_ids','child_of',[user.commercial_partner_id.id]),('order_id.is_subscription', '=', True)]
             </field>
         </record>
-
+        
         <function name="write" model="ir.model.data">
             <function name="search" model="ir.model.data">
                 <value eval="[('module', '=', 'sale'), ('name', 'in', ['sale_order_rule_portal', 'sale_order_line_rule_portal'])]"/>
             </function>
             <value eval="{'noupdate': True}"/>
         </function>
-
+    
     </data>
 </odoo>
