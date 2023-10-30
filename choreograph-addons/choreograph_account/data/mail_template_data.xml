@@ -58,6 +58,63 @@
             <field name="lang">{{ object.partner_id.lang }}</field>
             <field name="auto_delete" eval="True"/>
         </record>
+
+        <!--Email template followup -->
+        <record id="email_template_followup_1" model="mail.template">
+            <field name="name">Payment Reminder 1</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="email_from">mandy.bercker@choreograph.com</field>
+            <field name="partner_to">{{ object.id }}</field>
+            <field name="subject">{{ (object.company_id or object._get_followup_responsible().company_id).name }} Payment Reminder - {{ object.commercial_company_name }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        <span>Hello,</span>
+                        <br/>
+                    </p>
+                    <p>
+                        We enclose our invoices showing an amount overdue for payment of
+                        <t t-out="format_amount(object.total_overdue, object.currency_id) or ''"/>,
+                    </p>
+                    <p>If there is a reason for the delay, please let us know,</p>
+                    <p>Otherwise, a prompt payment will be much appreciated,</p>
+                    <p>If you have already, please ignore this email,</p>
+                    <p>Many thanks,</p>
+                    <p>Kind regards,</p>
+                </div>
+            </field>
+            <field name="lang">{{ object.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+
+        <record id="email_template_followup_2" model="mail.template">
+            <field name="name">Payment Reminder 2</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="email_from">mandy.bercker@choreograph.com</field>
+            <field name="partner_to">{{ object.id }}</field>
+            <field name="subject">{{ (object.company_id or object._get_followup_responsible().company_id).name }} Payment Reminder - {{ object.commercial_company_name }}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        <span>Hello,</span>
+                        <br />
+                    </p>
+                    <p>We are sorry to note that despite our previous reminder this account remains unpaid,</p>
+                    <p>
+                        We enclose our invoices showing an amount overdue for payment of
+                        <t t-out="format_amount(object.total_overdue, object.currency_id) or ''"/>
+                    </p>
+                    <p>In order to regularise your situation, we kindly ask you to pay the invoice as soon as possible
+                        by bank transfer,
+                    </p>
+                    <p>If you need any further information, feel free to contact me or your sales contact,</p>
+                    <p>Many thanks,</p>
+                    <p>Kind regards,</p>
+                </div>
+            </field>
+            <field name="lang">{{ object.lang }}</field>
+            <field name="auto_delete" eval="False"/>
+        </record>
     </data>
 
 </odoo>
