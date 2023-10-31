@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
 	//$(".all-operation-table").stupidtable();
 	//----- usefull (construct event that can be calle like $(xxx).rightclick) -------
 	(function($) {
@@ -767,7 +768,7 @@ $(document).ready(function () {
             $(ContainerID + ':contains(' + searchTerm + ')').show();
 
 		});
-		paginate_all_opepration(1);
+		paginate_all_operation(1);
     });
 
 	var list_done = [];
@@ -823,7 +824,7 @@ $(document).ready(function () {
                 });
 
             });
-            paginate_all_opepration(1);
+            paginate_all_operation(1);
 
             if($('#operaction_creation .-liste').filter("active")){
                 $("#inactive-campaign").attr("src", "/maas_website/static/src/img/ico-coche-actif.png");
@@ -938,7 +939,7 @@ $(document).ready(function () {
                     }
                 }
             });
-            paginate_all_opepration();
+            paginate_all_operation();
 
             if($('#operaction_creation .-liste').filter("active")){
                 $("#inactive-campaign").attr("src", "/maas_website/static/src/img/ico-coche-actif.png");
@@ -998,6 +999,14 @@ $(document).ready(function () {
 
     add_liste_click();
 
+	function update_pagination_text(){
+		$('.page-item.first > a').text('Première');
+		$('.page-item.prev > a').text('Précédente');
+		$('.page-item.next > a').text('Suivante');
+		$('.page-item.last > a').text('Dernière');
+	}
+	update_pagination_text();
+
     function getCampagneActive(){
         var campagnes = document.querySelectorAll('.-liste.active');
         return campagnes
@@ -1007,7 +1016,7 @@ $(document).ready(function () {
         var actions = document.querySelectorAll('.list-group-item.active');
         return actions
     }
-    paginate_all_opepration = function(page){
+    paginate_all_operation = function(page){
         var operations = filter_operations();
         $('.all-operation-table').each(function () {
             var numPerPage = $('.op_row_input').val();
@@ -1087,15 +1096,16 @@ $(document).ready(function () {
     paginate_all_operation_child = function(){
         $(".ligne-operation:not(:visible)").next().hide();
         $(".ligne-operation:visible").next().show();
+        update_pagination_text();
     }
 
     $('.op_row_input').on('change', function (e) {
         $('.ligne-operation').show();
-        paginate_all_opepration();
+        paginate_all_operation();
 	});
 
-    // call paginate_all_opepration() to paginate all operation on first view
-    paginate_all_opepration();
+    // call paginate_all_operation() to paginate all operation on first view
+    paginate_all_operation();
 
 	$('.accordian-body').on('show.bs.collapse', function () {
 	    $(this).closest("tbody")
@@ -1209,7 +1219,7 @@ $(document).ready(function () {
             else{
                 $("td[colspan=9]").find("div").filter("#collapse-child").slideUp();
             }
-            paginate_all_opepration(page);
+            paginate_all_operation(page);
             addEventIco();
         });
     }
@@ -1310,7 +1320,7 @@ $(document).ready(function () {
                                     page = parseInt($('#pagination_pager .active')[0].firstChild.innerText);
 
                                 }
-                                paginate_all_opepration(page);
+                                paginate_all_operation(page);
                                 $("td[colspan=9]").find("div").filter("#collapse-child").hide();
                                 $("td[colspan=9]").find("div").filter("#collapse-child[parent='"+$target[0].attributes.parent.value+"']").slideToggle(function(){
 
@@ -1390,7 +1400,7 @@ $(document).ready(function () {
                                     page = parseInt($('#pagination_pager .active')[0].firstChild.innerText);
 
                                 }
-                                paginate_all_opepration(page);
+                                paginate_all_operation(page);
                                 $("td[colspan=9]").find("div").filter("#collapse-child").hide();
                                 $("td[colspan=9]").find("div").filter("#collapse-child[parent='"+$target[0].attributes.parent.value+"']").show(function(){
                                     addEventIco();
@@ -1451,7 +1461,7 @@ $(document).ready(function () {
     function filter_change_action(){
         $("#filter-operation").change(function() {
            $(this).find(":selected").each(function () {
-                   paginate_all_opepration(1);
+                   paginate_all_operation(1);
                    update_badge_info_count($(this).val());
            });
          });
@@ -1982,6 +1992,6 @@ $(document).ready(function () {
             hash: encodeURIComponent(window.location.hash)
         };
         window.location.href = "/website/lang/"+redirect.lang+"?r="+redirect.url+redirect.hash;
-    })
+    });
 
 });
