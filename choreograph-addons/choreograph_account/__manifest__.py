@@ -13,6 +13,7 @@
         'account',
         'l10n_fr',
         'choreograph_base',
+        'mail',
     ],
     'data': [
         # data
