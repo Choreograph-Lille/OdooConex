@@ -117,4 +117,16 @@
         </record>
     </data>
 
+    <template id="mail_notification_light_inherit" inherit_id="mail.mail_notification_light">
+        <xpath expr="//tbody/tr[last()]" position="replace">
+            <tr>
+                <td align="center"
+                    style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;">
+                    <hr width="100%"
+                        style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 4px 0px;"/>
+                    <b t-out="company.name"/>
+                </td>
+            </tr>
+        </xpath>
+    </template>
 </odoo>
