@@ -361,7 +361,7 @@ class SaleOrder(models.Model):
 
     @api.model_create_multi
     def create(self, val_list):
-        res = self
+        res = self.env[self._name]
         for vals in val_list:
             vals['is_info_validated'] = False
             vals['email_is_info_validated'] = False
