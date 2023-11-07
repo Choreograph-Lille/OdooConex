@@ -359,7 +359,7 @@ class SaleOrder(models.Model):
                 rec.update_task_bat_from(rec.email_bat_from.id)
         return res
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
         vals['is_info_validated'] = False
         vals['email_is_info_validated'] = False
