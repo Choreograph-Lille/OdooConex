@@ -360,26 +360,29 @@ class SaleOrder(models.Model):
         return res
 
     @api.model_create_multi
-    def create(self, vals):
-        vals['is_info_validated'] = False
-        vals['email_is_info_validated'] = False
-        order_id = super(SaleOrder, self).create(vals)
-        if self.env.context.get('create_project_from_template', False):
-            project = self.env['project.project'].browse(self.env.context.get('operation_id', False)).exists()
-            if project:
-                project.initialize_order(order_id)
-                order_id.write({
-                    'project_id': project.id,
-                    'project_ids': [(4, project.id)],
-                    'show_operation_generation_button': False
-                })
-                order_id.compute_operation_code()
-                order_id.compute_task_operations()
-                order_id._manage_ce_role_project_following()
-                order_id.initiate_provider_delivery(project)
-                order_id.with_context(is_operation_generation=True)._update_date_deadline(vals)
-                order_id._manage_task_assignation()
-        return order_id
+    def create(self, val_list):
+        res = self.env[self._name]
+        for vals in val_list:
+            vals['is_info_validated'] = False
+            vals['email_is_info_validated'] = False
+            order_id = super(SaleOrder, self).create(vals)
+            res |= order_id
+            if self.env.context.get('create_project_from_template', False):
+                project = self.env['project.project'].browse(self.env.context.get('operation_id', False)).exists()
+                if project:
+                    project.initialize_order(order_id)
+                    order_id.write({
+                        'project_id': project.id,
+                        'project_ids': [(4, project.id)],
+                        'show_operation_generation_button': False
+                    })
+                    order_id.compute_operation_code()
+                    order_id.compute_task_operations()
+                    order_id._manage_ce_role_project_following()
+                    order_id.initiate_provider_delivery(project)
+                    order_id.with_context(is_operation_generation=True)._update_date_deadline(vals)
+                    order_id._manage_task_assignation()
+            return res
 
     def update_task_bat_from(self, value=''):
         self.tasks_ids.write({

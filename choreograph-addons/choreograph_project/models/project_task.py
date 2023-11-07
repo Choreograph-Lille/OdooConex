@@ -45,18 +45,20 @@ class ProjectTask(models.Model):
         return self.env['project.task.type'].search([('type_of_project', '=', 'operation')])
 
     @api.model_create_multi
-    def create(self, values):
-        if self._context.get('is_operation_generation'):
-            if values.get('task_number', False) == '20' and values.get('project_id', False):
-                project_id = self.env['project.project'].browse(values['project_id']).exists()
-                if project_id:
-                    values['name'] = project_id.name.replace(' (TEMPLATE)', '').replace(' (COPY)', '')
-            values.update({
-                'stage_id': self.env.ref('choreograph_project.project_task_type_draft').id,
-            })
-        res = super().create(values)
-        self.env['mail.followers']._insert_followers(
-            'project.project', res.project_id.ids, res.user_ids.partner_id.ids)
+    def create(self, val_list):
+        res = self.env[self._name]
+        for values in val_list:
+            if self._context.get('is_operation_generation'):
+                if values.get('task_number', False) == '20' and values.get('project_id', False):
+                    project_id = self.env['project.project'].browse(values['project_id']).exists()
+                    if project_id:
+                        values['name'] = project_id.name.replace(' (TEMPLATE)', '').replace(' (COPY)', '')
+                values.update({
+                    'stage_id': self.env.ref('choreograph_project.project_task_type_draft').id,
+                })
+            res |= super().create(values)
+            self.env['mail.followers']._insert_followers(
+                'project.project', res.project_id.ids, res.user_ids.partner_id.ids)
         return res
 
     @api.returns('mail.message', lambda value: value.id)
