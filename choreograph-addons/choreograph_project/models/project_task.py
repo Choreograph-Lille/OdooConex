@@ -46,7 +46,7 @@ class ProjectTask(models.Model):
 
     @api.model_create_multi
     def create(self, val_list):
-        res = self
+        res = self.env[self._name]
         for values in val_list:
             if self._context.get('is_operation_generation'):
                 if values.get('task_number', False) == '20' and values.get('project_id', False):
