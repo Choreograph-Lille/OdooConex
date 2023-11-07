@@ -44,7 +44,7 @@ class ProjectTask(models.Model):
     def get_operation_project_task_type(self):
         return self.env['project.task.type'].search([('type_of_project', '=', 'operation')])
 
-    @api.model
+    @api.model_create_multi
     def create(self, values):
         if self._context.get('is_operation_generation'):
             if values.get('task_number', False) == '20' and values.get('project_id', False):
