@@ -40,7 +40,7 @@ class SaleSubscription(models.Model):
 
     allowance = fields.Selection([('crm', 'CRM'), ('prm', 'PRM')], default='crm')
 
-    @api.model
+    @api.model_create_multi
     def create(self, vals):
         if vals.get('package_id'):
             vals['balance'] = self.env['product.product'].browse(vals.get('package_id')).identifiers

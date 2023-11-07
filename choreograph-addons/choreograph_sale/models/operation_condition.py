@@ -95,5 +95,6 @@ class OperationCondition(models.Model):
 
 class OperationConditionType(models.Model):
     _name = 'operation.condition.subtype'
+    _description = 'Operation Condition Subtype'
 
     name = fields.Char()
