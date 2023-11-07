@@ -5,6 +5,7 @@ from odoo import fields, models, api
 
 class SaleDataConservation(models.Model):
     _name = 'sale.data.conservation'
+    _description = 'Sale Data Conservation'
 
     name = fields.Char(translate=True)
     active = fields.Boolean('Active', default=False)

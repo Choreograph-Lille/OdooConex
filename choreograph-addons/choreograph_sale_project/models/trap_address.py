@@ -5,6 +5,7 @@ from odoo import fields, models
 
 class TrapAddress(models.Model):
     _name = 'trap.address'
+    _description = 'Trap Address'
 
     name = fields.Char('Trap Addresses')
     task_id = fields.Many2one('project.task')
