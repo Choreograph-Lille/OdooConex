@@ -5,6 +5,7 @@ from odoo import fields, models
 
 class OperationProviderDelivery(models.Model):
     _name = 'operation.provider.delivery'
+    _description = 'Operation Provider Delivery'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     order_id = fields.Many2one('sale.order', 'Sale Order')

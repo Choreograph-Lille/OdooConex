@@ -5,6 +5,7 @@ from odoo import fields, models
 
 class ProjectTaskCampaign(models.Model):
     _name = 'project.task.campaign'
+    _description = 'Project Task Campaign'
 
     name = fields.Char('Campaign Name')
     id_campaign = fields.Char('Campaign ID')
