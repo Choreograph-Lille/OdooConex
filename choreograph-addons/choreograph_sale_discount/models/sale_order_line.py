@@ -18,7 +18,6 @@ class SaleOrderLine(models.Model):
 		readonly=False,
 		store=True,
 		precompute=True,
-		ondelete='cascade',
 		help='Discount notes related to this product lines'
 	)
 
