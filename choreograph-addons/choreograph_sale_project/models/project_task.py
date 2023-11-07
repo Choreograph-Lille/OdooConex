@@ -308,7 +308,6 @@ class ProjectTask(models.Model):
                     '40': '_hook_task_40_in_stage_80',
                     '45': '_hook_task_45_50_in_stage_80',
                     '50': '_hook_task_45_50_in_stage_80',
-                    '55': '_hook_task_55_in_stage_80',
                     '60': '_hook_task_60_in_stage_80',
                     '65': '_hook_task_65_in_stage_80',
                     '70': '_hook_task_70_in_stage_80',

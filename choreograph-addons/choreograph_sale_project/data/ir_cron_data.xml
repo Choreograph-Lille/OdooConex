@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data noupdate="0">
+    <data noupdate="1">
 
         <record id="scheduler_move_task_95_in_15_stage" model="ir.cron">
             <field name="name">Choreograph: Move Task 95 to Stage 15</field>

@@ -6,6 +6,8 @@
  * Released under Apache 2.0 license
  * http://apache.org/licenses/LICENSE-2.0.html
  */
+import { _lt } from "@web/core/l10n/translation";
+
 (function ($, window, document, undefined) {
 
     'use strict';
@@ -339,10 +341,10 @@
             pageVariable: '{{page}}',
             totalPagesVariable: '{{total_pages}}',
             page: null,
-            first: 'First page',
-            prev: 'Previous',
-            next: 'Next',
-            last: 'Last page',
+            first: _lt('First page'),
+            prev: _lt('Previous'),
+            next: _lt('Next'),
+            last: _lt('Last page'),
             loop: false,
             onPageClick: null,
             paginationClass: 'pagination',
