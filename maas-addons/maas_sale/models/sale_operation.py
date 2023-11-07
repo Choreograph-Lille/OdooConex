@@ -170,7 +170,7 @@ class SaleOperation(models.Model):
 
     @api.model_create_multi
     def create(self, val_list):
-        res = self
+        res = self.env[self._name]
         for vals in val_list:
             vals['number'] = self.env['ir.sequence'].next_by_code('sale.operation')
             data01 = vals.pop('population_scored_datafile', None)
