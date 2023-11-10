@@ -27,11 +27,11 @@
         <field name="name">Changing SOX roles</field>
         <field name="model">auditlog.report.wizard</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
-        <field name="report_file">choreograph_auditlog.report_auditlog_log</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log_sox_role_changing</field>
+        <field name="report_file">choreograph_auditlog.report_auditlog_log_sox_role_changing</field>
         <field name="binding_model_id" ref="model_auditlog_report_wizard" />
         <field name="binding_type">report</field>
-        <field name="auditlog_model_id" ref="base_user_role.model_res_users_role" />
+        <field name="auditlog_model_id" ref="base.model_res_users" />
         <field name="is_auditreport" eval="True" />
     </record>
 
@@ -50,8 +50,8 @@
         <field name="name">Supplier RIB modification extraction</field>
         <field name="model">auditlog.report.wizard</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
-        <field name="report_file">choreograph_auditlog.report_auditlog_log</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log_res_partner_rib</field>
+        <field name="report_file">choreograph_auditlog.report_auditlog_log_res_partner_rib</field>
         <field name="binding_model_id" ref="model_auditlog_report_wizard" />
         <field name="binding_type">report</field>
         <field name="auditlog_model_id" ref="base.model_res_partner" />
@@ -95,8 +95,8 @@
         <field name="name">Extracts from suppliers</field>
         <field name="model">auditlog.report.wizard</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
-        <field name="report_name">choreograph_auditlog.report_auditlog_log</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log_extracts_from_suppliers</field>
+        <field name="report_name">choreograph_auditlog.report_auditlog_log_extracts_from_suppliers</field>
         <field name="binding_model_id" ref="model_auditlog_report_wizard" />
         <field name="binding_type">report</field>
         <field name="auditlog_model_id" ref="base.model_res_partner" />
