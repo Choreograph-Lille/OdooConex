@@ -8,7 +8,7 @@ class AuditlogRule(models.Model):
     def auto_subscribe(self):
         datas = [
             self.env.ref('choreograph_auditlog.auditlog_sox_roles').id,
-            self.env.ref('choreograph_auditlog.auditlog_res_partner_bank').id,
+            self.env.ref('choreograph_auditlog.auditlog_res_bank').id,
             self.env.ref('choreograph_auditlog.auditlog_res_partner').id,
             self.env.ref('choreograph_auditlog.auditlog_account_move').id,
             self.env.ref('choreograph_auditlog.auditlog_sale_order').id,

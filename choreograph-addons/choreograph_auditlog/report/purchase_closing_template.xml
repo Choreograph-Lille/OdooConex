@@ -3,96 +3,117 @@
     <template id="purchase_closing_template">
         <t t-call="choreograph_auditlog.layout">
             <div class="page">
+                <style>
+                    th{
+                        text-align: left;
+                    }
+                </style>
                 <t t-call="choreograph_auditlog.header_audit_report" />
                 <div class="row">
                     <table class="table table-borderless">
                         <thead>
                             <tr>
-                                <td class="fw-bold">Name order</td>
-                                <td class="fw-bold">Client</td>
-                                <td class="fw-bold">Amount order</td>
-                                <td class="fw-bold">Delivery date</td>
-                                <td class="fw-bold">Purchase order</td>
-                                <td class="fw-bold">Purchase invoices</td>
-                                <td class="fw-bold">Informations</td>
+                                <th class="fw-bold" width="8%">Name order</th>
+                                <th class="fw-bold" width="8%">Client</th>
+                                <th class="fw-bold" width="8%">Amount order</th>
+                                <th class="fw-bold" width="8%">Delivery date</th>
+                                <th class="fw-bold" width="14%">Purchase order</th>
+                                <th class="fw-bold" width="23%">Purchase invoices</th>
+                                <th class="fw-bold" width="31%">Informations</th>
                             </tr>
                         </thead>
                         <tbody>
                             <t t-foreach="orders" t-as="order">
-                                <tr>
-                                    <td t-out="order['name']" />
-                                    <td t-out="order['client']" />
-                                    <td t-out="order['amount']" />
-                                    <td t-out="order['delivery_date']" />
-                                    <t t-foreach="order['purchase_data']" t-as="purchase_bloc">
-                                        <t t-set="purchase" t-value="purchase_bloc['purchase']" />
-                                        <t t-set="invoice"
-                                            t-value="purchase_bloc['invoices'][0] if purchase_bloc['invoices'] else {}" />
-                                        <t t-set="infos" t-value="purchase_bloc['informations']" />
+                                <t t-set="first_order_line" t-value="True"/>
+                                <t t-foreach="order['purchase_data']" t-as="purchase_bloc">
+                                    <tr>
+                                        <t t-if="first_order_line">
+                                            <td t-out="order['name']"/>
+                                            <td t-out="order['client']"/>
+                                            <td t-out="order['amount']"/>
+                                            <td t-out="order['delivery_date']"/>
+                                        </t>
+                                        <t t-else="">
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </t>
+                                        <t t-set="first_order_line" t-value="False"/>
+                                        <t t-set="purchase" t-value="purchase_bloc['purchase']"/>
                                         <td>
                                             <p>
-                                                <strong>N° PO : </strong>
-                                                <span t-out="purchase['po_number']" />
+                                                <strong>N° PO :</strong>
+                                                <span t-out="purchase['po_number']"/>
                                             </p>
                                             <p>
-                                                <strong>Supplier : </strong>
-                                                <span t-out="purchase['supplier']" />
+                                                <strong>Supplier :</strong>
+                                                <span t-out="purchase['supplier']"/>
                                             </p>
                                             <p>
-                                                <strong>PO date : </strong>
-                                                <span t-out="purchase['date_approve']" />
+                                                <strong>PO date :</strong>
+                                                <span t-out="purchase['date_approve']"/>
                                             </p>
                                             <p>
-                                                <strong>Date planned : </strong>
-                                                <span t-out="purchase['date_planned']" />
+                                                <strong>Date planned :</strong>
+                                                <span t-out="purchase['date_planned']"/>
                                             </p>
                                             <p>
-                                                <strong>Amount: </strong>
-                                                <span t-out="purchase['amount']" />
+                                                <strong>Amount:</strong>
+                                                <span t-out="purchase['amount']"/>
                                             </p>
                                         </td>
                                         <td>
-                                            <p>
-                                                <strong>N° invoice : </strong>
-                                                <span t-out="invoice.get('invoice_name') or ''" />
-                                            </p>
-                                            <p>
-                                                <strong>Invoice date : </strong>
-                                                <span t-out="invoice.get('invoice_date') or ''" />
-                                            </p>
-                                            <p>
-                                                <strong>Amount TTC : </strong>
-                                                <span t-out="invoice.get('amount') or ''" />
-                                            </p>
-                                            <p>
-                                                <strong>Difference : </strong>
-                                                <span t-out="invoice.get('diff') or ''" />
-                                            </p>
+                                            <t t-foreach="purchase_bloc['invoices']" t-as="invoice">
+                                                <div style="margin-bottom: 56px;">
+                                                    <p>
+                                                        <strong>N° invoice :</strong>
+                                                        <span t-out="invoice.get('invoice_name') or ''"/>
+                                                    </p>
+                                                    <p>
+                                                        <strong>Invoice date :</strong>
+                                                        <span t-out="invoice.get('invoice_date') or ''"/>
+                                                    </p>
+                                                    <p>
+                                                        <strong>Amount TTC :</strong>
+                                                        <span t-out="invoice.get('amount') or ''"/>
+                                                    </p>
+                                                    <p>
+                                                        <strong>Difference :</strong>
+                                                        <span t-out="invoice.get('diff') or ''"/>
+                                                    </p>
+                                                </div>
+                                            </t>
                                         </td>
                                         <td>
-                                            <p>
-                                                <strong>Difference amount : </strong>
-                                                <span t-out="infos.get('difference_amount') or ''" />
-                                            </p>
-                                            <p>
-                                                <strong>Comment : </strong>
-                                                <span t-out="infos.get('comment') or ''" />
-                                            </p>
-                                            <p>
-                                                <strong>PO preparator : </strong>
-                                                <span t-out="infos.get('po_preparer') or ''" />
-                                            </p>
-                                            <p>
-                                                <strong>PO validor : </strong>
-                                                <span t-out="infos.get('po_validor') or ''" />
-                                            </p>
-                                            <p>
-                                                <strong>Net margin : </strong>
-                                                <span t-out="infos.get('net_marging') or ''" />
-                                            </p>
+                                            <t t-foreach="purchase_bloc['informations']" t-as="infos">
+                                                <div>
+                                                    <p>
+                                                        <strong>Difference amount :</strong>
+                                                        <span t-out="infos.get('difference_amount') or ''"/>
+                                                    </p>
+                                                    <p>
+                                                        <strong>Comment :</strong>
+                                                        <span t-out="infos.get('comment') or ''"/>
+                                                    </p>
+                                                    <p>
+                                                        <strong>PO preparator :</strong>
+                                                        <span t-out="infos.get('po_preparer') or ''"/>
+                                                    </p>
+                                                    <p>
+                                                        <strong>PO validor :</strong>
+                                                        <span t-out="infos.get('po_validor') or ''"/>
+                                                    </p>
+                                                    <p>
+                                                        <strong>Net margin :</strong>
+                                                        <span t-out="infos.get('net_marging') or ''"/>
+                                                    </p>
+                                                </div>
+                                            </t>
                                         </td>
-                                    </t>
-                                </tr>
+
+                                    </tr>
+                                </t>
                             </t>
                         </tbody>
                     </table>

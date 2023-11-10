@@ -3,11 +3,11 @@
     <data noupdate="1">
         <record id="auditlog_sox_roles" model="auditlog.rule">
             <field name="name">Changing SOX roles</field>
-            <field name="model_id" ref="base_user_role.model_res_users_role" />
+            <field name="model_id" ref="base.model_res_users" />
         </record>
-        <record id="auditlog_res_partner_bank" model="auditlog.rule">
-            <field name="name">Res Partner Bank</field>
-            <field name="model_id" ref="base.model_res_partner_bank" />
+        <record id="auditlog_res_bank" model="auditlog.rule">
+            <field name="name">Res Bank</field>
+            <field name="model_id" ref="base.model_res_bank" />
         </record>
         <record id="auditlog_res_partner" model="auditlog.rule">
             <field name="name">Supplier RIB modification</field>
