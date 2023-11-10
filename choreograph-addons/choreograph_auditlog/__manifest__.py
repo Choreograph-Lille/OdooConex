@@ -10,7 +10,8 @@
     'website': 'https://arkeup.com',
     'depends': [
         'auditlog',
-        'choreograph_base',
+        'choreograph_sox',
+        'base_user_role'
     ],
     'data': [
         'security/ir.model.access.csv',

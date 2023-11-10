@@ -24,7 +24,7 @@ class ResPartner(models.Model):
     property_product_pricelist = fields.Many2one(comodel_name='product.pricelist', tracking=10)
     property_supplier_payment_term_id = fields.Many2one(comodel_name='account.payment.term', tracking=10)
     property_purchase_currency_id = fields.Many2one(comodel_name='res.currency', tracking=10)
-    property_account_position_id = fields.Many2one(comodel_name='account.fiscal.position', tracking=10)
+    property_account_position_id = fields.Many2one(comodel_name='account.fiscal.position', tracking=10, company_dependent=False)
     property_account_receivable_id = fields.Many2one(comodel_name='account.account', tracking=10)
     property_account_payable_id = fields.Many2one(comodel_name='account.account', tracking=10)
     receipt_reminder_email = fields.Boolean(tracking=10)
