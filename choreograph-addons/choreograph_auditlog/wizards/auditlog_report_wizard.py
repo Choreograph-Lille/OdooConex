@@ -198,7 +198,7 @@ class AuditlogReport(models.TransientModel):
             'accounts': []
         }
         for move_id in move_ids:
-            split_ref = move_id.ref.split(',')
+            split_ref = move_id.ref.split(',') if move_id.ref else ''
             log_line_id = log_line_ids.filtered(lambda l: l.log_id.res_id == move_id.id).sorted(
                 lambda item: item.create_date, reverse=True)[0]
             data['accounts'].append({
