@@ -206,7 +206,7 @@ class AuditlogReport(models.TransientModel):
                 'invoice_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE),
                 'credit_note_number': move_id.name,
                 'commercial': move_id.invoice_user_id.name,
-                'origin_document': move_id.reversed_entry_id,
+                'origin_document': move_id.reversed_entry_id.name,
                 'subtotal': formatLang(self.env, move_id.amount_total),
                 'creator': move_id.create_uid.name,
                 'validator': log_line_id.log_id.user_id.name if log_line_id else None,
