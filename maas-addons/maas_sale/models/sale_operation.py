@@ -168,19 +168,22 @@ class SaleOperation(models.Model):
             self.attachment_profile_id = attachment_obj.sudo().create(attachment_vals).id
         return True
 
-    @api.model
-    def create(self, vals):
-        vals['number'] = self.env['ir.sequence'].next_by_code('sale.operation')
-        data01 = vals.pop('population_scored_datafile', None)
-        name01 = vals.pop('population_scored_filename', False)
-        data02 = vals.pop('searched_profile_datafile', None)
-        name02 = vals.pop('searched_profile_filename', False)
-        operation = super(SaleOperation, self).create(vals)
-        template = self.env.ref('maas_sale.operation_created_mail_template', raise_if_not_found=False)
-        operation.send_mail(template.with_context(stage='stage_02'))
-        if data01 or data02:
-            operation.run_attachments_process(data01, name01, data02, name02)
-        return operation
+    @api.model_create_multi
+    def create(self, val_list):
+        res = self.env[self._name]
+        for vals in val_list:
+            vals['number'] = self.env['ir.sequence'].next_by_code('sale.operation')
+            data01 = vals.pop('population_scored_datafile', None)
+            name01 = vals.pop('population_scored_filename', False)
+            data02 = vals.pop('searched_profile_datafile', None)
+            name02 = vals.pop('searched_profile_filename', False)
+            operation = super(SaleOperation, self).create(vals)
+            template = self.env.ref('maas_sale.operation_created_mail_template', raise_if_not_found=False)
+            operation.send_mail(template.with_context(stage='stage_02'))
+            if data01 or data02:
+                operation.run_attachments_process(data01, name01, data02, name02)
+            res |= operation
+        return res
 
     def write(self, vals):
         result = super(SaleOperation, self).write(vals)

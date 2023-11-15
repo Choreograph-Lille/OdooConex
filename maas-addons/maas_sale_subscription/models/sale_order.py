@@ -40,11 +40,12 @@ class SaleSubscription(models.Model):
 
     allowance = fields.Selection([('crm', 'CRM'), ('prm', 'PRM')], default='crm')
 
-    @api.model
-    def create(self, vals):
-        if vals.get('package_id'):
-            vals['balance'] = self.env['product.product'].browse(vals.get('package_id')).identifiers
-        return super(SaleSubscription, self).create(vals)
+    @api.model_create_multi
+    def create(self, val_list):
+        for vals in val_list:
+            if vals.get('package_id'):
+                vals['balance'] = self.env['product.product'].browse(vals.get('package_id')).identifiers
+        return super(SaleSubscription, self).create(val_list)
 
     def _get_pricelist(self):
         self.ensure_one()
