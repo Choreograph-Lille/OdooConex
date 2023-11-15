@@ -25,7 +25,7 @@
                                     <tr>
                                         <td t-out="log.get('object', '')" />
                                         <td t-out="log.get('display_name', '')" />
-                                        <td t-out="line.get('field_name', '')" />
+                                        <td t-out="line.get('field_description', '')" />
                                         <td t-out="line.get('old_value_text') or ''" />
                                         <td t-out="line.get('new_value_text') or ''" />
                                         <td t-out="line.get('create_date_formatted', '')" />
