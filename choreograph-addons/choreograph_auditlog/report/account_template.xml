@@ -34,7 +34,6 @@
                                     <td t-out="account.get('validator')"/>
                                     <td t-out="account.get('validation_date')"/>
                                     <td t-out="account.get('comment')"/>
-                                    <td t-out="account.get('comment')"/>
                                 </tr>
                             </t>
                         </tbody>
