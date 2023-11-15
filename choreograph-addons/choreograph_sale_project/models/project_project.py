@@ -85,11 +85,11 @@ class ProjectProject(models.Model):
         self.env.ref('choreograph_sale_project.project_project_prospection_telportable').write(get_vals(task_list))
 
     def create_operation_from_template(self):
-        action = self.project_template_id.create_project_from_template(self.name)
+        action = self.project_template_id.create_project_from_template()
         self.unlink()
         return action
 
-    def create_project_from_template(self, name=False):
+    def create_project_from_template(self):
         action = super(ProjectProject, self).create_project_from_template()
         project = self.browse(action.get('res_id')).exists()
         if project.type_of_project == 'operation':
@@ -97,9 +97,9 @@ class ProjectProject(models.Model):
             project_stage = self.env.ref('choreograph_project.planning_project_stage_draft')
             task_stage = self.env.ref('choreograph_project.project_task_type_draft')
             project.write({
-                'stage_id': project_stage.id,
-                'type_ids': [(6, 0, types.ids)],
-                'name': name if name else project.name
+                "stage_id": project_stage.id,
+                "type_ids": [(6, 0, types.ids)],
+                "name": project.name.replace(" (COPY)", "")
             })
             project.task_ids.with_context(task_stage_init=True).write({
                 'stage_id': task_stage.id,
@@ -221,11 +221,6 @@ class ProjectProject(models.Model):
 
     def _hook_task_90_in_stage_80(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_livery').id})
-        self._update_task_stage('95', TODO_TASK_STAGE)
-        so = self.sale_order_id or self.env['sale.order'].search([('project_id', '=', self.id)])
-        self._find_task_by_task_number('95').write({
-            'date_deadline': so.get_date_tz(so.commitment_date) + relativedelta(days=15)
-        })
 
     def _hook_check_all_task(self, task_id):
         not_terminated = self.task_ids.filtered(
