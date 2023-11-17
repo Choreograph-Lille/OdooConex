@@ -570,6 +570,13 @@ msgid "The operations %s has been Planned"
 msgstr "L'opération %s a été planifiée"
 
 #. module: choreograph_project
+#. odoo-python
+#: code:addons/choreograph_project/models/project_project.py:0
+#, python-format
+msgid "The operations %s has been Canceled"
+msgstr "L'opération %s a été annulée"
+
+#. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_to_do
 msgid "To Do"
 msgstr "A faire"
