@@ -79,7 +79,6 @@ class FieldTrackingMessageMixin(models.AbstractModel):
     def _creation_message(self):
         return ""
 
-
     def _message_track(self, fields_iter, initial_values_dict):
         if not fields_iter:
             return {}
@@ -115,11 +114,12 @@ class FieldTrackingMessageMixin(models.AbstractModel):
                 )
             elif tracking_value_ids:
                 project_id = record._get_project_id()
-                project_id.message_post(
-                    body=record._get_body_message_track(),
-                    tracking_value_ids=tracking_value_ids,
-                    partner_ids=project_id.message_follower_ids.mapped('partner_id').ids
-                )
+                if project_id:
+                    project_id.message_post(
+                        body=record._get_body_message_track(),
+                        tracking_value_ids=tracking_value_ids,
+                        partner_ids=project_id.message_follower_ids.mapped('partner_id').ids
+                    )
 
         return tracking
 
