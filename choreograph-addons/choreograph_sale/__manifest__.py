@@ -20,6 +20,7 @@
         # data
         'data/sale_data_conservation_data.xml',
         'data/mail_template_data.xml',
+        'data/ir_cron_data.xml',
         # security
         'security/ir.model.access.csv',
         # wizards
