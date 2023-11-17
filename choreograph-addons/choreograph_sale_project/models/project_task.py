@@ -337,17 +337,28 @@ class ProjectTask(models.Model):
                                'trap_address_ids', 'provider_comment', 'volume', 'dedup_title_number', 'bat_from']
             if any(field in vals for field in provider_fields) and task.task_number in ['70', '80']:
                 task.update_provider_data()
-            if task.task_number == '70' and 'task_segment_ids' in vals:
-                task_75_id = task.project_id._find_task_by_task_number('75')
-                if task_75_id:
-                    task_75_id.write({'segment_ids': [(6, 0, self.task_segment_ids.ids)]})
+            if 'task_segment_ids' in vals:
+                task.synchronize_segment_ids()
             if task.task_number == '60' and 'optout_link' in vals:
                 task.sale_order_id.update_optout_link(vals.get('optout_link'))
         return res
 
+    def get_provider_targeted_task(self):
+        targeted_task = False
+        if self.task_number == '70':
+            targeted_task = self.project_id.task_ids.filtered(lambda t: t.task_number == '75')
+        elif self.task_number == '80':
+            targeted_task = self.project_id.task_ids.filtered(lambda t: t.task_number == '85')
+        return targeted_task
+
+    def synchronize_segment_ids(self):
+        for rec in self:
+            targeted_task = rec.get_provider_targeted_task()
+            if targeted_task:
+                targeted_task.write({'segment_ids': [(6, 0, rec.task_segment_ids.ids)]})
+
     def update_provider_data(self):
         for rec in self:
-            targeted_task = False
             new_traps = self.env['trap.address'].create([{
                 'name': trap.name,
                 'segment_number': trap.segment_number,
@@ -365,10 +376,7 @@ class ProjectTask(models.Model):
                 'volume': rec.volume,
                 'bat_from': rec.bat_from,
             }
-            if rec.task_number == '70':
-                targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '75')
-            elif rec.task_number == '80':
-                targeted_task = rec.project_id.task_ids.filtered(lambda t: t.task_number == '85')
+            targeted_task = rec.get_provider_targeted_task()
             if targeted_task:
                 targeted_task.write(data)
 
