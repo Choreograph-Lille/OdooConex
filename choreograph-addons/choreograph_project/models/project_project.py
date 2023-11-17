@@ -190,6 +190,9 @@ class ProjectProject(models.Model):
         if "stage_id" in values and values["stage_id"] == self.env.ref(
                 'choreograph_project.planning_project_stage_planified').id:
             self._notify_planned_operation()
+        if "stage_id" in values and values["stage_id"] == self.env.ref(
+                'choreograph_project.planning_project_stage_canceled').id:
+            self._notify_canceled_operation()
         return res
 
     def _notify_project_change(self, body):
@@ -212,6 +215,11 @@ class ProjectProject(models.Model):
         for project in self:
             self._notify_project_change(
                 body=(project._get_body_message_planned_operation(_("The operations %s has been Planned") % self.name)))
+
+    def _notify_canceled_operation(self):
+        for project in self:
+            self._notify_project_change(
+                body=(project._get_body_message_planned_operation(_("The operations %s has been Canceled") % self.name)))
 
     def _get_body_message_planned_operation(self, title):
         self.ensure_one()
