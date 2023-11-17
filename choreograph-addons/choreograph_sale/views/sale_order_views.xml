@@ -227,6 +227,12 @@
                 <xpath expr="//field[@name='order_line']/tree/field[@name='qty_invoiced']" position="attributes">
                     <attribute name="optional"></attribute>
                 </xpath>
+
+                <xpath expr="//div[@class='o_td_label'][2]" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='date_order'][2]" position="replace">
+                    <field name="date_order" attrs="{'invisible': [('state', 'in', ['draft', 'sent'])], 'readonly': False, 'required': True}"/>
+                </xpath>
             </field>
         </record>
 
