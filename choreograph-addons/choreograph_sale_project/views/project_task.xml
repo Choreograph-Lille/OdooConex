@@ -146,10 +146,12 @@
                             <field name="email_bat_client"
                                 attrs="{'invisible': [('task_number', 'not in', ['55', '45'])]}" />
 
-                            <field name="bat_comment"
-                                attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50'])], 'readonly': [('task_number','not in',['40', '55'])]}" />
+                            <!--<field name="bat_comment"
+                                attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50'])], 'readonly': [('task_number','not in',['40', '55'])]}" />-->
                             <field name="bat_desired_date"
                                 attrs="{'invisible': [('task_number', 'not in', ['45'])]}" />
+                            <field name="email_bat_comment"
+                               attrs="{'invisible': [('task_number', 'not in', ['40', '55', '50','45'])], 'readonly': [('task_number','in',['45', '55'])]}" />
 
                             <h4
                                 attrs="{'invisible': [('task_number', 'not in', ['55', '45', '50'])]}">
@@ -163,9 +165,10 @@
                                 attrs="{'invisible': [('task_number', 'not in', ['50'])]}" />
                             <field name="email_witness_file_name"
                                 attrs="{'invisible': [('task_number', 'not in', ['55', '45'])]}" />
-                            <field name="witness_comment"
-                                attrs="{'invisible': [('task_number', 'not in', ['55', '50'])]}" />
+                            <!--<field name="witness_comment"
+                                attrs="{'invisible': [('task_number', 'not in', ['55', '50'])]}" />-->
                             <field name="has_enrichment_email_op" invisible="1" />
+                            <field name="email_witness_comment" attrs="{'invisible': [('task_number', 'not in', ['55', '50', '45'])], 'readonly': [('task_number','in',['45', '55'])]}" />
                             <h4
                                 attrs="{'invisible': ['|',('task_number', 'not in', ['60', '45']),('has_enrichment_email_op','=',False)]}">
                                 Optout
