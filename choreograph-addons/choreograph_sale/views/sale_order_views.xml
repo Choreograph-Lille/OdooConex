@@ -149,9 +149,11 @@
                                 <field name="email_bat_internal"/>
                                 <field name="email_bat_client"/>
                                 <field name="bat_desired_date"/>
+                                <field name="email_bat_comment"/>
 
                                 <separator string="Witnesses"/>
                                 <field name="email_witness_file_name"/>
+                                <field name="email_witness_comment"/>
 
                                 <separator string="Optout"/>
                                 <field name="excluded_provider"/>

@@ -857,6 +857,13 @@ msgstr ""
 
 #. module: choreograph_sale
 #. odoo-python
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_bat_comment
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__email_witness_comment
+msgid "Comment"
+msgstr "Commentaire"
+
+#. module: choreograph_sale
+#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sms_comment
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__comment
