@@ -108,6 +108,9 @@ class ProjectTask(models.Model):
     has_enrichment_email_op = fields.Boolean(related='sale_order_id.has_enrichment_email_op')
     repatriate_information = fields.Boolean(related='sale_order_id.repatriate_information')
 
+    email_bat_comment = fields.Text(string="Comment", related="sale_order_id.email_bat_comment")
+    email_witness_comment = fields.Text(string="Comment", related="sale_order_id.email_witness_comment")
+
     # def compute_comment(self):
     #     for rec in self:
     #         comment_values = {
