@@ -245,6 +245,10 @@ class SaleOrder(models.Model):
         self.compute_task_operations()
         self.initiate_provider_delivery(self.project_ids[0])
         self.with_context(is_operation_generation=True, user_id=self.user_id.id)._update_date_deadline()
+        tasks = ['20', '25', '30']
+        if self.repatriate_information:
+            tasks.extend(['85', '80'])
+        self.repatriate_quantity_information_on_task(tasks)
 
     def initiate_provider_delivery(self, project=False):
         provider_delivery_template = self.get_provider_delivery_template(project)
