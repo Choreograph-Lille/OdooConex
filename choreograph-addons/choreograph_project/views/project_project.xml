@@ -19,6 +19,9 @@
                 <field name="sale_order_id" readonly="1"/>
             </xpath>
 
+            <xpath expr="//notebook" position="before">
+                <field name="task_ids"/>
+            </xpath>
         </field>
     </record>
 </odoo>
