@@ -147,7 +147,7 @@ class SaleOrder(models.Model):
         ('closed_won', 'Closed Won'),
         ('adjustment', 'Adjustment'),
         ('cancel', 'Cancelled'),
-    ], string="C9H State", default='forecast')
+    ], string="C9H State", default='forecast', tracking=True)
     note = fields.Html(translate=True)
     commitment_date_tracked = fields.Date("Delivery Date", compute="compute_commitment_date_tracked", tracking=True, store=True)
 
