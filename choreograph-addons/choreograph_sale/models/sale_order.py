@@ -251,7 +251,7 @@ class SaleOrder(models.Model):
                                                      raise_if_not_found=False).id})
         return res
 
-    @api.depends('order_line')
+    @api.depends('order_line', 'order_line.retribution_cost', 'related_base')
     def _compute_total_retribution(self):
         for rec in self:
             rec.total_retribution = sum(rec.order_line.mapped('retribution_cost'))
