@@ -12,6 +12,7 @@
     'depends': [
         'sale_project',
         'sale_timesheet',
+        'hr_holidays',
         'choreograph_sale',
         'choreograph_project',
     ],
