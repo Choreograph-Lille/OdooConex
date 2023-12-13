@@ -6,7 +6,8 @@ class ResUsers(models.Model):
 
     user_roles = fields.Char(compute='compute_user_rules', store=True)
 
-    @api.depends('role_line_ids')
+    @api.depends('groups_id')
     def compute_user_rules(self):
         for rec in self:
-            rec.user_roles = ', '.join(rec.role_line_ids.mapped('role_id.name'))
+            group_roles = self.env['res.users.role'].search([]).mapped('group_id')
+            rec.user_roles = ','.join(rec.groups_id.filtered(lambda group: group.id in group_roles.ids).mapped('name'))
