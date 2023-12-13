@@ -60,7 +60,7 @@ class AuditlogReport(models.TransientModel):
         })
         return self.ir_action_report_id.report_action(None, data=data)
 
-    def get_log_lines(self, model, fields=[], is_supplier_extraction=False):
+    def get_log_lines(self, model, fields=[], method='', is_supplier_extraction=False):
         end_date = self.end_date if self.is_period else self.start_date
         domain = [
             ('create_date', '>=', self.start_date),
@@ -71,11 +71,27 @@ class AuditlogReport(models.TransientModel):
             domain.append(('field_name', 'in', fields))
         if self.user_ids:
             domain.append(('log_id.user_id', 'in', self.user_ids.ids))
+        if method:
+            domain.append(('log_id.method', '=', method))
         if is_supplier_extraction:
             domain.append(('log_id.res_id', 'in', self.env['res.partner'].search([('supplier_rank', '!=', 0)]).ids))
         return self.env['auditlog.log.line'].search(domain)
 
-    def prepare_log_line_data(self, line, display_name):
+    def prepare_log_line_data(self, line, display_name, is_data_sox_role_changing=False):
+        """
+        Return a dict of datas used in the report
+        :param line: the log line
+        :param display_name: name of the record
+        :param is_data_sox_role_changing: if True, take only the difference between old and new values
+        :return: dict
+        """
+        old_value = line.old_value_text
+        new_value = line.new_value_text
+        if is_data_sox_role_changing:
+            old_value_list = old_value.split(',')
+            new_value_list = new_value.split(',')
+            old_value = ', '.join(list(set(old_value_list) - set(new_value_list)))
+            new_value = ', '.join(list(set(new_value_list) - set(old_value_list)))
         return {
             'id': line.log_id.id,
             'display_name': display_name,
@@ -84,8 +100,8 @@ class AuditlogReport(models.TransientModel):
             'create_date': line.log_id.create_date,
             'method': line.log_id.method,
             'lines': [{
-                'old_value_text': line.old_value_text,
-                'new_value_text': line.new_value_text,
+                'old_value_text': old_value,
+                'new_value_text': new_value,
                 'field_name': line.field_name,
                 'field_description': line.field_description,
                 'create_date': line.create_date,
@@ -102,7 +118,7 @@ class AuditlogReport(models.TransientModel):
         logs_lines = self.get_log_lines(role_model, ['user_roles'])
         for line in logs_lines:
             record = line.get_record()
-            data['logs'].append(self.prepare_log_line_data(line, record.display_name))
+            data['logs'].append(self.prepare_log_line_data(line, record.display_name, True))
         return data
 
     def _data_partner_rib(self):
@@ -111,9 +127,7 @@ class AuditlogReport(models.TransientModel):
         }
         # this should be res.partner
         role_model = self.ir_action_report_id.auditlog_model_id
-        bank_model = self.env['ir.model'].search([('model', '=', 'res.bank')])
-        logs_lines = self.get_log_lines(role_model, ['property_account_position', 'siret', 'banks'])
-        logs_lines |= self.get_log_lines(bank_model, ['bic'])
+        logs_lines = self.get_log_lines(role_model, ['siret', 'banks'], 'write', True)
         for line in logs_lines:
             record = line.get_record()
             data['logs'].append(self.prepare_log_line_data(line, record.display_name))
