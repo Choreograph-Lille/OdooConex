@@ -28,6 +28,23 @@
                           (0, 0, {'view_mode': 'tree', 'view_id': ref('base.view_partner_tree')}),
                           (0, 0, {'view_mode': 'form', 'view_id': ref('base.view_partner_form')})]"/>
         </record>
+
+        <record id="customer_statements_form_view_inherit" model="ir.ui.view">
+            <field name="name">customer.statements.followup.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account_followup.customer_statements_form_view"/>
+            <field name="arch" type="xml">
+                <field name="total_due" position="before">
+                    <field name="pricelist_currency_id" invisible="1"/>
+                </field>
+                <field name="total_due" position="attributes">
+                    <attribute name="options">{'currency_field': 'pricelist_currency_id'}</attribute>
+                </field>
+                <field name="total_overdue" position="attributes">
+                    <attribute name="options">{'currency_field': 'pricelist_currency_id'}</attribute>
+                </field>
+            </field>
+        </record>
     
     </data>
 </odoo>

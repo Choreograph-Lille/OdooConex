@@ -527,8 +527,8 @@ msgstr "Sous total"
 
 #. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_res_partner_rib
-msgid "Supplier RIB modification extraction"
-msgstr "Extraction modification RIB fournisseur"
+msgid "Supplier RIB modifications"
+msgstr "Modification des RIB fournisseur"
 
 #. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_supplier_bank_details

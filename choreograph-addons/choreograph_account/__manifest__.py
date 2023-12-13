@@ -11,6 +11,7 @@
     'website': 'https://arkeup.com',
     'depends': [
         'account',
+        'account_followup',
         'l10n_fr',
         'choreograph_base',
         'mail',
