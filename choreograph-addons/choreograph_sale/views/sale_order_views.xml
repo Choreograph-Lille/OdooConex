@@ -189,7 +189,8 @@
                     <field name="state_specific"
                            widget="statusbar"
                            statusbar_visible="forecast,lead,prospecting,draft,sent,sale,closed_won,adjustment"
-                           attrs="{'invisible': [('recurrence_id','!=', False)]}"/>
+                           attrs="{'invisible': [('recurrence_id','!=', False)]}"
+                           options="{'clickable': '1'}"/>
                 </xpath>
                 <button name="payment_action_capture" position="before">
                     <button name="action_lead"
@@ -225,6 +226,12 @@
                 </xpath>
                 <xpath expr="//field[@name='order_line']/tree/field[@name='qty_invoiced']" position="attributes">
                     <attribute name="optional"></attribute>
+                </xpath>
+
+                <xpath expr="//div[@class='o_td_label'][2]" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='date_order'][2]" position="replace">
+                    <field name="date_order" attrs="{'invisible': [('state', 'in', ['draft', 'sent'])], 'readonly': False, 'required': True}"/>
                 </xpath>
             </field>
         </record>
