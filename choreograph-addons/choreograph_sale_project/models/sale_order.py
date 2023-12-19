@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
-from pytz import timezone, utc
-from datetime import timedelta
-
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from dateutil.relativedelta import relativedelta
@@ -411,28 +407,6 @@ class SaleOrder(models.Model):
             'segment_ids': [(6, 0, [])],
             'task_segment_ids': [(6, 0, [])],
         })
-
-    def get_date_tz(self, datetime_to_convert):
-        tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
-        tz_date = utc.localize(datetime_to_convert).astimezone(tz)
-        return tz_date
-
-    def check_is_day_off(self, date_value):
-        for leave in self.env['resource.calendar.leaves'].search([]):
-            if self.get_date_tz(leave.date_from).date() <= date_value <= self.get_date_tz(leave.date_to).date():
-                return True
-        return False
-
-    def get_next_non_day_off(self, date_value):
-        """
-        Get the next non_off day
-        :param date_value: the start date
-        :return: the next non-off date
-        """
-        if date_value:
-            while date_value.weekday() > 4 or self.check_is_day_off(date_value):
-                date_value = date_value + timedelta(days=1)
-        return date_value
 
     def _update_date_deadline(self, vals={}):
         for rec in self:
