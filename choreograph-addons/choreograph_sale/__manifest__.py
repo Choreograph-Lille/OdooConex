@@ -15,6 +15,7 @@
         'project_template',
         'choreograph_contact',
         'sale_purchase',
+        'hr_holidays',
     ],
     'data': [
         # data
