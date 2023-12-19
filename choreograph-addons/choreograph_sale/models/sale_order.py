@@ -517,3 +517,8 @@ class SaleOrder(models.Model):
             while date_value.weekday() > 4 or self.check_is_day_off(date_value):
                 date_value = date_value + timedelta(days=1)
         return date_value
+
+    def copy(self, default=None):
+        default = default or {}
+        default['state_specific'] = 'prospecting'
+        return super(SaleOrder, self).copy(default=default)
