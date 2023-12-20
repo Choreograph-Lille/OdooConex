@@ -52,8 +52,8 @@ class ProjectTask(models.Model):
     provider_file_name = fields.Char()
     provider_delivery_address = fields.Char('Delivery Address')
     provider_delivery_partner_ids = fields.Many2many('res.partner', string='Partner Delivery Address')
-
     provider_comment = fields.Text()
+
     desired_finished_volume = fields.Char()
     start_date = fields.Date()
     routing_base = fields.Char(related='sale_order_id.routing_base')
