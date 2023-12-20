@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="resource_calendar_leave_tree_inherit" model="ir.ui.view">
+        <field name="name">>resource.calendar.leaves.tree</field>
+        <field name="model">resource.calendar.leaves</field>
+        <field name="inherit_id" ref="resource.resource_calendar_leave_tree"/>
+        <field name="arch" type="xml">
+            <field name="calendar_id" position="after">
+                <field name="country_base"/>
+            </field>
+        </field>
+    </record>
+</odoo>
