@@ -62,6 +62,11 @@ class SaleOrder(models.Model):
     has_enrichment_email_op = fields.Boolean(compute='_compute_has_email_op')
     has_prospection_email_op = fields.Boolean(compute='_compute_has_email_op')
 
+    delivery_provider_comment = fields.Text(string='Delivery Info Comment', compute='compute_delivery_info_data')
+    delivery_provider_delivery_partner_ids = fields.Many2many('res.partner', string='Delivery Info Partner Delivery Address', compute='compute_delivery_info_data')
+    presta_provider_comment = fields.Text(string='Presta Info Comment', compute='compute_delivery_info_data')
+    presta_provider_delivery_partner_ids = fields.Many2many('res.partner', string='Presta Info Partner Delivery Address', compute='compute_delivery_info_data')
+
     @api.model
     def get_operation_fields(self):
         return [
@@ -97,8 +102,16 @@ class SaleOrder(models.Model):
         return result
 
     def compute_delivery_info_tasks(self):
-        self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
-        self.presta_delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '70').id or False
+        for rec in self:
+            rec.delivery_info_task_id = rec.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
+            rec.presta_delivery_info_task_id = rec.tasks_ids.filtered(lambda t: t.task_number == '70').id or False
+
+    def compute_delivery_info_data(self):
+        for rec in self:
+            rec.delivery_provider_comment = rec.delivery_info_task_id.provider_comment
+            rec.delivery_provider_delivery_partner_ids = [(6, 0, rec.delivery_info_task_id.provider_delivery_partner_ids.ids)]
+            rec.presta_provider_comment = rec.presta_delivery_info_task_id.provider_comment
+            rec.presta_provider_delivery_partner_ids = [(6, 0, rec.presta_delivery_info_task_id.provider_delivery_partner_ids.ids)]
 
     @api.depends('project_ids')
     def _compute_operation_type_id(self):
