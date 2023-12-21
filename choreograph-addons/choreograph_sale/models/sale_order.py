@@ -502,7 +502,7 @@ class SaleOrder(models.Model):
         return tz_date
 
     def check_is_day_off(self, date_value):
-        for leave in self.env['resource.calendar.leaves'].search([('country_base', '=', self.partner_id.country_base)]):
+        for leave in self.env['resource.calendar.leaves'].search([('country_base', 'in', [self.partner_id.country_base, False])]):
             if self.get_date_tz(leave.date_from).date() <= date_value <= self.get_date_tz(leave.date_to).date():
                 return True
         return False
