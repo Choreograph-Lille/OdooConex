@@ -302,10 +302,6 @@ class SaleOrder(models.Model):
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
         for rec in self:
-            if any(date in vals for date in ['commitment_date', 'potential_return_date', 'study_delivery_date',
-                                             'presentation_date', 'return_production_potential_date',
-                                             'operation_provider_delivery_ids', 'bat_desired_date']):
-                rec._update_date_deadline(vals)
             rec._check_info_validated(vals)
             if vals.get('is_info_validated', False) or any(field in vals for field in [
                 'po_number',
@@ -371,6 +367,10 @@ class SaleOrder(models.Model):
                 rec.update_task_bat_from(rec.bat_from.id)
             if 'email_bat_from' in vals:
                 rec.update_task_bat_from(rec.email_bat_from.id)
+            if any(date in vals for date in ['commitment_date', 'potential_return_date', 'study_delivery_date',
+                                             'presentation_date', 'return_production_potential_date',
+                                             'operation_provider_delivery_ids', 'bat_desired_date']):
+                rec._update_date_deadline(vals)
         return res
 
     @api.model_create_multi
