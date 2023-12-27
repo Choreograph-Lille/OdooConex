@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-09-05 08:20+0000\n"
-"PO-Revision-Date: 2023-12-19 12:57+0000\n"
+"PO-Revision-Date: 2023-12-20 08:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -413,6 +413,16 @@ msgstr "Livrer l'email à"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__delivery_info_task_id
 msgid "Delivery Info"
 msgstr "Infos livraison"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__delivery_provider_comment
+msgid "Delivery Info Comment"
+msgstr "Commentaire infos livraison"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__delivery_provider_delivery_partner_ids
+msgid "Delivery Info Partner Delivery Address"
+msgstr "Adresse de livraison infos livraison"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__deposit_date_1
@@ -956,6 +966,16 @@ msgstr "Date livraison presta"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_delivery_info_task_id
 msgid "Presta Delivery Info"
 msgstr "Infos Livraison Presta"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_provider_comment
+msgid "Presta Info Comment"
+msgstr "Commentaire infos presta"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_provider_delivery_partner_ids
+msgid "Presta Info Partner Delivery Address"
+msgstr "Adresse de livraison infos presta"
 
 #. module: choreograph_sale_project
 #: model:ir.model,name:choreograph_sale_project.model_product_template

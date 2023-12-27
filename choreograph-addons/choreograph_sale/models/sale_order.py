@@ -502,7 +502,7 @@ class SaleOrder(models.Model):
         return tz_date
 
     def check_is_day_off(self, date_value):
-        for leave in self.env['resource.calendar.leaves'].search([('country_base', '=', self.partner_id.country_base)]):
+        for leave in self.env['resource.calendar.leaves'].search([('country_base', 'in', [self.partner_id.country_base, False])]):
             if self.get_date_tz(leave.date_from).date() <= date_value <= self.get_date_tz(leave.date_to).date():
                 return True
         return False
@@ -517,3 +517,8 @@ class SaleOrder(models.Model):
             while date_value.weekday() > 4 or self.check_is_day_off(date_value):
                 date_value = date_value + timedelta(days=1)
         return date_value
+
+    def copy(self, default=None):
+        default = default or {}
+        default['state_specific'] = 'prospecting'
+        return super(SaleOrder, self).copy(default=default)
