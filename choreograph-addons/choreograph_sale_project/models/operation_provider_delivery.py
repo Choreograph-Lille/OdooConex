@@ -21,4 +21,4 @@ class OperationProviderDelivery(models.Model):
         return res
 
     def update_task_date_deadline(self):
-        self.task_id.date_deadline = self.delivery_date
+        self.task_id.date_deadline = self.order_id.get_next_non_day_off(self.delivery_date)

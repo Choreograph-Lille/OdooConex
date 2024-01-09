@@ -231,31 +231,33 @@ class AuditlogReport(models.TransientModel):
 
     def _data_quote_po(self):
         end_date = self.end_date if self.is_period else self.start_date
-        log_line_ids = self.env['auditlog.log.line'].search([
-            ('field_name', '=', 'sox'),
-            ('new_value_text', '=', 'True'),
-            ('log_id.model_id', '=', self.env.ref('sale.model_sale_order').id),
-            ('create_date', '>=', self.start_date),
-            ('create_date', '<=', end_date)
-        ])
         order_ids = self.env['sale.order'].search([
-            ('state', '=', 'sale'),
-            ('sox', '=', True),
-            ('id', 'in', log_line_ids.mapped('log_id.res_id'))
+            ('state_specific', '=', 'closed_won'),
+            ('commitment_date', '>=', self.start_date),
+            ('commitment_date', '<=', end_date)
         ])
         data = {
             'orders': []
         }
         for order in order_ids:
-            log_line_id = log_line_ids.filtered(lambda l: l.log_id.res_id == order.id).sorted(
-                lambda item: item.create_date, reverse=True)[0]
+            sox_data = self.get_sox_data_for_report(order)
             data['orders'].append({
-                'author': log_line_id.log_id.user_id.name,
-                'sox_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE_TIME),
+                'name': order.name,
+                'sox': _('Yes') if order.sox else _('No'),
+                'author': sox_data.log_id.user_id.name if sox_data and order.sox else '',
+                'sox_date': format_datetime(self.env, sox_data.log_id.create_date, dt_format=FORMAT_DATE_TIME) if sox_data and order.sox else '',
                 'delivery_date': format_datetime(self.env, order.commitment_date, dt_format=FORMAT_DATE_TIME),
-                'name': order.name
             })
         return data
+
+    def get_sox_data_for_report(self, order):
+        role_model = self.ir_action_report_id.auditlog_model_id
+        domain = [
+            ('log_id.model_id', '=', role_model.id),
+            ('log_id.res_id', '=', order.id),
+            ('field_name', '=', 'sox')
+        ]
+        return self.env['auditlog.log.line'].search(domain, order='id desc', limit=1)
 
     def _data_purchase_closing(self):
         end_date = self.end_date if self.is_period else self.start_date

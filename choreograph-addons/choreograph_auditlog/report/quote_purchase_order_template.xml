@@ -19,7 +19,7 @@
                         <t t-foreach="orders" t-as="order">
                             <tr>
                                 <td t-out="order['name']"/>
-                                <td>True</td>
+                                <td t-out="order['sox']"/>
                                 <td t-out="order['author']"/>
                                 <td t-out="order['sox_date']"/>
                                 <td t-out="order['delivery_date']"/>
