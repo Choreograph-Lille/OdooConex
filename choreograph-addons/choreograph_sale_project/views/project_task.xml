@@ -307,7 +307,7 @@
                                    attrs="{'invisible': [('task_number', 'not in', ['70', '80'])]}"/>
 
                             <field name="provider_comment"
-                                attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])]}" />
+                                attrs="{'invisible': [('task_number', 'not in', ['70', '75', '85', '80'])], 'readonly': [('task_number', 'in', ['75', '85'])]}" />
 
                             <field name="start_date"
                                 attrs="{'invisible': [('task_number', 'not in', ['90'])]}" />
