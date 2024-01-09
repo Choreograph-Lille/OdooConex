@@ -420,7 +420,7 @@ msgid "Delivery Info Comment"
 msgstr "Commentaire infos livraison"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__delivery_provider_delivery_partner_ids
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__delivery_provider_delivery_partner_email
 msgid "Delivery Info Partner Delivery Address"
 msgstr "Adresse de livraison infos livraison"
 
@@ -973,7 +973,7 @@ msgid "Presta Info Comment"
 msgstr "Commentaire infos presta"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_provider_delivery_partner_ids
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_provider_delivery_partner_email
 msgid "Presta Info Partner Delivery Address"
 msgstr "Adresse de livraison infos presta"
 
