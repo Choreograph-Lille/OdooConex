@@ -2,14 +2,14 @@
 <odoo>
     <template id="term_and_conditions">
         <div class="row"
-            style="page-break-before: always! important;text-align: justify; font-size: 7.4px">
+            style="page-break-before: always! important;text-align: justify; font-size: 6px">
             <t t-set="choreo_p" t-value="'margin: 4.2px'" />
             <t t-if="doc.partner_id.lang == 'fr_FR'">
                 <div class="col-4" style="padding-right: 5px;">
                     <p t-att-style="choreo_p">
-                        <h2>
+                        <strong style="font-size: 8px;">
                             CONDITIONS GENERALES DE VENTE CHOREOGRAPH
-                        </h2>
+                        </strong>
                     </p>
                     <p t-att-style="choreo_p">
                         <strong>
@@ -529,9 +529,9 @@
             <t t-else="">
                 <div class="col-4" style="padding-right: 5px;">
                     <p t-att-style="choreo_p">
-                        <h2>
+                        <strong style="font-size: 8px;">
                             CHOREOGRAPH'S GENERAL TERMS AND CONDITIONS OF BUSINESS
-                        </h2>
+                        </strong>
                     </p>
                     <p t-att-style="choreo_p">
                         <strong>
