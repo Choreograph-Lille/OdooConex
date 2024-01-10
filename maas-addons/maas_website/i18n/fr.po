@@ -762,6 +762,16 @@ msgid ""
 "                                                                                                    Cancel\n"
 "                                                                                                    and\n"
 "                                                                                                    replace"
+msgstr ""
+"<option value=\"cancel_replace\">Annule et remplace complet</option>\n"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
+"Full\n"
+"                                                                                                    Cancel\n"
+"                                                                                                    and\n"
+"                                                                                                    replace"
 msgstr "Annule et remplace complet"
 
 #. module: maas_website

@@ -95,9 +95,11 @@ class SaleOrder(models.Model):
     bat_from = fields.Many2one('choreograph.campaign.de', tracking=True)
     bat_internal = fields.Char(tracking=True)
     bat_comment = fields.Text('BAT Comment', tracking=True)
+    email_bat_comment = fields.Text('Comment', tracking=True)
 
     witness_file_name = fields.Char('File Name', tracking=True)
     witness_comment = fields.Text(tracking=True)
+    email_witness_comment = fields.Text(string="Comment", tracking=True)
 
     sox = fields.Boolean('SOX')
 
@@ -249,7 +251,7 @@ class SaleOrder(models.Model):
                                                      raise_if_not_found=False).id})
         return res
 
-    @api.depends('order_line')
+    @api.depends('order_line', 'order_line.retribution_cost', 'related_base')
     def _compute_total_retribution(self):
         for rec in self:
             rec.total_retribution = sum(rec.order_line.mapped('retribution_cost'))

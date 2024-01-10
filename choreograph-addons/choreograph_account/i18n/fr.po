@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-06-23 16:31+0000\n"
-"PO-Revision-Date: 2023-06-23 16:31+0000\n"
+"PO-Revision-Date: 2023-10-30 11:30+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -54,6 +54,80 @@ msgstr "60 jours fin de mois"
 #: model:account.payment.term,name:choreograph_account.account_payment_term_60days_invoice_date
 msgid "60 Days invoice date"
 msgstr "60 jours date de facturation"
+
+#. module: choreograph_account
+#: model:mail.template,body_html:choreograph_account.email_template_followup_1
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        <span>Hello,</span>\n"
+"                        <br/>\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        We enclose our invoices showing an amount overdue for payment of\n"
+"                        <t t-out=\"format_amount(object.total_overdue, object.property_product_pricelist.currency_id) or ''\"/>,\n"
+"                    </p>\n"
+"                    <p>If there is a reason for the delay, please let us know,</p>\n"
+"                    <p>Otherwise, a prompt payment will be much appreciated,</p>\n"
+"                    <p>If you have already, please ignore this email,</p>\n"
+"                    <p>Many thanks,</p>\n"
+"                    <p>Kind regards,</p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        <span>Bonjour,</span>\n"
+"                        <br>\n"
+"                    </p>\n"
+"                    <p>\n"
+"                        Sauf erreur ou omission de notre part, il semble qu’un montant de\n"
+"                        <t t-out=\"format_amount(object.total_overdue, object.property_product_pricelist.currency_id) or ''\"></t> reste impayé,\n"
+"                    </p>\n"
+"                    <p>Nous vous prions de bien vouloir procéder au règlement dans les meilleurs délais,</p>\n"
+"                    <p>Si par ailleurs, votre paiement venait à croiser le présent email, veuillez ne pas prendre en compte ce rappel,</p>\n"
+"                    <p>Vous en remerciant par avance,</p>\n"
+"                    <p>Cordialement.</p>\n"
+"                </div>\n"
+"            "
+
+#. module: choreograph_account
+#: model:mail.template,body_html:choreograph_account.email_template_followup_2
+msgid ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        <span>Hello,</span>\n"
+"                        <br/>\n"
+"                    </p>\n"
+"                    <p>We are sorry to note that despite our previous reminder this account remains unpaid,</p>\n"
+"                    <p>\n"
+"                        We enclose our invoices showing an amount overdue for payment of\n"
+"                        <t t-out=\"format_amount(object.total_overdue, object.property_product_pricelist.currency_id) or ''\"/>\n"
+"                    </p>\n"
+"                    <p>In order to regularise your situation, we kindly ask you to pay the invoice as soon as possible\n"
+"                        by bank transfer,\n"
+"                    </p>\n"
+"                    <p>If you need any further information, feel free to contact me or your sales contact,</p>\n"
+"                    <p>Many thanks,</p>\n"
+"                    <p>Kind regards,</p>\n"
+"                </div>\n"
+"            "
+msgstr ""
+"<div style=\"margin: 0px; padding: 0px;\">\n"
+"                    <p style=\"margin: 0px; padding: 0px; font-size: 13px;\">\n"
+"                        <span>Bonjour,</span>\n"
+"                        <br>\n"
+"                    </p>\n"
+"                        Nous constatons avec regret, que vous n’avez pas donné suite à notre précédent mail de rappel, et que le montant de\n"
+"                        <t t-out=\"format_amount(object.total_overdue, object.property_product_pricelist.currency_id) or ''\">\n"
+"                    </t> restait impayé,</p>\n"
+"                    <p>Afin de régulariser votre situation, nous vous demandons de bien vouloir procéder au règlement sous huitaine,\n"
+"                    </p>\n"
+"                    <p>Si par ailleurs, votre règlement venait à nous parvenir avant la réception de cet email, merci de ne pas en tenir compte,</p>\n"
+"                    <p>Vous en remerciant par avance,</p>\n"
+"                    <p>Cordialement.</p>\n"
+"                </div>\n"
+"            "
 
 #. module: choreograph_account
 #: model:mail.template,body_html:choreograph_account.email_template_edi_invoice
@@ -235,6 +309,16 @@ msgid "Newly registered customers: 30% to 50% down payment"
 msgstr "Clients nouvellement immatriculés : de 30% à 50% d'acompte"
 
 #. module: choreograph_account
+#: model:mail.template,name:choreograph_account.email_template_followup_1
+msgid "Payment Reminder 1"
+msgstr "Rappel de paiement 1"
+
+#. module: choreograph_account
+#: model:mail.template,name:choreograph_account.email_template_followup_2
+msgid "Payment Reminder 2"
+msgstr "Rappel de paiement 2"
+
+#. module: choreograph_account
 #: model_terms:account.payment.term,note:choreograph_account.account_payment_term_30days_invoice_date
 msgid "Payment terms: 30 Days from invoice date"
 msgstr "Conditions de paiement :  30 jours date de facturation"
@@ -300,3 +384,13 @@ msgstr "Envoyé aux clients avec leurs factures en pièce jointe"
 #: model_terms:ir.ui.view,arch_db:choreograph_account.report_invoice_document
 msgid "Tax ID"
 msgstr "N° de TVA"
+
+#. module: choreograph_account
+#: model:mail.template,subject:choreograph_account.email_template_followup_1
+#: model:mail.template,subject:choreograph_account.email_template_followup_2
+msgid ""
+"{{ (object.company_id or object._get_followup_responsible().company_id).name"
+" }} Payment Reminder - {{ object.commercial_company_name }}"
+msgstr ""
+"{{ (object.company_id or object._get_followup_responsible().company_id).name"
+" }} Rappel de paiement - {{ object.commercial_company_name }}"
