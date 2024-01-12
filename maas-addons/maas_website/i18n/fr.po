@@ -745,6 +745,21 @@ msgstr "Première page"
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid ""
+"<option value=\"best_scored\">Best\n"
+"                                                                                            scored\n"
+"                                                                                        </option>\n"
+"                                                                                        <option value=\"least_scored\">\n"
+"                                                                                            Least\n"
+"                                                                                            scored\n"
+"                                                                                        </option>"
+msgstr ""
+"<option value=\"best_scored\">Mieux scorés</option>\n"
+"                                                                                        <option value=\"least_scored\">Moins bien scorés</option>"
+
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_list
+msgid ""
 "<option value=\"cancel_replace\">\n"
 "                                                                                                    Full Cancel and\n"
 "                                                                                                    replace\n"
