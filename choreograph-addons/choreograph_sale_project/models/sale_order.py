@@ -343,6 +343,7 @@ class SaleOrder(models.Model):
                 'livedata_po_number',
                 'email_campaign_name',
                 'email_comment',
+                'email_volume_detail',
             ]) and rec.email_is_info_validated:
                 rec.update_task_email_campaign()
                 rec.update_task_campaign_90('email')
@@ -530,6 +531,7 @@ class SaleOrder(models.Model):
             ('po_livedata_number', 'livedata_po_number'),
             ('campaign_name', 'email_campaign_name'),
             ('comment', 'email_comment'),
+            ('volume_detail', 'email_volume_detail'),
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
         values.update({
@@ -666,12 +668,6 @@ class SaleOrder(models.Model):
     @api.depends('project_ids')
     def compute_operation_code(self):
         self.operation_code = self.project_ids[0].code if self.project_ids else ''
-
-    @api.onchange('segment_ids')
-    def onchange_segment_sequence(self):
-        for rec in self:
-            for i, l in enumerate(rec.segment_ids):
-                l.segment_number = i + 1
 
     def _manage_ce_role_project_following(self):
         self.ensure_one()
