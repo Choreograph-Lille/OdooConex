@@ -769,6 +769,7 @@ msgid ""
 "                                                                                                </option>"
 msgstr ""
 "<option value=\"cancel_replace\">Annule et remplace complet</option>\n"
+"<option value=\"only_delta\">Delta uniquement</option>"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
