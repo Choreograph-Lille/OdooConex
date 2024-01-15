@@ -59,7 +59,15 @@ class OperationCondition(models.Model):
     def write(self, vals):
         res = super(OperationCondition, self).write(vals)
         self._update_task_values()
+        if 'condition_subtype' or 'exclusion_subtype' in vals:
+            self.check_subtype()
         return res
+
+    def check_subtype(self):
+        for rec in self:
+            subtype_blacklist = ['sale_order', 'comment']
+            if rec.operation_type == 'condition' and rec.condition_subtype in subtype_blacklist or rec.operation_type == 'exclusion' and rec.exclusion_subtype in subtype_blacklist:
+                rec.task_id.unlink()
 
     def _update_task_values(self):
         for rec in self:
@@ -92,6 +100,7 @@ class OperationCondition(models.Model):
 
     def _get_body_message_track(self):
         return _('Condition/Exclusion line : %s') % self.sequence
+
 
 class OperationConditionType(models.Model):
     _name = 'operation.condition.subtype'
