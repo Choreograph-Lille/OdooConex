@@ -330,6 +330,7 @@ class SaleOrder(models.Model):
                 'livedata_po_number',
                 'email_campaign_name',
                 'email_comment',
+                'email_volume_detail',
             ]) and rec.email_is_info_validated:
                 rec.update_task_email_campaign()
                 rec.update_task_campaign_90('email')
@@ -517,6 +518,7 @@ class SaleOrder(models.Model):
             ('po_livedata_number', 'livedata_po_number'),
             ('campaign_name', 'email_campaign_name'),
             ('comment', 'email_comment'),
+            ('volume_detail', 'email_volume_detail'),
         ]
         values = {task_key: self[so_key] for task_key, so_key in values_list}
         values.update({
