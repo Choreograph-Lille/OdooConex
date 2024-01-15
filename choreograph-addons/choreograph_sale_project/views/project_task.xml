@@ -212,7 +212,7 @@
                         widget="one2many"
                         domain="[('order_id', '=', sale_order_id)]"
                         force_save="1">
-                        <tree editable="bottom">
+                        <tree editable="bottom" default_order="segment_number">
                             <field name="order_id" invisible="1" />
                             <field name="segment_number" force_save="1" />
                             <field name="model_selection"
@@ -253,6 +253,7 @@
                                 '&amp;', ('task_number', 'in', ['80']), ('repatriate_information', '=', True)]}"
                         force_save="1">
                         <tree editable="bottom">
+                            <field name="sequence" widget="handle" invisible="1"/>
                             <field name="task_id" invisible="1" />
                             <field name="segment_number" force_save="1" />
                             <field name="name" />

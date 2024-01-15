@@ -134,7 +134,7 @@ class ProjectTask(models.Model):
             task.folder_key = '_'.join([str(item) for item in combinaison_value if item])
 
     def repatriate_quantity_information(self):
-        self.segment_ids = [(6, 0, self.sale_order_id.segment_ids.ids)]
+        self.segment_ids = [(6, 0, self.sale_order_id.segment_ids.sorted('segment_number').ids)]
 
     def repatriate_volume(self):
         self.volume = self.sale_order_id.quantity_to_deliver
@@ -394,18 +394,6 @@ class ProjectTask(models.Model):
                                          ('sale_order_id.commitment_date', '!=', False),
                                          ('sale_order_id.commitment_date', '<=', date)])
         return tasks.write({'stage_id': to_do_stage.id})
-
-    @api.onchange('segment_ids')
-    def onchange_segment_sequence(self):
-        for rec in self:
-            for i, l in enumerate(rec.segment_ids):
-                l.segment_number = i + 1
-
-    @api.onchange('task_segment_ids')
-    def onchange_task_segment_sequence(self):
-        for rec in self:
-            for i, l in enumerate(rec.task_segment_ids):
-                l.segment_number = i + 1
 
     @api.depends('sale_line_id', 'project_id', 'commercial_partner_id')
     def _compute_sale_order_id(self, sale_order=False):

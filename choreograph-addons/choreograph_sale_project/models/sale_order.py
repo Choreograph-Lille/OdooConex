@@ -656,12 +656,6 @@ class SaleOrder(models.Model):
     def compute_operation_code(self):
         self.operation_code = self.project_ids[0].code if self.project_ids else ''
 
-    @api.onchange('segment_ids')
-    def onchange_segment_sequence(self):
-        for rec in self:
-            for i, l in enumerate(rec.segment_ids):
-                l.segment_number = i + 1
-
     def _manage_ce_role_project_following(self):
         self.ensure_one()
         mail_wizard_invite_obj = self.env["mail.wizard.invite"]
