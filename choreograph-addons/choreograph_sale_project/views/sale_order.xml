@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='sms_campaign']" position="before">
                 <page name="sale_operation" string="Operation"
-                    attrs="{'invisible': [('recurrence_id', '!=', False)]}">
+                    attrs="{'invisible': ['|', ('recurrence_id', '!=', False), ('project_ids', '=', [])]}">
                     <group>
                         <group>
                             <field name="potential_return" force_save="1" />
