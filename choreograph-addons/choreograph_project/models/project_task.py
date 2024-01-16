@@ -73,9 +73,14 @@ class ProjectTask(models.Model):
     def write(self, values):
         res = super().write(values)
         if 'user_ids' in values:
-            self.env['mail.followers']._insert_followers(
-                'project.project', self.project_id.ids, self.user_ids.partner_id.ids)
+            self.insert_operation_followers()
         return res
+
+    def insert_operation_followers(self):
+        for rec in self:
+            if rec.type_of_project == 'operation':
+                self.env['mail.followers']._insert_followers(
+                    'project.project', rec.project_id.ids, rec.user_ids.partner_id.ids)
 
     @api.model
     def _task_message_auto_subscribe_notify(self, users_per_task):
