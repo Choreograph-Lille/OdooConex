@@ -511,11 +511,11 @@ class SaleOrder(models.Model):
         """
         Get the next non_off day
         :param date_value: the start date
-        :return: the next non-off date
+        :return: the last non-off date
         """
         if date_value:
             while date_value.weekday() > 4 or self.check_is_day_off(date_value):
-                date_value = date_value + timedelta(days=1)
+                date_value = date_value - timedelta(days=1)
         return date_value
 
     def copy(self, default=None):
