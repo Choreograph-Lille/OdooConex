@@ -233,7 +233,12 @@
                 <xpath expr="//div[@class='o_td_label'][2]" position="replace">
                 </xpath>
                 <xpath expr="//field[@name='date_order'][2]" position="replace">
-                    <field name="date_order" attrs="{'invisible': [('state', 'in', ['draft', 'sent'])], 'readonly': False, 'required': True}"/>
+                    <field name="date_order" attrs="{'invisible': False, 'readonly': False, 'required': True}"/>
+                </xpath>
+
+                <xpath expr="//div[@class='o_td_label'][1]" position="replace">
+                </xpath>
+                <xpath expr="//field[@name='date_order'][1]" position="replace">
                 </xpath>
             </field>
         </record>
