@@ -454,7 +454,7 @@ class SaleOrder(models.Model):
                               'date_deadline': rec.operation_provider_delivery_ids[0].delivery_date})])
 
             if is_operation_generation or vals.get('bat_desired_date'):
-                values.append((rec._get_operation_task(['55'], True), {'date_deadline': rec.bat_desired_date - relativedelta(days=1)}))
+                values.append((rec._get_operation_task(['55'], True), {'date_deadline': rec.bat_desired_date - relativedelta(days=1) if rec.bat_desired_date else False}))
 
             if is_operation_generation or vals.get("commitment_date"):
                 values.append((rec._get_operation_task(["95"], True), {"date_deadline": (rec.commitment_date + relativedelta(days=15)).date()}))
