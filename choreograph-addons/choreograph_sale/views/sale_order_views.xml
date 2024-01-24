@@ -143,6 +143,7 @@
                                 <field name="is_preheader_available_text"
                                        attrs="{'invisible': [('is_preheader_available','=',True)]}"/>
                                 <field name="email_comment"/>
+                                <field name="routing_base"/>
                             </group>
                             <group name="bat" string="BAT">
                                 <field name="email_bat_from"/>
@@ -158,7 +159,6 @@
                                 <separator string="Optout"/>
                                 <field name="excluded_provider"/>
                                 <field name="optout_link"/>
-                                <field name="routing_base"/>
                             </group>
                         </group>
                         <field name="project_task_campaign_ids">
