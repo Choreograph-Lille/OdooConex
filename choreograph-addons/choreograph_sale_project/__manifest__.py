@@ -29,6 +29,7 @@
         'views/sale_order.xml',
         'views/ir_ui_menu.xml',
         'views/project_project.xml',
+        'views/resource_views.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],

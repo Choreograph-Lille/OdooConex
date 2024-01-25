@@ -77,6 +77,7 @@
         <field name="report_file">choreograph_auditlog.report_quote_purchase_order</field>
         <field name="binding_model_id" ref="model_auditlog_report_wizard" />
         <field name="binding_type">report</field>
+        <field name="auditlog_model_id" ref="sale.model_sale_order" />
         <field name="is_auditreport" eval="True" />
     </record>
 

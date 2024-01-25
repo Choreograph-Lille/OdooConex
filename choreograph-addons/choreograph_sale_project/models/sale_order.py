@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
 
-from datetime import date
-from pytz import timezone, utc
-
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from dateutil.relativedelta import relativedelta
@@ -292,10 +289,6 @@ class SaleOrder(models.Model):
     def write(self, vals):
         res = super(SaleOrder, self).write(vals)
         for rec in self:
-            if any(date in vals for date in ['commitment_date', 'potential_return_date', 'study_delivery_date',
-                                             'presentation_date', 'return_production_potential_date',
-                                             'operation_provider_delivery_ids', 'bat_desired_date']):
-                rec._update_date_deadline(vals)
             rec._check_info_validated(vals)
             if vals.get('is_info_validated', False) or any(field in vals for field in [
                 'po_number',
@@ -361,6 +354,10 @@ class SaleOrder(models.Model):
                 rec.update_task_bat_from(rec.bat_from.id)
             if 'email_bat_from' in vals:
                 rec.update_task_bat_from(rec.email_bat_from.id)
+            if any(date in vals for date in ['commitment_date', 'potential_return_date', 'study_delivery_date',
+                                             'presentation_date', 'return_production_potential_date',
+                                             'operation_provider_delivery_ids', 'bat_desired_date']):
+                rec._update_date_deadline(vals)
         return res
 
     @api.model_create_multi
@@ -411,19 +408,14 @@ class SaleOrder(models.Model):
             'task_segment_ids': [(6, 0, [])],
         })
 
-    def get_date_tz(self, datetime_to_convert):
-        tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
-        tz_date = utc.localize(datetime_to_convert).astimezone(tz)
-        return tz_date
-
     def _update_date_deadline(self, vals={}):
         for rec in self:
             values = []
             is_operation_generation = self._context.get('is_operation_generation')
             if (is_operation_generation or vals.get('commitment_date')) and rec.commitment_date:
                 tz_date = rec.get_date_tz(rec.commitment_date)
-                values.extend([(rec._get_operation_task(['85']), {'date_deadline': tz_date}),
-                              (rec._get_operation_task(['65', '80']), {'date_deadline': tz_date - relativedelta(days=2)})])
+                values.extend([(rec._get_operation_task(['85']), {'date_deadline': tz_date.date()}),
+                              (rec._get_operation_task(['65', '80']), {'date_deadline': (tz_date - relativedelta(days=2)).date()})])
 
             if (is_operation_generation or vals.get('potential_return_date')) and rec.potential_return_task_id:
                 values.append((rec.potential_return_task_id, {'date_deadline': rec.potential_return_date}))
@@ -441,7 +433,7 @@ class SaleOrder(models.Model):
 
             if is_operation_generation or vals.get('operation_provider_delivery_ids') or vals.get('commitment_date') or vals.get('is_info_validated', False) or vals.get('email_is_info_validated', False):
                 values.extend([(rec._get_operation_task(['45', '50'], True), {'delivery_date': rec.operation_provider_delivery_ids[0].delivery_date if rec.operation_code in [
-                              'ENR_EMAIL', 'ENR_SMS'] and rec.operation_provider_delivery_ids else rec.get_date_tz(rec.commitment_date)})])
+                              'ENR_EMAIL', 'ENR_SMS'] and rec.operation_provider_delivery_ids else rec.get_date_tz(rec.commitment_date).date()})])
 
             if (is_operation_generation or vals.get('operation_provider_delivery_ids')) and rec.operation_provider_delivery_ids:
                 values.extend([(rec._get_operation_task(['60', '70'], True), {
@@ -451,7 +443,7 @@ class SaleOrder(models.Model):
                 values.append((rec._get_operation_task(['55'], True), {'date_deadline': rec.bat_desired_date}))
 
             if is_operation_generation or vals.get("commitment_date"):
-                values.append((rec._get_operation_task(["95"], True), {"date_deadline": rec.commitment_date + relativedelta(days=15)}))
+                values.append((rec._get_operation_task(["95"], True), {"date_deadline": (rec.commitment_date + relativedelta(days=15)).date()}))
 
             rec.update_date_deadline(values)
 
@@ -462,7 +454,9 @@ class SaleOrder(models.Model):
         :return:
         """
         for task, value in values:
-            task.write(value)
+            task.write({
+                list(value.keys())[0]: self.get_next_non_day_off(list(value.values())[0])
+            })
 
     def update_optout_link(self, value=''):
         for rec in self:

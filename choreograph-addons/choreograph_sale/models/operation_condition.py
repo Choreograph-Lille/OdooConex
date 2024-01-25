@@ -66,7 +66,7 @@ class OperationCondition(models.Model):
             if rec.task_id:
                 rec.task_id.write({
                     'note': rec.note,
-                    'date_deadline': rec.operation_date,
+                    'date_deadline': rec.order_id.get_next_non_day_off(rec.operation_date),
                     'campaign_file_name': rec.file_name,
                     'task_number': rec.task_number,
                 })

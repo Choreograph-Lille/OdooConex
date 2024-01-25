@@ -2,6 +2,7 @@
 
 import logging
 from pytz import timezone, utc
+from datetime import timedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError, MissingError
@@ -414,7 +415,6 @@ class SaleOrder(models.Model):
             order = order.with_company(order.company_id)
             order.payment_term_id = order.partner_invoice_id.property_payment_term_id
 
-
     def _message_track(self, fields_iter, initial_values_dict):
         if not fields_iter:
             return {}
@@ -486,12 +486,12 @@ class SaleOrder(models.Model):
     @api.depends("commitment_date")
     def compute_commitment_date_tracked(self):
         for record in self:
-            record.commitment_date_tracked = record.commitment_date and self._get_date_tz(record.commitment_date)
+            record.commitment_date_tracked = record.commitment_date and self.get_date_tz(record.commitment_date)
 
     def _get_commitment_date_fields(self):
         return self.env.ref("choreograph_sale.field_sale_order__commitment_date_tracked", raise_if_not_found=False).id
 
-    def _get_date_tz(self, datetime_to_convert=False):
+    def get_date_tz(self, datetime_to_convert=False):
         """
             Convert datetime to date according to the TZ
         """
@@ -500,3 +500,25 @@ class SaleOrder(models.Model):
         tz = timezone(self.env.user.tz or self.env.context.get('tz') or 'UTC')
         tz_date = utc.localize(datetime_to_convert).astimezone(tz)
         return tz_date
+
+    def check_is_day_off(self, date_value):
+        for leave in self.env['resource.calendar.leaves'].search([('country_base', 'in', [self.partner_id.country_base, False])]):
+            if self.get_date_tz(leave.date_from).date() <= date_value <= self.get_date_tz(leave.date_to).date():
+                return True
+        return False
+
+    def get_next_non_day_off(self, date_value):
+        """
+        Get the next non_off day
+        :param date_value: the start date
+        :return: the last non-off date
+        """
+        if date_value:
+            while date_value.weekday() > 4 or self.check_is_day_off(date_value):
+                date_value = date_value - timedelta(days=1)
+        return date_value
+
+    def copy(self, default=None):
+        default = default or {}
+        default['state_specific'] = 'prospecting'
+        return super(SaleOrder, self).copy(default=default)
