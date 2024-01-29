@@ -291,7 +291,6 @@ class SaleOrder(models.Model):
 
     @check_project_count
     def action_livery_project(self):
-        project_id = self.project_ids[0]
         return self.action_send_delivery_email()
 
     @check_project_count
@@ -623,7 +622,7 @@ class SaleOrder(models.Model):
 
     def action_send_delivery_email(self):
         self.ensure_one()
-        email_to = self._get_operation_task([85]).provider_delivery_address
+        email_to = self.get_delivery_address()
         if email_to:
             self.env['res.partner'].sudo().find_or_create(email_to)
         composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form')
@@ -646,6 +645,22 @@ class SaleOrder(models.Model):
                 'operation_email_process': True,
             },
         }
+
+    def get_delivery_task_number(self):
+        stage_to_delivery = {
+            '40': '75',
+            '50': '85'
+        }
+        if self.project_ids:
+            return stage_to_delivery.get(self.project_ids[0].stage_id.stage_number, None)
+        return False
+
+    def get_delivery_address(self):
+        delivery_task_number = self.get_delivery_task_number()
+        if delivery_task_number:
+            return self.project_ids[0].task_ids.filtered(
+                lambda t: t.task_number == delivery_task_number).provider_delivery_address
+        return False
 
     def action_create_task_from_condition(self):
         super().action_create_task_from_condition()
