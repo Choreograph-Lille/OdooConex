@@ -57,7 +57,7 @@ class ProjectTask(models.Model):
                     'stage_id': self.env.ref('choreograph_project.project_task_type_draft').id,
                 })
             res |= super().create(values)
-            self.insert_operation_followers()
+            res.insert_operation_followers()
         return res
 
     @api.returns('mail.message', lambda value: value.id)
