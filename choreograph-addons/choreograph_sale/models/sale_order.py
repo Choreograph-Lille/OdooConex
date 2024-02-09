@@ -7,7 +7,6 @@ from datetime import timedelta
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError, MissingError
 
-from .operation_condition import SUBTYPE
 
 _logger = logging.getLogger(__name__)
 
@@ -33,16 +32,11 @@ TASK_NAME = {
     '95': _('Deposit Date'),
 }
 
-OPERATION_TYPE = {
-    'condition': 'Condition',
-    'exclusion': 'Exclusion',
-}
 REQUIRED_TASK_NUMBER = {
     'potential_return': '25',
     'study_delivery': '30',
     'presentation': '35',
 }
-SUBTYPES = dict(SUBTYPE)
 
 CUSTOM_STATE_SEQUENCE_MAP = {
     'forecast': 0,
@@ -290,8 +284,7 @@ class SaleOrder(models.Model):
         for rec in self:
             for condition in rec.get_operation_condition_lines():
                 vals = {
-                    'name': OPERATION_TYPE[condition.operation_type] + '/' + _(SUBTYPES[
-                                                                                   condition.subtype]),
+                    'name': condition.get_task_name(),
                     'partner_id': rec.partner_id.id,
                     'email_from': rec.partner_id.email,
                     'note': condition.note,
