@@ -105,7 +105,7 @@
                                 readonly="1"
                                 attrs="{'invisible': [('task_number', 'not in', ['90', '45', '50'])]}" />
                             <field name="volume_detail"
-                                attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}" />
+                                attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}" readonly="1"/>
                             <field name="sender" readonly="1"
                                 attrs="{'invisible': [('task_number', 'not in', ['45', '50'])]}" />
                             <field name="object"
