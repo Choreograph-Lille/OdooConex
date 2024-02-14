@@ -9,7 +9,7 @@ class OperationSegment(models.Model):
     _description = 'Segment'
 
     order_id = fields.Many2one('sale.order', 'Sale Order')
-    segment_number = fields.Integer(tracking=True)
+    segment_number = fields.Integer(compute='_compute_segment_number', tracking=True)
     model_selection = fields.Char('Model/Selection', tracking=True)
     name = fields.Char('Segment Name', tracking=True)
     quantity = fields.Integer(tracking=True)
@@ -35,3 +35,7 @@ class OperationSegment(models.Model):
 
     def _get_body_message_track(self):
         return _('Segment line : %s') % self.sequence
+
+    def _compute_segment_number(self):
+        for rec in self:
+            rec.segment_number = rec.sequence
