@@ -63,7 +63,7 @@ class OperationCondition(models.Model):
 
     def write(self, vals):
         res = super(OperationCondition, self).write(vals)
-        if 'subtype' in vals:
+        if any(task in vals for task in ['operation_type', 'condition_subtype', 'exclusion_subtype']):
             self.check_subtype()
         self._update_task_values()
         return res
