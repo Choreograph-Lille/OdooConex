@@ -5,6 +5,10 @@ from odoo.tools import html_escape
 from odoo.tools.misc import format_date
 
 TASK_NUMBER = [(str(n), str(n)) for n in range(5, 100, 5)]
+OPERATION_TYPE = {
+    'condition': 'Condition',
+    'exclusion': 'Exclusion',
+}
 SUBTYPE = [('client_file', _('Client File')), ('sale_order', _('Sale Order')), ('comment', _('Comment')),
            ('update', _('Update')), ('update_repoussoir', _('Update Repoussoir'))]
 CONDITION_SUBTYPE = [('client_file', 'Client File'), ('update', 'Update'),
@@ -17,6 +21,7 @@ SUBTYPE_TASK_NUMBER = {
     'exclusion_client_file': '15',
     'exclusion_update_repoussoir': '10',
 }
+SUBTYPES = dict(SUBTYPE)
 
 
 class OperationCondition(models.Model):
@@ -58,21 +63,26 @@ class OperationCondition(models.Model):
 
     def write(self, vals):
         res = super(OperationCondition, self).write(vals)
-        self._update_task_values()
-        if 'condition_subtype' or 'exclusion_subtype' in vals:
+        if any(task in vals for task in ['operation_type', 'condition_subtype', 'exclusion_subtype']):
             self.check_subtype()
+        self._update_task_values()
         return res
 
     def check_subtype(self):
         for rec in self:
             subtype_blacklist = ['sale_order', 'comment']
-            if rec.operation_type == 'condition' and rec.condition_subtype in subtype_blacklist or rec.operation_type == 'exclusion' and rec.exclusion_subtype in subtype_blacklist:
+            if rec.subtype in subtype_blacklist:
                 rec.task_id.unlink()
+                rec.is_task_created = False
+
+    def get_task_name(self):
+        return OPERATION_TYPE[self.operation_type] + '/' + _(SUBTYPES[self.subtype])
 
     def _update_task_values(self):
         for rec in self:
             if rec.task_id:
                 rec.task_id.write({
+                    'name': rec.get_task_name(),
                     'note': rec.note,
                     'date_deadline': rec.order_id.get_next_non_day_off(rec.operation_date),
                     'campaign_file_name': rec.file_name,
