@@ -46,26 +46,23 @@
                             The distribution of addresses is as follows:
                             <br/>
                             <br/>
-                            <t t-set="task_80" t-value="object.tasks_ids.filtered(lambda t: t.task_number in ['80'])"/>
-                            <t t-if="task_80">
-                                <t t-set="segments" t-value="task_80.task_segment_ids"/>
-                                <t t-if="object.repatriate_information">
-                                    <t t-set="segments" t-value="task_80.segment_ids"/>
-                                </t>
-                                <t t-set="count" t-value="1"/>
-                                <t t-foreach="segments" t-as="segment">
-                                    Segment <t t-out="count"/>:
-                                    <t t-out="segment.name"/>
-                                    <br/>
-                                    Quantity:
-                                    <span style="font-weight:bold;" t-out="segment.quantity"/>
-                                    <br/>
-                                    Keycode:
-                                    <span style="font-weight:bold;" t-out="segment.keycode"/>
-                                    <br/>
-                                    <br/>
-                                    <t t-set="count" t-value="count + 1"/>
-                                </t>
+                            <t t-set="segments" t-value="info_task.task_segment_ids"/>
+                            <t t-if="object.repatriate_information">
+                                <t t-set="segments" t-value="task_80.segment_ids"/>
+                            </t>
+                            <t t-set="count" t-value="1"/>
+                            <t t-foreach="segments" t-as="segment">
+                                Segment<t t-out="count"/>:
+                                <t t-out="segment.name"/>
+                                <br/>
+                                Quantity:
+                                <span style="font-weight:bold;" t-out="segment.quantity"/>
+                                <br/>
+                                Keycode:
+                                <span style="font-weight:bold;" t-out="segment.keycode"/>
+                                <br/>
+                                <br/>
+                                <t t-set="count" t-value="count + 1"/>
                             </t>
                             <br/>
                             <span style="color: green;">IMPORTANT: Please confirm receipt of the file at</span>
