@@ -74,7 +74,10 @@ class AuditlogReport(models.TransientModel):
         if method:
             domain.append(('log_id.method', '=', method))
         if is_supplier_extraction:
-            domain.append(('log_id.res_id', 'in', self.env['res.partner'].search([('supplier_rank', '!=', 0)]).ids))
+            domain.extend(
+                ['&', '&', ('log_id.res_id', 'in', self.env['res.partner'].search([('supplier_rank', '!=', 0)]).ids),
+                 ('field_id.readonly', '=', False),
+                 '|', ('old_value_text', '!=', False), ('new_value_text', 'not in', [False, '', '[]', '0', '0.0'])])
         return self.env['auditlog.log.line'].search(domain)
 
     def prepare_log_line_data(self, line, display_name, is_data_sox_role_changing=False):
