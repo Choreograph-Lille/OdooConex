@@ -48,7 +48,7 @@
                             <br/>
                             <t t-set="segments" t-value="info_task.task_segment_ids"/>
                             <t t-if="object.repatriate_information">
-                                <t t-set="segments" t-value="task_80.segment_ids"/>
+                                <t t-set="segments" t-value="info_task.segment_ids"/>
                             </t>
                             <t t-set="count" t-value="1"/>
                             <t t-foreach="segments" t-as="segment">
