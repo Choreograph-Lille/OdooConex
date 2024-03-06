@@ -46,10 +46,7 @@
                             The distribution of addresses is as follows:
                             <br/>
                             <br/>
-                            <t t-set="segments" t-value="info_task.task_segment_ids"/>
-                            <t t-if="object.repatriate_information">
-                                <t t-set="segments" t-value="info_task.segment_ids"/>
-                            </t>
+                            <t t-set="segments" t-value="info_task.segment_ids"/>
                             <t t-set="count" t-value="1"/>
                             <t t-foreach="segments" t-as="segment">
                                 Segment<t t-out="count"/>:
