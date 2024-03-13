@@ -835,7 +835,6 @@ msgid "Classic"
 msgstr ""
 
 #. module: choreograph_sale
-#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__client_file
@@ -870,7 +869,6 @@ msgid "Comment"
 msgstr "Commentaire"
 
 #. module: choreograph_sale
-#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__sms_comment
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__comment
@@ -1943,7 +1941,6 @@ msgid "SOX"
 msgstr ""
 
 #. module: choreograph_sale
-#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__order_ids
 #: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__order_id
@@ -2353,7 +2350,6 @@ msgid "Type of the exception activity on record."
 msgstr ""
 
 #. module: choreograph_sale
-#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__condition_subtype__update
@@ -2363,7 +2359,6 @@ msgid "Update"
 msgstr "Mise à jour"
 
 #. module: choreograph_sale
-#. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_condition__exclusion_subtype__update_repoussoir
