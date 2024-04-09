@@ -9,7 +9,7 @@
             <field name="priority" eval="16"/>
             <field name="arch" type="xml">
                 <button name="button_justify_gap" position="attributes">
-                    <attribute name="groups">choreograph_sox.group_purchasing_preparer_profile_res_groups</attribute>
+                    <attribute name="groups">choreograph_sox.group_accounting_profile_res_groups</attribute>
                 </button>
                 <button name="button_validate_gap" position="attributes">
                     <attribute name="groups">choreograph_sox.group_validator_1_purchase_profile_res_groups</attribute>
