@@ -29,7 +29,7 @@
                         ('hide_post_button', '=', True),
                         ('move_type', '=', 'entry'),
                         ('display_inactive_currency_warning','=',True),
-                        '&amp;', '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_justified', '=', False), ('is_preparer', '=', True),
+                        '&amp;', '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_justified', '=', False), ('is_accountant', '=', True),
                         ('is_accountant', '=', False),
                         '&amp;', '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_validated', '=', False), ('is_validator', '=', True),
                         ('is_accountant', '=', False)
