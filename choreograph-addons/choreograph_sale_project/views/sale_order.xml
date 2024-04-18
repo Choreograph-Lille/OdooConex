@@ -90,6 +90,16 @@
                             <field name="repatriate_information" class="oe_inline" />
                         </div>
                     </group>
+                    <group>
+                        <group>
+                            <field name="delivery_provider_delivery_partner_email"/>
+                            <field name="delivery_provider_comment"/>
+                        </group>
+                        <group>
+                            <field name="presta_provider_delivery_partner_email"/>
+                            <field name="presta_provider_comment"/>
+                        </group>
+                    </group>
                 </page>
             </xpath>
             <xpath expr="//field[@name='project_count']" position="after">

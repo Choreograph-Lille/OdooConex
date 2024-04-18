@@ -62,6 +62,11 @@ class SaleOrder(models.Model):
     has_enrichment_email_op = fields.Boolean(compute='_compute_has_email_op')
     has_prospection_email_op = fields.Boolean(compute='_compute_has_email_op')
 
+    delivery_provider_comment = fields.Text(string='Delivery Info Comment', compute='compute_delivery_info_data')
+    delivery_provider_delivery_partner_email = fields.Char(string='Delivery Info Partner Delivery Address', compute='compute_delivery_info_data')
+    presta_provider_comment = fields.Text(string='Presta Info Comment', compute='compute_delivery_info_data')
+    presta_provider_delivery_partner_email = fields.Char(string='Presta Info Partner Delivery Address', compute='compute_delivery_info_data')
+
     @api.model
     def get_operation_fields(self):
         return [
@@ -97,8 +102,16 @@ class SaleOrder(models.Model):
         return result
 
     def compute_delivery_info_tasks(self):
-        self.delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
-        self.presta_delivery_info_task_id = self.tasks_ids.filtered(lambda t: t.task_number == '70').id or False
+        for rec in self:
+            rec.delivery_info_task_id = rec.tasks_ids.filtered(lambda t: t.task_number == '80').id or False
+            rec.presta_delivery_info_task_id = rec.tasks_ids.filtered(lambda t: t.task_number == '70').id or False
+
+    def compute_delivery_info_data(self):
+        for rec in self:
+            rec.delivery_provider_comment = rec.delivery_info_task_id.provider_comment
+            rec.delivery_provider_delivery_partner_email = ','.join(rec.delivery_info_task_id.provider_delivery_partner_ids.mapped('email'))
+            rec.presta_provider_comment = rec.presta_delivery_info_task_id.provider_comment
+            rec.presta_provider_delivery_partner_email = ','.join(rec.presta_delivery_info_task_id.provider_delivery_partner_ids.mapped('email'))
 
     @api.depends('project_ids')
     def _compute_operation_type_id(self):
@@ -278,7 +291,6 @@ class SaleOrder(models.Model):
 
     @check_project_count
     def action_livery_project(self):
-        project_id = self.project_ids[0]
         return self.action_send_delivery_email()
 
     @check_project_count
@@ -610,7 +622,7 @@ class SaleOrder(models.Model):
 
     def action_send_delivery_email(self):
         self.ensure_one()
-        email_to = self._get_operation_task([85]).provider_delivery_address
+        email_to = self.get_delivery_address()
         if email_to:
             self.env['res.partner'].sudo().find_or_create(email_to)
         composer_form_view_id = self.env.ref('mail.email_compose_message_wizard_form')
@@ -633,6 +645,22 @@ class SaleOrder(models.Model):
                 'operation_email_process': True,
             },
         }
+
+    def get_delivery_task_number(self):
+        stage_to_delivery = {
+            '40': '75',
+            '50': '85'
+        }
+        if self.project_ids:
+            return stage_to_delivery.get(self.project_ids[0].stage_id.stage_number, None)
+        return False
+
+    def get_delivery_address(self):
+        delivery_task_number = self.get_delivery_task_number()
+        if delivery_task_number:
+            return self.project_ids[0].task_ids.filtered(
+                lambda t: t.task_number == delivery_task_number).provider_delivery_address
+        return False
 
     def action_create_task_from_condition(self):
         super().action_create_task_from_condition()
