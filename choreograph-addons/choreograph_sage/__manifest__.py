@@ -15,6 +15,7 @@
     ],
     'data': [
         # data
+        'data/ir_cron_data.xml',
         # security
         'security/ir.model.access.csv',
         # views

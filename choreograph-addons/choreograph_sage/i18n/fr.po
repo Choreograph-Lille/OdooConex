@@ -9,6 +9,7 @@ msgstr ""
 "POT-Creation-Date: 2024-05-02 16:36+0000\n"
 "PO-Revision-Date: 2024-05-02 16:36+0000\n"
 "PO-Revision-Date: 2024-05-03 12:08+0000\n"
+"PO-Revision-Date: 2024-05-03 10:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -43,6 +44,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sage.field_res_users__cartesis_code
 msgid "Cartesis Code"
 msgstr "Code CARTESIS"
+
+#. module: choreograph_sage
+#: model:ir.actions.server,name:choreograph_sage.cron_generate_in_file_ir_actions_server
+#: model:ir.cron,cron_name:choreograph_sage.cron_generate_in_file
+msgid "Choreograph SAGE: Generate file for in invoices and refunds"
+msgstr "Choreograph SAGE: Générer le fichier pour les factures et avoirs fournisseurs"
+
+#. module: choreograph_sage
+#: model:ir.actions.server,name:choreograph_sage.cron_generate_out_file_ir_actions_server
+#: model:ir.cron,cron_name:choreograph_sage.cron_generate_out_file
+msgid "Choreograph SAGE: Generate file for out invoices and refunds"
+msgstr "Choreograph SAGE: Générer le fichier pour les factures et avoirs clients"
 
 #. module: choreograph_sage
 #: model:ir.model,name:choreograph_sage.model_res_partner
