@@ -9,6 +9,7 @@ class AccountMove(models.Model):
 
     payment_choice = fields.Selection(PAYMENT_CHOICE, string='Payment Choice')
     wording = fields.Char(compute='_compute_wording')
+    is_transferred_to_sage = fields.Boolean()
 
     @api.depends('name', 'partner_id', 'partner_id.name')
     def _compute_wording(self):
