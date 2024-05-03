@@ -7,13 +7,23 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-05-02 16:36+0000\n"
-"PO-Revision-Date: 2024-05-03 10:09+0000\n"
+"PO-Revision-Date: 2024-05-03 12:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: choreograph_sage
+#: model_terms:ir.actions.act_window,help:choreograph_sage.choreograph_sage_ftp_server_action
+msgid "Add a new server"
+msgstr "Ajouter un nouveau serveur"
 
 #. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__bcc
@@ -51,6 +61,11 @@ msgid "Contact"
 msgstr ""
 
 #. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__host
+msgid "Host"
+msgstr "Hôte"
+
+#. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_bank_statement_line__is_transferred_to_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_move__is_transferred_to_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_payment__is_transferred_to_sage
@@ -63,10 +78,22 @@ msgid "Journal Entry"
 msgstr "Pièce comptable"
 
 #. module: choreograph_sage
+#. odoo-python
+#: code:addons/choreograph_sage/models/account_move.py:0
+#, python-format
+msgid "Make sure to configure an active FTP server!"
+msgstr "Veuillez configurer un serveur FTP actif!"
+
+#. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__prv
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__payment_choice__prv
 msgid "PRV"
 msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__path
+msgid "Path"
+msgstr "Chemin"
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_bank_statement_line__payment_choice
@@ -78,9 +105,26 @@ msgid "Payment Choice"
 msgstr "Mode de règlement"
 
 #. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__port
+msgid "Port"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.ui.menu,name:choreograph_sage.menu_sage
 #: model_terms:ir.ui.view,arch_db:choreograph_sage.account_move_view_form_inherit
 msgid "SAGE"
 msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.actions.act_window,name:choreograph_sage.choreograph_sage_ftp_server_action
+#: model:ir.ui.menu,name:choreograph_sage.menu_choreograph_sage_ftp_server
+msgid "SAGE FTP Servers"
+msgstr "Serveurs FTP SAGE"
+
+#. module: choreograph_sage
+#: model:ir.model,name:choreograph_sage.model_choreograph_sage_ftp_server
+msgid "SAGE ftp server configuration"
+msgstr "Configuration serveurs SFT SAGE"
 
 #. module: choreograph_sage
 #: model:ir.model,name:choreograph_sage.model_account_tax
