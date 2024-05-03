@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <group name="sale" position="inside">
+                    <field name="third_party_role_client_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                </group>
+                <group name="misc" position="inside">
+                    <field name="payment_choice" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <field name="cartesis_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                </group>
+            </field>
+        </record>
+
+        <record id="view_partner_property_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.purchase.property.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="purchase.view_partner_property_form"/>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <field name="property_purchase_currency_id" position="after">
+                    <field name="third_party_role_supplier_code" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
