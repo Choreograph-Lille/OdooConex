@@ -9,8 +9,11 @@
             <field name="arch" type="xml">
                 <xpath expr="//group[@id='other_tab_group']" position="inside">
                     <group string="SAGE" name="sage_group">
+                        <field name="move_type" invisible="1"/>
                         <field name="payment_choice"/>
                         <field name="wording"/>
+                        <field name="is_transferred_to_sage" readonly="1"
+                               attrs="{'invisible': [('move_type', 'not in', ['in_invoice', 'in_refund', 'out_invoice', 'out_refund'])]}"/>
                     </group>
                 </xpath>
             </field>
