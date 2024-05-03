@@ -15,6 +15,7 @@
     ],
     'data': [
         # data
+        'data/ir_cron_data.xml',
         # security
         # views
         'views/res_partner_views.xml',
