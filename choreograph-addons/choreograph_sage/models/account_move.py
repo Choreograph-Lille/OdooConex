@@ -27,16 +27,15 @@ class AccountMove(models.Model):
     def update_payment_choice_from_partner(self):
         self.payment_choice = self.partner_id.payment_choice
 
-    def generate_sage_file(self, move_type):
+    def generate_sage_file(self, move_type, limit=None):
         if move_type == 'in':
             move_types = ['in_invoice', 'in_refund']
         elif move_type == 'out':
             move_types = ['out_invoice', 'out_refund']
 
-        move_ids = self.env['account.move'].search([('move_type', 'in', move_types), ('is_transferred_to_sage', '=', False)])
+        move_ids = self.env['account.move'].search([('move_type', 'in', move_types), ('is_transferred_to_sage', '=', False)], limit=limit)
         if move_ids:
             # TODO: generate the file and send to the FTP server
             move_ids.write({
                 'is_transferred_to_sage': True,
             })
-
