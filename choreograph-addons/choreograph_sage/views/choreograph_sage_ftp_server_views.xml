@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="choreograph_sage_ftp_server_view_tree" model="ir.ui.view">
+            <field name="name">choreograph.sage.ftp.server.view.tree</field>
+            <field name="model">choreograph.sage.ftp.server</field>
+            <field name="arch" type="xml">
+                <tree editable="bottom" decoration-muted="(not active)">
+                    <field name="host"/>
+                    <field name="port"/>
+                    <field name="path"/>
+                    <field name="active" widget="boolean_toggle"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="choreograph_sage_ftp_server_action" model="ir.actions.act_window">
+            <field name="name">SAGE FTP Servers</field>
+            <field name="res_model">choreograph.sage.ftp.server</field>
+            <field name="view_mode">tree</field>
+            <field name="context">{'active_test': False}</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Add a new server
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_sage" name="SAGE" sequence="7" parent="account.menu_finance_configuration">
+            <menuitem
+                    id="menu_choreograph_sage_ftp_server"
+                    action="choreograph_sage.choreograph_sage_ftp_server_action"
+                    name="SAGE FTP Servers"
+                    sequence="1"
+            />
+        </menuitem>
+
+    </data>
+</odoo>
