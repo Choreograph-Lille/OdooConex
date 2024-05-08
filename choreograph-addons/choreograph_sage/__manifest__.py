@@ -23,6 +23,7 @@
         'views/account_move_views.xml',
         'views/account_tax_views.xml',
         'views/choreograph_sage_ftp_server_views.xml',
+        'views/ftp_logging_views.xml'
     ],
     'assets': {
         'web._assets_primary_variables': [],
