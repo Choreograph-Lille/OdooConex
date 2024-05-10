@@ -9,7 +9,7 @@
             <field name="arch" type="xml">
                 <group name="misc" position="inside">
                     <field name="is_company" invisible="1"/>
-                    <field name="operation_home_url"/>
+                    <field name="operation_home_url" attrs="{'invisible': [('is_company', '=', False)]}"/>
                 </group>
             </field>
         </record>
