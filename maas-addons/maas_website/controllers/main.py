@@ -40,6 +40,14 @@ class OperationWebsite(http.Controller):
         unlimited = subscription.current_package_id.unlimited
         return quantity, identifiers, percent, unlimited
 
+    @http.route('/home', auth='user', website=True, csrf=False)
+    def home(self, **kwargs):
+        partner = http.request.env.user.partner_id
+        values = {
+            'iframe_url': partner.operation_home_url
+        }
+        return http.request.render('maas_website.operation_home', values, True)
+
     @http.route('/operation/list', auth='user', website=True, csrf=False)
     def index(self, **kwargs):
         quantity, identifiers, percent, unlimited = self._get_consumption_data()

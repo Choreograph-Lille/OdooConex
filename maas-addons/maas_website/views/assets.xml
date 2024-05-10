@@ -111,4 +111,23 @@
             <script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js" />
         </xpath>
     </template>
+
+    <template id="maas_operation_home" inherit_id="maas_website.operation_home">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                href="/maas_website/static/src/bootstrap/dist/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/bootstrap/dist/css/bootstrap.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/maas.css" />
+            <link rel="stylesheet" href="/maas_website/static/src/css/font.css" />
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.js"></script>
+            <script type="text/javascript"
+                src="/maas_website/static/src/bootstrap/dist/js/collapse.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
+            <script type="text/javascript" src="/maas_website/static/src/js/maas.js" />
+            <script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js" />
+        </xpath>
+    </template>
 </odoo>
