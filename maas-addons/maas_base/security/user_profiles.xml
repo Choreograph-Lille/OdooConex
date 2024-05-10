@@ -64,6 +64,10 @@
                                              ref('maas_base.group_download_operation_ordered')])]"/>
             <field name="users" eval="[(4, ref('base.user_admin'))]"/>
         </record>
+
+        <record id="freemium_user_role" model="res.users.role">
+            <field name="name">My Model / Freemium</field>
+        </record>
     
     </data>
 </odoo>
