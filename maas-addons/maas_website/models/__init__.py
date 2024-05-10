@@ -21,3 +21,4 @@
 
 from . import sale_operation
 from . import res_users
+from . import res_partner

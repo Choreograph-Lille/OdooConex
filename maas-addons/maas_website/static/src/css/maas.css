@@ -796,6 +796,17 @@ input::placeholder {
 .creation-menu.active::before {
     content: url('/maas_website/static/src/img/ico-edit3.png') !important;
 }
+.home-menu::before {
+    content: url('/maas_website/static/src/img/ico-home.png');
+    display: block;
+    float: left;
+    margin: -3px 29px 0 0;
+}
+.home-menu:focus::before,
+.home-menu:hover::before,
+.home-menu.active::before {
+    content: url('/maas_website/static/src/img/ico-home-2.png') !important;
+}
 .campagne-menu::before {
     content: url('/maas_website/static/src/img/ico-campagne.png');
     display: block;
@@ -1790,6 +1801,10 @@ i.fa.fa-sort {
 }
 .btn.btn-primary.btn-lg.pbi-iframe {
     float: right;
+}
+.operation-home-content{
+    background-image: linear-gradient(to top right,#F2F9FF,#f9ffff);
+    height:100%;
 }
 .maas-contact-text{
     background-image: linear-gradient(to top right,#F2F9FF,#f9ffff);
