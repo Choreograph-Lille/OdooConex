@@ -21,6 +21,7 @@
         'views/menu.xml',
         'views/templates.xml',
         'views/assets.xml',
+        'views/res_partner_views.xml',
     ],
     'assets': {
         'web.assets_tests': [],
