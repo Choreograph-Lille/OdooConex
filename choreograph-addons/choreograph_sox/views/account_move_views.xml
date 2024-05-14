@@ -9,7 +9,7 @@
             <field name="priority" eval="16"/>
             <field name="arch" type="xml">
                 <button name="button_justify_gap" position="attributes">
-                    <attribute name="groups">choreograph_sox.group_purchasing_preparer_profile_res_groups</attribute>
+                    <attribute name="groups">choreograph_sox.group_accounting_profile_res_groups</attribute>
                 </button>
                 <button name="button_validate_gap" position="attributes">
                     <attribute name="groups">choreograph_sox.group_validator_1_purchase_profile_res_groups</attribute>
@@ -29,11 +29,12 @@
                         ('hide_post_button', '=', True),
                         ('move_type', '=', 'entry'),
                         ('display_inactive_currency_warning','=',True),
-                        '&amp;', '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_justified', '=', False), ('is_preparer', '=', True),
-                        ('is_accountant', '=', False),
-                        '&amp;', '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_validated', '=', False), ('is_validator', '=', True),
-                        ('is_accountant', '=', False)
+                        '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_justified', '=', False), ('is_accountant', '=', True),
+                        '&amp;', '&amp;', ('is_gap', '=', True), ('is_gap_validated', '=', False), ('is_validator', '=', True)
                         ]}
+                    </attribute>
+                    <attribute name="groups">
+                        choreograph_sox.group_accounting_profile_res_groups,choreograph_sox.group_validator_1_purchase_profile_res_groups
                     </attribute>
                 </xpath>
                 <xpath expr="//button[@name='action_post'][2]" position="after">
@@ -45,17 +46,15 @@
                             string="Confirm"
                             class="oe_highlight"
                             type="object"
-                            groups="choreograph_sox.group_purchasing_preparer_profile_res_groups"
+                            groups="choreograph_sox.group_accounting_profile_res_groups"
                             attrs="{'invisible': [
-                            '|', '|', '|', '|', '|',
+                            '|', '|', '|', '|',
                             ('hide_post_button', '=', True),
                             ('move_type', '=', 'entry'),
                             ('display_inactive_currency_warning','=',True),
-                            ('is_accountant', '=', True),
                             ('is_gap', '=', False),
                             '&amp;',
-                            ('is_gap', '=', True),
-                            ('is_gap_justified', '=', True)]}"/>
+                            ('is_gap', '=', True), ('is_gap_justified', '=', True)]}"/>
                     
                     <button name="action_gap_not_validated"
                             string="Confirm"
@@ -64,10 +63,10 @@
                             groups="choreograph_sox.group_validator_1_purchase_profile_res_groups"
                             attrs="{'invisible': [
                             '|', '|', '|', '|', '|',
+                            ('is_accountant', '=', True),
                             ('hide_post_button', '=', True),
                             ('move_type', '=', 'entry'),
                             ('display_inactive_currency_warning','=',True),
-                            ('is_accountant', '=', True),
                             ('is_gap', '=', False),
                             '&amp;',
                             ('is_gap', '=', True), ('is_gap_validated', '=', True)]}"/>
