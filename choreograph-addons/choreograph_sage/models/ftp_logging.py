@@ -9,6 +9,16 @@ class FtpLogging(models.Model):
 
     file_name = fields.Char()
     export_date = fields.Date()
+    attachment_id = fields.Many2one('ir.attachment')
     file = fields.Binary()
+    type = fields.Selection([
+        ('customer','Customer'),
+        ('supplier','Supplier')
+    ])
     line_count = fields.Integer()
+    state = fields.Selection([
+        ('failed', 'Failed'),
+        ('success','Success')
+    ])
+    message= fields.Char()
 
