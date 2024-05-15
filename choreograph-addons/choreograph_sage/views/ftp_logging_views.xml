@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ftp_logging_view_tree" model="ir.ui.view">
+            <field name="name">ftp.logging.view.tree</field>
+            <field name="model">ftp.logging</field>
+            <field name="arch" type="xml">
+                <tree create="false" edit="false" decoration-success="state == 'success'" decoration-danger="state == 'failed'">
+                    <field name="export_date" />
+                    <field name="type" />
+                    <field name="file_name" />
+                    <field name="line_count" />
+                    <field name="state" />
+                </tree>
+            </field>
+        </record>
+        <record id="ftp_logging_view_form" model="ir.ui.view">
+            <field name="name">ftp.logging.view.form</field>
+            <field name="model">ftp.logging</field>
+            <field name="arch" type="xml">
+                <form create="false" edit="false">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="export_date" />
+                                <field name="state" />
+                                <field name="type" />     
+                            </group>
+                             <group>
+                                <field name="file_name" />
+                                <field name="attachment_id" />
+                                <field name="line_count" />
+                            </group>
+                        </group>
+                         <group>
+                            <field name="message" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ftp_logging_action" model="ir.actions.act_window">
+            <field name="name">Open FTP logging</field>
+            <field name="res_model">ftp.logging</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        <menuitem
+            id="ftp_logging_menu"
+            name="FTP logging"
+            action="ftp_logging_action"
+            web_icon="choreograph_sage,static/description/file_icon.png"
+        />
+    </data>
+</odoo>
