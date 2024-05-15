@@ -89,7 +89,7 @@ class AccountMove(models.Model):
         type = moves[-1].move_type
                 
         for line in moves.line_ids:
-            if type == 'in':
+            if type in ['in_invoice', 'in_refund']:
                 role = line.move_id.partner_id.third_party_role_supplier_code
             else:
                 role = line.move_id.partner_id.third_party_role_client_code
@@ -122,6 +122,30 @@ class AccountMove(models.Model):
             rows.append(vals)
         return fields, rows
 
+    def create_ftp_log(self, state, type, file=None, file_name=None, line_count=None, message=None):
+        """
+        Create FTP log
+        :param : state, file, file_name, line_count, message
+        :return: ftp.logging
+        """
+        log_vals = {
+            "export_date": datetime.today(),
+            "file_name":file_name,
+            "line_count": line_count,
+            "message": message,
+            "state":state,
+            "type":type
+        }
+        if file:
+            attachment_vals = {
+                'datas': file,
+                'name': file_name,
+            }            
+            attachment_id = self.env['ir.attachment'].create(attachment_vals)
+            log_vals['attachment_id'] = attachment_id.id
+        log = self.env['ftp.logging'].create(log_vals)
+        return log
+
     def create_sage_file(self, moves, ftp_server):
         """
         Create the binary file
@@ -135,11 +159,11 @@ class AccountMove(models.Model):
         key_path = ftp_server.key_attachment_id._full_path(ftp_server.key_attachment_id.store_fname)
         passphrase = ftp_server.passphrase
         fields, rows = self.prepare_file_rows(moves)
+        type = 'supplier' if moves[-1].move_type in ['in_invoice', 'in_refund'] else 'customer'
         
         file_name = f"{datetime.now().strftime('%Y-%m-%d %H:%M')}.csv"
         try:
             key = paramiko.RSAKey.from_private_key_file(key_path, password=passphrase)
-            
             ssh_client.connect(ftp_server.host, ftp_server.port, ftp_server.username, pkey=key)
             # Create and Transfert file
             with paramiko.SFTPClient.from_transport(ssh_client.get_transport()) as sftp:
@@ -150,12 +174,16 @@ class AccountMove(models.Model):
                     writer.writerows(rows)
                 # Copy temporary file into server
                 sftp.put(file_name, f"{ftp_server.path}/{file_name}")
-                
+                # Create log
+                with open(file_name,'rb') as file:
+                    file = base64.b64encode(file.read())
+                    state = 'success'
+                    message = _("File uploaded with success")
+                    self.create_ftp_log(state, type, file, file_name, len(moves), message)
         except Exception as e:
-            pass
-                
+            state = 'failed'
+            message = str(e)
+            self.create_ftp_log(state, type, message,file=None, file_name=None, line_count=None)      
         finally:
             ssh_client.close()
-
-          
         return True

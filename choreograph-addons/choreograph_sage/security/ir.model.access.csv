@@ -2,3 +2,4 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_choreograph_sage_ftp_server_reader,access_choreograph_sage_ftp_server_reader,model_choreograph_sage_ftp_server,,1,0,0,0
 access_choreograph_sage_ftp_server_user,access_choreograph_sage_ftp_server_user,model_choreograph_sage_ftp_server,base.group_user,1,1,1,0
 access_choreograph_sage_ftp_server_manager,access_choreograph_sage_ftp_server_manager,model_choreograph_sage_ftp_server,base.group_erp_manager,1,1,1,1
+access_ftp_logging,access_ftp_logging,model_ftp_logging,base.group_user,1,1,1,1
