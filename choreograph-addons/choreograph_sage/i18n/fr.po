@@ -70,6 +70,21 @@ msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_uid
 #: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__create_uid
 msgid "Created by"
 msgstr ""
@@ -190,6 +205,11 @@ msgstr "Ouvrir Log FTP"
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__prv
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__payment_choice__prv
 msgid "PRV"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__passphrase
+msgid "Passphrase"
 msgstr ""
 
 #. module: choreograph_sage
