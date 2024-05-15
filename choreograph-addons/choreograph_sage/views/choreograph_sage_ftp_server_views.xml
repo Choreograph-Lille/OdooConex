@@ -10,6 +10,9 @@
                     <field name="host"/>
                     <field name="port"/>
                     <field name="path"/>
+                    <field name="passphrase" password="True"/>
+                    <field name="key_attachment_id"/>
+                    <field name="username" />
                     <field name="active" widget="boolean_toggle"/>
                 </tree>
             </field>

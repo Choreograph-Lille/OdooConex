@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-08 11:50+0000\n"
-"PO-Revision-Date: 2024-05-08 11:50+0000\n"
+"POT-Creation-Date: 2024-05-15 12:25+0000\n"
+"PO-Revision-Date: 2024-05-15 12:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -65,41 +65,18 @@ msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_uid
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_date
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__display_name
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__display_name
 msgid "Display Name"
 msgstr ""
-
-#. module: choreograph_sage
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__export_date
-msgid "Export Date"
-msgstr "Date d'export"
-
-#. module: choreograph_sage
-#: model:ir.ui.menu,name:choreograph_sage.ftp_logging_menu
-msgid "FTP logging"
-msgstr "Log FTP"
-
-#. module: choreograph_sage
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__file
-msgid "File"
-msgstr "Fichier"
-
-#. module: choreograph_sage
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__file_name
-msgid "File Name"
-msgstr "Nom du fichier"
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__host
@@ -108,7 +85,6 @@ msgstr "Hôte"
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__id
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__id
 msgid "ID"
 msgstr ""
 
@@ -125,27 +101,24 @@ msgid "Journal Entry"
 msgstr "Pièce comptable"
 
 #. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__key_attachment_id
+msgid "Key Attachment"
+msgstr "Clé en PJ"
+
+#. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server____last_update
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__write_uid
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__write_date
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__write_date
 msgid "Last Updated on"
 msgstr ""
-
-#. module: choreograph_sage
-#: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__line_count
-msgid "Line Count"
-msgstr "Nombre de ligne"
 
 #. module: choreograph_sage
 #. odoo-python
@@ -163,6 +136,11 @@ msgstr "Ouvrir Log FTP"
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__prv
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__payment_choice__prv
 msgid "PRV"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__passphrase
+msgid "Passphrase"
 msgstr ""
 
 #. module: choreograph_sage
@@ -227,6 +205,11 @@ msgstr "Code Rôle Tiers Fournisseur"
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_tax__tva_profile_code
 msgid "Tva Profile Code"
 msgstr "Code Profil TVA"
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__username
+msgid "Username"
+msgstr "Nom utilisateur"
 
 #. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__virint
