@@ -8,7 +8,10 @@ class ChoreographSageFtpServer(models.Model):
     _description = "SAGE ftp server configuration"
     _rec_name = 'host'
 
-    host = fields.Char()
-    port = fields.Char()
-    path = fields.Char()
+    host = fields.Char(required=True)
+    port = fields.Char(required=True)
+    path = fields.Char(required=True)
+    passphrase = fields.Char(required=True)
+    username = fields.Char(required=True)
+    key_attachment_id = fields.Many2one("ir.attachment", required=True)
     active = fields.Boolean()

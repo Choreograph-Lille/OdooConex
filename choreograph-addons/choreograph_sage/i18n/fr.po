@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-02 16:36+0000\n"
-"PO-Revision-Date: 2024-05-03 12:55+0000\n"
+"POT-Creation-Date: 2024-05-15 12:25+0000\n"
+"PO-Revision-Date: 2024-05-15 12:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -47,13 +47,16 @@ msgstr "Code CARTESIS"
 #: model:ir.actions.server,name:choreograph_sage.cron_generate_in_file_ir_actions_server
 #: model:ir.cron,cron_name:choreograph_sage.cron_generate_in_file
 msgid "Choreograph SAGE: Generate file for in invoices and refunds"
-msgstr "Choreograph SAGE: Générer le fichier pour les factures et avoirs fournisseurs"
+msgstr ""
+"Choreograph SAGE: Générer le fichier pour les factures et avoirs "
+"fournisseurs"
 
 #. module: choreograph_sage
 #: model:ir.actions.server,name:choreograph_sage.cron_generate_out_file_ir_actions_server
 #: model:ir.cron,cron_name:choreograph_sage.cron_generate_out_file
 msgid "Choreograph SAGE: Generate file for out invoices and refunds"
-msgstr "Choreograph SAGE: Générer le fichier pour les factures et avoirs clients"
+msgstr ""
+"Choreograph SAGE: Générer le fichier pour les factures et avoirs clients"
 
 #. module: choreograph_sage
 #: model:ir.model,name:choreograph_sage.model_res_partner
@@ -61,9 +64,29 @@ msgid "Contact"
 msgstr ""
 
 #. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__host
 msgid "Host"
 msgstr "Hôte"
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__id
+msgid "ID"
+msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_bank_statement_line__is_transferred_to_sage
@@ -78,6 +101,26 @@ msgid "Journal Entry"
 msgstr "Pièce comptable"
 
 #. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__key_attachment_id
+msgid "Key Attachment"
+msgstr "Clé en PJ"
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: choreograph_sage
 #. odoo-python
 #: code:addons/choreograph_sage/models/account_move.py:0
 #, python-format
@@ -88,6 +131,11 @@ msgstr "Veuillez configurer un serveur FTP actif!"
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__prv
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__payment_choice__prv
 msgid "PRV"
+msgstr ""
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__passphrase
+msgid "Passphrase"
 msgstr ""
 
 #. module: choreograph_sage
@@ -147,6 +195,11 @@ msgstr "Code Rôle Tiers Fournisseur"
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_tax__tva_profile_code
 msgid "Tva Profile Code"
 msgstr "Code Profil TVA"
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__username
+msgid "Username"
+msgstr "Nom utilisateur"
 
 #. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__virint
