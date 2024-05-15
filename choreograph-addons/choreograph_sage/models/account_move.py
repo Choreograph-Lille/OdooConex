@@ -2,10 +2,12 @@
 
 from odoo import models, fields, api, _
 import base64
-import contextlib
-import io
+import csv
+from datetime import datetime
+import paramiko
 from odoo.exceptions import ValidationError
 from odoo.addons.choreograph_sage.models.res_partner import PAYMENT_CHOICE
+
 
 
 class AccountMove(models.Model):
@@ -32,7 +34,7 @@ class AccountMove(models.Model):
         self.payment_choice = self.partner_id.payment_choice
 
     def generate_sage_file(self, move_type, limit=None):
-        ftp_server = self.env['choreograph.sage.ftp.server'].search([], limit=1)
+        ftp_server = self.env['choreograph.sage.ftp.server'].search([('active','=',True)], limit=1)
         if not ftp_server:
             raise ValidationError(_('Make sure to configure an active FTP server!'))
 
@@ -44,7 +46,8 @@ class AccountMove(models.Model):
         moves = self.env['account.move'].search([('move_type', 'in', move_types), ('state', '=', 'posted'),
                                                  ('is_transferred_to_sage', '=', False)], limit=limit)
         if moves:
-            file = self.create_sage_file(moves)
+            self.create_sage_file(moves, ftp_server)
+            
             # TODO: send the file to the the server and create LOG
             moves.write({
                 'is_transferred_to_sage': True,
