@@ -588,7 +588,7 @@
             <head>
             </head>
             <main class="operation-home">
-                <input type="hidden" name="partner_id" t-att-value="partner"/>
+                <input type="hidden" id="partner_id" name="partner_id" t-att-value="partner"/>
                 <section class="container-fluid overlaying">
                     <div class="top-container">
                         <div class="row">
