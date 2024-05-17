@@ -83,20 +83,20 @@ class AccountMove(models.Model):
             "JOUMM",
             "IDODOO"
         ]
-        rows = []
-        
-        type = moves[-1].move_type
+        rows = []                
                 
         for line in moves.line_ids:
-            if type in ['in_invoice', 'in_refund']:
+            if line.move_id.move_type == ['in_invoice', 'in_refund']:
                 role = line.move_id.partner_id.third_party_role_supplier_code
+                ref = 'FF' if line.move_id.move_type == 'in_invoice' else 'AF'
             else:
                 role = line.move_id.partner_id.third_party_role_client_code
+                ref = 'FC' if line.move_id.move_type == 'out_invoice' else 'AC'
             
             vals= {
                 "Code Société":"",
-                "Journal": 'ACH' if type == 'in' else 'VTE',
-                "Type de Pièce":'FF' if type == 'in' else 'FC',
+                "Journal": 'ACH' if type in ['in_invoice', 'in_refund'] else 'VTE',
+                "Type de Pièce":ref,
                 "Compte général":line.account_id.code or "",
                 "Rôle Tiers":role or "",
                 "date piece":line.move_id.invoice_date or "",
@@ -160,7 +160,7 @@ class AccountMove(models.Model):
         fields, rows = self.prepare_file_rows(moves)
         type = 'supplier' if moves[-1].move_type in ['in_invoice', 'in_refund'] else 'customer'
         
-        file_name = f"{datetime.now().strftime('%Y-%m-%d %H:%M')}.csv"
+        file_name = f"{'ECRACH' if type == 'supplier' else 'ECRVEN'}_{datetime.today().strftime('%Y%m%d')}.csv"
         try:
             key = paramiko.RSAKey.from_private_key_file(key_path, password=passphrase)
             ssh_client.connect(ftp_server.host, ftp_server.port, ftp_server.username, pkey=key)
@@ -182,7 +182,7 @@ class AccountMove(models.Model):
         except Exception as e:
             state = 'failed'
             message = str(e)
-            self.create_ftp_log(state, type, message,file=None, file_name=None, line_count=None)      
+            self.create_ftp_log(state, type, message)      
         finally:
             ssh_client.close()
         return True
