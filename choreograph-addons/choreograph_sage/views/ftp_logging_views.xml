@@ -47,11 +47,12 @@
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
+
         <menuitem
             id="ftp_logging_menu"
             name="FTP logging"
+            parent="choreograph_sage.menu_sage"
             action="ftp_logging_action"
-            web_icon="choreograph_sage,static/description/file_icon.png"
         />
     </data>
 </odoo>
