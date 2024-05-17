@@ -9,7 +9,10 @@
             <field name="arch" type="xml">
                 <group name="misc" position="inside">
                     <field name="is_company" invisible="1"/>
-                    <field name="operation_home_url" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <field name="pbi_function_app_url" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <field name="pbi_table_filter" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <field name="pbi_column_filter" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <field name="pbi_value_filter" attrs="{'invisible': [('is_company', '=', False)]}"/>
                 </group>
             </field>
         </record>

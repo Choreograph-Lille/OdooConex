@@ -44,7 +44,7 @@ class OperationWebsite(http.Controller):
     def home(self, **kwargs):
         partner = http.request.env.user.partner_id
         values = {
-            'iframe_url': partner.operation_home_url
+            'partner': partner.id,
         }
         return http.request.render('maas_website.operation_home', values, True)
 
@@ -358,9 +358,16 @@ class OperationWebsite(http.Controller):
 
         return json.dumps(list(res.values()))
 
-    @http.route('/report/<int:operation_id>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
-    def get_report_bi(self, operation_id):
-        operation_obj = http.request.env['sale.operation']
+    @http.route('/report/<int:operation_id>/<string:model_name>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
+    def get_report_bi(self, operation_id, model_name):
+        """
+        Get report html data
+        :param operation_id: id of operation OR partner
+        :param model_name: could be sale_operation or res_partner
+        :return:
+        """
+        model_name = model_name.replace('_', '.')
+        operation_obj = http.request.env[model_name]
         operation = operation_obj.browse(operation_id)
         report_bi_src = """
 <!DOCTYPE html>
