@@ -9,7 +9,6 @@ from odoo.exceptions import ValidationError
 from odoo.addons.choreograph_sage.models.res_partner import PAYMENT_CHOICE
 
 
-
 class AccountMove(models.Model):
     _inherit = "account.move"
 

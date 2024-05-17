@@ -588,6 +588,7 @@
             <head>
             </head>
             <main class="operation-home">
+                <input type="hidden" name="partner_id" t-att-value="partner"/>
                 <section class="container-fluid overlaying">
                     <div class="top-container">
                         <div class="row">
@@ -678,7 +679,7 @@
                 <div class="operation-home-content">
                     <div class="row">
                         <div class="operation-home-content-iframe">
-                            <iframe t-att-src="iframe_url" width="100%" height="100%" frameborder="0"/>
+                            <iframe src="" width="100%" height="100%" frameborder="0" id="home_report_bi_src"/>
                         </div>
                     </div>
                 </div>
