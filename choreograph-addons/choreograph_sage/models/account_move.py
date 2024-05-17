@@ -84,13 +84,7 @@ class AccountMove(models.Model):
             "JOUMM",
             "IDODOO"
         ]
-        rows = []
-        
-        
-        type = moves[-1].move_type
-                
-                
-        type = moves[-1].move_type
+        rows = []                
                 
         for line in moves.line_ids:
             if line.move_id.move_type == ['in_invoice', 'in_refund']:
