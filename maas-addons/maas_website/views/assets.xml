@@ -128,6 +128,7 @@
             <script type="text/javascript" src="/maas_website/static/src/bootstrap/dist/js/modal.js"></script>
             <script type="text/javascript" src="/maas_website/static/src/js/maas.js" />
             <script type="text/javascript" src="/maas_website/static/src/js/stupidtable.min.js" />
+            <script type="text/javascript" src="/maas_website/static/src/js/mymodel.home.js" />
         </xpath>
     </template>
 </odoo>

@@ -171,7 +171,7 @@ $(document).ready(function () {
 				$('.active .qty-extracted-value').removeClass('hidden');
 				$.ajax({
 		            dataType: 'json',
-		            url: '/report/' + parseInt((this.attributes.id.value).replace('operation','')),
+		            url: '/report/' + parseInt((this.attributes.id.value).replace('operation','')) + '/sale_operation',
 		            type: 'POST',
 		            proccessData: false,
 		            data: {},
