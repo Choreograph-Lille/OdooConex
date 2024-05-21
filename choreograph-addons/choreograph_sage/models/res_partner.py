@@ -23,7 +23,8 @@ class ResPartner(models.Model):
 
     third_party_role_client_code = fields.Char(compute='compute_parent_fields', inverse='inverse_parent_fields', store=True)
     third_party_role_supplier_code = fields.Char(compute='compute_parent_fields', inverse='inverse_parent_fields', store=True)
-    payment_choice = fields.Selection(PAYMENT_CHOICE, compute='compute_parent_fields', inverse='inverse_parent_fields', store=True)
+    customer_payment_choice = fields.Selection(PAYMENT_CHOICE, compute='compute_parent_fields', inverse='inverse_parent_fields', store=True)
+    supplier_payment_choice = fields.Selection(PAYMENT_CHOICE, compute='compute_parent_fields', inverse='inverse_parent_fields', store=True)
     cartesis_code = fields.Char(compute='compute_parent_fields', inverse='inverse_parent_fields', store=True)
 
     @api.depends('parent_id', 'parent_id.third_party_role_client_code', 'parent_id.third_party_role_client_code', 'parent_id.third_party_role_supplier_code', 'parent_id.cartesis_code')
@@ -31,7 +32,8 @@ class ResPartner(models.Model):
         for rec in self:
             rec.third_party_role_client_code = rec.parent_id.third_party_role_client_code if rec.parent_id else rec.third_party_role_client_code
             rec.third_party_role_supplier_code = rec.parent_id.third_party_role_supplier_code if rec.parent_id else rec.third_party_role_supplier_code
-            rec.payment_choice = rec.parent_id.payment_choice if rec.parent_id else rec.payment_choice
+            rec.customer_payment_choice = rec.parent_id.customer_payment_choice if rec.parent_id else rec.customer_payment_choice
+            rec.supplier_payment_choice = rec.parent_id.supplier_payment_choice if rec.parent_id else rec.supplier_payment_choice
             rec.cartesis_code = rec.parent_id.cartesis_code if rec.parent_id else rec.cartesis_code
 
     def inverse_parent_fields(self):
