@@ -13,9 +13,23 @@ from odoo.addons.choreograph_sage.models.res_partner import PAYMENT_CHOICE
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    payment_choice = fields.Selection(PAYMENT_CHOICE, string='Payment Choice')
+    payment_choice = fields.Selection(PAYMENT_CHOICE, compute='compute_payment_choice', inverse='inverse_payment_choice', string='Payment Choice')
     wording = fields.Char(compute='_compute_wording')
     is_transferred_to_sage = fields.Boolean()
+
+    @api.depends('partner_id','move_type')
+    def compute_payment_choice(self):
+        for rec in self:
+            if rec.move_type in ['in_invoice', 'in_refund']:
+                rec.payment_choice = rec.partner_id.supplier_payment_choice
+               
+            elif rec.move_type in ['out_invoice', 'out_refund']:
+                rec.payment_choice = rec.partner_id.supplier_payment_choice
+
+            else:
+                rec.payment_choice = rec.payment_choice
+    def inverse_payment_choice(sefl):
+        pass
 
     @api.depends('name', 'partner_id', 'partner_id.name')
     def _compute_wording(self):

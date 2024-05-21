@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-19 11:56+0000\n"
-"PO-Revision-Date: 2024-05-19 11:56+0000\n"
+"POT-Creation-Date: 2024-05-21 14:35+0000\n"
+"PO-Revision-Date: 2024-05-21 14:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,13 +32,15 @@ msgstr "Pièce Jointe"
 
 #. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__bcc
-#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__payment_choice__bcc
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__customer_payment_choice__bcc
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__supplier_payment_choice__bcc
 msgid "BCC"
 msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__chq
-#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__payment_choice__chq
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__customer_payment_choice__chq
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__supplier_payment_choice__chq
 msgid "CHQ"
 msgstr ""
 
@@ -118,6 +120,12 @@ msgstr ""
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__ftp_logging__type__customer
 msgid "Customer"
 msgstr "Client"
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_res_partner__customer_payment_choice
+#: model:ir.model.fields,field_description:choreograph_sage.field_res_users__customer_payment_choice
+msgid "Customer Payment Choice"
+msgstr "Mode de règlement client"
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__display_name
@@ -222,7 +230,8 @@ msgstr "Ouvrir Log FTP"
 
 #. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__prv
-#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__payment_choice__prv
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__customer_payment_choice__prv
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__supplier_payment_choice__prv
 msgid "PRV"
 msgstr ""
 
@@ -240,8 +249,6 @@ msgstr "Chemin"
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_bank_statement_line__payment_choice
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_move__payment_choice
 #: model:ir.model.fields,field_description:choreograph_sage.field_account_payment__payment_choice
-#: model:ir.model.fields,field_description:choreograph_sage.field_res_partner__payment_choice
-#: model:ir.model.fields,field_description:choreograph_sage.field_res_users__payment_choice
 msgid "Payment Choice"
 msgstr "Mode de règlement"
 
@@ -288,6 +295,12 @@ msgid "Supplier"
 msgstr "Fournisseur"
 
 #. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_res_partner__supplier_payment_choice
+#: model:ir.model.fields,field_description:choreograph_sage.field_res_users__supplier_payment_choice
+msgid "Supplier Payment Choice"
+msgstr "Mode de règlement fournisseur"
+
+#. module: choreograph_sage
 #: model:ir.model,name:choreograph_sage.model_account_tax
 msgid "Tax"
 msgstr "Taxe"
@@ -326,13 +339,15 @@ msgstr "Nom utilisateur"
 
 #. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__virint
-#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__payment_choice__virint
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__customer_payment_choice__virint
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__supplier_payment_choice__virint
 msgid "VIRINT"
 msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__account_move__payment_choice__vsep
-#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__payment_choice__vsep
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__customer_payment_choice__vsep
+#: model:ir.model.fields.selection,name:choreograph_sage.selection__res_partner__supplier_payment_choice__vsep
 msgid "VSEP"
 msgstr ""
 
