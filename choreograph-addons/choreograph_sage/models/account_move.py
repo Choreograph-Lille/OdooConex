@@ -86,7 +86,7 @@ class AccountMove(models.Model):
         rows = []                
                 
         for line in moves.line_ids:
-            if line.move_id.move_type == ['in_invoice', 'in_refund']:
+            if line.move_id.move_type in ['in_invoice', 'in_refund']:
                 role = line.move_id.partner_id.third_party_role_supplier_code
                 ref = 'FF' if line.move_id.move_type == 'in_invoice' else 'AF'
             else:
@@ -95,7 +95,7 @@ class AccountMove(models.Model):
             
             vals= {
                 "Code Société":"",
-                "Journal": 'ACH' if type in ['in_invoice', 'in_refund'] else 'VTE',
+                "Journal": line.move_id.journal_id.code,
                 "Type de Pièce":ref,
                 "Compte général":line.account_id.code or "",
                 "Rôle Tiers":role or "",
