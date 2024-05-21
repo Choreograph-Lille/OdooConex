@@ -89,15 +89,17 @@ class AccountMove(models.Model):
         type = moves[-1].move_type
                 
         for line in moves.line_ids:
-            if type in ['in_invoice', 'in_refund']:
+            if line.move_id.move_type in ['in_invoice', 'in_refund']:
                 role = line.move_id.partner_id.third_party_role_supplier_code
+                ref = 'FF' if line.move_id.move_type == 'in_invoice' else 'AF'
             else:
                 role = line.move_id.partner_id.third_party_role_client_code
+                ref = 'FC' if line.move_id.move_type == 'out_invoice' else 'AC'
             
             vals= {
                 "Code Société":"",
-                "Journal": 'ACH' if type == 'in' else 'VTE',
-                "Type de Pièce":'FF' if type == 'in' else 'FC',
+                "Journal": line.move_id.journal_id.code,
+                "Type de Pièce":ref,
                 "Compte général":line.account_id.code or "",
                 "Rôle Tiers":role or "",
                 "date piece":line.move_id.invoice_date or "",
