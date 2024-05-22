@@ -24,28 +24,19 @@ class AccountMove(models.Model):
                 rec.payment_choice = rec.partner_id.supplier_payment_choice
                
             elif rec.move_type in ['out_invoice', 'out_refund']:
-                rec.payment_choice = rec.partner_id.supplier_payment_choice
-
+                rec.payment_choice = rec.partner_id.customer_payment_choice
             else:
-                rec.payment_choice = rec.payment_choice
+                rec.payment_choice = False
+                
+
     def inverse_payment_choice(sefl):
         pass
 
     @api.depends('name', 'partner_id', 'partner_id.name')
     def _compute_wording(self):
         for rec in self:
-            rec.wording = "%s / %s" % (rec.partner_id.name, rec.name)
+            rec.wording = "%s-%s" % (rec.partner_id.name, rec.name)
 
-    @api.model_create_multi
-    def create(self, values):
-        res = super(AccountMove, self).create(values)
-        for move in res:
-            if move.partner_id:
-                move.update_payment_choice_from_partner()
-        return res
-
-    def update_payment_choice_from_partner(self):
-        self.payment_choice = self.partner_id.payment_choice
 
     def generate_sage_file(self, move_type, limit=None):
         ftp_server = self.env['choreograph.sage.ftp.server'].search([('active','=',True)], limit=1)
