@@ -13,7 +13,7 @@ from odoo.addons.choreograph_sage.models.res_partner import PAYMENT_CHOICE
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    payment_choice = fields.Selection(PAYMENT_CHOICE, compute='compute_payment_choice', inverse='inverse_payment_choice', string='Payment Choice')
+    payment_choice = fields.Selection(PAYMENT_CHOICE, compute='compute_payment_choice', inverse='inverse_payment_choice', string='Payment Choice', store=True)
     wording = fields.Char(compute='_compute_wording')
     is_transferred_to_sage = fields.Boolean()
 
