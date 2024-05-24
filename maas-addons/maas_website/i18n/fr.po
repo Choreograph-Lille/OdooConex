@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20221017\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-01-27 12:26+0000\n"
-"PO-Revision-Date: 2023-10-23 09:32+0000\n"
+"PO-Revision-Date: 2024-05-17 11:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -389,9 +389,9 @@ msgstr ""
 "                                          </span>"
 
 #. module: maas_website
-#: model_terms:ir.ui.view,arch_db:maas_website.indication
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_contact
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_home
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid "<span>Disconnect</span>"
 msgstr "<span>Déconnexion</span>"
@@ -718,13 +718,12 @@ msgid "Download"
 msgstr "Télécharger"
 
 #. module: maas_website
-#: model_terms:ir.ui.view,arch_db:maas_website.indication
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_contact
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
+#: model_terms:ir.ui.view,arch_db:maas_website.operation_home
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
 msgid "Downloaded ID"
 msgstr "ID consommés"
-
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_creation
 msgid "Enter the operation name :"
@@ -741,6 +740,11 @@ msgstr "Renseigné"
 #, python-format
 msgid "First page"
 msgstr "Première page"
+
+#. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.collapse_menu
+msgid "Home Page"
+msgstr "Accueil"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.operation_list
@@ -960,6 +964,30 @@ msgstr "Date MAJ vars additionnelles :"
 #: model_terms:ir.ui.view,arch_db:maas_website.indication
 msgid "Partner data update :"
 msgstr "Date MAJ titre :"
+
+#. module: maas_website
+#: model:ir.model.fields,field_description:maas_website.field_res_partner__pbi_column_filter
+#: model:ir.model.fields,field_description:maas_website.field_res_users__pbi_column_filter
+msgid "PBI Column Filter"
+msgstr "Colonne du filtre"
+
+#. module: maas_website
+#: model:ir.model.fields,field_description:maas_website.field_res_partner__pbi_function_app_url
+#: model:ir.model.fields,field_description:maas_website.field_res_users__pbi_function_app_url
+msgid "PBI Function App URL"
+msgstr "URL du rapport"
+
+#. module: maas_website
+#: model:ir.model.fields,field_description:maas_website.field_res_partner__pbi_table_filter
+#: model:ir.model.fields,field_description:maas_website.field_res_users__pbi_table_filter
+msgid "PBI Table Filter"
+msgstr "Table du filtre"
+
+#. module: maas_website
+#: model:ir.model.fields,field_description:maas_website.field_res_partner__pbi_value_filter
+#: model:ir.model.fields,field_description:maas_website.field_res_users__pbi_value_filter
+msgid "PBI Value Filter"
+msgstr "Valeur du filtre"
 
 #. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.login

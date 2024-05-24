@@ -582,6 +582,112 @@
         </xpath>
     </template>
 
+    <!-- MyModel Home -->
+    <template id="operation_home" name="Operation Home">
+        <div class="wrap-connexion">
+            <head>
+            </head>
+            <main class="operation-home">
+                <input type="hidden" id="partner_id" name="partner_id" t-att-value="partner"/>
+                <section class="container-fluid overlaying">
+                    <div class="top-container">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <a href="/" class="navbar-brand logo">
+                                    <img src="/maas_website/static/src/img/logo-header.png"
+                                         alt="Logo of YourCompany"
+                                         title="YourCompany"/>
+                                </a>
+                            </div>
+                            <div class="col-md-4" id="head-value">
+                                <div class="progress">
+                                    <input class="percent-progress-bar" type="hidden"
+                                           t-att-value="percent"/>
+                                    <div id="progress-bar" class="progress-bar" role="progressbar"
+                                         aria-valuenow="25"
+                                         aria-valuemin="0" aria-valuemax="100" style="width:0%">
+                                    </div>
+                                </div>
+                                <p class="valeur-id" style="text-align: center">
+                                    <b>
+                                        <t t-esc='total_qty_cumulative'/>
+                                        <t t-if="unlimited == False">/
+                                            <t t-esc='identifiers'/>
+                                        </t>
+                                    </b>
+                                    Downloaded ID
+                                </p>
+                            </div>
+                            <div class="col-md-4 user-section">
+                                <ul class="nav navbar-nav navbar-right" id="top_menu">
+                                    <li
+                                            t-if="(request and request.is_frontend_multilang and len(languages) &gt; 1) or (website and (editable or translatable))"
+                                            class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <t t-foreach="languages" t-as="lg">
+                                                <t t-if="request.context.get('lang') == lg[0]">
+                                                    <t t-esc="lg[2].split('/').pop() if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]"/>
+                                                </t>
+                                            </t>
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu js_language_selector" role="menu"
+                                            style="min-width: 73px;">
+                                            <t t-foreach="languages" t-as="lg">
+                                                <t t-if="lang!=lg[0]">
+                                                    <li style="min-width: 50px;">
+                                                        <a
+                                                                t-att-href="url_for(request.httprequest.path + '?' + keep_query(), lang_code=lg[0])"
+                                                                t-att-data-default-lang="editable and 'true' if lg[0] == website.default_lang_id.code else None"
+                                                                t-att-data-lang="lg[0]"
+                                                                t-att-data-url_code="lg[1]"
+                                                                class="js_change_lang"
+                                                        >
+                                                            <t t-esc="lg[2].split('/')[0] if lg[1] in ['fr','fr_FR'] else lg[2].split(' ')[0]"/>
+                                                        </a>
+                                                    </li>
+                                                </t>
+                                            </t>
+                                        </ul>
+                                    </li>
+                                    <li style="margin-top:-5px">
+                                        <a href="#">
+                                            <img class="notification-top"
+                                                 src="/maas_website/static/src/img/ico-notif.png"/>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown" style="margin-top:-9px">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <img class="user-top"
+                                                 src="/maas_website/static/src/img/ico-user.png"/>
+                                            <span t-esc="request.env.user.name"/>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li>
+                                                <a id="logout-id"
+                                                   href="/web/session/logout?redirect=/">
+                                                    <span>Disconnect</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <div class="operation-home-content">
+                    <div class="row">
+                        <div class="operation-home-content-iframe">
+                            <iframe src="" width="100%" height="100%" frameborder="0" id="home_report_bi_src"/>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <t t-call="maas_website.collapse_menu"/>
+    </template>
+
     <!-- Operation List -->
     <template id="operation_list" name="Operation List">
         <div class="wrap-connexion">
@@ -765,7 +871,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="btn-head">
+                                <div class="btn-head" t-if="not user.has_group('maas_base.freemium_user_role_res_groups')">
                                     <a href="#" class="btn btn-left-head create-campaign">
                                         <span style="vertical-align: middle;padding-left:8px;">
                                             Create
@@ -784,6 +890,9 @@
                                             Action
                                         </span>
                                     </a>
+                                </div>
+                                <div t-else="" style="margin-top:10px;">
+                                    <br/>
                                 </div>
                                 <div class="panel-group">
                                     <div id="campaign" class="panel panel-default campagne">
@@ -873,138 +982,15 @@
                                                         </t>
                                                     </ul>
                                                 </div>
-                                                <!--</t>-->
                                             </t>
                                         </div>
 
-                                        <!--<a
-                                        class="-liste editable" id="history-campaigns"
-                                        style="cursor:pointer;"
-                       t-att-folder="'parent-folder'"
-                                        t-att-archived="'archived'"
-                       t-att-deleted="'not
-                                        deleted'"
-                        data-toggle="collapse"
-                                        t-att-href="'#collapse-campaign-archived'">Campaign History
-                                        </a>
-                    <div
-                                        id="collapse-campaign-archived" class="collapse
-                                        collapsed-campaign" style="position:relative;">
-                        <t
-                                        t-foreach="campaign_ids.filtered(lambda j:j.has_archived)"
-                                        t-as="c">
-                            <a class="-liste
-                                        campaign-list editable" data-toggle="collapse"
-                                        t-att-href="'#collapse-archived'+str(c.id)" t-att-id="c.id "
-                                        t-att-name="c.name"
-                                t-att-archived="'archived'"
-                                        t-att-deleted="'not deleted'">
-                                <span
-                                        t-field="c.name"/>
-                                <span
-                                        class="badge badge badge-campaign-info"
-                                        t-esc="len(c.operation_ids.filtered(lambda o:o.archived and
-                                        not o.deleted))"/>
-                                &lt;!&ndash;<t
-                                        t-if="len(c.operation_ids.filtered(lambda o:o.active ==
-                                        False) == 0 and len(c.action_ids) == 0">
-                                    <img
-                                        class="ico-delete"
-                                        src="/maas_website/static/src/img/ico-no.png"
-                                        t-att-campaign-id="c.id"/>
-                                </t>&ndash;&gt;
-                                        </a>
-                            &lt;!&ndash;<div
-                                        class="hidden" style="padding-top:10px;
-                                        padding-bottom:10px;"
-                                 t-att-id="'campaign'+str(c.id)">
-                                        <i style="content:
-                                        url(/maas_website/static/src/img/ico-doc.png);
-                                    top:
-                                        2.5px;
-                                    margin-right:
-                                        7px;
-                                    position:
-                                        relative;">
-
-                                </i>
-                                <input
-                                        type="text" class="campaign-text-change"
-                                        style="padding-left:15px;width:200px; border: 2px solid
-                                        #87CEEB;"
-                                       t-att-id="'campaign'+str(c.id)"
-                                        t-att-value="c.name"/>
-                            </div>&ndash;&gt;
-                                        &lt;!&ndash;<t t-if="c.action_ids">&ndash;&gt;
-                                <div
-                                        t-att-id="'collapse-archived'+str(c.id)"
-                                        class="panel-collapse collapse">
-                                    <ul
-                                        t-att-id="'list-group'+str(c.id)" class="list-group"
-                                        style="margin-bottom: 0px;">
-                                        <t
-                                        t-foreach="c.action_ids.filtered(lambda j:j.has_archived)"
-                                        t-as="ca">
-                                            <li
-                                        class="list-group-item" t-att-id="ca.id"
-                                        t-att-campaign="c.id" t-att-archived="'archived'">
-                                                <a
-                                        href="#"
-                                                    t-att-archived="'archived'"
-                                        t-att-deleted="'not deleted'">
-                                                    <span
-                                        t-field="ca.name"/>
-                                                    <span
-                                        class="badge badge badge-action-info"
-                                        t-esc="len(ca.operation_ids.filtered(lambda j:j.archived and
-                                        not j.deleted))"/>
-                                                    <t
-                                        t-if="len(ca.operation_ids) == 0">
-                                                        <img
-                                        class="ico-delete"
-                                        src="/maas_website/static/src/img/ico-no.png"
-                                        t-att-action-id="ca.id"/>
-                                                    </t>
-                                        </a>
-                                            </li>
-                                        &lt;!&ndash;<div class="hidden" style="padding:9px 45px;"
-                                        t-att-id="ca.id">
-                                                <i
-                                        style="content:
-                                        url(/maas_website/static/src/img/ico-doc-2.png);;
-                                                    top:
-                                        2.5px;
-                                                    margin-right:
-                                        7px;
-                                                    position:
-                                        relative;">
-
-                                                </i>
-                                        <input type="text" class="action-text-change"
-                                        style="padding-left:15px;width:200px; border: 2px solid
-                                        #87CEEB;"
-                                                       t-att-id="'action'+str(ca.id)"
-                                        t-att-value="ca.name"/>
-                                            </div>&ndash;&gt;
-                                        </t>
-                                    </ul>
-                                </div>
-                                        &lt;!&ndash;</t>&ndash;&gt;
-                        </t>
-                                        </div>-->
                                         <a class="-liste editable" id="deleted-campaigns"
                                            style="cursor:pointer;"
                                            t-att-deleted="'deleted'"
                                            t-att-folder="'parent-folder'">Deleted operations
                                         </a>
-
-
                                     </div>
-                                    <!--<div>
-                      <a class="-liste editable"
-                                    id="all-campaigns" style="cursor:pointer;">Campaigns
-                      </a>
-                                    </div>-->
                                 </div>
                             </div>
                             <div class="col-sm-8 col-md-9 main">
@@ -1036,7 +1022,7 @@
                                 <div class="table-responsive blanc-bg">
                                     <div class="head-operations">
                                         <span>THEMES</span>
-                                        <a href="/operation/create" class="btn btn-operation">Create
+                                        <a t-if="not user.has_group('maas_base.freemium_user_role_res_groups')" href="/operation/create" class="btn btn-operation">Create
                                             a new campaign
                                             theme
                                         </a>
