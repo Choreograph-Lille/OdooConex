@@ -91,21 +91,6 @@ msgstr ""
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_uid
-msgid "Created by"
-msgstr ""
-
-#. module: choreograph_sage
-#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_date
-msgid "Created on"
-msgstr ""
-
-#. module: choreograph_sage
-#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: choreograph_sage
-#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__create_uid
 #: model:ir.model.fields,field_description:choreograph_sage.field_ftp_logging__create_uid
 msgid "Created by"
 msgstr ""
@@ -187,6 +172,11 @@ msgstr "Transféré vers SAGE"
 #: model:ir.model,name:choreograph_sage.model_account_move
 msgid "Journal Entry"
 msgstr "Pièce comptable"
+
+#. module: choreograph_sage
+#: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server__key_attachment_id
+msgid "Key Attachment"
+msgstr "Clé en PJ"
 
 #. module: choreograph_sage
 #: model:ir.model.fields,field_description:choreograph_sage.field_choreograph_sage_ftp_server____last_update
