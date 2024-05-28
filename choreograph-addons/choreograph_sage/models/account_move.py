@@ -9,7 +9,6 @@ from odoo.exceptions import ValidationError
 from odoo.addons.choreograph_sage.models.res_partner import PAYMENT_CHOICE
 
 
-
 class AccountMove(models.Model):
     _inherit = "account.move"
 
@@ -89,9 +88,7 @@ class AccountMove(models.Model):
             "JOUMM",
             "IDODOO"
         ]
-        rows = []
-        
-        type = moves[-1].move_type
+        rows = []                
                 
         for line in moves.line_ids:
             if line.move_id.move_type in ['in_invoice', 'in_refund']:
@@ -168,7 +165,7 @@ class AccountMove(models.Model):
         fields, rows = self.prepare_file_rows(moves)
         type = 'supplier' if moves[-1].move_type in ['in_invoice', 'in_refund'] else 'customer'
         
-        file_name = f"{datetime.now().strftime('%Y-%m-%d %H:%M')}.csv"
+        file_name = f"{'ECRACH' if type == 'supplier' else 'ECRVEN'}_{datetime.today().strftime('%Y%m%d')}.csv"
         try:
             key = paramiko.RSAKey.from_private_key_file(key_path, password=passphrase)
             ssh_client.connect(ftp_server.host, ftp_server.port, ftp_server.username, pkey=key)
@@ -190,7 +187,7 @@ class AccountMove(models.Model):
         except Exception as e:
             state = 'failed'
             message = str(e)
-            self.create_ftp_log(state, type, message,file=None, file_name=None, line_count=None)      
+            self.create_ftp_log(state, type, message)      
         finally:
             ssh_client.close()
         return True
