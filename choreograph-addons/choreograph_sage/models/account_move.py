@@ -16,7 +16,7 @@ class AccountMove(models.Model):
     wording = fields.Char(compute='_compute_wording')
     is_transferred_to_sage = fields.Boolean()
 
-    @api.depends('partner_id','move_type')
+    @api.depends('partner_id', 'move_type', 'partner_id.supplier_payment_choice', 'partner_id.customer_payment_choice')
     def compute_payment_choice(self):
         for rec in self:
             if rec.move_type in ['in_invoice', 'in_refund']:
@@ -26,9 +26,8 @@ class AccountMove(models.Model):
                 rec.payment_choice = rec.partner_id.customer_payment_choice
             else:
                 rec.payment_choice = False
-                
 
-    def inverse_payment_choice(sefl):
+    def inverse_payment_choice(self):
         pass
 
     @api.depends('name', 'partner_id', 'partner_id.name')
@@ -36,9 +35,8 @@ class AccountMove(models.Model):
         for rec in self:
             rec.wording = "%s-%s" % (rec.partner_id.name, rec.name)
 
-
     def generate_sage_file(self, move_type, limit=None):
-        ftp_server = self.env['choreograph.sage.ftp.server'].search([('active','=',True)], limit=1)
+        ftp_server = self.env['choreograph.sage.ftp.server'].search([('active', '=', True)], limit=1)
         if not ftp_server:
             raise ValidationError(_('Make sure to configure an active FTP server!'))
 
@@ -97,31 +95,31 @@ class AccountMove(models.Model):
             else:
                 role = line.move_id.partner_id.third_party_role_client_code
                 ref = 'FC' if line.move_id.move_type == 'out_invoice' else 'AC'
-            
-            vals= {
-                "Code Société":"",
+
+            vals = {
+                "Code Société": "",
                 "Journal": line.move_id.journal_id.code,
-                "Type de Pièce":ref,
-                "Compte général":line.account_id.code or "",
-                "Rôle Tiers": role if line.account_id and line.account_id.code[:3] in ['401', '411'] else "",
-                "date piece":line.move_id.invoice_date or "",
-                "date échéance":line.move_id.invoice_date_due or "",
-                "Mode reglement":line.move_id.payment_choice or "",
-                "Référence Pièce":line.move_id.name or "",
-                "Libellé":line.move_id.wording or "",
-                "Devise":line.move_id.currency_id.name or "",
-                "Débit devise":line.debit,
-                "Crédit Devise":line.credit,
-                "Débit EUR":"",
-                "Crédit EUR":"",
-                "Libellé CARTESIS":"",
-                "codeCARTESIS":line.move_id.partner_id.cartesis_code or "",
-                "Département":"",
-                "Média":"",
-                "ProfilTVA":','.join(line.tax_ids.filtered(lambda l:l.tva_profile_code !=False).mapped("tva_profile_code")),
-                "NUMDEVIS":line.move_id.invoice_origin or "",
-                "JOUMM":"",
-                "IDODOO":line.id
+                "Type de Pièce": ref,
+                "Compte général": line.account_id.code or "",
+                "Rôle Tiers": role or "",
+                "date piece": line.move_id.invoice_date or "",
+                "date échéance": line.move_id.invoice_date_due or "",
+                "Mode reglement": str(line.move_id.payment_choice).upper() or "",
+                "Référence Pièce": line.move_id.name or "",
+                "Libellé": line.move_id.wording or "",
+                "Devise": line.move_id.currency_id.name or "",
+                "Débit devise": '%.2f' % line.debit,
+                "Crédit Devise": '%.2f' % line.credit,
+                "Débit EUR": "",
+                "Crédit EUR": "",
+                "Libellé CARTESIS": "",
+                "codeCARTESIS": line.move_id.partner_id.cartesis_code or "",
+                "Département": "",
+                "Média": "",
+                "ProfilTVA": ','.join(line.tax_ids.filtered(lambda l: l.tva_profile_code != False).mapped("tva_profile_code")),
+                "NUMDEVIS": line.move_id.invoice_origin or "",
+                "JOUMM": "",
+                "IDODOO": line.id
             }
             rows.append(vals)
         return fields, rows
@@ -134,11 +132,11 @@ class AccountMove(models.Model):
         """
         log_vals = {
             "export_date": datetime.today(),
-            "file_name":file_name,
+            "file_name": file_name,
             "line_count": line_count,
             "message": message,
-            "state":state,
-            "type":type
+            "state": state,
+            "type": type
         }
         if file:
             attachment_vals = {
