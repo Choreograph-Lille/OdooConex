@@ -101,7 +101,7 @@ class AccountMove(models.Model):
                 "Journal": line.move_id.journal_id.code,
                 "Type de Pièce": ref,
                 "Compte général": line.account_id.code or "",
-                "Rôle Tiers": role or "",
+                "Rôle Tiers": role if line.account_id and line.account_id.code[:3] in ['401', '411'] else "",
                 "date piece": line.move_id.invoice_date or "",
                 "date échéance": line.move_id.invoice_date_due or "",
                 "Mode reglement": str(line.move_id.payment_choice).upper() if line.move_id.payment_choice else "",
