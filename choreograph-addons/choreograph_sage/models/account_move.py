@@ -104,7 +104,7 @@ class AccountMove(models.Model):
                 "Rôle Tiers": role or "",
                 "date piece": line.move_id.invoice_date or "",
                 "date échéance": line.move_id.invoice_date_due or "",
-                "Mode reglement": str(line.move_id.payment_choice).upper() or "",
+                "Mode reglement": str(line.move_id.payment_choice).upper() if line.move_id.payment_choice else "",
                 "Référence Pièce": line.move_id.name or "",
                 "Libellé": line.move_id.wording or "",
                 "Devise": line.move_id.currency_id.name or "",
