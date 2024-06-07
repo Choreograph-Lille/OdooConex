@@ -14,18 +14,21 @@ class AccountMove(models.Model):
 
     payment_choice = fields.Selection(PAYMENT_CHOICE, compute='compute_payment_choice', inverse='inverse_payment_choice', string='Payment Choice', store=True)
     wording = fields.Char(compute='_compute_wording')
-    is_transferred_to_sage = fields.Boolean()
+    is_transferred_to_sage = fields.Boolean(copy=False)
 
     @api.depends('partner_id', 'move_type', 'partner_id.supplier_payment_choice', 'partner_id.customer_payment_choice')
     def compute_payment_choice(self):
         for rec in self:
-            if rec.move_type in ['in_invoice', 'in_refund']:
-                rec.payment_choice = rec.partner_id.supplier_payment_choice
-               
-            elif rec.move_type in ['out_invoice', 'out_refund']:
-                rec.payment_choice = rec.partner_id.customer_payment_choice
+            if rec.state == 'draft':
+                if rec.move_type in ['in_invoice', 'in_refund']:
+                    rec.payment_choice = rec.partner_id.supplier_payment_choice
+
+                elif rec.move_type in ['out_invoice', 'out_refund']:
+                    rec.payment_choice = rec.partner_id.customer_payment_choice
+                else:
+                    rec.payment_choice = False
             else:
-                rec.payment_choice = False
+                rec.payment_choice = rec.payment_choice
 
     def inverse_payment_choice(self):
         pass
