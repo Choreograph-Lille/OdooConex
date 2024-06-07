@@ -7,7 +7,7 @@ PAYMENT_CHOICE = [
     ('vsep', 'VSEP'),
     ('prv', 'PRV'),
     ('virint', 'VIRINT'),
-    ('bcc', 'BCC'),
+    ('cbb', 'CBB'),
     ('chq', 'CHQ'),
 ]
 
@@ -37,4 +37,4 @@ class ResPartner(models.Model):
             rec.cartesis_code = rec.parent_id.cartesis_code if rec.parent_id else rec.cartesis_code
 
     def inverse_parent_fields(self):
-        pass
+        self.child_ids.compute_parent_fields()
