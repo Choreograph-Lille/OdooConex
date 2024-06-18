@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-17 13:24+0000\n"
-"PO-Revision-Date: 2024-06-17 13:24+0000\n"
+"POT-Creation-Date: 2024-06-18 08:42+0000\n"
+"PO-Revision-Date: 2024-06-18 08:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -30,22 +30,6 @@ msgstr "%s créé"
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__volume_percentage
 msgid "%vol"
-msgstr ""
-
-#. module: choreograph_sale
-#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
-msgid ""
-"- Assurer la sécurité et la confidentialité des Données Conex et notamment, empêcher\n"
-"                            qu’elles\n"
-"                            soient déformées, endommagées, ou que des tiers non autorisés y aient accès, notamment le\n"
-"                            Client\n"
-"                            s’engage à ne pas les divulguer d’une manière qui porterait atteinte à toute loi ou\n"
-"                            règlement.\n"
-"                            Dans l’hypothèse où une faille de sécurité relative aux Données Conex serait détectée par le\n"
-"                            Client, ce dernier s’engage à en informer Choreograph par écrit dans les plus brefs délais ;\n"
-"                            <br/>\n"
-"                            - Supprimer définitivement, à l'issue des Services, toutes les Données Conex qui lui ont été\n"
-"                            transmises ainsi que toutes les copies qui auraient pu en être faites."
 msgstr ""
 
 #. module: choreograph_sale
@@ -1215,14 +1199,32 @@ msgid ""
 "                            <br/>\n"
 "                            Par ailleurs, si à la suite de l'exécution des Services, une personne concernée par les\n"
 "                            Données\n"
-"                            Conex, exerce ses droits de réclamation directement auprès du Client, ce dernier devra\n"
+"                            Conex, exerce ses droits de réclamation directement auprès du Client, \n"
+"                            ce dernier devra\n"
 "                            immédiatement en informer Choreograph, par email confirmé par lettre avec accusé de\n"
-"                            réception,\n"
-"                            et au plus tard dans les soixante-douze (72) heures suivant la date à laquelle le Client a\n"
-"                            eu\n"
-"                            connaissance de la réclamation, au regard de la Réglementation sur la protection des\n"
-"                            données."
+"                            réception,"
 msgstr ""
+"Choreograph a développé une procédure de gestion interne des demandes d'exercice de droits\n"
+"                            (opposition, accès, rectification…) exercées directement par les personnes concernées ou par\n"
+"                            le\n"
+"                            biais du Responsable du traitement, afin que les Données Conex soient très régulièrement\n"
+"                            mises à\n"
+"                            jour.\n"
+"                            <br/>\n"
+"                            Dans les cas où le Client planifie sa communication commerciale plus d'un mois après la date\n"
+"                            de\n"
+"                            livraison des Données Conex par Choreograph, le Client est encouragé à effectuer une mise à\n"
+"                            jour\n"
+"                            des Données Conex livrées, en utilisant le fichier d'opposition (ou \"liste repoussoir\") mis\n"
+"                            à\n"
+"                            disposition du Client par Choreograph. Ce fichier d'opposition, qui est mis à jour\n"
+"                            quotidiennement par Choreograph, et qui est accessible sur simple demande, permet au Client\n"
+"                            d'exclure des Données Conex livrées, toute personne concernée ayant exercé son droit\n"
+"                            d'opposition ou de suppression, avant toute communication commerciale.\n"
+"                            <br/>\n"
+"                            Par ailleurs, si à la suite de l'exécution des Services, une personne concernée par les\n"
+"                            Données\n"
+"                            Conex, exerce ses droits de réclamation directement auprès du Client,"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -1536,11 +1538,7 @@ msgid ""
 "                            - Utiliser les Données Conex uniquement en interne et pour le seul usage défini dans le\n"
 "                            devis;\n"
 "                            <br/>\n"
-"                            - Ne pas stocker ou archiver les Données Conex sur quelque support que ce soit au-delà de la\n"
-"                            durée des Services ou de l’utilisation convenue entre les Parties telle qu’indiquée dans le\n"
-"                            bon\n"
-"                            de commande ; étant précisé que tout manquement de ce point de vue peut constituer une\n"
-"                            infraction pénale dont le Client serait alors entièrement responsable ;"
+"                            - Ne pas stocker ou archiver les Données Conex sur quelque support que ce soit au-delà"
 msgstr ""
 
 #. module: choreograph_sale
@@ -1988,9 +1986,8 @@ msgstr ""
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
-"If during the Services, one of the parties finds that the Conex Data has been or is being brought to\n"
-"                            the knowledge of unauthorized third parties, or if there are any facts that suggests that the Conex\n"
-"                            Data processed has been breached in any way, they must promptly inform the other party"
+"If during the Services, one of the parties finds that the Conex Data has "
+"been or is being"
 msgstr ""
 
 #. module: choreograph_sale
@@ -3033,13 +3030,6 @@ msgstr "Termes et conditions"
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
-"The Conex Data requested by the Client shall be delivered to the latter by digital medium in\n"
-"                            accordance with the provisions specified in the estimate or the purchase order."
-msgstr ""
-
-#. module: choreograph_sale
-#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
-msgid ""
 "The Courts of Lille, France, will have sole and exclusive jurisdiction in the event of a dispute\n"
 "                            arising from the interpretation or enforcement of these General Terms and Conditions."
 msgstr ""
@@ -3247,7 +3237,9 @@ msgid ""
 "                            calendar days from the date it is sent to the Client.<br/>\n"
 "                            The order shall be deemed final only upon a written confirmation by a representative of the Client.\n"
 "                            The duration of the Services is specified in the estimate. If not specified, the duration of the\n"
-"                            Services may not exceed the date on which payment is due, in accordance with article 6.2.<br/>"
+"                            Services may not exceed the date on which payment is due, in accordance with article 6.2.<br/>\n"
+"                            The Conex Data requested by the Client shall be delivered to the latter by digital medium in\n"
+"                            accordance with the provisions specified in the estimate or the purchase order."
 msgstr ""
 
 #. module: choreograph_sale
@@ -3309,12 +3301,44 @@ msgstr "Témoins"
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
-"exhaustively\n"
+"brought to\n"
+"                            the knowledge of unauthorized third parties, or if there are any facts that suggests that the Conex\n"
+"                            Data processed has been breached in any way, they must promptly inform the other party \n"
+"                            exhaustively\n"
 "                            and in writing, of the nature and scope of the incident, and of the measures it has taken to\n"
 "                            urgently stop the illegal transmission and/or unauthorized knowledge by third parties, and prevent\n"
 "                            such occurrence from happening in the future. This information must be provided within forty-eight\n"
 "                            (48) hours from the date on which the concerned party becomes aware of the violation itself or the\n"
 "                            facts suggesting a violation."
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"de la durée des Services ou de l’utilisation convenue entre les Parties telle qu’indiquée dans le\n"
+"                            bon de commande ; \n"
+"                            étant précisé que tout manquement de ce point de vue peut constituer une\n"
+"                            infraction pénale dont le Client serait alors entièrement responsable ;\n"
+"                            - Assurer la sécurité et la confidentialité des Données Conex et notamment, empêcher\n"
+"                            qu’elles\n"
+"                            soient déformées, endommagées, ou que des tiers non autorisés y aient accès, notamment le\n"
+"                            Client\n"
+"                            s’engage à ne pas les divulguer d’une manière qui porterait atteinte à toute loi ou\n"
+"                            règlement.\n"
+"                            Dans l’hypothèse où une faille de sécurité relative aux Données Conex serait détectée par le\n"
+"                            Client, ce dernier s’engage à en informer Choreograph par écrit dans les plus brefs délais ;\n"
+"                            <br/>\n"
+"                            - Supprimer définitivement, à l'issue des Services, toutes les Données Conex qui lui ont été\n"
+"                            transmises ainsi que toutes les copies qui auraient pu en être faites."
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"et au plus tard dans les soixante-douze (72) heures suivant la date à laquelle le Client a\n"
+"                            eu\n"
+"                            connaissance de la réclamation, au regard de la Réglementation sur la protection des\n"
+"                            données."
 msgstr ""
 
 #. module: choreograph_sale
