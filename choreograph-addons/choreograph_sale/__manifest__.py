@@ -27,6 +27,8 @@
         # wizards
         'wizards/operation_generation_views.xml',
         # report
+        'report/paperformat.xml',
+        'report/ir_actions_report.xml',
         'report/report_terms_templates.xml',
         'report/report_templates.xml',
         # views
