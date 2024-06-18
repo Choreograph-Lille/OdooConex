@@ -6,6 +6,7 @@
             <t t-set="choreo_title" t-value="'margin: 1px'" />
             <t t-set="choreo_p_en" t-value="'margin: 1px'" />
             <t t-set="choreo_title_en" t-value="'margin: -1px'" />
+            <t t-set="choreo_en_row" t-value="'margin-top: -10px;padding-top: -10px'"/>
             <t t-if="doc.partner_id.lang == 'fr_FR'">
                 <div class="row">
                     <div class="col-6" style="padding-right: 5px;">
@@ -148,17 +149,17 @@
                             - Utiliser les Données Conex uniquement en interne et pour le seul usage défini dans le
                             devis;
                             <br/>
-                            - Ne pas stocker ou archiver les Données Conex sur quelque support que ce soit au-delà de la
-                            durée des Services ou de l’utilisation convenue entre les Parties telle qu’indiquée dans le
-                            bon
-                            de commande ; étant précisé que tout manquement de ce point de vue peut constituer une
+                            - Ne pas stocker ou archiver les Données Conex sur quelque support que ce soit au-delà 
+                            de la durée des Services ou de l’utilisation convenue entre les Parties telle qu’indiquée dans le
+                            bon de commande ; 
+                            étant précisé que tout manquement de ce point de vue peut constituer une
                             infraction pénale dont le Client serait alors entièrement responsable ;
                         </p>
                         
                     </div>
                    
                     <div class="col-6" style="padding-left: 10px;">
-                        <p t-att-style="choreo_p">
+                        <p t-att-style="choreo_p">   
                             - Assurer la sécurité et la confidentialité des Données Conex et notamment, empêcher
                             qu’elles
                             soient déformées, endommagées, ou que des tiers non autorisés y aient accès, notamment le
@@ -438,18 +439,21 @@
                             <br/>
                             Par ailleurs, si à la suite de l'exécution des Services, une personne concernée par les
                             Données
-                            Conex, exerce ses droits de réclamation directement auprès du Client, ce dernier devra
+                            Conex, exerce ses droits de réclamation directement auprès du Client, 
+                            ce dernier devra
                             immédiatement en informer Choreograph, par email confirmé par lettre avec accusé de
                             réception,
-                            et au plus tard dans les soixante-douze (72) heures suivant la date à laquelle le Client a
-                            eu
-                            connaissance de la réclamation, au regard de la Réglementation sur la protection des
-                            données.
                         </p>
                         
                     </div>                       
                    
                     <div class="col-6" style="padding-left: 10px;">
+                        <p t-att-style="choreo_p">
+                            et au plus tard dans les soixante-douze (72) heures suivant la date à laquelle le Client a
+                            eu
+                            connaissance de la réclamation, au regard de la Réglementation sur la protection des
+                            données.
+                        </p>
                         <p t-att-style="choreo_title">
                             <strong>
                                 <i>
@@ -606,7 +610,7 @@
                 </div>
             </t>
             <t t-else="">
-                <div class="row">
+                <div class="row" t-att-style="choreo_en_row">
                     <div class="col-12" style="padding-right: 5px;">
                         <p t-att-style="choreo_title_en">
                             <strong style="font-size: 10px;">
@@ -615,7 +619,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" >
                     <div class="col-6" style="padding-right: 5px;">
                         <p t-att-style="choreo_title_en">
                             <strong>
@@ -875,7 +879,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row" style="page-break-before: always! important;">
+                <div class="row" style="page-break-before: always! important;margin-top: -10px">
                     <div class="col-6" style="padding-right: 5px;">
                         <p t-att-style="choreo_p_en">
                             4) When the dispute originates outside the French territory, or in particular
