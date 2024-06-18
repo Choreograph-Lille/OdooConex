@@ -6,7 +6,7 @@
             <t t-set="choreo_title" t-value="'margin: 1px'" />
             <t t-set="choreo_p_en" t-value="'margin: 1px'" />
             <t t-set="choreo_title_en" t-value="'margin: -1px'" />
-            <t t-set="choreo_en_row" t-value="'margin-top: -10px;padding: -10px'"/>
+            <t t-set="choreo_en_row" t-value="'margin-top: -10px;padding-top: -10px'"/>
             <t t-if="doc.partner_id.lang == 'fr_FR'">
                 <div class="row">
                     <div class="col-6" style="padding-right: 5px;">
