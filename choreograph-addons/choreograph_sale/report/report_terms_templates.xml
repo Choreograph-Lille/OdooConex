@@ -152,16 +152,14 @@
                         </p>
                         <p t-att-style="choreo_p">
                             Concernant les Données Conex livrées par Choreograph dans le cadre des Services, le Client,
-                            s’engage à :
-                             <br/>
-                            - Utiliser les Données Conex uniquement en interne et pour le seul usage défini dans le
-                            
+                            s’engage à:                        
                         </p>
                         
                     </div>
                    
                     <div class="col-6" style="padding-left: 10px;">
                         <p t-att-style="choreo_p">   
+                            - Utiliser les Données Conex uniquement en interne et pour le seul usage défini dans le
                             devis;
                             <br/>
                             - Ne pas stocker ou archiver les Données Conex sur quelque support que ce soit au-delà 
