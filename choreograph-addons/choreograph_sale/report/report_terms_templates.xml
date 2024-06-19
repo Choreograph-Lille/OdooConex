@@ -35,11 +35,10 @@
                             est situé 27 bis, rue du Vieux Faubourg, 59000 Lille.
                             <br/>
                             Des clients de Choreograph ont décidé de participer à la constitution de bases de données
-                            mutualisées (<strong>"Alliance"</strong>), chacune spécifique à un secteur d'activité (vente
+                            mutualisées , chacune spécifique à un secteur d'activité (vente
                             à
-                            distance, presse, caritatif…), qui sont gérées par Choreograph pour le compte desdits
-                            clients
-                            membres d'une Alliance (<strong>"Membres"</strong>).
+                            distance, presse, caritatif…)ou à une utilisation particulière (prospection, enrichissement…), 
+                            qui sont gérées par Choreograph pour leur compte. 
                             <br/>
                             Choreograph assure la gestion (intégration, normalisation des données, etc.) et la mise à
                             disposition des données contenues dans lesdites bases de données mutualisées (ci-après les
@@ -93,6 +92,15 @@
                             Seules les stipulations portées sur un contrat signé ou des Conditions Particulières
                             conclues
                             entre Choreograph et le Client pourront déroger aux présentes.
+                            <br/>
+                            Le fait pour Choreograph de ne pas présenter d'objections aux stipulations contenues 
+                            dans une communication quelconque reçue du Client ne pourra pas être considéré comme une 
+                            renonciation à se prévaloir des présentes.
+                            <br/>
+                            Choreograph se réserve la possibilité de modifier à tout moment les présentes Conditions 
+                            Générales de Vente. Ces modifications ne seront applicables qu’aux prestations acceptées 
+                            postérieurement à la communication aux Clients par tous moyens des Conditions Générales de 
+                            Vente modifiées.
                         </p>
                         <p t-att-style="choreo_title">
                             <strong>
@@ -147,6 +155,13 @@
                             s’engage à :
                              <br/>
                             - Utiliser les Données Conex uniquement en interne et pour le seul usage défini dans le
+                            
+                        </p>
+                        
+                    </div>
+                   
+                    <div class="col-6" style="padding-left: 10px;">
+                        <p t-att-style="choreo_p">   
                             devis;
                             <br/>
                             - Ne pas stocker ou archiver les Données Conex sur quelque support que ce soit au-delà 
@@ -154,12 +169,6 @@
                             bon de commande ; 
                             étant précisé que tout manquement de ce point de vue peut constituer une
                             infraction pénale dont le Client serait alors entièrement responsable ;
-                        </p>
-                        
-                    </div>
-                   
-                    <div class="col-6" style="padding-left: 10px;">
-                        <p t-att-style="choreo_p">   
                             - Assurer la sécurité et la confidentialité des Données Conex et notamment, empêcher
                             qu’elles
                             soient déformées, endommagées, ou que des tiers non autorisés y aient accès, notamment le
@@ -306,18 +315,22 @@
                             généralement ses obligations légales ;
                             <br/>
                             4) Lorsque la contestation trouve son origine hors du territoire français.
+                            <br/>
                             Dans tous les cas, la responsabilité de Choreograph est limitée à la réparation du préjudice
-                            direct, certain et prouvé au sens de l'article 1231-3 du Code civil et dans la limite du
-                            prix des Services de Choreograph tel que défini dans le devis vise à l'article 3.
+                            direct, 
                         </p>
                     </div>
                 </div>
                 <div class="row" style="page-break-before: always! important;">
                     <div class="col-6" style="padding-right: 5px;">
+                        <p t-att-style="choreo_p">
+                            certain et prouvé au sens de l'article 1231-3 du Code civil et dans la limite du
+                            prix des Services de Choreograph tel que défini dans le devis vise à l'article 3.
+                        </p>
                         <p t-att-style="choreo_title">
                             <strong>
                                 <u>
-                                    8. Force Majeure
+                                    8. Force majeure
                                 </u>
                             </strong>
                         </p>
@@ -643,9 +656,9 @@
                             (FRANCE), (hereinafter referred to as <strong>"Choreograph"</strong>).
                             <br/>
                             Some of Choreograph's clients have decided to work together to create shared databases
-                            (<strong>"Alliances"</strong>), each of which is specific to a particular sector of activity (Mail
-                            Order, press, charities, etc.), which are managed by Choreograph on behalf of said clients who are
-                            members of a specific Alliance (<strong>"Members"</strong>).
+                            , each of which is specific to a particular sector of activity (Mail
+                            Order, press, charities, etc.), or for a specific use (prospection, enrichment…) which are managed 
+                            by Choreograph on behalf of said clients.
                             <br/>
                             Choreograph manages (integration, data standardization, etc.) and makes available data contained in
                             the shared databases (hereinafter referred to as <strong>"Conex Data"</strong>) to provide several
@@ -723,7 +736,7 @@
                             availability.<br/>
                             The estimate or the rates offered to the Client shall only remain valid for a period of thirty (30)
                             calendar days from the date it is sent to the Client.<br/>
-                            The order shall be deemed final only upon a written confirmation by a representative of the Client.
+                            The order shall be deemed final only upon a written confirmation by a representative of the Client.<br/>
                             The duration of the Services is specified in the estimate. If not specified, the duration of the
                             Services may not exceed the date on which payment is due, in accordance with article 6.2.<br/>
                             The Conex Data requested by the Client shall be delivered to the latter by digital medium in
@@ -745,7 +758,7 @@
                         <p t-att-style="choreo_title_en">
                             <strong>
                                 <i>
-                                    4.1 CLIENT's Obligations
+                                    4.1 Client's Obligations
                                 </i>
                             </strong>
                         </p>
