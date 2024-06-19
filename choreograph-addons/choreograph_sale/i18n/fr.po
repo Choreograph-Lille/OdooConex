@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-06-18 08:42+0000\n"
-"PO-Revision-Date: 2024-06-18 08:42+0000\n"
+"POT-Creation-Date: 2024-06-19 11:15+0000\n"
+"PO-Revision-Date: 2024-06-19 11:15+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -25,7 +25,7 @@ msgstr "%rétribution"
 #: code:addons/choreograph_sale/models/field_tracking_message_mixin.py:0
 #, python-format
 msgid "%s created"
-msgstr "%s créé"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__volume_percentage
@@ -240,7 +240,7 @@ msgstr ""
 #: code:addons/choreograph_sale/models/field_tracking_message_mixin.py:0
 #, python-format
 msgid "<span class='text-muted'><i>Empty</i></span>"
-msgstr "<span class='text-muted'><i>Aucun</i></span>"
+msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -320,15 +320,10 @@ msgstr ""
 msgid ""
 "<strong>\n"
 "                                <i>\n"
-"                                    4.1 CLIENT's Obligations\n"
+"                                    4.1 Client's Obligations\n"
 "                                </i>\n"
 "                            </strong>"
 msgstr ""
-"<strong>\n"
-"                        <i>\n"
-"                            4.1 Obligations du CLIENT\n"
-"                        </i>\n"
-"                    </strong>"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -885,9 +880,6 @@ msgid ""
 "                                </u>\n"
 "                            </strong>"
 msgstr ""
-"<strong>\n"
-"                        8. Responsabilité\n"
-"                    </strong>"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -898,9 +890,16 @@ msgid ""
 "                                </u>\n"
 "                            </strong>"
 msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
 "<strong>\n"
-"                        9. Force Majeure\n"
-"                    </strong>"
+"                                <u>\n"
+"                                    8. Force majeure\n"
+"                                </u>\n"
+"                            </strong>"
+msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -1080,7 +1079,7 @@ msgstr "Commentaire"
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "BAT/Witness File"
-msgstr "Fichier BAT/Témoin"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__base_id
@@ -1132,7 +1131,7 @@ msgstr "Campagne"
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Campaign Couting"
-msgstr "Comptages campagne"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_project_task_campaign__id_campaign
@@ -1455,10 +1454,35 @@ msgid ""
 "                            généralement ses obligations légales ;\n"
 "                            <br/>\n"
 "                            4) Lorsque la contestation trouve son origine hors du territoire français.\n"
+"                            <br/>\n"
 "                            Dans tous les cas, la responsabilité de Choreograph est limitée à la réparation du préjudice\n"
-"                            direct, certain et prouvé au sens de l'article 1231-3 du Code civil et dans la limite du\n"
-"                            prix des Services de Choreograph tel que défini dans le devis vise à l'article 3."
+"                            direct,"
 msgstr ""
+"Choreograph n’est tenue à l’égard du Client qu’à une obligation de moyens et ne fournit\n"
+"                            aucune\n"
+"                            garantie, expresse ou implicite, y compris, toute garantie de qualité et d’adéquation à un\n"
+"                            usage\n"
+"                            particulier des Données Conex transmises au Client par Choreograph.\n"
+"                            <br/>\n"
+"                            La responsabilité de Choreograph ne pourra pas être mise en œuvre dans les hypothèses\n"
+"                            suivantes:\n"
+"                            <br/>\n"
+"                            1) En cas de non-respect par le Client des dispositions de la Règlementation sur la\n"
+"                            protection\n"
+"                            des données ;\n"
+"                            <br/>\n"
+"                            2) Lorsque Choreograph aura formellement attiré l’attention du Client sur l’existence de\n"
+"                            risques\n"
+"                            juridiques et/ou techniques potentiels, que ce dernier aura acceptés par tout moyen\n"
+"                            approprié\n"
+"                            (mail, compte-rendu de réunion etc.) en toute connaissance de cause ;\n"
+"                            <br/>\n"
+"                            3) Lorsque le Client n’aura pas respecté ses obligations à l'égard des tiers ou plus\n"
+"                            généralement ses obligations légales ;\n"
+"                            <br/>\n"
+"                            4) Lorsque la contestation trouve son origine hors du territoire français.\n"
+"                            Dans tous les cas, la responsabilité de Choreograph est limitée à la réparation du préjudice\n"
+"                            direct"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -1535,10 +1559,7 @@ msgid ""
 "Concernant les Données Conex livrées par Choreograph dans le cadre des Services, le Client,\n"
 "                            s’engage à :\n"
 "                             <br/>\n"
-"                            - Utiliser les Données Conex uniquement en interne et pour le seul usage défini dans le\n"
-"                            devis;\n"
-"                            <br/>\n"
-"                            - Ne pas stocker ou archiver les Données Conex sur quelque support que ce soit au-delà"
+"                            - Utiliser les Données Conex uniquement en interne et pour le seul usage défini dans le"
 msgstr ""
 
 #. module: choreograph_sale
@@ -1561,14 +1582,14 @@ msgstr ""
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #, python-format
 msgid "Condition/Exclusion deleted"
-msgstr "Condition/Exclusion supprimé"
+msgstr ""
 
 #. module: choreograph_sale
 #. odoo-python
 #: code:addons/choreograph_sale/models/operation_condition.py:0
 #, python-format
 msgid "Condition/Exclusion line : %s"
-msgstr "Ligne Condition / Exclusion : %s"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_res_config_settings
@@ -1619,7 +1640,7 @@ msgstr "Créé le"
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Customer Fulfillment"
-msgstr "Fulfillment client"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__access_url
@@ -1659,7 +1680,7 @@ msgstr "Date de livraison"
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Delivery Info"
-msgstr "Info livraison"
+msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.report_saleorder_document
@@ -1672,7 +1693,7 @@ msgstr "Date de livraison"
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Deposit Date"
-msgstr "Date de dépôt"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__description
@@ -2203,7 +2224,16 @@ msgid ""
 "                            <br/>\n"
 "                            Seules les stipulations portées sur un contrat signé ou des Conditions Particulières\n"
 "                            conclues\n"
-"                            entre Choreograph et le Client pourront déroger aux présentes."
+"                            entre Choreograph et le Client pourront déroger aux présentes.\n"
+"                            <br/>\n"
+"                            Le fait pour Choreograph de ne pas présenter d'objections aux stipulations contenues \n"
+"                            dans une communication quelconque reçue du Client ne pourra pas être considéré comme une \n"
+"                            renonciation à se prévaloir des présentes.\n"
+"                            <br/>\n"
+"                            Choreograph se réserve la possibilité de modifier à tout moment les présentes Conditions \n"
+"                            Générales de Vente. Ces modifications ne seront applicables qu’aux prestations acceptées \n"
+"                            postérieurement à la communication aux Clients par tous moyens des Conditions Générales de \n"
+"                            Vente modifiées."
 msgstr ""
 
 #. module: choreograph_sale
@@ -2219,6 +2249,51 @@ msgstr ""
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
+"Les présentes constituent les Conditions générales de vente de Choreograph (ci-après\n"
+"                            les <strong>\n"
+"                            \"CGV\"</strong>)\n"
+"                            et s’appliquent à toutes les prestations de marketing proposées par la société Choreograph\n"
+"                            SAS\n"
+"                            (ci-après <strong>\"Choreograph\"</strong>), société au capital de 397 313 euros, immatriculée\n"
+"                            au\n"
+"                            Registre du Commerce et des Sociétés de Lille sous le numéro 489 496 331, dont le siège\n"
+"                            social\n"
+"                            est situé 27 bis, rue du Vieux Faubourg, 59000 Lille.\n"
+"                            <br/>\n"
+"                            Des clients de Choreograph ont décidé de participer à la constitution de bases de données\n"
+"                            mutualisées , chacune spécifique à un secteur d'activité (vente\n"
+"                            à\n"
+"                            distance, presse, caritatif…)ou à une utilisation particulière (prospection, enrichissement…), \n"
+"                            qui sont gérées par Choreograph pour leur compte. \n"
+"                            <br/>\n"
+"                            Choreograph assure la gestion (intégration, normalisation des données, etc.) et la mise à\n"
+"                            disposition des données contenues dans lesdites bases de données mutualisées (ci-après les\n"
+"                            <strong>\"Données Conex\"</strong>) à des fins de fourniture de services de marketing\n"
+"                            notamment\n"
+"                            des services de prospection, d’optimisation, de fidélisation, e-commerce, ISA etc. (ci-après\n"
+"                            les\n"
+"                            <strong>\"Services\"</strong>)\n"
+"                            auprès de sociétés clientes. Dans le cadre des présentes, il est précisé que le\n"
+"                            terme <strong>\n"
+"                            \"Client\"</strong>, comprend la société cliente pour laquelle Choreograph fournit des\n"
+"                            Services,\n"
+"                            ainsi que l’ensemble des intermédiaires, quels qu’ils soient (mandataires, prestataires,\n"
+"                            agence\n"
+"                            etc.), auxquels la société cliente fait appel pour agir en son nom pour l’exécution de ses\n"
+"                            obligations en vertu des présentes. Il est entendu que (i) la société cliente est\n"
+"                            entièrement\n"
+"                            responsable de ses intermédiaires et se porte fort qu'ils respectent les obligations à sa\n"
+"                            charge\n"
+"                            découlant des présentes, (ii) la société cliente et ses intermédiaires sont solidairement\n"
+"                            responsables et (iii) la société cliente garantit, Choreograph, à ce titre.\n"
+"                            <br/>\n"
+"                            Les Données Conex sont pour partie des données à caractère personnel au sens de la\n"
+"                            règlementation applicable, comprenant notamment la loi Informatique et liberté du 6 janvier\n"
+"                            1978\n"
+"                            modifiée et le règlement européen n°2016/679 du 27 avril 2016 dit règlement général sur la\n"
+"                            protection des données personnelles ou « RGPD » (ci-après, la <strong>\"Règlementation sur la\n"
+"                            protection des données\"</strong>)."
+msgstr ""
 "Les présentes constituent les Conditions générales de vente de Choreograph (ci-après\n"
 "                            les <strong>\n"
 "                            \"CGV\"</strong>)\n"
@@ -2264,7 +2339,6 @@ msgid ""
 "                            modifiée et le règlement européen n°2016/679 du 27 avril 2016 dit règlement général sur la\n"
 "                            protection des données personnelles ou « RGPD » (ci-après, la <strong>\"Règlementation sur la\n"
 "                            protection des données\"</strong>)."
-msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -2464,7 +2538,7 @@ msgstr ""
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "OPT-OUT Link"
-msgstr "Lien OPT-OUT"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__is_open
@@ -2588,7 +2662,7 @@ msgstr "Adresse Postale"
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Potential Return"
-msgstr "Retour de potentiel"
+msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -2619,14 +2693,14 @@ msgstr ""
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Presta Delivery"
-msgstr "Livraison presta"
+msgstr ""
 
 #. module: choreograph_sale
 #. odoo-python
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Presta Info"
-msgstr "Info presta"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_product_template
@@ -2640,7 +2714,7 @@ msgstr "Modèle d'article"
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Project Name"
-msgstr "Nom du projet"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model,name:choreograph_sale.model_project_task_campaign
@@ -2891,7 +2965,7 @@ msgstr "Sauvegarder"
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Scoring Presentation"
-msgstr "Présentation de score"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__access_token
@@ -2981,7 +3055,7 @@ msgstr ""
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "Study Delivery"
-msgstr "Livraison études"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_operation_condition__subtype
@@ -3043,7 +3117,7 @@ msgstr ""
 #, python-format
 msgid ""
 "The operation template must have the following task number: {0}, {1}, {2}"
-msgstr "Le modèle d'opération doit avoir des tâches de numéros: {0}, {1}, {2}"
+msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -3101,8 +3175,6 @@ msgstr ""
 #, python-format
 msgid "There is no operation to generate for the items selected in the quote"
 msgstr ""
-"Il n'y a pas d'opération à générer pour les articles sélectionnés dans le "
-"devis"
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
@@ -3145,6 +3217,36 @@ msgid ""
 "                            (FRANCE), (hereinafter referred to as <strong>\"Choreograph\"</strong>).\n"
 "                            <br/>\n"
 "                            Some of Choreograph's clients have decided to work together to create shared databases\n"
+"                            , each of which is specific to a particular sector of activity (Mail\n"
+"                            Order, press, charities, etc.), or for a specific use (prospection, enrichment…) which are managed \n"
+"                            by Choreograph on behalf of said clients.\n"
+"                            <br/>\n"
+"                            Choreograph manages (integration, data standardization, etc.) and makes available data contained in\n"
+"                            the shared databases (hereinafter referred to as <strong>\"Conex Data\"</strong>) to provide several\n"
+"                            marketing Services such as prospection, optimization, customer loyalty, e-commerce, Door Drop etc.\n"
+"                            (hereinafter referred to as the <strong>\"Services\"</strong>) for its client companies. It is\n"
+"                            specified herein that the term\n"
+"                            <strong>\"Client\"</strong>\n"
+"                            encompass the client company for which Choreograph provides Services, as well as all and\n"
+"                            any intermediaries (agents, service providers, agencies, etc.), that the client company may appoint\n"
+"                            to act on its behalf for the performance of its obligations under the present General Terms and\n"
+"                            Conditions of Business. It is understood that (i) the client company is fully liable for its\n"
+"                            intermediaries and shall ensure that they comply with the obligations hereunder, (ii) the client\n"
+"                            company and its intermediaries are jointly liable, and (iii) the client company guarantees\n"
+"                            Choreograph in this respect.\n"
+"                            <br/>\n"
+"                            The Data consists of personal data within the meaning of the French Data Protection Act of January\n"
+"                            6th, 1978, as amended by the Act of August 6th 2004 and Regulation No. 2016/679 known as the General\n"
+"                            Regulation on the Protection of Personal Data or \"GDPR\" (hereinafter jointly referred to as the\n"
+"                            <strong>\"Data Protection Regulation\"</strong>)."
+msgstr ""
+"This document constitutes the General Terms and Conditions of Business of Choreograph (hereinafter\n"
+"                            the <strong>\"Terms and Conditions\"</strong>) which shall apply to all marketing Services offered by\n"
+"                            Choreograph SAS a company with a capital of 397 313 euros, registered in Lille Trade and Companies\n"
+"                            Register under number 489 496 331 and headquartered at 27 bis, rue du Vieux Faubourg, 59000 LILLE\n"
+"                            (FRANCE), (hereinafter referred to as <strong>\"Choreograph\"</strong>).\n"
+"                            <br/>\n"
+"                            Some of Choreograph's clients have decided to work together to create shared databases\n"
 "                            (<strong>\"Alliances\"</strong>), each of which is specific to a particular sector of activity (Mail\n"
 "                            Order, press, charities, etc.), which are managed by Choreograph on behalf of said clients who are\n"
 "                            members of a specific Alliance (<strong>\"Members\"</strong>).\n"
@@ -3167,7 +3269,6 @@ msgid ""
 "                            6th, 1978, as amended by the Act of August 6th 2004 and Regulation No. 2016/679 known as the General\n"
 "                            Regulation on the Protection of Personal Data or \"GDPR\" (hereinafter jointly referred to as the\n"
 "                            <strong>\"Data Protection Regulation\"</strong>)."
-msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,help:choreograph_sale.field_retribution_base__campaign_id
@@ -3235,12 +3336,23 @@ msgid ""
 "                            availability.<br/>\n"
 "                            The estimate or the rates offered to the Client shall only remain valid for a period of thirty (30)\n"
 "                            calendar days from the date it is sent to the Client.<br/>\n"
-"                            The order shall be deemed final only upon a written confirmation by a representative of the Client.\n"
+"                            The order shall be deemed final only upon a written confirmation by a representative of the Client.<br/>\n"
 "                            The duration of the Services is specified in the estimate. If not specified, the duration of the\n"
 "                            Services may not exceed the date on which payment is due, in accordance with article 6.2.<br/>\n"
 "                            The Conex Data requested by the Client shall be delivered to the latter by digital medium in\n"
 "                            accordance with the provisions specified in the estimate or the purchase order."
 msgstr ""
+"Upon Client's request, Choreograph shall send the latter an estimate or the rates chargeable for its\n"
+"                            Services. If the Services are chargeable, the estimate, or the rates, lays down Choreograph's\n"
+"                            conditions of intervention for the use of the Conex Data requested by the Client as well as their\n"
+"                            availability.<br/>\n"
+"                            The estimate or the rates offered to the Client shall only remain valid for a period of thirty (30)\n"
+"                            calendar days from the date it is sent to the Client.<br/>\n"
+"                            The order shall be deemed final only upon a written confirmation by a representative of the Client.\n"
+"                            The duration of the Services is specified in the estimate. If not specified, the duration of the\n"
+"                            Services may not exceed the date on which payment is due, in accordance with article 6.2.<br/>\n"
+"                            The Conex Data requested by the Client shall be delivered to the latter by digital medium in\n"
+"                            accordance with the provisions specified in the estimate or the purchase order."
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.operation_generation_view_form
@@ -3262,7 +3374,7 @@ msgstr "Détail volume"
 #: code:addons/choreograph_sale/models/retribution_base.py:0
 #, python-format
 msgid "Volume percentage is {0}%, this should be at 100%"
-msgstr "Le pourcentage actuel est de {0}%, il doit être de 100%"
+msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_field_tracking_message_mixin__website_message_ids
@@ -3315,7 +3427,17 @@ msgstr ""
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
-"de la durée des Services ou de l’utilisation convenue entre les Parties telle qu’indiquée dans le\n"
+"certain et prouvé au sens de l'article 1231-3 du Code civil et dans la limite du\n"
+"                            prix des Services de Choreograph tel que défini dans le devis vise à l'article 3."
+msgstr ""
+
+#. module: choreograph_sale
+#: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
+msgid ""
+"devis;\n"
+"                            <br/>\n"
+"                            - Ne pas stocker ou archiver les Données Conex sur quelque support que ce soit au-delà \n"
+"                            de la durée des Services ou de l’utilisation convenue entre les Parties telle qu’indiquée dans le\n"
 "                            bon de commande ; \n"
 "                            étant précisé que tout manquement de ce point de vue peut constituer une\n"
 "                            infraction pénale dont le Client serait alors entièrement responsable ;\n"
@@ -3367,7 +3489,7 @@ msgstr ""
 #: code:addons/choreograph_sale/models/sale_order.py:0
 #, python-format
 msgid "the record %s has no delivery date."
-msgstr "L'enregistrement %s n'a pas de date de livraison"
+msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
