@@ -97,6 +97,7 @@ class AccountMove(models.Model):
                 media = False
                 account_first_number = list(str(line.account_id.code))[0] if line.account_id.code else False
                 vat = ','.join(line.tax_ids.filtered(lambda l: l.tva_profile_code != False).mapped("tva_profile_code"))
+                vat_value = False
                 if line.move_id.move_type in ['in_invoice', 'in_refund']:
                     role = line.move_id.partner_id.third_party_role_supplier_code
                     ref = 'FF' if line.move_id.move_type == 'in_invoice' else 'AF'
@@ -133,7 +134,7 @@ class AccountMove(models.Model):
                     "codeCARTESIS": line.move_id.partner_id.cartesis_code or "",
                     "Département": department if department else "",
                     "Média": media if media else "",
-                    "ProfilTVA": vat_value,
+                    "ProfilTVA": vat_value or "",
                     "NUMDEVIS": line.move_id.invoice_origin or "",
                     "JOUMM": "",
                     "IDODOO": line.id
