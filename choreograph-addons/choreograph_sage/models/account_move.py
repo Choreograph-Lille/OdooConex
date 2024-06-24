@@ -103,12 +103,14 @@ class AccountMove(models.Model):
                     if account_first_number and account_first_number == '6':
                         department = 132
                         media = 217
+                        vat_value = vat or "CEIEXO"
                 else:
                     role = line.move_id.partner_id.third_party_role_client_code
                     ref = 'FC' if line.move_id.move_type == 'out_invoice' else 'AC'
                     if account_first_number and account_first_number == '7':
                         department = 132
                         media = 217
+                        vat_value = vat or "CEIEXO"
                 
 
                 vals = {
@@ -131,7 +133,7 @@ class AccountMove(models.Model):
                     "codeCARTESIS": line.move_id.partner_id.cartesis_code or "",
                     "Département": department if department else "",
                     "Média": media if media else "",
-                    "ProfilTVA": vat or "CEIEXO",
+                    "ProfilTVA": vat_value,
                     "NUMDEVIS": line.move_id.invoice_origin or "",
                     "JOUMM": "",
                     "IDODOO": line.id
