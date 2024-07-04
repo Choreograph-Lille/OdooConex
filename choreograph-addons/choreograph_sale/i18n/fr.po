@@ -1677,8 +1677,8 @@ msgstr ""
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
-"Dans l’hypothèse où les Services convenues entre les parties comprennent une livraison de\n"
-"                            numéros de téléphone de consommateurs par Choreograph nécessitant une vérification Bloctel,\n"
+"Dans l’hypothèse où les Services convenues entre les parties comprennent une livraison\n"
+"                            de numéros de téléphone de consommateurs par Choreograph nécessitant une vérification Bloctel,\n"
 "                            il\n"
 "                            est précisé que le Client fait son affaire d'effectuer la confrontation à la liste\n"
 "                            d’opposition\n"
@@ -2289,7 +2289,7 @@ msgid ""
 "                            qui sont gérées par Choreograph pour leur compte. \n"
 "                            <br/>\n"
 "                            Choreograph assure la gestion (intégration, normalisation des données, etc.) et la mise à\n"
-"                            disposition des données contenues dans lesdites bases de données mutualisées (ci-après les\n"
+"                            disposition des données contenues dans les bases de données mutualisées (ci-après les\n"
 "                            <strong>\"Données Conex\"</strong>) à des fins de fourniture de services de marketing\n"
 "                            notamment\n"
 "                            des services de prospection, d’optimisation, de fidélisation, e-commerce, ISA etc. (ci-après\n"
@@ -2321,19 +2321,15 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
 "Les traitements réalisés sur les Données Conex préalablement à leur remise au Client sont\n"
-"                            réalisés par le Membre concerné fournisseur des Données en qualité de Responsable du\n"
-"                            traitement,\n"
+"                            réalisés par le fournisseur des Données en qualité de Responsable du traitement,\n"
 "                            et par Choreograph en sa qualité de Sous-traitant.\n"
 "                            <br/>\n"
-"                            Choreograph et chaque Membre concerné sont liées par un contrat de sous-traitance qui\n"
-"                            prévoit\n"
-"                            que le Responsable du traitement a la charge de la licéité du traitement comprenant\n"
-"                            notamment le\n"
-"                            choix de la base légale et l’information de la personne concernée. Choreograph s’engage à\n"
-"                            demander au Membre concerné la preuve de l’information fournie et du consentement ou du\n"
-"                            droit\n"
-"                            d’opposition collecté auprès des personnes concernées pour les fournir au Client à première\n"
-"                            demande."
+"                            Choreograph et chaque Responsable du traitement concerné sont liées par un contrat de\n"
+"                            sous-traitance qui prévoit que le Responsable du traitement a la charge de la licéité du\n"
+"                            traitement comprenant notamment le choix de la base légale et l’information de la personne\n"
+"                            concernée. Choreograph s’engage à demander au Responsable du traitement concerné la preuve\n"
+"                            de l’information fournie et du consentement ou du droit d’opposition collecté auprès des\n"
+"                            personnes concernées pour les fournir au Client à premièredemande."
 msgstr ""
 
 #. module: choreograph_sale
@@ -3109,14 +3105,14 @@ msgstr ""
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
-"The processing of Conex Data prior to delivery to the Client is carried out by the Member supplying\n"
-"                            the Data in its capacity as Data Controller and by Choreograph in its capacity as Processor.<br/>\n"
-"                            Choreograph is bound to each Member by a processing agreement which stipulates that the Member, as\n"
-"                            Data Controller, is responsible for the lawfulness of the processing, including the choice of legal\n"
-"                            basis and supplying information on the processing to the data subject. Choreograph undertakes to ask\n"
-"                            the Member concerned for proof of the information provided to the data subject, and of the consent\n"
-"                            or objection obtained from the data subjects, in order to make it available to the Client on first\n"
-"                            request."
+"The processing of Conex Data prior to delivery to the Client is carried out by the Data\n"
+"                            Controller supplying the Data and by Choreograph in its capacity as Processor.<br/>\n"
+                            Choreograph is bound to each Data Controller by a processing agreement which stipulates that
+                            the Data Controller, is responsible for the lawfulness of the processing, including the
+                            choice of legal basis and supplying information on the processing to the data subject.
+                            Choreograph undertakes to ask the relevant Data Controller for proof of the information
+                            provided to the data subject, and of the consent or objection obtained from the data
+                            subjects, in order to make it available to the Client on first request."
 msgstr ""
 
 #. module: choreograph_sale
@@ -3179,9 +3175,9 @@ msgid ""
 "                            between Choreograph and the Client may deviate from these Terms and Conditions.\n"
 "                            Choreograph's failure to object to provisions contained in communications from the Client shall not\n"
 "                            be construed as a waiver of these Terms and Conditions.<br/>\n"
-"                            Choreograph reserves the right to update or modify these Terms and Conditions at any time. These\n"
-"                            modifications shall only be applicable to Services performed after communication by any appropriate\n"
-"                            mean of the modified Terms and Conditions to the Client."
+"                            Choreograph reserves the right to update or modify these Terms and Conditions at any time.\n"
+"                            These modifications shall only be applicable to Services performed after communication by\n"
+"                            any appropriate mean of the modified Terms and Conditions to the Client."
 msgstr ""
 
 #. module: choreograph_sale
@@ -3404,16 +3400,16 @@ msgstr ""
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
-"certain et prouvé au sens de l'article 1231-3 du Code civil et dans la limite du\n"
+"Dans tous les cas, la responsabilité de Choreograph est limitée à la réparation du préjudice\n"
+"                            direct, certain et prouvé au sens de l'article 1231-3 du Code civil et dans la limite du\n"
 "                            prix des Services de Choreograph tel que défini dans le devis vise à l'article 3."
 msgstr ""
 
 #. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.term_and_conditions
 msgid ""
-"et au plus tard dans les soixante-douze (72) heures suivant la date à laquelle le Client a\n"
-"                            eu\n"
-"                            connaissance de la réclamation, au regard de la Réglementation sur la protection des\n"
+"et au plus tard dans les soixante-douze (72) heures suivant la date à laquelle le Client\n"
+"                            a eu connaissance de la réclamation, au regard de la Réglementation sur la protection des\n"
 "                            données."
 msgstr ""
 
