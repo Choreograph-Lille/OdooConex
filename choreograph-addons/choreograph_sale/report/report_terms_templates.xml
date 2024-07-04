@@ -41,7 +41,7 @@
                             qui sont gérées par Choreograph pour leur compte. 
                             <br/>
                             Choreograph assure la gestion (intégration, normalisation des données, etc.) et la mise à
-                            disposition des données contenues dans lesdites bases de données mutualisées (ci-après les
+                            disposition des données contenues dans les bases de données mutualisées (ci-après les
                             <strong>"Données Conex"</strong>) à des fins de fourniture de services de marketing
                             notamment
                             des services de prospection, d’optimisation, de fidélisation, e-commerce, ISA etc. (ci-après
@@ -322,7 +322,8 @@
                 <div class="row" style="page-break-before: always! important;">
                     <div class="col-6" style="padding-right: 5px;">
                         <p t-att-style="choreo_p">
-                            certain et prouvé au sens de l'article 1231-3 du Code civil et dans la limite du
+                            Dans tous les cas, la responsabilité de Choreograph est limitée à la réparation du préjudice
+                            direct, certain et prouvé au sens de l'article 1231-3 du Code civil et dans la limite du
                             prix des Services de Choreograph tel que défini dans le devis vise à l'article 3.
                         </p>
                         <p t-att-style="choreo_title">
@@ -369,19 +370,15 @@
                         </p>
                         <p t-att-style="choreo_p">
                             Les traitements réalisés sur les Données Conex préalablement à leur remise au Client sont
-                            réalisés par le Membre concerné fournisseur des Données en qualité de Responsable du
-                            traitement,
+                            réalisés par le fournisseur des Données en qualité de Responsable du traitement,
                             et par Choreograph en sa qualité de Sous-traitant.
                             <br/>
-                            Choreograph et chaque Membre concerné sont liées par un contrat de sous-traitance qui
-                            prévoit
-                            que le Responsable du traitement a la charge de la licéité du traitement comprenant
-                            notamment le
-                            choix de la base légale et l’information de la personne concernée. Choreograph s’engage à
-                            demander au Membre concerné la preuve de l’information fournie et du consentement ou du
-                            droit
-                            d’opposition collecté auprès des personnes concernées pour les fournir au Client à première
-                            demande.
+                            Choreograph et chaque Responsable du traitement concerné sont liées par un contrat de
+                            sous-traitance qui prévoit que le Responsable du traitement a la charge de la licéité du
+                            traitement comprenant notamment le choix de la base légale et l’information de la personne
+                            concernée. Choreograph s’engage à demander au Responsable du traitement concerné la preuve
+                            de l’information fournie et du consentement ou du droit d’opposition collecté auprès des
+                            personnes concernées pour les fournir au Client à premièredemande.
                         </p>
                         <p t-att-style="choreo_title">
                             <strong>
@@ -460,9 +457,8 @@
                    
                     <div class="col-6" style="padding-left: 10px;">
                         <p t-att-style="choreo_p">
-                            et au plus tard dans les soixante-douze (72) heures suivant la date à laquelle le Client a
-                            eu
-                            connaissance de la réclamation, au regard de la Réglementation sur la protection des
+                            et au plus tard dans les soixante-douze (72) heures suivant la date à laquelle le Client
+                            a eu connaissance de la réclamation, au regard de la Réglementation sur la protection des
                             données.
                         </p>
                         <p t-att-style="choreo_title">
@@ -531,8 +527,8 @@
                             </strong>
                         </p>
                         <p t-att-style="choreo_p">
-                            Dans l’hypothèse où les Services convenues entre les parties comprennent une livraison de
-                            numéros de téléphone de consommateurs par Choreograph nécessitant une vérification Bloctel,
+                            Dans l’hypothèse où les Services convenues entre les parties comprennent une livraison
+                            de numéros de téléphone de consommateurs par Choreograph nécessitant une vérification Bloctel,
                             il
                             est précisé que le Client fait son affaire d'effectuer la confrontation à la liste
                             d’opposition
@@ -692,7 +688,7 @@
                             Protection Regulation. <br/>
                             For the avoidance of doubt, within these Terms and Conditions: <br/>
                             (i) &amp;nbsp; &amp;nbsp; &amp;nbsp; all clauses applicable to "Conex Data" shall also be applicable to "Partner's Data". <br/>
-                            (ii) &amp;nbsp; &amp;nbsp; all references to "Members" shall also apply to "Partners".
+                            (ii) &amp;nbsp; &amp;nbsp; all references to "Data Controller" shall also apply to "Partners".
                         </p>
                         <p t-att-style="choreo_title_en">
                             <strong>
@@ -716,9 +712,9 @@
                             between Choreograph and the Client may deviate from these Terms and Conditions.
                             Choreograph's failure to object to provisions contained in communications from the Client shall not
                             be construed as a waiver of these Terms and Conditions.<br/>
-                            Choreograph reserves the right to update or modify these Terms and Conditions at any time. These
-                            modifications shall only be applicable to Services performed after communication by any appropriate
-                            mean of the modified Terms and Conditions to the Client.
+                            Choreograph reserves the right to update or modify these Terms and Conditions at any time.
+                            These modifications shall only be applicable to Services performed after communication by
+                            any appropriate mean of the modified Terms and Conditions to the Client.
                         </p>
                         <p t-att-style="choreo_title_en">
                             <strong>
@@ -937,14 +933,14 @@
                             </strong>
                         </p>
                         <p t-att-style="choreo_p_en">
-                            The processing of Conex Data prior to delivery to the Client is carried out by the Member supplying
-                            the Data in its capacity as Data Controller and by Choreograph in its capacity as Processor.<br/>
-                            Choreograph is bound to each Member by a processing agreement which stipulates that the Member, as
-                            Data Controller, is responsible for the lawfulness of the processing, including the choice of legal
-                            basis and supplying information on the processing to the data subject. Choreograph undertakes to ask
-                            the Member concerned for proof of the information provided to the data subject, and of the consent
-                            or objection obtained from the data subjects, in order to make it available to the Client on first
-                            request.
+                            The processing of Conex Data prior to delivery to the Client is carried out by the Data
+                            Controller supplying the Data and by Choreograph in its capacity as Processor.<br/>
+                            Choreograph is bound to each Data Controller by a processing agreement which stipulates that
+                            the Data Controller, is responsible for the lawfulness of the processing, including the
+                            choice of legal basis and supplying information on the processing to the data subject.
+                            Choreograph undertakes to ask the relevant Data Controller for proof of the information
+                            provided to the data subject, and of the consent or objection obtained from the data
+                            subjects, in order to make it available to the Client on first request.
                         </p>
                         <p t-att-style="choreo_title_en">
                             <strong>
