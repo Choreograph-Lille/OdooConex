@@ -96,7 +96,7 @@ class SaleOrder(models.Model):
     witness_comment = fields.Text(tracking=True)
     email_witness_comment = fields.Text(string="Comment", tracking=True)
 
-    sox = fields.Boolean('SOX')
+    sox = fields.Boolean('SOX', copy=False)
 
     # email campaign
     livedata_po_number = fields.Char('Email PO Livedata Number', tracking=True)
