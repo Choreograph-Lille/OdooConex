@@ -364,10 +364,24 @@ class SaleOrder(models.Model):
             "narration": self._get_invoice_narration()
         })
         return result
+    
+    def _get_lang_and_currency(self):  
+        if self.env.ref('base.EUR') and self.currency_id == self.env.ref('base.EUR'):
+            lang = 'fr_FR'
+            currency_id = self.env.ref('base.EUR')
+        elif self.env.ref('base.GBP') and self.currency_id == self.env.ref('base.GBP'):
+            lang = 'en_GB'
+            currency_id = self.env.ref('base.GBP')
+        else:
+            lang = self.partner_invoice_id.lang
+            currency_id = False
+        return lang, currency_id
 
     def _get_invoice_narration(self):
         self.ensure_one()
-        return self.with_context(lang=self.partner_invoice_id.lang).env.company.invoice_terms_c9h
+        lang, currency_id = self._get_lang_and_currency()   
+        invoice_terms = self.with_context(lang=lang).env.company.invoice_terms_c9h if currency_id else ''
+        return invoice_terms
 
     @api.depends('partner_shipping_id', 'partner_id', 'company_id', 'partner_invoice_id')
     def _compute_fiscal_position_id(self):
