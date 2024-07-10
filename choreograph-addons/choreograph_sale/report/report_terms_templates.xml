@@ -110,8 +110,7 @@
                             </strong>
                         </p>
                         <p t-att-style="choreo_p">
-                             A la demande du Client, Choreograph adresse à ce dernier un devis ou tarif de ses Services.
-                            Le
+                             A la demande du Client, Choreograph adresse à ce dernier un devis ou tarif de ses Services.Le
                             devis ou le tarif, si les Services sont des prestations tarifées, arrête les conditions
                             d’intervention de Choreograph pour l’utilisation des Données Conex sollicitées par le Client
                             ainsi que leur mise à disposition.
