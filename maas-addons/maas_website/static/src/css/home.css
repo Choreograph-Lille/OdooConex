@@ -793,3 +793,7 @@ input.error	:-ms-input-placeholder {
 .homepage > footer {
   display: none !important;
 }
+.operation-home-content-iframe {
+	width:90%;
+	margin:auto
+}
