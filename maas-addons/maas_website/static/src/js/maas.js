@@ -1998,6 +1998,7 @@ $(document).ready(function () {
             console.log($('#collapse_menu'));
             console.log($('#home_content'));
             $('#collapse_menu').addClass('col-md-2');
+            $('#collapse_menu').show();
             $('#home_content').removeClass('col-md-12').addClass('col-md-10');
             console.log('---------------');
             console.log($('#collapse_menu'));
@@ -2009,7 +2010,8 @@ $(document).ready(function () {
         function(){
             console.log($('#collapse_menu'));
             console.log($('#home_content'));
-            $('#collapse_menu').css({'display':'none'});
+            $('#collapse_menu').removeClass('col-md-2');
+            $('#collapse_menu').hide();
             $('#home_content').removeClass('col-md-10').addClass('col-md-12');
             console.log('---------------');
             console.log($('#collapse_menu'));
