@@ -2009,7 +2009,7 @@ $(document).ready(function () {
         function(){
             console.log($('#collapse_menu'));
             console.log($('#home_content'));
-            $('#collapse_menu').removeClass('col-md-2');
+            $('#collapse_menu').css({'display':'none'});
             $('#home_content').removeClass('col-md-10').addClass('col-md-12');
             console.log('---------------');
             console.log($('#collapse_menu'));
