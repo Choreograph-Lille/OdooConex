@@ -45,11 +45,11 @@ class SaleOrder(models.Model):
     operation_code = fields.Char(compute='compute_operation_code', store=True)
 
     operation_provider_delivery_ids = fields.One2many('operation.provider.delivery', 'order_id', 'Provider Delivery')
-    comment = fields.Text(tracking=True)
-    quantity_to_deliver = fields.Integer(tracking=True)
-    to_validate = fields.Boolean(tracking=True)
+    comment = fields.Text(tracking=True, copy=False)
+    quantity_to_deliver = fields.Integer(tracking=True, copy=False)
+    to_validate = fields.Boolean(tracking=True, copy=False)
     segment_ids = fields.One2many('operation.segment', 'order_id', 'Segment')
-    repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab', tracking=True)
+    repatriate_information = fields.Boolean('Repatriate Informations On Delivery Informations Tab', tracking=True, copy=False)
     operation_type_id = fields.Many2one(
         'project.project', compute='_compute_operation_type_id', store=True, tracking=True)
     can_display_redelivery = fields.Boolean(compute='_compute_can_display_delivery')
