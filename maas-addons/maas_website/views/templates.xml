@@ -678,7 +678,7 @@
                 </section>
                 <div class="operation-home-content">
                     <div class="row">
-                        <div class="operation-home-content-iframe">
+                        <div class="operation-home-content-iframe" style="width:95%;margin:auto">
                             <iframe src="" width="100%" height="100%" frameborder="0" id="home_report_bi_src"/>
                         </div>
                     </div>
