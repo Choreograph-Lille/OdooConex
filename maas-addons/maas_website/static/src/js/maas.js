@@ -1993,5 +1993,26 @@ $(document).ready(function () {
         };
         window.location.href = "/website/lang/"+redirect.lang+"?r="+redirect.url+redirect.hash;
     });
+    $('.ico-menu').on('click',
+        function(){
+            var menu = document.getElementById("collapse_menu");
+            var content = document.getElementById("home_content");
+            console.log(menu)
+            console.log(content)
+            menu.addClass('col-md-2')
+            content.removeClass('col-md-12').addClass('col-md-10')
+        }
+    );
+
+    $('.ico-back-menu').on('click',
+        function(){
+            var menu = document.getElementById("collapse_menu");
+            var content = document.getElementById("home_content");
+            console.log(menu)
+            console.log(content)
+            menu.removeClass('col-md-2');
+            content.removeClass('col-md-10').addClass('col-md-12');
+        }
+    );
 
 });
