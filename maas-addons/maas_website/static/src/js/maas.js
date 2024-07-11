@@ -1999,8 +1999,11 @@ $(document).ready(function () {
             var content = document.getElementById("home_content");
             console.log(menu)
             console.log(content)
-            menu.addClass('col-md-2')
-            content.removeClass('col-md-12').addClass('col-md-10')
+            menu.addClass('col-md-2');
+            content.removeClass('col-md-12').addClass('col-md-10');
+            console.log('---------------')
+            console.log(menu)
+            console.log(content)
         }
     );
 
@@ -2008,6 +2011,7 @@ $(document).ready(function () {
         function(){
             var menu = document.getElementById("collapse_menu");
             var content = document.getElementById("home_content");
+            console.log('---------------')
             console.log(menu)
             console.log(content)
             menu.removeClass('col-md-2');
