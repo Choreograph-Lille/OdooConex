@@ -1995,27 +1995,25 @@ $(document).ready(function () {
     });
     $('.ico-menu').on('click',
         function(){
-            var menu = document.getElementById("collapse_menu");
-            var content = document.getElementById("home_content");
-            console.log(menu)
-            console.log(content)
-            menu.addClass('col-md-2');
-            content.removeClass('col-md-12').addClass('col-md-10');
-            console.log('---------------')
-            console.log(menu)
-            console.log(content)
+            console.log($('#collapse_menu'));
+            console.log($('#home_content'));
+            $('#collapse_menu').addClass('col-md-2');
+            $('#home_content').removeClass('col-md-12').addClass('col-md-10');
+            console.log('---------------');
+            console.log($('#collapse_menu'));
+            console.log($('#home_content'));
         }
     );
 
     $('.ico-back-menu').on('click',
         function(){
-            var menu = document.getElementById("collapse_menu");
-            var content = document.getElementById("home_content");
-            console.log('---------------')
-            console.log(menu)
-            console.log(content)
-            menu.removeClass('col-md-2');
-            content.removeClass('col-md-10').addClass('col-md-12');
+            console.log($('#collapse_menu'));
+            console.log($('#home_content'));
+            $('#collapse_menu').removeClass('col-md-2');
+            $('#home_content').removeClass('col-md-10').addClass('col-md-12');
+            console.log('---------------');
+            console.log($('#collapse_menu'));
+            console.log($('#home_content'));
         }
     );
 
