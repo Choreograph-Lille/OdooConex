@@ -43,8 +43,11 @@ class OperationWebsite(http.Controller):
     @http.route('/home', auth='user', website=True, csrf=False)
     def home(self, **kwargs):
         partner = http.request.env.user.partner_id
+        quantity, identifiers, percent, unlimited = self._get_consumption_data()
         values = {
             'partner': partner.id,
+            'total_qty_cumulative': quantity,
+            'identifiers': identifiers,
         }
         return http.request.render('maas_website.operation_home', values, True)
 
