@@ -3,7 +3,7 @@
 
     <template id="collapse_menu" name="Collapse Menu">
         <img class="ico-menu" src="/maas_website/static/src/img/ico-menu.png"/>
-        <div class="col-md-2" id="collapse_menu" style="height:auto">
+        <div class="col-md-2" id="collapse_menu" style="display:none">
             <img class="ico-back-menu" src="/maas_website/static/src/img/ico-back.png"/>
             <ul class="list-menu">
                 <li>
