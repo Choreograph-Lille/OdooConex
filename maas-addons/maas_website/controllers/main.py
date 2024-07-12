@@ -48,6 +48,7 @@ class OperationWebsite(http.Controller):
             'partner': partner.id,
             'total_qty_cumulative': quantity,
             'identifiers': identifiers,
+            'unlimited': unlimited
         }
         return http.request.render('maas_website.operation_home', values, True)
 
