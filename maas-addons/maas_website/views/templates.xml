@@ -592,7 +592,7 @@
                 <div class="row">
                   <input type="hidden" id="partner_id" name="partner_id" t-att-value="partner"/>
                   <t t-call="maas_website.collapse_menu"/>
-                  <div class="col-md-10" id="home_content">
+                  <div class="col-md-12" id="home_content">
                     <section class="container-fluid overlaying">
                         <div class="top-container">
                             <div class="row">
@@ -685,7 +685,7 @@
             <main class="list-operations-camp">
                 <div class="row">
                   <t t-call="maas_website.collapse_menu"/>
-                  <div class="col-md-10" id="home_content">
+                  <div class="col-md-12" id="home_content">
                     <section class="container-fluid overlaying">
                         <div class="top-container">
                             <div class="row">
@@ -1565,7 +1565,7 @@
             <main class="creat-operations ">
               <div class="row">
                 <t t-call="maas_website.collapse_menu"/>
-                <div class="col-md-10" id="home_content">
+                <div class="col-md-12" id="home_content">
                   <div id="myOverlay"/>
                   <div id="screen"/>
                   <section class="container-fluid overlaying">
@@ -1977,7 +1977,7 @@
             <main class="contact-page">
               <div class="row">
                 <t t-call="maas_website.collapse_menu"/>
-                <div class="col-md-10" id="home_content">
+                <div class="col-md-12" id="home_content">
                   <section class="container-fluid overlaying">
                       <div class="top-container">
                           <div class="row">
