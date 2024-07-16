@@ -62,6 +62,7 @@ $(document).ready(function(){
         var cookies = $('#cookies');
         cookies.hide();
     }
+    
 
 })
 
