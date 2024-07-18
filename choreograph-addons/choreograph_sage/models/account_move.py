@@ -33,10 +33,16 @@ class AccountMove(models.Model):
     def inverse_payment_choice(self):
         pass
 
-    @api.depends('name', 'partner_id', 'partner_id.name')
+    @api.depends('name', 'partner_id', 'partner_id.name', 'ref', 'move_type')
     def _compute_wording(self):
         for rec in self:
-            rec.wording = "%s-%s" % (rec.partner_id.name, rec.name)
+            if rec.move_type in ['out_invoice', 'out_refund']:
+                ref = rec.name
+            elif rec.move_type in ['in_invoice', 'in_refund']:
+                ref = rec.ref
+            else:
+                ref = False
+            rec.wording = "%s-%s" % (rec.partner_id.name, ref)
 
     def generate_sage_file(self, move_type, limit=None):
         ftp_server = self.env['choreograph.sage.ftp.server'].search([('active', '=', True)], limit=1)
