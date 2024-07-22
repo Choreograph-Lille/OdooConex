@@ -37,7 +37,7 @@
                             Des clients de Choreograph ont décidé de participer à la constitution de bases de données
                             mutualisées, chacune spécifique à un secteur d'activité (vente
                             à
-                            distance, presse, caritatif…)ou à une utilisation particulière (prospection, enrichissement…), 
+                            distance, presse, caritatif…) ou à une utilisation particulière (prospection, enrichissement…), 
                             qui sont gérées par Choreograph pour leur compte. 
                             <br/>
                             Choreograph assure la gestion (intégration, normalisation des données, etc.) et la mise à
@@ -110,8 +110,8 @@
                             </strong>
                         </p>
                         <p t-att-style="choreo_p">
-                             A la demande du Client, Choreograph adresse à ce dernier un devis ou tarif de ses Services.Le
-                            devis ou le tarif, si les Services sont des prestations tarifées, arrête les conditions
+                            A la demande du Client, Choreograph adresse à ce dernier un devis ou tarif de ses Services.
+                            Le devis ou le tarif, si les Services sont des prestations tarifées, arrête les conditions
                             d’intervention de Choreograph pour l’utilisation des Données Conex sollicitées par le Client
                             ainsi que leur mise à disposition.
                             <br/>
@@ -374,7 +374,7 @@
                             traitement comprenant notamment le choix de la base légale et l’information de la personne
                             concernée. Choreograph s’engage à demander au Responsable du traitement concerné la preuve
                             de l’information fournie et du consentement ou du droit d’opposition collecté auprès des
-                            personnes concernées pour les fournir au Client à premièredemande.
+                            personnes concernées pour les fournir au Client à première demande.
                         </p>
                         <p t-att-style="choreo_title">
                             <strong>
@@ -707,8 +707,8 @@
                             between Choreograph and the Client may deviate from these Terms and Conditions.
                             Choreograph's failure to object to provisions contained in communications from the Client shall not
                             be construed as a waiver of these Terms and Conditions.<br/>
-                            Choreograph reserves the right to update or modify these Terms and Conditions at any time.These 
-                            modifications shall only be applicable to Services performed after communication by
+                            Choreograph reserves the right to update or modify these Terms and Conditions at any time.
+                            These modifications shall only be applicable to Services performed after communication by
                             any appropriate mean of the modified Terms and Conditions to the Client.
                         </p>
                         <p t-att-style="choreo_title_en">
@@ -874,7 +874,7 @@
                             <br/>
                             2) When Choreograph has formally drawn the Client's attention to the existence
                             of potential legal and/or technical risks, which the Client has accepted by any appropriate
-                            means (email, meeting report, etc.)in full knowledge of the facts;
+                            means (email, meeting report, etc.) in full knowledge of the facts;
                             <br/>
                             3) When the Client has not complied with its obligations towards third parties
                             or more generally its legal obligations;
