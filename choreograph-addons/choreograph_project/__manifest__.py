@@ -11,7 +11,6 @@
     'website': 'https://arkeup.com',
     'depends': [
         'choreograph_contact',
-        'project'
     ],
     'data': [
         # data
@@ -24,7 +23,6 @@
         'views/project_task_views.xml',
         'views/project_project.xml',
         'views/project_update.xml',
-        'views/project_views.xml',
         'views/project_task_type.xml',
         'views/ir_actions_act_windows.xml',
         'views/ir_ui_menu.xml'
