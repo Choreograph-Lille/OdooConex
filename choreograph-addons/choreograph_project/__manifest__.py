@@ -11,6 +11,7 @@
     'website': 'https://arkeup.com',
     'depends': [
         'choreograph_contact',
+        'project'
     ],
     'data': [
         # data
@@ -31,6 +32,7 @@
         'web._assets_primary_variables': [],
         'web.assets_backend': [
             'choreograph_project/static/src/**/*',
+            'choreograph_project/static/src/views/**/*',
         ],
         'web.assets_frontend': [],
     },
