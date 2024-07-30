@@ -106,6 +106,7 @@ class AccountMove(models.Model):
                 vat = ','.join(line.tax_ids.filtered(lambda l: l.tva_profile_code != False).mapped("tva_profile_code"))
                 vat_value = False
                 if line.move_id.move_type in ['in_invoice', 'in_refund']:
+                    invoice_ref = line.move_id.ref
                     role = line.move_id.partner_id.third_party_role_supplier_code
                     ref = 'FF' if line.move_id.move_type == 'in_invoice' else 'AF'
                     if account_first_number and account_first_number == '6':
@@ -113,6 +114,7 @@ class AccountMove(models.Model):
                         media = 217
                         vat_value = vat or "CEIEXO"
                 else:
+                    invoice_ref = line.move_id.name
                     role = line.move_id.partner_id.third_party_role_client_code
                     ref = 'FC' if line.move_id.move_type == 'out_invoice' else 'AC'
                     if account_first_number and account_first_number == '7':
@@ -130,7 +132,7 @@ class AccountMove(models.Model):
                     "date piece": line.move_id.invoice_date or "",
                     "date échéance": line.move_id.invoice_date_due or "",
                     "Mode reglement": str(line.move_id.payment_choice).upper() if line.move_id.payment_choice else "",
-                    "Référence Pièce": line.move_id.name or "",
+                    "Référence Pièce": invoice_ref,
                     "Libellé": line.move_id.wording or "",
                     "Devise": line.move_id.currency_id.name or "",
                     "Débit devise": '%.2f' % line.debit,
