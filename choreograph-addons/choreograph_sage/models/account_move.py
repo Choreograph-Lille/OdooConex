@@ -33,10 +33,17 @@ class AccountMove(models.Model):
     def inverse_payment_choice(self):
         pass
 
-    @api.depends('name', 'partner_id', 'partner_id.name')
+    @api.depends('name', 'partner_id', 'partner_id.name', 'ref', 'move_type')
     def _compute_wording(self):
         for rec in self:
-            rec.wording = "%s-%s" % (rec.partner_id.name, rec.name)
+            partner_label = "%s - " % (rec.partner_id.parent_id.name) if rec.partner_id.parent_id else ''
+            if rec.move_type in ['out_invoice', 'out_refund']:
+                ref = rec.name
+            elif rec.move_type in ['in_invoice', 'in_refund']:
+                ref = rec.ref
+            else:
+                ref = False
+            rec.wording = "%s%s - %s" % (partner_label, rec.partner_id.name, ref)
 
     def generate_sage_file(self, move_type, limit=None):
         ftp_server = self.env['choreograph.sage.ftp.server'].search([('active', '=', True)], limit=1)
@@ -99,6 +106,7 @@ class AccountMove(models.Model):
                 vat = ','.join(line.tax_ids.filtered(lambda l: l.tva_profile_code != False).mapped("tva_profile_code"))
                 vat_value = False
                 if line.move_id.move_type in ['in_invoice', 'in_refund']:
+                    invoice_ref = line.move_id.ref
                     role = line.move_id.partner_id.third_party_role_supplier_code
                     ref = 'FF' if line.move_id.move_type == 'in_invoice' else 'AF'
                     if account_first_number and account_first_number == '6':
@@ -106,6 +114,7 @@ class AccountMove(models.Model):
                         media = 217
                         vat_value = vat or "CEIEXO"
                 else:
+                    invoice_ref = line.move_id.name
                     role = line.move_id.partner_id.third_party_role_client_code
                     ref = 'FC' if line.move_id.move_type == 'out_invoice' else 'AC'
                     if account_first_number and account_first_number == '7':
@@ -123,7 +132,7 @@ class AccountMove(models.Model):
                     "date piece": line.move_id.invoice_date or "",
                     "date échéance": line.move_id.invoice_date_due or "",
                     "Mode reglement": str(line.move_id.payment_choice).upper() if line.move_id.payment_choice else "",
-                    "Référence Pièce": line.move_id.name or "",
+                    "Référence Pièce": invoice_ref,
                     "Libellé": line.move_id.wording or "",
                     "Devise": line.move_id.currency_id.name or "",
                     "Débit devise": '%.2f' % line.debit,
