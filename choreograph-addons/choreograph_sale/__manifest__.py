@@ -12,6 +12,7 @@
     'website': 'https://arkeup.com',
     'depends': [
         'sales_team',
+        'sale_subscription',
         'project_template',
         'choreograph_contact',
         'sale_purchase',
@@ -43,6 +44,7 @@
         'views/res_config_settings_views.xml',
         'views/sale_portal_templates.xml',
         'views/ir_ui_menu_views.xml',
+        'views/sale_subscription_views.xml'
     ],
     'assets': {
         'web._assets_primary_variables': [],

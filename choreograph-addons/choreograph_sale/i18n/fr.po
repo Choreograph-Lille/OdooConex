@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-18 11:21+0000\n"
-"PO-Revision-Date: 2024-07-18 11:21+0000\n"
+"POT-Creation-Date: 2024-08-08 11:44+0000\n"
+"PO-Revision-Date: 2024-08-08 11:44+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -1469,6 +1469,11 @@ msgid "Contact details choreograph:"
 msgstr "Contact Choreograph:"
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_template__cost_per_thousand
+msgid "Cost Per Thousand"
+msgstr "Coût au milles"
+
+#. module: choreograph_sale
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__operation_generation__operation_selection__creation
 msgid "Create a new operation"
 msgstr "Créer une nouvelle opération"
@@ -2257,6 +2262,16 @@ msgid "Messages"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_template__minimal_consumption
+msgid "Minimal Consumption"
+msgstr "Consommation minimum"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_template__minimal_price
+msgid "Minimal Price"
+msgstr "Coût minimum"
+
+#. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base_line__multi_base_id
 msgid "Multi-Base"
 msgstr ""
@@ -2570,6 +2585,11 @@ msgstr "Date du devis :"
 #: model:ir.model.fields.selection,name:choreograph_sale.selection__sale_report__state_specific__sent
 msgid "Quotation Sent"
 msgstr "Devis envoyé"
+
+#. module: choreograph_sale
+#: model:ir.model,name:choreograph_sale.model_sale_order_template
+msgid "Quotation Template"
+msgstr "Modèle de devis"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__receiver
@@ -3162,6 +3182,11 @@ msgstr "Que souhaitez vous faire ?"
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__reception_location
 msgid "Where to find ?"
 msgstr "Où le trouver ?"
+
+#. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_sale_order_template__with_rent
+msgid "With Rent"
+msgstr "Avec loyer"
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_order__witness_comment
