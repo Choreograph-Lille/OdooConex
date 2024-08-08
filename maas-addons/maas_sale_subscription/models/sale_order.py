@@ -145,13 +145,16 @@ class SaleSubscription(models.Model):
             date_start_rent = end_period + relativedelta(months=1, day=1)
             vals.update({'date': date_start_rent})
             _logger.info(_('Start subscription line added in subscription %s') % subscription.name)
-            subscription.create_subscription_rent(date_start_rent)
+
             subscription.write({'balance': subscription.package_id.identifiers,
                                 'current_cumulative_quantity': 0,
                                 'current_package_id': subscription.package_id.id})
-            new_line = subscription_line_obj.new(vals)
-            new_line._compute_amount()
-            subscription_line_obj.create(new_line._convert_to_write(new_line._cache))
+            
+            if subscription.sale_order_template_id and subscription.sale_order_template_id.with_rent:
+                subscription.create_subscription_rent(date_start_rent)
+                new_line = subscription_line_obj.new(vals)
+                new_line._compute_amount()
+                subscription_line_obj.create(new_line._convert_to_write(new_line._cache))
         return subscriptions
 
     def get_subscription_rent_items(self):
