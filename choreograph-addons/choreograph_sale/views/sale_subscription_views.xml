@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="sale_subscription_template_view_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order.template.view.form.inherit</field>
+            <field name="model">sale.order.template</field>
+            <field name="inherit_id" ref="sale_subscription.sale_subscription_template_view_form"/>
+            <field name="arch" type="xml">
+                <field name="recurrence_id" position="before">
+                    <field name="with_rent" />
+                </field>
+                <field name="invoice_mail_template_id" position="after">
+                    <field name="minimal_consumption"/>
+                    <field name="minimal_price" />
+                    <field name="cost_per_thousand" />
+                </field>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>
