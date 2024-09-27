@@ -191,16 +191,17 @@ class SaleOrder(models.Model):
                     'potential_return': rec.potential_return_date,
                     'study_delivery': rec.study_delivery_date,
                     'presentation': rec.presentation_date,
+                    'study_global': rec.study_delivery_date,
                 }
-                if operation_task != 'study_global':
-                    task.write({
-                        'date_deadline': vals[operation_task]
-                    })
+                task.write({
+                    'date_deadline': vals[operation_task]
+                })
+                
                 # CNXMIG-102
                 if rec.project_ids and rec.project_ids[0].stage_id.id in (
                         self.env.ref('choreograph_project.planning_project_stage_planified') | self.env.ref(
                     'choreograph_project.planning_project_stage_in_progress')).ids and operation_task in [
-                    'potential_return', 'presentation']:
+                    'potential_return', 'presentation', 'study_global']:
                     rec.update_task_stage_to_do(task)
 
     def _archive_task(self, operation_task):
