@@ -5,7 +5,7 @@ from pytz import timezone, utc
 from datetime import timedelta
 
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError, MissingError, RedirectWarning
+from odoo.exceptions import ValidationError, MissingError
 
 _logger = logging.getLogger(__name__)
 
@@ -227,27 +227,7 @@ class SaleOrder(models.Model):
 
     def action_draft_native(self):
         self.write({'state_specific': 'draft'})
-        # commit change to the database
-        self.env.cr.commit()
-
-        # show partner warning
-        partner_warning = self._onchange_partner_id_warning() or dict()
-        msg_warning = partner_warning.get('warning', dict())
-        msg = ''
-        if msg_warning:
-            msg += msg_warning['message']
-            raise RedirectWarning(
-                msg,
-                {
-                    'type': 'ir.actions.client',
-                    'tag': 'soft_reload'
-                }, 'Continuer',
-                {
-                    'active_id': self.id,
-                    'active_model': self._name,
-                    'partner_warning': True
-                }
-            )
+       
 
     def copy_for_next_year(self):
         no_delivery_date = self.filtered(lambda order: not order.commitment_date)
@@ -549,31 +529,35 @@ class SaleOrder(models.Model):
         default = default or {}
         default['state_specific'] = 'prospecting'
         return super(SaleOrder, self).copy(default=default)
-
-    @api.onchange('partner_id')
+    
+    @api.onchange('partner_invoice_id', 'state_specific')
     def _onchange_partner_id_warning(self):
-        if not self.partner_id:
-            return
-        if not isinstance(self.id, models.NewId) and self.state_specific != 'draft':
-            return
+        def show_partner_warning():
+            if not self.partner_id:
+                return
+            if not isinstance(self.id, models.NewId) and self.state_specific != 'draft':
+                return
+            partner = self.partner_invoice_id if self.partner_invoice_id else self.partner_id
 
-        partner = self.partner_invoice_id if self.partner_invoice_id else self.partner_id
-
-        # If partner has no warning, check its company
-        if partner.sale_warn == 'no-message' and partner.parent_id:
-            partner = partner.parent_id
-
-        if partner.sale_warn and partner.sale_warn != 'no-message':
-            # Block if partner only has warning but parent company is blocked
-            if partner.sale_warn != 'block' and partner.parent_id and partner.parent_id.sale_warn == 'block':
+            # If partner has no warning, check its company
+            if partner.sale_warn == 'no-message' and partner.parent_id:
                 partner = partner.parent_id
 
-            if partner.sale_warn == 'block':
-                self.partner_id = False
+            if partner.sale_warn and partner.sale_warn != 'no-message':
+                # Block if partner only has warning but parent company is blocked
+                if partner.sale_warn != 'block' and partner.parent_id and partner.parent_id.sale_warn == 'block':
+                    partner = partner.parent_id
 
-            return {
-                'warning': {
-                    'title': _("Warning for %s", partner.name),
-                    'message': partner.sale_warn_msg,
+                if partner.sale_warn == 'block':
+                    self.partner_id = False
+
+                return {
+                    'warning': {
+                        'title': _("Warning for %s", partner.name),
+                        'message': partner.sale_warn_msg,
+                    }
                 }
-            }
+        
+        if self.state_specific == 'draft':
+            return show_partner_warning()
+        return show_partner_warning()
