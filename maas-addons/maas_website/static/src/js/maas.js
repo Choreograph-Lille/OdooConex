@@ -171,7 +171,7 @@ $(document).ready(function () {
 				$('.active .qty-extracted-value').removeClass('hidden');
 				$.ajax({
 		            dataType: 'json',
-		            url: '/report/' + parseInt((this.attributes.id.value).replace('operation','')),
+		            url: '/report/' + parseInt((this.attributes.id.value).replace('operation','')) + '/sale_operation',
 		            type: 'POST',
 		            proccessData: false,
 		            data: {},
@@ -1993,5 +1993,22 @@ $(document).ready(function () {
         };
         window.location.href = "/website/lang/"+redirect.lang+"?r="+redirect.url+redirect.hash;
     });
+    $('.ico-menu').on('click',
+        function(){
+            $('#collapse_menu').addClass('col-md-2');
+            $('#collapse_menu').show();
+            $('#home_content').removeClass('col-md-12').addClass('col-md-10');
+            $('.ico-menu').hide();
+        }
+    );
+
+    $('.ico-back-menu').on('click',
+        function(){
+            $('#collapse_menu').removeClass('col-md-2');
+            $('#collapse_menu').hide();
+            $('#home_content').removeClass('col-md-10').addClass('col-md-12');
+            $('.ico-menu').show();      
+        }
+    );
 
 });

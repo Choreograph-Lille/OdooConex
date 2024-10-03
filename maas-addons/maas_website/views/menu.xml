@@ -2,18 +2,18 @@
 <odoo>
 
     <template id="collapse_menu" name="Collapse Menu">
-        <img class="ico-menu" data-toggle="collapse" data-target="#collapse_menu"
-            src="/maas_website/static/src/img/ico-menu.png" />
-        <div class="vertical-menu collapse" id="collapse_menu">
-            <div class="vertical-menu-border"></div>
-            <img class="ico-back-menu" data-toggle="collapse" data-target="#collapse_menu"
-                src="/maas_website/static/src/img/ico-back.png" />
+        <img class="ico-menu" src="/maas_website/static/src/img/ico-menu.png"/>
+        <div class="col-md-2" id="collapse_menu" style="display:none">
+            <img class="ico-back-menu" src="/maas_website/static/src/img/ico-back.png"/>
             <ul class="list-menu">
+                <li>
+                    <a class="link-menu home-menu" href="/home">Home Page</a>
+                </li>
                 <li>
                     <a class="link-menu campagne-menu" href="/operation/list">Campaigns</a>
                 </li>
                 <li>
-                    <a class="link-menu link-br creation-menu" href="/operation/create">Operation <br />
+                    <a class="link-menu link-br creation-menu" href="/operation/create">Operation <br/>
                         creation</a>
                 </li>
                 <li>

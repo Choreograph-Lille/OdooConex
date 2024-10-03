@@ -40,6 +40,19 @@ class OperationWebsite(http.Controller):
         unlimited = subscription.current_package_id.unlimited
         return quantity, identifiers, percent, unlimited
 
+    @http.route('/home', auth='user', website=True, csrf=False)
+    def home(self, **kwargs):
+        partner = http.request.env.user.partner_id
+        quantity, identifiers, percent, unlimited = self._get_consumption_data()
+        values = {
+            'partner': partner.id,
+            'total_qty_cumulative': quantity,
+            'identifiers': identifiers,
+            'percent': percent,
+            'unlimited': unlimited
+        }
+        return http.request.render('maas_website.operation_home', values, True)
+
     @http.route('/operation/list', auth='user', website=True, csrf=False)
     def index(self, **kwargs):
         quantity, identifiers, percent, unlimited = self._get_consumption_data()
@@ -350,9 +363,16 @@ class OperationWebsite(http.Controller):
 
         return json.dumps(list(res.values()))
 
-    @http.route('/report/<int:operation_id>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
-    def get_report_bi(self, operation_id):
-        operation_obj = http.request.env['sale.operation']
+    @http.route('/report/<int:operation_id>/<string:model_name>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
+    def get_report_bi(self, operation_id, model_name):
+        """
+        Get report html data
+        :param operation_id: id of operation OR partner
+        :param model_name: could be sale_operation or res_partner
+        :return:
+        """
+        model_name = model_name.replace('_', '.')
+        operation_obj = http.request.env[model_name]
         operation = operation_obj.browse(operation_id)
         report_bi_src = """
 <!DOCTYPE html>
