@@ -22,6 +22,8 @@
 from dateutil.relativedelta import relativedelta
 from odoo import fields, models, api, _
 from odoo.tools import str2bool
+from datetime import date
+from datetime import datetime
 
 import logging
 
@@ -129,20 +131,39 @@ class SaleSubscription(models.Model):
         """
         subscription_obj = self.env['sale.order']
         subscription_line_obj = self.env['sale.order.line']
+        # Disable today domain for subscription next_inovice_date
+        # subscriptions = subscription_obj.search([('is_subscription', '=', True), ('next_invoice_date', '=', fields.Date.today()),
+        #                                          ('current_package_id', '!=', False), ('stage_id.category', '=', 'progress')])
 
-        subscriptions = subscription_obj.search([('is_subscription', '=', True), ('next_invoice_date', '=', fields.Date.today()),
+        subscriptions = subscription_obj.search([('is_subscription', '=', True),
                                                  ('current_package_id', '!=', False), ('stage_id.category', '=', 'progress')])
-        current_datetime = fields.Datetime.now()
-        _logger.info("Subscription CRON launched at %s" % current_datetime)
 
-        start_period = current_datetime.replace(hour=2, minute=0, second=0) + relativedelta(day=1)
-        end_period = current_datetime.replace(hour=21, minute=59, second=59, microsecond=999) + relativedelta(day=31)
+        # Change current_datetime
+        # current_datetime = fields.Datetime.now()
+        # _logger.info("Subscription CRON launched at %s" % current_datetime)
+
+        # start_period = current_datetime.replace(hour=2, minute=0, second=0) + relativedelta(day=1)
+        # end_period = current_datetime.replace(hour=21, minute=59, second=59, microsecond=999) + relativedelta(day=31)
 
         for subscription in subscriptions:
+            # Set next_invoice_date to current_date
+            current_datetime = datetime.combine(subscription.next_invoice_date, datetime.min.time())
+            _logger.info("Subscription CRON launched at %s" % current_datetime)
+
+            start_period = current_datetime.replace(hour=2, minute=0, second=0) + relativedelta(day=1)
+            end_period = current_datetime.replace(hour=21, minute=59, second=59, microsecond=999) + relativedelta(day=31)
+            
+            # Disable date filter for order_line
+            # lines = subscription.order_line.filtered(
+            #     lambda l: l.state_subscription == 'consumption' and start_period <= l.date <= end_period
+            # )
             lines = subscription.order_line.filtered(
-                lambda l: l.state_subscription == 'consumption' and start_period <= l.date <= end_period
+                lambda l: l.state_subscription == 'consumption'
             )
-            if lines:
+            lines_invoiced = subscription.order_line.filtered(
+                lambda l: l.state_subscription == 'invoiced'
+            )
+            if lines and not lines_invoiced:
                 line = lines[-1:]
                 vals = subscription._prepare_line_to_invoice_values(line)
                 vals.update({'date': end_period})
@@ -236,12 +257,16 @@ class SaleSubscription(models.Model):
         invoiceable_lines = super(SaleSubscription, self)._get_invoiceable_lines(final)
         invoiceable_lines = invoiceable_lines.filtered(lambda invl: not invl.order_id.is_subscription)
 
-        date = fields.Datetime.now()
+        # Change today datetime
+        # date = fields.Datetime.now()
 
-        start_period = date.replace(hour=0, minute=0, second=0) + relativedelta(day=1)
-        end_period = date.replace(hour=23, minute=59, second=59, microsecond=999) + relativedelta(day=31)
+        # start_period = date.replace(hour=0, minute=0, second=0) + relativedelta(day=1)
+        # end_period = date.replace(hour=23, minute=59, second=59, microsecond=999) + relativedelta(day=31)
 
         for subscription in self.filtered(lambda sub: sub.is_subscription and sub.sale_order_template_id):
+            date = datetime.combine(subscription.next_invoice_date, datetime.min.time())
+            start_period = date.replace(hour=0, minute=0, second=0) + relativedelta(day=1)
+            end_period = date.replace(hour=23, minute=59, second=59, microsecond=999) + relativedelta(day=31)
             if subscription.sale_order_template_id.with_rent:
                 invoiceable_lines = subscription._get_invoiceable_lines_with_rent(start_period, end_period, subscription, invoiceable_lines)
             else:
