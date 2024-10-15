@@ -158,12 +158,9 @@ class SaleSubscription(models.Model):
             #     lambda l: l.state_subscription == 'consumption' and start_period <= l.date <= end_period
             # )
             lines = subscription.order_line.filtered(
-                lambda l: l.state_subscription == 'consumption'
+                lambda l: l.state_subscription == 'consumption' and start_period <= l.date <= end_period
             )
-            lines_invoiced = subscription.order_line.filtered(
-                lambda l: l.state_subscription == 'invoiced'
-            )
-            if lines and not lines_invoiced:
+            if lines:
                 line = lines[-1:]
                 vals = subscription._prepare_line_to_invoice_values(line)
                 vals.update({'date': end_period})
