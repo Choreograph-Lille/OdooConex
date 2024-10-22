@@ -530,9 +530,7 @@ class SaleOrder(models.Model):
         default['state_specific'] = 'prospecting'
         return super(SaleOrder, self).copy(default=default)
     
-    @api.onchange('partner_invoice_id', 'state_specific')
-    def _onchange_partner_id_warning(self):
-        def show_partner_warning():
+    def show_partner_warning(self):
             if not self.partner_id:
                 return
             if not isinstance(self.id, models.NewId) and self.state_specific != 'draft':
@@ -558,6 +556,11 @@ class SaleOrder(models.Model):
                     }
                 }
         
+    @api.onchange('partner_invoice_id')
+    def _onchange_partner_id_warning(self):
+        return self.show_partner_warning()
+    
+    @api.onchange('state_specific')
+    def _onchange_state_warning(self):
         if self.state_specific == 'draft':
-            return show_partner_warning()
-        return show_partner_warning()
+            return self.show_partner_warning()
