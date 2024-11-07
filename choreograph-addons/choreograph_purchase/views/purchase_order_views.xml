@@ -23,6 +23,10 @@
             <xpath expr="//field[@name='date_planned']" position="attributes">
                 <attribute name="string">Predicted date</attribute>
             </xpath>
+
+            <field name="origin" position="after">
+                <field name="validated_difference" attrs="{'invisible':['|', ('invoice_status', '!=', 'to invoice'),('invoice_count', '=', 0)]}"/>
+            </field>
             
             <button name="action_create_invoice" position="attributes">
                 <attribute name="studio_approval">True</attribute>

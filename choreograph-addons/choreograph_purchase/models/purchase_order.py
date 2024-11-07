@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 
 from odoo import fields, models, api
+from odoo.tools.float_utils import float_compare, float_is_zero, float_round
 
 
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
+
+    validated_difference = fields.Boolean()
 
     def default_user_id(self):
         return self.partner_id.purchase_user_id or False
@@ -43,3 +46,28 @@ class PurchaseOrder(models.Model):
         entries = entry_obj.search([('model', '=', model), ('method', '=', method), ('res_id', '=', res_id)])
         entries.unlink()
         return True
+
+    @api.depends('state', 'order_line.qty_to_invoice', 'validated_difference')
+    def _get_invoiced(self):
+        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+        for order in self:
+            if order.state not in ('purchase', 'done'):
+                order.invoice_status = 'no'
+                continue
+
+            if any(
+                not float_is_zero(line.qty_to_invoice, precision_digits=precision)
+                for line in order.order_line.filtered(lambda l: not l.display_type)
+            ):
+                invoice_status = 'invoiced' if order.validated_difference else 'to invoice'
+                order.invoice_status = invoice_status
+            elif (
+                all(
+                    float_is_zero(line.qty_to_invoice, precision_digits=precision)
+                    for line in order.order_line.filtered(lambda l: not l.display_type)
+                )
+                and order.invoice_ids
+            ):
+                order.invoice_status = 'invoiced'
+            else:
+                order.invoice_status = 'no'

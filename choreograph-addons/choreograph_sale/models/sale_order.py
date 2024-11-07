@@ -7,7 +7,6 @@ from datetime import timedelta
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError, MissingError
 
-
 _logger = logging.getLogger(__name__)
 
 TASK_NAME = {
@@ -228,6 +227,7 @@ class SaleOrder(models.Model):
 
     def action_draft_native(self):
         self.write({'state_specific': 'draft'})
+       
 
     def copy_for_next_year(self):
         no_delivery_date = self.filtered(lambda order: not order.commitment_date)
@@ -529,3 +529,38 @@ class SaleOrder(models.Model):
         default = default or {}
         default['state_specific'] = 'prospecting'
         return super(SaleOrder, self).copy(default=default)
+    
+    def show_partner_warning(self):
+            if not self.partner_id:
+                return
+            if not isinstance(self.id, models.NewId) and self.state_specific != 'draft':
+                return
+            partner = self.partner_invoice_id if self.partner_invoice_id else self.partner_id
+
+            # If partner has no warning, check its company
+            if partner.sale_warn == 'no-message' and partner.parent_id:
+                partner = partner.parent_id
+
+            if partner.sale_warn and partner.sale_warn != 'no-message':
+                # Block if partner only has warning but parent company is blocked
+                if partner.sale_warn != 'block' and partner.parent_id and partner.parent_id.sale_warn == 'block':
+                    partner = partner.parent_id
+
+                if partner.sale_warn == 'block':
+                    self.partner_id = False
+
+                return {
+                    'warning': {
+                        'title': _("Warning for %s", partner.name),
+                        'message': partner.sale_warn_msg,
+                    }
+                }
+        
+    @api.onchange('partner_invoice_id')
+    def _onchange_partner_id_warning(self):
+        return self.show_partner_warning()
+    
+    @api.onchange('state_specific')
+    def _onchange_state_warning(self):
+        if self.state_specific == 'draft':
+            return self.show_partner_warning()
