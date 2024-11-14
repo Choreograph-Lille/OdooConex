@@ -34,7 +34,7 @@ class SaleOrderLine(models.Model):
 				qty = line.product_uom_qty or 1.0
 				uom = line.product_uom
 				percentage_discount = [self.get_discount(pricelist_rule)]
-				current_list_price = product.list_price * qty
+				current_list_price = line.price_unit * qty
 				pricelist_item = pricelist_rule
 				if pricelist_item.pricelist_id.discount_policy == 'without_discount':
 					while pricelist_item.base == 'pricelist' and pricelist_item.base_pricelist_id.discount_policy == 'without_discount':
