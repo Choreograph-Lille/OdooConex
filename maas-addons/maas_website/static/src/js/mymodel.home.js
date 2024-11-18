@@ -12,6 +12,7 @@ $(document).ready(function(){
                 a.push({id: b['id'], report_bi_src: b['report_bi_src'],});
                 return a;
             }, []);
+            console.log(data)
             $('#home_report_bi_src').attr('srcdoc', data[0]['report_bi_src']);
         });
     }
