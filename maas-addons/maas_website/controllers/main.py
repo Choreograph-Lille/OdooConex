@@ -408,10 +408,11 @@ class OperationWebsite(http.Controller):
                 type: 'GET',
                 
                 }).done(function(json) {
-                    console.log(json.ErrorMessage);
-                    console.log(json.PowerBiEmbedInfo.EmbedToken);
-                    console.log(json.PowerBiEmbedInfo.ReportEmbedUrl);
-                    console.log(json.PowerBiEmbedInfo.ReportId);
+                    console.log(json)
+                    //console.log(json.ErrorMessage);
+                    //console.log(json.PowerBiEmbedInfo.EmbedToken);
+                    //console.log(json.PowerBiEmbedInfo.ReportEmbedUrl);
+                    //console.log(json.PowerBiEmbedInfo.ReportId);
 
             // Get models. models contains enums that can be used.
             var models = window['powerbi-client'].models;
