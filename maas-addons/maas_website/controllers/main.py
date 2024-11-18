@@ -407,7 +407,7 @@ class OperationWebsite(http.Controller):
                 dataType: 'jsonp',
                 type: 'GET',
                 
-                }).done(function(json) {
+                }).then(function(json) {
                     console.log(json)
                     //console.log(json.ErrorMessage);
                     //console.log(json.PowerBiEmbedInfo.EmbedToken);
