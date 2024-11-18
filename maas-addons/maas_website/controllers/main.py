@@ -462,10 +462,10 @@ class OperationWebsite(http.Controller):
                 var err = textStatus + ", " + error + "(status=" + jqxhr.status + ")";
                 console.log( "REQUEST HAS FAILED - SIMPLE ERROR MESSAGE: " + err);
 
-                if(jqxhr.responseJSON.ErrorMessage)
-                {
-                    console.log( "REQUEST HAS FAILED - DETAILED ERROR MESSAGE: " + jqxhr.responseJSON.ErrorMessage );
-                }
+                //if(jqxhr.responseJSON.ErrorMessage)
+                //{
+                //    console.log( "REQUEST HAS FAILED - DETAILED ERROR MESSAGE: " + jqxhr.responseJSON.ErrorMessage );
+                //}
             });
         });
      </script>
