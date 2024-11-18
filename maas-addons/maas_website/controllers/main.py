@@ -363,7 +363,7 @@ class OperationWebsite(http.Controller):
 
         return json.dumps(list(res.values()))
 
-    @http.route('/report/<int:operation_id>/<string:model_name>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
+    @http.route('/report/<int:operation_id>/<string:model_name>', type='http', auth='user', methods=['POST'], website=True, csrf=False, cors="*")
     def get_report_bi(self, operation_id, model_name):
         """
         Get report html data
