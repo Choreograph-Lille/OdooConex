@@ -374,10 +374,14 @@ class OperationWebsite(http.Controller):
         :param model_name: could be sale_operation or res_partner
         :return:
         """
-        _logger.warning('Logging')
+        _logger.warning('----------------Log-----------------')
         model_name = model_name.replace('_', '.')
         operation_obj = http.request.env[model_name]
         operation = operation_obj.browse(operation_id)
+        _logger.warning(operation_id)
+        _logger.warning(operation_obj)
+        _logger.warning(operation)
+
         report_bi_src = """
 <!DOCTYPE html>
 <head>
