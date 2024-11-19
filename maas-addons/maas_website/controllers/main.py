@@ -24,6 +24,9 @@ import json
 
 from odoo import http
 from odoo.addons.http_routing.models.ir_http import url_for
+import logging
+
+_logger = logging.getLogger(__name__)
 
 
 class OperationWebsite(http.Controller):
@@ -371,6 +374,7 @@ class OperationWebsite(http.Controller):
         :param model_name: could be sale_operation or res_partner
         :return:
         """
+        _logger.warning('Logging')
         model_name = model_name.replace('_', '.')
         operation_obj = http.request.env[model_name]
         operation = operation_obj.browse(operation_id)
@@ -463,8 +467,8 @@ class OperationWebsite(http.Controller):
         result = {}
         if operation.pbi_function_app_url:
             result = {operation.id: {'id': operation_id, 'report_bi_src': report_bi_src}}
-            print('-----------------------------------------')
-            print( result)
+            _logger.warning('In result')
+            _logger.warning(result)
         return json.dumps(list(result.values()))
 
     @http.route('/close/report/<int:operation_id>', auth='user', methods=['POST'], website=True, csrf=False)
