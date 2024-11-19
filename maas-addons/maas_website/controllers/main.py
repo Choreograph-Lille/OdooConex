@@ -363,7 +363,7 @@ class OperationWebsite(http.Controller):
 
         return json.dumps(list(res.values()))
 
-    @http.route('/report/<int:operation_id>/<string:model_name>', type='http', auth='user', methods=['POST'], website=True, csrf=False, cors="*")
+    @http.route('/report/<int:operation_id>/<string:model_name>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
     def get_report_bi(self, operation_id, model_name):
         """
         Get report html data
@@ -394,25 +394,13 @@ class OperationWebsite(http.Controller):
     <script type="text/javascript">
         $(function () {
 
-            // $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url)+',"crossDomain": true, "dataType": jsonp' + """)
-            //.done(function( json ) {
-            //    console.log(json.ErrorMessage);
-            //     console.log(json.PowerBiEmbedInfo.EmbedToken);
-            //   console.log(json.PowerBiEmbedInfo.ReportEmbedUrl);
-            //    console.log(json.PowerBiEmbedInfo.ReportId);
+            $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """)
+            .done(function( json ) {
+                console.log(json.ErrorMessage);
+                console.log(json.PowerBiEmbedInfo.EmbedToken);
+                console.log(json.PowerBiEmbedInfo.ReportEmbedUrl);
+                console.log(json.PowerBiEmbedInfo.ReportId);
 
-            $.ajax({
-                url: """+'"{}"'.format(operation.pbi_function_app_url)+""",
-                crossDomain: true,
-                dataType: 'jsonp',
-                type: 'GET',
-                
-                }).done(function(json) {
-                    console.log(json)
-                    //console.log(json.ErrorMessage);
-                    //console.log(json.PowerBiEmbedInfo.EmbedToken);
-                    //console.log(json.PowerBiEmbedInfo.ReportEmbedUrl);
-                    //console.log(json.PowerBiEmbedInfo.ReportId);
 
             // Get models. models contains enums that can be used.
             var models = window['powerbi-client'].models;
@@ -462,10 +450,10 @@ class OperationWebsite(http.Controller):
                 var err = textStatus + ", " + error + "(status=" + jqxhr.status + ")";
                 console.log( "REQUEST HAS FAILED - SIMPLE ERROR MESSAGE: " + err);
 
-                //if(jqxhr.responseJSON.ErrorMessage)
-                //{
-                //    console.log( "REQUEST HAS FAILED - DETAILED ERROR MESSAGE: " + jqxhr.responseJSON.ErrorMessage );
-                //}
+                if(jqxhr.responseJSON.ErrorMessage)
+                {
+                    console.log( "REQUEST HAS FAILED - DETAILED ERROR MESSAGE: " + jqxhr.responseJSON.ErrorMessage );
+                }
             });
         });
      </script>
