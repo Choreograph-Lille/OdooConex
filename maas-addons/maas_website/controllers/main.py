@@ -463,6 +463,8 @@ class OperationWebsite(http.Controller):
         result = {}
         if operation.pbi_function_app_url:
             result = {operation.id: {'id': operation_id, 'report_bi_src': report_bi_src}}
+            print('-----------------------------------------')
+            print( result)
         return json.dumps(list(result.values()))
 
     @http.route('/close/report/<int:operation_id>', auth='user', methods=['POST'], website=True, csrf=False)
