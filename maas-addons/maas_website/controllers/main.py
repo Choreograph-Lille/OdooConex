@@ -394,25 +394,24 @@ class OperationWebsite(http.Controller):
     <script type="text/javascript">
         $(function () {
 
-            // $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url)+',"crossDomain": true, "dataType": jsonp' + """)
-            //.done(function( json ) {
-            //    console.log(json.ErrorMessage);
-            //     console.log(json.PowerBiEmbedInfo.EmbedToken);
-            //   console.log(json.PowerBiEmbedInfo.ReportEmbedUrl);
-            //    console.log(json.PowerBiEmbedInfo.ReportId);
+            $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url)+',"crossDomain": true, "dataType": jsonp' + """)
+            .done(function( json ) {
+                console.log(json.ErrorMessage);
+                console.log(json.PowerBiEmbedInfo.EmbedToken);
+                console.log(json.PowerBiEmbedInfo.ReportEmbedUrl);
+                console.log(json.PowerBiEmbedInfo.ReportId);
 
-            $.ajax({
-                url: """+'"{}"'.format(operation.pbi_function_app_url)+""",
-                crossDomain: true,
-                dataType: 'jsonp',
-                type: 'GET',
-                
-                }).done(function(json) {
-                    console.log(json)
-                    //console.log(json.ErrorMessage);
-                    //console.log(json.PowerBiEmbedInfo.EmbedToken);
-                    //console.log(json.PowerBiEmbedInfo.ReportEmbedUrl);
-                    //console.log(json.PowerBiEmbedInfo.ReportId);
+            //$.ajax({
+            //    url: """+'"{}"'.format(operation.pbi_function_app_url)+""",
+            //    crossDomain: true,
+            //    dataType: 'jsonp',
+            //    type: 'GET',    
+            //    }).then(function(json) {
+            //        console.log(json)
+            //        //console.log(json.ErrorMessage);
+            //        //console.log(json.PowerBiEmbedInfo.EmbedToken);
+            //        //console.log(json.PowerBiEmbedInfo.ReportEmbedUrl);
+            //        //console.log(json.PowerBiEmbedInfo.ReportId);
 
             // Get models. models contains enums that can be used.
             var models = window['powerbi-client'].models;
