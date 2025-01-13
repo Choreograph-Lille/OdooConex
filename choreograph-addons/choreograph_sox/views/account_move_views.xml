@@ -71,6 +71,9 @@
                             '&amp;',
                             ('is_gap', '=', True), ('is_gap_validated', '=', True)]}"/>
                 </xpath>
+                 <xpath expr="//button[@name='action_reverse']" position="attributes">
+                    <attribute name="groups">choreograph_sox.group_credit_note_preparer_profile_res_groups</attribute>
+                </xpath>
                 <div name="journal_div" position="after">
                     <field name="is_gap" invisible="1"/>
                     <field name="is_gap_justified" invisible="1"/>
