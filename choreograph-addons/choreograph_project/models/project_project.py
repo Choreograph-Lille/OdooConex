@@ -42,6 +42,17 @@ TYPE_OF_PROJECT = [
     ('standard', 'standard'),
     ('operation', 'operation')
 ]
+PROSPECTION_LIST = [
+    'PRPOST', 
+    'PRPOSTTEL', 
+    'PRTEL', 
+    'PRPOSTE', 
+    'PREMAIL', 
+    'PRPOSTSMS', 
+    'PRSMS', 
+    'PRPOSTPORT', 
+    'PRPORT'
+]
 
 
 def filter_by_type_of_project(func):
@@ -187,7 +198,7 @@ class ProjectProject(models.Model):
         elif stage_id == stage_livery_id:
             is_automatic = True
             self._update_deposit_task(is_automatic)
-        elif stage_id == stage_terminated_id and self.code in ['PREMAIL','PRSMS','PRPOSTE','PRPOSTSMS']:
+        elif stage_id == stage_terminated_id and self.code in PROSPECTION_LIST:
             self._update_deposit_task()   
         else:
             pass
