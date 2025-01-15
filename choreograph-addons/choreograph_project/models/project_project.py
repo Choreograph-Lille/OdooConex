@@ -161,25 +161,41 @@ class ProjectProject(models.Model):
         SaleOrder = self.env['sale.order']
         return SaleOrder.get_operation_fields() + SaleOrder.get_sms_campaign_field() + SaleOrder.get_email_campaign_field()
 
-    def write(self, values):
-        res = super().write(values)
-        if "stage_id" in values and values["stage_id"] == self.env.ref(
-                'choreograph_project.planning_project_stage_planified').id:
-            self._notify_planned_operation()
-        if "stage_id" in values and values["stage_id"] == self.env.ref(
-                'choreograph_project.planning_project_stage_canceled').id:
-            self._notify_canceled_operation()
-        if ("stage_id" in values and values["stage_id"] == self.env.ref(
-                'choreograph_project.planning_project_stage_livery').id
-            ):
+    def _update_deposit_task(self, is_automatic=False):
+        if is_automatic:
             deposit_task = self.task_ids.filtered(
                 lambda t: t.task_type_id == self.env.ref('choreograph_sale_project.choreograph_project_task_type_deposit_date') and
                 t.related_base.automatic_deposit_date is True 
             )
-            if deposit_task:
-                deposit_task.write({
+        else:
+            deposit_task = self.task_ids.filtered(
+                lambda t: t.task_type_id == self.env.ref('choreograph_sale_project.choreograph_project_task_type_deposit_date')
+            )
+        if deposit_task:
+             deposit_task.write({
                     'stage_id': self.env.ref('choreograph_project.project_task_type_done').id
                 })
+    def _action_on_update_stage_id(self, stage_id):
+        stage_planified_id = self.env.ref('choreograph_project.planning_project_stage_planified').id
+        stage_canceled_id = self.env.ref('choreograph_project.planning_project_stage_canceled').id
+        stage_livery_id = self.env.ref('choreograph_project.planning_project_stage_livery').id
+        stage_terminated_id = self.env.ref('choreograph_project.planning_project_stage_terminated').id
+        if stage_id == stage_planified_id:
+            self._notify_planned_operation()
+        elif stage_id == stage_canceled_id:
+            self._notify_canceled_operation()
+        elif stage_id == stage_livery_id:
+            is_automatic = True
+            self._update_deposit_task(is_automatic)
+        elif stage_id == stage_terminated_id and self.code in ['PREMAIL','PRSMS','PRPOSTE','PRPOSTSMS']:
+            self._update_deposit_task()   
+        else:
+            pass
+            
+    def write(self, values):
+        res = super().write(values)
+        if "stage_id" in values:
+            self._action_on_update_stage_id(values["stage_id"])
         return res
 
     def _notify_project_change(self, body):
