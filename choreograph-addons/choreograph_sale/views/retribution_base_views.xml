@@ -11,6 +11,7 @@
                     <field name="code" />
                     <field name="is_open" />
                     <field name="is_multi_base" />
+                    <field name="automatic_deposit_date"/>
                     <field name="retribution_rate" widget="percentage" />
                 </tree>
             </field>
