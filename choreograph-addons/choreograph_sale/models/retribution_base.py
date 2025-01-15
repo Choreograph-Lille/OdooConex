@@ -18,6 +18,7 @@ class RetributionBase(models.Model):
     postal_address = fields.Float('Postal address', tracking=True, default=1.0)
     product_template_id = fields.Many2one('product.template', 'Product')
     code = fields.Char('Code')
+    automatic_deposit_date = fields.Boolean()
 
     @api.onchange('quota_base_ids', 'is_multi_base')
     def _onchange_quota_base(self):

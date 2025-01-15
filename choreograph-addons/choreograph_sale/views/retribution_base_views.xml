@@ -51,6 +51,7 @@
                                     attrs="{'invisible':[('is_multi_base', '=', False)]}"
                                     string="Postal address"
                                     widget="percentage" />
+                                <field name="automatic_deposit_date"/>
                             </group>
                         </group>
                         <notebook>
