@@ -15,6 +15,18 @@ from odoo.addons.choreograph_project.models.project_project import (
 )
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
+PROSPECTION_LIST = [
+    'PRPOST', 
+    'PRPOSTTEL', 
+    'PRTEL', 
+    'PRPOSTE', 
+    'PREMAIL', 
+    'PRPOSTSMS', 
+    'PRSMS', 
+    'PRPOSTPORT', 
+    'PRPORT'
+]
+
 
 class ProjectTask(models.Model):
     _inherit = 'project.task'
@@ -59,7 +71,7 @@ class ProjectTask(models.Model):
     routing_base = fields.Char(related='sale_order_id.routing_base')
     specific_counting = fields.Text()
     send_with = fields.Selection(related='sale_order_id.send_with')
-    deposit_date_1 = fields.Date()
+    deposit_date_1 = fields.Date(compute="_compute_deposite_date", inverse = "_inverse_deposite_date", store = True)
     deposit_date_2 = fields.Date()
     deposit_date_3 = fields.Date()
 
@@ -410,3 +422,38 @@ class ProjectTask(models.Model):
                 task.sale_order_id = sale_order.id
         else:
             super(ProjectTask, self)._compute_sale_order_id()
+    
+    @api.depends(
+            'task_type_id', 
+            'related_base.automatic_deposit_date', 
+            'sale_order_id.commitment_date',
+            'sale_order_id.routing_date',
+            'sale_order_id.email_routing_date'
+    )
+    def _compute_deposite_date(self):
+        for task in self:
+            task.deposit_date_1 = False
+            routing_date = task.sale_order_id.routing_date
+            email_routing_date = task.sale_order_id.email_routing_date  
+            if task.task_type_id == self.env.ref('choreograph_sale_project.choreograph_project_task_type_deposit_date'):
+                
+                if (
+                    task.related_base.automatic_deposit_date is True and
+                    task.sale_order_id.commitment_date
+                ):
+                    task.deposit_date_1 = task.sale_order_id.commitment_date + relativedelta(days=16)
+               
+                if  (
+                    task.related_base.automatic_deposit_date is False and
+                    (
+                        (not routing_date and email_routing_date) or
+                        (routing_date and not email_routing_date) 
+                    ) and
+                    task.project_id.code in PROSPECTION_LIST
+                ):
+                    task.deposit_date_1 = routing_date if routing_date else email_routing_date
+                
+                
+    
+    def _inverse_deposite_date(self):
+        pass
