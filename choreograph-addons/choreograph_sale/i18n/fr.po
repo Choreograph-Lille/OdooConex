@@ -1019,6 +1019,11 @@ msgid "Audit"
 msgstr ""
 
 #. module: choreograph_sale
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__automatic_deposit_date
+msgid "Automatic Deposit Date"
+msgstr "Date de dépôt automatique"
+
+#. module: choreograph_sale
 #: model_terms:ir.ui.view,arch_db:choreograph_sale.view_order_form_inherit
 msgid "BAT"
 msgstr ""
