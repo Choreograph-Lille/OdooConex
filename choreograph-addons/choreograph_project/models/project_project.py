@@ -169,6 +169,17 @@ class ProjectProject(models.Model):
         if "stage_id" in values and values["stage_id"] == self.env.ref(
                 'choreograph_project.planning_project_stage_canceled').id:
             self._notify_canceled_operation()
+        if ("stage_id" in values and values["stage_id"] == self.env.ref(
+                'choreograph_project.planning_project_stage_livery').id
+            ):
+            deposit_task = self.task_ids.filtered(
+                lambda t: t.task_type_id == self.env.ref('choreograph_sale_project.choreograph_project_task_type_deposit_date') and
+                t.related_base.automatic_deposit_date is True 
+            )
+            if deposit_task:
+                deposit_task.write({
+                    'stage_id': self.env.ref('choreograph_project.project_task_type_done').id
+                })
         return res
 
     def _notify_project_change(self, body):
