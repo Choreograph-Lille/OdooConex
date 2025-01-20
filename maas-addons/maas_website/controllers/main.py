@@ -394,7 +394,7 @@ class OperationWebsite(http.Controller):
 </head>
 <body>
 
-    <div id=embedContainer style="height:600px; width:100%; max-width:10000px;">
+    <div id=embedContainer >
     </div>
 
  <!--Add script to update the page and send messages.-->
