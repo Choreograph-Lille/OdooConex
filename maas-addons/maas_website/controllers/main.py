@@ -386,19 +386,26 @@ class OperationWebsite(http.Controller):
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'self'; img-src 'self'; connect-src 'self';script-src 'self'; style-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'self'; img-src 'self'; connect-src 'self';script-src 'self' 'nonce-script'; style-src 'self' 'nonce-style;">
     <meta charset="utf-8">
     <title>Power BI embedded - Conexance</title>
     <script src="/maas_website/static/src/report/es6-promise.js" integrity="sha384-o56RdTPUrpuJrwU5s8XdhI8EJ1rlkBUrHZUY7U4ykFo7mkS4c/H/qXMIRyRM86mz" crossorigin="anonymous"></script>
     <script src="/maas_website/static/src/report/powerbi.js" integrity="sha384-Sxdglzx/DupIgv9dbj82EYxklXXeizMUTc+rqKbjwQtKD5MLpVzUefmSClYOtMgT" crossorigin="anonymous"></script>
+    <style nonce="nonce_style">
+    #embedContainer {
+      height:600px; 
+      width:100%; 
+      max-width:10000px;
+    }
+  </style>
 </head>
 <body>
 
-    <div id=embedContainer style="height:600px; width:100%; max-width:10000px;">
+    <div id=embedContainer>
     </div>
 
  <!--Add script to update the page and send messages.-->
-    <script type="text/javascript">
+    <script type="text/javascript" nonce="nonce-script">
         $(function () {
 
             $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """)
