@@ -395,7 +395,7 @@ class OperationWebsite(http.Controller):
         integrity="sha384-I7/UTpkJas2maMjJpGmrvEgQecqO8Dta/9Wwh+cQrH6Jj984WRRFhWg4MV/oTkIW"
         crossorigin="anonymous"
     ></script>
-    <script src="/maas_website/static/src/report/powerbi.js" integrity="sha384-Sxdglzx/DupIgv9dbj82EYxklXXeizMUTc+rqKbjwQtKD5MLpVzUefmSClYOtMgT" crossorigin="anonymous"></script>
+    <script src="/maas_website/static/src/report/powerbi.js" integrity="sha384-eU0E5DWk57oAcUTcCMVX9ydymgwo1GYOcpFLqLxmTDmlJvDqGjvEEPd3Me9qd1qF" crossorigin="anonymous"></script>
     <style nonce="style">
     #embedContainer {
       height:600px; 
