@@ -386,7 +386,7 @@ class OperationWebsite(http.Controller):
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'self'; img-src 'self'; connect-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'self'; img-src 'self'; connect-src 'self'; script-src-elem 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js;">
     <meta charset="utf-8">
     <title>Power BI embedded - Conexance</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha384-tsQFqpEReu7ZLhBV2VZlAu7zcOV+rXbYlF2cqB8txI/8aZajjp4Bqd+V6D5IgvKT" crossorigin="anonymous"></script>
