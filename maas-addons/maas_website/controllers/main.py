@@ -386,7 +386,7 @@ class OperationWebsite(http.Controller):
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'self'; img-src 'self'; connect-src 'self';script-src 'self' 'nonce-script'; style-src 'self' 'nonce-style';">
+    <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
     <meta charset="utf-8">
     <title>Power BI embedded - Conexance</title>
     <script src="/maas_website/static/src/report/es6-promise.js" integrity="sha384-o56RdTPUrpuJrwU5s8XdhI8EJ1rlkBUrHZUY7U4ykFo7mkS4c/H/qXMIRyRM86mz" crossorigin="anonymous"></script>
