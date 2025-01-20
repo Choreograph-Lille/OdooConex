@@ -21,7 +21,6 @@
 
 import base64
 import json
-import os
 
 from odoo import http
 from odoo.addons.http_routing.models.ir_http import url_for
@@ -383,18 +382,16 @@ class OperationWebsite(http.Controller):
         _logger.warning(operation_obj)
         _logger.warning(operation)
 
-        nonce_code = base64.b64encode(os.urandom(16)).decode('utf-8')
-        nonce = f"nonce-{nonce_code}"
         report_bi_src = """
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'self'; img-src 'self'; connect-src 'self';script-src 'self' '"""+nonce+"""'; style-src 'self' '"""+nonce+"""';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; object-src 'self'; img-src 'self'; connect-src 'self';script-src 'self' 'nonce-script'; style-src 'self' 'nonce-style';">
     <meta charset="utf-8">
     <title>Power BI embedded - Conexance</title>
     <script src="/maas_website/static/src/report/es6-promise.js" integrity="sha384-o56RdTPUrpuJrwU5s8XdhI8EJ1rlkBUrHZUY7U4ykFo7mkS4c/H/qXMIRyRM86mz" crossorigin="anonymous"></script>
     <script src="/maas_website/static/src/report/powerbi.js" integrity="sha384-Sxdglzx/DupIgv9dbj82EYxklXXeizMUTc+rqKbjwQtKD5MLpVzUefmSClYOtMgT" crossorigin="anonymous"></script>
-    <style nonce='"""+nonce+"""'>
+    <style nonce="style">
     #embedContainer {
       height:600px; 
       width:100%; 
@@ -408,7 +405,7 @@ class OperationWebsite(http.Controller):
     </div>
 
  <!--Add script to update the page and send messages.-->
-    <script type="text/javascript" nonce='"""+nonce+"""'>
+    <script type="text/javascript" nonce="script">
         $(function () {
 
             $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """)
