@@ -182,10 +182,11 @@ class ProjectProject(models.Model):
             deposit_task = self.task_ids.filtered(
                 lambda t: t.task_type_id == self.env.ref('choreograph_sale_project.choreograph_project_task_type_deposit_date')
             )
-        if deposit_task:
-             deposit_task.write({
-                    'stage_id': self.env.ref('choreograph_project.project_task_type_done').id
-                })
+
+        if deposit_task and deposit_task.stage_id != self.env.ref('choreograph_project.project_task_type_done'):
+            deposit_task.write({
+                'stage_id': self.env.ref('choreograph_project.project_task_type_done').id
+            })
     def _action_on_update_stage_id(self, stage_id):
         stage_planified_id = self.env.ref('choreograph_project.planning_project_stage_planified').id
         stage_canceled_id = self.env.ref('choreograph_project.planning_project_stage_canceled').id
