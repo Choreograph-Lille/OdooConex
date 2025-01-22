@@ -1,4 +1,5 @@
 /*! powerbi-client v2.5.2 | (c) 2016 Microsoft Corporation MIT */
+/*! Comment add here for test*/
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory();
