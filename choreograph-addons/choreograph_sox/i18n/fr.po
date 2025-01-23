@@ -125,3 +125,10 @@ msgstr "L'écart doit être justifié avant de confirmer !"
 #, python-format
 msgid "The gap must be validated before confirmation"
 msgstr "L'écart doit être validé avant de confirmer !"
+
+#. module: choreograph_sox
+#. odoo-python
+#: code:addons/choreograph_sox/models/account_move.py:0
+#, python-format
+msgid "You don't have access to create refund."
+msgstr "Vous n'avez pas accès à la création de facture d'avoirs."
