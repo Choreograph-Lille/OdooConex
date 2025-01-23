@@ -378,20 +378,31 @@ class OperationWebsite(http.Controller):
 <!DOCTYPE html>
 <head>
     <meta name="viewport" content="width=device-width">
-    <meta http-equiv="Content-Security-Policy" content="default-src * self blob: data: gap:; style-src * self 'unsafe-inline' blob: data: gap:; script-src * 'self' 'unsafe-eval' 'unsafe-inline' blob: data: gap:; object-src * 'self' blob: data: gap:; img-src * self 'unsafe-inline' blob: data: gap:; connect-src self * 'unsafe-inline' blob: data: gap:; frame-src * self blob: data: gap:;">
+    <meta http-equiv="Content-Security-Policy" content="object-src 'self'; img-src 'self'; script-src 'self' 'nonce-script'; style-src 'self' 'nonce-style';">
     <meta charset="utf-8">
     <title>Power BI embedded - Conexance</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/maas_website/static/src/report/es6-promise.js"></script>
-    <script src="/maas_website/static/src/report/powerbi.js"></script>
+    <script src="/maas_website/static/src/report/es6-promise.js" integrity="sha384-o56RdTPUrpuJrwU5s8XdhI8EJ1rlkBUrHZUY7U4ykFo7mkS4c/H/qXMIRyRM86mz" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+        src="/maas_website/static/src/js/jquery.min.js"
+        integrity="sha384-I7/UTpkJas2maMjJpGmrvEgQecqO8Dta/9Wwh+cQrH6Jj984WRRFhWg4MV/oTkIW"
+        crossorigin="anonymous"
+    ></script>
+    <script src="/maas_website/static/src/report/powerbi.js" integrity="sha384-eU0E5DWk57oAcUTcCMVX9ydymgwo1GYOcpFLqLxmTDmlJvDqGjvEEPd3Me9qd1qF" crossorigin="anonymous"></script>
+    <style nonce="style">
+    #embedContainer {
+      height:600px; 
+      width:100%; 
+      max-width:10000px;
+    }
+  </style>
 </head>
 <body>
 
-    <div id=embedContainer style="height:600px; width:100%; max-width:10000px;">
+    <div id=embedContainer>
     </div>
 
  <!--Add script to update the page and send messages.-->
-    <script type="text/javascript">
+    <script type="text/javascript" nonce="script">
         $(function () {
 
             $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """)
