@@ -2,7 +2,7 @@
 
 from odoo import api, models, fields, _
 
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, AccessError
 
 
 class AccountMove(models.Model):
@@ -23,3 +23,17 @@ class AccountMove(models.Model):
 
     def action_gap_not_validated(self):
         raise ValidationError(_('The gap must be validated before confirmation'))
+    
+    @api.model_create_multi
+    def create(self, vals_list):
+        if (
+            (
+                self._context.get('default_move_type') in ['out_refund', 'in_refund'] or 
+                any(vals.get('move_type') in ['out_refund', 'in_refund'] for vals in vals_list)
+            )  and not self.env.user.has_group('choreograph_sox.group_credit_note_preparer_profile_res_groups')
+        ):
+            raise AccessError(_("You don't have access to create refund."))
+        
+        records = super(AccountMove, self).create(vals_list)
+        return records
+
