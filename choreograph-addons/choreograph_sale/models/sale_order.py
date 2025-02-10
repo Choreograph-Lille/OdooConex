@@ -5,7 +5,7 @@ from pytz import timezone, utc
 from datetime import timedelta
 
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError, MissingError
+from odoo.exceptions import ValidationError, MissingError, UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -561,6 +561,9 @@ class SaleOrder(models.Model):
         return self.show_partner_warning()
     
     @api.onchange('state_specific')
-    def _onchange_state_warning(self):
+    def _onchange_state_specific(self):
         if self.state_specific == 'draft':
             return self.show_partner_warning()
+        if self.state_specific == 'sale':
+            self._origin.action_confirm()              
+            
