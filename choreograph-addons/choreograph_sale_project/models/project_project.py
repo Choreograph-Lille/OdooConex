@@ -19,6 +19,7 @@ class ProjectProject(models.Model):
     return_studies_date = fields.Date("Return To Studies Date", compute="compute_date_from_so", store=True)
     commitment_date = fields.Date("Commitment Date", compute="compute_date_from_so", store=True)
     sale_order_id = fields.Many2one(readonly=False, store=True)
+    catalogue_ids = fields.Many2many(related='sale_order_id.catalogue_ids')
 
     @api.depends("sale_order_id", "sale_order_id.potential_return_date", "sale_order_id.study_delivery_date",
                  "sale_order_id.commitment_date", "sale_order_id.potential_return")
