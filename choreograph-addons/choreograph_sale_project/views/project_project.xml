@@ -50,19 +50,22 @@
          <field name="inherit_id" ref="project.view_project" />
          <field name="type">tree</field>
          <field name="arch" type="xml">
-             <field name="date_start" position="before">
-                 <field name="return_studies_date" invisible="context.get('hide_custom_dates', False)"/>
-                 <field name="commitment_date" invisible="context.get('hide_custom_dates', False)"/>
-             </field>
-             <field name="date_start" position="attributes">
-                 <attribute name="invisible">context.get('hide_dates', False)</attribute>
-             </field>
-             <field name="date" position="attributes">
-                 <attribute name="invisible">context.get('hide_dates', False)</attribute>
-             </field>
-			 <field name="display_name" position="after">
-				 <field name="name" string="Project Name" optional="hide"/>
-			 </field>
+            <field name="partner_id" position="after">
+                <field name="catalogue_ids" widget="many2many_tags" optional="hide"/>
+            </field>
+            <field name="date_start" position="before">
+                <field name="return_studies_date" invisible="context.get('hide_custom_dates', False)"/>
+                <field name="commitment_date" invisible="context.get('hide_custom_dates', False)"/>
+            </field>
+            <field name="date_start" position="attributes">
+                <attribute name="invisible">context.get('hide_dates', False)</attribute>
+            </field>
+            <field name="date" position="attributes">
+                <attribute name="invisible">context.get('hide_dates', False)</attribute>
+            </field>
+            <field name="display_name" position="after">
+                <field name="name" string="Project Name" optional="hide"/>
+            </field>
          </field>
      </record>
 
