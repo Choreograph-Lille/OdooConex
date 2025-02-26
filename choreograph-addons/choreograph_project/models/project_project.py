@@ -191,7 +191,6 @@ class ProjectProject(models.Model):
         stage_planified_id = self.env.ref('choreograph_project.planning_project_stage_planified').id
         stage_canceled_id = self.env.ref('choreograph_project.planning_project_stage_canceled').id
         stage_livery_id = self.env.ref('choreograph_project.planning_project_stage_livery').id
-        stage_terminated_id = self.env.ref('choreograph_project.planning_project_stage_terminated').id
         if stage_id == stage_planified_id:
             self._notify_planned_operation()
         elif stage_id == stage_canceled_id:
@@ -199,7 +198,7 @@ class ProjectProject(models.Model):
         elif stage_id == stage_livery_id:
             is_automatic = True
             self._update_deposit_task(is_automatic)
-        elif stage_id == stage_terminated_id and self.code in PROSPECTION_LIST:
+        elif stage_id == stage_livery_id and self.code in PROSPECTION_LIST:
             self._update_deposit_task()   
         else:
             pass
