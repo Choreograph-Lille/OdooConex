@@ -36,4 +36,10 @@ class AccountMove(models.Model):
         
         records = super(AccountMove, self).create(vals_list)
         return records
+    
+    def write(self, vals):
+        if self.move_type in ['out_refund', 'in_refund'] and not self.env.user.has_group('choreograph_sox.group_credit_note_preparer_profile_res_groups'):
+            raise AccessError(_("You don't have access to edit refund."))
+        res = super(AccountMove, self).write(vals)
+        return res
 
