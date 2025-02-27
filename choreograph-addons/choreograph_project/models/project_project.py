@@ -172,8 +172,8 @@ class ProjectProject(models.Model):
         SaleOrder = self.env['sale.order']
         return SaleOrder.get_operation_fields() + SaleOrder.get_sms_campaign_field() + SaleOrder.get_email_campaign_field()
 
-    def _update_deposit_task(self, is_automatic=False):
-        if is_automatic:
+    def _update_deposit_task(self):
+        if self.code not in PROSPECTION_LIST:
             deposit_task = self.task_ids.filtered(
                 lambda t: t.task_type_id == self.env.ref('choreograph_sale_project.choreograph_project_task_type_deposit_date') and
                 t.related_base.automatic_deposit_date is True 
@@ -196,12 +196,8 @@ class ProjectProject(models.Model):
         elif stage_id == stage_canceled_id:
             self._notify_canceled_operation()
         elif stage_id == stage_livery_id:
-            is_automatic = True
-            self._update_deposit_task(is_automatic)
-        elif stage_id == stage_livery_id and self.code in PROSPECTION_LIST:
-            self._update_deposit_task()   
-        else:
-            pass
+            self._update_deposit_task()
+       
             
     def write(self, values):
         res = super().write(values)
