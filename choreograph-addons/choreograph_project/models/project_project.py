@@ -197,6 +197,8 @@ class ProjectProject(models.Model):
             self._notify_canceled_operation()
         elif stage_id == stage_livery_id:
             self._update_deposit_task()
+        else:
+            pass
        
             
     def write(self, values):
