@@ -75,11 +75,11 @@ class SaleSubscription(models.Model):
 
     def _prepare_line_to_invoice_values(self, line):
         self.ensure_one()
-        if not line.product_id:
+        if not line.product_id or not self.sale_order_template_id:
             return {}
         pricelist = self._get_pricelist()
         product = line.product_id
-        price = pricelist._get_product_price(product, 1)
+        price = self._get_price(product, pricelist, line)
         return {
             'order_id': self.id,
             'product_id': line.product_id.id,
@@ -90,6 +90,17 @@ class SaleSubscription(models.Model):
             'state_subscription': 'invoiced',
             'qty_cumulative': line.qty_cumulative,
         }
+    
+    def _get_price(self, product, pricelist, line):
+        order_template = self.sale_order_template_id
+        if order_template.with_rent is False:
+            if line.qty_cumulative <= order_template.minimal_consumption:
+                price = order_template.minimal_price
+            else:
+                price = line.qty_cumulative * order_template.cost_per_thousand
+        else:
+            price = pricelist._get_product_price(product, 1)
+        return price
 
     def _prepare_start_subscription_line_values(self, product):
         self.ensure_one()
@@ -145,13 +156,16 @@ class SaleSubscription(models.Model):
             date_start_rent = end_period + relativedelta(months=1, day=1)
             vals.update({'date': date_start_rent})
             _logger.info(_('Start subscription line added in subscription %s') % subscription.name)
-            subscription.create_subscription_rent(date_start_rent)
+
             subscription.write({'balance': subscription.package_id.identifiers,
                                 'current_cumulative_quantity': 0,
                                 'current_package_id': subscription.package_id.id})
-            new_line = subscription_line_obj.new(vals)
-            new_line._compute_amount()
-            subscription_line_obj.create(new_line._convert_to_write(new_line._cache))
+            
+            if subscription.sale_order_template_id and subscription.sale_order_template_id.with_rent:
+                subscription.create_subscription_rent(date_start_rent)
+                new_line = subscription_line_obj.new(vals)
+                new_line._compute_amount()
+                subscription_line_obj.create(new_line._convert_to_write(new_line._cache))
         return subscriptions
 
     def get_subscription_rent_items(self):
@@ -191,6 +205,27 @@ class SaleSubscription(models.Model):
             product = products[0]
             self.package_id = product
         return result
+    
+    def _get_invoiceable_lines_with_rent(self, start_period, end_period, subscription, invoiceable_lines):
+        rent_line = subscription.order_line.filtered(
+            lambda l: l.state_subscription == 'subscription_rent' and start_period <= l.date <= end_period
+        )
+        consumption_lines = subscription.order_line.filtered(
+            lambda l: l.state_subscription == 'consumption' and start_period <= l.date <= end_period
+        )
+        if consumption_lines and rent_line:
+            invoiceable_lines |= rent_line[0]
+            invoiceable_lines |= consumption_lines[-1:]
+        else:
+            start_subscription_line = subscription.order_line.filtered(
+                lambda l: l.state_subscription == 'start_subscription' and start_period <= l.date <= end_period
+            )
+            if start_subscription_line and rent_line:
+                invoiceable_lines |= rent_line[0]
+                invoiceable_lines |= start_subscription_line[0]
+        
+        return invoiceable_lines
+    
 
     def _get_invoiceable_lines(self, final=False):
         """
@@ -206,25 +241,18 @@ class SaleSubscription(models.Model):
         start_period = date.replace(hour=0, minute=0, second=0) + relativedelta(day=1)
         end_period = date.replace(hour=23, minute=59, second=59, microsecond=999) + relativedelta(day=31)
 
-        for subscription in self.filtered(lambda sub: sub.is_subscription):
-            rent_line = subscription.order_line.filtered(
-                lambda l: l.state_subscription == 'subscription_rent' and start_period <= l.date <= end_period
-            )
-            consumption_lines = subscription.order_line.filtered(
-                lambda l: l.state_subscription == 'consumption' and start_period <= l.date <= end_period
-            )
-            if consumption_lines and rent_line:
-                invoiceable_lines |= rent_line[0]
-                invoiceable_lines |= consumption_lines[-1:]
+        for subscription in self.filtered(lambda sub: sub.is_subscription and sub.sale_order_template_id):
+            if subscription.sale_order_template_id.with_rent:
+                invoiceable_lines = subscription._get_invoiceable_lines_with_rent(start_period, end_period, subscription, invoiceable_lines)
             else:
-                start_subscription_line = subscription.order_line.filtered(
-                    lambda l: l.state_subscription == 'start_subscription' and start_period <= l.date <= end_period
+                line = subscription.order_line.filtered(
+                    lambda l: l.state_subscription == 'invoiced' and start_period <= l.date <= end_period
                 )
-                if start_subscription_line and rent_line:
-                    invoiceable_lines |= rent_line[0]
-                    invoiceable_lines |= start_subscription_line[0]
+                if line:
+                    invoiceable_lines |= line[0]
                 else:
                     continue
+            
         _logger.info(_("Lines to invoice: %s") % str(invoiceable_lines.mapped("name")))
         return invoiceable_lines
 
