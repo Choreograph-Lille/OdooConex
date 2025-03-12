@@ -468,11 +468,11 @@ class OperationWebsite(http.Controller):
             .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error + "(status=" + jqxhr.status + ")";
                 console.log( "REQUEST HAS FAILED - SIMPLE ERROR MESSAGE: " + err);
-                console.log(jqxhr.responseJSON)
-                if(jqxhr.responseJSON.ErrorMessage)
-                {
-                    console.log( "REQUEST HAS FAILED - DETAILED ERROR MESSAGE: " + jqxhr.responseJSON.ErrorMessage );
-                }
+                console.log(jqxhr)
+                // if(jqxhr.responseJSON.ErrorMessage)
+                // {
+                //     console.log( "REQUEST HAS FAILED - DETAILED ERROR MESSAGE: " + jqxhr.responseJSON.ErrorMessage );
+                // }
             });
         });
      </script>
