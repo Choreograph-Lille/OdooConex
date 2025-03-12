@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-11 07:20+0000\n"
-"PO-Revision-Date: 2023-09-11 07:20+0000\n"
+"POT-Creation-Date: 2025-03-12 12:58+0000\n"
+"PO-Revision-Date: 2025-03-12 12:58+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -176,6 +176,27 @@ msgstr ""
 "model='project.project' data-oe-id='%s'>%s</a></p>"
 
 #. module: choreograph_project
+#: model:mail.template,body_html:choreograph_project.task_notification_template
+msgid ""
+"<div>\n"
+"                    Hi<br><br>\n"
+"                    You have been assigned a new task entitled <t t-out=\"ctx.get('task_name')\"></t>.\n"
+"                    <div style=\"text-align: center; padding: 16px 0px 16px 0px;\">\n"
+"                        <a style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\" t-att-href=\"ctx.get('task_url')\" target=\"_blank\">View task</a><br>\n"
+"                    </div>\n"
+"               </div>\n"
+"           "
+msgstr ""
+"<div>\n"
+"                    Bonjour<br><br>\n"
+"                    Vous êtes assigné à une tâche intitulé <t t-out=\"ctx.get('task_name')\"></t>.\n"
+"                    <div style=\"text-align: center; padding: 16px 0px 16px 0px;\">\n"
+"                        <a style=\"background-color: #875A7B; padding: 8px 16px 8px 16px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;\" t-att-href=\"ctx.get('task_url')\" target=\"_blank\">Voir tâche</a><br>\n"
+"                    </div>\n"
+"               </div>\n"
+"           "
+
+#. module: choreograph_project
 #. odoo-python
 #: code:addons/choreograph_project/models/project_project.py:0
 #, python-format
@@ -342,6 +363,11 @@ msgstr "Livrer"
 #: model:ir.ui.menu,name:choreograph_project.taks
 msgid "My Tasks"
 msgstr "Mes tâches"
+
+#. module: choreograph_project
+#: model:mail.template,subject:choreograph_project.task_notification_template
+msgid "New task created"
+msgstr "Nouvelle tâche créee"
 
 #. module: choreograph_project
 #: model_terms:ir.actions.act_window,help:choreograph_project.action_project_task_user_tree
@@ -542,6 +568,11 @@ msgid "Task Stages"
 msgstr "Étapes de tâches"
 
 #. module: choreograph_project
+#: model:mail.template,name:choreograph_project.task_notification_template
+msgid "Task notification"
+msgstr "Notification tâche"
+
+#. module: choreograph_project
 #: model:ir.actions.act_window,name:choreograph_project.action_project_task_user_tree
 #: model:ir.model,name:choreograph_project.model_report_project_task_user
 msgid "Tasks Analysis"
@@ -566,15 +597,15 @@ msgstr "Terminé"
 #. odoo-python
 #: code:addons/choreograph_project/models/project_project.py:0
 #, python-format
-msgid "The operations %s has been Planned"
-msgstr "L'opération %s a été planifiée"
+msgid "The operations %s has been Canceled"
+msgstr "L'opération %s a été annulée"
 
 #. module: choreograph_project
 #. odoo-python
 #: code:addons/choreograph_project/models/project_project.py:0
 #, python-format
-msgid "The operations %s has been Canceled"
-msgstr "L'opération %s a été annulée"
+msgid "The operations %s has been Planned"
+msgstr "L'opération %s a été planifiée"
 
 #. module: choreograph_project
 #: model:project.task.type,name:choreograph_project.project_task_type_to_do

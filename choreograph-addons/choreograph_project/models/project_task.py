@@ -56,9 +56,26 @@ class ProjectTask(models.Model):
                 values.update({
                     'stage_id': self.env.ref('choreograph_project.project_task_type_draft').id,
                 })
-            res |= super().create(values)
+            task = super().create(values)
+            task._send_task_notification()
+            res |= task
             res.insert_operation_followers()
         return res
+    
+    def _send_task_notification(self):
+        if self.user_ids:
+            mail_template = self.env.ref('choreograph_project.task_notification_template')
+            task_url = f"{self.get_base_url()}/web#id={self.id}&model=project.task&view_type=form"
+            context = {
+                'partner_to':','.join([str(user_id.partner_id.id) for user_id in self.user_ids]),
+                'task_url': task_url,
+                'task_name': self.name,
+                'lang':self.env.user.lang
+            }
+            self.env['mail.thread'].with_context(context).message_post_with_template(
+                mail_template.id, message_type='comment', composition_mode='comment'
+            )
+        
 
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
