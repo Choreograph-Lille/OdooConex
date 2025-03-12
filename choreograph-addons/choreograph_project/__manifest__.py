@@ -26,7 +26,9 @@
         'views/project_update.xml',
         'views/project_task_type.xml',
         'views/ir_actions_act_windows.xml',
-        'views/ir_ui_menu.xml'
+        'views/ir_ui_menu.xml',
+        # Template
+        'views/task_notification_template.xml'
     ],
     'assets': {
         'web._assets_primary_variables': [],
