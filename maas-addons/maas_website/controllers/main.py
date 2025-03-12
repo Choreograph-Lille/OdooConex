@@ -412,7 +412,7 @@ class OperationWebsite(http.Controller):
  <!--Add script to update the page and send messages.-->
     <script type="text/javascript" nonce="script">
         $(function () {
-
+            console.log($.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """))
             $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """)
             .done(function( json ) {
                 console.log(json.ErrorMessage);
@@ -482,6 +482,7 @@ class OperationWebsite(http.Controller):
         result = {}
         if operation.pbi_function_app_url:
             result = {operation.id: {'id': operation_id, 'report_bi_src': report_bi_src}}
+            print(result)
             _logger.warning('In result')
             _logger.warning(result)
         return json.dumps(list(result.values()))
