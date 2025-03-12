@@ -468,7 +468,7 @@ class OperationWebsite(http.Controller):
             .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error + "(status=" + jqxhr.status + ")";
                 console.log( "REQUEST HAS FAILED - SIMPLE ERROR MESSAGE: " + err);
-
+                console.log(jqxhr.responseJSON)
                 if(jqxhr.responseJSON.ErrorMessage)
                 {
                     console.log( "REQUEST HAS FAILED - DETAILED ERROR MESSAGE: " + jqxhr.responseJSON.ErrorMessage );
@@ -482,7 +482,6 @@ class OperationWebsite(http.Controller):
         result = {}
         if operation.pbi_function_app_url:
             result = {operation.id: {'id': operation_id, 'report_bi_src': report_bi_src}}
-            print(result)
             _logger.warning('In result')
             _logger.warning(result)
         return json.dumps(list(result.values()))
