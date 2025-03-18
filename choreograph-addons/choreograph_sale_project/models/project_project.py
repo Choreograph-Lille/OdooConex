@@ -218,3 +218,7 @@ class ProjectProject(models.Model):
             lambda task: task.id != task_id and task.stage_id.stage_number != TERMINATED_TASK_STAGE)
         if not not_terminated:
             self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
+    
+    def _complete_project(self):
+        self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
+        

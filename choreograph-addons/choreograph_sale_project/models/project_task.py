@@ -336,6 +336,8 @@ class ProjectTask(models.Model):
                     self.project_id._hook_check_all_task(task.id)
                     if method_name:
                         getattr(task.project_id, method_name)()
+                    if task.task_type_id == self.env.ref('choreograph_sale_project.choreograph_project_task_campaign_counts'):
+                        getattr(task.project_id, '_complete_project')()
                 elif stage_id.stage_number in [FILE_RECEIVED_TASK_STAGE, IN_PROGRESS_TASK_STAGE] and task.project_id.stage_id.stage_number == PLANIFIED_PROJECT_STAGE:
                     task.project_id._hook_task_in_stage_25_50()
                 elif task.task_number in ['45', '50'] and stage_id.stage_number == '50':
