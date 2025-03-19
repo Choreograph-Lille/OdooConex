@@ -386,7 +386,7 @@
             <script 
                 type="text/javascript" 
                 src="/maas_website/static/src/js/mymodel.home.js" 
-                integrity="sha384-xLLzkyKEL8PqXvs73pTb/CSEHwySRj9ciVuxF/xxnGsndWaq+oCnCc8x1fgj61DK"
+                integrity="sha384-vOArRZhNCSLXRgJfT1pltkFKbg5I/Wp6B03cr2Ylvez/rCFDeuXc2BrqMQ/p/vNa"
                 crossorigin="anonymous"
             />
         </xpath>
