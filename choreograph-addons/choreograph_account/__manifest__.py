@@ -20,6 +20,7 @@
         # data
         'data/mail_template_data.xml',
         'data/account_payment_term_data.xml',
+        'data/ir_cron.xml',
         # security
         # views
         'views/res_partner_views.xml',
