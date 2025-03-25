@@ -12,6 +12,17 @@
                 </group>
             </field>
         </record>
+
+        <record id="res_partner_form_view_confidential" model="ir.ui.view">
+            <field name="name">res.partner.form.view.inherit.confidential</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="category_id" position="after">
+                    <field name="is_confidential" />
+                </field>
+            </field>
+        </record>
         
         <record id="account.res_partner_action_customer" model="ir.actions.act_window">
             <field name="view_ids"
