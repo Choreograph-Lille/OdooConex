@@ -74,21 +74,17 @@
                 integrity="sha384-kDRj80U2apynizOAmAPR4TZ5VL100eh3/N9J/WPhwGl6Q653Uwff6rJHkbqx+KRE"
                 crossorigin="anonymous"
             />
-            <!-- <script type="text/javascript"
+            <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.v3.7.1.js"
                 integrity="sha384-MnTx5+eP/OUWPb9SjwMXShfMET3B3r3gx6HJWG+7Lj6kag+yreDUSG5FDWWG/SHA"
                 crossorigin="anonymous"
-            ></script> -->
-            <script type="text/javascript"
+            ></script>
+            <!-- <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"
                 integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
                 crossorigin="anonymous"
-            ></script>
-            <!-- <script type="text/javascript"
-                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v5.0.0.js"
-                integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
-                crossorigin="anonymous"
             ></script> -->
+            
             <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v3.4.1.js"
                 integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
@@ -128,18 +124,18 @@
                 integrity="sha384-syHiAz2EHaxY9uH1B9wxIALrDF0ftS6AfzEuywYTdOoY/oaxEz9/I8LkqefkPAZQ"
                 crossorigin="anonymous"  
             />
-            <!-- <script 
+            <script 
                 type="text/javascript" 
                 src="/maas_website/static/src/js/jquery.validate.min.v1.19.5.js" 
                 integrity="sha384-aEDtD4n2FLrMdE9psop0SHdNyy/W9cBjH22rSRp+3wPHd62Y32uijc0H2eLmgaSn"
                 crossorigin="anonymous"  
-            /> -->
-            <script 
+            />
+            <!-- <script 
                 type="text/javascript" 
                 src="/maas_website/static/src/js/jquery.validate.min.js" 
                 integrity="sha384-VoqiBWkuPrBO9LiESm+GubN/lYlsaMFUVN46L4g4k9bNmY9grTBw8AQZDrhAr7bT"
                 crossorigin="anonymous"  
-            />
+            /> -->
             <script 
                 type="text/javascript" 
                 src="/maas_website/static/src/js/homepage.js" 
@@ -177,21 +173,17 @@
                 integrity="sha384-kDRj80U2apynizOAmAPR4TZ5VL100eh3/N9J/WPhwGl6Q653Uwff6rJHkbqx+KRE"
                 crossorigin="anonymous"
             />
-             <!-- <script type="text/javascript"
+             <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.v3.7.1.js"
                 integrity="sha384-MnTx5+eP/OUWPb9SjwMXShfMET3B3r3gx6HJWG+7Lj6kag+yreDUSG5FDWWG/SHA"
                 crossorigin="anonymous"
-            ></script> -->
-            <script type="text/javascript"
+            ></script>
+            <!-- <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"
                 integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
                 crossorigin="anonymous"
-            ></script>
-            <!-- <script type="text/javascript"
-                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v5.0.0.js"
-                integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
-                crossorigin="anonymous"
             ></script> -->
+            
             <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v3.4.1.js"
                 integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
@@ -256,21 +248,17 @@
                 integrity="sha384-U6sk+wpwIgmhaJjaru48ilUYROHMsCGkJzfRRLRvh6Xi30oYyXgyi25H4fxUm87d"
                 crossorigin="anonymous"
             />
-            <!-- <script type="text/javascript"
+            <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.v3.7.1.js"
                 integrity="sha384-MnTx5+eP/OUWPb9SjwMXShfMET3B3r3gx6HJWG+7Lj6kag+yreDUSG5FDWWG/SHA"
                 crossorigin="anonymous"
-            ></script> -->
-            <script type="text/javascript"
+            ></script>
+            <!-- <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"
                 integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
                 crossorigin="anonymous"
-            ></script>
-            <!-- <script type="text/javascript"
-                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v5.0.0.js"
-                integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
-                crossorigin="anonymous"
             ></script> -->
+            
             <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v3.4.1.js"
                 integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
@@ -324,16 +312,16 @@
                 integrity="sha384-U6sk+wpwIgmhaJjaru48ilUYROHMsCGkJzfRRLRvh6Xi30oYyXgyi25H4fxUm87d"
                 crossorigin="anonymous"
             />
-             <!-- <script type="text/javascript"
+             <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.v3.7.1.js"
                 integrity="sha384-MnTx5+eP/OUWPb9SjwMXShfMET3B3r3gx6HJWG+7Lj6kag+yreDUSG5FDWWG/SHA"
                 crossorigin="anonymous"
-            ></script> -->
-            <script type="text/javascript"
+            ></script>
+            <!-- <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"
                 integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
                 crossorigin="anonymous"
-            ></script>
+            ></script> -->
         </xpath>
     </template>
     <template id="maas_contact" inherit_id="maas_website.operation_contact">
@@ -353,21 +341,17 @@
                 integrity="sha384-U6sk+wpwIgmhaJjaru48ilUYROHMsCGkJzfRRLRvh6Xi30oYyXgyi25H4fxUm87d"
                 crossorigin="anonymous"
             />
-            <!-- <script type="text/javascript"
+            <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.v3.7.1.js"
                 integrity="sha384-MnTx5+eP/OUWPb9SjwMXShfMET3B3r3gx6HJWG+7Lj6kag+yreDUSG5FDWWG/SHA"
                 crossorigin="anonymous"
-            ></script> -->
-            <script type="text/javascript"
+            ></script>
+            <!-- <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"
                 integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
                 crossorigin="anonymous"
-            ></script>
-            <!-- <script type="text/javascript"
-                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v5.0.0.js"
-                integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
-                crossorigin="anonymous"
             ></script> -->
+            
             <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v3.4.1.js"
                 integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
@@ -421,21 +405,17 @@
                 integrity="sha384-U6sk+wpwIgmhaJjaru48ilUYROHMsCGkJzfRRLRvh6Xi30oYyXgyi25H4fxUm87d"
                 crossorigin="anonymous"
             />
-             <!-- <script type="text/javascript"
+             <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.v3.7.1.js"
                 integrity="sha384-MnTx5+eP/OUWPb9SjwMXShfMET3B3r3gx6HJWG+7Lj6kag+yreDUSG5FDWWG/SHA"
                 crossorigin="anonymous"
-            ></script> -->
-            <script type="text/javascript"
+            ></script>
+            <!-- <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"
                 integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
                 crossorigin="anonymous"
-            ></script>
-            <!-- <script type="text/javascript"
-                src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v5.0.0.js"
-                integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ"
-                crossorigin="anonymous"
             ></script> -->
+            
             <script type="text/javascript"
                 src="/maas_website/static/src/bootstrap/dist/js/bootstrap.min.v3.4.1.js"
                 integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
