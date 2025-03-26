@@ -293,16 +293,5 @@
             </field>
         </record>
 
-        <record id="view_quotation_tree_inherit" model="ir.ui.view">
-            <field name="name">sale.order.view.tree.inherit</field>
-            <field name="model">sale.order</field>
-            <field name="inherit_id" ref="sale.view_quotation_tree"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='amount_total']" position="before">
-                    <field name="catalogue_ids" widget="many2many_tags" optional="hide"/>
-                </xpath>
-            </field>
-        </record>
-
     </data>
 </odoo>
