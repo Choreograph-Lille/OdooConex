@@ -7,18 +7,15 @@ class NeedsBase(models.AbstractModel):
     _name = "needs.base"
 
     name = fields.Char('Name')
-    volume = fields.Text('Volume/Ventilation')
-    average_age = fields.Text('Average Age')
-    h_f_percentage = fields.Text('% H/F')
-    match_rate = fields.Text('Match Rate')
-    other_chanel_potential = fields.Selection([
+    need_comment = fields.Text('Comment')
+    need_type = fields.Selection([
             ('email', 'Email'),
             ('sms', 'SMS'),
             ('phone', 'Phone'),
         ],
-        string='Other Channel Potential'
+        string='Channel type'
     )
-    other = fields.Text('Other')
+    is_display_comment = fields.Boolean('Display Comment')
 
 
 class MethodologyNeeds(models.Model):
@@ -36,9 +33,6 @@ class NeedsNeeds(models.Model):
     @api.onchange('order_id.needs_id', 'needs_id')
     def _onchange_needs_id(self):
         self.name = self.needs_id.name
-        self.volume = self.needs_id.volume
-        self.average_age = self.needs_id.average_age
-        self.h_f_percentage = self.needs_id.h_f_percentage
-        self.match_rate = self.needs_id.match_rate
-        self.other_chanel_potential = self.needs_id.other_chanel_potential
-        self.other = self.needs_id.other
+        self.need_comment = self.needs_id.need_comment
+        self.need_type = self.needs_id.need_type
+        self.is_display_comment = self.needs_id.is_display_comment

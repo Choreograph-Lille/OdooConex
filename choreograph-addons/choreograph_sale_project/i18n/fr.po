@@ -285,6 +285,13 @@ msgid "Catalogues"
 msgstr ""
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__need_type
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_needs_base__need_type
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_needs_needs__need_type
+msgid "Channel type"
+msgstr "Type de canal"
+
+#. module: choreograph_sale_project
 #: model:mail.template,subject:choreograph_sale_project.email_template_choreograph_delivery
 msgid ""
 "Choreograph/ I-Behavior: The {{ object.get_operation_template_name() }} "
@@ -311,6 +318,9 @@ msgid "Civility"
 msgstr "Civilités"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__need_comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_needs_base__need_comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_needs_needs__need_comment
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__comment
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__comment
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__email_bat_comment
@@ -459,6 +469,13 @@ msgstr "Profondeur"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__desired_finished_volume
 msgid "Desired Finished Volume"
 msgstr "Volume abouti souhaité"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__is_display_comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_needs_base__is_display_comment
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_needs_needs__is_display_comment
+msgid "Display Comment"
+msgstr "Afficher la zone de texte"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__display_name

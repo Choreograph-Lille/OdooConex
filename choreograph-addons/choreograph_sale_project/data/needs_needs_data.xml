@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+      <record model="needs.needs" id="needs_needs_1">
+        <field name="name">VOLUME / VENTILATION</field>
+        <field name="is_display_comment">1</field>
+      </record>
+      <record model="needs.needs" id="needs_needs_2">
+        <field name="name">AGE MOYEN</field>
+        <field name="is_display_comment">1</field>
+      </record>
+      <record model="needs.needs" id="needs_needs_3">
+        <field name="name">% H/F</field>
+        <field name="is_display_comment">1</field>
+      </record>
+      <record model="needs.needs" id="needs_needs_4">
+        <field name="name">TAUX DE MATCH</field>
+        <field name="is_display_comment">1</field>
+      </record>
+      <record model="needs.needs" id="needs_needs_5">
+        <field name="name">POTENTIEL AUTRE CANAL</field>
+        <field name="is_display_comment">0</field>
+      </record>
+      <record model="needs.needs" id="needs_needs_6">
+        <field name="name">AUTRE</field>
+        <field name="is_display_comment">1</field>
+      </record>
+    </data>
+</odoo>
