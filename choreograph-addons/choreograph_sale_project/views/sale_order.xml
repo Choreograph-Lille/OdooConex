@@ -67,6 +67,7 @@
                             <control>
                                 <create name="add_line_control" string="Add a need"/>
                             </control>
+                            <field name="needs_id"/>
                             <field name="volume"/>
                             <field name="average_age"/>
                             <field name="h_f_percentage"/>

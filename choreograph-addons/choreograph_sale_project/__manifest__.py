@@ -30,6 +30,7 @@
         'views/ir_ui_menu.xml',
         'views/project_project.xml',
         'views/resource_views.xml',
+        'views/methodology_needs.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],
