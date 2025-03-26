@@ -16,6 +16,11 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__h_f_percentage
+msgid "% H/F"
+msgstr ""
+
+#. module: choreograph_sale_project
 #: model:mail.template,body_html:choreograph_sale_project.email_template_choreograph_delivery
 msgid ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
@@ -185,6 +190,11 @@ msgid "Activity Type Icon"
 msgstr "Icône de type d'activité"
 
 #. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "Add a need"
+msgstr "Ajouter un besoin"
+
+#. module: choreograph_sale_project
 #: model_terms:ir.actions.act_window,help:choreograph_sale_project.choreograph_sale_project_task_type_action
 msgid "Add a new task type"
 msgstr "Ajouter un nouveau type de tâche"
@@ -194,6 +204,11 @@ msgstr "Ajouter un nouveau type de tâche"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__message_attachment_count
 msgid "Attachment Count"
 msgstr "Nombre d'attachements"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__average_age
+msgid "Average Age"
+msgstr "Age moyen"
 
 #. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_task_form2_inherit2
@@ -328,6 +343,7 @@ msgstr "Créer l'opération"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__create_uid
@@ -336,6 +352,7 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_date
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__create_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__create_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__create_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__create_date
@@ -439,10 +456,16 @@ msgstr "Volume abouti souhaité"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__display_name
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__methodology_needs__other_chanel_potential__email
+msgid "Email"
 msgstr ""
 
 #. module: choreograph_sale_project
@@ -596,6 +619,7 @@ msgstr "A une prospection email Op"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__id
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__id
@@ -681,6 +705,7 @@ msgstr "LIEN OPT-OUT"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type____last_update
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address____last_update
@@ -689,6 +714,7 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__write_uid
@@ -697,6 +723,7 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__write_date
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_trap_address__write_date
@@ -723,6 +750,11 @@ msgstr "Pièce jointe principale"
 #: model:ir.model.fields.selection,name:choreograph_sale_project.selection__operation_segment__civility__male
 msgid "Males"
 msgstr "Hommes"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__match_rate
+msgid "Match Rate"
+msgstr "Taux de match"
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_matchback
@@ -766,6 +798,11 @@ msgstr "Échéance de mon activité"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__name
 msgid "Name"
 msgstr "Nom"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__needs_ids
+msgid "Needs"
+msgstr "Besoins"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__activity_calendar_event_id
@@ -851,6 +888,21 @@ msgid "Optout"
 msgstr ""
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__order_id
+msgid "Order"
+msgstr "Commande"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__other
+msgid "Other"
+msgstr "Autre"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__other_chanel_potential
+msgid "Other Channel Potential"
+msgstr "Potentiel autre canal"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields.selection,name:choreograph_sale_project.selection__operation_segment__civility__other
 msgid "Others"
 msgstr "Mixtes"
@@ -884,6 +936,11 @@ msgstr "Adresse de livraison"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__personalization
 msgid "Personalization"
 msgstr "Personnalisation"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__methodology_needs__other_chanel_potential__phone
+msgid "Phone"
+msgstr ""
 
 #. module: choreograph_sale_project
 #: model:project.project,name:choreograph_sale_project.project_project_postal_prospecting
@@ -1104,6 +1161,11 @@ msgstr "Date de routage"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__routing_end_date
 msgid "Routing End Date"
 msgstr "Fin de routage"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields.selection,name:choreograph_sale_project.selection__methodology_needs__other_chanel_potential__sms
+msgid "SMS"
+msgstr ""
 
 #. module: choreograph_sale_project
 #: model:choreograph.project.task.type,name:choreograph_sale_project.choreograph_project_task_type_sms_campaign
@@ -1391,6 +1453,11 @@ msgstr "Quantité à livrer"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__volume_detail
 msgid "Volume Detail"
 msgstr "Détail volume"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__volume
+msgid "Volume/Ventilation"
+msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__website_message_ids
