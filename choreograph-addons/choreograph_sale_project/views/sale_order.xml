@@ -60,10 +60,22 @@
                     </h3>
                     <field name="operation_condition_ids"
                         context="{'default_partner_id': partner_id}" />
-                    <h3>
-                        <label for="comment" />
-                    </h3>
-                    <field name="comment" />
+
+                    <label for="needs_ids" />
+                    <field name="needs_ids">
+                        <tree editable="bottom">
+                            <control>
+                                <create name="add_line_control" string="Add a need"/>
+                            </control>
+                            <field name="volume"/>
+                            <field name="average_age"/>
+                            <field name="h_f_percentage"/>
+                            <field name="match_rate"/>
+                            <field name="other_chanel_potential"/>
+                            <field name="other"/>
+                        </tree>
+                    </field>
+
                     <group>
                         <group>
                             <field name="quantity_to_deliver" />

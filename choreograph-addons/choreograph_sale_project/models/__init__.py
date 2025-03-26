@@ -13,3 +13,4 @@ from . import mail_tracking_value
 from . import product
 from . import resource_calendar_leaves
 from . import mail_followers
+from . import methodology_needs
