@@ -390,9 +390,14 @@ class OperationWebsite(http.Controller):
     <meta charset="utf-8">
     <title>Power BI embedded - Conexance</title>
     <script src="/maas_website/static/src/report/es6-promise.js" integrity="sha384-o56RdTPUrpuJrwU5s8XdhI8EJ1rlkBUrHZUY7U4ykFo7mkS4c/H/qXMIRyRM86mz" crossorigin="anonymous"></script>
-    <script type="text/javascript"
+    <!-- <script type="text/javascript"
         src="/maas_website/static/src/bootstrap/dist/js/jquery.min.v3.7.1.js"
         integrity="sha384-MnTx5+eP/OUWPb9SjwMXShfMET3B3r3gx6HJWG+7Lj6kag+yreDUSG5FDWWG/SHA"
+        crossorigin="anonymous"
+    ></script>-->
+    <script type="text/javascript"
+        src="/maas_website/static/src/bootstrap/dist/js/jquery.min.js"
+        integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ"
         crossorigin="anonymous"
     ></script>
     <script src="/maas_website/static/src/report/powerbi.js" integrity="sha384-eU0E5DWk57oAcUTcCMVX9ydymgwo1GYOcpFLqLxmTDmlJvDqGjvEEPd3Me9qd1qF" crossorigin="anonymous"></script>
