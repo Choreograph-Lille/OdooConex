@@ -68,12 +68,9 @@
                                 <create name="add_line_control" string="Add a need"/>
                             </control>
                             <field name="needs_id"/>
-                            <field name="volume"/>
-                            <field name="average_age"/>
-                            <field name="h_f_percentage"/>
-                            <field name="match_rate"/>
-                            <field name="other_chanel_potential"/>
-                            <field name="other"/>
+                            <field name="need_comment" attrs="{'readonly': [('is_display_comment', '=', False)]}"/>
+                            <field name="need_type" attrs="{'readonly': [('is_display_comment', '=', True)]}"/>
+                            <field name="is_display_comment" invisible="True"/>
                         </tree>
                     </field>
 

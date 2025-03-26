@@ -21,6 +21,7 @@
         'data/project_project.xml',
         'data/mail_template_data.xml',
         'data/ir_cron_data.xml',
+        'data/needs_needs_data.xml',
         # security
         'security/ir.model.access.csv',
         # views

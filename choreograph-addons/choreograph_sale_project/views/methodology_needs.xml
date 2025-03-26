@@ -11,16 +11,13 @@
           </h1>
           <group>
             <group>
-              <field name="volume"/>
-              <field name="average_age"/>
+              <field name="need_type"/>
+              <field name="need_comment"/>
             </group>
+          </group>
+          <group>
             <group>
-              <field name="h_f_percentage"/>
-              <field name="match_rate"/>
-            </group>
-            <group>
-              <field name="other_chanel_potential"/>
-              <field name="other"/>
+              <field name="is_display_comment"/>
             </group>
           </group>
         </sheet>
@@ -34,12 +31,9 @@
     <field name="arch" type="xml">
       <tree>
         <field name="name"/>
-        <field name="volume"/>
-        <field name="average_age"/>
-        <field name="h_f_percentage"/>
-        <field name="match_rate"/>
-        <field name="other_chanel_potential"/>
-        <field name="other"/>
+        <field name="need_comment"/>
+        <field name="need_type"/>
+        <field name="is_display_comment" optional="hide"/>
       </tree>
     </field>
   </record>
