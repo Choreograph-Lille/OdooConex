@@ -73,6 +73,8 @@
                             <field name="is_display_comment" invisible="True"/>
                         </tree>
                     </field>
+                    <label for="survey_exchange" />
+                    <field name="survey_exchange"/>
 
                     <group>
                         <group>
