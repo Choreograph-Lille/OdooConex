@@ -87,11 +87,7 @@ class PurchaseOrder(models.Model):
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
-        if (
-            not self.env.user.has_group("choreograph_sox.group_purchasing_preparer_profile_res_groups") and
-            not self.env.user.has_group("choreograph_sox.group_validator_1_purchase_profile_res_groups") and
-            not self.env.user.has_group("choreograph_sox.group_validator_2_purchase_profile_res_groups")
-        ):
+        if not self.env.user.has_group("choreograph_sox.group_confidential_profile_res_groups"):
             args = expression.AND([[('is_confidential', '=', False)], args])
         
         return super(PurchaseOrder, self).search(args, offset=offset, limit=limit, order=order, count=count)
