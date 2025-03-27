@@ -2,12 +2,14 @@
 
 from odoo import fields, models, api
 from odoo.tools.float_utils import float_compare, float_is_zero, float_round
+from odoo.osv import expression
 
 
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     validated_difference = fields.Boolean()
+    is_confidential = fields.Boolean()
 
     def default_user_id(self):
         return self.partner_id.purchase_user_id or False
@@ -71,3 +73,21 @@ class PurchaseOrder(models.Model):
                 order.invoice_status = 'invoiced'
             else:
                 order.invoice_status = 'no'
+    
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        self.is_confidential = self.partner_id.is_confidential
+
+    @api.onchange('is_confidential')
+    def _onchange_is_confidential(self):
+        if self.invoice_ids:
+            self.invoice_ids.write({
+                'is_confidential':self.is_confidential
+            })
+
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        if not self.env.user.has_group("choreograph_sox.group_confidential_profile_res_groups"):
+            args = expression.AND([[('is_confidential', '=', False)], args])
+        
+        return super(PurchaseOrder, self).search(args, offset=offset, limit=limit, order=order, count=count)

@@ -8,6 +8,9 @@
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
+                <group name="accounting_info_group" position="inside">
+                    <field name="is_confidential"/>
+                </group>
                 <field name="invoice_vendor_bill_id" position="after">
                     <field name="sale_order_id" invisible="1"/>
                 </field>

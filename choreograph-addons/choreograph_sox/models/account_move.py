@@ -3,6 +3,7 @@
 from odoo import api, models, fields, _
 
 from odoo.exceptions import ValidationError, AccessError
+from odoo.osv import expression
 
 
 class AccountMove(models.Model):
@@ -55,4 +56,21 @@ class AccountMove(models.Model):
         
         res = super(AccountMove, self).write(vals)
         return res
+
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        if (
+            any(isinstance(e, list) and e[0] == 'move_type' for e in args) and
+            (
+                any(isinstance(e, list) and e[2] == 'in_invoice' for e in args) or
+                (
+                    any(isinstance(e, list) and e[1] == 'in' for e in args) and
+                    any(isinstance(e, list) and isinstance(e[2], list) and 'in_invoice' in e[2] for e in args)
+                )
+            )
+        ):
+            if not self.env.user.has_group("choreograph_sox.group_confidential_profile_res_groups"):
+                args = expression.AND([[('is_confidential', '=', False)], args])
+        
+        return super(AccountMove, self).search(args, offset=offset, limit=limit, order=order, count=count)
 
