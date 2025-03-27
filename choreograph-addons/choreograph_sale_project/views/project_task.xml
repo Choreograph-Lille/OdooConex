@@ -207,6 +207,9 @@
                             <field name="is_display_comment" invisible="True"/>
                         </tree>
                     </field>
+                    <label for="survey_exchange" />
+                    <field name="survey_exchange"/>
+                    <hr/>
 
                     <group attrs="{'invisible': [('task_number', '=', False)]}">
                         <group>
