@@ -123,6 +123,8 @@ class ProjectTask(models.Model):
     email_bat_comment = fields.Text(string="Comment", related="sale_order_id.email_bat_comment")
     email_witness_comment = fields.Text(string="Comment", related="sale_order_id.email_witness_comment")
 
+    needs_ids = fields.One2many(related="sale_order_id.needs_ids")
+
     # def compute_comment(self):
     #     for rec in self:
     #         comment_values = {
