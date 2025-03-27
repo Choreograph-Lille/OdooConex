@@ -68,6 +68,7 @@ class SaleOrder(models.Model):
     presta_provider_delivery_partner_email = fields.Char(string='Presta Info Partner Delivery Address', compute='compute_delivery_info_data')
 
     needs_ids = fields.One2many('methodology.needs', 'order_id', 'Needs')
+    survey_exchange = fields.Text(string='Survey Exchange')
 
     @api.model
     def get_operation_fields(self):
