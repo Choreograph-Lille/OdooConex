@@ -5,6 +5,7 @@ import logging
 from odoo import fields, models, api, _
 from odoo.exceptions import UserError, ValidationError
 import uuid
+import re
 
 logger = logging.getLogger(__name__)
 
@@ -13,7 +14,7 @@ class SaleOperation(models.Model):
     _name = 'sale.operation'
     _inherit = ['mail.thread', 'mail.activity.mixin', 'portal.mixin']
     _description = 'Sale Operation'
-    _order = 'number desc'
+    _order = 'number_sequence desc'
 
     @api.model
     def default_get(self, fields):
@@ -31,6 +32,7 @@ class SaleOperation(models.Model):
 
     name = fields.Char('Name', required=True)
     number = fields.Char('Operation Number', default='', readonly=True)
+    number_sequence = fields.Integer(compute="_compute_numeric_part", store=True, index=True)
     date = fields.Datetime('Date', tracking=True)
     company_id = fields.Many2one('res.company', 'Company', ondelete='cascade')
     partner_id = fields.Many2one('res.partner', 'Partner', ondelete='cascade', required=True,
@@ -319,3 +321,15 @@ class SaleOperation(models.Model):
                 default=False):
             raise ValidationError(_('You cannot order quantity greater than the population scored.'))
         return True
+    
+    @api.depends('number')
+    def _compute_numeric_part(self):
+        for record in self:
+            num = re.findall(r'\d+', record.number)
+            record.number_sequence = int(num[0]) if num else 0
+        
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        if order and 'number' in order:
+            order = order.replace('number', 'number_sequence')
+        return super(SaleOperation, self).search(args, offset=offset, limit=limit, order=order, count=count)

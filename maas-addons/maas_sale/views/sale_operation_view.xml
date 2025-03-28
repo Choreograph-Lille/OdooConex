@@ -119,6 +119,7 @@
             <field name="model">sale.operation</field>
             <field name="arch" type="xml">
                 <tree string="Sales Operations">
+                    <field name="number_sequence"  invisible="1"/>
                     <field name="number" />
                     <field name="name" />
                     <field name="partner_id" />
