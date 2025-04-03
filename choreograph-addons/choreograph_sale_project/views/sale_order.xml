@@ -60,10 +60,63 @@
                     </h3>
                     <field name="operation_condition_ids"
                         context="{'default_partner_id': partner_id}" />
-                    <h3>
-                        <label for="comment" />
-                    </h3>
-                    <field name="comment" />
+
+                    <label for="methodology_ids" />
+                    <field name="methodology_ids" context="{'default_order_id': active_id}" widget="section_and_note_one2many">
+                        <tree>
+                            <control>
+                                <create name="add_section_control"
+                                        string="Add a score"
+                                        context="{
+                                        'default_type': 'score', 'default_display_type': 'line_section',
+                                        'form_view_ref': 'choreograph_sale_project.view_methodology_methodology_form',
+                                        }"
+                                />
+                                <create name="add_section_control"
+                                        string="Add a selection"
+                                        context="{
+                                        'default_type': 'selection', 'default_display_type': 'line_section',
+                                        'form_view_ref': 'choreograph_sale_project.view_methodology_methodology_form',
+                                        }"
+                                />
+                                <create name="add_line_control"
+                                        string="Add a list"
+                                        context="{
+                                        'no_name': True,
+                                        'form_view_ref': 'choreograph_sale_project.view_methodology_methodology_form',
+                                        }"
+                                />
+                            </control>
+                            <field name="name" widget="section_and_note_text"/>
+                            <field name="methodology_name_id"/>
+                            <field name="target_id"/>
+                            <field name="target_textarea"/>
+                            <field name="target_recence_id"/>
+                            <field name="recence_textarea"/>
+                            <field name="target_filter_id"/>
+                            <field name="filter_textarea"/>
+                            <field name="customer_filter_id"/>
+                            <field name="customer_filter_textarea"/>
+                            <field name="order_id" invisible="True"/>
+                            <field name="type" invisible="True"/>
+                            <field name="display_type" invisible="True"/>
+                        </tree>
+                    </field>
+                    <label for="needs_ids" />
+                    <field name="needs_ids">
+                        <tree editable="bottom">
+                            <control>
+                                <create name="add_line_control" string="Add a need"/>
+                            </control>
+                            <field name="needs_id"/>
+                            <field name="need_comment" attrs="{'readonly': [('is_display_comment', '=', False)]}"/>
+                            <field name="need_type" attrs="{'readonly': [('is_display_comment', '=', True)]}"/>
+                            <field name="is_display_comment" invisible="True"/>
+                        </tree>
+                    </field>
+                    <label for="survey_exchange" />
+                    <field name="survey_exchange"/>
+
                     <group>
                         <group>
                             <field name="quantity_to_deliver" />

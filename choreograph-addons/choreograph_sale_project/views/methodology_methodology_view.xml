@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record model="ir.ui.view" id="view_methodology_methodology_form">
+    <field name="name">Methodology Methodology Form</field>
+    <field name="model">methodology.methodology</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <field name="name" attrs="{'invisible': [('display_type', '!=', 'line_section')]}"/>
+          <group attrs="{'invisible': [('display_type', '=', 'line_section')]}">
+            <group>
+              <field name="methodology_name_id"
+                     attrs="{
+                     'invisible': [('type', '=', 'selection')],
+                     'required': [('display_type', '!=', 'line_section'), ('type', '=', 'score')]
+                     }"
+              />
+              <field name="target_id"
+                     attrs="{
+                     'invisible': [('type', '=', 'selection')],
+                     'required': [('display_type', '!=', 'line_section'), ('type', '=', 'score')]
+                     }"
+                     options="{'no_edit':True, 'no_create_edit': True, 'no_open': True}"
+                     domain="[('type', '=', 'score')]"
+              />
+              <div/>
+              <div>
+                <field name="target_textarea"
+                       attrs="{
+                       'invisible': [('target_textarea_show', '=', False)],
+                       }"
+                       placeholder="Textarea for target here ..."
+                       no_label="1"
+                />
+              </div>
+            </group>
+
+            <group>
+              <field name="target_recence_id"
+                     attrs="{
+                     'required': [('display_type', '!=', 'line_section'), ('type', 'in', ['score', 'selection'])]
+                     }"
+                     options="{'no_edit':True, 'no_create_edit': True, 'no_open': True}"
+              />
+              <div/>
+              <div>
+                <field name="recence_textarea"
+                       attrs="{
+                       'invisible': [('target_recence_textarea_show', '=', False)],
+                       }"
+                       placeholder="Textarea for target recence or selection recence here ..."
+                       no_label="1"
+                />
+              </div>
+            </group>
+
+            <group>
+              <field name="target_filter_id"
+                     options="{'no_edit':True, 'no_create_edit': True, 'no_open': True}"
+                     domain="[('type', '=', 'score')]"
+                     attrs="{
+                     'invisible': [('type', '=', 'selection')],
+                     }"
+
+              />
+              <div/>
+              <div>
+                <field name="filter_textarea"
+                       attrs="{
+                       'invisible': ['|', ('target_filter_textarea_show', '=', False), ('type', '=', 'selection')],
+                       }"
+                       placeholder="Textarea for target filter here ..."
+                       no_label="1"
+                />
+              </div>
+            </group>
+
+            <group>
+              <field name="customer_filter_id"/>
+              <div/>
+              <div>
+                <field name="customer_filter_textarea"
+                       attrs="{
+                       'invisible': [('customer_filter_textarea_show', '=', False)],
+                       }"
+                       placeholder="Textarea for customer filter here ..."
+                       no_label="1"
+                />
+              </div>
+            </group>
+            <field name="order_id" invisible="True"/>
+            <field name="type" invisible="True"/>
+            <field name="display_type" invisible="True"/>
+            <field name="target_textarea_show" invisible="True"/>
+            <field name="target_recence_textarea_show" invisible="True"/>
+            <field name="target_filter_textarea_show" invisible="True"/>
+            <field name="customer_filter_textarea_show" invisible="True"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+</odoo>

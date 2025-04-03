@@ -7,4 +7,9 @@
     sequence="10"
     parent="project.menu_project_config"
   />
+  <menuitem
+    id="menu_methodology"
+    name="Methodology"
+    parent="sale.menu_sale_config"
+  />
 </odoo>
