@@ -95,6 +95,7 @@
             <field name="target_recence_textarea_show" invisible="True"/>
             <field name="target_filter_textarea_show" invisible="True"/>
             <field name="customer_filter_textarea_show" invisible="True"/>
+            <field name="section_owner" invisible="True"/>
           </group>
         </sheet>
       </form>
