@@ -80,15 +80,15 @@ class MethodologyMethodology(models.Model):
             section_type = res.get('type', False)
             last_section = self.get_sections(order_id)
             section_owner = last_section[0].name if last_section else False
-            if section_type:
+            display_type = res.get('display_type', False)
+            if section_type and display_type:
                 name = section_type + ' ' + str(self.check_existing_section(section_type, order_id) + 1)
                 res['name'] = name.upper()
             if section_owner:
                 res['section_owner'] = section_owner
-                display_type = res.get('display_type', False)
                 if not display_type:
                     type = section_owner.lower().split(' ')[0]
-                    # res['type'] = type
+                    res['name'] = False
                     if type == 'score':
                         target_recence = 'choreograph_sale_project.target_0_12'
                     else:
@@ -131,7 +131,7 @@ class MethodologyMethodology(models.Model):
         section_owner = last_section[0].name if last_section else ''
         for vals in vals_list:
             section_type = vals.get('type', '')
-            if section_type in ('score', 'selection'):
+            if section_type in ('score', 'selection') and vals.get('display_type', False):
                 sequence.update({section_type: self.check_existing_section(section_type, order_id) + 1})
                 section_owner = section_type + ' ' + str(sequence.get(section_type))
                 vals.update({ 'name': section_owner.upper() })
