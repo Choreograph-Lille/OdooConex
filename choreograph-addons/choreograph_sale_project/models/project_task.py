@@ -126,6 +126,9 @@ class ProjectTask(models.Model):
     needs_ids = fields.One2many(related="sale_order_id.needs_ids")
     survey_exchange = fields.Text(related="sale_order_id.survey_exchange")
     methodology_ids = fields.One2many(related="sale_order_id.methodology_ids")
+    is_random = fields.Boolean(related='sale_order_id.is_random')
+    is_prioritization = fields.Boolean(related='sale_order_id.is_prioritization')
+    prioritization_textarea = fields.Text(related='sale_order_id.prioritization_textarea')
 
     # def compute_comment(self):
     #     for rec in self:
