@@ -49,5 +49,5 @@
     </field>
   </record>
 
-  <menuitem id="menu_needs_needs" name="Needs" parent="sale.menu_sale_config" action="action_needs_needs"/>
+  <menuitem id="menu_needs_needs" name="Needs" parent="menu_methodology" action="action_needs_needs"/>
 </odoo>

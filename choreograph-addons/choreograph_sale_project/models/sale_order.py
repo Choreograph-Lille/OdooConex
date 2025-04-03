@@ -69,6 +69,7 @@ class SaleOrder(models.Model):
 
     needs_ids = fields.One2many('methodology.needs', 'order_id', 'Needs')
     survey_exchange = fields.Text(string='Survey Exchange')
+    methodology_ids = fields.One2many('methodology.methodology', 'order_id', 'Methodology')
 
     @api.model
     def get_operation_fields(self):

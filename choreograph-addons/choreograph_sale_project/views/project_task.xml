@@ -194,7 +194,24 @@
                             [('task_number', 'not in', ['45'])]}"/>-->
                         </group>
                     </group>
-
+                    <label for="methodology_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                    <field name="methodology_ids" widget="section_and_note_one2many" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
+                        <tree>
+                            <field name="name" widget="section_and_note_text"/>
+                            <field name="methodology_name_id"/>
+                            <field name="target_id"/>
+                            <field name="target_textarea"/>
+                            <field name="target_recence_id"/>
+                            <field name="recence_textarea"/>
+                            <field name="target_filter_id"/>
+                            <field name="filter_textarea"/>
+                            <field name="customer_filter_id"/>
+                            <field name="customer_filter_textarea"/>
+                            <field name="order_id" invisible="True"/>
+                            <field name="type" invisible="True"/>
+                            <field name="display_type" invisible="True"/>
+                        </tree>
+                    </field>
                     <label for="needs_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
                     <field name="needs_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
                         <tree editable="bottom">
@@ -207,8 +224,8 @@
                             <field name="is_display_comment" invisible="True"/>
                         </tree>
                     </field>
-                    <label for="survey_exchange" />
-                    <field name="survey_exchange"/>
+                    <label for="survey_exchange" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                    <field name="survey_exchange" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
                     <hr/>
 
                     <group attrs="{'invisible': [('task_number', '=', False)]}">

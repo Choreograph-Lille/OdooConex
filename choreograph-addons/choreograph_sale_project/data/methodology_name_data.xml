@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+    <record model="methodology.name" id="clone">
+      <field name="name">CLONE</field>
+      <field name="type">score</field>
+      <field name="target_id" ref="choreograph_sale_project.assets"/>
+    </record>
+    <record model="methodology.name" id="clone_again">
+      <field name="name">CLONE_AGAIN</field>
+      <field name="type">score</field>
+      <field name="target_id" ref="choreograph_sale_project.assets_gt_2"/>
+    </record>
+    <record model="methodology.name" id="clone_season">
+      <field name="name">CLONE_SEASON</field>
+      <field name="type">score</field>
+      <field name="target_id" ref="choreograph_sale_project.assets_fix"/>
+    </record>
+    <record model="methodology.name" id="name_new">
+      <field name="name">NEW</field>
+      <field name="type">score</field>
+      <field name="target_id" ref="choreograph_sale_project.new"/>
+    </record>
+    <record model="methodology.name" id="new_again">
+      <field name="name">NEW_AGAIN</field>
+      <field name="type">score</field>
+      <field name="target_id" ref="choreograph_sale_project.new_gt_2"/>
+    </record>
+    <record model="methodology.name" id="new_season">
+      <field name="name">NEW_SEASON</field>
+      <field name="type">score</field>
+      <field name="target_id" ref="choreograph_sale_project.new_fix"/>
+    </record>
+    <record model="methodology.name" id="meillaill">
+      <field name="name">MEILLAILL</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.name" id="comeback">
+      <field name="name">COMEBACK</field>
+      <field name="type">score</field>
+      <field name="target_id" ref="choreograph_sale_project.assets_accurate"/>
+    </record>
+    <record model="methodology.name" id="name_others">
+      <field name="name">OTHERS</field>
+      <field name="type">score</field>
+    </record>
+  </data>
+</odoo>
