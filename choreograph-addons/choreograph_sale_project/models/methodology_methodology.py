@@ -109,7 +109,7 @@ class MethodologyMethodology(models.Model):
         ],
         default=False
     )  # Juste for data display
-    target_recence_id = fields.Many2one('methodology.target.recence', string='Target Recence/Selection', domain="[('type', '=', type)]")
+    target_recence_id = fields.Many2one('methodology.target.recence', string='Target Recence/Selection')
     target_recence_textarea_show = fields.Boolean(related='target_recence_id.display_textarea')
     recence_textarea = fields.Text('Textarea')
     target_filter_id = fields.Many2one('methodology.target.filter', string='Target Filter')
@@ -167,3 +167,10 @@ class MethodologyMethodology(models.Model):
             self.target_textarea_show = True
         else:
             self.target_textarea_show = False
+
+    @api.onchange('section_owner')
+    def _onchange_section_owner(self):
+        if self.section_owner:
+            section_type = self.section_owner.lower().split(' ')[0]
+            return {'domain': {'target_recence_id': [('type', '=', section_type)]}}
+
