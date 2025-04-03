@@ -177,6 +177,28 @@ msgstr ""
 "            "
 
 #. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_task_form2_inherit2
+msgid ""
+"<span attrs=\"{'invisible': [('task_number', 'not in', ['20', '25', '30', "
+"'35'])]}\">Base repartition</span>"
+msgstr "<span attrs=\"{'invisible': [('task_number', 'not in', ['20', '25', '30', "
+"'35'])]}\">Répartition base</span>"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_task_form2_inherit2
+msgid ""
+"<span attrs=\"{'invisible': [('task_number', 'not in', ['20', '25', '30', "
+"'35'])]}\">Score/selection repartition</span>"
+msgstr ""
+"<span attrs=\"{'invisible': [('task_number', 'not in', ['20', '25', '30', "
+"'35'])]}\">Répartition Score/Sélection</span>"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "<span>Base repartition</span>"
+msgstr "<span>Répartition base</span>"
+
+#. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
 msgid "<span>Score/selection repartition</span>"
 msgstr "<span>Répartition Score/Sélection</span>"
@@ -1022,12 +1044,18 @@ msgid "Is Follower"
 msgstr "Est abonné"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__is_prioritization
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__is_prioritization_base
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__is_prioritization
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__is_prioritization_base
 msgid "Is Prioritization"
 msgstr "Priorisation"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__is_random
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__is_random_base
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__is_random
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__is_random_base
 msgid "Is Random"
 msgstr "Aléatoire"
 
@@ -1559,6 +1587,25 @@ msgstr "Commentaire infos presta"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__presta_provider_delivery_partner_email
 msgid "Presta Info Partner Delivery Address"
 msgstr "Adresse de livraison infos presta"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__prioritization_textarea
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__prioritization_textarea_base
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__prioritization_textarea
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__prioritization_textarea_base
+msgid "Prioritization Textarea"
+msgstr "Zone de text pour priorisation"
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "Prioritization base textarea ..."
+msgstr "Zonde de texte pour la base de priorisation ..."
+
+#. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_task_form2_inherit2
+msgid "Prioritization textarea ..."
+msgstr "Zone de texte pour la priorisation Score/Séléction"
 
 #. module: choreograph_sale_project
 #: model:ir.model,name:choreograph_sale_project.model_product_template

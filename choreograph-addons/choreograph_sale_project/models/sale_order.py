@@ -73,6 +73,9 @@ class SaleOrder(models.Model):
     is_random = fields.Boolean('Is Random')
     is_prioritization = fields.Boolean('Is Prioritization')
     prioritization_textarea = fields.Text(string='Prioritization Textarea')
+    is_random_base = fields.Boolean('Is Random')
+    is_prioritization_base = fields.Boolean('Is Prioritization')
+    prioritization_textarea_base = fields.Text(string='Prioritization Textarea')
 
     @api.model
     def get_operation_fields(self):

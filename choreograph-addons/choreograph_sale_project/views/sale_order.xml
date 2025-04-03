@@ -114,6 +114,18 @@
                         />
                     </div>
                     <separator/>
+                    <span>Base repartition</span>
+                    <div class="inline">
+                        <label for="is_random_base"/>
+                        <field name="is_random_base" style="margin-right: 5em;"/>
+                        <label for="is_prioritization_base"/>
+                        <field name="is_prioritization_base"/>
+                        <field name="prioritization_textarea_base"
+                               attrs="{'invisible': [('is_prioritization_base', '=', False)]}"
+                               placeholder="Prioritization base textarea ..."
+                        />
+                    </div>
+                    <separator/>
                     <label for="needs_ids" />
                     <field name="needs_ids">
                         <tree editable="bottom">
