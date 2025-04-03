@@ -132,6 +132,7 @@ class ProjectTask(models.Model):
     is_random_base = fields.Boolean(related='sale_order_id.is_random_base')
     is_prioritization_base = fields.Boolean(related='sale_order_id.is_prioritization_base')
     prioritization_textarea_base = fields.Text(related='sale_order_id.prioritization_textarea_base')
+    results = fields.Text(related='sale_order_id.results')
 
     # def compute_comment(self):
     #     for rec in self:
