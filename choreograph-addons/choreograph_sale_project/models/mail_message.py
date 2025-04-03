@@ -21,3 +21,16 @@ class MailMessage(models.Model):
                 if project_id.partner_id:
                     vals["record_name"] += f' - {project_id.partner_id.name}'
         return vals_list
+
+    @api.model_create_multi
+    def create(self, values_list):
+        res = super().create(values_list)
+        if 'methodology.methodology' in set(res.mapped('model')):
+            methodology_id = self.env['methodology.methodology'].browse(res.mapped('res_id')[0])
+            res.copy({
+                'model': methodology_id.order_id._name,
+                'res_id': methodology_id.order_id.id,
+                'tracking_value_ids': [(6, 0, res.tracking_value_ids.ids)],
+            })
+        return res
+

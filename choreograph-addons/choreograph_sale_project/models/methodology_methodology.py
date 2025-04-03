@@ -67,6 +67,7 @@ class MethodologyName(models.Model):
 
 class MethodologyMethodology(models.Model):
     _name = "methodology.methodology"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Methodology"
     _translate = True
 
@@ -95,13 +96,13 @@ class MethodologyMethodology(models.Model):
                     res['target_recence_id'] = self.env.ref(target_recence)
         return res
 
-    name = fields.Char('Name', readonly=True)
-    type = fields.Selection(TYPE_SELECTION, 'Type')
-    methodology_name_id = fields.Many2one('methodology.name', 'Methodology name')
-    target_id = fields.Many2one('methodology.score.target', 'Target')
-    target_textarea_show = fields.Boolean(string='Display textarea ?')
-    target_textarea = fields.Text('Textarea')
-    order_id = fields.Many2one('sale.order', 'Order')
+    name = fields.Char('Name', readonly=True, tracking=True)
+    type = fields.Selection(TYPE_SELECTION, 'Type', tracking=True)
+    methodology_name_id = fields.Many2one('methodology.name', 'Methodology name', tracking=True)
+    target_id = fields.Many2one('methodology.score.target', 'Target', tracking=True)
+    target_textarea_show = fields.Boolean(string='Display textarea ?', tracking=True)
+    target_textarea = fields.Text('Textarea', tracking=True)
+    order_id = fields.Many2one('sale.order', 'Order', tracking=True)
     section_owner = fields.Char('Section Owner')
     display_type = fields.Selection(
         selection=[
@@ -109,15 +110,15 @@ class MethodologyMethodology(models.Model):
         ],
         default=False
     )  # Juste for data display
-    target_recence_id = fields.Many2one('methodology.target.recence', string='Target Recence/Selection')
-    target_recence_textarea_show = fields.Boolean(related='target_recence_id.display_textarea')
-    recence_textarea = fields.Text('Textarea')
-    target_filter_id = fields.Many2one('methodology.target.filter', string='Target Filter')
-    target_filter_textarea_show = fields.Boolean(related='target_filter_id.display_textarea')
-    filter_textarea = fields.Text('Textarea')
-    customer_filter_id = fields.Many2one('methodology.customer.filter', string='Customer Filter Type')
-    customer_filter_textarea_show = fields.Boolean(related='customer_filter_id.display_textarea')
-    customer_filter_textarea = fields.Text('Textarea')
+    target_recence_id = fields.Many2one('methodology.target.recence', string='Target Recence/Selection', tracking=True)
+    target_recence_textarea_show = fields.Boolean(related='target_recence_id.display_textarea', tracking=True)
+    recence_textarea = fields.Text('Textarea', tracking=True)
+    target_filter_id = fields.Many2one('methodology.target.filter', string='Target Filter', tracking=True)
+    target_filter_textarea_show = fields.Boolean(related='target_filter_id.display_textarea', tracking=True)
+    filter_textarea = fields.Text('Textarea', tracking=True)
+    customer_filter_id = fields.Many2one('methodology.customer.filter', string='Customer Filter Type', tracking=True)
+    customer_filter_textarea_show = fields.Boolean(related='customer_filter_id.display_textarea', tracking=True)
+    customer_filter_textarea = fields.Text('Textarea', tracking=True)
 
     @api.model_create_multi
     def create(self, vals_list):
