@@ -224,6 +224,18 @@
                         />
                     </div>
                     <separator/>
+                    <span attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">Base repartition</span>
+                    <div class="inline" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
+                        <label for="is_random_base"/>
+                        <field name="is_random_base" style="margin-right: 5em;"/>
+                        <label for="is_prioritization_base"/>
+                        <field name="is_prioritization_base"/>
+                        <field name="prioritization_textarea_base"
+                               attrs="{'invisible': [('is_prioritization_base', '=', False)]}"
+                               placeholder="Prioritization textarea ..."
+                        />
+                    </div>
+                    <separator/>
                     <label for="needs_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
                     <field name="needs_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
                         <tree editable="bottom">
