@@ -126,6 +126,8 @@
                         />
                     </div>
                     <separator/>
+                    <label for="results"/>
+                    <field name="results" placeholder="Textarea for results ..."/>
                     <label for="needs_ids" />
                     <field name="needs_ids">
                         <tree editable="bottom">

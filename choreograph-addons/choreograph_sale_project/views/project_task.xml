@@ -236,6 +236,8 @@
                         />
                     </div>
                     <separator/>
+                    <label for="results" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                    <field name="results" placeholder="Textarea for results ..." attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
                     <label for="needs_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
                     <field name="needs_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
                         <tree editable="bottom">
