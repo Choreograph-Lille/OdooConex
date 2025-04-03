@@ -68,15 +68,15 @@ class SaleOrder(models.Model):
     presta_provider_delivery_partner_email = fields.Char(string='Presta Info Partner Delivery Address', compute='compute_delivery_info_data')
 
     needs_ids = fields.One2many('methodology.needs', 'order_id', 'Needs')
-    survey_exchange = fields.Text(string='Survey Exchange')
+    survey_exchange = fields.Text(string='Survey Exchange', tracking=True)
     methodology_ids = fields.One2many('methodology.methodology', 'order_id', 'Methodology')
-    is_random = fields.Boolean('Is Random')
-    is_prioritization = fields.Boolean('Is Prioritization')
-    prioritization_textarea = fields.Text(string='Prioritization Textarea')
-    is_random_base = fields.Boolean('Is Random')
-    is_prioritization_base = fields.Boolean('Is Prioritization')
-    prioritization_textarea_base = fields.Text(string='Prioritization Textarea')
-    results = fields.Text(string='Results')
+    is_random = fields.Boolean('Is Random', tracking=True)
+    is_prioritization = fields.Boolean('Is Prioritization', tracking=True)
+    prioritization_textarea = fields.Text(string='Prioritization Textarea', tracking=True)
+    is_random_base = fields.Boolean('Is Random', tracking=True)
+    is_prioritization_base = fields.Boolean('Is Prioritization', tracking=True)
+    prioritization_textarea_base = fields.Text(string='Prioritization Textarea', tracking=True)
+    results = fields.Text(string='Results', tracking=True)
 
     @api.model
     def get_operation_fields(self):
@@ -311,6 +311,12 @@ class SaleOrder(models.Model):
         return project_id.action_to_plan()
 
     def write(self, vals):
+        methodology_fields_changes = []
+        if 'methodology_ids' in vals:
+            methodologies = vals.get('methodology_ids')
+            for methodology in methodologies:
+                if methodology[0] in [0, 1]:
+                    methodology_fields_changes.append(methodology)
         res = super(SaleOrder, self).write(vals)
         for rec in self:
             rec._check_info_validated(vals)
