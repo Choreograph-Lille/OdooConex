@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+    <!-- TARGET RECENCE -->
+    <record model="methodology.target.recence" id="target_0_6">
+      <field name="name">0 - 6 MONTHS</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.target.recence" id="target_0_12">
+      <field name="name">0 - 12 MONTHS</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.target.recence" id="target_0_18">
+      <field name="name">0 - 18 MONTHS</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.target.recence" id="target_0_24">
+      <field name="name">0 - 24 MONTHS</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.target.recence" id="target_0_36">
+      <field name="name">0 - 36 MONTHS</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.target.recence" id="target_customer_folder_recence">
+      <field name="name">CUSTOMER FOLDER</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.target.recence" id="target_lifetime">
+      <field name="name">LIFETIME</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.target.recence" id="target_recence_others">
+      <field name="name">OTHERS</field>
+      <field name="type">score</field>
+      <field name="display_textarea">1</field>
+    </record>
+    
+    <!-- TARGET SELECTION -->
+    <record model="methodology.target.recence" id="selection_default">
+      <field name="name">Default</field>
+      <field name="type">selection</field>
+    </record>
+    <record model="methodology.target.recence" id="selection_0_6">
+      <field name="name">0 - 6 MONTHS</field>
+      <field name="type">selection</field>
+    </record>
+    <record model="methodology.target.recence" id="selection_0_12">
+      <field name="name">0 - 12 MONTHS</field>
+      <field name="type">selection</field>
+    </record>
+    <record model="methodology.target.recence" id="selection_0_18">
+      <field name="name">0 - 18 MONTHS</field>
+      <field name="type">selection</field>
+    </record>
+    <record model="methodology.target.recence" id="selection_0_24">
+      <field name="name">0 - 24 MONTHS</field>
+      <field name="type">selection</field>
+    </record>
+    <record model="methodology.target.recence" id="selection_0_36">
+      <field name="name">0 - 36 MONTHS</field>
+      <field name="type">selection</field>
+    </record>
+    <record model="methodology.target.recence" id="selection_lifetime">
+      <field name="name">LIFETIME</field>
+      <field name="type">selection</field>
+    </record>
+    <record model="methodology.target.recence" id="selection_recence_others">
+      <field name="name">OTHERS</field>
+      <field name="type">selection</field>
+      <field name="display_textarea">1</field>
+    </record>
+  </data>
+</odoo>

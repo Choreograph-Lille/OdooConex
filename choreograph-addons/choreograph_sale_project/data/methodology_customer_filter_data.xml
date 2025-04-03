@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Customer Filter Records -->
+        <record id="customer_dep" model="methodology.customer.filter">
+            <field name="name">CUSTOMER FILTER DEPARTMENTS / POSTCODES</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_geoloc" model="methodology.customer.filter">
+            <field name="name">GEOLOC CUSTOMER FILTER (CHALANDISE AREA in km)</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="other_filter" model="methodology.customer.filter">
+            <field name="name">OTHER CUSTOMER FILTER</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <!-- GENDER -->
+        <record id="customer_gender_male" model="methodology.customer.filter">
+            <field name="name">MALE GENDER</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_gender_female" model="methodology.customer.filter">
+            <field name="name">FEMALE GENDER</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <!-- CSP -->
+        <record id="customer_csp_negative" model="methodology.customer.filter">
+            <field name="name">CSP-</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_csp_negative_positive" model="methodology.customer.filter">
+            <field name="name">CSP-/+</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_csp_positive" model="methodology.customer.filter">
+            <field name="name">CSP+</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <!-- INCOME -->
+        <record id="customer_income_0" model="methodology.customer.filter">
+            <field name="name">HIGH-INCOME 0</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_income_1" model="methodology.customer.filter">
+            <field name="name">HIGH-INCOME 1</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_income_2" model="methodology.customer.filter">
+            <field name="name">HIGH-INCOME 2</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_income_3" model="methodology.customer.filter">
+            <field name="name">HIGH-INCOME 3</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_income_4" model="methodology.customer.filter">
+            <field name="name">HIGH-INCOME 4</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_income_5" model="methodology.customer.filter">
+            <field name="name">HIGH-INCOME 5</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <!-- RF -->
+        <record id="customer_rf_new" model="methodology.customer.filter">
+            <field name="name">RF TBC/BC NEW</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_rf_new_tiedes" model="methodology.customer.filter">
+            <field name="name">RF TBC/BC NEW TIEDES</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_rf_new_tiedes_abandoners" model="methodology.customer.filter">
+            <field name="name">RF TBC/BC NEW TIEDES ABANDONERS</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_rf_unqualified" model="methodology.customer.filter">
+            <field name="name">UNQUALIFIED</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_rf_unqualified_gt_24" model="methodology.customer.filter">
+            <field name="name">UNQUALIFIED > 24 MONTHS</field>
+            <field name="display_textarea">False</field>
+        </record>
+            <!-- CHANNEL -->
+        <record id="customer_channel_email" model="methodology.customer.filter">
+            <field name="name">CHANNEL POSTAL+EMAIL (Partial)</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_channel_sms" model="methodology.customer.filter">
+            <field name="name">CHANNEL POSTAL+SMS (Partial)</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_channel_tel_fix" model="methodology.customer.filter">
+            <field name="name">CHANNEL POSTAL+TEL FIXE BOX (Partial)</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <record id="customer_channel_tel_mobile" model="methodology.customer.filter">
+            <field name="name">CHANNEL POSTAL+TEL MOBILE (Partial)</field>
+            <field name="display_textarea">False</field>
+        </record>
+        <!-- PURCHASE -->
+        <record id="customer_purchase_lt_et" model="methodology.customer.filter">
+            <field name="name">PURCHASE AMOUNT LESS THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_purchase_gt_et" model="methodology.customer.filter">
+            <field name="name">PURCHASE AMOUNT GREATER THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_purchase_between" model="methodology.customer.filter">
+            <field name="name">PURCHASE AMOUNT BETWEEN</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <!-- AVERAGE CART -->
+        <record id="customer_av_cart_lt_et" model="methodology.customer.filter">
+            <field name="name">AVERAGE CART LESS THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_av_cart_gt_et" model="methodology.customer.filter">
+            <field name="name">AVERAGE CART GREATER THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_av_cart_between" model="methodology.customer.filter">
+            <field name="name">AVERAGE CART BETWEEN</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <!-- REVENUE -->
+        <record id="customer_revenue_lt_et" model="methodology.customer.filter">
+            <field name="name">REVENUE LESS THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_revenue_gt_et" model="methodology.customer.filter">
+            <field name="name">REVENUE GREATER THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <!-- AGE INCLUDED -->
+        <record id="customer_age_included_lt_et" model="methodology.customer.filter">
+            <field name="name">AGE - NR INCLUDE LESS THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_age_included_gt_et" model="methodology.customer.filter">
+            <field name="name">AGE - NR INCLUDE GREATER THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_age_included_between" model="methodology.customer.filter">
+            <field name="name">AGE - NR INCLUDE BETWEEN</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <!-- AGE EXCLUDED -->
+        <record id="customer_age_excluded_lt_et" model="methodology.customer.filter">
+            <field name="name">AGE - NR EXCLUDE LESS THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_age_excluded_gt_et" model="methodology.customer.filter">
+            <field name="name">AGE - NR EXCLUDE GREATER THAN OR EQUAL TO</field>
+            <field name="display_textarea">True</field>
+        </record>
+        <record id="customer_age_excluded_between" model="methodology.customer.filter">
+            <field name="name">AGE - NR EXCLUDE BETWEEN</field>
+            <field name="display_textarea">True</field>
+        </record>
+    </data>
+</odoo>

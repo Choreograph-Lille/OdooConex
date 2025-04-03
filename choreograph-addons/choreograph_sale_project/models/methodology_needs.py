@@ -5,6 +5,7 @@ from odoo import api, fields, models
 
 class NeedsBase(models.AbstractModel):
     _name = "needs.base"
+    _description = "needs"
 
     name = fields.Char('Name')
     need_comment = fields.Text('Comment')
@@ -26,6 +27,7 @@ class MethodologyNeeds(models.Model):
 class NeedsNeeds(models.Model):
     _name = "methodology.needs"
     _inherit = "needs.base"
+    _description = "needs"
 
     order_id = fields.Many2one('sale.order', 'Order')
     needs_id = fields.Many2one('needs.needs', 'Name')

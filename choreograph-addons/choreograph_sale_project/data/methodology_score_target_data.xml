@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+    <record model="methodology.score.target" id="assets">
+      <field name="name">ASSETS</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.score.target" id="assets_gt_2">
+      <field name="name">ASSETS >= 2 PURCHASES</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.score.target" id="assets_fix">
+      <field name="name">ASSETS OVER A GIVEN PERIOD</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.score.target" id="new">
+      <field name="name">NEW</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.score.target" id="new_gt_2">
+      <field name="name">NEW >=2 PURCHASES</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.score.target" id="new_fix">
+      <field name="name">NEW PRODUCTS OVER A GIVEN PERIOD</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.score.target" id="customer_folder">
+      <field name="name">CUSTOMER FOLDER</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.score.target" id="assets_accurate">
+      <field name="name">ASSETS X MONTHS WITH A PERIOD OF INACTIVITY OF AT LEAST X MONTHS. PERIMETER TO BE VALIDATED
+        WITH DATA ANALYST
+      </field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.score.target" id="assets_others">
+      <field name="name">OTHERS</field>
+      <field name="type">score</field>
+      <field name="display_textarea">1</field>
+    </record>
+  </data>
+</odoo>
