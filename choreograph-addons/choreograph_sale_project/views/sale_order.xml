@@ -102,6 +102,18 @@
                             <field name="display_type" invisible="True"/>
                         </tree>
                     </field>
+                    <span>Score/selection repartition</span>
+                    <div class="inline">
+                        <label for="is_random"/>
+                        <field name="is_random" style="margin-right: 5em;"/>
+                        <label for="is_prioritization"/>
+                        <field name="is_prioritization"/>
+                        <field name="prioritization_textarea"
+                               attrs="{'invisible': [('is_prioritization', '=', False)]}"
+                               placeholder="Prioritization textarea ..."
+                        />
+                    </div>
+                    <separator/>
                     <label for="needs_ids" />
                     <field name="needs_ids">
                         <tree editable="bottom">

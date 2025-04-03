@@ -70,6 +70,9 @@ class SaleOrder(models.Model):
     needs_ids = fields.One2many('methodology.needs', 'order_id', 'Needs')
     survey_exchange = fields.Text(string='Survey Exchange')
     methodology_ids = fields.One2many('methodology.methodology', 'order_id', 'Methodology')
+    is_random = fields.Boolean('Is Random')
+    is_prioritization = fields.Boolean('Is Prioritization')
+    prioritization_textarea = fields.Text(string='Prioritization Textarea')
 
     @api.model
     def get_operation_fields(self):
