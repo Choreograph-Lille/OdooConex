@@ -173,5 +173,7 @@ class MethodologyMethodology(models.Model):
     def _onchange_section_owner(self):
         if self.section_owner:
             section_type = self.section_owner.lower().split(' ')[0]
+            if not self._context.get('default_display_type', False):
+                self.type = section_type
             return {'domain': {'target_recence_id': [('type', '=', section_type)]}}
 
