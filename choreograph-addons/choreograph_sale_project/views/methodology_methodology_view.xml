@@ -37,6 +37,7 @@
 
             <group>
               <field name="target_recence_id"
+                     domain="[('type', '=', type)]"
                      attrs="{
                      'required': [('display_type', '!=', 'line_section'), ('type', 'in', ['score', 'selection'])]
                      }"
