@@ -43,15 +43,10 @@ TYPE_OF_PROJECT = [
     ('operation', 'operation')
 ]
 PROSPECTION_LIST = [
-    'PRPOST', 
-    'PRPOSTTEL', 
-    'PRTEL', 
-    'PRPOSTE', 
-    'PREMAIL', 
-    'PRPOSTSMS', 
-    'PRSMS', 
-    'PRPOSTPORT', 
-    'PRPORT'
+    'PREMAIL',
+    'PRSMS',
+    'PRPOSTE',
+    'PRPOSTSMS'
 ]
 
 

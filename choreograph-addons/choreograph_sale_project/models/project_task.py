@@ -16,15 +16,10 @@ from odoo.addons.choreograph_project.models.project_project import (
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
 PROSPECTION_LIST = [
-    'PRPOST', 
-    'PRPOSTTEL', 
-    'PRTEL', 
-    'PRPOSTE', 
-    'PREMAIL', 
-    'PRPOSTSMS', 
-    'PRSMS', 
-    'PRPOSTPORT', 
-    'PRPORT'
+    'PREMAIL',
+    'PRSMS',
+    'PRPOSTE',
+    'PRPOSTSMS'
 ]
 
 
