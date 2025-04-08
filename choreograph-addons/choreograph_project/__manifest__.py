@@ -11,7 +11,8 @@
     'website': 'https://arkeup.com',
     'depends': [
         'choreograph_contact',
-        'project'
+        'project',
+        'mail'
     ],
     'data': [
         # data
