@@ -980,7 +980,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="operation-body" id="sale-operation">
-                                                        <t t-foreach="campaign_ids.mapped('operation_ids').sorted(key=lambda op: op.number, reverse=True)" t-as="o">
+                                                        <t t-foreach="campaign_ids.mapped('operation_ids').sorted(key=lambda op: op.number_sequence, reverse=True)" t-as="o">
                                                             <span id="op_line">
                                                                 <tr class="ligne-operation accordion-toggle" t-att-id="'operation'+str(o.id)" t-att-value="o.name" t-att-volume="o.qty_extracted" t-att-campaign-id="o.campaign_id.id" t-att-action-id="o.action_id.id" t-att-deleted="'deleted' if o.deleted else 'not deleted'" t-att-date="o.date" draggable="true">
                                                                     <td>
