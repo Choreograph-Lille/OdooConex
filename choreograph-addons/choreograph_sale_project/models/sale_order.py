@@ -82,6 +82,14 @@ class SaleOrder(models.Model):
     prioritization_textarea_base = fields.Text(string='Prioritization Textarea', tracking=True)
     results = fields.Text(string='Results', tracking=True)
 
+    @api.constrains('survey_exchange')
+    def _check_survey_exchange(self):
+        char_limit = self.env['ir.config_parameter'].sudo().get_param(
+            'survey_exchange.char.limit')
+        for order_id in self:
+            if order_id.survey_exchange and len(order_id.survey_exchange) > int(char_limit):
+                raise ValidationError(_('Survey Exchange is too long, please reduce it.'))
+
     @api.depends('methodology_ids')
     def compute_is_repartition_mt_1(self):
         for order_id in self:
