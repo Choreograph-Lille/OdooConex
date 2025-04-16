@@ -1985,8 +1985,9 @@ msgstr "Échange d'études : limite de charactères"
 #. odoo-python
 #: code:addons/choreograph_sale_project/models/sale_order.py:0
 #, python-format
-msgid "Survey Exchange is too long, please reduce it."
-msgstr "Le text sur le champ 'Échange d'études' dépasse la limite des carectères autorisée. Veillez réduire le nombre de charactère !"
+msgid ""
+"Survey Exchange is %s, too long. Please reduce it less than %s characters."
+msgstr "Le text sur le champ 'Échange d'études' dépasse la limite des carectères autorisée: %s. Veillez réduire le nombre de charactère à moins de %s"
 
 #. module: choreograph_sale_project
 #: model:ir.actions.act_window,name:choreograph_sale_project.action_methodology_score_target

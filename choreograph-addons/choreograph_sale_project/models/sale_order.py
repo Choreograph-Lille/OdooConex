@@ -84,11 +84,12 @@ class SaleOrder(models.Model):
 
     @api.constrains('survey_exchange')
     def _check_survey_exchange(self):
-        char_limit = self.env['ir.config_parameter'].sudo().get_param(
-            'survey_exchange.char.limit')
+        char_limit = int(self.env['ir.config_parameter'].sudo().get_param(
+            'survey_exchange.char.limit'))
         for order_id in self:
-            if order_id.survey_exchange and len(order_id.survey_exchange) > int(char_limit):
-                raise ValidationError(_('Survey Exchange is too long, please reduce it.'))
+            survey_char_len = len(order_id.survey_exchange)
+            if order_id.survey_exchange and survey_char_len > char_limit:
+                raise ValidationError(_('Survey Exchange is %s, too long. Please reduce it less than %s characters.') % (survey_char_len, char_limit))
 
     @api.depends('methodology_ids')
     def compute_is_repartition_mt_1(self):
