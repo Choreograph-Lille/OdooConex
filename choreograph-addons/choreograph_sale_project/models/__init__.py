@@ -15,3 +15,4 @@ from . import resource_calendar_leaves
 from . import mail_followers
 from . import methodology_needs
 from . import methodology_methodology
+from . import res_config_settings

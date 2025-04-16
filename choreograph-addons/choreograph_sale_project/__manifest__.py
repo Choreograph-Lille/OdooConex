@@ -42,6 +42,7 @@
         'views/methodology_methodology_name_views.xml',
         'views/methodology_methodology_target_recence_views.xml',
         'views/methodology_methodology_customer_filter_views.xml',
+        'views/res_config_settings_views.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],
