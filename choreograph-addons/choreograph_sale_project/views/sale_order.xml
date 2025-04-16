@@ -102,8 +102,11 @@
                             <field name="display_type" invisible="True"/>
                         </tree>
                     </field>
-                    <span>Score/selection repartition</span>
-                    <div class="inline">
+                    <field name="is_repartition_mt_1" invisible="1"/>
+                    <div attrs="{'invisible': [('is_repartition_mt_1', '=', False)]}">
+                        <span>Score/selection repartition</span>
+                    </div>
+                    <div class="inline" attrs="{'invisible': [('is_repartition_mt_1', '=', False)]}">
                         <label for="is_random"/>
                         <field name="is_random" style="margin-right: 5em;"/>
                         <label for="is_prioritization"/>
