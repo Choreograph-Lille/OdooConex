@@ -1203,6 +1203,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__methodology_ids
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__methodology_ids
 #: model:ir.ui.menu,name:choreograph_sale_project.menu_methodology
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.res_config_settings_view_form_inherit
 msgid "Methodology"
 msgstr "Méthodologie"
 
