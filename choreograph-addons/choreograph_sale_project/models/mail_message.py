@@ -26,7 +26,7 @@ class MailMessage(models.Model):
     def create(self, values_list):
         res = super().create(values_list)
         methodology_model_name = 'methodology.methodology'
-        if all(model_name for model_name in set(res.mapped('model')) if model_name == methodology_model_name) and not self._context.get('is_copy', False):
+        if all(model_name == methodology_model_name for model_name in set(res.mapped('model'))) and not self._context.get('is_copy', False):
             methodology_id = self.env[methodology_model_name].browse(res.mapped('res_id')[0])
             for message_id in res:
                 message_id.with_context(is_copy=True).copy({
