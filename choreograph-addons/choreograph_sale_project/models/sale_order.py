@@ -22,6 +22,9 @@ CAMPAIGN_TASK_NAME = {
     '50': _('SMS Campaign'),
 }
 
+def count_element(list_to_use, word_to_check):
+    return sum(1 for item in list_to_use if word_to_check.lower() in item.lower())
+
 
 class SaleOrder(models.Model):
     _inherit = "sale.order"
@@ -70,6 +73,7 @@ class SaleOrder(models.Model):
     needs_ids = fields.One2many('methodology.needs', 'order_id', 'Needs')
     survey_exchange = fields.Text(string='Survey Exchange', tracking=True)
     methodology_ids = fields.One2many('methodology.methodology', 'order_id', 'Methodology')
+    is_repartition_mt_1 = fields.Boolean(compute='compute_is_repartition_mt_1', store=True)
     is_random = fields.Boolean('Is Random', tracking=True)
     is_prioritization = fields.Boolean('Is Prioritization', tracking=True)
     prioritization_textarea = fields.Text(string='Prioritization Textarea', tracking=True)
@@ -77,6 +81,14 @@ class SaleOrder(models.Model):
     is_prioritization_base = fields.Boolean('Is Prioritization', tracking=True)
     prioritization_textarea_base = fields.Text(string='Prioritization Textarea', tracking=True)
     results = fields.Text(string='Results', tracking=True)
+
+    @api.depends('methodology_ids')
+    def compute_is_repartition_mt_1(self):
+        for order_id in self:
+            methodology_ids = order_id.methodology_ids.get_sections(order_id.id)
+            count_score = count_element(methodology_ids.mapped('name'), 'score')
+            count_selection = count_element(methodology_ids.mapped('name'), 'selection')
+            order_id.is_repartition_mt_1 = True if count_score > 1 or count_selection > 1 else False
 
     @api.model
     def get_operation_fields(self):

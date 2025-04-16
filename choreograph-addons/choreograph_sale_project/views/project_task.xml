@@ -212,8 +212,9 @@
                             <field name="display_type" invisible="True"/>
                         </tree>
                     </field>
-                    <span attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">Score/selection repartition</span>
-                    <div class="inline" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
+                    <field name="is_repartition_mt_1" invisible="1"/>
+                    <span attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35']), ('is_repartition_mt_1', '=', False)]}">Score/selection repartition</span>
+                    <div class="inline" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35']), ('is_repartition_mt_1', '=', False)]}">
                         <label for="is_random"/>
                         <field name="is_random" style="margin-right: 5em;"/>
                         <label for="is_prioritization"/>
