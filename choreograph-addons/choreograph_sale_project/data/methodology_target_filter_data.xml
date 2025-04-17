@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data noupdate="0">
+    <record model="methodology.target.filter" id="source_code">
+      <field name="name">SOURCE CODE</field>
+      <field name="type">score</field>
+      <field name="display_textarea">1</field>
+    </record>
+    <record model="methodology.target.filter" id="condition_comments">
+      <field name="name">CONDITION COMMENTS</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.target.filter" id="signe_group">
+      <field name="name">MULTI SIGNE GROUP</field>
+      <field name="type">score</field>
+    </record>
+    <record model="methodology.target.filter" id="signe_others">
+      <field name="name">Others</field>
+      <field name="type">score</field>
+      <field name="display_textarea">1</field>
+    </record>
+  </data>
+</odoo>

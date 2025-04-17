@@ -16,10 +16,15 @@ from odoo.addons.choreograph_project.models.project_project import (
 from odoo.addons.choreograph_sale.models.sale_order import REQUIRED_TASK_NUMBER
 
 PROSPECTION_LIST = [
-    'PREMAIL',
-    'PRSMS',
-    'PRPOSTE',
-    'PRPOSTSMS'
+    'PRPOST', 
+    'PRPOSTTEL', 
+    'PRTEL', 
+    'PRPOSTE', 
+    'PREMAIL', 
+    'PRPOSTSMS', 
+    'PRSMS', 
+    'PRPOSTPORT', 
+    'PRPORT'
 ]
 
 
@@ -117,6 +122,18 @@ class ProjectTask(models.Model):
 
     email_bat_comment = fields.Text(string="Comment", related="sale_order_id.email_bat_comment")
     email_witness_comment = fields.Text(string="Comment", related="sale_order_id.email_witness_comment")
+
+    needs_ids = fields.One2many(related="sale_order_id.needs_ids")
+    survey_exchange = fields.Text(related="sale_order_id.survey_exchange")
+    methodology_ids = fields.One2many(related="sale_order_id.methodology_ids")
+    is_repartition_mt_1 = fields.Boolean(related='sale_order_id.is_repartition_mt_1')
+    is_random = fields.Boolean(related='sale_order_id.is_random')
+    is_prioritization = fields.Boolean(related='sale_order_id.is_prioritization')
+    prioritization_textarea = fields.Text(related='sale_order_id.prioritization_textarea')
+    is_random_base = fields.Boolean(related='sale_order_id.is_random_base')
+    is_prioritization_base = fields.Boolean(related='sale_order_id.is_prioritization_base')
+    prioritization_textarea_base = fields.Text(related='sale_order_id.prioritization_textarea_base')
+    results = fields.Text(related='sale_order_id.results')
 
     # def compute_comment(self):
     #     for rec in self:

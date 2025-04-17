@@ -194,6 +194,67 @@
                             [('task_number', 'not in', ['45'])]}"/>-->
                         </group>
                     </group>
+                    <label for="methodology_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                    <field name="methodology_ids" widget="section_and_note_one2many" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
+                        <tree>
+                            <field name="name" widget="section_and_note_text"/>
+                            <field name="methodology_name_id"/>
+                            <field name="target_id"/>
+                            <field name="target_textarea"/>
+                            <field name="target_recence_id"/>
+                            <field name="recence_textarea"/>
+                            <field name="target_filter_id"/>
+                            <field name="filter_textarea"/>
+                            <field name="customer_filter_id"/>
+                            <field name="customer_filter_textarea"/>
+                            <field name="order_id" invisible="True"/>
+                            <field name="type" invisible="True"/>
+                            <field name="display_type" invisible="True"/>
+                        </tree>
+                    </field>
+                    <field name="is_repartition_mt_1" invisible="1"/>
+                    <span attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35']), ('is_repartition_mt_1', '=', False)]}">Score/selection repartition</span>
+                    <div class="inline" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35']), ('is_repartition_mt_1', '=', False)]}">
+                        <label for="is_random"/>
+                        <field name="is_random" style="margin-right: 5em;"/>
+                        <label for="is_prioritization"/>
+                        <field name="is_prioritization"/>
+                        <field name="prioritization_textarea"
+                               attrs="{'invisible': [('is_prioritization', '=', False)]}"
+                               placeholder="Prioritization textarea ..."
+                        />
+                    </div>
+                    <separator/>
+                    <span attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">Base repartition</span>
+                    <div class="inline" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
+                        <label for="is_random_base"/>
+                        <field name="is_random_base" style="margin-right: 5em;"/>
+                        <label for="is_prioritization_base"/>
+                        <field name="is_prioritization_base"/>
+                        <field name="prioritization_textarea_base"
+                               attrs="{'invisible': [('is_prioritization_base', '=', False)]}"
+                               placeholder="Prioritization textarea ..."
+                        />
+                    </div>
+                    <separator/>
+                    <label for="results" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                    <field name="results" placeholder="Textarea for results ..." attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                    <label for="needs_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                    <field name="needs_ids" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
+                        <tree editable="bottom">
+                            <control>
+                                <create name="add_line_control" string="Add a need"/>
+                            </control>
+                            <field name="needs_id"/>
+                            <field name="need_comment" attrs="{'readonly': [('is_display_comment', '=', False)]}"/>
+                            <field name="need_type" attrs="{'readonly': [('is_display_comment', '=', True)]}"/>
+                            <field name="is_display_comment" invisible="True"/>
+                        </tree>
+                    </field>
+                    <label for="survey_exchange" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                    <field name="survey_exchange" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}"/>
+                    <hr/>
+
                     <group attrs="{'invisible': [('task_number', '=', False)]}">
                         <group>
                             <field name="quantity_to_deliver"

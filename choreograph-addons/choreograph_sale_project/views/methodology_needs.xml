@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record model="ir.ui.view" id="view_needs_needs_form">
+    <field name="name">Methodology Needs Form</field>
+    <field name="model">needs.needs</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <h1>
+            <field name="name" attrs="{'required': True}"/>
+          </h1>
+          <group>
+            <group>
+              <field name="need_type"/>
+              <field name="need_comment"/>
+            </group>
+          </group>
+          <group>
+            <group>
+              <field name="is_display_comment"/>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="view_needs_needs_tree">
+    <field name="name">Methodology Needs Tree</field>
+    <field name="model">needs.needs</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="need_comment"/>
+        <field name="need_type"/>
+        <field name="is_display_comment" optional="hide"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="action_needs_needs" model="ir.actions.act_window">
+    <field name="name">Needs</field>
+    <field name="res_model">needs.needs</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        No needs found.
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="menu_needs_needs" name="Needs" parent="menu_methodology" action="action_needs_needs"/>
+</odoo>

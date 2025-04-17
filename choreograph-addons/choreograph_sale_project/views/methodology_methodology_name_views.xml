@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record model="ir.ui.view" id="view_methodology_name_tree">
+    <field name="name">Methodology Score Target Tree</field>
+    <field name="model">methodology.name</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom" create="bottom">
+        <field name="name"/>
+        <field name="type" optional="hide"/>
+        <field name="target_id"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="action_methodology_name" model="ir.actions.act_window">
+    <field name="name">Methodology name</field>
+    <field name="res_model">methodology.name</field>
+    <field name="view_mode">tree</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        No Methodology name found.
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="menu_methodology_name" name="Name" parent="menu_methodology" action="action_methodology_name"/>
+</odoo>

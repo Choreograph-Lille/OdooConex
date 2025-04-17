@@ -21,6 +21,12 @@
         'data/project_project.xml',
         'data/mail_template_data.xml',
         'data/ir_cron_data.xml',
+        'data/needs_needs_data.xml',
+        'data/methodology_score_target_data.xml',
+        'data/methodology_target_recence_data.xml',
+        'data/methodology_target_filter_data.xml',
+        'data/methodology_name_data.xml',
+        'data/methodology_customer_filter_data.xml',
         # security
         'security/ir.model.access.csv',
         # views
@@ -30,6 +36,13 @@
         'views/ir_ui_menu.xml',
         'views/project_project.xml',
         'views/resource_views.xml',
+        'views/methodology_methodology_view.xml',
+        'views/methodology_needs.xml',
+        'views/methodology_methodology_score_target_views.xml',
+        'views/methodology_methodology_name_views.xml',
+        'views/methodology_methodology_target_recence_views.xml',
+        'views/methodology_methodology_customer_filter_views.xml',
+        'views/res_config_settings_views.xml',
     ],
     'assets': {
         'web._assets_primary_variables': [],
