@@ -452,7 +452,7 @@ $(document).ready(function () {
 
     $(".foot-btn")
     .on('click', function() {
-    	$(".operation-modal-email").text($('#').val());
+    	// $(".operation-modal-email").text($('#').val());
     	var current = document.getElementsByClassName("active");
     	if (current[0].hasAttribute("campaign-id")) {
 	    	document.getElementById("campaign_id").value = parseInt(current[0].attributes['campaign-id'].value);
