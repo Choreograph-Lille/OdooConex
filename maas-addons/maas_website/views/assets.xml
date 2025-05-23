@@ -208,7 +208,7 @@
             <script 
                 type="text/javascript" 
                 src="/maas_website/static/src/js/maas.js" 
-                integrity="sha384-hiL1MNbMyRtEknETWxZ8Vbamk2y7dZRYzs4MHnVdQtgvpvYA8HdxgcG1BcyIEjwJ"
+                integrity="sha384-+DZLPM9H/Foy50a6ep/9sKqdZkMJZS7MXN/L8lWYQF/vQeYRh3u99tN+VzlX3fAL"
                 crossorigin="anonymous"
             />
             <script type="text/javascript"
@@ -280,10 +280,10 @@
                 integrity="sha384-eE2bT/G+3yyQdb2kQIymjWpRcRckOKya/b/gOYOsEbIhZYZQDyhyS5I8BzmLXZRr"
                 crossorigin="anonymous"
             ></script>
-            <script 
+             <script 
                 type="text/javascript" 
                 src="/maas_website/static/src/js/maas.js" 
-                integrity="sha384-hiL1MNbMyRtEknETWxZ8Vbamk2y7dZRYzs4MHnVdQtgvpvYA8HdxgcG1BcyIEjwJ"
+                integrity="sha384-+DZLPM9H/Foy50a6ep/9sKqdZkMJZS7MXN/L8lWYQF/vQeYRh3u99tN+VzlX3fAL"
                 crossorigin="anonymous"
             />
             <script 
@@ -373,10 +373,10 @@
                 integrity="sha384-eE2bT/G+3yyQdb2kQIymjWpRcRckOKya/b/gOYOsEbIhZYZQDyhyS5I8BzmLXZRr"
                 crossorigin="anonymous"
             ></script>
-            <script 
+             <script 
                 type="text/javascript" 
                 src="/maas_website/static/src/js/maas.js" 
-                integrity="sha384-hiL1MNbMyRtEknETWxZ8Vbamk2y7dZRYzs4MHnVdQtgvpvYA8HdxgcG1BcyIEjwJ"
+                integrity="sha384-+DZLPM9H/Foy50a6ep/9sKqdZkMJZS7MXN/L8lWYQF/vQeYRh3u99tN+VzlX3fAL"
                 crossorigin="anonymous"
             />
             <script 
@@ -440,7 +440,7 @@
             <script 
                 type="text/javascript" 
                 src="/maas_website/static/src/js/maas.js" 
-                integrity="sha384-hiL1MNbMyRtEknETWxZ8Vbamk2y7dZRYzs4MHnVdQtgvpvYA8HdxgcG1BcyIEjwJ"
+                integrity="sha384-+DZLPM9H/Foy50a6ep/9sKqdZkMJZS7MXN/L8lWYQF/vQeYRh3u99tN+VzlX3fAL"
                 crossorigin="anonymous"
             />
             <script 
