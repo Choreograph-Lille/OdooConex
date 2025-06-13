@@ -78,12 +78,11 @@ class PurchaseOrder(models.Model):
     def _onchange_partner_id(self):
         self.is_confidential = self.partner_id.is_confidential
 
-    @api.onchange('is_confidential')
-    def _onchange_is_confidential(self):
-        if self.invoice_ids:
-            self.invoice_ids.write({
-                'is_confidential':self.is_confidential
-            })
+    def write(self, vals):
+        res = super(PurchaseOrder, self).write(vals)
+        if self.is_confidential and self.invoice_ids:
+            self.invoice_ids.write({'is_confidential': True})
+        return res
 
     @api.model
     def search(self, args, offset=0, limit=None, order=None, count=False):
@@ -91,3 +90,9 @@ class PurchaseOrder(models.Model):
             args = expression.AND([[('is_confidential', '=', False)], args])
         
         return super(PurchaseOrder, self).search(args, offset=offset, limit=limit, order=order, count=count)
+    
+    def _prepare_invoice(self):
+        invoice_vals = super(PurchaseOrder, self)._prepare_invoice()
+        if self.is_confidential:
+            invoice_vals['is_confidential'] = True
+        return invoice_vals
