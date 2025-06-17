@@ -85,11 +85,15 @@ class ProjectTask(models.Model):
                     'name': self.name,
                     'channel_partner_ids': [(4, partner_id) for partner_id in partner_ids],
                 })
+                task_name = _(
+                    "<a href='%(task_url)s' target='_blank'>%(task_name)s</a>", 
+                    task_url=task_url, task_name=self.name
+                )
                 channel.with_user(self.env.user).message_notify(
-                    body=_("You are assigned to the task %(task_name)s", task_name = self.name),
-                    message_type ='user_notification',
-                    partner_ids = partner_ids,
-                ) 
+                    body=_("You are assigned to the task %(task_name)s", task_name=task_name),
+                    message_type='user_notification',
+                    partner_ids=partner_ids,
+                )
 
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
