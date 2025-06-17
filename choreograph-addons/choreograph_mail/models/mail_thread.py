@@ -21,7 +21,7 @@ class MailThread(models.AbstractModel):
         res = super()._get_mail_thread_data(request_list)
         if 'suggestedRecipients' not in request_list:
             return res
-        if self.env.company.disable_followers:
+        if self.env.company.disable_followers and 'suggestedRecipients' in res:
             suggestedRecipients = [item for item in res['suggestedRecipients'] if not self._check_suggestion(item)]
             res['suggestedRecipients'] = suggestedRecipients
         return res
