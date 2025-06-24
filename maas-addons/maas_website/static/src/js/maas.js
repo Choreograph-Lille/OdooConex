@@ -452,7 +452,7 @@ $(document).ready(function () {
 
     $(".foot-btn")
     .on('click', function() {
-    	$(".operation-modal-email").text($('#').val());
+    	// $(".operation-modal-email").text($('#').val());
     	var current = document.getElementsByClassName("active");
     	if (current[0].hasAttribute("campaign-id")) {
 	    	document.getElementById("campaign_id").value = parseInt(current[0].attributes['campaign-id'].value);
@@ -786,7 +786,7 @@ $(document).ready(function () {
             var parent = $(this);
             var campaign_id = $(this)[0].parentElement.attributes.id.value.split('list-group')[1];
             $('.ligne-operation').each(function(){
-               if ($(this).context.hasAttribute("campaign-id") && $(this).context.attributes['campaign-id'].value === campaign_id){
+               if ($(this).is("[campaign-id]") && $(this).attr("campaign-id") === campaign_id){
                     $(this).show();
                }
             });
@@ -800,10 +800,11 @@ $(document).ready(function () {
                             .indexOf((match[3] || "").toLowerCase()) >= 0;
                         }
                         });
-                        if ($(this).context.hasAttribute('action-id')){
+                        
+                        if ($(this).is("[action-id]")){
 
-                                var ContainerID =  '#'+($(this).context.attributes.id.value).replace('collapse-infos','');
-                                var text= $(this).context.attributes["action-id"].value;
+                                var ContainerID =  '#'+($(this).attr("id")).replace('collapse-infos','');
+                                var text= $(this).attr("action-id");
                                 if (text === value){
                                     $(ContainerID).show();
                                     $(ContainerID).addClass('topaginated');
@@ -906,7 +907,7 @@ $(document).ready(function () {
 
             $('.table .operation-body').find('tr').each(function(e) {
                 var $me = $(this).children('td:nth-child(1)');
-                if ($me.context.classList.contains("ligne-operation")) {
+                if ($($me.context).hasClass("ligne-operation")) {
                     $('.ligne-operation').each(function() {
                         $.extend($.expr[':'], {
                             'contains': function(elem, i, match, array) {
