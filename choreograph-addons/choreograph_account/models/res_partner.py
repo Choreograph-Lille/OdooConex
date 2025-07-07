@@ -14,9 +14,10 @@ class ResPartner(models.Model):
             # Update purchase order documents
             purchase_orders = self.env['purchase.order'].search([('partner_id', '=', partner.id)])
             if purchase_orders:
-                purchase_orders.write({
-                    'is_confidential': True
-                })
+                for order in purchase_orders:
+                    order.write({
+                        'is_confidential': True
+                    })
             # Update invoices documents
             invoices = self.env['account.move'].search([
                 ('partner_id', '=', partner.id),
