@@ -80,8 +80,10 @@ class PurchaseOrder(models.Model):
 
     def write(self, vals):
         res = super(PurchaseOrder, self).write(vals)
-        if self.is_confidential and self.invoice_ids:
-            self.invoice_ids.write({'is_confidential': True})
+        
+        if 'is_confidential' in vals and self.invoice_ids:
+            for invoice in self.invoice_ids:
+                invoice.is_confidential = self.is_confidential
         return res
 
     @api.model
