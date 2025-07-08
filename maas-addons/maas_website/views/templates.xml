@@ -1763,7 +1763,7 @@
                                           </div>
                                       </div>
                                   </div>
-                                  <div class="col-sm-6 col-md-6 col-lg-3 o-block-operations" style="height:200px">
+                                  <div class="col-sm-6 col-md-6 col-lg-3 o-block-operations">
                                       <div class="panel-heading">
                                           <h4 class="panel-title">
                                               <img id="operation-name-filled" class="green-actif-coche" src="/maas_website/static/src/img/ico-coche-inactif.png"/>
@@ -1786,7 +1786,7 @@
                                               </div>
                                           </div>
                                       </div>
-                                      <div class="o-block-operations" style="height: 190px; max-width: 250px; margin-left: 0px;">
+                                      <div class="o-block-operations" style="height: 190px; max-width: 250px; margin-left: 0px; display:none;">
                                           <div class="panel-heading">
                                               <h4 class="panel-title">
                                                   <img id="diffusion-canal-filled" class="green-actif-coche" src="/maas_website/static/src/img/ico-coche-inactif.png"/>

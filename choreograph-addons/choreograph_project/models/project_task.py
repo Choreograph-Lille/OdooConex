@@ -1,5 +1,5 @@
 from .project_project import TYPE_OF_PROJECT, filter_by_type_of_project
-from odoo import api, fields, models
+from odoo import api, fields, models, _
 
 TASK_NUMBER = [(str(n), str(n)) for n in range(5, 100, 5)]
 
@@ -56,9 +56,44 @@ class ProjectTask(models.Model):
                 values.update({
                     'stage_id': self.env.ref('choreograph_project.project_task_type_draft').id,
                 })
-            res |= super().create(values)
+            task = super().create(values)
+            task._send_task_notification()
+            res |= task
             res.insert_operation_followers()
         return res
+    
+    def _send_task_notification(self):
+        if self.user_ids:
+            task_url = f"{self.get_base_url()}/web#id={self.id}&model=project.task&view_type=form"
+            users_with_email_notification = self.user_ids.filtered(lambda u: u.notification_type == 'email')
+            lang = self.env.user.lang
+            if users_with_email_notification:
+                mail_template = self.env.ref('choreograph_project.task_notification_template')
+                context = {
+                    'partner_to':','.join([str(user_id.partner_id.id) for user_id in users_with_email_notification]),
+                    'task_url': task_url,
+                    'task_name': self.name,
+                    'lang':lang
+                }
+                self.env['mail.thread'].with_context(context).message_post_with_template(
+                    mail_template.id, message_type='comment', composition_mode='comment'
+                )
+            users_with_odoo_notification = self.user_ids.filtered(lambda u: u.notification_type == 'inbox')
+            if users_with_odoo_notification:
+                partner_ids = users_with_odoo_notification.partner_id.ids
+                channel = self.env['mail.channel'].create({
+                    'name': self.name,
+                    'channel_partner_ids': [(4, partner_id) for partner_id in partner_ids],
+                })
+                task_name = _(
+                    "<a href='%(task_url)s' target='_blank'>%(task_name)s</a>", 
+                    task_url=task_url, task_name=self.name
+                )
+                channel.with_user(self.env.user).message_notify(
+                    body=_("You are assigned to the task %(task_name)s", task_name=task_name),
+                    message_type='user_notification',
+                    partner_ids=partner_ids,
+                )
 
     @api.returns('mail.message', lambda value: value.id)
     def message_post(self, **kwargs):
