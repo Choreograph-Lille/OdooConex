@@ -81,5 +81,7 @@ class AccountMove(models.Model):
     
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
-        self.is_confidential = self.partner_id.is_confidential       
+        self.is_confidential = self.partner_id.is_confidential    
+        if self.partner_id.property_product_pricelist:
+            self.currency_id = self.partner_id.property_product_pricelist.currency_id
     
