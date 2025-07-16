@@ -49,6 +49,7 @@ class AccountMove(models.Model):
        
         if (
             self.move_type in ['out_refund', 'in_refund'] and 
+            self.env.user != self.env.ref('base.user_root') and
             not self.env.user.has_group('choreograph_sox.group_credit_note_preparer_profile_res_groups') and
             not self._context.get('force_write')
         ):
