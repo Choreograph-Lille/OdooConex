@@ -61,9 +61,10 @@ class AccountMove(models.Model):
             self.create_sage_file(moves, ftp_server)
             
             # TODO: send the file to the the server and create LOG
-            moves.write({
-                'is_transferred_to_sage': True,
-            })
+            for move in moves:
+                move.write({
+                    'is_transferred_to_sage': True,
+                })
 
     def prepare_file_rows(self, moves):
         """
