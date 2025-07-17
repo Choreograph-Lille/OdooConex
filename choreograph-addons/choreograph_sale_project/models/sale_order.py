@@ -211,9 +211,9 @@ class SaleOrder(models.Model):
 
     def _unarchive_task(self, operation_task):
         for rec in self:
-            task = rec._get_operation_task([OPERATION_TASK_NUMBER[operation_task]], False) or rec._get_operation_task([
+            tasks = rec._get_operation_task([OPERATION_TASK_NUMBER[operation_task]], False) or rec._get_operation_task([
                 OPERATION_TASK_NUMBER[operation_task]], True)
-            if task:
+            for task in tasks:
                 task.write({
                     'active': True,
                 })
