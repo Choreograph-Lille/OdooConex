@@ -17,6 +17,7 @@ class AccountMove(models.Model):
 
     sale_order_id = fields.Many2one("sale.order", "Sale Order", compute="_compute_sale_order_id", store=True, compute_sudo=True)
     user_id = fields.Many2one('res.users', tracking=False)
+    is_confidential = fields.Boolean()
 
     def action_invoice_sent(self):
         result = super(AccountMove, self).action_invoice_sent()
@@ -77,3 +78,10 @@ class AccountMove(models.Model):
         ]})
         
         return reverse_moves
+    
+    @api.onchange('partner_id')
+    def _onchange_partner_id(self):
+        self.is_confidential = self.partner_id.is_confidential    
+        if self.partner_id.property_product_pricelist:
+            self.currency_id = self.partner_id.property_product_pricelist.currency_id
+    

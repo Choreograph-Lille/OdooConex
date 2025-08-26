@@ -92,8 +92,8 @@ class AuditlogReport(models.TransientModel):
         old_value = line.old_value_text
         new_value = line.new_value_text
         if is_data_sox_role_changing:
-            old_value_list = old_value.split(',')
-            new_value_list = new_value.split(',')
+            old_value_list = old_value.split(',') if old_value else []
+            new_value_list = new_value.split(',') if new_value else []
             old_value = ', '.join(list(set(old_value_list) - set(new_value_list)))
             new_value = ', '.join(list(set(new_value_list) - set(old_value_list)))
         return {

@@ -6,14 +6,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-02-26 12:18+0000\n"
-"PO-Revision-Date: 2025-02-26 12:18+0000\n"
+"POT-Creation-Date: 2025-03-27 06:52+0000\n"
+"PO-Revision-Date: 2025-03-27 06:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: choreograph_sox
+#. odoo-python
+#: code:addons/choreograph_sox/models/studio_approval_rule.py:0
+#, python-format
+msgid "Approvals can only be done on a method or an action, not both."
+msgstr ""
 
 #. module: choreograph_sox
 #: model:res.groups,name:choreograph_sox.group_accounting_profile_res_groups
@@ -34,6 +41,11 @@ msgstr "C9H / Administrateur"
 #: model:res.groups,name:choreograph_sox.group_cac_profile_res_groups
 msgid "C9H / CAC"
 msgstr ""
+
+#. module: choreograph_sox
+#: model:res.groups,name:choreograph_sox.group_confidential_profile_res_groups
+msgid "C9H / Confidential"
+msgstr "C9H / Confidentiel"
 
 #. module: choreograph_sox
 #: model:res.groups,name:choreograph_sox.group_credit_note_preparer_profile_res_groups
@@ -101,6 +113,13 @@ msgid "Confirm"
 msgstr "Confirmer"
 
 #. module: choreograph_sox
+#: model:ir.model.fields,field_description:choreograph_sox.field_account_bank_statement_line__is_accountant
+#: model:ir.model.fields,field_description:choreograph_sox.field_account_move__is_accountant
+#: model:ir.model.fields,field_description:choreograph_sox.field_account_payment__is_accountant
+msgid "Is Accountant"
+msgstr ""
+
+#. module: choreograph_sox
 #: model:ir.model.fields,field_description:choreograph_sox.field_account_bank_statement_line__is_preparer
 #: model:ir.model.fields,field_description:choreograph_sox.field_account_move__is_preparer
 #: model:ir.model.fields,field_description:choreograph_sox.field_account_payment__is_preparer
@@ -115,12 +134,34 @@ msgid "Is Validator"
 msgstr "Est un validateur"
 
 #. module: choreograph_sox
+#: model:ir.model,name:choreograph_sox.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: choreograph_sox
+#: model:ir.model,name:choreograph_sox.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: choreograph_sox
+#: model:ir.model,name:choreograph_sox.model_studio_approval_entry
+msgid "Studio Approval Entry"
+msgstr "Entrée d'approbation Studio"
+
+#. module: choreograph_sox
+#: model:ir.model,name:choreograph_sox.model_studio_approval_rule
+msgid "Studio Approval Rule"
+msgstr "Règle d'approbation Studio"
+
+#. module: choreograph_sox
+#. odoo-python
 #: code:addons/choreograph_sox/models/account_move.py:0
 #, python-format
 msgid "The gap must be justified before confirmation"
 msgstr "L'écart doit être justifié avant de confirmer !"
 
 #. module: choreograph_sox
+#. odoo-python
 #: code:addons/choreograph_sox/models/account_move.py:0
 #, python-format
 msgid "The gap must be validated before confirmation"
