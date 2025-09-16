@@ -24,6 +24,7 @@
                                 <field name="last_conexup_date" readonly="1"/>
                                 <field name="last_revival_date" readonly="1"/>
                                 <field name="base_entry_date" readonly="1"/>
+                                <field name="contractual_exclusion_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
                             </group>
                             <group name="client_data_right">
                                 <field name="last_transaction_date" readonly="1"/>
