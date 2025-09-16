@@ -26,11 +26,18 @@ class ResPartner(models.Model):
     agency_id = fields.Many2one("res.partner", "Agency", ondelete="restrict", index=True, tracking=True)
     industry_id = fields.Many2one("res.partner.industry", "Activity area", tracking=True)
     function = fields.Char(string="Job Position", tracking=True)
+    contractual_exclusion_ids = fields.Many2many(
+        "res.partner",
+        "res_partner_contractual_exclusion_rel",
+        "partner_id",
+        "excluded_partner_id",
+        domain="[('is_company', '=', True)]",
+    )
 
     def write(self, vals):
 
         catalogues_summary = {}
-        categories_summary = {}
+        categories_summary = {} 
         roles_summary = {}
 
         if "catalogue_ids" in vals:
