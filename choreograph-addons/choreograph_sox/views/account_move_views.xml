@@ -50,7 +50,7 @@
                             attrs="{'invisible': [
                             '|', '|', '|', '|',
                             ('hide_post_button', '=', True),
-                            ('move_type', '=', 'entry'),
+                            ('move_type', 'in', ['entry', 'in_refund', 'out_refund']),
                             ('display_inactive_currency_warning','=',True),
                             ('is_gap', '=', False),
                             '&amp;',
