@@ -16,7 +16,7 @@ class AccountMove(models.Model):
         for move in self:
             is_gap = False
             amount_untaxed = sum(self.mapped("line_ids").mapped("purchase_line_id").mapped("order_id").mapped("amount_untaxed"))
-            if amount_untaxed and not move.is_gap_validated:
+            if amount_untaxed and not move.is_gap_validated and not move.move_type == 'in_refund':
                 gap =  (move.amount_untaxed - amount_untaxed) * 100 / amount_untaxed
                 if abs(gap) >= 10:
                     is_gap = True
