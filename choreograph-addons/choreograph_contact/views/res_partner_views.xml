@@ -6,6 +6,7 @@
             <field name="name">res.partner.form.view.inherit</field>
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="99"/>
             <field name="arch" type="xml">
                 <page name="internal_notes" position="before">
                     <page name="partner_role_pg" string="Roles">
@@ -53,6 +54,9 @@
                 <field name="vat" position="after">
                     <field name="agency_id" options="{'no_create': True, 'no_open': True}"/>
                 </field>
+                <group name="sale" position="inside">
+                    <field name="projected_revenue" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                </group>
             </field>
         </record>
 

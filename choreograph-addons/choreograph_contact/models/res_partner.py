@@ -33,6 +33,8 @@ class ResPartner(models.Model):
         "excluded_partner_id",
         domain="[('is_company', '=', True)]",
     )
+    projected_revenue = fields.Char()
+
 
     def write(self, vals):
 
