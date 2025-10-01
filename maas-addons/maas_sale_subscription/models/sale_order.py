@@ -293,9 +293,12 @@ class SaleSubscription(models.Model):
 
     def _set_next_invoice_date_to_end_of_month(self):
         """
-        force the next invoice date to the end of month
+        force the next invoice date to the end of month and update next_invoice_date
         """
+        today = fields.Date.today()
         for subscription in self:
+            if subscription.next_invoice_date and subscription.next_invoice_date <= today:
+                subscription._update_next_invoice_date()
             subscription.write({'next_invoice_date':  subscription.next_invoice_date + relativedelta(months=1, day=1, days=-1)})
 
     def _handle_automatic_invoices(self, auto_commit, invoices):
