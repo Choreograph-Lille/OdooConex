@@ -59,7 +59,7 @@
     </record>
 
     <record id="action_report_out_refund_accounting" model="ir.actions.report">
-        <field name="name">Out Refund Accounting rererer</field>
+        <field name="name">Out Refund Accounting</field>
         <field name="model">auditlog.report.wizard</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">choreograph_auditlog.report_out_refund_accounting</field>
