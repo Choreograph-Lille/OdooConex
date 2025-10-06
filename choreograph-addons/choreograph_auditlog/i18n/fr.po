@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-06 12:53+0000\n"
-"PO-Revision-Date: 2025-10-06 12:53+0000\n"
+"POT-Creation-Date: 2025-10-06 14:52+0000\n"
+"PO-Revision-Date: 2025-10-06 14:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,8 +17,8 @@ msgstr ""
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
-msgid "<strong>Amount TTC :</strong>"
-msgstr "<strong>Montant TTC : </strong>"
+msgid "<strong>Amount untaxes :</strong>"
+msgstr "<strong>Montant HT :</strong>"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
@@ -401,11 +401,6 @@ msgid "Period :"
 msgstr "Périodes :"
 
 #. module: choreograph_auditlog
-#: model:ir.actions.report,name:choreograph_auditlog.action_report_purchase_closing
-msgid "Purchase closing"
-msgstr "Clôture d'achats"
-
-#. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
 msgid "Purchase invoices"
 msgstr "Factures achat"
@@ -414,6 +409,11 @@ msgstr "Factures achat"
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
 msgid "Purchase order"
 msgstr "Bons de commande"
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_purchase_closing
+msgid "Purchase order from sale"
+msgstr "BDC achat partie vente"
 
 #. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_quote_purchase_order
@@ -519,6 +519,16 @@ msgstr "Sous-total HT en euros"
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
 msgid "Total Untaxed GBP"
 msgstr "Sous-total HT en GBP"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "Total Untaxed Purchase EUR"
+msgstr "Sous-total en HT BDC Achat en €"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
+msgid "Total Untaxed Purchase GBP"
+msgstr "Sous-total en HT BDC Achat en £"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
