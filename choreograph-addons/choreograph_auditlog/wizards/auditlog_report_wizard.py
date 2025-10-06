@@ -44,7 +44,7 @@ class AuditlogReport(models.TransientModel):
             self.env.ref('choreograph_auditlog.action_report_user_roles_and_right'): self._data_rights_and_roles,
             self.env.ref('choreograph_auditlog.action_report_sox_role_permissions'): self._data_user_sox_roles,
             self.env.ref('choreograph_auditlog.action_report_supplier_bank_details'): self._data_supplier_bank_details,
-            self.env.ref('choreograph_auditlog.action_report_accounting'): self._data_accounting,
+            self.env.ref('choreograph_auditlog.action_report_out_refund_accounting'): self._data_out_refund_accounting,
             self.env.ref('choreograph_auditlog.action_report_quote_purchase_order'): self._data_quote_po,
             self.env.ref('choreograph_auditlog.action_report_purchase_closing'): self._data_purchase_closing,
         }
@@ -197,8 +197,10 @@ class AuditlogReport(models.TransientModel):
                 'siret': partner_bank_id.partner_id.siret
             })
         return data
-
-    def _data_accounting(self):
+    def _data_out_refund_accounting(self):
+        return self._data_accounting('out_refund')
+    
+    def _data_accounting(self, type=''):
         end_date = self.end_date if self.is_period else self.start_date
         log_line_ids = self.env['auditlog.log.line'].search([
             ('field_name', '=', 'state'),
@@ -209,27 +211,35 @@ class AuditlogReport(models.TransientModel):
         ])
         move_ids = self.env['account.move'].search([
             ('state', '=', 'posted'),
-            ('move_type', '=', 'out_refund'),
+            ('move_type', '=', type),
             ('id', 'in', log_line_ids.mapped('log_id.res_id'))
         ])
         data = {
             'accounts': []
         }
+        eur = self.env.ref('base.EUR')
+        gbp = self.env.ref('base.GBP')
+        amount_total_untaxed_eur = move_ids.filtered(lambda m: m.currency_id == eur).mapped('amount_untaxed')
+        amount_total_untaxed_gbp = move_ids.filtered(lambda m: m.currency_id == gbp).mapped('amount_untaxed')
+        data['total_eur'] = formatLang(self.env, sum(amount_total_untaxed_eur), currency_obj=eur) if amount_total_untaxed_eur else '0,00 €'
+        data['total_gbp'] = formatLang(self.env, sum(amount_total_untaxed_gbp), currency_obj=gbp) if amount_total_untaxed_gbp else '£ 0,00'
         for move_id in move_ids:
             split_ref = move_id.ref.split(',') if move_id.ref else ''
             log_line_id = log_line_ids.filtered(lambda l: l.log_id.res_id == move_id.id).sorted(
                 lambda item: item.create_date, reverse=True)[0]
             data['accounts'].append({
-                'client': move_id.partner_id.name,
+                'client': move_id.partner_id.display_name,
                 'invoice_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE),
                 'credit_note_number': move_id.name,
                 'commercial': move_id.invoice_user_id.name,
-                'origin_document': move_id.reversed_entry_id.name,
-                'subtotal': formatLang(self.env, move_id.amount_total),
+                'origin_document': move_id.reversed_entry_id.name if move_id.reversed_entry_id else '',
+                'subtotal': formatLang(self.env, move_id.amount_untaxed),
                 'creator': move_id.create_uid.name,
                 'validator': log_line_id.log_id.user_id.name if log_line_id else None,
                 'validation_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE_TIME),
-                'comment': split_ref[1] if len(split_ref) == 2 else ''
+                'comment': split_ref[1] if len(split_ref) == 2 else '',
+                'amount_untaxed_eur': formatLang(self.env, move_id.amount_untaxed) if move_id.currency_id == self.env.ref('base.EUR') else '',
+                'amount_untaxed_gbp': formatLang(self.env, move_id.amount_untaxed) if move_id.currency_id == self.env.ref('base.GBP') else '',
             })
         return data
 

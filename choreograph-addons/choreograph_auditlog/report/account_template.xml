@@ -14,7 +14,7 @@
                                 <td class="fw-bold">Credit note number</td>
                                 <td class="fw-bold">Commercial</td>
                                 <td class="fw-bold">Origin document</td>
-                                <td class="fw-bold">Subtotal</td>
+                                <td class="fw-bold">Subtotal Untaxed</td>
                                 <td class="fw-bold">Creator</td>
                                 <td class="fw-bold">Validator</td>
                                 <td class="fw-bold">Validation date</td>
@@ -36,6 +36,16 @@
                                     <td t-out="account.get('comment')"/>
                                 </tr>
                             </t>
+                            <tr>
+                                <td colspan="5" class="text-end fw-bold">Total Untaxed EUR</td>
+                                <td class="fw-bold" t-out="total_eur"/>
+                                <td colspan="4"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-end fw-bold">Total Untaxed GBP</td>
+                                <td class="fw-bold" t-out="total_gbp"/>
+                                <td colspan="4"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
