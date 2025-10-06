@@ -335,6 +335,15 @@ class AuditlogReport(models.TransientModel):
             'orders': []
         }
 
+        def get_approval_entries(res_id, groups):
+            entries = self.env['studio.approval.entry'].search([
+                ('model', '=', 'purchase.order'),
+                ('res_id', '=', res_id),
+                ('approved', '=', True),
+                ('group_id', 'in', groups)
+            ])
+            res = entries.mapped('user_id.name')
+            return res
         eur = self.env.ref('base.EUR')
         gbp = self.env.ref('base.GBP')
         total_eur = 0
