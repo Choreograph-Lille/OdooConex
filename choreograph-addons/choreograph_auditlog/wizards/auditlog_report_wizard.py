@@ -293,13 +293,19 @@ class AuditlogReport(models.TransientModel):
             ])
             res = entries.mapped('user_id.name')
             return res
-
+        eur = self.env.ref('base.EUR')
+        gbp = self.env.ref('base.GBP')
+        total_eur = 0
+        total_gbp = 0
+        
         for order_id in order_ids:
             purchase_order_ids = order_id._get_purchase_orders()
+            total_eur += sum(order_ids.filtered(lambda m: m.currency_id == eur).mapped('amount_untaxed'))
+            total_gbp += sum(order_ids.filtered(lambda m: m.currency_id == gbp).mapped('amount_untaxed'))
             po_list = purchase_order_ids.mapped(lambda po: {
                 'purchase': {
                     'po_number': po.name,
-                    'supplier': po.partner_id.name,
+                    'supplier': po.partner_id.display_name,
                     'date_approve': format_date(self.env, po.date_approve, FORMAT_DATE),
                     'date_planned': format_date(self.env, po.date_planned, FORMAT_DATE),
                     'amount': formatLang(self.env, po.amount_untaxed),
@@ -307,7 +313,7 @@ class AuditlogReport(models.TransientModel):
                 'invoices': po.invoice_ids.mapped(lambda invoice: {
                     'invoice_name': invoice.name,
                     'invoice_date': format_date(self.env, invoice.invoice_date, FORMAT_DATE),
-                    'amount': formatLang(self.env, invoice.amount_total),
+                    'amount': formatLang(self.env, invoice.amount_untaxed),
                     'diff': _('Yes') if invoice.is_gap else _('No')
                 }),
                 'informations': po.invoice_ids.mapped(lambda invoice: {
@@ -320,9 +326,11 @@ class AuditlogReport(models.TransientModel):
                     'net_marging': formatLang(self.env, order_id.amount_untaxed - invoice.amount_untaxed)
                 }),
             })
+            datas['total_eur'] = formatLang(self.env, total_eur, currency_obj=eur) if total_eur > 0 else '0,00 €'
+            datas['total_gbp'] = formatLang(self.env, total_gbp, currency_obj=gbp) if total_gbp > 0 else '£ 0,00'
             datas['orders'].append({
                 'name': order_id.name,
-                'client': order_id.partner_id.name,
+                'client': order_id.partner_id.display_name,
                 'amount': formatLang(self.env, order_id.amount_untaxed),
                 'delivery_date': format_datetime(self.env, order_id.commitment_date, dt_format=FORMAT_DATE),
                 'purchase_data': po_list
