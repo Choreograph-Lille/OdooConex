@@ -9,7 +9,7 @@
                     <table class="table table-borderless">
                         <thead>
                             <tr>
-                                <td t-if="not create_count" class="fw-bold">Object</td>
+                                <td t-if="not contact_type" class="fw-bold">Object</td>
                                 <td t-if="contact_type and contact_type == 'supplier'" class="fw-bold">Supplier Name</td>
                                 <td t-else="" class="fw-bold">Name</td>
                                 <td class="fw-bold">Field</td>
@@ -24,7 +24,7 @@
                             <t t-if="logs" t-foreach="logs" t-as="log">
                                 <t t-foreach="log['lines']" t-as="line">
                                     <tr>
-                                        <td t-if="not create_count" t-out="log.get('object', '')" />
+                                        <td t-if="not contact_type" t-out="log.get('object', '')" />
                                         <td t-out="log.get('display_name', '')" />
                                         <td t-out="line.get('field_description', '')" />
                                         <td t-out="line.get('old_value_text') or ''" />
@@ -38,7 +38,7 @@
                             <t t-if="create_logs" t-foreach="create_logs" t-as="log">
                                 <t t-foreach="log['lines']" t-as="line">
                                     <tr>
-                                        <td t-if="not create_count" t-out="log.get('object', '')" />
+                                        <td t-if="not contact_type" t-out="log.get('object', '')" />
                                         <td t-out="log.get('display_name', '')" />
                                         <td t-out="line.get('field_description', '')" />
                                         <td t-out="line.get('old_value_text') or ''" />
@@ -52,7 +52,7 @@
                             <t t-if="write_logs" t-foreach="write_logs" t-as="log">
                                 <t t-foreach="log['lines']" t-as="line">
                                     <tr>
-                                        <td t-if="not create_count" t-out="log.get('object', '')" />
+                                        <td t-if="not contact_type" t-out="log.get('object', '')" />
                                         <td t-out="log.get('display_name', '')" />
                                         <td t-out="line.get('field_description', '')" />
                                         <td t-out="line.get('old_value_text') or ''" />
@@ -66,7 +66,7 @@
                             <t t-if="unlink_logs" t-foreach="unlink_logs" t-as="log">
                                 <t t-foreach="log['lines']" t-as="line">
                                     <tr>
-                                        <td t-if="not create_count" t-out="log.get('object', '')" />
+                                        <td t-if="not contact_type" t-out="log.get('object', '')" />
                                         <td t-out="log.get('display_name', '')" />
                                         <td t-out="line.get('field_description', '')" />
                                         <td t-out="line.get('old_value_text') or ''" />
@@ -77,7 +77,7 @@
                                     </tr>
                                 </t>
                             </t>
-                            <t t-if="create_count is not None">
+                            <t t-if="contact_type">
                                 <tr>
                                     <td class="text-end fw-bold text-nowrap">Create count</td>
                                     <td class="fw-bold" t-out="create_count"/>
