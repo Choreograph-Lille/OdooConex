@@ -93,7 +93,7 @@
     </record>
 
     <record id="action_report_extracts_from_suppliers" model="ir.actions.report">
-        <field name="name">Extracts from suppliers</field>
+        <field name="name">Suppliers</field>
         <field name="model">auditlog.report.wizard</field>
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">choreograph_auditlog.report_auditlog_log_extracts_from_suppliers</field>
