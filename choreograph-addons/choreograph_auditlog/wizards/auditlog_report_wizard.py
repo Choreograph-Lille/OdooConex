@@ -60,6 +60,18 @@ class AuditlogReport(models.TransientModel):
         })
         return self.ir_action_report_id.report_action(None, data=data)
 
+    def get_contact_count(self, partner_type):
+        end_date = self.end_date if self.is_period else self.start_date
+        domain = [('customer_rank', '!=', 0)] if partner_type == 'customer' else [('supplier_rank', '!=', 0)]
+        domain += [
+            ('create_date', '>=', self.start_date),
+            ('create_date', '<=', end_date),
+        ]
+        if self.user_ids:
+            domain.append(('create_uid', 'in', self.user_ids.ids))
+        contacts_count = self.env['res.partner'].search_count(domain)
+        return contacts_count or 0
+
     def get_log_lines(self, model, fields=[], method='', is_supplier_extraction=False, ignore_empty_value=False):
         end_date = self.end_date if self.is_period else self.start_date
         domain = [
@@ -89,6 +101,10 @@ class AuditlogReport(models.TransientModel):
         :param is_data_sox_role_changing: if True, take only the difference between old and new values
         :return: dict
         """
+        def get_method_value(value):
+            if value in ['create', 'write', 'unlink']:
+                return _('Create') if value == 'create' else _('Update') if value == 'write' else _('Unlink')
+            return value
         old_value = line.old_value_text
         new_value = line.new_value_text
         if is_data_sox_role_changing:
@@ -102,7 +118,7 @@ class AuditlogReport(models.TransientModel):
             'user': line.log_id.user_id.name,
             'object': line.log_id.model_id.name,
             'create_date': line.log_id.create_date,
-            'method': line.log_id.method,
+            'method': get_method_value(line.log_id.method),
             'lines': [{
                 'old_value_text': old_value,
                 'new_value_text': new_value,
@@ -139,14 +155,27 @@ class AuditlogReport(models.TransientModel):
 
     def _data_supplier_extract(self):
         data = {
-            'logs': []
+            'create_logs': [],
+            'write_logs': [],
+            'unlink_logs': [],
         }
         # this should be res.partner
         role_model = self.ir_action_report_id.auditlog_model_id
         logs_lines = self.get_log_lines(role_model, [], '', True, True)
-        for line in logs_lines:
+        create_log_lines = logs_lines.filtered(lambda l: l.log_id.method == 'create')
+        write_log_lines = logs_lines.filtered(lambda l: l.log_id.method == 'write')
+        unlink_log_lines = logs_lines.filtered(lambda l: l.log_id.method == 'unlink')
+        
+        for line in create_log_lines:
             record = line.get_record()
-            data['logs'].append(self.prepare_log_line_data(line, record.display_name))
+            data['create_logs'].append(self.prepare_log_line_data(line, record.display_name))
+        for line in write_log_lines:
+            record = line.get_record()
+            data['write_logs'].append(self.prepare_log_line_data(line, record.display_name))
+        for line in unlink_log_lines:
+            record = line.get_record()
+            data['unlink_logs'].append(self.prepare_log_line_data(line, record.display_name))
+        data['create_count'] = self.get_contact_count('supplier')
         return data
 
     def _data_rights_and_roles(self):
