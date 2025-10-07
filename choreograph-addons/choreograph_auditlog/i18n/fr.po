@@ -608,6 +608,11 @@ msgid "Subtotal Untaxed"
 msgstr "Sous-total HT"
 
 #. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+msgid "Supplier Name"
+msgstr "Nom du fournisseur"
+
+#. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_res_partner_rib
 msgid "Supplier RIB modifications"
 msgstr "Modification des RIB fournisseur"

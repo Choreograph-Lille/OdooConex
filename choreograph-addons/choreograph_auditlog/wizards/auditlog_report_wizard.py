@@ -186,6 +186,7 @@ class AuditlogReport(models.TransientModel):
         for line in unlink_log_lines:
             record = line.get_record()
             data['unlink_logs'].append(self.prepare_log_line_data(line, record.display_name))
+        data['contact_type'] = 'supplier'
         data['create_count'] = self.get_contact_count('supplier')
         return data
 
