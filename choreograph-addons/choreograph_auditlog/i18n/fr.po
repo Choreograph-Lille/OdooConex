@@ -189,9 +189,17 @@ msgid "Contact"
 msgstr ""
 
 #. module: choreograph_auditlog
+#. odoo-python
+#: code:addons/choreograph_auditlog/wizards/auditlog_report_wizard.py:0
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.user_roles_and_right_template
+#, python-format
 msgid "Create"
-msgstr ""
+msgstr "Création"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+msgid "Create count"
+msgstr "Nombre de création"
 
 #. module: choreograph_auditlog
 #: model:ir.actions.server,name:choreograph_auditlog.compute_purchase_redistribution_ir_actions_server
@@ -654,6 +662,13 @@ msgstr ""
 #, python-format
 msgid "Unlink"
 msgstr "Suppression"
+
+#. module: choreograph_auditlog
+#. odoo-python
+#: code:addons/choreograph_auditlog/wizards/auditlog_report_wizard.py:0
+#, python-format
+msgid "Update"
+msgstr "Modification"
 
 #. module: choreograph_auditlog
 #: model:ir.model,name:choreograph_auditlog.model_res_users

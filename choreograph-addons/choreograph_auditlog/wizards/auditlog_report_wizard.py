@@ -65,9 +65,9 @@ class AuditlogReport(models.TransientModel):
         })
         return self.ir_action_report_id.report_action(None, data=data)
 
-    def get_contact_count(self, partner_rank_type):
+    def get_contact_count(self, partner_type):
         end_date = self.end_date if self.is_period else self.start_date
-        domain = [(partner_rank_type, '!=', 0)]
+        domain = [('customer_rank', '!=', 0)] if partner_type == 'customer' else [('supplier_rank', '!=', 0)]
         domain += [
             ('create_date', '>=', self.start_date),
             ('create_date', '<=', end_date),
@@ -77,7 +77,7 @@ class AuditlogReport(models.TransientModel):
         contacts_count = self.env['res.partner'].search_count(domain)
         return contacts_count or 0
 
-    def get_log_lines(self, model, fields=[], method='', partner_rank_type='', ignore_empty_value=False):
+    def get_log_lines(self, model, fields=[], method='', is_supplier_extraction=False, ignore_empty_value=False):
         end_date = self.end_date if self.is_period else self.start_date
         domain = [
             ('create_date', '>=', self.start_date),
@@ -172,7 +172,7 @@ class AuditlogReport(models.TransientModel):
         }
         # this should be res.partner
         role_model = self.ir_action_report_id.auditlog_model_id
-        logs_lines = self.get_log_lines(role_model, [], '', partner_rank_type, True)
+        logs_lines = self.get_log_lines(role_model, [], '', True, True)
         create_log_lines = logs_lines.filtered(lambda l: l.log_id.method == 'create')
         write_log_lines = logs_lines.filtered(lambda l: l.log_id.method == 'write')
         unlink_log_lines = logs_lines.filtered(lambda l: l.log_id.method == 'unlink')
@@ -186,8 +186,7 @@ class AuditlogReport(models.TransientModel):
         for line in unlink_log_lines:
             record = line.get_record()
             data['unlink_logs'].append(self.prepare_log_line_data(line, record.display_name))
-        data['contact_type'] = partner_rank_type
-        data['create_count'] = self.get_contact_count(partner_rank_type)
+        data['create_count'] = self.get_contact_count('supplier')
         return data
 
     def _data_rights_and_roles(self):
