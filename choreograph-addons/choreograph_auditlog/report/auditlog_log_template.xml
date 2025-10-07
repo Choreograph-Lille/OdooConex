@@ -10,7 +10,8 @@
                         <thead>
                             <tr>
                                 <td t-if="not create_count" class="fw-bold">Object</td>
-                                <td class="fw-bold">Name</td>
+                                <td t-if="contact_type and contact_type == 'supplier'" class="fw-bold">Supplier Name</td>
+                                <td t-else="" class="fw-bold">Name</td>
                                 <td class="fw-bold">Field</td>
                                 <td class="fw-bold">Old value</td>
                                 <td class="fw-bold">New value</td>
