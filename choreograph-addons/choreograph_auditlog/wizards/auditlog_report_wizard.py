@@ -19,16 +19,17 @@ class AuditlogReport(models.TransientModel):
     end_date = fields.Date()
     ir_action_report_id = fields.Many2one('ir.actions.report', 'Rule')
     user_ids = fields.Many2many('res.users')
-    is_extracts_from_supplier = fields.Boolean(compute='_compute_is_extracts_from_supplier', store=True)
+    is_contact_extracts = fields.Boolean(compute='_compute_is_contact_extracts', store=True)
 
     @api.depends('ir_action_report_id')
-    def _compute_is_extracts_from_supplier(self):
+    def _compute_is_contact_extracts(self):
         for audit in self:
             extract_supplier = self.env.ref('choreograph_auditlog.action_report_extracts_from_suppliers', raise_if_not_found=False)
-            is_extracts_from_supplier = False
-            if audit.ir_action_report_id == extract_supplier:
-                is_extracts_from_supplier = True
-            audit.is_extracts_from_supplier = is_extracts_from_supplier
+            extract_customer = self.env.ref('choreograph_auditlog.action_report_extracts_from_customers', raise_if_not_found=False)
+            is_contact_extracts = False
+            if audit.ir_action_report_id == extract_supplier or audit.ir_action_report_id == extract_customer:
+                is_contact_extracts = True
+            audit.is_contact_extracts = is_contact_extracts
 
     @api.constrains('start_date', 'end_date', 'is_period')
     def _check_date(self):
@@ -41,6 +42,7 @@ class AuditlogReport(models.TransientModel):
             self.env.ref('choreograph_auditlog.action_report_sox_role_changing'): self._data_sox_role_changing,
             self.env.ref('choreograph_auditlog.action_report_res_partner_rib'): self._data_partner_rib,
             self.env.ref('choreograph_auditlog.action_report_extracts_from_suppliers'): self._data_supplier_extract,
+            self.env.ref('choreograph_auditlog.action_report_extracts_from_customers'): self._data_customer_extract,
             self.env.ref('choreograph_auditlog.action_report_user_roles_and_right'): self._data_rights_and_roles,
             self.env.ref('choreograph_auditlog.action_report_sox_role_permissions'): self._data_user_sox_roles,
             self.env.ref('choreograph_auditlog.action_report_supplier_bank_details'): self._data_supplier_bank_details,
@@ -72,7 +74,7 @@ class AuditlogReport(models.TransientModel):
         contacts_count = self.env['res.partner'].search_count(domain)
         return contacts_count or 0
 
-    def get_log_lines(self, model, fields=[], method='', is_supplier_extraction=False, ignore_empty_value=False):
+    def get_log_lines(self, model, fields=[], method='', partner_rank_type='', ignore_empty_value=False):
         end_date = self.end_date if self.is_period else self.start_date
         domain = [
             ('create_date', '>=', self.start_date),
@@ -85,8 +87,8 @@ class AuditlogReport(models.TransientModel):
             domain.append(('log_id.user_id', 'in', self.user_ids.ids))
         if method:
             domain.append(('log_id.method', '=', method))
-        if is_supplier_extraction:
-            domain.append(('log_id.res_id', 'in', self.env['res.partner'].search([('supplier_rank', '!=', 0)]).ids))
+        if partner_rank_type:
+            domain.append(('log_id.res_id', 'in', self.env['res.partner'].search([(partner_rank_type, '!=', 0)]).ids))
         if ignore_empty_value:
             domain.extend(
                 ['&', ('field_id.readonly', '=', False), '|', ('old_value_text', '!=', False),
@@ -152,8 +154,14 @@ class AuditlogReport(models.TransientModel):
             record = line.get_record()
             data['logs'].append(self.prepare_log_line_data(line, record.display_name))
         return data
-
+    
     def _data_supplier_extract(self):
+        return self._data_contact_extract('supplier_rank')
+
+    def _data_customer_extract(self):
+        return self._data_contact_extract('customer_rank')
+
+    def _data_contact_extract(self, partner_rank_type):
         data = {
             'create_logs': [],
             'write_logs': [],
@@ -161,7 +169,7 @@ class AuditlogReport(models.TransientModel):
         }
         # this should be res.partner
         role_model = self.ir_action_report_id.auditlog_model_id
-        logs_lines = self.get_log_lines(role_model, [], '', True, True)
+        logs_lines = self.get_log_lines(role_model, [], '', partner_rank_type, True)
         create_log_lines = logs_lines.filtered(lambda l: l.log_id.method == 'create')
         write_log_lines = logs_lines.filtered(lambda l: l.log_id.method == 'write')
         unlink_log_lines = logs_lines.filtered(lambda l: l.log_id.method == 'unlink')
@@ -175,7 +183,7 @@ class AuditlogReport(models.TransientModel):
         for line in unlink_log_lines:
             record = line.get_record()
             data['unlink_logs'].append(self.prepare_log_line_data(line, record.display_name))
-        data['contact_type'] = 'supplier'
+        data['contact_type'] = partner_rank_type
         data['create_count'] = self.get_contact_count('supplier')
         return data
 
