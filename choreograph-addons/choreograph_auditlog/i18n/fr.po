@@ -248,9 +248,9 @@ msgid "Credit note number"
 msgstr "N° de l'avoir"
 
 #. module: choreograph_auditlog
-#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
-msgid "Cumulative subtotal untaxed"
-msgstr "Sous-total HT cumulé"
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
+msgid "Customer Name"
+msgstr "Nom du client"
 
 #. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_extracts_from_customers
@@ -387,23 +387,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__is_contact_extracts
 msgid "Is Contact Extracts"
 msgstr "Est une extraction de contact"
-
-#. module: choreograph_auditlog
-#: model:ir.model.fields,field_description:choreograph_auditlog.field_account_bank_statement_line__is_mymodel
-#: model:ir.model.fields,field_description:choreograph_auditlog.field_account_move__is_mymodel
-#: model:ir.model.fields,field_description:choreograph_auditlog.field_account_payment__is_mymodel
-msgid "Is Mymodel"
-msgstr "Est Mymodel"
-
-#. module: choreograph_auditlog
-#: model:ir.model.fields,field_description:choreograph_auditlog.field_purchase_order__is_retribution_order
-msgid "Is Retribution Order"
-msgstr "Est un BC Retribution"
-
-#. module: choreograph_auditlog
-#: model:ir.model,name:choreograph_auditlog.model_account_move
-msgid "Journal Entry"
-msgstr "Pièce comptable"
 
 #. module: choreograph_auditlog
 #: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard____last_update
