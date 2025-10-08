@@ -12,11 +12,11 @@
                                 required="1"
                                 domain="[('is_auditreport', '=', True)]"
                                 options="{'no_create': True}" />
-                            <field name="is_extracts_from_supplier" invisible="1" />
+                            <field name="is_contact_extracts" invisible="1" />
                             <field name="user_ids"
                                 widget="many2many_tags"
                                 string="Authors"
-                                attrs="{'invisible': [('is_extracts_from_supplier','=',False)],'required': [('is_extracts_from_supplier','=',True)]}"
+                                attrs="{'invisible': [('is_contact_extracts','=',False)],'required': [('is_contact_extracts','=',True)]}"
                                 options="{'no_create': True}" />
                             <field name="start_date" required="1" />
                             <field name="is_period" />
