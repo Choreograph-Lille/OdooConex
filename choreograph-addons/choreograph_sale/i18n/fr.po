@@ -934,6 +934,7 @@ msgstr ""
 
 #. module: choreograph_sale
 #: model:ir.model.fields,field_description:choreograph_sale.field_choreograph_campaign_de__active
+#: model:ir.model.fields,field_description:choreograph_sale.field_retribution_base__active
 #: model:ir.model.fields,field_description:choreograph_sale.field_sale_data_conservation__active
 msgid "Active"
 msgstr "Actif"
