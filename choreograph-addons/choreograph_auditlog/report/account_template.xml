@@ -52,7 +52,12 @@
             </div>
         </t>
     </template>
-    <template id="report_accounting">
+    <template id="report_out_refund_accounting">
+        <t t-call="web.html_container">
+            <t t-call="choreograph_auditlog.accounting_template" />
+        </t>
+    </template>
+    <template id="report_in_refund_accounting">
         <t t-call="web.html_container">
             <t t-call="choreograph_auditlog.accounting_template" />
         </t>
