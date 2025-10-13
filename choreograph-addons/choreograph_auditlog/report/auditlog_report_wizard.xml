@@ -59,11 +59,11 @@
     </record>
 
     <record id="action_report_out_refund_accounting" model="ir.actions.report">
-        <field name="name">Out Refund Accounting</field>
+        <field name="name">Out Refund Accounting rererer</field>
         <field name="model">auditlog.report.wizard</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">choreograph_auditlog.report_accounting</field>
-        <field name="report_file">choreograph_auditlog.report_accounting</field>
+        <field name="report_name">choreograph_auditlog.report_out_refund_accounting</field>
+        <field name="report_file">choreograph_auditlog.report_out_refund_accounting</field>
         <field name="binding_model_id" ref="model_auditlog_report_wizard" />
         <field name="binding_type">report</field>
         <field name="is_auditreport" eval="True" />
@@ -73,8 +73,8 @@
         <field name="name">In Refund Accounting</field>
         <field name="model">auditlog.report.wizard</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">choreograph_auditlog.report_accounting</field>
-        <field name="report_file">choreograph_auditlog.report_accounting</field>
+        <field name="report_name">choreograph_auditlog.report_in_refund_accounting</field>
+        <field name="report_file">choreograph_auditlog.report_in_refund_accounting</field>
         <field name="binding_model_id" ref="model_auditlog_report_wizard" />
         <field name="binding_type">report</field>
         <field name="is_auditreport" eval="True" />
