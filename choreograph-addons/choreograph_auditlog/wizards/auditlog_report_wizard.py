@@ -47,6 +47,7 @@ class AuditlogReport(models.TransientModel):
             self.env.ref('choreograph_auditlog.action_report_sox_role_permissions'): self._data_user_sox_roles,
             self.env.ref('choreograph_auditlog.action_report_supplier_bank_details'): self._data_supplier_bank_details,
             self.env.ref('choreograph_auditlog.action_report_out_refund_accounting'): self._data_out_refund_accounting,
+            self.env.ref('choreograph_auditlog.action_report_in_refund_accounting'): self._data_in_refund_accounting,
             self.env.ref('choreograph_auditlog.action_report_quote_purchase_order'): self._data_quote_po,
             self.env.ref('choreograph_auditlog.action_report_purchase_closing'): self._data_purchase_closing,
         }
@@ -235,8 +236,12 @@ class AuditlogReport(models.TransientModel):
                 'siret': partner_bank_id.partner_id.siret
             })
         return data
+    
     def _data_out_refund_accounting(self):
         return self._data_accounting('out_refund')
+    
+    def _data_in_refund_accounting(self):
+        return self._data_accounting('in_refund')
     
     def _data_accounting(self, type=''):
         end_date = self.end_date if self.is_period else self.start_date
