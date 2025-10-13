@@ -277,7 +277,7 @@ class AuditlogReport(models.TransientModel):
                 'client': move_id.partner_id.display_name,
                 'invoice_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE),
                 'credit_note_number': move_id.name,
-                'commercial': move_id.invoice_user_id.name,
+                'commercial': move_id.invoice_user_id.name if move_id.invoice_user_id else '',
                 'origin_document': move_id.reversed_entry_id.name if move_id.reversed_entry_id else '',
                 'subtotal': formatLang(self.env, move_id.amount_untaxed),
                 'creator': move_id.create_uid.name,
