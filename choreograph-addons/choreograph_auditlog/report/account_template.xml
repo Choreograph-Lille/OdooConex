@@ -53,109 +53,12 @@
             </div>
         </t>
     </template>
-
-    <template id="out_invoice_accounting_template">
-        <t t-call="choreograph_auditlog.layout">
-            <div class="page">
-                <t t-call="choreograph_auditlog.header_audit_report" />
-                <div class="row">
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <td class="fw-bold text-nowrap">Client</td>
-                                <td class="fw-bold text-nowrap">Invoice date</td>
-                                <td class="fw-bold text-nowrap">Invoice note number</td>
-                                <td class="fw-bold text-nowrap">Order Number</td>
-                                <td class="fw-bold text-nowrap">Cartesis code</td>
-                                <td class="fw-bold text-nowrap">Third client code</td>
-                                <td class="fw-bold">
-                                    <span class="text-nowrap">Commercial Team</span><br/> <span class="text-nowrap">(VAD, Presse, UK, ...)</span>
-                                </td>
-                                <td class="fw-bold text-nowrap">Subtotal Untaxed</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="accounts" t-as="account">
-                                <tr>
-                                    <td t-out="account.get('client')"/>
-                                    <td t-out="account.get('invoice_date')"/>
-                                    <td t-out="account.get('credit_note_number')"/>
-                                    <td t-out="account.get('order_number')"/>
-                                    <td t-out="account.get('cartesis_code')"/>
-                                    <td t-out="account.get('third_client_code') or ''"/>
-                                    <td t-out="account.get('commercial_team') or ''"/>
-                                    <td t-out="account.get('subtotal_untaxed')"/>
-                                </tr>
-                            </t>
-                            <tr>
-                                <td colspan="7" class="text-end fw-bold">Total Untaxed EUR</td>
-                                <td class="fw-bold" t-out="total_eur"/>
-                            </tr>
-                            <tr>
-                                <td colspan="7" class="text-end fw-bold">Total Untaxed GBP</td>
-                                <td class="fw-bold" t-out="total_gbp"/>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </t>
-    </template>
-
-    <template id="mymodel_invoice_template">
-        <t t-call="choreograph_auditlog.layout">
-            <div class="page">
-                <t t-call="choreograph_auditlog.header_audit_report" />
-                <div class="row">
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <td class="fw-bold">Client</td>
-                                <td class="fw-bold">Invoice date</td>
-                                <td class="fw-bold">Invoice number</td>
-                                <td class="fw-bold">Order Number</td>
-                                <td class="fw-bold">Cartesis code</td>
-                                <td class="fw-bold">Third client code</td>
-                                <td class="fw-bold">
-                                    <span class="text-nowrap">Commercial Team</span><br/> <span class="text-nowrap">(VAD, Presse, UK, ...)</span>
-                                </td>
-                                <td class="fw-bold">Subtotal Untaxed</td>
-                                <td class="fw-bold">Cumulative subtotal untaxed</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="accounts" t-as="account">
-                                <tr>
-                                    <td t-out="account.get('client')"/>
-                                    <td t-out="account.get('invoice_date')"/>
-                                    <td t-out="account.get('invoice_number')"/>
-                                    <td t-out="account.get('order_number')"/>
-                                    <td t-out="account.get('cartesis_code')"/>
-                                    <td t-out="account.get('third_party_role_client_code')"/>
-                                    <td t-out="account.get('commercial_team')"/>
-                                    <td t-out="account.get('subtotal')"/>
-                                    <td t-out="partners[str(account.get('partner_id'))]"/>                                   
-
-                                </tr>
-                            </t>
-                            <tr>
-                                <td colspan="7" class="text-end fw-bold">Total Untaxed EUR</td>
-                                <td class="fw-bold" t-out="total_eur"/>
-                                <td class="fw-bold" t-out="cumulative_total_eur"/>
-                            </tr>
-                            <tr>
-                                <td colspan="7" class="text-end fw-bold">Total Untaxed GBP</td>
-                                <td class="fw-bold" t-out="total_gbp"/>
-                                <td class="fw-bold" t-out="cumulative_total_gbp"/>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </t>
-    </template>
-
     <template id="report_out_refund_accounting">
+        <t t-call="web.html_container">
+            <t t-call="choreograph_auditlog.accounting_template" />
+        </t>
+    </template>
+    <template id="report_in_refund_accounting">
         <t t-call="web.html_container">
             <t t-call="choreograph_auditlog.accounting_template" />
         </t>

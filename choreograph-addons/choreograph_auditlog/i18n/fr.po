@@ -354,7 +354,7 @@ msgstr ""
 #. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_in_refund_accounting
 msgid "In Refund Accounting"
-msgstr "Avoirs Achat "
+msgstr "Avoirs Achat"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
