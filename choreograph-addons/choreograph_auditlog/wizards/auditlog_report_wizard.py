@@ -51,8 +51,6 @@ class AuditlogReport(models.TransientModel):
             self.env.ref('choreograph_auditlog.action_report_quote_purchase_order'): self._data_quote_po,
             self.env.ref('choreograph_auditlog.action_report_purchase_closing'): self._data_purchase_closing,
             self.env.ref('choreograph_auditlog.action_report_out_invoice_accounting'): self._data_out_invoice_accounting,
-            self.env.ref('choreograph_auditlog.action_report_purchase_retribution'): self._data_purchase_retribution,
-            self.env.ref('choreograph_auditlog.action_report_mymodel_invoice'): self._data_mymodel_invoice,
         }
         report_data_func = report_data_map.get(self.ir_action_report_id)
         if not report_data_func:
@@ -246,6 +244,9 @@ class AuditlogReport(models.TransientModel):
     def _data_in_refund_accounting(self):
         return self._data_accounting('in_refund')
     
+    def _data_out_invoice_accounting(self):
+        return self._data_accounting('out_invoice')
+    
     def _data_accounting(self, type=''):
         end_date = self.end_date if self.is_period else self.start_date
         log_line_ids = self.env['auditlog.log.line'].search([
@@ -278,14 +279,16 @@ class AuditlogReport(models.TransientModel):
                 'invoice_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE),
                 'credit_note_number': move_id.name,
                 'commercial': move_id.invoice_user_id.name if move_id.invoice_user_id else '',
+                'commercial_team': move_id.team_id.name if move_id.team_id else '',
                 'origin_document': move_id.reversed_entry_id.name if move_id.reversed_entry_id else '',
+                'order_number': move_id.sale_order_id.name if move_id.sale_order_id else '',
                 'subtotal': formatLang(self.env, move_id.amount_untaxed),
                 'creator': move_id.create_uid.name,
                 'validator': log_line_id.log_id.user_id.name if log_line_id else None,
                 'validation_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE_TIME),
                 'comment': split_ref[1] if len(split_ref) == 2 else '',
-                'amount_untaxed_eur': formatLang(self.env, move_id.amount_untaxed) if move_id.currency_id == self.env.ref('base.EUR') else '',
-                'amount_untaxed_gbp': formatLang(self.env, move_id.amount_untaxed) if move_id.currency_id == self.env.ref('base.GBP') else '',
+                'cartesis_code': move_id.partner_id.cartesis_code,
+                'third_party_role_client_code': move_id.partner_id.third_party_role_client_code
             })
         return data
 

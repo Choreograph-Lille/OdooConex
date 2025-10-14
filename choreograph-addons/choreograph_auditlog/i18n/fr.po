@@ -16,6 +16,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
+msgid ""
+"<span class=\"text-nowrap\">Commercial Team</span><br/> <span class=\"text-"
+"nowrap\">(VAD, Presse, UK, ...)</span>"
+msgstr ""
+"<span class=\"text-nowrap\">Equipe Commercial</span><br/> <span "
+"class=\"text-nowrap\">(VAD, Presse, UK, ...)</span>"
+
+#. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
 msgid "<strong>Amount untaxes :</strong>"
 msgstr "<strong>Montant HT :</strong>"
@@ -155,7 +164,6 @@ msgid "Banks"
 msgstr "Banques"
 
 #. module: choreograph_auditlog
-#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Cartesis code"
 msgstr "Code Cartesis"
@@ -167,7 +175,6 @@ msgstr "Modification des rôles SOX"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
-#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
 msgid "Client"
@@ -363,7 +370,6 @@ msgstr ""
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
-#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Invoice date"
 msgstr "Date de la facture"
@@ -376,6 +382,11 @@ msgstr "N° de la facture"
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 msgid "Invoice number"
+msgstr "N° de la facture"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
+msgid "Invoice note number"
 msgstr "N° de la facture"
 
 #. module: choreograph_auditlog
@@ -466,7 +477,6 @@ msgid "Old value"
 msgstr "Ancienne valeur"
 
 #. module: choreograph_auditlog
-#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Order Number"
 msgstr "N° du BC"
@@ -478,8 +488,13 @@ msgstr "Document d'origine"
 
 #. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_out_refund_accounting
-msgid "Out Refund Accounting"
+msgid "Out Refund Accounting rererer"
 msgstr "Avoirs Vente"
+
+#. module: choreograph_auditlog
+#: model:ir.actions.report,name:choreograph_auditlog.action_report_out_invoice_accounting
+msgid "Out invoice accounted"
+msgstr "Factures vente comptabilisée"
 
 #. module: choreograph_auditlog
 #: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard__is_period
@@ -587,6 +602,7 @@ msgstr "Etat des rôles et droits utilisateurs"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Subtotal Untaxed"
 msgstr "Sous-total HT"
 
@@ -618,12 +634,19 @@ msgid "The start date cannot be greater than the end date"
 msgstr "La date de début ne peut pas être supérieure à la date de fin"
 
 #. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
+msgid "Third client code"
+msgstr "Code tiers"
+
+#. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Total Untaxed EUR"
 msgstr "Sous-total HT en euros"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Total Untaxed GBP"
 msgstr "Sous-total HT en GBP"
 
