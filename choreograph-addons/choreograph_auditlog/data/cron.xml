@@ -6,16 +6,7 @@
             <field name="name">Compute retribution cost</field>
             <field name="model_id" ref="model_purchase_order"/>
             <field name="state">code</field>
-            <field name="active">False</field>
             <field name="code">model.search([('is_retribution_order', '=', False),('state', '=', 'purchase')])._compute_is_retribution_order()</field>
-        </record>
-
-        <record id="compute_mymodel_invoice" model="ir.cron">
-            <field name="name">Compute Mymodel invoice</field>
-            <field name="model_id" ref="model_account_move"/>
-            <field name="state">code</field>
-            <field name="active">False</field>
-            <field name="code">model.update_subscription_invoices()</field>
         </record>
 
     </data>

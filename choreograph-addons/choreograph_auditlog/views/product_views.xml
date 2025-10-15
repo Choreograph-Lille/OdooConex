@@ -13,10 +13,6 @@
                         <field name="retribution"/>
                         <label for="retribution"/>
                     </span>
-                    <span class="d-inline-block">
-                        <field name="mymodel"/>
-                        <label for="mymodel"/>
-                    </span>
                 </xpath>
             </field>
         </record>
