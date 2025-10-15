@@ -135,7 +135,6 @@
         <field name="report_name">choreograph_auditlog.report_out_invoice_accounting</field>
         <field name="binding_model_id" ref="model_auditlog_report_wizard" />
         <field name="binding_type">report</field>
-        <field name="auditlog_model_id" ref="base.model_res_partner" />
         <field name="is_auditreport" eval="True" />
     </record>
 
@@ -147,7 +146,7 @@
         <field name="report_name">choreograph_auditlog.report_purchase_retribution</field>
         <field name="binding_model_id" ref="model_auditlog_report_wizard" />
         <field name="binding_type">report</field>
-        <field name="auditlog_model_id" ref="base.model_res_partner" />
+        <field name="is_auditreport" eval="True" />
     </record>
 
 </odoo>
