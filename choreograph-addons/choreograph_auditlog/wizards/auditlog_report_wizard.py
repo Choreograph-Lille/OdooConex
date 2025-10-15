@@ -51,6 +51,7 @@ class AuditlogReport(models.TransientModel):
             self.env.ref('choreograph_auditlog.action_report_quote_purchase_order'): self._data_quote_po,
             self.env.ref('choreograph_auditlog.action_report_purchase_closing'): self._data_purchase_closing,
             self.env.ref('choreograph_auditlog.action_report_out_invoice_accounting'): self._data_out_invoice_accounting,
+            self.env.ref('choreograph_auditlog.action_report_purchase_retribution'): self._data_purchase_retribution,
         }
         report_data_func = report_data_map.get(self.ir_action_report_id)
         if not report_data_func:
@@ -292,6 +293,44 @@ class AuditlogReport(models.TransientModel):
             })
         return data
 
+    def _data_purchase_retribution(self):
+        end_date = self.end_date if self.is_period else self.start_date
+        
+        po_ids = self.env['purchase.order'].search([
+            # ('state', '=', 'purchase'),
+            ('is_retribution_order', '=', True),
+            ('create_date', '>=', self.start_date),
+            ('create_date', '<=', end_date)
+        ])
+        data = {
+            'orders': []
+        }
+        eur = self.env.ref('base.EUR')
+        gbp = self.env.ref('base.GBP')
+        amount_total_untaxed_eur = po_ids.filtered(lambda m: m.currency_id == eur).mapped('amount_untaxed')
+        amount_total_untaxed_gbp = po_ids.filtered(lambda m: m.currency_id == gbp).mapped('amount_untaxed')
+        data['total_eur'] = formatLang(self.env, sum(amount_total_untaxed_eur), currency_obj=eur) if amount_total_untaxed_eur else '0,00 €'
+        data['total_gbp'] = formatLang(self.env, sum(amount_total_untaxed_gbp), currency_obj=gbp) if amount_total_untaxed_gbp else '£ 0,00'
+        for po in po_ids:
+            approval_entry = self.get_approval_entries(po.id, [
+                self.env.ref('choreograph_sox.group_validator_1_purchase_profile_res_groups').id,
+                self.env.ref('choreograph_sox.group_validator_2_purchase_profile_res_groups').id
+            ])
+            # log_line_id = log_line_ids.filtered(lambda l: l.log_id.res_id == po.id).sorted(
+            #     lambda item: item.create_date, reverse=True)[0]
+            data['orders'].append({
+                'provider': po.partner_id.display_name,
+                'po_number': po.name,
+                'provider_ref': po.partner_ref or '',
+                'date_order': po.date_order or '',
+                'date_planned': po.date_planned or '',
+                'subtotal': formatLang(self.env, po.amount_untaxed),
+                'creator': po.create_uid.name,
+                'validator': ', '.join(approval_entry.mapped('user_id.name')),
+                'validation_date': ', '.join([format_datetime(self.env, entry.create_date, dt_format=FORMAT_DATE_TIME) for entry in approval_entry]),
+            })
+        return data
+
     def _data_quote_po(self):
         end_date = self.end_date if self.is_period else self.start_date
         order_ids = self.env['sale.order'].search([
@@ -322,6 +361,16 @@ class AuditlogReport(models.TransientModel):
         ]
         return self.env['auditlog.log.line'].search(domain, order='id desc', limit=1)
 
+    def get_approval_entries(self, res_id, groups):
+        entries = self.env['studio.approval.entry'].search([
+            ('model', '=', 'purchase.order'),
+            ('res_id', '=', res_id),
+            ('approved', '=', True),
+            ('group_id', 'in', groups)
+        ])
+        
+        return entries
+
     def _data_purchase_closing(self):
         end_date = self.end_date if self.is_period else self.start_date
         order_ids = self.env['sale.order'].search([
@@ -333,15 +382,6 @@ class AuditlogReport(models.TransientModel):
             'orders': []
         }
 
-        def get_approval_entries(res_id, groups):
-            entries = self.env['studio.approval.entry'].search([
-                ('model', '=', 'purchase.order'),
-                ('res_id', '=', res_id),
-                ('approved', '=', True),
-                ('group_id', 'in', groups)
-            ])
-            res = entries.mapped('user_id.name')
-            return res
         eur = self.env.ref('base.EUR')
         gbp = self.env.ref('base.GBP')
         total_eur = 0
@@ -369,9 +409,9 @@ class AuditlogReport(models.TransientModel):
                     'difference_amount': formatLang(self.env, invoice.amount_untaxed - po.amount_untaxed),
                     'comment': '',
                     'po_preparer': po.create_uid.name,
-                    'po_validor': ', '.join(get_approval_entries(po.id, [
+                    'po_validor': ', '.join(self.get_approval_entries(po.id, [
                         self.env.ref('choreograph_sox.group_validator_1_purchase_profile_res_groups').id,
-                        self.env.ref('choreograph_sox.group_validator_2_purchase_profile_res_groups').id])),
+                        self.env.ref('choreograph_sox.group_validator_2_purchase_profile_res_groups').id]).mapped('user_id.name')),
                     'net_marging': formatLang(self.env, order_id.amount_untaxed - invoice.amount_untaxed)
                 }),
             })
