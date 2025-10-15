@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="purchase_retribution_template">
+        <t t-call="choreograph_auditlog.layout">
+            <div class="page">
+                <style>
+                    th{
+                        text-align: left;
+                    }
+                </style>
+                <t t-call="choreograph_auditlog.header_audit_report" />
+                <div class="row">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th class="fw-bold">Provider</th>
+                                <th class="fw-bold">PO number</th>
+                                <th class="fw-bold">Provider ref</th>
+                                <th class="fw-bold">Date order</th>
+                                <th class="fw-bold">Date planned</th>
+                                <th class="fw-bold">Subtotal</th>
+                                <th class="fw-bold">Creator</th>
+                                <th class="fw-bold">Validator</th>
+                                <th class="fw-bold">Validation date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="orders" t-as="po">
+                                <tr>
+                                    <td t-out="po.get('provider')"/>
+                                    <td t-out="po.get('po_number')" />
+                                    <td t-out="po.get('provider_ref')"/>
+                                    <td t-out="po.get('date_order')"/>
+                                    <td t-out="po.get('date_planned')"/>
+                                    <td class="text-end" t-out="po.get('subtotal')"/>
+                                    <td t-out="po.get('creator')"/>
+                                    <td t-out="po.get('validator')"/>
+                                    <td t-out="po.get('validation_date')"/>
+                                </tr>
+                            </t>
+                            <tr>
+                                <td colspan="5" class="text-end fw-bold">Total Untaxed in euros</td>
+                                <td class="fw-bold" t-out="total_eur"/>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="text-end fw-bold">Total Untaxed in GBP</td>
+                                <td class="fw-bold" t-out="total_gbp"/>
+                                <td colspan="2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="report_purchase_retribution">
+        <t t-set="full_width" t-value="True" />
+        <t t-set="data_report_landscape" t-value="True" />
+        <t t-call="web.html_container">
+            <t t-call="choreograph_auditlog.purchase_retribution_template" />
+        </t>
+    </template>
+</odoo>
