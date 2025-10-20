@@ -19,6 +19,7 @@ class RetributionBase(models.Model):
     product_template_id = fields.Many2one('product.template', 'Product')
     code = fields.Char('Code')
     automatic_deposit_date = fields.Boolean()
+    active = fields.Boolean(default=True)
 
     @api.onchange('quota_base_ids', 'is_multi_base')
     def _onchange_quota_base(self):
