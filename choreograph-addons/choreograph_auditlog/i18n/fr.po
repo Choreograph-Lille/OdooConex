@@ -16,6 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid ""
 "<span class=\"text-nowrap\">Commercial Team</span><br/> <span class=\"text-"
@@ -164,6 +165,7 @@ msgid "Banks"
 msgstr "Banques"
 
 #. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Cartesis code"
 msgstr "Code Cartesis"
@@ -175,6 +177,7 @@ msgstr "Modification des rôles SOX"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_closing_template
 msgid "Client"
@@ -191,9 +194,14 @@ msgid "Commercial"
 msgstr ""
 
 #. module: choreograph_auditlog
+#: model:ir.actions.server,name:choreograph_auditlog.compute_mymodel_invoice_ir_actions_server
+#: model:ir.cron,cron_name:choreograph_auditlog.compute_mymodel_invoice
+msgid "Compute Mymodel invoice"
+msgstr ""
+
+#. module: choreograph_auditlog
 #: model:ir.actions.server,name:choreograph_auditlog.compute_purchase_redistribution_ir_actions_server
 #: model:ir.actions.server,name:choreograph_auditlog.compute_purchase_retribution_ir_actions_server
-#: model:ir.cron,cron_name:choreograph_auditlog.compute_purchase_redistribution
 #: model:ir.cron,cron_name:choreograph_auditlog.compute_purchase_retribution
 msgid "Compute retribution cost"
 msgstr ""
@@ -261,6 +269,11 @@ msgstr "Créateur"
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
 msgid "Credit note number"
 msgstr "N° de l'avoir"
+
+#. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
+msgid "Cumulative subtotal untaxed"
+msgstr "Sous-total HT cumulé"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
@@ -378,6 +391,7 @@ msgstr ""
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Invoice date"
 msgstr "Date de la facture"
@@ -398,6 +412,11 @@ msgid "Invoice note number"
 msgstr "N° de la facture"
 
 #. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
+msgid "Invoice number"
+msgstr "N° de la facture"
+
+#. module: choreograph_auditlog
 #: model:ir.model.fields,field_description:choreograph_auditlog.field_ir_actions_report__is_auditreport
 msgid "Is Auditreport"
 msgstr ""
@@ -408,9 +427,21 @@ msgid "Is Contact Extracts"
 msgstr "Est une extraction de contact"
 
 #. module: choreograph_auditlog
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_account_bank_statement_line__is_mymodel
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_account_move__is_mymodel
+#: model:ir.model.fields,field_description:choreograph_auditlog.field_account_payment__is_mymodel
+msgid "Is Mymodel"
+msgstr "Est Mymodel"
+
+#. module: choreograph_auditlog
 #: model:ir.model.fields,field_description:choreograph_auditlog.field_purchase_order__is_retribution_order
 msgid "Is Retribution Order"
 msgstr "Est un BC Retribution"
+
+#. module: choreograph_auditlog
+#: model:ir.model,name:choreograph_auditlog.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
 
 #. module: choreograph_auditlog
 #: model:ir.model.fields,field_description:choreograph_auditlog.field_auditlog_report_wizard____last_update
@@ -490,6 +521,7 @@ msgid "Old value"
 msgstr "Ancienne valeur"
 
 #. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Order Number"
 msgstr "N° du BC"
@@ -655,6 +687,7 @@ msgstr "Sous-total HT"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Subtotal Untaxed"
 msgstr "Sous-total HT"
@@ -687,18 +720,21 @@ msgid "The start date cannot be greater than the end date"
 msgstr "La date de début ne peut pas être supérieure à la date de fin"
 
 #. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Third client code"
 msgstr "Code tiers"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Total Untaxed EUR"
 msgstr "Sous-total HT en euros"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Total Untaxed GBP"
 msgstr "Sous-total HT en GBP"

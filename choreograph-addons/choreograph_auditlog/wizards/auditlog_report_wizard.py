@@ -52,6 +52,7 @@ class AuditlogReport(models.TransientModel):
             self.env.ref('choreograph_auditlog.action_report_purchase_closing'): self._data_purchase_closing,
             self.env.ref('choreograph_auditlog.action_report_out_invoice_accounting'): self._data_out_invoice_accounting,
             self.env.ref('choreograph_auditlog.action_report_purchase_retribution'): self._data_purchase_retribution,
+            self.env.ref('choreograph_auditlog.action_report_mymodel_invoice'): self._data_mymodel_invoice,
         }
         report_data_func = report_data_map.get(self.ir_action_report_id)
         if not report_data_func:
@@ -292,12 +293,70 @@ class AuditlogReport(models.TransientModel):
                 'third_party_role_client_code': move_id.partner_id.third_party_role_client_code
             })
         return data
+    
+    def _data_mymodel_invoice(self):
+        def get_partner_cumulative_subtotal(partner_id = None, currency = None):
+            domain  = [
+                ('state', '=', 'posted'),
+                ('move_type', '=', 'out_invoice'),
+                ('is_mymodel', '=', True),
+            ]
+            if partner_id:
+                domain.append(('partner_id', '=', partner_id.id))
+            move_ids = self.env['account.move'].search(domain)
+            if not move_ids:
+                if not currency:
+                    return '0,00'
+                return '0,00 €' if currency == self.env.ref('base.EUR') else '£ 0,00'
+            else:
+                if not currency:
+                    return formatLang(self.env, sum(move_ids.mapped('amount_untaxed')))
+                return formatLang(self.env, sum(move_ids.filtered(lambda m: m.currency_id == currency).mapped('amount_untaxed')), currency_obj=currency)
+                
+        end_date = self.end_date if self.is_period else self.start_date
+
+        move_ids = self.env['account.move'].search([
+            ('state', '=', 'posted'),
+            ('move_type', '=', 'out_invoice'),
+            ('is_mymodel', '=', True),
+            ('create_date', '>=', self.start_date),
+            ('create_date', '<=', end_date)
+        ])
+        data = {
+            'accounts': [], 
+            'partners': {}
+        }
+        
+        eur = self.env.ref('base.EUR')
+        gbp = self.env.ref('base.GBP')
+        amount_total_untaxed_eur = move_ids.filtered(lambda m: m.currency_id == eur).mapped('amount_untaxed')
+        amount_total_untaxed_gbp = move_ids.filtered(lambda m: m.currency_id == gbp).mapped('amount_untaxed')
+        data['total_eur'] = formatLang(self.env, sum(amount_total_untaxed_eur), currency_obj=eur) if amount_total_untaxed_eur else '0,00 €'
+        data['total_gbp'] = formatLang(self.env, sum(amount_total_untaxed_gbp), currency_obj=gbp) if amount_total_untaxed_gbp else '£ 0,00'
+        data['cumulative_total_eur'] = get_partner_cumulative_subtotal(currency=eur)
+        data['cumulative_total_gbp'] = get_partner_cumulative_subtotal(currency=gbp)
+        for move in move_ids:
+            data['accounts'].append({
+                'partner_id': move.partner_id.id,
+                'client': move.partner_id.display_name,
+                'invoice_date': format_date(self.env, move.invoice_date, FORMAT_DATE),
+                'invoice_number': move.name,
+                'order_number': move.sale_order_id.name if move.sale_order_id else ' ',
+                'cartesis_code': move.partner_id.cartesis_code or ' ',
+                'third_party_role_client_code': move.partner_id.third_party_role_client_code or ' ',
+                'commercial_team': move.team_id.name if move.team_id else ' ',
+                'subtotal': formatLang(self.env, move.amount_untaxed),
+            })
+            if move.partner_id.id not in data['partners']:
+                data['partners'][move.partner_id.id] = get_partner_cumulative_subtotal(move.partner_id)
+        return data
+                        
 
     def _data_purchase_retribution(self):
         end_date = self.end_date if self.is_period else self.start_date
         
         po_ids = self.env['purchase.order'].search([
-            # ('state', '=', 'purchase'),
+            ('state', '=', 'purchase'),
             ('is_retribution_order', '=', True),
             ('create_date', '>=', self.start_date),
             ('create_date', '<=', end_date)
