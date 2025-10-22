@@ -9,7 +9,8 @@
                     <table class="table table-borderless">
                         <thead>
                             <tr>
-                                <td class="fw-bold">Client</td>
+                                <td t-if="type == 'out_refund'" class="fw-bold">Client</td>
+                                <td t-else="" class="fw-bold">Provider</td>
                                 <td class="fw-bold">Invoice date</td>
                                 <td class="fw-bold">Credit note number</td>
                                 <td class="fw-bold">Commercial</td>
