@@ -369,7 +369,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Invoice date"
-msgstr "Date de facture"
+msgstr "Date de la facture"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
@@ -655,7 +655,7 @@ msgstr "Sous-total HT"
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Subtotal Untaxed"
-msgstr "Sous-total HT"
+msgstr "Sous-total en HT"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
