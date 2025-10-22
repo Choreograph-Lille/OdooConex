@@ -276,11 +276,6 @@ msgid "Cumulative subtotal untaxed"
 msgstr "Sous-total HT cumulé"
 
 #. module: choreograph_auditlog
-#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
-msgid "Customer Name"
-msgstr "Nom du client"
-
-#. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_extracts_from_customers
 msgid "Customers"
 msgstr "Clients"
@@ -557,6 +552,7 @@ msgid "Product Variant"
 msgstr "Variante de produit"
 
 #. module: choreograph_auditlog
+#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.accounting_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_retribution_template
 msgid "Provider"
 msgstr "Fournisseur"
@@ -681,11 +677,6 @@ msgstr "Sous-total HT"
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Subtotal Untaxed"
 msgstr "Sous-total en HT"
-
-#. module: choreograph_auditlog
-#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
-msgid "Supplier Name"
-msgstr "Nom du fournisseur"
 
 #. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_res_partner_rib
