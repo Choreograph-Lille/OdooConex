@@ -292,6 +292,7 @@ class AuditlogReport(models.TransientModel):
                 'cartesis_code': move_id.partner_id.cartesis_code,
                 'third_party_role_client_code': move_id.partner_id.third_party_role_client_code
             })
+        data['type'] = type
         return data
     
     def _data_mymodel_invoice(self):
