@@ -407,16 +407,6 @@ msgid "Invoice number"
 msgstr "N° de la facture"
 
 #. module: choreograph_auditlog
-#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
-msgid "Invoice note number"
-msgstr "N° de la facture"
-
-#. module: choreograph_auditlog
-#: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
-msgid "Invoice number"
-msgstr "N° de la facture"
-
-#. module: choreograph_auditlog
 #: model:ir.model.fields,field_description:choreograph_auditlog.field_ir_actions_report__is_auditreport
 msgid "Is Auditreport"
 msgstr ""
@@ -690,7 +680,7 @@ msgstr "Sous-total HT"
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.mymodel_invoice_template
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.out_invoice_accounting_template
 msgid "Subtotal Untaxed"
-msgstr "Sous-total HT"
+msgstr "Sous-total en HT"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.auditlog_log_template
