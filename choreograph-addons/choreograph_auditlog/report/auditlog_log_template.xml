@@ -11,7 +11,7 @@
                             <tr>
                                 <td t-if="not contact_type" class="fw-bold">Object</td>
                                 <td t-if="contact_type and contact_type == 'supplier_rank'" class="fw-bold">Supplier Name</td>
-                                <td t-if="contact_type and contact_type == 'customer_rank'" class="fw-bold">Customer Name</td>
+                                <td t-elif="contact_type and contact_type == 'customer_rank'" class="fw-bold">Customer Name</td>
                                 <td t-else="" class="fw-bold">Name</td>
                                 <td class="fw-bold">Field</td>
                                 <td class="fw-bold">Old value</td>
