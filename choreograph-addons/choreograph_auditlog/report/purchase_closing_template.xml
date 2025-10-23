@@ -75,7 +75,7 @@
                                                         <span t-out="invoice.get('invoice_date') or ''"/>
                                                     </p>
                                                     <p>
-                                                        <strong>Amount TTC :</strong>
+                                                        <strong>Amount untaxes :</strong>
                                                         <span t-out="invoice.get('amount') or ''"/>
                                                     </p>
                                                     <p>
@@ -115,6 +115,16 @@
                                     </tr>
                                 </t>
                             </t>
+                            <tr>
+                                <td colspan="4" class="text-end fw-bold">Total Untaxed Purchase EUR</td>
+                                <td class="fw-bold" t-out="total_eur"/>
+                                <td colspan="2"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="text-end fw-bold">Total Untaxed Purchase GBP</td>
+                                <td class="fw-bold" t-out="total_gbp"/>
+                                <td colspan="2"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
