@@ -69,6 +69,7 @@ class ProjectTask(models.Model):
     deposit_date_1 = fields.Date(compute="_compute_deposite_date", inverse = "_inverse_deposite_date", store = True)
     deposit_date_2 = fields.Date()
     deposit_date_3 = fields.Date()
+    analysis_end_date = fields.Date()
 
     is_info_validated = fields.Boolean('Infos Validated', related='sale_order_id.is_info_validated')
     po_livedata_number = fields.Char('PO Livedata Number')
