@@ -406,6 +406,10 @@
                                 attrs="{'invisible': [('task_number', 'not in', ['95'])]}" />
                             <field name="deposit_date_3"
                                 attrs="{'invisible': [('task_number', 'not in', ['95'])]}" />
+                            <field name="analysis_end_date"
+                                attrs="{'invisible': [('task_number', 'not in', ['95'])]}" 
+                                readonly="1"
+                            />
                             <field name="note"
                                 attrs="{'invisible': [('task_number', 'not in', ['5', '10', '15'])]}" />
                         </group>

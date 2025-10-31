@@ -351,6 +351,11 @@ msgid "Add a selection"
 msgstr "Ajouter Sélection"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__analysis_end_date
+msgid "Analysis End Date"
+msgstr "Date de fin d'analyse"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_provider_delivery__message_attachment_count
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__message_attachment_count
 msgid "Attachment Count"
