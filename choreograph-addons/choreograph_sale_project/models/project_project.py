@@ -21,6 +21,18 @@ class ProjectProject(models.Model):
     sale_order_id = fields.Many2one(readonly=False, store=True)
     catalogue_ids = fields.Many2many(related='sale_order_id.catalogue_ids')
 
+    needs_ids = fields.One2many('methodology.needs', 'project_id', related='sale_order_id.needs_ids', store=True, tracking=True)
+    survey_exchange = fields.Text(related='sale_order_id.survey_exchange', store=True, tracking=True)
+    methodology_ids = fields.One2many('methodology.methodology', 'project_id', related='sale_order_id.methodology_ids', store=True, tracking=True)
+    is_repartition_mt_1 = fields.Boolean(related='sale_order_id.is_repartition_mt_1')
+    is_random = fields.Boolean(related='sale_order_id.is_random', store=True, tracking=True)
+    is_prioritization = fields.Boolean(related='sale_order_id.is_prioritization', store=True, tracking=True)
+    prioritization_textarea = fields.Text(related='sale_order_id.prioritization_textarea', store=True, tracking=True)
+    is_random_base = fields.Boolean(related='sale_order_id.is_random_base', store=True, tracking=True)
+    is_prioritization_base = fields.Boolean(related='sale_order_id.is_prioritization_base', store=True, tracking=True)
+    prioritization_textarea_base = fields.Text(related='sale_order_id.prioritization_textarea_base', store=True, tracking=True)
+    results = fields.Text(related='sale_order_id.results', store=True, tracking=True)
+
     @api.depends("sale_order_id", "sale_order_id.potential_return_date", "sale_order_id.study_delivery_date",
                  "sale_order_id.commitment_date", "sale_order_id.potential_return")
     def compute_date_from_so(self):
