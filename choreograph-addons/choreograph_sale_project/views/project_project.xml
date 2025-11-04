@@ -68,5 +68,26 @@
             </field>
          </field>
      </record>
+     <record id="edit_project_view_inherit" model="ir.ui.view">
+        <field name="name">project.project.view.form.inherit</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <xpath expr="." position="inside">
+                <field name="needs_ids" invisible="1"/>
+                <field name="survey_exchange" invisible="1"/>
+                <field name="methodology_ids" invisible="1"/>
+                <field name="is_repartition_mt_1" invisible="1"/>
+                <field name="is_random" invisible="1"/>
+                <field name="is_prioritization" invisible="1"/>
+                <field name="prioritization_textarea" invisible="1"/>
+                <field name="is_random_base" invisible="1"/>
+                <field name="is_prioritization_base" invisible="1"/>
+                <field name="prioritization_textarea_base" invisible="1"/>
+                <field name="results" invisible="1"/>
+
+            </xpath>
+        </field>
+     </record>
 
 </odoo>

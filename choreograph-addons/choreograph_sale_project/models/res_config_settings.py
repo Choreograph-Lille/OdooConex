@@ -7,6 +7,6 @@ class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
     survey_exchange_char_limit = fields.Integer(
-        config_parameter="survey_exchange.char.limit",
+        config_parameter="choreograph_sale_project.survey_exchange_char_limit",
         default=100
     )

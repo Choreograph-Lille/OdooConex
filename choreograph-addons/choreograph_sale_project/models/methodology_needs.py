@@ -5,16 +5,18 @@ from odoo import api, fields, models
 
 class NeedsBase(models.AbstractModel):
     _name = "needs.base"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "needs"
 
-    name = fields.Char('Name')
-    need_comment = fields.Text('Comment')
+    name = fields.Char('Name', tracking=True)
+    need_comment = fields.Text('Comment', tracking=True)
     need_type = fields.Selection([
             ('email', 'Email'),
             ('sms', 'SMS'),
             ('phone', 'Phone'),
         ],
-        string='Channel type'
+        string='Channel type',
+        tracking=True
     )
     is_display_comment = fields.Boolean('Display Comment')
 
@@ -28,10 +30,11 @@ class NeedsNeeds(models.Model):
     _name = "methodology.needs"
     _inherit = "needs.base"
     _description = "needs"
-
-    order_id = fields.Many2one('sale.order', 'Order')
-    needs_id = fields.Many2one('needs.needs', 'Name')
     
+    order_id = fields.Many2one('sale.order', 'Order', tracking=True)
+    project_id = fields.Many2one('project.project', 'Project', tracking=True)
+    needs_id = fields.Many2one('needs.needs', 'Name', tracking=True)
+
     @api.onchange('order_id.needs_id', 'needs_id')
     def _onchange_needs_id(self):
         self.name = self.needs_id.name
