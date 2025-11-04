@@ -71,21 +71,31 @@ class SaleOrder(models.Model):
     presta_provider_delivery_partner_email = fields.Char(string='Presta Info Partner Delivery Address', compute='compute_delivery_info_data')
 
     needs_ids = fields.One2many('methodology.needs', 'order_id', 'Needs')
-    survey_exchange = fields.Text(string='Survey Exchange', tracking=True)
+    survey_exchange = fields.Text(string='Survey Exchange')
     methodology_ids = fields.One2many('methodology.methodology', 'order_id', 'Methodology')
-    is_repartition_mt_1 = fields.Boolean(compute='compute_is_repartition_mt_1', store=True)
-    is_random = fields.Boolean('Is Random', tracking=True)
-    is_prioritization = fields.Boolean('Is Prioritization', tracking=True)
-    prioritization_textarea = fields.Text(string='Prioritization Textarea', tracking=True)
-    is_random_base = fields.Boolean('Is Random', tracking=True)
-    is_prioritization_base = fields.Boolean('Is Prioritization', tracking=True)
-    prioritization_textarea_base = fields.Text(string='Prioritization Textarea', tracking=True)
-    results = fields.Text(string='Results', tracking=True)
+    is_repartition_mt_1 = fields.Boolean(compute='compute_is_repartition_mt_1')
+    is_random = fields.Boolean('Is Random')
+    is_prioritization = fields.Boolean('Is Prioritization')
+    prioritization_textarea = fields.Text(string='Prioritization Textarea')
+    is_random_base = fields.Boolean('Is Random')
+    is_prioritization_base = fields.Boolean('Is Prioritization')
+    prioritization_textarea_base = fields.Text(string='Prioritization Textarea')
+    results = fields.Text(string='Results')
+    score_count = fields.Integer(string='Score Count', compute = '_compute_score_selection_count', store=True)
+    selection_count = fields.Integer(string='Selection Count', compute = '_compute_score_selection_count', store=True)
+    
+
+    @api.depends('methodology_ids')
+    def _compute_score_selection_count(self):
+        for order_id in self:
+            list_type = order_id.methodology_ids.mapped('type')
+            order_id.score_count = list_type.count('score')
+            order_id.selection_count = list_type.count('selection')
 
     @api.constrains('survey_exchange')
     def _check_survey_exchange(self):
         char_limit = int(self.env['ir.config_parameter'].sudo().get_param(
-            'survey_exchange.char.limit'))
+            'choreograph_sale_project.survey_exchange_char_limit'))
         for order_id in self:
             if order_id.survey_exchange:
                 survey_char_len = len(order_id.survey_exchange)

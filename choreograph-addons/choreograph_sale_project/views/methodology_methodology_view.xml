@@ -9,6 +9,7 @@
           <field name="name" attrs="{'invisible': [('display_type', '!=', 'line_section')]}"/>
           <group attrs="{'invisible': [('display_type', '=', 'line_section')]}">
             <group>
+              <field name="type" required="1"/>
               <field name="methodology_name_id"
                      attrs="{
                      'invisible': [('type', '=', 'selection')],
