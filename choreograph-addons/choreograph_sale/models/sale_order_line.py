@@ -20,7 +20,7 @@ class SaleOrderLine(models.Model):
                 price_unit = rec.price_unit - (rec.price_unit * rec.discount) / 100
                 rec.retribution_cost = rec.product_uom_qty * price_unit * rec.product_id.concerned_base.retribution_rate
                 if rec.product_id.concerned_base.is_multi_base:
-                    is_postal_addr = rec.product_template_id == rec.product_id.concerned_base.product_template_id
+                    is_postal_addr = rec.product_template_id in rec.product_id.concerned_base.product_tmpl_ids
                     rate = rec.product_id.concerned_base.postal_address if is_postal_addr else rec.product_id.concerned_base.postal_variable
                     rec.retribution_cost *= rate
             else:
