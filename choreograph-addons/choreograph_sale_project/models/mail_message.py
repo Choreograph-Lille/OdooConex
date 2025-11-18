@@ -25,14 +25,16 @@ class MailMessage(models.Model):
     @api.model_create_multi
     def create(self, values_list):
         res = super().create(values_list)
-        methodology_model_name = 'methodology.methodology'
-        if all(model_name == methodology_model_name for model_name in set(res.mapped('model'))) and not self._context.get('is_copy', False):
-            methodology_id = self.env[methodology_model_name].browse(res.mapped('res_id')[0])
-            for message_id in res:
+        model_list = ['methodology.methodology', 'methodology.needs']
+        for message_id in res:
+            if message_id.model in model_list and not self._context.get('is_copy', False):
+                res_id = self.env[message_id.model].browse(message_id.res_id)
+                project_id = res_id.project_id or res_id.order_id.project_id
                 message_id.with_context(is_copy=True).copy({
-                    'model': methodology_id.order_id._name,
-                    'res_id': methodology_id.order_id.id,
+                    'model': project_id._name,
+                    'res_id': project_id.id,
                     'tracking_value_ids': [(6, 0, message_id.tracking_value_ids.ids)],
                 })
+        
         return res
 

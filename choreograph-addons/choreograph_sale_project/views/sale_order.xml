@@ -62,9 +62,9 @@
                         context="{'default_partner_id': partner_id}" />
 
                     <label for="methodology_ids" />
-                    <field name="methodology_ids" context="{'default_order_id': active_id}" widget="section_and_note_one2many">
+                    <field name="methodology_ids" context="{'default_order_id': active_id, 'default_type': 'score'}">
                         <tree>
-                            <control>
+                            <!-- <control>
                                 <create name="add_section_control"
                                         string="Add a score"
                                         context="{
@@ -86,7 +86,8 @@
                                         'form_view_ref': 'choreograph_sale_project.view_methodology_methodology_form',
                                         }"
                                 />
-                            </control>
+                            </control> -->
+                            <field name="sequence" widget="handle" />
                             <field name="name" widget="section_and_note_text"/>
                             <field name="methodology_name_id"/>
                             <field name="target_id"/>
@@ -139,7 +140,7 @@
                             </control>
                             <field name="needs_id"/>
                             <field name="need_comment" attrs="{'readonly': [('is_display_comment', '=', False)]}"/>
-                            <field name="need_type" attrs="{'readonly': [('is_display_comment', '=', True)]}"/>
+                            <field name="need_type" attrs="{'readonly': [('is_display_comment', '=', True)]}" invisible="True"/>
                             <field name="is_display_comment" invisible="True"/>
                         </tree>
                     </field>

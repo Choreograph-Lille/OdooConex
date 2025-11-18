@@ -71,39 +71,16 @@ class MethodologyMethodology(models.Model):
     _description = "Methodology"
     _translate = True
 
-    @api.model
-    def default_get(self, fields):
-        res = super(MethodologyMethodology, self).default_get(fields)
-        order_id = self._context.get('default_order_id') or self._context.get('params', {}).get('id', False)
-        if order_id:
-            res['order_id'] = order_id
-            section_type = res.get('type', False)
-            last_section = self.get_sections(order_id)
-            section_owner = last_section[0].name if last_section else False
-            display_type = res.get('display_type', False)
-            if section_type and display_type:
-                name = section_type + ' ' + str(self.check_existing_section(section_type, order_id) + 1)
-                res['name'] = name.upper()
-            if section_owner:
-                res['section_owner'] = section_owner
-                if not display_type:
-                    type = section_owner.lower().split(' ')[0]
-                    res['name'] = False
-                    if type == 'score':
-                        target_recence = 'choreograph_sale_project.target_0_12'
-                    else:
-                        target_recence = 'choreograph_sale_project.selection_default'
-                    res['target_recence_id'] = self.env.ref(target_recence)
-        return res
-
-    name = fields.Char('Name', readonly=True, tracking=True)
+    name = fields.Char('Name', tracking=True)
     type = fields.Selection(TYPE_SELECTION, 'Type', tracking=True)
     methodology_name_id = fields.Many2one('methodology.name', 'Methodology name', tracking=True)
     target_id = fields.Many2one('methodology.score.target', 'Target', tracking=True)
     target_textarea_show = fields.Boolean(string='Display textarea ?', tracking=True)
     target_textarea = fields.Text('Textarea', tracking=True)
     order_id = fields.Many2one('sale.order', 'Order', tracking=True)
+    project_id = fields.Many2one('project.project', 'Project', tracking=True)
     section_owner = fields.Char('Section Owner')
+    sequence = fields.Integer('Sequence')
     display_type = fields.Selection(
         selection=[
             ('line_section', "Section"),
@@ -120,25 +97,21 @@ class MethodologyMethodology(models.Model):
     customer_filter_textarea_show = fields.Boolean(related='customer_filter_id.display_textarea', tracking=True)
     customer_filter_textarea = fields.Text('Textarea', tracking=True)
 
+
     @api.model_create_multi
     def create(self, vals_list):
-        sequence = {
-            'score': 0,
-            'selection': 0,
-        }
-        order_id = vals_list[0].get('order_id')
-        last_section = self.get_sections(order_id)
-        section_owner = last_section[0].name if last_section else ''
+        order_id = self.env['sale.order'].browse(vals_list[0].get('order_id')) 
+        score_count = order_id.score_count
+        selection_count = order_id.selection_count
         for vals in vals_list:
             section_type = vals.get('type', '')
-            if section_type in ('score', 'selection') and vals.get('display_type', False):
-                sequence.update({section_type: self.check_existing_section(section_type, order_id) + 1})
-                section_owner = section_type + ' ' + str(sequence.get(section_type))
-                vals.update({ 'name': section_owner.upper() })
-            vals.update({
-                'section_owner': section_owner,
-                'type': section_owner.lower().split(' ')[0],
-            })
+            if section_type in ('score', 'selection'):
+                if section_type == 'score':
+                    score_count += 1
+                else:
+                    selection_count += 1
+                name = section_type + ' ' + str(score_count) if section_type == 'score' else section_type + ' ' + str(selection_count)
+                vals.update({ 'name': name.upper() })
 
         return super(MethodologyMethodology, self).create(vals_list)
 
@@ -176,4 +149,36 @@ class MethodologyMethodology(models.Model):
             if not self._context.get('default_display_type', False):
                 self.type = section_type
             return {'domain': {'target_recence_id': [('type', '=', section_type)]}}
+    
+    def _reset_all_value(self):
+        self.target_textarea = False
+        self.recence_textarea = False
+        self.filter_textarea = False
+        self.customer_filter_textarea = False
+    
 
+    @api.onchange('type')
+    def _onchange_type(self):
+        if self.type == 'score':
+            self.target_recence_id = self.env.ref('choreograph_sale_project.target_0_12', raise_if_not_found=False).id
+            self.name = "SCORE %s" % (str(len(self.order_id.methodology_ids.filtered(lambda m: m.type == 'score'))))
+        else:
+            self.target_recence_id = self.env.ref('choreograph_sale_project.selection_default', raise_if_not_found=False).id
+            self.name = "SELECTION %s" % (str(len(self.order_id.methodology_ids.filtered(lambda m: m.type == 'selection'))))
+        
+    
+    @api.onchange('target_id')
+    def _reset_target_textarea(self):
+        self.target_textarea = False
+
+    @api.onchange('target_recence_id')
+    def _reset_target_recence(self):
+        self.recence_textarea = False
+
+    @api.onchange('target_filter_id')
+    def _reset_filter_textarea(self):
+        self.filter_textarea = False
+
+    @api.onchange('customer_filter_id')
+    def _reset_customer_filter_textarea(self):
+        self.customer_filter_textarea = False
