@@ -25,7 +25,9 @@
         # views
         'views/res_partner_views.xml',
         'views/account_move_views.xml',
+        'views/res_company_views.xml',
         # report
+        'report/layout.xml',
         'report/report_invoice_document.xml',
     ],
     'assets': {
