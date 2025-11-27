@@ -4,7 +4,8 @@
     <data>
         <template id="external_layout_striped_inherit" inherit_id="web.external_layout_striped">
             <xpath expr="//div[1]//div[2]" position="after">
-                <div t-if="o and o._name =='account.move' and not is_html_empty(company.new_address)" style="display:inline-block; white-space:nowrap">
+                <div t-if="o and o._name =='account.move' and not is_html_empty(company.new_address)" 
+                    style="display:inline-block; white-space:nowrap; margin-left:20px">
                     <div style="background-color: #f2aa84;padding-left: 5px; padding-right: 5px;">
                       <t t-raw="company.new_address"/>
                     </div>
