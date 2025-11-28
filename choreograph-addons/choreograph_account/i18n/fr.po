@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-03-25 09:25+0000\n"
-"PO-Revision-Date: 2025-03-25 09:25+0000\n"
+"POT-Creation-Date: 2025-11-26 14:22+0000\n"
+"PO-Revision-Date: 2025-11-26 14:22+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -328,6 +328,11 @@ msgid "Choreograph: Update confidential document"
 msgstr "Choreograph: Mise à jour des documents confidentiels"
 
 #. module: choreograph_account
+#: model:ir.model,name:choreograph_account.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: choreograph_account
 #: model:ir.model,name:choreograph_account.model_res_partner
 msgid "Contact"
 msgstr ""
@@ -375,6 +380,11 @@ msgstr "Est confidentiel"
 #: model:ir.model,name:choreograph_account.model_account_move
 msgid "Journal Entry"
 msgstr "Pièce comptable"
+
+#. module: choreograph_account
+#: model:ir.model.fields,field_description:choreograph_account.field_res_company__new_address
+msgid "New Address"
+msgstr "Nouvelle adresse"
 
 #. module: choreograph_account
 #: model:account.payment.term,name:choreograph_account.account_payment_term_30_to_50_down_payment
