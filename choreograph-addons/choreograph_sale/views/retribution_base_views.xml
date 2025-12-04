@@ -33,6 +33,7 @@
                                 <field name="code" />
                                 <field name="is_open" />
                                 <field name="is_multi_base" />
+                                <field name="active" invisible="1"/>
                             </group>
                             <group>
                                 <field name="retribution_rate"
@@ -43,11 +44,6 @@
                                     attrs="{'invisible':[('is_multi_base', '=', False)]}"
                                     force_save="1"
                                     widget="percentage" />
-                                <field name="product_template_id"
-                                    domain="[('concerned_base','=',id)]"
-                                    string="Product"
-                                    options="{'no_create': True}"
-                                    attrs="{'invisible':[('is_multi_base', '=', False)], 'required': [('is_multi_base', '=', True)]}" />
                                 <field name="postal_address"
                                     attrs="{'invisible':[('is_multi_base', '=', False)]}"
                                     string="Postal address"
@@ -59,6 +55,10 @@
                             <page name="quotas" string="Quotas"
                                 attrs="{'invisible':[('is_multi_base', '=', False)]}">
                                 <field name="quota_base_ids" />
+                            </page>
+                            <page name="product_tmpl_ids" string="Products"
+                                attrs="{'invisible':[('is_multi_base', '=', False)]}">
+                                <field name="product_tmpl_ids" widget="one2many_list"/>
                             </page>
                         </notebook>
                     </sheet>
