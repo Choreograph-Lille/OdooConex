@@ -12,6 +12,8 @@
                     script-src 'self' https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js;
                     style-src 'self' https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css;
                     img-src 'self';
+                    frame-src https://app.astrato.io;
+                    connect-src 'self' https://fctgetpowerbiembedinfoaakngm1apqerc.azurewebsites.net https://app.astrato.io;
                 "/>
 
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
