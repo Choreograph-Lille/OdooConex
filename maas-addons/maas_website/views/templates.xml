@@ -677,6 +677,13 @@
         </div>
     </template>
 
+    <!-- inherit home template -->
+    <template id="astrato_home" name="Astrato" inherit_id="maas_website.operation_home" primary="True">
+        <xpath expr="//iframe[@id='home_report_bi_src']" position="replace">
+             <iframe t-att-src="astrato_embibed_link" width="100%" height="100%" frameborder="0" id="home_report_astrato_src"/>
+        </xpath>
+    </template>
+
     <!-- Operation List -->
     <template id="operation_list" name="Operation List">
         <div class="wrap-connexion">

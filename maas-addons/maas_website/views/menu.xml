@@ -10,6 +10,9 @@
                     <a class="link-menu home-menu" href="/home">Home Page</a>
                 </li>
                 <li>
+                    <a class="link-menu home-menu" href="/home/astrato">Astrato</a>
+                </li>
+                <li>
                     <a class="link-menu campagne-menu" href="/operation/list">Campaigns</a>
                 </li>
                 <li>
