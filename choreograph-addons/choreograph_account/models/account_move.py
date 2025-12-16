@@ -18,6 +18,7 @@ class AccountMove(models.Model):
     sale_order_id = fields.Many2one("sale.order", "Sale Order", compute="_compute_sale_order_id", store=True, compute_sudo=True)
     user_id = fields.Many2one('res.users', tracking=False)
     is_confidential = fields.Boolean()
+    provider_invoice_date = fields.Date()
 
     def action_invoice_sent(self):
         result = super(AccountMove, self).action_invoice_sent()
@@ -28,6 +29,15 @@ class AccountMove(models.Model):
         })
 
         return result
+    
+    @api.onchange('provider_invoice_date')
+    def _onchange_provider_invoice_date(self):
+        self.invoice_date_due = self.provider_invoice_date
+    
+    def write(self, vals):
+        if 'provider_invoice_date' in vals:
+            vals['invoice_date_due'] = vals['provider_invoice_date']
+        return super(AccountMove, self).write(vals)
 
     @api.depends('line_ids.sale_line_ids')
     def _compute_sale_order_id(self):
