@@ -8,6 +8,8 @@
         <field name="name"/>
         <field name="type" optional="hide"/>
         <field name="target_id"/>
+        <field name="is_required_target" optional="hide"/>
+        <field name="display_textarea" optional="hide"/>
       </tree>
     </field>
   </record>
