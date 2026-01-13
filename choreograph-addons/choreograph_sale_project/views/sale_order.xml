@@ -96,11 +96,11 @@
                             <field name="recence_textarea"/>
                             <field name="target_filter_id"/>
                             <field name="filter_textarea"/>
-                            <field name="customer_filter_id"/>
-                            <field name="customer_filter_textarea"/>
+                            <field name="customer_filter"/>
                             <field name="order_id" invisible="True"/>
                             <field name="type" invisible="True"/>
                             <field name="display_type" invisible="True"/>
+                            <button name="action_show_filters" type="object" icon="fa-list" width="0.1" title="Details"/>
                         </tree>
                     </field>
                     <field name="is_repartition_mt_1" invisible="1"/>

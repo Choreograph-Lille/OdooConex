@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="methodology_methodology_filter_view_form" model="ir.ui.view">
+            <field name="name">methodology.methodology.filter.view.form</field>
+            <field name="model">methodology.methodology.filter</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <field name="customer_filter_ids" >
+                            <tree editable="bottom" create="bottom">
+                                <field name="customer_filter_id" />
+                                <field name="customer_filter_textarea_show" />
+                                <field name="customer_filter_textarea" attrs="{'readonly': [('customer_filter_textarea_show', '=', False)]}"/>
+                            </tree>
+                                
+                        </field>
+                    </sheet>
+                </form>
+                
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>

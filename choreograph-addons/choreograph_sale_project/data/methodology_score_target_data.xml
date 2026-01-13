@@ -14,7 +14,7 @@
       <field name="type">score</field>
     </record>
     <record model="methodology.score.target" id="new">
-      <field name="name">NEW</field>
+      <field name="name">NEWS</field>
       <field name="type">score</field>
     </record>
     <record model="methodology.score.target" id="new_gt_2">

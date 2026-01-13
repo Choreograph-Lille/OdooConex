@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record model="ir.ui.view" id="view_methodology_customer_filter_tree">
+    <field name="name">Methodology Score Target Tree</field>
+    <field name="model">methodology.customer.filter</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom" create="bottom">
+        <field name="name"/>
+        <field name="type" optional="hide"/>
+        <field name="display_textarea" optional="show"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="action_methodology_customer_filter" model="ir.actions.act_window">
+    <field name="name">Customer filter</field>
+    <field name="res_model">methodology.customer.filter</field>
+    <field name="view_mode">tree</field>
+    <field name="help" type="html">
+      <p class="o_view_nocontent_smiling_face">
+        No Customer filter found.
+      </p>
+    </field>
+  </record>
+
+  <menuitem id="menu_methodology_customer_filter" name="Customer filter" parent="menu_methodology" action="action_methodology_customer_filter"/>
+</odoo>
