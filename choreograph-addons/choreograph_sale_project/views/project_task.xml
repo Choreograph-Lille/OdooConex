@@ -215,8 +215,7 @@
                             <field name="recence_textarea"/>
                             <field name="target_filter_id"/>
                             <field name="filter_textarea"/>
-                            <field name="customer_filter_id"/>
-                            <field name="customer_filter_textarea"/>
+                            <field name="customer_filter"/>
                             <field name="order_id" invisible="True"/>
                             <field name="type" invisible="True"/>
                             <field name="display_type" invisible="True"/>
