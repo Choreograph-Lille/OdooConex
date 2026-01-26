@@ -29,7 +29,7 @@
               <div>
                 <field name="target_textarea"
                        attrs="{
-                       'invisible': [('target_textarea_show', '=', False)],
+                       'invisible': ['|', ('target_textarea_show', '=', False), ('type', '=', 'selection')],
                        }"
                        placeholder="Textarea for target here ..."
                        no_label="1"
