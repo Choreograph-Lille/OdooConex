@@ -105,9 +105,9 @@ class SaleOrder(models.Model):
     @api.depends('methodology_ids')
     def compute_is_repartition_mt_1(self):
         for order_id in self:
-            methodology_ids = order_id.methodology_ids.get_sections(order_id.id)
-            count_score = count_element(methodology_ids.mapped('name'), 'score')
-            count_selection = count_element(methodology_ids.mapped('name'), 'selection')
+            methodology_ids = order_id.methodology_ids
+            count_score = count_element(methodology_ids.mapped('type'), 'score')
+            count_selection = count_element(methodology_ids.mapped('type'), 'selection')
             order_id.is_repartition_mt_1 = True if count_score > 1 or count_selection > 1 else False
 
     @api.model

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-11-04 06:51+0000\n"
-"PO-Revision-Date: 2025-11-04 06:51+0000\n"
+"POT-Creation-Date: 2026-01-13 07:48+0000\n"
+"PO-Revision-Date: 2026-01-13 07:48+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -587,6 +587,8 @@ msgstr "Créer l'opération"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_customer_filter__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__create_uid
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_filter__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__create_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_score_target__create_uid
@@ -603,6 +605,8 @@ msgstr "Créer par"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__create_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_customer_filter__create_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__create_date
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__create_date
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_filter__create_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name__create_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__create_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_score_target__create_date
@@ -616,14 +620,24 @@ msgid "Created on"
 msgstr "Créer le"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__customer_filter
+msgid "Custom Filter"
+msgstr "FILTRE CLIENT"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__customer_commitment_date
 msgid "Customer Delivery Date"
 msgstr "Date de livraison client"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__customer_filter_id
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__customer_filter_id
 msgid "Customer Filter Type"
 msgstr "FILTRE CLIENT"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_filter__customer_filter_ids
+msgid "Customer Filters"
+msgstr "Filtre clients"
 
 #. module: choreograph_sale_project
 #: model:ir.actions.act_window,name:choreograph_sale_project.action_methodology_customer_filter
@@ -727,6 +741,11 @@ msgid "Desired Finished Volume"
 msgstr "Volume abouti souhaité"
 
 #. module: choreograph_sale_project
+#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2
+msgid "Details"
+msgstr "Détails"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__is_display_comment
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_needs_base__is_display_comment
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_needs_needs__is_display_comment
@@ -737,6 +756,8 @@ msgstr "Afficher la zone de texte"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_customer_filter__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__display_name
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__display_name
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_filter__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__display_name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_score_target__display_name
@@ -751,9 +772,9 @@ msgstr "Nom d'affichage"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_customer_filter__display_textarea
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__customer_filter_textarea_show
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__target_filter_textarea_show
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__target_recence_textarea_show
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__customer_filter_textarea_show
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name__display_textarea
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_score_target__display_textarea
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_selection__display_textarea
@@ -998,6 +1019,8 @@ msgstr "A une prospection email Op"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_customer_filter__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__id
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__id
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_filter__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_score_target__id
@@ -1129,6 +1152,12 @@ msgid "Is Template"
 msgstr "Es un modèle"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__is_required_target
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name__is_required_target
+msgid "Is required target ?"
+msgstr "Cible requise?"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_operation_segment__keycode
 msgid "Keycode"
 msgstr ""
@@ -1148,6 +1177,8 @@ msgstr "LIEN OPT-OUT"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_customer_filter____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology____last_update
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter____last_update
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_filter____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs____last_update
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_score_target____last_update
@@ -1164,6 +1195,8 @@ msgstr "Dernière modification le"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_customer_filter__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__write_uid
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_filter__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__write_uid
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_score_target__write_uid
@@ -1180,6 +1213,8 @@ msgstr "Dernière mise à jour par"
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_customer_filter__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__write_date
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__write_date
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_filter__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__write_date
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_score_target__write_date
@@ -1269,6 +1304,7 @@ msgstr ""
 
 #. module: choreograph_sale_project
 #: model:ir.model,name:choreograph_sale_project.model_methodology_methodology
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_filter__methodology_id
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_project__methodology_ids
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_project_task__methodology_ids
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_sale_order__methodology_ids
@@ -1281,6 +1317,29 @@ msgstr "Méthodologie"
 #: model:ir.model,name:choreograph_sale_project.model_methodology_customer_filter
 msgid "Methodology Customer Filter"
 msgstr "Méthodologie Filtre client"
+
+#. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__methodology_filter_id
+msgid "Methodology Filter"
+msgstr "Methodologie Filtre"
+
+#. module: choreograph_sale_project
+#. odoo-python
+#: code:addons/choreograph_sale_project/models/methodology_methodology.py:0
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__methodology_filter_ids
+#, python-format
+msgid "Methodology Filters"
+msgstr "Methodologies Filtres"
+
+#. module: choreograph_sale_project
+#: model:ir.model,name:choreograph_sale_project.model_methodology_methodology_custom_filter
+msgid "Methodology Methodology Custom Filter"
+msgstr "Méthodologie Filtre client"
+
+#. module: choreograph_sale_project
+#: model:ir.model,name:choreograph_sale_project.model_methodology_methodology_filter
+msgid "Methodology Methodology Filter"
+msgstr "Filtre des méthodologies"
 
 #. module: choreograph_sale_project
 #: model:ir.model,name:choreograph_sale_project.model_methodology_name
@@ -1325,7 +1384,6 @@ msgstr "Échéance de mon activité"
 
 #. module: choreograph_sale_project
 #: model:methodology.name,name:choreograph_sale_project.name_new
-#: model:methodology.score.target,name:choreograph_sale_project.new
 msgid "NEW"
 msgstr "NOUVEAU"
 
@@ -1340,6 +1398,11 @@ msgid "NEW PRODUCTS OVER A GIVEN PERIOD"
 msgstr "NOUVEAUX SUR UNE PERIODE DONNEE"
 
 #. module: choreograph_sale_project
+#: model:methodology.score.target,name:choreograph_sale_project.new
+msgid "NEWS"
+msgstr "NOUVEAUX"
+
+#. module: choreograph_sale_project
 #: model:methodology.name,name:choreograph_sale_project.new_again
 msgid "NEW_AGAIN"
 msgstr ""
@@ -1352,7 +1415,6 @@ msgstr ""
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_choreograph_project_task_type__name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_customer_filter__name
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_name__name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__name
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__needs_id
@@ -1368,7 +1430,7 @@ msgstr "Nom"
 
 #. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__name
-msgid "Name"
+msgid "Name Type"
 msgstr "Type"
 
 #. module: choreograph_sale_project
@@ -2262,17 +2324,12 @@ msgid "Template used on SO when we push the button Delivery"
 msgstr "Modèle utilisé dans les BC au clic du bouton Livrer"
 
 #. module: choreograph_sale_project
-#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__customer_filter_textarea
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__filter_textarea
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__recence_textarea
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__target_textarea
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology_custom_filter__customer_filter_textarea
 msgid "Textarea"
 msgstr "Zone de texte"
-
-#. module: choreograph_sale_project
-#: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_methodology_methodology_form
-msgid "Textarea for customer filter here ..."
-msgstr "Zone de text pour filtre client ..."
 
 #. module: choreograph_sale_project
 #: model_terms:ir.ui.view,arch_db:choreograph_sale_project.view_order_form_inherit2

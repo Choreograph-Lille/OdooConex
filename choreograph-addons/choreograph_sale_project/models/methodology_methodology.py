@@ -63,6 +63,7 @@ class MethodologyName(models.Model):
     _description = "Methodology Name"
 
     target_id = fields.Many2one('methodology.score.target', 'Target')
+    is_required_target = fields.Boolean('Is required target ?')
 
 
 class MethodologyMethodology(models.Model):
@@ -71,9 +72,10 @@ class MethodologyMethodology(models.Model):
     _description = "Methodology"
     _translate = True
 
-    name = fields.Char('Name', tracking=True)
+    name = fields.Char('Name Type', tracking=True)
     type = fields.Selection(TYPE_SELECTION, 'Type', tracking=True)
     methodology_name_id = fields.Many2one('methodology.name', 'Methodology name', tracking=True)
+    is_required_target = fields.Boolean('Is required target ?',compute='_compute_is_required_target')
     target_id = fields.Many2one('methodology.score.target', 'Target', tracking=True)
     target_textarea_show = fields.Boolean(string='Display textarea ?', tracking=True)
     target_textarea = fields.Text('Textarea', tracking=True)
@@ -93,9 +95,9 @@ class MethodologyMethodology(models.Model):
     target_filter_id = fields.Many2one('methodology.target.filter', string='Target Filter', tracking=True)
     target_filter_textarea_show = fields.Boolean(related='target_filter_id.display_textarea', tracking=True)
     filter_textarea = fields.Text('Textarea', tracking=True)
-    customer_filter_id = fields.Many2one('methodology.customer.filter', string='Customer Filter Type', tracking=True)
-    customer_filter_textarea_show = fields.Boolean(related='customer_filter_id.display_textarea', tracking=True)
-    customer_filter_textarea = fields.Text('Textarea', tracking=True)
+    customer_filter = fields.Text('Custom Filter', compute='compute_customer_filter')
+
+    methodology_filter_ids = fields.One2many('methodology.methodology.filter', 'methodology_id', string='Methodology Filters')
 
 
     @api.model_create_multi
@@ -122,6 +124,14 @@ class MethodologyMethodology(models.Model):
 
     def get_sections(self, order_id):
         return self.search([('display_type', '=', 'line_section'), ('order_id', '=', order_id)], order='id desc')
+
+    @api.depends('methodology_name_id', 'type')
+    def _compute_is_required_target(self):
+        for record in self:
+            if record.methodology_name_id:
+                record.is_required_target = record.methodology_name_id.is_required_target
+            else:
+                record.is_required_target = False
 
     @api.onchange('methodology_name_id')
     def _onchange_methodology_name_id(self):
@@ -153,9 +163,7 @@ class MethodologyMethodology(models.Model):
     def _reset_all_value(self):
         self.target_textarea = False
         self.recence_textarea = False
-        self.filter_textarea = False
-        self.customer_filter_textarea = False
-    
+        self.filter_textarea = False   
 
     @api.onchange('type')
     def _onchange_type(self):
@@ -178,7 +186,60 @@ class MethodologyMethodology(models.Model):
     @api.onchange('target_filter_id')
     def _reset_filter_textarea(self):
         self.filter_textarea = False
+    
+    @api.depends('methodology_filter_ids')
+    def compute_customer_filter(self):
+        for record in self:
+            filters = []
+            customer_filter_ids = record.methodology_filter_ids.customer_filter_ids
+            if customer_filter_ids:
+                filters = [
+                    f"{cf.customer_filter_id.name}             {cf.customer_filter_textarea or ''}" for cf in customer_filter_ids
+                ]
+            record.customer_filter = '\n'.join(filters)
+    
+    def action_show_filters(self):
+        self.ensure_one()
+
+        filter_rec = self.env['methodology.methodology.filter'].search(
+            [('methodology_id', '=', self.id)],
+            limit=1
+        )
+
+        if not filter_rec:
+            filter_rec = self.env['methodology.methodology.filter'].create({
+                'methodology_id': self.id,
+            })
+
+        return {
+            'name': _('Methodology Filters'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'methodology.methodology.filter',
+            'view_mode': 'form',
+            'view_id': self.env.ref(
+                'choreograph_sale_project.methodology_methodology_filter_view_form'
+            ).id,
+            'res_id': filter_rec.id,  
+            'target': 'new',
+        }
+
+class MethodologyMethodologyFilter(models.Model):
+    _name = "methodology.methodology.filter"
+    _description = "Methodology Methodology Filter"
+
+    methodology_id = fields.Many2one('methodology.methodology', 'Methodology')
+    customer_filter_ids = fields.One2many('methodology.methodology.custom.filter', 'methodology_filter_id', string='Customer Filters')
+
+class MethodologyMethodologyCustomFilter(models.Model):
+    _name = "methodology.methodology.custom.filter"
+    _description = "Methodology Methodology Custom Filter"
+
+    methodology_filter_id = fields.Many2one('methodology.methodology.filter', 'Methodology Filter')
+    customer_filter_id = fields.Many2one('methodology.customer.filter', string='Customer Filter Type')
+    customer_filter_textarea_show = fields.Boolean(related='customer_filter_id.display_textarea', store=True)
+    customer_filter_textarea = fields.Text('Textarea')
 
     @api.onchange('customer_filter_id')
-    def _reset_customer_filter_textarea(self):
-        self.customer_filter_textarea = False
+    def _onchange_customer_filter_id(self):
+        if self.customer_filter_id:
+            self.customer_filter_textarea = False
