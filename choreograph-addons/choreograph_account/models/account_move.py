@@ -11,6 +11,8 @@ TYPE_REVERSE_MAP = {
     'in_receipt': 'in_refund',
 }
 
+from dateutil.relativedelta import relativedelta
+
 
 class AccountMove(models.Model):
     _inherit = "account.move"
@@ -18,6 +20,7 @@ class AccountMove(models.Model):
     sale_order_id = fields.Many2one("sale.order", "Sale Order", compute="_compute_sale_order_id", store=True, compute_sudo=True)
     user_id = fields.Many2one('res.users', tracking=False)
     is_confidential = fields.Boolean()
+    provider_invoice_date = fields.Date()
 
     def action_invoice_sent(self):
         result = super(AccountMove, self).action_invoice_sent()
@@ -28,6 +31,29 @@ class AccountMove(models.Model):
         })
 
         return result
+    @api.depends('move_type', 'provider_invoice_date')
+    def _compute_needed_terms(self):
+        for invoice in self:
+            if invoice.move_type == 'in_invoice' and invoice.provider_invoice_date:
+                invoice = invoice.with_context(
+                    provider_invoice_date=invoice.provider_invoice_date
+                )
+            super(AccountMove, invoice)._compute_needed_terms()
+    
+    @api.depends('move_type', 'provider_invoice_date')
+    def _compute_invoice_date_due(self):
+        for move in self:
+            if move.move_type == 'in_invoice' and move.provider_invoice_date:
+                # If provider_invoice_date is set, use it to compute invoice_date_due
+                terms = move.needed_terms
+                if terms:
+                    move.invoice_date_due = terms and max(
+                    (k['date_maturity'] for k in terms.keys() if k),
+                    default=False,)
+                else:
+                    move.invoice_date_due = move.provider_invoice_date
+            else:
+                super(AccountMove, move)._compute_invoice_date_due()
 
     @api.depends('line_ids.sale_line_ids')
     def _compute_sale_order_id(self):
