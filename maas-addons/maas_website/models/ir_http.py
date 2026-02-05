@@ -33,7 +33,7 @@ class IrHttp(models.AbstractModel):
                 "frame-ancestors 'self'; "
                 "report-to csp-endpoint;"
                 "frame-src 'self' https://app.powerbi.com https://app.astrato.io;"
-                "connect-src 'self' https://fctgetpowerbiembedinfoaakngm1apqerc.azurewebsites.net https://app.astrato.io;"
+                "connect-src 'self' https://*.azurewebsites.net https://app.astrato.io;"
             )
             response.headers['Report-To'] = (
                 '{"group":"csp-endpoint","max_age":10886400,'
