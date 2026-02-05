@@ -33,7 +33,7 @@ class IrHttp(models.AbstractModel):
                 "frame-ancestors 'self'; "
                 "report-to csp-endpoint;"
                 "frame-src 'self' https://app.powerbi.com;"
-                "connect-src 'self' https://fctgetpowerbiembedinfoaakngm1apqerc.azurewebsites.net;"
+                "connect-src 'self' https://*.azurewebsites.net;"
             )
             response.headers['Report-To'] = (
                 '{"group":"csp-endpoint","max_age":10886400,'
