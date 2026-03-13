@@ -40,6 +40,19 @@ class OperationWebsite(http.Controller):
         unlimited = subscription.current_package_id.unlimited
         return quantity, identifiers, percent, unlimited
 
+    # @http.route('/home', auth='user', website=True, csrf=False)
+    # def home(self, **kwargs):
+    #     partner = http.request.env.user.partner_id
+    #     quantity, identifiers, percent, unlimited = self._get_consumption_data()
+    #     values = {
+    #         'partner': partner.id,
+    #         'total_qty_cumulative': quantity,
+    #         'identifiers': identifiers,
+    #         'percent': percent,
+    #         'unlimited': unlimited
+    #     }
+    #     return http.request.render('maas_website.operation_home', values, True)
+
     @http.route('/home', auth='user', website=True, csrf=False)
     def home(self, **kwargs):
         partner = http.request.env.user.partner_id
@@ -49,9 +62,18 @@ class OperationWebsite(http.Controller):
             'total_qty_cumulative': quantity,
             'identifiers': identifiers,
             'percent': percent,
-            'unlimited': unlimited
+            'unlimited': unlimited,
+            'astrato_embibed_link': self.get_astrato_link(partner)
         }
-        return http.request.render('maas_website.operation_home', values, True)
+        return http.request.render('maas_website.astrato_home', values, True)
+    
+    def get_astrato_link(self, partner):
+        if partner.parent_id:
+            partner = partner.parent_id
+            if partner.pbi_function_app_url:
+                return partner.pbi_function_app_url
+            
+        return False
 
     @http.route('/operation/list', auth='user', website=True, csrf=False)
     def index(self, **kwargs):
