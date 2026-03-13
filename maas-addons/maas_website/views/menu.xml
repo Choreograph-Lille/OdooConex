@@ -7,11 +7,11 @@
             <img class="ico-back-menu" src="/maas_website/static/src/img/ico-back.png"/>
             <ul class="list-menu">
                 <li>
-                    <a class="link-menu home-menu" href="/home">Home Page</a>
+                    <a class="link-menu home-menu" href="/home/astrato">Home Page</a>
                 </li>
-                <li>
+                <!--<li>
                     <a class="link-menu home-menu" href="/home/astrato">Astrato</a>
-                </li>
+                </li>-->
                 <li>
                     <a class="link-menu campagne-menu" href="/operation/list">Campaigns</a>
                 </li>
