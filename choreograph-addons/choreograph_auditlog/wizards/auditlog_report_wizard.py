@@ -296,62 +296,72 @@ class AuditlogReport(models.TransientModel):
         return data
     
     def _data_mymodel_invoice(self):
-        def get_partner_cumulative_subtotal(partner_id = None, currency = None):
-            domain  = [
-                ('state', '=', 'posted'),
-                ('move_type', '=', 'out_invoice'),
-                ('is_mymodel', '=', True),
-            ]
-            if partner_id:
-                domain.append(('partner_id', '=', partner_id.id))
-            move_ids = self.env['account.move'].search(domain)
-            if not move_ids:
-                if not currency:
-                    return '0,00'
-                return '0,00 €' if currency == self.env.ref('base.EUR') else '£ 0,00'
-            else:
-                if not currency:
-                    return formatLang(self.env, sum(move_ids.mapped('amount_untaxed')))
-                return formatLang(self.env, sum(move_ids.filtered(lambda m: m.currency_id == currency).mapped('amount_untaxed')), currency_obj=currency)
-                
-        end_date = self.end_date if self.is_period else self.start_date
+        end_date = self.end_date if self.is_period else fields.Date.today()
+        f_year_day = self.start_date.replace(month=1, day=1)
+        l_year_day = self.start_date.replace(month=12, day=31)
+
+        data = {
+            'accounts': [],
+            'partners': {}
+        }
 
         move_ids = self.env['account.move'].search([
             ('state', '=', 'posted'),
             ('move_type', '=', 'out_invoice'),
             ('is_mymodel', '=', True),
-            ('create_date', '>=', self.start_date),
-            ('create_date', '<=', end_date)
+            ('invoice_date', '>=', f_year_day),
+            ('invoice_date', '<=', l_year_day),
         ])
-        data = {
-            'accounts': [], 
-            'partners': {}
-        }
+        if not move_ids:
+            return data
+
+        current_move_ids = move_ids.filtered(lambda m: m.invoice_date >= self.start_date and m.invoice_date <= end_date)
+        partner_ids = current_move_ids.mapped('partner_id')
+        move_ids = move_ids.filtered(lambda m: m.partner_id.id in partner_ids.ids)
         
         eur = self.env.ref('base.EUR')
         gbp = self.env.ref('base.GBP')
-        amount_total_untaxed_eur = move_ids.filtered(lambda m: m.currency_id == eur).mapped('amount_untaxed')
-        amount_total_untaxed_gbp = move_ids.filtered(lambda m: m.currency_id == gbp).mapped('amount_untaxed')
+
+        amount_total_untaxed_eur = current_move_ids.filtered(lambda m: m.currency_id == eur).mapped('amount_untaxed')
+        amount_total_untaxed_gbp = current_move_ids.filtered(lambda m: m.currency_id == gbp).mapped('amount_untaxed')
+
         data['total_eur'] = formatLang(self.env, sum(amount_total_untaxed_eur), currency_obj=eur) if amount_total_untaxed_eur else '0,00 €'
         data['total_gbp'] = formatLang(self.env, sum(amount_total_untaxed_gbp), currency_obj=gbp) if amount_total_untaxed_gbp else '£ 0,00'
-        data['cumulative_total_eur'] = get_partner_cumulative_subtotal(currency=eur)
-        data['cumulative_total_gbp'] = get_partner_cumulative_subtotal(currency=gbp)
-        for move in move_ids:
+
+        for move in current_move_ids:
+            partner_id = move.partner_id
             data['accounts'].append({
-                'partner_id': move.partner_id.id,
+                'partner_id': partner_id.id,
                 'client': move.partner_id.display_name,
                 'invoice_date': format_date(self.env, move.invoice_date, FORMAT_DATE),
                 'invoice_number': move.name,
                 'order_number': move.sale_order_id.name if move.sale_order_id else ' ',
-                'cartesis_code': move.partner_id.cartesis_code or ' ',
-                'third_party_role_client_code': move.partner_id.third_party_role_client_code or ' ',
+                'cartesis_code': partner_id.cartesis_code or ' ',
+                'third_party_role_client_code': partner_id.third_party_role_client_code or ' ',
                 'commercial_team': move.team_id.name if move.team_id else ' ',
                 'subtotal': formatLang(self.env, move.amount_untaxed),
             })
-            if move.partner_id.id not in data['partners']:
-                data['partners'][move.partner_id.id] = get_partner_cumulative_subtotal(move.partner_id)
+            if partner_id.id not in data['partners']:
+                data['partners'][partner_id.id] = formatLang(
+                    self.env,
+                    sum(move_ids.filtered(lambda m: m.partner_id.id == partner_id.id).mapped('amount_untaxed'))
+                )
+
+        cumul_amount_eur = formatLang(
+            self.env,
+            sum(move_ids.filtered(lambda m: m.currency_id == eur).mapped(
+                'amount_untaxed')),
+            currency_obj=eur
+        )
+        cumul_amount_gbp = formatLang(
+            self.env,
+            sum(move_ids.filtered(lambda m: m.currency_id == gbp).mapped(
+                'amount_untaxed')),
+            currency_obj=gbp
+        )
+        data['cumulative_total_eur'] = cumul_amount_eur
+        data['cumulative_total_gbp'] = cumul_amount_gbp
         return data
-                        
 
     def _data_purchase_retribution(self):
         end_date = self.end_date if self.is_period else self.start_date
