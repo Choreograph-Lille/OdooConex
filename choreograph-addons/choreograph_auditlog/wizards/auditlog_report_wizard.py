@@ -249,7 +249,7 @@ class AuditlogReport(models.TransientModel):
     def _data_out_invoice_accounting(self):
         return self._data_accounting('out_invoice')
     
-    def _data_accounting(self, type=''):
+    def _data_accounting(self, type=None):
         end_date = self.end_date if self.is_period else self.start_date
         log_line_ids = self.env['auditlog.log.line'].search([
             ('field_name', '=', 'state'),
@@ -258,11 +258,13 @@ class AuditlogReport(models.TransientModel):
             ('create_date', '>=', self.start_date),
             ('create_date', '<=', end_date)
         ])
-        move_ids = self.env['account.move'].search([
+        move_domain = [
             ('state', '=', 'posted'),
-            ('move_type', '=', type),
             ('id', 'in', log_line_ids.mapped('log_id.res_id'))
-        ])
+        ]
+        if type:
+            move_domain.append(('move_type', '=', type))
+        move_ids = self.env['account.move'].search(move_domain)
         data = {
             'accounts': []
         }
@@ -276,6 +278,7 @@ class AuditlogReport(models.TransientModel):
             split_ref = move_id.ref.split(',') if move_id.ref else ''
             log_line_id = log_line_ids.filtered(lambda l: l.log_id.res_id == move_id.id).sorted(
                 lambda item: item.create_date, reverse=True)[0]
+            parent_id = move_id.partner_id.parent_id if move_id.partner_id.parent_id else move_id.partner_id
             data['accounts'].append({
                 'client': move_id.partner_id.display_name,
                 'invoice_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE),
@@ -284,13 +287,13 @@ class AuditlogReport(models.TransientModel):
                 'commercial_team': move_id.team_id.name if move_id.team_id else '',
                 'origin_document': move_id.reversed_entry_id.name if move_id.reversed_entry_id else '',
                 'order_number': move_id.sale_order_id.name if move_id.sale_order_id else '',
-                'subtotal': formatLang(self.env, move_id.amount_untaxed),
+                'subtotal_untaxed': formatLang(self.env, move_id.amount_untaxed),
                 'creator': move_id.create_uid.name,
                 'validator': log_line_id.log_id.user_id.name if log_line_id else None,
                 'validation_date': format_datetime(self.env, log_line_id.create_date, dt_format=FORMAT_DATE_TIME),
                 'comment': split_ref[1] if len(split_ref) == 2 else '',
-                'cartesis_code': move_id.partner_id.cartesis_code,
-                'third_party_role_client_code': move_id.partner_id.third_party_role_client_code
+                'cartesis_code': parent_id.cartesis_code,
+                'third_client_code': parent_id.third_party_role_client_code
             })
         data['type'] = type
         return data

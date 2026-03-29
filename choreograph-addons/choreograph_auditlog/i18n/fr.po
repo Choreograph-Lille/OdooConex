@@ -524,7 +524,7 @@ msgstr "Avoirs Vente"
 #. module: choreograph_auditlog
 #: model:ir.actions.report,name:choreograph_auditlog.action_report_out_invoice_accounting
 msgid "Out invoice accounted"
-msgstr "Factures vente comptabilisée"
+msgstr "Factures Vente comptabilisées"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_retribution_template
