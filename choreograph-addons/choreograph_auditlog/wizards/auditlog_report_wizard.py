@@ -370,7 +370,7 @@ class AuditlogReport(models.TransientModel):
         end_date = self.end_date if self.is_period else self.start_date
         
         po_ids = self.env['purchase.order'].search([
-            ('state', '=', 'purchase'),
+            ('state', 'in', ['purchase', 'done']),
             ('is_retribution_order', '=', True),
             ('create_date', '>=', self.start_date),
             ('create_date', '<=', end_date)
