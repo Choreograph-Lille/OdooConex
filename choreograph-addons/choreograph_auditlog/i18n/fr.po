@@ -733,12 +733,12 @@ msgstr "Sous-total en HT BDC Achat en £"
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_retribution_template
 msgid "Total Untaxed in GBP"
-msgstr "Sous-total en euros"
+msgstr "Sous-total en GBP"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.purchase_retribution_template
 msgid "Total Untaxed in euros"
-msgstr "Sous-total en GBP"
+msgstr "Sous-total en euros"
 
 #. module: choreograph_auditlog
 #: model_terms:ir.ui.view,arch_db:choreograph_auditlog.header_audit_report
