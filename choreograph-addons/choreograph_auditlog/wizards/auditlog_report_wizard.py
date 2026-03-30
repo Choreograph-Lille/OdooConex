@@ -462,8 +462,6 @@ class AuditlogReport(models.TransientModel):
         
         for order_id in order_ids:
             purchase_order_ids = order_id._get_purchase_orders()
-            total_eur += sum(order_ids.filtered(lambda m: m.currency_id == eur).mapped('amount_untaxed'))
-            total_gbp += sum(order_ids.filtered(lambda m: m.currency_id == gbp).mapped('amount_untaxed'))
             po_list = purchase_order_ids.mapped(lambda po: {
                 'purchase': {
                     'po_number': po.name,
@@ -488,8 +486,6 @@ class AuditlogReport(models.TransientModel):
                     'net_marging': formatLang(self.env, order_id.amount_untaxed - invoice.amount_untaxed)
                 }),
             })
-            datas['total_eur'] = formatLang(self.env, total_eur, currency_obj=eur) if total_eur > 0 else '0,00 €'
-            datas['total_gbp'] = formatLang(self.env, total_gbp, currency_obj=gbp) if total_gbp > 0 else '£ 0,00'
             datas['orders'].append({
                 'name': order_id.name,
                 'client': order_id.partner_id.display_name,
@@ -498,4 +494,9 @@ class AuditlogReport(models.TransientModel):
                 'purchase_data': po_list
 
             })
+            total_eur += sum(purchase_order_ids.filtered(lambda m: m.currency_id == eur).mapped('amount_untaxed'))
+            total_gbp += sum(purchase_order_ids.filtered(lambda m: m.currency_id == gbp).mapped('amount_untaxed'))
+        datas['total_eur'] = formatLang(self.env, total_eur, currency_obj=eur) if total_eur > 0 else '0,00 €'
+        datas['total_gbp'] = formatLang(self.env, total_gbp, currency_obj=gbp) if total_gbp > 0 else '£ 0,00'
+
         return datas
