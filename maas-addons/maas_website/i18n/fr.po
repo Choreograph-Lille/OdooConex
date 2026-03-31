@@ -423,6 +423,11 @@ msgid "All operations"
 msgstr "Toutes les opérations"
 
 #. module: maas_website
+#: model_terms:ir.ui.view,arch_db:maas_website.collapse_menu
+msgid "Astrato"
+msgstr ""
+
+#. module: maas_website
 #: model_terms:ir.ui.view,arch_db:maas_website.homepage
 msgid ""
 "At Conexance, our asset,\n"
