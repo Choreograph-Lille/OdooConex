@@ -20,7 +20,7 @@ else:
         try:
             # Force default flags if not provided
             if secure is False:
-                secure = False
+                secure = True
             if httponly is False:
                 httponly = True
             if not samesite:
@@ -43,7 +43,7 @@ else:
                                      samesite=None):
         try:
             if secure is False:
-                secure = False
+                secure = True
             if httponly is False:
                 httponly = True
             if not samesite:
