@@ -32,7 +32,7 @@ class IrHttp(models.AbstractModel):
                 "font-src 'self'; "
                 "frame-ancestors 'self'; "
                 "report-to csp-endpoint;"
-                "frame-src https://app.astrato.io;"
+                "frame-src 'self' https://app.powerbi.com https://app.astrato.io;"
                 "connect-src 'self' https://fctgetpowerbiembedinfoaakngm1apqerc.azurewebsites.net https://app.astrato.io;"
             )
             response.headers['Report-To'] = (
