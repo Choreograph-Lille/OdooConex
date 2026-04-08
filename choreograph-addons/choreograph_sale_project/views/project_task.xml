@@ -234,10 +234,10 @@
                         />
                     </div>
                     <separator/>
-                    <!--<span attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">Base repartition</span>-->
-                    <span invisible="1">Base repartition</span>
-                    <!--<div class="inline" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">-->
-                    <div class="inline" invisible="1">
+                    <span attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">Base repartition</span>
+                    <!--<span invisible="1">Base repartition</span>-->
+                    <div class="inline" attrs="{'invisible': [('task_number', 'not in', ['20', '25', '30', '35'])]}">
+                    <!--<div class="inline" invisible="1">-->
                         <label for="is_random_base"/>
                         <field name="is_random_base" style="margin-right: 5em;"/>
                         <label for="is_prioritization_base"/>
