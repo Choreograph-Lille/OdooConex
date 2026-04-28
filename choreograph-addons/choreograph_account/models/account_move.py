@@ -21,6 +21,7 @@ class AccountMove(models.Model):
     user_id = fields.Many2one('res.users', tracking=False)
     is_confidential = fields.Boolean()
     provider_invoice_date = fields.Date()
+    siren = fields.Char(compute='compute_siren', string='SIREN')
 
     def action_invoice_sent(self):
         result = super(AccountMove, self).action_invoice_sent()
@@ -110,4 +111,12 @@ class AccountMove(models.Model):
         self.is_confidential = self.partner_id.is_confidential    
         if self.partner_id.property_product_pricelist:
             self.currency_id = self.partner_id.property_product_pricelist.currency_id
+
+    @api.depends('partner_id')
+    def compute_siren(self):
+        for move_id in self:
+            if move_id.partner_id.company_type != 'company':
+                move_id.siren = move_id.partner_id.parent_id.siren
+            else:
+                move_id.siren = move_id.partner_id.siren
     

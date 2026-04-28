@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <group name="misc" position="inside">
                     <field name="siret" position="move"/>
+                    <field name="siren"/>
                 </group>
             </field>
         </record>

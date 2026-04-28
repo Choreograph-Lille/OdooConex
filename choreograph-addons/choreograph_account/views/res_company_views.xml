@@ -13,6 +13,17 @@
                 </field>
             </field>
         </record>
+
+        <record id="res_company_form_l10n_fr_inherited" model="ir.ui.view">
+            <field name="name">res.company.form.inherited</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="l10n_fr.res_company_form_l10n_fr"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='siret']" position="after">
+                    <field name="siren"/>
+                </xpath>
+            </field>
+        </record>
     
     </data>
     
