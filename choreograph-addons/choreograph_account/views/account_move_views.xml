@@ -10,6 +10,7 @@
             <field name="arch" type="xml">
                 <group name="accounting_info_group" position="inside">
                     <field name="is_confidential"/>
+                    <field name="siren"/>
                 </group>
                 <field name="invoice_vendor_bill_id" position="after">
                     <field name="sale_order_id" invisible="1"/>
