@@ -30,7 +30,7 @@
                                     <td t-out="account.get('credit_note_number')"/>
                                     <td t-out="account.get('commercial')"/>
                                     <td t-out="account.get('origin_document')"/>
-                                    <td t-out="account.get('subtotal')"/>
+                                    <td t-out="account.get('subtotal_untaxed')"/>
                                     <td t-out="account.get('creator')"/>
                                     <td t-out="account.get('validator')"/>
                                     <td t-out="account.get('validation_date')"/>
