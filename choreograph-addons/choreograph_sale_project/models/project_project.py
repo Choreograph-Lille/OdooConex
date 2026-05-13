@@ -33,6 +33,8 @@ class ProjectProject(models.Model):
     prioritization_textarea_base = fields.Text(related='sale_order_id.prioritization_textarea_base', store=True, tracking=True)
     results = fields.Text(related='sale_order_id.results', store=True, tracking=True)
 
+    is_struct_brief = fields.Boolean(string='Not for Stricture Brief')
+
     @api.depends("sale_order_id", "sale_order_id.potential_return_date", "sale_order_id.study_delivery_date",
                  "sale_order_id.commitment_date", "sale_order_id.potential_return")
     def compute_date_from_so(self):
@@ -112,7 +114,8 @@ class ProjectProject(models.Model):
             project.write({
                 "stage_id": project_stage.id,
                 "type_ids": [(6, 0, types.ids)],
-                "name": project.name.replace(" (COPY)", "")
+                "name": project.name.replace(" (COPY)", ""),
+                "is_struct_brief": project.is_struct_brief
             })
             project.task_ids.with_context(task_stage_init=True).write({
                 'stage_id': task_stage.id,

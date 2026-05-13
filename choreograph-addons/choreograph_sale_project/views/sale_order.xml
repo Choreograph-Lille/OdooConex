@@ -18,6 +18,7 @@
                                 attrs="{'invisible':[('potential_return', '=', False)]}"
                                 readonly="1" force_save="1" />
                             <field name="operation_code" invisible="1" />
+                            <field name="is_struct_brief" invisible="1" />
                             <field name="return_production_potential"
                                 attrs="{'invisible':[('operation_code', 'not in', ['ENR_EMAIL', 'ENR_SMS'])]}" />
                             <field name="return_production_potential_date"
@@ -61,32 +62,9 @@
                     <field name="operation_condition_ids"
                         context="{'default_partner_id': partner_id}" />
 
-                    <label for="methodology_ids" />
-                    <field name="methodology_ids" context="{'default_order_id': active_id, 'default_type': 'score'}">
+                    <label for="methodology_ids" attrs="{'invisible' : [('is_struct_brief', '=', True)]}"/>
+                    <field name="methodology_ids" context="{'default_order_id': active_id, 'default_type': 'score'}" attrs="{'invisible' : [('is_struct_brief', '=', True)]}">
                         <tree>
-                            <!-- <control>
-                                <create name="add_section_control"
-                                        string="Add a score"
-                                        context="{
-                                        'default_type': 'score', 'default_display_type': 'line_section',
-                                        'form_view_ref': 'choreograph_sale_project.view_methodology_methodology_form',
-                                        }"
-                                />
-                                <create name="add_section_control"
-                                        string="Add a selection"
-                                        context="{
-                                        'default_type': 'selection', 'default_display_type': 'line_section',
-                                        'form_view_ref': 'choreograph_sale_project.view_methodology_methodology_form',
-                                        }"
-                                />
-                                <create name="add_line_control"
-                                        string="Add a list"
-                                        context="{
-                                        'no_name': True,
-                                        'form_view_ref': 'choreograph_sale_project.view_methodology_methodology_form',
-                                        }"
-                                />
-                            </control> -->
                             <field name="sequence" widget="handle" />
                             <field name="name" widget="section_and_note_text"/>
                             <field name="methodology_name_id"/>
@@ -104,10 +82,10 @@
                         </tree>
                     </field>
                     <field name="is_repartition_mt_1" invisible="1"/>
-                    <div attrs="{'invisible': [('is_repartition_mt_1', '=', False)]}">
+                    <div attrs="{'invisible': ['|', ('is_repartition_mt_1', '=', False), ('is_struct_brief', '=', True)]}">
                         <span>Score/selection repartition</span>
                     </div>
-                    <div class="inline" attrs="{'invisible': [('is_repartition_mt_1', '=', False)]}">
+                    <div class="inline" attrs="{'invisible': ['|', ('is_repartition_mt_1', '=', False), ('is_struct_brief', '=', True)]}">
                         <label for="is_random"/>
                         <field name="is_random" style="margin-right: 5em;"/>
                         <label for="is_prioritization"/>
@@ -117,9 +95,9 @@
                                placeholder="Prioritization textarea ..."
                         />
                     </div>
-                    <separator/>
-                    <span>Base repartition</span>
-                    <div class="inline">
+                    <separator attrs="{'invisible' : [('is_struct_brief', '=', True)]}"/>
+                    <span attrs="{'invisible' : [('is_struct_brief', '=', True)]}">Base repartition</span>
+                    <div class="inline" attrs="{'invisible' : [('is_struct_brief', '=', True)]}">
                         <label for="is_random_base"/>
                         <field name="is_random_base" style="margin-right: 5em;"/>
                         <label for="is_prioritization_base"/>
@@ -129,11 +107,11 @@
                                placeholder="Prioritization base textarea ..."
                         />
                     </div>
-                    <separator/>
-                    <label for="results"/>
-                    <field name="results" placeholder="Textarea for results ..."/>
-                    <label for="needs_ids" />
-                    <field name="needs_ids">
+                    <separator attrs="{'invisible' : [('is_struct_brief', '=', True)]}"/>
+                    <label for="results" attrs="{'invisible' : [('is_struct_brief', '=', True)]}"/>
+                    <field name="results" placeholder="Textarea for results ..." attrs="{'invisible' : [('is_struct_brief', '=', True)]}"/>
+                    <label for="needs_ids" attrs="{'invisible' : [('is_struct_brief', '=', True)]}"/>
+                    <field name="needs_ids" attrs="{'invisible' : [('is_struct_brief', '=', True)]}">
                         <tree editable="bottom">
                             <control>
                                 <create name="add_line_control" string="Add a need"/>
@@ -144,8 +122,11 @@
                             <field name="is_display_comment" invisible="True"/>
                         </tree>
                     </field>
-                    <label for="survey_exchange" />
-                    <field name="survey_exchange"/>
+                    <label for="survey_exchange" attrs="{'invisible' : [('is_struct_brief', '=', True)]}"/>
+                    <field name="survey_exchange" attrs="{'invisible' : [('is_struct_brief', '=', True)]}"/>
+
+                    <label for="comment" attrs="{'invisible' : [('is_struct_brief', '=', False)]}"/>
+                    <field name="comment" widget="text" attrs="{'invisible' : [('is_struct_brief', '=', False)]}"/>
 
                     <group>
                         <group>
