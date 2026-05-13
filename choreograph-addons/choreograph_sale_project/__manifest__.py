@@ -27,6 +27,7 @@
         'data/methodology_target_filter_data.xml',
         'data/methodology_name_data.xml',
         'data/methodology_customer_filter_data.xml',
+        'data/ir_server_actions.xml',
         # security
         'security/ir.model.access.csv',
         # views

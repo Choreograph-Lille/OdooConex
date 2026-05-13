@@ -246,4 +246,8 @@ class ProjectProject(models.Model):
     
     def _complete_project(self):
         self.write({'stage_id': self.env.ref('choreograph_project.planning_project_stage_terminated').id})
+
+    def update_structure_brief(self):
+        for project_id in self.filtered(lambda p: not p.is_template):
+            project_id.is_struct_brief = project_id.project_template_id.is_struct_brief
         
