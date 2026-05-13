@@ -83,7 +83,8 @@ class SaleOrder(models.Model):
     results = fields.Text(string='Results')
     score_count = fields.Integer(string='Score Count', compute = '_compute_score_selection_count', store=True)
     selection_count = fields.Integer(string='Selection Count', compute = '_compute_score_selection_count', store=True)
-    
+
+    is_struct_brief = fields.Boolean(string='Stricture Brief', related='operation_type_id.is_struct_brief')
 
     @api.depends('methodology_ids')
     def _compute_score_selection_count(self):
