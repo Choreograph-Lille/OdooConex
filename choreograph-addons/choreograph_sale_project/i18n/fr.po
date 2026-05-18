@@ -1513,6 +1513,11 @@ msgid "No target found."
 msgstr "Aucune cible trouvée"
 
 #. module: choreograph_sale_project
+#: model:ir.model.fields,field_description:choreograph_sale_project.field_project_project__is_struct_brief
+msgid "Not for Stricture Brief"
+msgstr "N'est pas pour structure du brief"
+
+#. module: choreograph_sale_project
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_methodology__message_needaction_counter
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_methodology_needs__message_needaction_counter
 #: model:ir.model.fields,field_description:choreograph_sale_project.field_needs_base__message_needaction_counter
