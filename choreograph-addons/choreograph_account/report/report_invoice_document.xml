@@ -79,6 +79,10 @@
                                 <span t-else="" class="low-font-size">Tax ID</span>:
                                 <span class="low-font-size" t-field="o.partner_id.vat"/>
                             </div>
+                            <div t-if="o.siren">
+                                <span class="low-font-size">SIREN</span>:
+                                <span class="low-font-size" t-field="o.siren"/>
+                            </div>
                         </t>
                     </div>
                 </div>
