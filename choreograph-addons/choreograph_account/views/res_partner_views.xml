@@ -10,6 +10,7 @@
                 <group name="misc" position="inside">
                     <field name="siret" position="move"/>
                     <field name="siren"/>
+                    <field name="electronic_address" attrs="{'invisible': [('is_company', '=', False)]}"/>
                 </group>
             </field>
         </record>
