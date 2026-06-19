@@ -83,6 +83,13 @@
                                 <span class="low-font-size">SIREN</span>:
                                 <span class="low-font-size" t-field="o.siren"/>
                             </div>
+                            
+                            <t t-set="billing_contact" t-value="o.partner_id.child_ids.filtered(lambda c: c.type == 'invoice')[:1]"/>
+        
+                            <div t-if="billing_contact and billing_contact.email">
+                                <span class="low-font-size">Email Contact Facturation</span>:
+                                <span class="low-font-size" t-esc="billing_contact.email"/>
+                            </div>
                         </t>
                     </div>
                 </div>
