@@ -369,3 +369,8 @@ msgstr "Frequence de MàJ"
 #: model:ir.model.fields,field_description:choreograph_contact.field_res_partner_role__user_ids
 msgid "Users"
 msgstr "Utilisateurs"
+
+#. module: choreograph_contact
+#: model:ir.model.fields,field_description:choreograph_contact.field_res_partner__pf_code_identification
+msgid "PF Code Identification"
+msgstr "Code Identification PF"
