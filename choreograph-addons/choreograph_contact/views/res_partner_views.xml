@@ -57,6 +57,9 @@
                 <group name="sale" position="inside">
                     <field name="projected_revenue" attrs="{'invisible': [('is_company', '=', False)]}"/>
                 </group>
+                <xpath expr="//field[@name='property_account_position_id']" position="after">
+                    <field name="pf_code_identification" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                </xpath>
             </field>
         </record>
 
