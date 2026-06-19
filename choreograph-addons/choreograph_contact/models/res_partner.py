@@ -34,6 +34,7 @@ class ResPartner(models.Model):
         domain="[('is_company', '=', True)]",
     )
     projected_revenue = fields.Char()
+    pf_code_identification = fields.Char("PF Code Identification", tracking=True)
 
 
     def write(self, vals):
