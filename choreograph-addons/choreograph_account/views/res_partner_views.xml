@@ -23,6 +23,9 @@
                 <field name="category_id" position="after">
                     <field name="is_confidential" />
                 </field>
+                <xpath expr="//field[@name='property_account_position_id']" position="after">
+                    <field name="pf_code_identification" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                </xpath>
             </field>
         </record>
         
