@@ -9,9 +9,9 @@ from odoo.osv import expression
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    is_preparer = fields.Boolean(compute='compute_user_role')
-    is_validator = fields.Boolean(compute='compute_user_role')
-    is_accountant = fields.Boolean(compute='compute_user_role')
+    is_preparer = fields.Boolean(string='Is Preparer', compute='compute_user_role')
+    is_validator = fields.Boolean(string='Is Validator', compute='compute_user_role')
+    is_accountant = fields.Boolean(string='Is Accountant', compute='compute_user_role')
 
     def compute_user_role(self):
         for rec in self:
