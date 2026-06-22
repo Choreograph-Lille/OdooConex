@@ -128,8 +128,27 @@ class AccountMove(models.Model):
         if not code_pf:
             return
 
-        note_node = etree.SubElement(parent_node, ns["cbc"] + "Note")
+        cbc = ns["cbc"]
+        children = list(parent_node)
+
+        type_code_tags = {
+            cbc + "InvoiceTypeCode",
+            cbc + "CreditNoteTypeCode",
+        }
+
+        insert_index = None
+        for i, child in enumerate(children):
+            if child.tag in type_code_tags:
+                insert_index = i + 1
+                break
+
+        note_node = etree.Element(cbc + "Note")
         note_node.text = "BAR/%s" % code_pf
+
+        if insert_index is not None:
+            parent_node.insert(insert_index, note_node)
+        else:
+            parent_node.append(note_node)
 
     def _ubl_add_customer_party(
         self, partner, company, node_name, parent_node, ns, version="2.1"
@@ -138,18 +157,23 @@ class AccountMove(models.Model):
             partner, company, node_name, parent_node, ns, version=version
         )
 
-        adresse_electronique = partner.commercial_partner_id.electronic_address
-        if not adresse_electronique:
-            return customer_party_root
+        cac = ns["cac"]
+        cbc = ns["cbc"]
 
-        party_node = customer_party_root.find(ns["cac"] + "Party")
+        party_node = customer_party_root.find(cac + "Party")
         if party_node is None:
             return customer_party_root
 
-        endpoint_node = etree.Element(ns["cbc"] + "EndpointID")
-        endpoint_node.set("schemeID", "0225")
-        endpoint_node.text = adresse_electronique
-        party_node.insert(0, endpoint_node)
+        website_node = party_node.find(cbc + "WebsiteURI")
+        if website_node is not None:
+            party_node.remove(website_node)
+
+        adresse_electronique = partner.commercial_partner_id.electronic_address
+        if adresse_electronique:
+            endpoint_node = etree.Element(cbc + "EndpointID")
+            endpoint_node.set("schemeID", "0225")
+            endpoint_node.text = adresse_electronique
+            party_node.insert(0, endpoint_node)
 
         return customer_party_root
     
