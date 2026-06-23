@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api, _, Command
+from lxml import etree
 TYPE_REVERSE_MAP = {
     'entry': 'entry',
     'out_invoice': 'out_refund',
@@ -119,4 +120,60 @@ class AccountMove(models.Model):
                 move_id.siren = move_id.partner_id.parent_id.siren
             else:
                 move_id.siren = move_id.partner_id.siren
+    
+    def _ubl_add_header(self, parent_node, ns, version="2.1"):
+        super()._ubl_add_header(parent_node, ns, version=version)
+
+        code_pf = self.partner_id.commercial_partner_id.pf_code_identification
+        if not code_pf:
+            return
+
+        cbc = ns["cbc"]
+        children = list(parent_node)
+
+        type_code_tags = {
+            cbc + "InvoiceTypeCode",
+            cbc + "CreditNoteTypeCode",
+        }
+
+        insert_index = None
+        for i, child in enumerate(children):
+            if child.tag in type_code_tags:
+                insert_index = i + 1
+                break
+
+        note_node = etree.Element(cbc + "Note")
+        note_node.text = "BAR/%s" % code_pf
+
+        if insert_index is not None:
+            parent_node.insert(insert_index, note_node)
+        else:
+            parent_node.append(note_node)
+
+    def _ubl_add_customer_party(
+        self, partner, company, node_name, parent_node, ns, version="2.1"
+    ):
+        customer_party_root = super()._ubl_add_customer_party(
+            partner, company, node_name, parent_node, ns, version=version
+        )
+
+        cac = ns["cac"]
+        cbc = ns["cbc"]
+
+        party_node = customer_party_root.find(cac + "Party")
+        if party_node is None:
+            return customer_party_root
+
+        website_node = party_node.find(cbc + "WebsiteURI")
+        if website_node is not None:
+            party_node.remove(website_node)
+
+        adresse_electronique = partner.commercial_partner_id.electronic_address
+        if adresse_electronique:
+            endpoint_node = etree.Element(cbc + "EndpointID")
+            endpoint_node.set("schemeID", "0225")
+            endpoint_node.text = adresse_electronique
+            party_node.insert(0, endpoint_node)
+
+        return customer_party_root
     
