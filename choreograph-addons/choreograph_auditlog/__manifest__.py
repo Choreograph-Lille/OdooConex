@@ -9,9 +9,11 @@
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
     'depends': [
+        'base',
         'auditlog',
         'choreograph_sox',
-        'base_user_role'
+        'base_user_role',
+        'purchase'
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -25,9 +27,13 @@
         'report/account_template.xml',
         'report/quote_purchase_order_template.xml',
         'report/auditlog_report_wizard.xml',
+        'report/purchase_retribution.xml',
 
         'data/auditlog_rule.xml',
         'data/ir_sequence.xml',
+        'data/cron.xml',
+
+        'views/product_views.xml',
 
         'wizards/auditlog_report_wizard.xml',
     ],

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+    
+        <record id="product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.view.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='options']" position="inside">
+                    <span class="d-inline-block">
+                        <field name="retribution"/>
+                        <label for="retribution"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="mymodel"/>
+                        <label for="mymodel"/>
+                    </span>
+                </xpath>
+            </field>
+        </record>
+    
+    </data>
+    
+
+</odoo>
