@@ -492,3 +492,13 @@ msgid ""
 msgstr ""
 "{{ (object.company_id or object._get_followup_responsible().company_id).name"
 " }} Rappel de paiement - {{ object.commercial_company_name }}"
+
+#. module: choreograph_account
+#: model:ir.model.fields,field_description:choreograph_account.field_res_partner__electronic_address
+msgid "Electronic Address"
+msgstr "Adresse Electronique"
+
+#. module: choreograph_account
+#: model:ir.model.fields,field_description:choreograph_account.field_res_partner__pf_code_identification
+msgid "PF Code Identification"
+msgstr "Code Identification PF"
