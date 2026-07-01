@@ -16,10 +16,32 @@
         />
 
         <menuitem
-        id="menu_sftp_logging"
-        action="sftp_logging_action"
+        id="menu_sftp_logging_1"
         name=" SFTP Import Logs"
-        parent="menu_sage_to_odoo"
-        sequence="2"
+        parent="account.menu_finance_receivables"
+        sequence="120"
         />
+
+        <menuitem
+        id="menu_sftp_logging_2"
+        name=" SFTP Import Logs"
+        parent="account.menu_finance_payables"
+        sequence="210"
+        />
+
+        <menuitem
+        id="menu_sftp_import_report_sale"
+        action="sftp_import_report_action_sale"
+        name="Sales"
+        parent="menu_sftp_logging_1"
+        sequence="1"
+    />
+
+    <menuitem
+        id="menu_sftp_import_report_purchase"
+        action="sftp_import_report_action_purchase"
+        name="Purchases"
+        parent="menu_sftp_logging_2"
+        sequence="1"
+    />
 </odoo>
