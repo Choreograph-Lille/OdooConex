@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+
+from odoo import fields, models
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    sage_file_prefix = fields.Char(string="Prefix", config_parameter='choreograph_sage_purchase_account.prefix')
+    sage_file_suffix = fields.Char(string="Suffix", config_parameter='choreograph_sage_purchase_account.suffix')
