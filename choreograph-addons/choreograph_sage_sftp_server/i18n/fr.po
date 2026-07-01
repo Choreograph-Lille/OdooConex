@@ -1,0 +1,254 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_sage_sftp_server
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-01 06:17+0000\n"
+"PO-Revision-Date: 2026-07-01 06:17+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.ui.menu,name:choreograph_sage_sftp_server.menu_sftp_logging
+msgid " SFTP Import Logs"
+msgstr "Logs d'import SFTP"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__active
+msgid "Active"
+msgstr "Actif?"
+
+#. module: choreograph_sage_sftp_server
+#: model_terms:ir.actions.act_window,help:choreograph_sage_sftp_server.choreograph_sage_sftp_server_action
+msgid "Add a new server"
+msgstr "Ajouter un nouveau serveur"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__connection_status
+msgid "Connection Status"
+msgstr "Statut de la connexion"
+
+#. module: choreograph_sage_sftp_server
+#. odoo-python
+#: code:addons/choreograph_sage_sftp_server/models/choreograph_sage_sftp_server.py:0
+#, python-format
+msgid "Connection failed: %s"
+msgstr "Echec de la connexion: %s"
+
+#. module: choreograph_sage_sftp_server
+#. odoo-python
+#: code:addons/choreograph_sage_sftp_server/models/choreograph_sage_sftp_server.py:0
+#, python-format
+msgid "Connection success"
+msgstr "Connexion Réussie"
+
+#. module: choreograph_sage_sftp_server
+#. odoo-python
+#: code:addons/choreograph_sage_sftp_server/models/choreograph_sage_sftp_server.py:0
+#, python-format
+msgid "Connection successful, but the directory '%s' is not found."
+msgstr "Connexion réussie, mais le répertoire '%s' est introuvable."
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__create_uid
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__create_date
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__display_name
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__error_count
+msgid "Errors"
+msgstr "Nombre d'erreurs"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_logging__state__failed
+msgid "Failed"
+msgstr "Echec"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__file_name
+msgid "File name"
+msgstr "Nom du fichier"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__type
+msgid "File type"
+msgstr "Type du fichier"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__host
+msgid "Host"
+msgstr "Hôte"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__id
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__id
+msgid "ID"
+msgstr "ID"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__import_date
+msgid "Import date"
+msgstr "Date d'import"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__attachment_id
+msgid "Imported file"
+msgstr "Fichier importé"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__key_attachment_id
+msgid "Key Attachment"
+msgstr "Clé de sécurité"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server____last_update
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__write_uid
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__write_uid
+msgid "Last Updated by"
+msgstr "Dernière modification par"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__write_date
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__write_date
+msgid "Last Updated on"
+msgstr "Dernière modification le"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__line_count
+msgid "Lines processed"
+msgstr "Lignes traitées"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__message
+msgid "Message"
+msgstr "Message"
+
+#. module: choreograph_sage_sftp_server
+#: model_terms:ir.actions.act_window,help:choreograph_sage_sftp_server.sftp_logging_action
+msgid ""
+"No import logs yet. When you import files from Sage via SFTP, the logs will "
+"appear here."
+msgstr ""
+"Aucun journal d'importation pour le moment. Lorsque vous importerez des fichiers depuis Sage via SFTP, les journaux apparaîtront" 
+"ici."
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__output_path
+msgid "Output Directory"
+msgstr "Répertoire de sortie"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,help:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__output_path
+msgid "Output directory for the SFTP server (e.g., /Output)"
+msgstr "Répertoire de sortie pour le serveur SFTP (ex: /Output)"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_logging__state__partial
+msgid "Partial"
+msgstr "Partiel"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__passphrase
+msgid "Passphrase"
+msgstr ""
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__port
+msgid "Port"
+msgstr "Port"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_logging__type__supplier
+msgid "Purchases"
+msgstr "Achats"
+
+#. module: choreograph_sage_sftp_server
+#: model_terms:ir.ui.view,arch_db:choreograph_sage_sftp_server.sftp_logging_view_form
+msgid "Résultat"
+msgstr ""
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.actions.act_window,name:choreograph_sage_sftp_server.choreograph_sage_sftp_server_action
+msgid "SAGE SFTP Servers"
+msgstr "Serveurs SFTP SAGE"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model,name:choreograph_sage_sftp_server.model_sftp_logging
+msgid "SAGE SFTP import log"
+msgstr "Log d'import SFTP SAGE"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model,name:choreograph_sage_sftp_server.model_choreograph_sage_sftp_server
+msgid "SAGE SFTP server configuration (Sage to Odoo)"
+msgstr "Configuration du serveur SFTP SAGE (SAGE vers Odoo)"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.actions.act_window,name:choreograph_sage_sftp_server.sftp_logging_action
+msgid "SFTP Import Logs"
+msgstr "Logs d'import SFTP"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__sftp_server_id
+#: model:ir.ui.menu,name:choreograph_sage_sftp_server.menu_choreograph_sage_sftp_server
+msgid "SFTP Server"
+msgstr "Serveur SFTP"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.ui.menu,name:choreograph_sage_sftp_server.menu_sage_to_odoo
+msgid "Sage to Odoo"
+msgstr "SAGE vers Odoo"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_logging__type__customer
+msgid "Sales"
+msgstr "Ventes"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__state
+msgid "Status"
+msgstr "Statut"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_logging__state__success
+msgid "Success"
+msgstr "Succès"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_sftp_logging__success_count
+msgid "Success"
+msgstr "Nombre de succès"
+
+#. module: choreograph_sage_sftp_server
+#: model_terms:ir.ui.view,arch_db:choreograph_sage_sftp_server.choreograph_sage_sftp_server_view_form
+msgid "Test connection"
+msgstr "Test de connexion"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__username
+msgid "Username"
+msgstr "Nom d'utilisateur"
