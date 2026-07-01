@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem
+                id="menu_sage_to_odoo"
+                name="Sage to Odoo"
+                parent="account.menu_finance_configuration"
+                sequence="8"
+        />
+
+        <menuitem
+                id="menu_choreograph_sage_sftp_server"
+                action="choreograph_sage_sftp_server_action"
+                name="SFTP Server"
+                parent="menu_sage_to_odoo"
+                sequence="1"
+        />
+
+        <menuitem
+        id="menu_sftp_logging"
+        action="sftp_logging_action"
+        name="Import Logs"
+        parent="menu_sage_to_odoo"
+        sequence="2"
+        />
+</odoo>
