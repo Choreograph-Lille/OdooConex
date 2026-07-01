@@ -10,8 +10,8 @@
     'data': [
         'security/ir.model.access.csv',
         'views/choreograph_sage_sftp_server_views.xml',
-        'views/menus.xml',
         'views/sftp_logging_views.xml',
+        'views/menus.xml',
     ],
     'installable': True,
     'application': False,
