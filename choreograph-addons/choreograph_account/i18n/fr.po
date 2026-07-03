@@ -502,3 +502,8 @@ msgstr "Adresse Electronique"
 #: model:ir.model.fields,field_description:choreograph_account.field_res_partner__pf_code_identification
 msgid "PF Code Identification"
 msgstr "Code Identification PF"
+
+#. module: choreograph_account
+#: model:ir.model.fields,field_description:choreograph_account.field_res_partner__vatex
+msgid "VATEX"
+msgstr "VATEX"

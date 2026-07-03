@@ -25,6 +25,7 @@
                 </field>
                 <xpath expr="//field[@name='property_account_position_id']" position="after">
                     <field name="pf_code_identification" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <field name="vatex" attrs="{'invisible': [('is_company', '=', False)]}"/>
                 </xpath>
             </field>
         </record>
