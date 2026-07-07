@@ -25,6 +25,14 @@
                                         <label for="sage_file_suffix" class="col-lg-3 o_light_label"/>
                                         <field name="sage_file_suffix"/>
                                     </div>
+                                    <div class="row mt16">
+                                        <label for="sage_purchase_default_journal_id" class="col-lg-3 o_light_label"/>
+                                        <field name="sage_purchase_default_journal_id"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="sage_test_ftp_directory" class="col-lg-3 o_light_label"/>
+                                        <field name="sage_test_ftp_directory"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
