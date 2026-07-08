@@ -98,6 +98,7 @@ class AccountMove(models.Model):
                 "Statut de paiement",
                 "SIREN du fournisseur",
                 "Montant payé",
+                "Devise"
             }
 
             missing_columns = required_columns - set(reader.fieldnames)
@@ -169,6 +170,7 @@ class AccountMove(models.Model):
                 ref,
             )
 
+
         if move.state != "posted":
             return self._validation_error(
                 log,
@@ -214,6 +216,15 @@ class AccountMove(models.Model):
             return self._validation_error(
                 log,
                 f"Invalid payment amount: '{amount_str}'.",
+                "data_mismatch",
+                ref,
+            )
+
+        currency = invoice_data.get('Devise') or ''
+        if move.currency_id.name.strip().lower() != currency.strip().lower():
+            return self._validation_error(
+                log,
+                "Currency does not match",
                 "data_mismatch",
                 ref,
             )
@@ -271,13 +282,27 @@ class AccountMove(models.Model):
                 error_count = 0
                 success_count = 0
                 for data in datas:
-                    move_id = self.validate_data_import(data, log)
-                    if move_id:
-                        success_count += 1
-                        self.create_payment(move_id, data)
-                    else:
+                    try:
+                        move_id = self.validate_data_import(data, log)
+                        if move_id:
+                            success_count += 1
+                            self.create_payment(move_id, data)
+                        else:
+                            error_count += 1
+                    except Exception as e:
+                        _logger.exception(
+                            "Unexpected error while processing line with reference '%s'",
+                            data.get("Référence Pièce")
+                        )
+                        self.create_sftp_log_line(
+                            log=log,
+                            message=str(e),
+                            error_type="file_invalid",
+                            ref=data.get("Référence Pièce"),
+                        )
                         error_count += 1
-                    line_count += 1
+                    finally:
+                        line_count += 1
                 log.line_count = line_count
                 log.error_count = error_count
                 log.success_count = success_count
