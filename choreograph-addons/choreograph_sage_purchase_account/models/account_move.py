@@ -75,7 +75,7 @@ class AccountMove(models.Model):
                     self.create_sftp_log_line(
                         log=log,
                         message="CSV file has no header",
-                        error_type='file_invalid'
+                        error_type='file_invalid',
                     )
                     return False, []
 
@@ -115,16 +115,15 @@ class AccountMove(models.Model):
 
 
 
-    def validate_data_import(self, invoice_data, log, attachment):
+    def validate_data_import(self, invoice_data, log):
         ref = invoice_data.get('Référence Pièce')
         if not ref:
-            error = 'Ref not found'
+            error = 'Invoice reference is not present in header'
             _logger.info(error)
             self.create_sftp_log_line(
                 log=log,
                 message=error,
-                error_type='invoice_not_found'
-
+                error_type='file_invalid'
             )
             return False
 
@@ -135,7 +134,8 @@ class AccountMove(models.Model):
             self.create_sftp_log_line(
                 log=log,
                 message=error,
-                error_type='invoice_not_found'
+                error_type='invoice_not_found',
+                ref=ref
             )
             return False
 
@@ -146,7 +146,7 @@ class AccountMove(models.Model):
                 log=log,
                 message=error,
                 error_type='wrong_state',
-                move_id=move_id
+                ref=ref
             )
             return False
 
@@ -156,8 +156,8 @@ class AccountMove(models.Model):
             self.create_sftp_log_line(
                 log=log,
                 message=error,
-                error_type='wrong_state',
-                move_id=move_id
+                error_type='unkown_status',
+                ref=ref
             )
             return False
 
@@ -168,7 +168,7 @@ class AccountMove(models.Model):
                 log=log,
                 message=error,
                 error_type='data_mismatch',
-                move_id=move_id
+                ref=ref
             )
             return False
 
@@ -179,7 +179,7 @@ class AccountMove(models.Model):
                 log=log,
                 message=error,
                 error_type='data_mismatch',
-                move_id=move_id
+                ref=ref
             )
             return False
 
@@ -189,7 +189,7 @@ class AccountMove(models.Model):
                 log=log,
                 message=error,
                 error_type='data_mismatch',
-                move_id=move_id
+                ref=ref
             )
             _logger.info(error)
             return False
@@ -201,7 +201,7 @@ class AccountMove(models.Model):
                 log=log,
                 message=error,
                 error_type='data_mismatch',
-                move_id=move_id
+                ref=ref
             )
             _logger.info(error)
             return False
@@ -218,11 +218,11 @@ class AccountMove(models.Model):
         })
         return log
 
-    def create_sftp_log_line(self, log, message, error_type, move_id=False):
+    def create_sftp_log_line(self, log, message, error_type, ref=False):
         self.env['sftp.import.report.line'].create({
             'report_id': log.id,
             'message': message,
-            'invoice_ref': move_id.ref if move_id else False,
+            'invoice_ref': ref,
             'error_type': error_type
         })
 
@@ -240,7 +240,7 @@ class AccountMove(models.Model):
     def import_account_move_in_invoice(self):
         sftp_server_id = self.env['choreograph.sage.sftp.server'].search([('active', '=', True)], limit=1)
         if sftp_server_id:
-            sftp = self.get_sftp_client(sftp_server_id)
+            # sftp = self.get_sftp_client(sftp_server_id)
             start = datetime.now()
             log = self.create_sftp_log(sftp_server_id)
             attachment, datas = self.download_file(log)
@@ -251,7 +251,7 @@ class AccountMove(models.Model):
                 error_count = 0
                 success_count = 0
                 for data in datas:
-                    move_id = self.validate_data_import(data, log, attachment)
+                    move_id = self.validate_data_import(data, log)
                     if move_id:
                         success_count += 1
                         self.create_payment(move_id, data)
