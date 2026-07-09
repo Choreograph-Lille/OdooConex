@@ -60,5 +60,6 @@ class SftpImportReportLine(models.Model):
         ('invoice_not_found', 'Invoice not found in Odoo'),
         ('wrong_state',       'Invoice not posted'),
         ('data_mismatch',     'Data mismatch'),
+        ('already_paid',     'Invoice already paid'),
     ], string="Error type")
     message = fields.Text(string="Error cause")
