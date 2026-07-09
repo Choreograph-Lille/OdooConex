@@ -346,3 +346,8 @@ msgstr "Statut inconnu"
 #: model:ir.model.fields,field_description:choreograph_sage_sftp_server.field_choreograph_sage_sftp_server__username
 msgid "Username"
 msgstr "Nom d'utilisateur"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_import_report_line__error_type__already_paid
+msgid "Invoice already paid"
+msgstr "Facture déjà payée"

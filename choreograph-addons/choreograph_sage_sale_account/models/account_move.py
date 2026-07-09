@@ -80,7 +80,7 @@ class AccountMove(models.Model):
             if reader.fieldnames is None:
                 self.create_sftp_log_line(
                     log=log,
-                    message='CSV file has no header',
+                    message=_('CSV file has no header'),
                     error_type='file_invalid',
                 )
                 return False, []
@@ -98,7 +98,7 @@ class AccountMove(models.Model):
         except UnicodeDecodeError:
             self.create_sftp_log_line(
                 log=log,
-                message='File is not a valid UTF-8 CSV',
+                message=_('File is not a valid UTF-8 CSV'),
                 error_type='file_invalid',
             )
             return False, []
@@ -106,7 +106,7 @@ class AccountMove(models.Model):
         except csv.Error as csv_error:
             self.create_sftp_log_line(
                 log=log,
-                message='CSV invalid: %s' % csv_error,
+                message=_('CSV invalid: %s') % csv_error,
                 error_type='file_invalid',
             )
             return False, []
@@ -114,7 +114,7 @@ class AccountMove(models.Model):
         except Exception as e:
             self.create_sftp_log_line(
                 log=log,
-                message='Cannot import file, reason: %s' % e,
+                message=_('Cannot import file, reason: %s') % e,
                 error_type='file_not_found',
             )
             return False, []
@@ -124,7 +124,7 @@ class AccountMove(models.Model):
         if not ref:
             self.create_sftp_log_line(
                 log=log,
-                message='Reference not found in CSV row',
+                message=_('Reference not found in CSV row'),
                 error_type='invoice_not_found',
             )
             return False
@@ -137,7 +137,7 @@ class AccountMove(models.Model):
         ], limit=1)
 
         if not move_id:
-            error = 'Account move with reference %s not found' % ref
+            error = _('Account move with reference %s not found') % ref
             _logger.info(error)
             self.create_sftp_log_line(
                 log=log,
@@ -147,7 +147,7 @@ class AccountMove(models.Model):
             return False
 
         if move_id.state != 'posted':
-            error = 'Invoice %s is not posted (current state: %s)' % (ref, move_id.state)
+            error = _('Invoice %s is not posted (current state: %s)') % (ref, move_id.state)
             _logger.info(error)
             self.create_sftp_log_line(
                 log=log,
@@ -158,7 +158,7 @@ class AccountMove(models.Model):
             return False
 
         if invoice_data.get('Statut de paiement') not in AUTHORIZED_PAYMENT_STATE:
-            error = 'Value of payment state should be among %s' % ', '.join(
+            error = _('Value of payment state should be among %s') % ', '.join(
                 AUTHORIZED_PAYMENT_STATE)
             _logger.error(error)
             self.create_sftp_log_line(
@@ -170,19 +170,19 @@ class AccountMove(models.Model):
             return False
 
         if move_id.amount_residual == 0:
-            error = 'Invoice %s has already been paid' % ref
+            error = _('Invoice %s has already been paid') % ref
             _logger.info(error)
             self.create_sftp_log_line(
                 log=log,
                 message=error,
-                error_type='data_mismatch',
+                error_type='already_paid',
                 move_id=move_id,
             )
             return False
 
         siren = invoice_data.get('SIREN du client', '').strip()
         if not siren:
-            error = 'SIREN not found in CSV row for invoice %s' % ref
+            error = _('SIREN not found in CSV row for invoice %s') % ref
             self.create_sftp_log_line(
                 log=log,
                 message=error,
@@ -192,7 +192,7 @@ class AccountMove(models.Model):
             return False
 
         if move_id.siren != siren:
-            error = "The customer's SIREN does not match for invoice %s: Sage=%s, Odoo=%s" % (
+            error = _('The customer\'s SIREN does not match for invoice %s: Sage=%s, Odoo=%s') % (
                 ref, siren, move_id.siren)
             _logger.info(error)
             self.create_sftp_log_line(
@@ -210,7 +210,7 @@ class AccountMove(models.Model):
             total_amount = 0.0
 
         if total_amount != move_id.amount_total:
-            error = 'Amount mismatch for invoice %s: Sage=%s, Odoo=%s' % (
+            error = _('Amount mismatch for invoice %s: Sage=%s, Odoo=%s') % (
                 ref, total_amount, move_id.amount_total)
             _logger.info(error)
             self.create_sftp_log_line(
@@ -223,7 +223,7 @@ class AccountMove(models.Model):
 
         devise = invoice_data.get('Devise', '').strip().upper()
         if devise and devise != move_id.currency_id.name.upper():
-            error = 'Currency mismatch for invoice %s: Sage=%s, Odoo=%s' % (
+            error = _('Currency mismatch for invoice %s: Sage=%s, Odoo=%s') % (
                 ref, devise, move_id.currency_id.name)
             _logger.info(error)
             self.create_sftp_log_line(
@@ -278,7 +278,7 @@ class AccountMove(models.Model):
             log = self.create_sftp_log(sftp_server_id)
             log.write({
                 'state':   'rejected',
-                'message': 'File %s not found on SFTP server.' % filename,
+                'message': _('File %s not found on SFTP server.') % filename,
             })
             return False
 
