@@ -61,154 +61,185 @@ class AccountMove(models.Model):
         except Exception as e:
             raise UserError(_('Could not etablish connexion to ftp server, reason %s') % e)
 
-    def download_file(self,log, ftp_server=False,):
-        # file_path = f"{ftp_server.full_path}/{self.get_file_name()}"
-        file_path = self.env['ir.config_parameter'].sudo().get_param('choreograph_sage_purchase_account.sage_test_ftp_directory')
+    def _validation_error(self, log, message, error_type, ref=False):
+        """Create a log line for a validation error and return False."""
+        _logger.info(message)
+        self.create_sftp_log_line(
+            log=log,
+            message=message,
+            error_type=error_type,
+            ref=ref,
+        )
+        return False
+
+    def download_file(self, log):
+        """Read the configured CSV file and return its attachment and rows."""
+
+        file_path = self.env["ir.config_parameter"].sudo().get_param(
+            "choreograph_sage_purchase_account.sage_test_ftp_directory"
+        )
+
         try:
-            with open(file_path, mode="rb") as f:
-                file_bytes = f.read()
-                # Convert file to dict
-                csv_text = file_bytes.decode("utf-8")
-                reader = csv.DictReader(io.StringIO(csv_text), delimiter="\t")
+            with open(file_path, "rb") as file:
+                file_bytes = file.read()
 
-                if reader.fieldnames is None:
-                    self.create_sftp_log_line(
-                        log=log,
-                        message="CSV file has no header",
-                        error_type='file_invalid',
-                    )
-                    return False, []
+            csv_text = file_bytes.decode("utf-8")
+            reader = csv.DictReader(io.StringIO(csv_text), delimiter="\t")
 
-                rows = list(reader)
-                # Save content as attachment
-                attachment = self.env['ir.attachment'].create({
-                    "name": os.path.basename(file_path),
-                    "datas": base64.b64encode(file_bytes),
-                    'type': 'binary',
-                    "mimetype": "text/csv",
-                })
-                return attachment, rows
+            if not reader.fieldnames:
+                return self._validation_error(
+                    log,
+                    "CSV file has no header.",
+                    "file_invalid",
+                ), []
+
+            required_columns = {
+                "Référence Pièce",
+                "Statut de paiement",
+                "SIREN du fournisseur",
+                "Montant payé",
+                "Devise"
+            }
+
+            missing_columns = required_columns - set(reader.fieldnames)
+
+            if missing_columns:
+                return self._validation_error(
+                    log,
+                    "Missing required column(s): %s"
+                    % ", ".join(sorted(missing_columns)),
+                    "file_invalid",
+                ), []
+
+            rows = list(reader)
+
+            attachment = self.env["ir.attachment"].create({
+                "name": os.path.basename(file_path),
+                "datas": base64.b64encode(file_bytes),
+                "type": "binary",
+                "mimetype": "text/csv",
+            })
+
+            return attachment, rows
+
+        except FileNotFoundError:
+            message = f"File not found: {file_path}"
+            error_type = "file_not_found"
 
         except UnicodeDecodeError:
-            error = "File is not a valid UTF-8 CSV"
-            self.create_sftp_log_line(
-                log=log,
-                message=error,
-                error_type='file_invalid'
-            )
-            return False, []
+            message = "File is not a valid UTF-8 CSV."
+            error_type = "file_invalid"
 
-        except csv.Error as csv_error:
-            self.create_sftp_log_line(
-                log=log,
-                message='Csv invalid: %s' % csv_error,
-                error_type='file_invalid'
-            )
-            return False, []
-        except Exception as e:
-            self.create_sftp_log_line(
-                log=log,
-                message='Cannot import file, reason: %s' % e,
-                error_type='file_not_found'
-            )
-            return False, []
+        except csv.Error as exc:
+            message = f"Invalid CSV file: {exc}"
+            error_type = "file_invalid"
 
+        except OSError as exc:
+            message = f"Unable to read file: {exc}"
+            error_type = "file_not_found"
 
+        self.create_sftp_log_line(
+            log=log,
+            message=message,
+            error_type=error_type,
+        )
+        return False, []
 
     def validate_data_import(self, invoice_data, log):
-        ref = invoice_data.get('Référence Pièce')
+        """Validate a single invoice row from the import."""
+
+        ref = invoice_data.get("Référence Pièce")
+
         if not ref:
-            error = 'Invoice reference is not present in header'
-            _logger.info(error)
-            self.create_sftp_log_line(
-                log=log,
-                message=error,
-                error_type='file_invalid'
+            return self._validation_error(
+                log,
+                "Invoice reference is missing.",
+                "file_invalid",
             )
-            return False
 
-        move_id = self.env['account.move'].search([('ref', '=', ref)], limit=1)
-        if not move_id:
-            error = 'Account move with ref %s not found' % ref
-            _logger.info(error)
-            self.create_sftp_log_line(
-                log=log,
-                message=error,
-                error_type='invoice_not_found',
-                ref=ref
+        move = self.env["account.move"].search(
+            [("ref", "=", ref)],
+            limit=1,
+        )
+
+        if not move:
+            return self._validation_error(
+                log,
+                f"Account move with reference '{ref}' was not found.",
+                "invoice_not_found",
+                ref,
             )
-            return False
 
-        if move_id.state != 'posted':
-            error = 'Invoice should be not in draft or cancel state'
-            _logger.info(error)
-            self.create_sftp_log_line(
-                log=log,
-                message=error,
-                error_type='wrong_state',
-                ref=ref
+
+        if move.state != "posted":
+            return self._validation_error(
+                log,
+                "Invoice must be posted.",
+                "wrong_state",
+                ref,
             )
-            return False
 
-        if invoice_data.get('Statut de paiement') not in AUTHORIZED_PAYMENT_STATE:
-            error = 'Value of payment state should be among %s' % ','.join(AUTHORIZED_PAYMENT_STATE)
-            _logger.error(error)
-            self.create_sftp_log_line(
-                log=log,
-                message=error,
-                error_type='unkown_status',
-                ref=ref
+        payment_state = invoice_data.get("Statut de paiement")
+
+        if payment_state not in AUTHORIZED_PAYMENT_STATE:
+            return self._validation_error(
+                log,
+                "Unknown payment state '%s'. Expected one of: %s."
+                % (payment_state, ", ".join(AUTHORIZED_PAYMENT_STATE)),
+                "unknown_status",
+                ref,
             )
-            return False
 
-        if move_id.amount_residual == 0:
-            error = 'The invoice has already been paid'
-            _logger.info(error)
-            self.create_sftp_log_line(
-                log=log,
-                message=error,
-                error_type='data_mismatch',
-                ref=ref
+        if move.amount_residual == 0:
+            return self._validation_error(
+                log,
+                "Invoice has already been paid.",
+                "data_mismatch",
+                ref,
             )
-            return False
 
-        siren = invoice_data.get('SIREN du fournisseur')
-        if not siren:
-            error = 'Siren not found'
-            self.create_sftp_log_line(
-                log=log,
-                message=error,
-                error_type='data_mismatch',
-                ref=ref
+        siren = invoice_data.get("SIREN du fournisseur")
+
+        if move.siren != siren:
+            return self._validation_error(
+                log,
+                "Supplier SIREN does not match the invoice.",
+                "data_mismatch",
+                ref,
             )
-            return False
 
-        if move_id.siren != siren:
-            error = "The supplier's SIREN number does not match"
-            self.create_sftp_log_line(
-                log=log,
-                message=error,
-                error_type='data_mismatch',
-                ref=ref
+        amount_str = invoice_data.get("Montant payé")
+
+        try:
+            amount = float(amount_str.replace(",", "."))
+        except (AttributeError, ValueError):
+            return self._validation_error(
+                log,
+                f"Invalid payment amount: '{amount_str}'.",
+                "data_mismatch",
+                ref,
             )
-            _logger.info(error)
-            return False
 
-        total_amount = float(invoice_data.get('Montant payé').replace(',', '.'))
-        if total_amount != move_id.amount_total:
-            error = 'The given amount total does not correspond to the actual amount'
-            self.create_sftp_log_line(
-                log=log,
-                message=error,
-                error_type='data_mismatch',
-                ref=ref
+        currency = invoice_data.get('Devise') or ''
+        if move.currency_id.name.strip().lower() != currency.strip().lower():
+            return self._validation_error(
+                log,
+                "Currency does not match",
+                "data_mismatch",
+                ref,
             )
-            _logger.info(error)
-            return False
 
-        return move_id
+        if amount != move.amount_total:
+            return self._validation_error(
+                log,
+                "Payment amount does not match the invoice total.",
+                "data_mismatch",
+                ref,
+            )
 
-    def create_sftp_log(self,sftp_server_id, attachment=False):
+        return move
+
+    def create_sftp_log(self, sftp_server_id, attachment=False):
         log = self.env['sftp.import.report'].create({
             'import_date': fields.Datetime.now(),
             'type': 'purchase',
@@ -251,13 +282,27 @@ class AccountMove(models.Model):
                 error_count = 0
                 success_count = 0
                 for data in datas:
-                    move_id = self.validate_data_import(data, log)
-                    if move_id:
-                        success_count += 1
-                        self.create_payment(move_id, data)
-                    else:
+                    try:
+                        move_id = self.validate_data_import(data, log)
+                        if move_id:
+                            success_count += 1
+                            self.create_payment(move_id, data)
+                        else:
+                            error_count += 1
+                    except Exception as e:
+                        _logger.exception(
+                            "Unexpected error while processing line with reference '%s'",
+                            data.get("Référence Pièce")
+                        )
+                        self.create_sftp_log_line(
+                            log=log,
+                            message=str(e),
+                            error_type="file_invalid",
+                            ref=data.get("Référence Pièce"),
+                        )
                         error_count += 1
-                    line_count += 1
+                    finally:
+                        line_count += 1
                 log.line_count = line_count
                 log.error_count = error_count
                 log.success_count = success_count
