@@ -8,8 +8,6 @@ class ResConfigSettings(models.TransientModel):
 
     sage_file_prefix = fields.Char(string="Prefix", config_parameter='choreograph_sage_purchase_account.prefix')
     sage_file_suffix = fields.Char(string="Suffix", config_parameter='choreograph_sage_purchase_account.suffix')
+    sage_file_date = fields.Datetime(string="Date", config_parameter='choreograph_sage_purchase_account.sage_file_date')
     sage_purchase_default_journal_id = fields.Many2one('account.journal',
                                                        config_parameter='choreograph_sage_purchase_account.purchase_default_journal_id')
-    sage_test_ftp_directory = fields.Char(string="FTP Directory test",
-                                          config_parameter='choreograph_sage_purchase_account.sage_test_ftp_directory'
-                                          )
