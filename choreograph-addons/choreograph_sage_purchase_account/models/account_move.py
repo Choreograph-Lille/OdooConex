@@ -80,7 +80,7 @@ class AccountMove(models.Model):
             _logger.info('File %s not found' % filename)
             self._validation_error(
                     log,
-                    "File not found",
+                    _("File not found"),
                     "file_not_found",
                 )
             return []
@@ -103,7 +103,7 @@ class AccountMove(models.Model):
             if not reader.fieldnames:
                 self._validation_error(
                     log,
-                    "CSV file has no header.",
+                    _("CSV file has no header."),
                     "file_invalid",
                 )
                 return []
@@ -121,7 +121,7 @@ class AccountMove(models.Model):
             if missing_columns:
                 self._validation_error(
                     log,
-                    "Missing required column(s): %s"
+                    _("Missing required column(s): %s")
                     % ", ".join(sorted(missing_columns)),
                     "file_invalid",
                 )
@@ -131,19 +131,19 @@ class AccountMove(models.Model):
             return rows
 
         except FileNotFoundError:
-            message = f"File not found: {file_path}"
+            message = _("File not found: %s") % file_path
             error_type = "file_not_found"
 
         except UnicodeDecodeError:
-            message = "File is not a valid UTF-8 CSV."
+            message = _("File is not a valid UTF-8 CSV.")
             error_type = "file_invalid"
 
         except csv.Error as exc:
-            message = f"Invalid CSV file: {exc}"
+            message = _("Invalid CSV file: %s") % exc
             error_type = "file_invalid"
 
         except OSError as exc:
-            message = f"Unable to read file: {exc}"
+            message = _("Unable to read file: %s") % exc
             error_type = "file_not_found"
 
         self.create_sftp_log_line(
@@ -161,7 +161,7 @@ class AccountMove(models.Model):
         if not ref:
             return self._validation_error(
                 log,
-                "Invoice reference is missing.",
+                _("Invoice reference is missing."),
                 "file_invalid",
             )
 
@@ -173,7 +173,7 @@ class AccountMove(models.Model):
         if not move:
             return self._validation_error(
                 log,
-                f"Account move with reference '{ref}' was not found.",
+                _("Account move with reference '%s' was not found.") % ref,
                 "invoice_not_found",
                 ref,
             )
@@ -182,7 +182,7 @@ class AccountMove(models.Model):
         if move.state != "posted":
             return self._validation_error(
                 log,
-                "Invoice must be posted.",
+                _("Invoice must be posted."),
                 "wrong_state",
                 ref,
             )
@@ -192,7 +192,7 @@ class AccountMove(models.Model):
         if payment_state not in AUTHORIZED_PAYMENT_STATE:
             return self._validation_error(
                 log,
-                "Unknown payment state '%s'. Expected one of: %s."
+                _("Unknown payment state '%s'. Expected one of: %s.")
                 % (payment_state, ", ".join(AUTHORIZED_PAYMENT_STATE)),
                 "unknown_status",
                 ref,
@@ -201,7 +201,7 @@ class AccountMove(models.Model):
         if move.amount_residual == 0:
             return self._validation_error(
                 log,
-                "Invoice has already been paid.",
+                _("Invoice has already been paid."),
                 "data_mismatch",
                 ref,
             )
@@ -211,7 +211,7 @@ class AccountMove(models.Model):
         if siren and move.siren != siren:
             return self._validation_error(
                 log,
-                "Supplier SIREN does not match the invoice.",
+                _("Supplier SIREN does not match the invoice."),
                 "data_mismatch",
                 ref,
             )
@@ -223,7 +223,7 @@ class AccountMove(models.Model):
         except (AttributeError, ValueError):
             return self._validation_error(
                 log,
-                f"Invalid payment amount: '{amount_str}'.",
+                _("Invalid payment amount: '%s'.") % amount_str,
                 "data_mismatch",
                 ref,
             )
@@ -232,7 +232,7 @@ class AccountMove(models.Model):
         if move.currency_id.name.strip().lower() != currency.strip().lower():
             return self._validation_error(
                 log,
-                "Currency does not match",
+                _("Currency does not match"),
                 "data_mismatch",
                 ref,
             )
@@ -240,7 +240,7 @@ class AccountMove(models.Model):
         if amount != move.amount_total:
             return self._validation_error(
                 log,
-                "Payment amount does not match the invoice total.",
+                _("Payment amount does not match the invoice total."),
                 "data_mismatch",
                 ref,
             )
@@ -315,7 +315,7 @@ class AccountMove(models.Model):
                         else:
                             self.create_sftp_log_line(
                                 log=log,
-                                message="Invoice cannot be paid or reversed; please check the remaining balance or whether a reversal has already been created.",
+                                message=_("Invoice cannot be paid or reversed; please check the remaining balance or whether a reversal has already been created."),
                                 error_type="data_mismatch",
                                 ref=data.get("Référence Pièce"),
                             )
