@@ -21,10 +21,13 @@ class AccountMove(models.Model):
     _inherit = 'account.move'
 
     def get_file_name(self):
-        prefix = self.env['ir.config_parameter'].sudo().get_param('choreograph_sage_purchase_account.prefix') or False
-        suffix = self.env['ir.config_parameter'].sudo().get_param('choreograph_sage_purchase_account.suffix') or False
+        config_parameter = self.env['ir.config_parameter'].sudo()
+        prefix = config_parameter.get_param('choreograph_sage_purchase_account.prefix') or False
+        suffix = config_parameter.get_param('choreograph_sage_purchase_account.suffix') or False
+        sage_date_str = config_parameter.get_param('choreograph_sage_purchase_account.sage_file_date') or False
+        sage_date = fields.Date.from_string(sage_date_str) if sage_date_str else fields.Date.today()
 
-        file_name = f"{fields.Date.today().strftime('%Y%m%d')}.csv"
+        file_name = f"{sage_date.strftime('%Y%m%d')}.csv"
         if prefix:
             file_name = prefix + file_name
         if suffix:
@@ -49,15 +52,8 @@ class AccountMove(models.Model):
         try:
             key = paramiko.RSAKey.from_private_key_file(key_path, password=passphrase)
             ssh_client.connect(ftp_server.host, ftp_server.port, ftp_server.username, pkey=key)
-            with paramiko.SFTPClient.from_transport(ssh_client.get_transport()) as sftp:
-                list_dir = sftp.listdir(f'/{ftp_server.output_path}')
-                filename = self.get_file_name()
-                if self.is_present_file(filename, list_dir):
-                    _logger.info('File %s found' % filename)
-                    return sftp
-                else:
-                    _logger.info('File not found')
-                    return False
+            return ssh_client
+
         except Exception as e:
             raise UserError(_('Could not etablish connexion to ftp server, reason %s') % e)
 
@@ -72,31 +68,50 @@ class AccountMove(models.Model):
         )
         return False
 
-    def download_file(self, log):
+    def download_file(self, ftp_server, ssh_client, log):
         """Read the configured CSV file and return its attachment and rows."""
+        file_path = f"{ftp_server.output_path}/{self.get_file_name()}"
+        sftp = ssh_client.open_sftp()
 
-        file_path = self.env["ir.config_parameter"].sudo().get_param(
-            "choreograph_sage_purchase_account.sage_test_ftp_directory"
-        )
+        # Try to read file first
+        list_dir = sftp.listdir(f'/{ftp_server.output_path}')
+        filename = self.get_file_name()
+        if not self.is_present_file(filename, list_dir):
+            _logger.info('File %s not found' % filename)
+            self._validation_error(
+                    log,
+                    "File not found",
+                    "file_not_found",
+                )
+            return []
 
         try:
-            with open(file_path, "rb") as file:
+            with sftp.open(file_path, "rb") as file:
                 file_bytes = file.read()
+                attachment = self.env["ir.attachment"].create({
+                    "name": os.path.basename(file_path),
+                    "datas": base64.b64encode(file_bytes),
+                    "type": "binary",
+                    "mimetype": "text/csv",
+                })
+                log.write({'attachment_id': attachment.id, 'file_name': attachment.name})
 
-            csv_text = file_bytes.decode("utf-8")
+
+            csv_text = file_bytes.decode("utf-8-sig")
             reader = csv.DictReader(io.StringIO(csv_text), delimiter="\t")
 
             if not reader.fieldnames:
-                return self._validation_error(
+                self._validation_error(
                     log,
                     "CSV file has no header.",
                     "file_invalid",
-                ), []
+                )
+                return []
 
             required_columns = {
                 "Référence Pièce",
-                "Statut de paiement",
-                "SIREN du fournisseur",
+                "Statut paiement",
+                "Siren tiers",
                 "Montant payé",
                 "Devise"
             }
@@ -104,23 +119,16 @@ class AccountMove(models.Model):
             missing_columns = required_columns - set(reader.fieldnames)
 
             if missing_columns:
-                return self._validation_error(
+                self._validation_error(
                     log,
                     "Missing required column(s): %s"
                     % ", ".join(sorted(missing_columns)),
                     "file_invalid",
-                ), []
+                )
+                return []
 
             rows = list(reader)
-
-            attachment = self.env["ir.attachment"].create({
-                "name": os.path.basename(file_path),
-                "datas": base64.b64encode(file_bytes),
-                "type": "binary",
-                "mimetype": "text/csv",
-            })
-
-            return attachment, rows
+            return rows
 
         except FileNotFoundError:
             message = f"File not found: {file_path}"
@@ -143,7 +151,7 @@ class AccountMove(models.Model):
             message=message,
             error_type=error_type,
         )
-        return False, []
+        return []
 
     def validate_data_import(self, invoice_data, log):
         """Validate a single invoice row from the import."""
@@ -158,7 +166,7 @@ class AccountMove(models.Model):
             )
 
         move = self.env["account.move"].search(
-            [("ref", "=", ref)],
+            [("ref", "=", ref), ('move_type', '=', 'in_invoice')],
             limit=1,
         )
 
@@ -179,7 +187,7 @@ class AccountMove(models.Model):
                 ref,
             )
 
-        payment_state = invoice_data.get("Statut de paiement")
+        payment_state = invoice_data.get("Statut paiement")
 
         if payment_state not in AUTHORIZED_PAYMENT_STATE:
             return self._validation_error(
@@ -198,9 +206,9 @@ class AccountMove(models.Model):
                 ref,
             )
 
-        siren = invoice_data.get("SIREN du fournisseur")
+        siren = invoice_data.get("Siren tiers")
 
-        if move.siren != siren:
+        if siren and move.siren != siren:
             return self._validation_error(
                 log,
                 "Supplier SIREN does not match the invoice.",
@@ -257,60 +265,86 @@ class AccountMove(models.Model):
             'error_type': error_type
         })
 
-    def create_payment(self, move_id, data):
-        payment_state = data.get('Statut de paiement')
-        if move_id.amount_residual > 0 and payment_state == 'En paiement':
-            wizard = self.env['account.payment.register'].with_context(
-                active_model='account.move',
-                active_ids=move_id.ids,
-            ).create({})
-            wizard._create_payments()
+    def create_payment(self):
+        wizard = self.env['account.payment.register'].with_context(
+            active_model='account.move',
+            active_ids=self.ids,
+        ).create({})
+        wizard._create_payments()
+        _logger.info("Payment created successfully for account move %s" % self.id)
+
+    def create_reverse_move(self):
+        reversal_move = self.env['account.move.reversal'].create({
+            'move_ids': self.ids,
+            'refund_method': 'cancel',
+            'date_mode': 'custom',
+            'journal_id': self.journal_id.id
+        })
+        reversal_move.reverse_moves()
+        for new_move in reversal_move.new_move_ids:
+            new_move.action_post()
+        _logger.info("Reverse move created successfully for account move %s" % self.id)
 
 
     @api.model
     def import_account_move_in_invoice(self):
         sftp_server_id = self.env['choreograph.sage.sftp.server'].search([('active', '=', True)], limit=1)
         if sftp_server_id:
-            # sftp = self.get_sftp_client(sftp_server_id)
+            ssh_client = self.get_sftp_client(sftp_server_id)
             start = datetime.now()
             log = self.create_sftp_log(sftp_server_id)
-            attachment, datas = self.download_file(log)
-            if attachment:
-                log.write({'attachment_id': attachment.id, 'file_name': attachment.name})
+            datas = self.download_file(sftp_server_id, ssh_client, log)
+            if len(datas) == 0:
+                log.state = 'rejected'
+                return False
 
-                line_count = 0
-                error_count = 0
-                success_count = 0
-                for data in datas:
-                    try:
-                        move_id = self.validate_data_import(data, log)
-                        if move_id:
+            line_count = 0
+            error_count = 0
+            success_count = 0
+            for data in datas:
+                try:
+                    move_id = self.validate_data_import(data, log)
+                    if move_id:
+                        payment_state = data.get('Statut paiement')
+                        if move_id.amount_residual > 0 and payment_state == 'En paiement':
+                            move_id.create_payment()
+                            success_count +=1
+                        elif not move_id.reversal_move_id and payment_state == 'Extourné':
+                            move_id.create_reverse_move()
                             success_count += 1
-                            self.create_payment(move_id, data)
                         else:
+                            self.create_sftp_log_line(
+                                log=log,
+                                message="Invoice cannot be paid or reversed; please check the remaining balance or whether a reversal has already been created.",
+                                error_type="data_mismatch",
+                                ref=data.get("Référence Pièce"),
+                            )
                             error_count += 1
-                    except Exception as e:
-                        _logger.exception(
-                            "Unexpected error while processing line with reference '%s'",
-                            data.get("Référence Pièce")
-                        )
-                        self.create_sftp_log_line(
-                            log=log,
-                            message=str(e),
-                            error_type="file_invalid",
-                            ref=data.get("Référence Pièce"),
-                        )
+
+                    else:
                         error_count += 1
-                    finally:
-                        line_count += 1
-                log.line_count = line_count
-                log.error_count = error_count
-                log.success_count = success_count
-                if line_count == error_count:
-                    log.state = 'failed'
-                elif line_count == success_count:
-                    log.state = 'success'
-                elif error_count != line_count and error_count != 0 and line_count != 0:
-                    log.state = 'partial'
-                end = datetime.now()
-                log.duration = (end - start).seconds
+                except Exception as e:
+                    _logger.exception(
+                        "Unexpected error while processing line with reference '%s'",
+                        data.get("Référence Pièce")
+                    )
+                    self.create_sftp_log_line(
+                        log=log,
+                        message=str(e),
+                        error_type="file_invalid",
+                        ref=data.get("Référence Pièce"),
+                    )
+                    error_count += 1
+                finally:
+                    line_count += 1
+            log.line_count = line_count
+            log.error_count = error_count
+            log.success_count = success_count
+            if line_count == error_count:
+                log.state = 'failed'
+            elif line_count == success_count:
+                log.state = 'success'
+            elif error_count != line_count and error_count != 0 and line_count != 0:
+                log.state = 'partial'
+            end = datetime.now()
+            log.duration = (end - start).seconds
