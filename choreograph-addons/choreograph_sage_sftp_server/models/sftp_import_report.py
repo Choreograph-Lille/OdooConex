@@ -61,5 +61,6 @@ class SftpImportReportLine(models.Model):
         ('wrong_state',       'Invoice not posted'),
         ('data_mismatch',     'Data mismatch'),
         ('already_paid',     'Invoice already paid'),
+        ('reversed', 'Reversed invoice')
     ], string="Error type")
     message = fields.Text(string="Error cause")

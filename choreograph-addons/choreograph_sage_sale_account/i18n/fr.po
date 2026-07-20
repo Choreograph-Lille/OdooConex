@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e-20250624\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-09 12:19+0000\n"
-"PO-Revision-Date: 2026-07-09 12:19+0000\n"
+"POT-Creation-Date: 2026-07-20 11:21+0000\n"
+"PO-Revision-Date: 2026-07-20 11:21+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,8 +19,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/choreograph_sage_sale_account/models/account_move.py:0
 #, python-format
-msgid "Account move with reference %s not found"
-msgstr "Facture avec la référence %s introuvable"
+msgid "Account move with reference '%s' was not found."
+msgstr "La facture avec la référence '%s' est introuvable"
 
 #. module: choreograph_sage_sale_account
 #: model_terms:ir.ui.view,arch_db:choreograph_sage_sale_account.res_config_settings_view_form
@@ -31,29 +31,8 @@ msgstr "Vous permettre de saisir des valeurs du fichier de vente SAGE"
 #. odoo-python
 #: code:addons/choreograph_sage_sale_account/models/account_move.py:0
 #, python-format
-msgid "Amount mismatch for invoice %s: Sage=%s, Odoo=%s"
-msgstr "Incohérence de montant pour la facture %s : Sage=%s, Odoo=%s"
-
-#. module: choreograph_sage_sale_account
-#. odoo-python
-#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
-#, python-format
-msgid "CSV file has no header"
-msgstr "Le fichier CSV n'a pas d'en-tête"
-
-#. module: choreograph_sage_sale_account
-#. odoo-python
-#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
-#, python-format
-msgid "CSV invalid: %s"
-msgstr "Fichier CSV invalide: %s"
-
-#. module: choreograph_sage_sale_account
-#. odoo-python
-#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
-#, python-format
-msgid "Cannot import file, reason: %s"
-msgstr "Impossible d'importer le fichier: raison: %s"
+msgid "CSV file has no header."
+msgstr "Le fichier CSV n'a pas d'en tête"
 
 #. module: choreograph_sage_sale_account
 #: model:ir.model,name:choreograph_sage_sale_account.model_res_config_settings
@@ -71,8 +50,20 @@ msgstr "Impossible d'établir une connexion au serveur SFTP, la raison: %s"
 #. odoo-python
 #: code:addons/choreograph_sage_sale_account/models/account_move.py:0
 #, python-format
-msgid "Currency mismatch for invoice %s: Sage=%s, Odoo=%s"
-msgstr "Incohérence sur la devise pour la facture %s: Sage=%s, Odoo=%s"
+msgid "Currency mismatch for invoice %s: Sage=%s, Odoo=%s."
+msgstr "Devise incohérente pour la facture %s: Sage=%s, Odoo=%s"
+
+#. module: choreograph_sage_sale_account
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
+#, python-format
+msgid "Customer SIREN does not match for invoice %s."
+msgstr "SIREN du client ne correspond pas %s"
+
+#. module: choreograph_sage_sale_account
+#: model:ir.model.fields,field_description:choreograph_sage_sale_account.field_res_config_settings__sage_sale_default_journal_id
+msgid "Default journal id"
+msgstr "Journal de paiement"
 
 #. module: choreograph_sage_sale_account
 #: model_terms:ir.ui.view,arch_db:choreograph_sage_sale_account.res_config_settings_view_form
@@ -84,29 +75,71 @@ msgstr ""
 #. odoo-python
 #: code:addons/choreograph_sage_sale_account/models/account_move.py:0
 #, python-format
+msgid "Duplicate reference %s in file, line skipped."
+msgstr "Référence dupliquée %s dans le fichier, ligne ignorée"
+
+#. module: choreograph_sage_sale_account
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
+#, python-format
 msgid "File %s not found on SFTP server."
 msgstr "Fichier %s introuvable sur le serveur SFTP"
 
 #. module: choreograph_sage_sale_account
-#. odoo-python
-#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
-#, python-format
-msgid "File is not a valid UTF-8 CSV"
-msgstr "Le fichier CSV n'a pas le bon encodage UTF-8"
+#: model:ir.model.fields,field_description:choreograph_sage_sale_account.field_res_config_settings__sage_sale_file_date
+msgid "File date"
+msgstr "Date d'import"
 
 #. module: choreograph_sage_sale_account
 #. odoo-python
 #: code:addons/choreograph_sage_sale_account/models/account_move.py:0
 #, python-format
-msgid "Invoice %s has already been paid"
+msgid "File is not a valid UTF-8 CSV."
+msgstr "Le fichier n'est pas un fichier CSV UTF-8 valide"
+
+#. module: choreograph_sage_sale_account
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
+#, python-format
+msgid "Invalid CSV file: %s"
+msgstr "Fichier CSV invalide: %s"
+
+#. module: choreograph_sage_sale_account
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
+#, python-format
+msgid "Invalid payment amount: '%s'."
+msgstr "Montant du paiement invalide: '%s'"
+
+#. module: choreograph_sage_sale_account
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
+#, python-format
+msgid "Invoice %s has already been paid."
 msgstr "La facture %s a déjà été payée"
 
 #. module: choreograph_sage_sale_account
 #. odoo-python
 #: code:addons/choreograph_sage_sale_account/models/account_move.py:0
 #, python-format
-msgid "Invoice %s is not posted (current state: %s)"
-msgstr "La facture %s n'est pas encore enregistrée (état actuel: %s)"
+msgid ""
+"Invoice %s has reversed status in Sage, no action taken. Please handle "
+"manually."
+msgstr "La facture %s a un statut Extourné, aucune action effectuée. Veuillez traiter manuellement."
+
+#. module: choreograph_sage_sale_account
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
+#, python-format
+msgid "Invoice %s must be posted."
+msgstr "La facture %s doit être Comptabilisé"
+
+#. module: choreograph_sage_sale_account
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
+#, python-format
+msgid "Invoice reference is missing."
+msgstr "Référence facture absente"
 
 #. module: choreograph_sage_sale_account
 #: model:ir.model,name:choreograph_sage_sale_account.model_account_move
@@ -114,23 +147,28 @@ msgid "Journal Entry"
 msgstr "Pièce comptable"
 
 #. module: choreograph_sage_sale_account
+#: model:ir.model.fields,help:choreograph_sage_sale_account.field_res_config_settings__sage_sale_file_date
+msgid "Leave empty to use today's date"
+msgstr "Laisser vide pour utiliser la date du jour"
+
+#. module: choreograph_sage_sale_account
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
+#, python-format
+msgid "Missing required column(s): %s"
+msgstr "Colonne obligatoire manquante(s): %s"
+
+#. module: choreograph_sage_sale_account
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
+#, python-format
+msgid "Payment amount does not match invoice total for %s: Sage=%s, Odoo=%s."
+msgstr "Le montant du paiement ne correspond pas au total de la facture pour %s : Sage=%s, Odoo=%s."
+
+#. module: choreograph_sage_sale_account
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account.field_res_config_settings__sage_sale_file_prefix
 msgid "Prefix"
 msgstr "Préfixe"
-
-#. module: choreograph_sage_sale_account
-#. odoo-python
-#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
-#, python-format
-msgid "Reference not found in CSV row"
-msgstr "Référence introuvable dans la ligne du fichier CSV"
-
-#. module: choreograph_sage_sale_account
-#. odoo-python
-#: code:addons/choreograph_sage_sale_account/models/account_move.py:0
-#, python-format
-msgid "SIREN not found in CSV row for invoice %s"
-msgstr "SIREN introuvable dans la ligne du fichier CSV pour la facture %s"
 
 #. module: choreograph_sage_sale_account
 #: model_terms:ir.ui.view,arch_db:choreograph_sage_sale_account.res_config_settings_view_form
@@ -152,12 +190,12 @@ msgstr "Suffixe"
 #. odoo-python
 #: code:addons/choreograph_sage_sale_account/models/account_move.py:0
 #, python-format
-msgid "The customer's SIREN does not match for invoice %s: Sage=%s, Odoo=%s"
-msgstr "Le SIREN du client ne correspond pas pour la facture %s : Sage=%s, Odoo=%s"
+msgid "Unable to read file: %s"
+msgstr "Impossible de lire le fichier: %s"
 
 #. module: choreograph_sage_sale_account
 #. odoo-python
 #: code:addons/choreograph_sage_sale_account/models/account_move.py:0
 #, python-format
-msgid "Value of payment state should be among %s"
-msgstr "La valeur de l'état du paiement doit être parmi %s"
+msgid "Unknown payment state '%s'. Expected one of: %s."
+msgstr "Statut de paiement inconnu '%s'. Statut attendus: %s"
