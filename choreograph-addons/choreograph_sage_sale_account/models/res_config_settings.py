@@ -12,3 +12,8 @@ class ResConfigSettings(models.TransientModel):
         string="Suffix",
         config_parameter='choreograph_sage_sale_account.suffix',
     )
+    sage_sale_file_date = fields.Datetime(
+    string="File date",
+    config_parameter='choreograph_sage_sale_account.sage_file_date',
+    help="Leave empty to use today's date",
+    )
