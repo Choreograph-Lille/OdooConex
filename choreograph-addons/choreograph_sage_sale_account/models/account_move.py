@@ -41,7 +41,7 @@ class AccountMove(models.Model):
         self = self.with_context(move_type=move_type)
         sftp_server_id = self.env['choreograph.sage.sftp.server'].search([('active', '=', True)], limit=1)
         if sftp_server_id:
-            ssh_client = self.get_sftp_client(sftp_server_id)
+            ssh_client = self.get_sftp_client_import(sftp_server_id)
             start = datetime.now()
             log = self.create_sftp_log(sftp_server_id)
             datas = self.download_file(sftp_server_id, ssh_client, log)
