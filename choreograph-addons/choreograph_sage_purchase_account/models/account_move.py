@@ -113,7 +113,8 @@ class AccountMove(models.Model):
                 "Statut paiement",
                 "Siren tiers",
                 "Montant payé",
-                "Devise"
+                "Devise",
+                "ID ODOO"
             }
 
             missing_columns = required_columns - set(reader.fieldnames)
@@ -165,10 +166,19 @@ class AccountMove(models.Model):
                 "file_invalid",
             )
 
-        move = self.env["account.move"].search(
-            [("ref", "=", ref), ('move_type', '=', 'in_invoice')],
-            limit=1,
-        )
+        odoo_id = invoice_data.get('ID ODOO')
+        move = self.env['account.move']
+        try:
+            move_id = int(odoo_id)
+            move = self.env["account.move"].browse(move_id)
+        except Exception as e:
+            _logger.error("Impossible to get move by ID odoo, reason: %s" % e)
+
+        if not move:
+            move = self.env["account.move"].search(
+                [("ref", "=", ref), ('move_type', '=', 'in_invoice')],
+                limit=1,
+            )
 
         if not move:
             return self._validation_error(
@@ -266,24 +276,17 @@ class AccountMove(models.Model):
         })
 
     def create_payment(self):
+        config_parameter = self.env['ir.config_parameter'].sudo()
+        journal_id  = config_parameter.get_param('choreograph_sage_purchase_account.purchase_default_journal_id', False)
+
         wizard = self.env['account.payment.register'].with_context(
             active_model='account.move',
             active_ids=self.ids,
-        ).create({})
+        ).create({
+            'journal_id': int(journal_id) if journal_id else False
+        })
         wizard._create_payments()
         _logger.info("Payment created successfully for account move %s" % self.id)
-
-    def create_reverse_move(self):
-        reversal_move = self.env['account.move.reversal'].create({
-            'move_ids': self.ids,
-            'refund_method': 'cancel',
-            'date_mode': 'custom',
-            'journal_id': self.journal_id.id
-        })
-        reversal_move.reverse_moves()
-        for new_move in reversal_move.new_move_ids:
-            new_move.action_post()
-        _logger.info("Reverse move created successfully for account move %s" % self.id)
 
 
     @api.model
@@ -309,13 +312,10 @@ class AccountMove(models.Model):
                         if move_id.amount_residual > 0 and payment_state == 'En paiement':
                             move_id.create_payment()
                             success_count +=1
-                        elif not move_id.reversal_move_id and payment_state == 'Extourné':
-                            move_id.create_reverse_move()
-                            success_count += 1
                         else:
                             self.create_sftp_log_line(
                                 log=log,
-                                message=_("Invoice cannot be paid or reversed; please check the remaining balance or whether a reversal has already been created."),
+                                message=_("Invoice cannot be paid; please check the remaining balance or whether a reversal has already been created."),
                                 error_type="data_mismatch",
                                 ref=data.get("Référence Pièce"),
                             )
