@@ -20,7 +20,7 @@ AUTHORIZED_PAYMENT_STATE = ('En paiement', 'Extourné')
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    def get_file_name(self):
+    def get_purchase_file_name(self):
         config_parameter = self.env['ir.config_parameter'].sudo()
         prefix = config_parameter.get_param('choreograph_sage_purchase_account.prefix') or False
         suffix = config_parameter.get_param('choreograph_sage_purchase_account.suffix') or False
@@ -68,14 +68,14 @@ class AccountMove(models.Model):
         )
         return False
 
-    def download_file(self, ftp_server, ssh_client, log):
+    def download_file_purchase(self, ftp_server, ssh_client, log):
         """Read the configured CSV file and return its attachment and rows."""
-        file_path = f"{ftp_server.output_path}/{self.get_file_name()}"
+        file_path = f"{ftp_server.output_path}/{self.get_purchase_file_name()}"
         sftp = ssh_client.open_sftp()
 
         # Try to read file first
         list_dir = sftp.listdir(f'/{ftp_server.output_path}')
-        filename = self.get_file_name()
+        filename = self.get_purchase_file_name()
         if not self.is_present_file(filename, list_dir):
             _logger.info('File %s not found' % filename)
             self._validation_error(
@@ -113,8 +113,7 @@ class AccountMove(models.Model):
                 "Statut paiement",
                 "Siren tiers",
                 "Montant payé",
-                "Devise",
-                "ID ODOO"
+                "Devise"
             }
 
             missing_columns = required_columns - set(reader.fieldnames)
@@ -154,7 +153,7 @@ class AccountMove(models.Model):
         )
         return []
 
-    def validate_data_import(self, invoice_data, log):
+    def validate_data_import_purchase(self, invoice_data, log):
         """Validate a single invoice row from the import."""
 
         ref = invoice_data.get("Référence Pièce")
@@ -166,20 +165,10 @@ class AccountMove(models.Model):
                 "file_invalid",
             )
 
-        odoo_id = invoice_data.get('ID ODOO')
-        move = self.env['account.move']
-        try:
-            move_id = int(odoo_id)
-            virtual_move = self.env["account.move"].browse(move_id)
-            move = virtual_move if virtual_move.exists() else self.env['account.move']
-        except Exception as e:
-            _logger.error("Impossible to get move by ID odoo, reason: %s" % e)
-
-        if not move:
-            move = self.env["account.move"].search(
-                [("ref", "=", ref), ('move_type', '=', 'in_invoice')],
-                limit=1,
-            )
+        move = self.env["account.move"].search(
+            [("ref", "=", ref), ('move_type', '=', 'in_invoice')],
+            limit=1,
+        )
 
         if not move:
             return self._validation_error(
@@ -248,8 +237,7 @@ class AccountMove(models.Model):
                 ref,
             )
 
-        # Check if the amount to pay is different of amount_total only if the currency is same as main company
-        if amount != move.amount_total and move.currency_id.id == move.company_id.currency_id.id:
+        if amount != move.amount_total:
             return self._validation_error(
                 log,
                 _("Payment amount does not match the invoice total."),
@@ -277,28 +265,25 @@ class AccountMove(models.Model):
             'error_type': error_type
         })
 
-    def get_payment_date(self, date_str):
-        try:
-            payment_date = datetime.strptime(date_str, '%d/%m/%Y')
-            return payment_date
-        except Exception as e:
-            _logger.error('Could not convert %s to date, reason: %s' % (date_str, e))
-            return fields.Date.today()
-
-
-    def create_payment(self, payment_date=False):
-        config_parameter = self.env['ir.config_parameter'].sudo()
-        journal_id  = config_parameter.get_param('choreograph_sage_purchase_account.purchase_default_journal_id', False)
-
+    def create_payment(self):
         wizard = self.env['account.payment.register'].with_context(
             active_model='account.move',
             active_ids=self.ids,
-        ).create({
-            'journal_id': int(journal_id) if journal_id else False,
-            'payment_date': self.get_payment_date(payment_date)
-        })
+        ).create({})
         wizard._create_payments()
         _logger.info("Payment created successfully for account move %s" % self.id)
+
+    def create_reverse_move(self):
+        reversal_move = self.env['account.move.reversal'].create({
+            'move_ids': self.ids,
+            'refund_method': 'cancel',
+            'date_mode': 'custom',
+            'journal_id': self.journal_id.id
+        })
+        reversal_move.reverse_moves()
+        for new_move in reversal_move.new_move_ids:
+            new_move.action_post()
+        _logger.info("Reverse move created successfully for account move %s" % self.id)
 
 
     @api.model
@@ -308,7 +293,7 @@ class AccountMove(models.Model):
             ssh_client = self.get_sftp_client(sftp_server_id)
             start = datetime.now()
             log = self.create_sftp_log(sftp_server_id)
-            datas = self.download_file(sftp_server_id, ssh_client, log)
+            datas = self.download_file_purchase(sftp_server_id, ssh_client, log)
             if len(datas) == 0:
                 log.state = 'rejected'
                 return False
@@ -318,16 +303,19 @@ class AccountMove(models.Model):
             success_count = 0
             for data in datas:
                 try:
-                    move_id = self.validate_data_import(data, log)
+                    move_id = self.validate_data_import_purchase(data, log)
                     if move_id:
                         payment_state = data.get('Statut paiement')
                         if move_id.amount_residual > 0 and payment_state == 'En paiement':
-                            move_id.create_payment(payment_date=data.get('Date paiement'))
+                            move_id.create_payment()
                             success_count +=1
+                        elif not move_id.reversal_move_id and payment_state == 'Extourné':
+                            move_id.create_reverse_move()
+                            success_count += 1
                         else:
                             self.create_sftp_log_line(
                                 log=log,
-                                message=_("Invoice cannot be paid; please check the remaining balance or whether a reversal has already been created."),
+                                message=_("Invoice cannot be paid or reversed; please check the remaining balance or whether a reversal has already been created."),
                                 error_type="data_mismatch",
                                 ref=data.get("Référence Pièce"),
                             )
