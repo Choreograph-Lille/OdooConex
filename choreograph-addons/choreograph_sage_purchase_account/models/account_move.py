@@ -277,7 +277,16 @@ class AccountMove(models.Model):
             'error_type': error_type
         })
 
-    def create_payment(self):
+    def get_payment_date(self, date_str):
+        try:
+            payment_date = datetime.strptime(date_str, '%d/%m/%Y')
+            return payment_date
+        except Exception as e:
+            _logger.error('Could not convert %s to date, reason: %s' % (date_str, e))
+            return fields.Date.today()
+
+
+    def create_payment(self, payment_date=False):
         config_parameter = self.env['ir.config_parameter'].sudo()
         journal_id  = config_parameter.get_param('choreograph_sage_purchase_account.purchase_default_journal_id', False)
 
@@ -285,7 +294,8 @@ class AccountMove(models.Model):
             active_model='account.move',
             active_ids=self.ids,
         ).create({
-            'journal_id': int(journal_id) if journal_id else False
+            'journal_id': int(journal_id) if journal_id else False,
+            'payment_date': self.get_payment_date(payment_date)
         })
         wizard._create_payments()
         _logger.info("Payment created successfully for account move %s" % self.id)
@@ -312,7 +322,7 @@ class AccountMove(models.Model):
                     if move_id:
                         payment_state = data.get('Statut paiement')
                         if move_id.amount_residual > 0 and payment_state == 'En paiement':
-                            move_id.create_payment()
+                            move_id.create_payment(payment_date=data.get('Date paiement'))
                             success_count +=1
                         else:
                             self.create_sftp_log_line(
