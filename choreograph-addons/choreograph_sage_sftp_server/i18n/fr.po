@@ -359,3 +359,8 @@ msgstr "Nom d'utilisateur"
 #: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_import_report_line__error_type__already_paid
 msgid "Invoice already paid"
 msgstr "Facture déjà payée"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_import_report_line__error_type__reversed
+msgid "Reversed invoice"
+msgstr "Facture Extourné"
