@@ -170,7 +170,8 @@ class AccountMove(models.Model):
         move = self.env['account.move']
         try:
             move_id = int(odoo_id)
-            move = self.env["account.move"].browse(move_id)
+            virtual_move = self.env["account.move"].browse(move_id)
+            move = virtual_move if virtual_move.exists() else self.env['account.move']
         except Exception as e:
             _logger.error("Impossible to get move by ID odoo, reason: %s" % e)
 
@@ -247,7 +248,8 @@ class AccountMove(models.Model):
                 ref,
             )
 
-        if amount != move.amount_total:
+        # Check if the amount to pay is different of amount_total only if the currency is same as main company
+        if amount != move.amount_total and move.currency_id.id == move.company_id.currency_id.id:
             return self._validation_error(
                 log,
                 _("Payment amount does not match the invoice total."),
