@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.choreograph.sage.sale.account.export</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@id='quick_edit_mode']" position="after">
+                    <h2>SAGE Sale Account Export</h2>
+                    <div class="row mt16 o_settings_container" id="sage_sale">
+                        <div class="col-12 col-lg-6 o_setting_box" id="sage_sale_files_informations"
+                             title="Allow you to configure SAGE sale invoice export settings">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <div class="text-muted">
+                                    Configure export settings for paid invoices to PA ICD.
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label for="sage_sale_export_file_prefix" class="col-lg-3 o_light_label"/>
+                                        <field name="sage_sale_export_file_prefix"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="sage_sale_export_file_suffix" class="col-lg-3 o_light_label"/>
+                                        <field name="sage_sale_export_file_suffix"/>
+                                    </div>
+                                    <div class="row mt16">
+                                        <label for="sage_sale_sftp_export_server_id" class="col-lg-3 o_light_label"/>
+                                        <field name="sage_sale_sftp_export_server_id"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
