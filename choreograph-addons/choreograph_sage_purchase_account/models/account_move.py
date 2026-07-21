@@ -20,7 +20,7 @@ AUTHORIZED_PAYMENT_STATE = ('En paiement', 'Extourné')
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
-    def get_file_name(self):
+    def get_purchase_file_name(self):
         config_parameter = self.env['ir.config_parameter'].sudo()
         prefix = config_parameter.get_param('choreograph_sage_purchase_account.prefix') or False
         suffix = config_parameter.get_param('choreograph_sage_purchase_account.suffix') or False
@@ -68,14 +68,14 @@ class AccountMove(models.Model):
         )
         return False
 
-    def download_file(self, ftp_server, ssh_client, log):
+    def download_file_purchase(self, ftp_server, ssh_client, log):
         """Read the configured CSV file and return its attachment and rows."""
-        file_path = f"{ftp_server.output_path}/{self.get_file_name()}"
+        file_path = f"{ftp_server.output_path}/{self.get_purchase_file_name()}"
         sftp = ssh_client.open_sftp()
 
         # Try to read file first
         list_dir = sftp.listdir(f'/{ftp_server.output_path}')
-        filename = self.get_file_name()
+        filename = self.get_purchase_file_name()
         if not self.is_present_file(filename, list_dir):
             _logger.info('File %s not found' % filename)
             self._validation_error(
@@ -153,7 +153,7 @@ class AccountMove(models.Model):
         )
         return []
 
-    def validate_data_import(self, invoice_data, log):
+    def validate_data_import_purchase(self, invoice_data, log):
         """Validate a single invoice row from the import."""
 
         ref = invoice_data.get("Référence Pièce")
@@ -293,7 +293,7 @@ class AccountMove(models.Model):
             ssh_client = self.get_sftp_client(sftp_server_id)
             start = datetime.now()
             log = self.create_sftp_log(sftp_server_id)
-            datas = self.download_file(sftp_server_id, ssh_client, log)
+            datas = self.download_file_purchase(sftp_server_id, ssh_client, log)
             if len(datas) == 0:
                 log.state = 'rejected'
                 return False
@@ -303,7 +303,7 @@ class AccountMove(models.Model):
             success_count = 0
             for data in datas:
                 try:
-                    move_id = self.validate_data_import(data, log)
+                    move_id = self.validate_data_import_purchase(data, log)
                     if move_id:
                         payment_state = data.get('Statut paiement')
                         if move_id.amount_residual > 0 and payment_state == 'En paiement':
