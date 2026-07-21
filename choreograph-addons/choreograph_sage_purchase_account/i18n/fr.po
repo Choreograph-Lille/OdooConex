@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-16 07:24+0000\n"
-"PO-Revision-Date: 2026-07-16 07:24+0000\n"
+"POT-Creation-Date: 2026-07-21 08:26+0000\n"
+"PO-Revision-Date: 2026-07-21 08:26+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -105,10 +105,10 @@ msgstr "Montant invalide pour le paiement: %s"
 #: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
 #, python-format
 msgid ""
-"Invoice cannot be paid or reversed; please check the remaining balance or "
-"whether a reversal has already been created."
+"Invoice cannot be paid; please check the remaining balance or whether a "
+"reversal has already been created."
 msgstr ""
-"La facture ne peut pas être réglée ni annulée ; veuillez vérifier le solde restant ou si une annulation a déjà été créée."
+"La facture ne peut pas être réglée ; veuillez vérifier le solde restant ou si le statut de paiement est en extourne"
 
 #. module: choreograph_sage_purchase_account
 #. odoo-python
