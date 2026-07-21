@@ -41,7 +41,7 @@ class AccountMove(models.Model):
             return False
 
 
-    def get_sftp_client(self, ftp_server):
+    def get_purchase_sftp_client(self, ftp_server):
         # Establish SSH connection
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -290,7 +290,7 @@ class AccountMove(models.Model):
     def import_account_move_in_invoice(self):
         sftp_server_id = self.env['choreograph.sage.sftp.server'].search([('active', '=', True)], limit=1)
         if sftp_server_id:
-            ssh_client = self.get_sftp_client(sftp_server_id)
+            ssh_client = self.get_purchase_sftp_client(sftp_server_id)
             start = datetime.now()
             log = self.create_sftp_log(sftp_server_id)
             datas = self.download_file_purchase(sftp_server_id, ssh_client, log)
