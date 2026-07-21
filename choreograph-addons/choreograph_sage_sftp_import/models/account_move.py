@@ -31,7 +31,7 @@ class AccountMove(models.Model):
             return False
 
 
-    def get_sftp_client(self, ftp_server):
+    def get_sftp_client_import(self, ftp_server):
         # Establish SSH connection
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
