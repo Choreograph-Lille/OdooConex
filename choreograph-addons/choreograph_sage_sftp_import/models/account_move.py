@@ -274,4 +274,23 @@ class AccountMove(models.Model):
         })
         wizard._create_payments()
         _logger.info("Payment created successfully for account move %s" % self.id)
+    
+    def create_sale_payment(self,data):
+        date_str = data.get('Date paiement' or '').strip()
+        payment_date = datetime.strptime(date_str, '%d/%m/%Y').date() if date_str else fields.Date.today()
+        amount = data.get('Montant payé' or '').strip()
+        vals = {
+            'payment_type': 'inbound',
+            'partner_type': 'customer',
+            'partner_id':   self.partner_id.id,
+            'amount':       amount,
+            'currency_id':  self.currency_id.id,
+            'payment_date' : payment_date,
+        }
+        wizard = self.env['account.payment.register'].with_context(
+            active_model='account.move',
+            active_ids=self.ids,
+        ).create(vals)
+        wizard._create_payments()
+        _logger.info('Payment created successfully for account move %s', self.id)
 

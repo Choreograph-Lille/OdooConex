@@ -12,6 +12,7 @@
         'choreograph_sage_sftp_server',
         'choreograph_account',
         'account',
+        'choreograph_sage_sftp_import'
     ],
     'data': [
         'security/ir.model.access.csv',
