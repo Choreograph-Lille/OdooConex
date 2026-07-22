@@ -262,6 +262,14 @@ class AccountMove(models.Model):
             'error_type': error_type
         })
 
+    def get_payment_date(self, date_str):
+        try:
+            payment_date = datetime.strptime(date_str, '%d/%m/%Y')
+            return payment_date
+        except Exception as e:
+            _logger.error('Could not convert %s to date, reason: %s' % (date_str, e))
+            return fields.Date.today()
+
     def create_payment(self, payment_date=False):
         config_parameter = self.env['ir.config_parameter'].sudo()
         journal_id = config_parameter.get_param('choreograph_sage_purchase_account.purchase_default_journal_id', False)
