@@ -11,7 +11,7 @@ import os
 
 _logger = logging.getLogger(__name__)
 
-from odoo import api, fields, models, _
+from odoo import fields, models, _
 from odoo.exceptions import UserError
 
 AUTHORIZED_PAYMENT_STATE = ('En paiement', 'Extourné')
@@ -247,10 +247,10 @@ class AccountMove(models.Model):
 
         return move
 
-    def create_sftp_log(self, sftp_server_id, attachment=False):
+    def create_sftp_log(self, sftp_server_id,type,attachment=False):
         log = self.env['sftp.import.report'].create({
             'import_date': fields.Datetime.now(),
-            'type': 'purchase',
+            'type': type,
             'attachment_id': attachment.id if attachment else False,
             'file_name': attachment.name if attachment else False,
             'sftp_server_id': sftp_server_id.id
