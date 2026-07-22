@@ -32,9 +32,9 @@ class AccountMove(models.Model):
 
             file_name = f"{sage_date.strftime('%Y%m%d')}.csv"
             if prefix:
-                file_name = prefix + file_name
+                file_name = f"{prefix}_{file_name}"
             if suffix:
-                file_name += suffix
+                file_name = f"{file_name}_{suffix}"
         return file_name
 
     @api.model
