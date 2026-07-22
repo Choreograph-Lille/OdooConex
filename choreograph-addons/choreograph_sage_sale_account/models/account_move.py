@@ -6,10 +6,8 @@ from datetime import datetime
 _logger = logging.getLogger(__name__)
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
 
 AUTHORIZED_PAYMENT_STATE = ('En paiement', 'Extourné')
-
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
@@ -43,7 +41,7 @@ class AccountMove(models.Model):
         if sftp_server_id:
             ssh_client = self.get_sftp_client_import(sftp_server_id)
             start = datetime.now()
-            log = self.create_sftp_log(sftp_server_id)
+            log = self.create_sftp_log(sftp_server_id,'sale')
             datas = self.download_file(sftp_server_id, ssh_client, log)
             if len(datas) == 0:
                 log.state = 'rejected'
