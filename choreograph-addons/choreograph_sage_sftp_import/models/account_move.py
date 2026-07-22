@@ -163,10 +163,13 @@ class AccountMove(models.Model):
         except Exception as e:
             _logger.error("Impossible to get move by ID odoo, reason: %s" % e)
 
-        move = self.env["account.move"].search(
-            [("ref", "=", ref), ('move_type', '=', move_type)],
-            limit=1,
-        )
+        if not move:
+            domain = [('move_type', '=', move_type)]
+            if move_type == 'in_invoice':
+                domain += [("ref", "=", ref)]
+            else:
+                domain += [('name', '=', ref)]
+            move = self.env["account.move"].search(domain,limit=1)
 
         if not move:
             return self._validation_error(
