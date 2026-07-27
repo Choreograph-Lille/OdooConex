@@ -6,7 +6,7 @@
     'category': 'Accounting',
     'author': 'ArkeUp',
     'website': 'https://arkeup.com',
-    'depends': ['base', 'account'],
+    'depends': ['base', 'account','choreograph_sage'],
     'data': [
         'security/ir.model.access.csv',
         'views/choreograph_sage_sftp_server_views.xml',

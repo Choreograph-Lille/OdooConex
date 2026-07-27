@@ -51,8 +51,9 @@
         <menuitem
             id="ftp_logging_menu"
             name="FTP logging"
-            parent="choreograph_sage.menu_sage"
+            parent="choreograph_sage.menu_logs"
             action="ftp_logging_action"
+            sequence="1"
         />
     </data>
 </odoo>
