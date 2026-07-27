@@ -251,9 +251,13 @@ msgstr "Port"
 
 #. module: choreograph_sage_sftp_server
 #: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_import_report__type__purchase
-#: model:ir.ui.menu,name:choreograph_sage_sftp_server.menu_sftp_import_report_purchase
 msgid "Purchases"
 msgstr "Achats"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.ui.menu,name:choreograph_sage_sftp_server.menu_sftp_import_report_purchase
+msgid "Purchases"
+msgstr "Logs Achats SAGE dans Odoo"
 
 #. module: choreograph_sage_sftp_server
 #: model:ir.actions.act_window,name:choreograph_sage_sftp_server.sftp_import_report_action_purchase
@@ -308,9 +312,13 @@ msgstr "SAGE vers Odoo"
 
 #. module: choreograph_sage_sftp_server
 #: model:ir.model.fields.selection,name:choreograph_sage_sftp_server.selection__sftp_import_report__type__sale
-#: model:ir.ui.menu,name:choreograph_sage_sftp_server.menu_sftp_import_report_sale
 msgid "Sales"
 msgstr "Ventes"
+
+#. module: choreograph_sage_sftp_server
+#: model:ir.ui.menu,name:choreograph_sage_sftp_server.menu_sftp_import_report_sale
+msgid "Sales"
+msgstr "Logs Ventes SAGE dans Odoo"
 
 #. module: choreograph_sage_sftp_server
 #: model:ir.actions.act_window,name:choreograph_sage_sftp_server.sftp_import_report_action_sale
