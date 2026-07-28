@@ -20,7 +20,6 @@ class SftpExportReport(models.Model):
         "ir.attachment",
         string="Exported File",
     )
-    file = fields.Binary(string="File Content", attachment=False)
     type = fields.Selection(
         [
             ("invoice_collected", "Invoice Collected"),

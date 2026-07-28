@@ -69,16 +69,16 @@ class AccountMove(models.Model):
         """Generate and export paid invoices to PA ICD via SFTP"""
         sftp_server_id = self.env['ir.config_parameter'].sudo().get_param(
             'choreograph_sage_sale_account_export.sftp_server_id')
-
+        
         if not sftp_server_id:
-            raise ValidationError(_("Make sure to configure an SFTP server in settings!"))
+            _logger.warning(_("Make sure to configure an SFTP server in settings!"))
 
         try:
             ftp_server = self.env["choreograph.sage.sftp.server"].browse(int(sftp_server_id))
             if not ftp_server.exists():
-                raise ValidationError(_("Configured SFTP server does not exist!"))
+                _logger.warning(_("Configured SFTP server does not exist!"))
         except (ValueError, TypeError):
-            raise ValidationError(_("Invalid SFTP server configuration!"))
+            _logger.warning(_("Invalid SFTP server configuration!"))
 
         today = date.today()
 
@@ -87,7 +87,7 @@ class AccountMove(models.Model):
                 ("move_type", "in", ["out_invoice", "out_refund"]),
                 ("state", "=", "posted"),
                 ("payment_state", "=", "in_payment"),
-                ("invoice_date_due", "=", today),
+                ("invoice_date_due", "=", fields.Date.today()),
                 ("is_invoice_collected", "=", False),
             ]
         )
@@ -122,9 +122,11 @@ class AccountMove(models.Model):
         ssh_client = None
         sftp = None
         file_name = None
+        upload_successful = False
+        message = None
+        state = None
 
         try:
-            ssh_client, sftp = self.get_sftp_client(ftp_server)
             fields_list, rows = self.prepare_paid_invoices_rows(moves)
 
             file_name = self.get_export_file_name()
@@ -135,13 +137,22 @@ class AccountMove(models.Model):
                 writer.writeheader()
                 writer.writerows(rows)
 
-            sftp.put(temp_file, f"{ftp_server.output_path}/{file_name}")
+            try:
+                if ftp_server :
+                    ssh_client, sftp = self.get_sftp_client(ftp_server)
+                    sftp.put(temp_file, f"{ftp_server.output_path}/{file_name}")
+                    upload_successful = True
+                    state = "success"
+                    message = _("File uploaded successfully")
+                else:
+                    raise UserError(_("No SFTP server configured for export!"))
+            except Exception as ftp_error:
+                state = "failed"
+                message = _("FTP upload error: %s") % str(ftp_error)
+                _logger.warning(_("Paid invoices export FTP error: %s") % str(ftp_error))
 
             with open(temp_file, "rb") as file:
                 file_content = base64.b64encode(file.read())
-
-                state = "success"
-                message = _("File uploaded successfully")
 
                 self.create_export_log(
                     state,
@@ -154,12 +165,13 @@ class AccountMove(models.Model):
                     moves,
                 )
 
-            for move in moves:
-                move.write({"is_invoice_collected": True})
+            if upload_successful:
+                for move in moves:
+                    move.write({"is_invoice_collected": True})
 
-            _logger.info(
-                f"Paid invoices export: {len(moves)} invoices exported to {file_name}"
-            )
+                _logger.info(
+                    _("Paid invoices export: %s invoices exported to %s") % (len(moves), file_name)
+                )
 
         except Exception as e:
             state = "failed"
@@ -174,8 +186,7 @@ class AccountMove(models.Model):
                 ftp_server,
                 None,
             )
-            _logger.error(f"Paid invoices export failed: {str(e)}")
-            raise UserError(str(e))
+            _logger.error(_("Paid invoices export failed: %s") % (str(e) if ftp_server else _("No SFTP server configured")))
 
         finally:
             if sftp:
@@ -214,7 +225,6 @@ class AccountMove(models.Model):
             }
             attachment_id = self.env["ir.attachment"].create(attachment_vals)
             log_vals["attachment_id"] = attachment_id.id
-            log_vals["file"] = file
 
         report = self.env["sftp.export.report"].create(log_vals)
 

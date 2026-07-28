@@ -9,7 +9,6 @@
                 <tree>
                     <field name="export_date"/>
                     <field name="file_name"/>
-                    <field name="type"/>
                     <field name="line_count"/>
                     <field name="state"/>
                 </tree>
@@ -36,7 +35,6 @@
                             <group>
                                 <field name="sftp_server_id"/>
                                 <field name="attachment_id"/>
-                                <field name="file" widget="binary" attrs="{'invisible': [('file', '=', False)]}"/>
                             </group>
                         </group>
                         <separator string="Message"/>
@@ -55,7 +53,7 @@
         </record>
 
         <!-- Action -->
-        <record id="sftp_export_report_line_action" model="ir.actions.act_window">
+        <record id="sftp_export_report_action" model="ir.actions.act_window">
             <field name="name">Export Reports</field>
             <field name="res_model">sftp.export.report</field>
             <field name="view_mode">tree,form</field>

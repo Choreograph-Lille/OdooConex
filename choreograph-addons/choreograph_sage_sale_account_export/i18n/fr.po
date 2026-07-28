@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-21 07:03+0000\n"
-"PO-Revision-Date: 2026-07-21 07:03+0000\n"
+"POT-Creation-Date: 2026-07-28 10:09+0000\n"
+"PO-Revision-Date: 2026-07-28 10:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,9 +17,9 @@ msgstr ""
 
 #. module: choreograph_sage_sale_account_export
 #: model_terms:ir.ui.view,arch_db:choreograph_sage_sale_account_export.res_config_settings_view_form
-msgid "Allow you to configure SAGE sale invoice export settings"
+msgid "Allow you to configure PA sale invoice export settings"
 msgstr ""
-"Permet de configurer les paramètres d'exportation des factures de vente SAGE"
+"Permet de configurer les paramètres d'exportation des factures de vente PA"
 
 #. module: choreograph_sage_sale_account_export
 #. odoo-python
@@ -45,8 +45,8 @@ msgstr "Paramètres de configuration"
 #. module: choreograph_sage_sale_account_export
 #: model_terms:ir.ui.view,arch_db:choreograph_sage_sale_account_export.res_config_settings_view_form
 msgid "Configure export settings for paid invoices to PA ICD."
-msgstr "Configurez les paramètres d'exportations pour les factures client vers PA ICD"
-"Configurer les paramètres d'exportation des factures payées vers PA ICD."
+msgstr ""
+"Configurez les paramètres d'exportation des factures payées vers PA ICD."
 
 #. module: choreograph_sage_sale_account_export
 #. odoo-python
@@ -108,8 +108,8 @@ msgid "Export Paid Invoices to PA ICD"
 msgstr "Exporter les factures payées vers PA ICD"
 
 #. module: choreograph_sage_sale_account_export
-#: model:ir.actions.act_window,name:choreograph_sage_sale_account_export.sftp_export_report_line_action
-#: model:ir.ui.menu,name:choreograph_sage_sale_account_export.menu_sftp_export_report_line
+#: model:ir.actions.act_window,name:choreograph_sage_sale_account_export.sftp_export_report_action
+#: model:ir.ui.menu,name:choreograph_sage_sale_account_export.menu_sftp_export_report
 msgid "Export Reports"
 msgstr "Rapports d'exportation"
 
@@ -124,14 +124,16 @@ msgid "Exported File"
 msgstr "Fichier exporté"
 
 #. module: choreograph_sage_sale_account_export
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "FTP upload error: %s"
+msgstr "Erreur d'upload FTP : %s"
+
+#. module: choreograph_sage_sale_account_export
 #: model:ir.model.fields.selection,name:choreograph_sage_sale_account_export.selection__sftp_export_report__state__failed
 msgid "Failed"
 msgstr "Échoué"
-
-#. module: choreograph_sage_sale_account_export
-#: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_sftp_export_report__file
-msgid "File Content"
-msgstr "Contenu du fichier"
 
 #. module: choreograph_sage_sale_account_export
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_sftp_export_report__file_name
@@ -159,7 +161,7 @@ msgstr "Fichier téléversé avec succès"
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_sftp_export_report__id
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_sftp_export_report_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: choreograph_sage_sale_account_export
 #. odoo-python
@@ -241,17 +243,57 @@ msgstr "Assurez-vous de configurer un serveur SFTP dans les paramètres !"
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_sftp_export_report__message
 #: model_terms:ir.ui.view,arch_db:choreograph_sage_sale_account_export.sftp_export_report_form
 msgid "Message"
-msgstr ""
+msgstr "Message"
 
 #. module: choreograph_sage_sale_account_export
-#: model_terms:ir.actions.act_window,help:choreograph_sage_sale_account_export.sftp_export_report_line_action
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "No SFTP server configured"
+msgstr "Aucun serveur SFTP configuré"
+
+#. module: choreograph_sage_sale_account_export
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "No SFTP server configured for export!"
+msgstr "Aucun serveur SFTP configuré pour l'exportation !"
+
+#. module: choreograph_sage_sale_account_export
+#: model_terms:ir.actions.act_window,help:choreograph_sage_sale_account_export.sftp_export_report_action
 msgid "No export report found."
 msgstr "Aucun rapport d'exportation trouvé."
 
 #. module: choreograph_sage_sale_account_export
 #: model:ir.ui.menu,name:choreograph_sage_sale_account_export.menu_odoo_to_sage
-msgid "Odoo to SAGE"
-msgstr "Odoo vers SAGE"
+msgid "Odoo to PA"
+msgstr "Odoo vers PA"
+
+#. module: choreograph_sage_sale_account_export
+#: model_terms:ir.ui.view,arch_db:choreograph_sage_sale_account_export.res_config_settings_view_form
+msgid "PA Sale Account Export"
+msgstr "Exportation des ventes vers PA"
+
+#. module: choreograph_sage_sale_account_export
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "Paid invoices export FTP error: %s"
+msgstr "Erreur FTP lors de l'exportation des factures payées : %s"
+
+#. module: choreograph_sage_sale_account_export
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "Paid invoices export failed: %s"
+msgstr "L'exportation des factures payées a échoué : %s"
+
+#. module: choreograph_sage_sale_account_export
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "Paid invoices export: %s invoices exported to %s"
+msgstr "Exportation des factures payées : %s factures exportées vers %s"
 
 #. module: choreograph_sage_sale_account_export
 #: model:ir.model.fields.selection,name:choreograph_sage_sale_account_export.selection__sftp_export_report__state__partial
@@ -267,11 +309,6 @@ msgstr "Rejeté"
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_sftp_export_report_line__report_id
 msgid "Report"
 msgstr "Rapport"
-
-#. module: choreograph_sage_sale_account_export
-#: model_terms:ir.ui.view,arch_db:choreograph_sage_sale_account_export.res_config_settings_view_form
-msgid "SAGE Sale Account Export"
-msgstr "Exportation des ventes SAGE"
 
 #. module: choreograph_sage_sale_account_export
 #: model:ir.model,name:choreograph_sage_sale_account_export.model_sftp_export_report

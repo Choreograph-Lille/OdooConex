@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 {
-    "name": "Choreograph SAGE Sale Account Export",
+    "name": "Choreograph PA Sale Account Export",
     "version": "16.0.1.0.0",
     "license": "LGPL-3",
     "category": "Accounting",
     "sequence": -97,
-    "summary": "Manage Choreograph SAGE Sale invoice export to PA ICD",
+    "summary": "Manage Choreograph PA Sale invoice export to PA ICD",
     "description": """This module allows to export paid sale invoices to PA ICD""",
     "author": "ArkeUp",
     "website": "https://arkeup.com",
