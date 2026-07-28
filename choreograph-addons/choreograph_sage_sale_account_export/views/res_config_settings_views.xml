@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="account.res_config_settings_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[@id='quick_edit_mode']" position="after">
-                    <h2>SAGE Sale Account Export</h2>
+                    <h2>PA Sale Account Export</h2>
                     <div class="row mt16 o_settings_container" id="sage_sale">
                         <div class="col-12 col-lg-6 o_setting_box" id="sage_sale_files_informations"
                              title="Allow you to configure SAGE sale invoice export settings">
