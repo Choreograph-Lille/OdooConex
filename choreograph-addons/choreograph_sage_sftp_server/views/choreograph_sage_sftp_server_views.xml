@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
 
-        <record id="choreograph_sage_ftp_server_view_tree" model="ir.ui.view">
-            <field name="name">choreograph.sage.ftp.server.view.tree</field>
-            <field name="model">choreograph.sage.ftp.server</field>
+    <record id="choreograph_sage_sftp_server_view_tree" model="ir.ui.view">
+            <field name="name">choreograph.sage.sftp.server.view.tree</field>
+            <field name="model">choreograph.sage.sftp.server</field>
             <field name="arch" type="xml">
                 <tree decoration-muted="(not active)">
                     <field name="host"/>
                     <field name="port"/>
-                    <field name="username" />
+                    <field name="username"/>
+                    <field name="output_path"/>
                     <field name="active" widget="boolean_toggle"/>
                 </tree>
             </field>
         </record>
 
-        <record id="choreograph_sage_ftp_server_view_form" model="ir.ui.view">
-            <field name="name">choreograph.sage.ftp.server.view.tree</field>
-            <field name="model">choreograph.sage.ftp.server</field>
+        <record id="choreograph_sage_sftp_server_view_form" model="ir.ui.view">
+            <field name="name">choreograph.sage.sftp.server.view.form</field>
+            <field name="model">choreograph.sage.sftp.server</field>
             <field name="arch" type="xml">
                 <form string="">
                     <header>
@@ -28,14 +28,14 @@
                             <group>
                                 <field name="host"/>
                                 <field name="port"/>
-                                <field name="path"/>
+                                <field name="output_path"/>
                                 <field name="passphrase" password="True"/>
                             </group>
                             <group>
                                 <field name="key_attachment_id"/>
-                                <field name="username" />
+                                <field name="username"/>
                                 <field name="active" widget="boolean_toggle"/>
-                                <field name="connection_status" />
+                                <field name="connection_status"/>
                             </group>
                         </group>
                     </sheet>
@@ -43,9 +43,9 @@
             </field>
         </record>
 
-        <record id="choreograph_sage_ftp_server_action" model="ir.actions.act_window">
-            <field name="name">SAGE FTP Servers</field>
-            <field name="res_model">choreograph.sage.ftp.server</field>
+        <record id="choreograph_sage_sftp_server_action" model="ir.actions.act_window">
+            <field name="name">SAGE SFTP Servers</field>
+            <field name="res_model">choreograph.sage.sftp.server</field>
             <field name="view_mode">tree,form</field>
             <field name="context">{'active_test': False}</field>
             <field name="help" type="html">
@@ -55,15 +55,4 @@
             </field>
         </record>
 
-        <menuitem id="menu_sage" name="FTP/SFTP Servers" sequence="7" parent="account.menu_finance_configuration">
-            <menuitem
-                    id="menu_choreograph_sage_ftp_server"
-                    action="choreograph_sage.choreograph_sage_ftp_server_action"
-                    name="SAGE FTP Servers"
-                    sequence="1"
-            />
-        </menuitem>
-        <menuitem id="menu_logs" name="LOGS" sequence="8" parent="account.menu_finance_configuration"/>
-
-    </data>
 </odoo>
