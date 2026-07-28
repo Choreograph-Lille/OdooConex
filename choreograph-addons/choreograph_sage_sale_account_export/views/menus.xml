@@ -2,13 +2,13 @@
 <odoo>
     <data>
         <!-- Parent menu for SAGE integrations -->
-        <menuitem id="menu_odoo_to_sage" name="Odoo to SAGE" parent="account.menu_finance_configuration" sequence="10"/>
+        <menuitem id="menu_odoo_to_sage" name="Odoo to PA" parent="account.menu_finance_configuration" sequence="10"/>
 
         <!-- SFTP Export Report menu -->
-        <menuitem id="menu_sftp_export_report_line"
+        <menuitem id="menu_sftp_export_report"
                   name="Export Reports"
                   parent="menu_odoo_to_sage"
-                  action="sftp_export_report_line_action"
+                  action="sftp_export_report_action"
                   sequence="10"/>
     </data>
 </odoo>
