@@ -6,6 +6,7 @@
             <field name="model">choreograph.sage.sftp.server</field>
             <field name="arch" type="xml">
                 <tree decoration-muted="(not active)">
+                    <field name="name"/>
                     <field name="host"/>
                     <field name="port"/>
                     <field name="username"/>
@@ -25,6 +26,9 @@
                     </header>
                     <sheet>
                         <group>
+														<div class="oe_title">
+																<h1><field class="text-break" name="name" placeholder="e.g. Cheese Burger" /></h1>
+														</div>
                             <group>
                                 <field name="host"/>
                                 <field name="port"/>

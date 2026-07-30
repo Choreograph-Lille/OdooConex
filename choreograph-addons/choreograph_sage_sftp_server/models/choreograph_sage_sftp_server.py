@@ -7,8 +7,8 @@ from odoo import _, fields, models
 class ChoreographSageSftpServer(models.Model):
     _name = "choreograph.sage.sftp.server"
     _description = "SAGE SFTP server configuration (Sage to Odoo)"
-    _rec_name = 'host'
 
+    name = fields.Char(string="Server Name", required=True)
     host = fields.Char(required=True)
     port = fields.Char(required=True, default='22')
     username = fields.Char(required=True)
