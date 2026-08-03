@@ -15,6 +15,7 @@
         'account'
     ],
     'data': [
+        'views/res_config_settings_views.xml'
     ],
     'assets': {
         'web._assets_primary_variables': [],
