@@ -4,16 +4,21 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: Odoo Server 16.0+e-20250624\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-21 12:43+0000\n"
-"PO-Revision-Date: 2026-07-21 12:43+0000\n"
+"POT-Creation-Date: 2026-08-03 13:01+0000\n"
+"PO-Revision-Date: 2026-08-03 13:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: choreograph_sage_sftp_import
+#: model_terms:ir.ui.view,arch_db:choreograph_sage_sftp_import.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">SFTP Server</span>"
+msgstr "<span class=\"o_form_label\">Serveur SFTP</span>"
 
 #. module: choreograph_sage_sftp_import
 #. odoo-python
@@ -28,6 +33,11 @@ msgstr "L'écriture comptable avec la référence « %s » est introuvable."
 #, python-format
 msgid "CSV file has no header."
 msgstr "Le fichier CSV ne contient pas d'en têtes"
+
+#. module: choreograph_sage_sftp_import
+#: model:ir.model,name:choreograph_sage_sftp_import.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
 
 #. module: choreograph_sage_sftp_import
 #. odoo-python
@@ -117,6 +127,21 @@ msgstr "Colonne manquante dans les en-têtes: %s"
 #, python-format
 msgid "Payment amount does not match the invoice total."
 msgstr "Le montant du paiement ne correspond pas au total de la facture."
+
+#. module: choreograph_sage_sftp_import
+#: model_terms:ir.ui.view,arch_db:choreograph_sage_sftp_import.res_config_settings_view_form
+msgid "SAGE to Odoo"
+msgstr "Sage vers Odoo"
+
+#. module: choreograph_sage_sftp_import
+#: model:ir.model.fields,field_description:choreograph_sage_sftp_import.field_res_config_settings__sftp_import_server_id
+msgid "SFTP Server"
+msgstr "Serveur SFTP"
+
+#. module: choreograph_sage_sftp_import
+#: model_terms:ir.ui.view,arch_db:choreograph_sage_sftp_import.res_config_settings_view_form
+msgid "Shared SFTP server used for both sales and purchases imports."
+msgstr "Serveur SFTP utilisé pour l'import des données des factures Ventes et Achats"
 
 #. module: choreograph_sage_sftp_import
 #. odoo-python

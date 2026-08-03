@@ -62,8 +62,8 @@ msgstr "Préfixe"
 
 #. module: choreograph_sage_sale_account
 #: model_terms:ir.ui.view,arch_db:choreograph_sage_sale_account.res_config_settings_view_form
-msgid "Sage Sale Account"
-msgstr "Facture ventes SAGE"
+msgid "<span class=\"o_form_label\">Sage Sale Account</span>"
+msgstr "<span class=\"o_form_label\">Factures ventes SAGE</span>"
 
 #. module: choreograph_sage_sale_account
 #: model:ir.actions.server,name:choreograph_sage_sale_account.ir_cron_import_account_move_out_invoice_ir_actions_server

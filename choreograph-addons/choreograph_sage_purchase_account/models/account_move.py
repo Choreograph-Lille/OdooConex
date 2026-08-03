@@ -33,7 +33,8 @@ class AccountMove(models.Model):
     def import_account_move_in_invoice(self):
         move_type = 'in_invoice'
         self = self.with_context(move_type=move_type)
-        sftp_server_id = self.env['choreograph.sage.sftp.server'].search([('active', '=', True)], limit=1)
+        sftp_server_param = self.env['ir.config_parameter'].sudo().get_param('choreograph_sage_sftp_import.sftp_server_id', False)
+        sftp_server_id = self.env['choreograph.sage.sftp.server'].browse(int(sftp_server_param)) if sftp_server_param else False
         if sftp_server_id:
             ssh_client = self.get_sftp_client_import(sftp_server_id)
             start = datetime.now()
