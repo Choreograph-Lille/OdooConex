@@ -12,7 +12,6 @@
     "depends": [
         "choreograph_sage",
         "choreograph_sage_sftp_server",
-        "choreograph_sage_sale_account",
         "choreograph_account",
         "account",
     ],
