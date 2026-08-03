@@ -4,16 +4,15 @@
         <record id="res_config_settings_view_form" model="ir.ui.view">
             <field name="name">res.config.settings.view.form.choreograph.sage.sale.account</field>
             <field name="model">res.config.settings</field>
-            <field name="inherit_id" ref="account.res_config_settings_view_form"/>
+            <field name="inherit_id" ref="choreograph_sage_sftp_import.res_config_settings_view_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//div[@id='quick_edit_mode']" position="after">
-                    <h2>Sage Sale Account</h2>
-                    <div class="row mt16 o_settings_container" id="sage_sale">
+                <xpath expr="//div[@id='sage_sale_purchase_config']" position="inside">
                         <div class="col-12 col-lg-6 o_setting_box"
-                             id="sage_sale_files_informations"
+                             id="sage_sale_informations"
                              title="Allow you to input Sage sale file values">
                             <div class="o_setting_left_pane"/>
                             <div class="o_setting_right_pane">
+                                <span class="o_form_label">Sage Sale Account</span>
                                 <div class="text-muted">
                                     Define prefix and suffix for Sage sale invoice files (PAYVEN).
                                 </div>
@@ -36,7 +35,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                 </xpath>
             </field>
         </record>
