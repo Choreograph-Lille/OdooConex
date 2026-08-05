@@ -786,3 +786,13 @@ msgstr "Ecriture"
 #, python-format
 msgid "Yes"
 msgstr "Oui"
+
+#. module: choreograph_auditlog
+#. odoo-python
+#: code:addons/choreograph_auditlog/wizards/auditlog_report_wizard.py:0
+#: code:addons/choreograph_auditlog/wizards/auditlog_report_wizard.py:0
+#: code:addons/choreograph_auditlog/wizards/auditlog_report_wizard.py:0
+#: code:addons/choreograph_auditlog/wizards/auditlog_report_wizard.py:0
+#, python-format
+msgid "User deleted (id: %s)"
+msgstr "Utilisateur supprimé (id: %s)"

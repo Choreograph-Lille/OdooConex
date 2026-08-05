@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import json
-import re
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -144,7 +142,8 @@ class AuditlogReport(models.TransientModel):
         logs_lines = self.get_log_lines(role_model, ['user_roles'])
         for line in logs_lines:
             record = line.get_record()
-            data['logs'].append(self.prepare_log_line_data(line, record.display_name, True))
+            display_name = record.display_name if record.exists() else _(('User deleted (id: %s)') % line.log_id.res_id)
+            data['logs'].append(self.prepare_log_line_data(line, display_name, True))
         return data
 
     def _data_partner_rib(self):
@@ -156,7 +155,8 @@ class AuditlogReport(models.TransientModel):
         logs_lines = self.get_log_lines(role_model, ['siret', 'banks'], 'write', 'supplier_rank', False)
         for line in logs_lines:
             record = line.get_record()
-            data['logs'].append(self.prepare_log_line_data(line, record.display_name))
+            display_name = record.display_name if record.exists() else _(('User deleted (id: %s)') % line.log_id.res_id)
+            data['logs'].append(self.prepare_log_line_data(line, display_name))
         return data
     
     def _data_supplier_extract(self):
@@ -180,10 +180,12 @@ class AuditlogReport(models.TransientModel):
         
         for line in create_log_lines:
             record = line.get_record()
-            data['create_logs'].append(self.prepare_log_line_data(line, record.display_name))
+            display_name = record.display_name if record.exists() else _(('User deleted (id: %s)') % line.log_id.res_id)
+            data['create_logs'].append(self.prepare_log_line_data(line, display_name))
         for line in write_log_lines:
             record = line.get_record()
-            data['write_logs'].append(self.prepare_log_line_data(line, record.display_name))
+            display_name = record.display_name if record.exists() else _(('User deleted (id: %s)') % line.log_id.res_id)
+            data['write_logs'].append(self.prepare_log_line_data(line, display_name))
         for line in unlink_log_lines:
             record = line.get_record()
             data['unlink_logs'].append(self.prepare_log_line_data(line, record.display_name))
