@@ -372,8 +372,8 @@ class AuditlogReport(models.TransientModel):
         po_ids = self.env['purchase.order'].search([
             ('state', 'in', ['purchase', 'done']),
             ('is_retribution_order', '=', True),
-            ('create_date', '>=', self.start_date),
-            ('create_date', '<=', end_date)
+            ('date_approve', '>=', self.start_date),
+            ('date_approve', '<=', end_date)
         ])
         data = {
             'orders': []
