@@ -153,7 +153,7 @@ class AuditlogReport(models.TransientModel):
         }
         # this should be res.partner
         role_model = self.ir_action_report_id.auditlog_model_id
-        logs_lines = self.get_log_lines(role_model, ['siret', 'banks'], 'write', True, False)
+        logs_lines = self.get_log_lines(role_model, ['siret', 'banks'], 'write', 'supplier_rank', False)
         for line in logs_lines:
             record = line.get_record()
             data['logs'].append(self.prepare_log_line_data(line, record.display_name))
