@@ -397,7 +397,7 @@ class AuditlogReport(models.TransientModel):
                 'provider': po.partner_id.display_name,
                 'po_number': po.name,
                 'provider_ref': po.partner_ref or '',
-                'date_order': po.date_order or '',
+                'date_order': po.date_approve or '',
                 'date_planned': po.date_planned or '',
                 'subtotal': formatLang(self.env, po.amount_untaxed),
                 'creator': po.create_uid.name,
