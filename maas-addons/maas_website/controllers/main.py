@@ -24,9 +24,6 @@ import json
 
 from odoo import http
 from odoo.addons.http_routing.models.ir_http import url_for
-import logging
-
-_logger = logging.getLogger(__name__)
 
 
 class OperationWebsite(http.Controller):
@@ -43,19 +40,6 @@ class OperationWebsite(http.Controller):
         unlimited = subscription.current_package_id.unlimited
         return quantity, identifiers, percent, unlimited
 
-    # @http.route('/home', auth='user', website=True, csrf=False)
-    # def home(self, **kwargs):
-    #     partner = http.request.env.user.partner_id
-    #     quantity, identifiers, percent, unlimited = self._get_consumption_data()
-    #     values = {
-    #         'partner': partner.id,
-    #         'total_qty_cumulative': quantity,
-    #         'identifiers': identifiers,
-    #         'percent': percent,
-    #         'unlimited': unlimited
-    #     }
-    #     return http.request.render('maas_website.operation_home', values, True)
-
     @http.route('/home', auth='user', website=True, csrf=False)
     def home(self, **kwargs):
         partner = http.request.env.user.partner_id
@@ -69,13 +53,13 @@ class OperationWebsite(http.Controller):
             'astrato_embibed_link': self.get_astrato_link(partner)
         }
         return http.request.render('maas_website.astrato_home', values, True)
-    
+
     def get_astrato_link(self, partner):
         if partner.parent_id:
             partner = partner.parent_id
             if partner.pbi_function_app_url:
                 return partner.pbi_function_app_url
-            
+
         return False
 
     @http.route('/operation/list', auth='user', website=True, csrf=False)
@@ -125,11 +109,13 @@ class OperationWebsite(http.Controller):
                                           'population_scored_desc': kwargs.get('population_scored_desc'),
                                           'attachment_scored_id': attachment_obj.create({
                                               'name': kwargs.get('population_scored_datafile').filename,
-                                              'datas': base64.encodebytes(kwargs.get('population_scored_datafile').read()),
+                                              'datas': base64.encodebytes(
+                                                  kwargs.get('population_scored_datafile').read()),
                                               'type': 'binary'}).id,
                                           'attachment_profile_id': attachment_obj.create({
                                               'name': kwargs.get('searched_profile_datafile').filename,
-                                              'datas': base64.encodebytes(kwargs.get('searched_profile_datafile').read()),
+                                              'datas': base64.encodebytes(
+                                                  kwargs.get('searched_profile_datafile').read()),
                                               'type': 'binary'}).id,
                                           'canal': canal})
         res = {operation.id: {'name': operation.name}}
@@ -252,7 +238,8 @@ class OperationWebsite(http.Controller):
         result = {operation.id: res}
         return json.dumps(list(result.values()))
 
-    @http.route('/operation/message/list/child/<int:operation_id>', type='http', auth='user', methods=['POST'], website=True,
+    @http.route('/operation/message/list/child/<int:operation_id>', type='http', auth='user', methods=['POST'],
+                website=True,
                 csrf=False)
     def get_message_list_child(self, operation_id):
         operation_obj = http.request.env['sale.operation.child']
@@ -380,7 +367,8 @@ class OperationWebsite(http.Controller):
                 return json.dumps(list(res.values()))
             res = {operation.id: {'id': operation.id, 'show_popup': True,
                                   'available_identifiers': subscription.balance,
-                                  'volume_filled': operation.qty_extracted, 'difference': subscription.balance - operation.qty_extracted,
+                                  'volume_filled': operation.qty_extracted,
+                                  'difference': subscription.balance - operation.qty_extracted,
                                   'product_name': boolean['context'].get('product_name'),
                                   'except': False, 'text': False}}
         except Exception as e:
@@ -388,7 +376,8 @@ class OperationWebsite(http.Controller):
 
         return json.dumps(list(res.values()))
 
-    @http.route('/report/<int:operation_id>/<string:model_name>', type='http', auth='user', methods=['POST'], website=True, csrf=False)
+    @http.route('/report/<int:operation_id>/<string:model_name>', type='http', auth='user', methods=['POST'],
+                website=True, csrf=False)
     def get_report_bi(self, operation_id, model_name):
         """
         Get report html data
@@ -396,14 +385,17 @@ class OperationWebsite(http.Controller):
         :param model_name: could be sale_operation or res_partner
         :return:
         """
-        _logger.warning('----------------Log-----------------')
         model_name = model_name.replace('_', '.')
         operation_obj = http.request.env[model_name]
         operation = operation_obj.browse(operation_id)
-        _logger.warning(operation_id)
-        _logger.warning(operation_obj)
-        _logger.warning(operation)
 
+        # Astrato is the only report backend in use, kept unconditional on purpose.
+        # The Power BI code below is dead code, left in place to be removed later.
+        result = {}
+        if operation.pbi_function_app_url:
+            result = {operation.id: {'id': operation_id, 'report_bi_src': operation.pbi_function_app_url}}
+        return json.dumps(list(result.values()))
+        # Todo: remove this code later
         report_bi_src = """
 <!DOCTYPE html>
 <head>
@@ -434,7 +426,7 @@ class OperationWebsite(http.Controller):
  <!--Add script to update the page and send messages.-->
     <script type="text/javascript" nonce="script">
         $(function () {
-            console.log($.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """))
+
             $.getJSON(""" + '"{}"'.format(operation.pbi_function_app_url) + """)
             .done(function( json ) {
                 console.log(json.ErrorMessage);
@@ -490,11 +482,11 @@ class OperationWebsite(http.Controller):
             .fail(function( jqxhr, textStatus, error ) {
                 var err = textStatus + ", " + error + "(status=" + jqxhr.status + ")";
                 console.log( "REQUEST HAS FAILED - SIMPLE ERROR MESSAGE: " + err);
-                console.log(jqxhr)
-                // if(jqxhr.responseJSON.ErrorMessage)
-                // {
-                //     console.log( "REQUEST HAS FAILED - DETAILED ERROR MESSAGE: " + jqxhr.responseJSON.ErrorMessage );
-                // }
+
+                if(jqxhr.responseJSON.ErrorMessage)
+                {
+                    console.log( "REQUEST HAS FAILED - DETAILED ERROR MESSAGE: " + jqxhr.responseJSON.ErrorMessage );
+                }
             });
         });
      </script>
@@ -504,8 +496,6 @@ class OperationWebsite(http.Controller):
         result = {}
         if operation.pbi_function_app_url:
             result = {operation.id: {'id': operation_id, 'report_bi_src': report_bi_src}}
-            _logger.warning('In result')
-            _logger.warning(result)
         return json.dumps(list(result.values()))
 
     @http.route('/close/report/<int:operation_id>', auth='user', methods=['POST'], website=True, csrf=False)
