@@ -182,9 +182,14 @@ $(document).ready(function () {
 		                }, []);
 					var iframe = document.getElementById('report_bi_src');
 					var modal_restricted_access = $('#report_bi_iframe');
-					$(iframe).attr('srcdoc', data[0]['report_bi_src']);
+					// Astrato is the only report backend in use, kept unconditional on purpose.
+					// The Power BI srcdoc line below is dead code, left in place to be removed later.
+					$(iframe).attr('src', data[0]['report_bi_src']);
 					$('.close-report')[0].value = parseInt(data[0]['id']);
                     modal_restricted_access.modal('show');
+					return;
+					// Keep old powerbi code, todo: remove this code later
+					$(iframe).attr('srcdoc', data[0]['report_bi_src']);
 				});
             });
 

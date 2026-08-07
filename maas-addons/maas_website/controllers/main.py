@@ -388,6 +388,14 @@ class OperationWebsite(http.Controller):
         model_name = model_name.replace('_', '.')
         operation_obj = http.request.env[model_name]
         operation = operation_obj.browse(operation_id)
+
+        # Astrato is the only report backend in use, kept unconditional on purpose.
+        # The Power BI code below is dead code, left in place to be removed later.
+        result = {}
+        if operation.pbi_function_app_url:
+            result = {operation.id: {'id': operation_id, 'report_bi_src': operation.pbi_function_app_url}}
+        return json.dumps(list(result.values()))
+        # Todo: remove this code later
         report_bi_src = """
 <!DOCTYPE html>
 <head>
