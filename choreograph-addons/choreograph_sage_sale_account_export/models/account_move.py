@@ -15,10 +15,7 @@ _logger = logging.getLogger(__name__)
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    is_invoice_collected = fields.Boolean(
-        copy=False,
-        help=_("Indicates if this invoice has been exported to PA ICD"),
-    )
+    is_invoice_collected = fields.Boolean(copy=False)
 
     def get_export_file_name(self):
         """Generate file name with date in DDMMYYYY format"""
@@ -87,7 +84,6 @@ class AccountMove(models.Model):
                 ("move_type", "in", ["out_invoice", "out_refund"]),
                 ("state", "=", "posted"),
                 ("payment_state", "=", "in_payment"),
-                ("invoice_date_due", "=", fields.Date.today()),
                 ("is_invoice_collected", "=", False),
             ]
         )
