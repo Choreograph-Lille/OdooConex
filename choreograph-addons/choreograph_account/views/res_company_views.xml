@@ -21,6 +21,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='siret']" position="after">
                     <field name="siren"/>
+                    <field name="electronic_address"/>
                 </xpath>
             </field>
         </record>
