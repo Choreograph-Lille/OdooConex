@@ -12,9 +12,6 @@ TYPE_REVERSE_MAP = {
     'in_receipt': 'in_refund',
 }
 
-from dateutil.relativedelta import relativedelta
-
-
 class AccountMove(models.Model):
     _inherit = "account.move"
 
@@ -124,31 +121,56 @@ class AccountMove(models.Model):
     def _ubl_add_header(self, parent_node, ns, version="2.1"):
         super()._ubl_add_header(parent_node, ns, version=version)
 
-        code_pf = self.partner_id.commercial_partner_id.pf_code_identification
-        if not code_pf:
-            return
-
         cbc = ns["cbc"]
-        children = list(parent_node)
 
-        type_code_tags = {
-            cbc + "InvoiceTypeCode",
-            cbc + "CreditNoteTypeCode",
-        }
+        if parent_node.find(cbc + 'CustomizationID') is None:
+            customization_node = etree.Element(cbc + 'CustomizationID')
+            customization_node.text = (
+                'urn:cen.eu:en16931:2017#conformant#'
+                'urn.cpro.gouv.fr:1p0:extended-ctc-fr'
+            )
+            parent_node.append(customization_node)
 
-        insert_index = None
-        for i, child in enumerate(children):
-            if child.tag in type_code_tags:
-                insert_index = i + 1
-                break
-
-        note_node = etree.Element(cbc + "Note")
-        note_node.text = "BAR/%s" % code_pf
-
-        if insert_index is not None:
-            parent_node.insert(insert_index, note_node)
-        else:
+        code_pf = self.partner_id.commercial_partner_id.pf_code_identification
+        if code_pf:
+            note_node = etree.Element(cbc + "Note")
+            note_node.text = "BAR/%s" % code_pf
             parent_node.append(note_node)
+
+        correct_order = [
+            cbc + 'UBLVersionID',
+            cbc + 'CustomizationID',
+            cbc + 'ProfileID',
+            cbc + 'ProfileExecutionID',
+            cbc + 'ID',
+            cbc + 'CopyIndicator',
+            cbc + 'UUID',
+            cbc + 'IssueDate',
+            cbc + 'IssueTime',
+            cbc + 'DueDate',
+            cbc + 'InvoiceTypeCode',
+            cbc + 'CreditNoteTypeCode',
+            cbc + 'Note',
+            cbc + 'TaxPointDate',
+            cbc + 'DocumentCurrencyCode',
+            cbc + 'TaxCurrencyCode',
+            cbc + 'PricingCurrencyCode',
+            cbc + 'PaymentCurrencyCode',
+            cbc + 'PaymentAlternativeCurrencyCode',
+            cbc + 'AccountingCostCode',
+            cbc + 'AccountingCost',
+            cbc + 'LineCountNumeric',
+        ]
+
+        children = list(parent_node)
+        children.sort(
+            key=lambda c: correct_order.index(c.tag)
+            if c.tag in correct_order else len(correct_order)
+        )
+        for child in children:
+            parent_node.remove(child)
+        for child in children:
+            parent_node.append(child)
 
     def _ubl_add_customer_party(
         self, partner, company, node_name, parent_node, ns, version="2.1"
@@ -174,6 +196,141 @@ class AccountMove(models.Model):
             endpoint_node.set("schemeID", "0225")
             endpoint_node.text = adresse_electronique
             party_node.insert(0, endpoint_node)
+        
+        siren = partner.commercial_partner_id.siren
+        if siren:
+            party_legal_entity = party_node.find(cac + 'PartyLegalEntity')
+            if party_legal_entity is not None:
+                company_id_node = party_legal_entity.find(cbc + 'CompanyID')
+                if company_id_node is not None:
+                    company_id_node.set('schemeID', '0002')
+                    company_id_node.text = siren
+                else:
+                    children = list(party_legal_entity)
+                    registration_name_tag = cbc + 'RegistrationName'
+                    insert_index = 0
+                    for i, child in enumerate(children):
+                        if child.tag == registration_name_tag:
+                            insert_index = i + 1
+                            break
+
+                    company_id_node = etree.Element(cbc + 'CompanyID')
+                    company_id_node.set('schemeID', '0002')
+                    company_id_node.text = siren
+                    party_legal_entity.insert(insert_index, company_id_node)
 
         return customer_party_root
     
+    def _ubl_add_supplier_party(
+        self, partner, company, node_name, parent_node, ns, version='2.1'
+    ):
+        supplier_party_root = super()._ubl_add_supplier_party(
+            partner, company, node_name, parent_node, ns, version=version
+        )
+
+        cac = ns['cac']
+        cbc = ns['cbc']
+
+        party_node = supplier_party_root.find(cac + 'Party')
+        if party_node is None:
+            return supplier_party_root
+
+        website_node = party_node.find(cbc + 'WebsiteURI')
+        if website_node is not None:
+            party_node.remove(website_node)
+
+        electronic_address = self.company_id.get_electronic_address()
+        if electronic_address:
+            endpoint_node = etree.Element(cbc + 'EndpointID')
+            endpoint_node.set('schemeID', '0225')
+            endpoint_node.text = electronic_address
+            party_node.insert(0, endpoint_node)
+
+        siren = self.company_id.siren or self.company_id.partner_id.siren
+        if siren:
+            party_legal_entity = party_node.find(cac + 'PartyLegalEntity')
+            if party_legal_entity is not None:
+                company_id_node = party_legal_entity.find(cbc + 'CompanyID')
+                if company_id_node is not None:
+                    company_id_node.set('schemeID', '0002')
+                    company_id_node.text = siren
+                else:
+                    children = list(party_legal_entity)
+                    registration_name_tag = cbc + 'RegistrationName'
+                    insert_index = 0
+                    for i, child in enumerate(children):
+                        if child.tag == registration_name_tag:
+                            insert_index = i + 1
+                            break
+
+                    company_id_node = etree.Element(cbc + 'CompanyID')
+                    company_id_node.set('schemeID', '0002')
+                    company_id_node.text = siren
+                    party_legal_entity.insert(insert_index, company_id_node)
+
+        return supplier_party_root
+    
+    def _ubl_add_tax_category(
+    self, tax, parent_node, ns, node_name='TaxCategory', version='2.1'
+    ):
+        super()._ubl_add_tax_category(
+            tax, parent_node, ns, node_name=node_name, version=version
+        )
+
+        cac = ns['cac']
+        cbc = ns['cbc']
+
+        tax_category_node = parent_node.find(cac + node_name)
+        if tax_category_node is None:
+            return
+
+        tax_id_node = tax_category_node.find(cbc + 'ID')
+        if tax_id_node is not None and tax_id_node.text == 'AC':
+            tax_id_node.text = 'S'
+        
+        if node_name != 'TaxCategory':
+            return
+        if tax.unece_categ_code not in ('E', 'Z'):
+            return
+        
+        vatex = self.partner_id.commercial_partner_id.vatex
+        if vatex:
+            sequence = [
+                cbc + 'ID',
+                cbc + 'Name',
+                cbc + 'Percent',
+                cbc + 'BaseUnitMeasure',
+                cbc + 'PerUnitAmount',
+                cbc + 'TaxExemptionReasonCode',
+                cbc + 'TaxExemptionReason',
+                cbc + 'TierRange',
+                cbc + 'TierRatePercent',
+                cbc + 'TaxScheme',
+            ]
+            target_pos = sequence.index(cbc + 'TaxExemptionReasonCode')
+
+            children = list(tax_category_node)
+            insert_at = len(children)
+            for i, child in enumerate(children):
+                if child.tag in sequence and sequence.index(child.tag) >= target_pos:
+                    insert_at = i
+                    break
+
+            exemption_node = etree.Element(cbc + 'TaxExemptionReasonCode')
+            exemption_node.text = vatex
+            tax_category_node.insert(insert_at, exemption_node)
+    
+    def _ubl_add_tax_scheme(self, tax_scheme_dict, parent_node, ns, version='2.1'):
+        super()._ubl_add_tax_scheme(tax_scheme_dict, parent_node, ns, version=version)
+
+        cac = ns['cac']
+        cbc = ns['cbc']
+
+        tax_scheme_node = parent_node.find(cac + 'TaxScheme')
+        if tax_scheme_node is None:
+            return
+
+        tax_scheme_id_node = tax_scheme_node.find(cbc + 'ID')
+        if tax_scheme_id_node is not None:
+            tax_scheme_id_node.attrib.pop('schemeID', None)
+            tax_scheme_id_node.attrib.pop('schemeAgencyID', None)
