@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_choreograph_sage_sftp_server,choreograph.sage.sftp.server,model_choreograph_sage_sftp_server,base.group_system,1,1,1,1
-access_sftp_import_report,sftp.import.report,model_sftp_import_report,base.group_system,1,1,1,1
-access_sftp_import_report_line,sftp.import.report.line,model_sftp_import_report_line,base.group_system,1,1,1,1
+access_choreograph_sage_sftp_server,choreograph.sage.sftp.server,model_choreograph_sage_sftp_server,account.group_account_manager,1,1,1,0
+access_sftp_import_report,sftp.import.report,model_sftp_import_report,account.group_account_manager,1,1,1,0
+access_sftp_import_report_line,sftp.import.report.line,model_sftp_import_report_line,account.group_account_manager,1,1,1,0
