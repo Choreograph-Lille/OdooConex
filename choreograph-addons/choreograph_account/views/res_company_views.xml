@@ -10,6 +10,7 @@
             <field name="arch" type="xml">
                 <field name="favicon" position="after">
                     <field name="new_address" widget="html"/>
+                    <field name="ubl_notes" widget="text" placeholder="Notes UBL structurées"/>
                 </field>
             </field>
         </record>

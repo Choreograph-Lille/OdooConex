@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <function model="res.company" name="_init_ubl_notes_default"/>
+    </data>
+</odoo>

@@ -136,6 +136,24 @@ class AccountMove(models.Model):
             note_node = etree.Element(cbc + "Note")
             note_node.text = "#BAR#%s" % code_pf
             parent_node.append(note_node)
+            
+        ubl_notes = self.company_id.ubl_notes
+        if ubl_notes:
+            for note_node in parent_node.findall(cbc + 'Note'):
+                parent_node.remove(note_node)
+
+            if code_pf:
+                note_bar = etree.Element(cbc + 'Note')
+                note_bar.text = "#BAR#%s" % code_pf
+                parent_node.append(note_bar)
+
+            for ligne in ubl_notes.splitlines():
+                ligne = ligne.strip()
+                if not ligne:
+                    continue
+                note = etree.Element(cbc + 'Note')
+                note.text = ligne
+                parent_node.append(note)
 
         correct_order = [
             cbc + 'UBLVersionID',
