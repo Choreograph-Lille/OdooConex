@@ -134,7 +134,7 @@ class AccountMove(models.Model):
         code_pf = self.partner_id.commercial_partner_id.pf_code_identification
         if code_pf:
             note_node = etree.Element(cbc + "Note")
-            note_node.text = "BAR/%s" % code_pf
+            note_node.text = "#BAR#%s" % code_pf
             parent_node.append(note_node)
 
         correct_order = [
