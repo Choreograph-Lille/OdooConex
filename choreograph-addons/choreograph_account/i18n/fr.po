@@ -508,3 +508,8 @@ msgstr "Code Identification PF"
 #: model:ir.model.fields,field_description:choreograph_account.field_res_partner__vatex
 msgid "VATEX"
 msgstr "VATEX"
+
+#. module: choreograph_account
+#: model:ir.model.fields,field_description:choreograph_account.field_res_company__ubl_notes
+msgid "UBL Notes"
+msgstr "Notes UBL"
