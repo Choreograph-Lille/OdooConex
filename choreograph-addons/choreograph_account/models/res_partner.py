@@ -10,6 +10,7 @@ class ResPartner(models.Model):
     electronic_address = fields.Char("Electronic Address", tracking=True)
     pf_code_identification = fields.Char("PF Code Identification", tracking=True)
     vatex = fields.Char("VATEX", tracking=True)
+    notes_pa = fields.Text("Notes PA", tracking=True)
 
     def update_confidential_document(self):
         confidential_partners = self.env['res.partner'].search([('is_confidential', '=', True)])

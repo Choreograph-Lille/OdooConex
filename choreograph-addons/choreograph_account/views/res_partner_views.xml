@@ -62,6 +62,23 @@
                 </field>
             </field>
         </record>
+
+        <record id="res_partner_form_view_notes_pa" model="ir.ui.view">
+            <field name="name">res.partner.form.view.inherit.notes.pa</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page name="notes_pa" string="Notes PA">
+                        <group>
+                           <group>
+                                <field name="notes_pa" widget="text"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
     
     </data>
 </odoo>
