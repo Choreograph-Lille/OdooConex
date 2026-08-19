@@ -22,7 +22,6 @@
         'data/mail_template_data.xml',
         'data/account_payment_term_data.xml',
         'data/ir_cron.xml',
-        'data/res_company_data.xml',
         # security
         # views
         'views/res_partner_views.xml',
