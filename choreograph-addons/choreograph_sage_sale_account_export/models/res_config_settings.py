@@ -19,3 +19,8 @@ class ResConfigSettings(models.TransientModel):
         string="SFTP Server",
         config_parameter='choreograph_sage_sale_account_export.sftp_server_id'
     )
+    sftp_ubl_export_server_id = fields.Many2one(
+        comodel_name='choreograph.sage.sftp.server',
+        string="UBL Export SFTP Server (ICD)",
+        config_parameter='choreograph_sage_sale_account_export.sftp_ubl_server_id',
+    )
