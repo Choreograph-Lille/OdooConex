@@ -23,6 +23,8 @@ class SftpExportReport(models.Model):
     type = fields.Selection(
         [
             ("invoice_collected", "Invoice Collected"),
+            ('invoice', 'Invoice'),
+            ('credit_note', 'Credit Note')
         ],
         string="Export Type",
     )
@@ -61,6 +63,11 @@ class SftpExportReportLine(models.Model):
     invoice_ref = fields.Char(string="Invoice Reference")
     amount_total = fields.Float(string="Amount TTC")
     status = fields.Char(string="Status")
+    type = fields.Selection([
+        ('invoice',     'Invoice'),
+        ('credit_note', 'Credit Note'),
+    ], string="Type")
+    message = fields.Text(string="Error Message")
 
     @api.model
     def create(self, vals):
