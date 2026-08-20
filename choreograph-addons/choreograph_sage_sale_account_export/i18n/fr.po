@@ -340,3 +340,50 @@ msgstr "Statut"
 #: model:ir.model.fields.selection,name:choreograph_sage_sale_account_export.selection__sftp_export_report__state__success
 msgid "Success"
 msgstr "Succès"
+
+#. module: choreograph_sage_sale_account_export
+#: model:ir.model.fields.selection,name:choreograph_sage_sale_account_export.selection__sftp_export_report__type__invoice
+#: model:ir.model.fields.selection,name:choreograph_sage_sale_account_export.selection__sftp_export_report_line__type__invoice
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: choreograph_sage_sale_account_export
+#: model:ir.model.fields.selection,name:choreograph_sage_sale_account_export.selection__sftp_export_report__type__credit_note
+#: model:ir.model.fields.selection,name:choreograph_sage_sale_account_export.selection__sftp_export_report_line__type__credit_note
+msgid "Credit Note"
+msgstr "Avoir"
+
+#. module: choreograph_sage_sale_account_export
+#: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_account_move__is_transferred_to_pa
+msgid "Is transferred to PA ?"
+msgstr "Est transférée à la PA ?"
+
+#. module: choreograph_sage_sale_account_export
+#: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_res_config_settings__sftp_ubl_export_server_id
+msgid "UBL Export SFTP Server (ICD)"
+msgstr "Serveur SFTP pour l'export des fichiers UBL"
+
+#. module: choreograph_sage_sale_account_export
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "Transferred"
+msgstr "Transféré"
+
+#. module: choreograph_sage_sale_account_export
+#. odoo-python
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "Failed"
+msgstr "Echec du transfert"
+
+#. module: choreograph_sage_sale_account_export
+#: model:ir.actions.server,name:choreograph_sage_sale_account_export.ir_cron_export_ubl_invoices_to_pa_ir_actions_server
+#: model:ir.cron,cron_name:choreograph_sage_sale_account_export.ir_cron_export_ubl_invoices_to_pa
+msgid "PA ICD: Export UBL invoices and credit notes"
+msgstr "Exporter les fichiers UBL des Factures et Avoirs Ventes vers PA ICD"
+
+#. module: choreograph_sage_sale_account_export
+#: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_sftp_export_report_line__message
+msgid "Error Message"
+msgstr "Message d'Erreur"

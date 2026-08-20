@@ -40,11 +40,13 @@
                         <separator string="Message"/>
                         <field name="message"/>
                         <separator string="Export Details"/>
-                        <field name="line_ids">
+                        <field name="line_ids" readonly="1">
                             <tree>
                                 <field name="invoice_ref"/>
                                 <field name="amount_total"/>
                                 <field name="status"/>
+                                <field name="type"/>
+                                <field name="message"/>
                             </tree>
                         </field>
                     </sheet>

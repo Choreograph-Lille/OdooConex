@@ -137,7 +137,7 @@ class AccountMove(models.Model):
             note_node.text = "#BAR#%s" % code_pf
             parent_node.append(note_node)
             
-        notes_pa = self.commercial_partner_id.notes_pa
+        notes_pa = self.partner_id.notes_pa or self.commercial_partner_id.notes_pa
         if notes_pa:
             for note_node in parent_node.findall(cbc + 'Note'):
                 parent_node.remove(note_node)
