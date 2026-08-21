@@ -35,13 +35,23 @@ class AccountMove(models.Model):
         # Establish SSH connection
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        # Get path of key as attachment
-        key_path = ftp_server.key_attachment_id._full_path(ftp_server.key_attachment_id.store_fname)
         passphrase = ftp_server.passphrase
 
         try:
-            key = paramiko.RSAKey.from_private_key_file(key_path, password=passphrase)
-            ssh_client.connect(ftp_server.host, ftp_server.port, ftp_server.username, pkey=key)
+            if ftp_server.key_attachment_id:
+                # Get path of key as attachment
+                key_path = ftp_server.key_attachment_id._full_path(
+                    ftp_server.key_attachment_id.store_fname
+                )
+                key = paramiko.RSAKey.from_private_key_file(key_path, password=passphrase)
+                ssh_client.connect(ftp_server.host, ftp_server.port, ftp_server.username, pkey=key)
+            else:
+                ssh_client.connect(
+                    ftp_server.host,
+                    int(ftp_server.port),
+                    ftp_server.username,
+                    password=passphrase,
+                )
             return ssh_client
 
         except Exception as e:
