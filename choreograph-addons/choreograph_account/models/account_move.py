@@ -137,8 +137,8 @@ class AccountMove(models.Model):
             note_node.text = "#BAR#%s" % code_pf
             parent_node.append(note_node)
             
-        ubl_notes = self.company_id.ubl_notes
-        if ubl_notes:
+        notes_pa = self.partner_id.notes_pa or self.commercial_partner_id.notes_pa
+        if notes_pa:
             for note_node in parent_node.findall(cbc + 'Note'):
                 parent_node.remove(note_node)
 
@@ -147,7 +147,7 @@ class AccountMove(models.Model):
                 note_bar.text = "#BAR#%s" % code_pf
                 parent_node.append(note_bar)
 
-            for ligne in ubl_notes.splitlines():
+            for ligne in notes_pa.splitlines():
                 ligne = ligne.strip()
                 if not ligne:
                     continue

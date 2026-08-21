@@ -29,6 +29,10 @@
                                         <label for="sage_sale_sftp_export_server_id" class="col-lg-3 o_light_label"/>
                                         <field name="sage_sale_sftp_export_server_id"/>
                                     </div>
+                                    <div class="row mt16">
+                                        <label for="sftp_ubl_export_server_id" class="col-lg-3 o_light_label"/>
+                                        <field name="sftp_ubl_export_server_id"/>
+                                    </div>
                                 </div>
                             </div>
                         </div>
