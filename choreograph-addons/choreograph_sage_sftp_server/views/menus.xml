@@ -1,47 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <menuitem
-                id="menu_sage_to_odoo"
-                name="Sage to Odoo"
-                parent="account.menu_finance_configuration"
-                sequence="8"
-        />
-
         <menuitem
                 id="menu_choreograph_sage_sftp_server"
                 action="choreograph_sage_sftp_server_action"
                 name="SFTP Server"
-                parent="menu_sage_to_odoo"
-                sequence="1"
+                parent="choreograph_sage.menu_sage"
+                sequence="2"
         />
-
-        <menuitem
-        id="menu_sftp_logging_1"
-        name=" SFTP Import Logs"
-        parent="account.menu_finance_receivables"
-        sequence="120"
-        />
-
-        <menuitem
-        id="menu_sftp_logging_2"
-        name=" SFTP Import Logs"
-        parent="account.menu_finance_payables"
-        sequence="210"
-        />
-
         <menuitem
         id="menu_sftp_import_report_sale"
         action="sftp_import_report_action_sale"
         name="Sales"
-        parent="menu_sftp_logging_1"
-        sequence="1"
+        parent="choreograph_sage.menu_logs"
+        sequence="2"
     />
 
     <menuitem
         id="menu_sftp_import_report_purchase"
         action="sftp_import_report_action_purchase"
         name="Purchases"
-        parent="menu_sftp_logging_2"
-        sequence="1"
+        parent="choreograph_sage.menu_logs"
+        sequence="3"
     />
 </odoo>
