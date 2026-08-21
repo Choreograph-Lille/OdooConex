@@ -13,7 +13,7 @@ class ChoreographSageSftpServer(models.Model):
     port = fields.Char(required=True, default='22')
     username = fields.Char(required=True)
     passphrase = fields.Char(required=True)
-    key_attachment_id = fields.Many2one("ir.attachment", required=True)
+    key_attachment_id = fields.Many2one("ir.attachment", required=False)
 
     output_path = fields.Char(
         string="Output Directory",
@@ -34,11 +34,15 @@ class ChoreographSageSftpServer(models.Model):
 
         ssh_client = paramiko.SSHClient()
         ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+        
+        if self.key_attachment_id:
+            key_path = self.key_attachment_id._full_path(self.key_attachment_id.store_fname)
+            key = paramiko.RSAKey.from_private_key_file(key_path, password=self.passphrase)
 
-        key_path = self.key_attachment_id._full_path(self.key_attachment_id.store_fname)
-        key = paramiko.RSAKey.from_private_key_file(key_path, password=self.passphrase)
+            ssh_client.connect(self.host, int(self.port), self.username, pkey=key)
+        else:
+            ssh_client.connect(self.host, int(self.port), self.username, password=self.passphrase)
 
-        ssh_client.connect(self.host, int(self.port), self.username, pkey=key)
         sftp_client = ssh_client.open_sftp()
         return ssh_client, sftp_client
 
