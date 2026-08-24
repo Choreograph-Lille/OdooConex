@@ -58,7 +58,7 @@ class AccountMove(models.Model):
                     ftp_server.host, 
                     int(ftp_server.port), 
                     ftp_server.username, 
-                    password=ftp_server.password
+                    password=ftp_server.passphrase
                 )
 
             sftp = ssh_client.open_sftp()
