@@ -72,7 +72,7 @@
                     <page name="notes_pa" string="Notes PA">
                         <group>
                            <group>
-                                <field name="notes_pa" widget="text"/>
+                                <field name="notes_pa" widget="text" nolabel="1"/>
                             </group>
                         </group>
                     </page>
