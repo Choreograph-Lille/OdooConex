@@ -308,7 +308,7 @@ class AccountMove(models.Model):
         
         if node_name != 'TaxCategory':
             return
-        if tax.unece_categ_code not in ('E', 'Z'):
+        if tax.unece_categ_code != 'E':
             return
         
         vatex = self.partner_id.commercial_partner_id.vatex
