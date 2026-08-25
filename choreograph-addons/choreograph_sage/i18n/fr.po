@@ -126,7 +126,7 @@ msgstr "Date d'éxportation"
 #. module: choreograph_sage
 #: model:ir.ui.menu,name:choreograph_sage.ftp_logging_menu
 msgid "FTP logging"
-msgstr "Log FTP"
+msgstr "Logs FTP Odoo vers Sage"
 
 #. module: choreograph_sage
 #: model:ir.model.fields.selection,name:choreograph_sage.selection__ftp_logging__state__failed
@@ -250,14 +250,14 @@ msgstr ""
 #. module: choreograph_sage
 #: model:ir.ui.menu,name:choreograph_sage.menu_sage
 #: model_terms:ir.ui.view,arch_db:choreograph_sage.account_move_view_form_inherit
-msgid "SAGE"
-msgstr ""
+msgid "FTP/SFTP Servers"
+msgstr "Serveur FTP/SFTP"
 
 #. module: choreograph_sage
 #: model:ir.actions.act_window,name:choreograph_sage.choreograph_sage_ftp_server_action
 #: model:ir.ui.menu,name:choreograph_sage.menu_choreograph_sage_ftp_server
 msgid "SAGE FTP Servers"
-msgstr "Serveurs FTP SAGE"
+msgstr "Serveurs FTP Odoo vers SAGE"
 
 #. module: choreograph_sage
 #: model:ir.model,name:choreograph_sage.model_ftp_logging

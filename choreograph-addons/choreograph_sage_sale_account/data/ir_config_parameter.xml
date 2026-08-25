@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="param_sage_sale_file_prefix" model="ir.config_parameter">
+            <field name="key">choreograph_sage_sale_account.prefix</field>
+            <field name="value"></field>
+        </record>
+
+        <record id="param_sage_sale_file_suffix" model="ir.config_parameter">
+            <field name="key">choreograph_sage_sale_account.suffix</field>
+            <field name="value"></field>
+        </record>
+
+    </data>
+</odoo>

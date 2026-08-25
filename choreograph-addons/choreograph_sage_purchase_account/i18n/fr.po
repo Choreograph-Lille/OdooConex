@@ -1,0 +1,198 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_sage_purchase_account
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-21 08:26+0000\n"
+"PO-Revision-Date: 2026-07-21 08:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Account move with reference '%s' was not found."
+msgstr "L'écriture comptable avec la référence « %s » est introuvable."
+
+#. module: choreograph_sage_purchase_account
+#: model_terms:ir.ui.view,arch_db:choreograph_sage_purchase_account.res_config_settings_view_form
+msgid "Allow you to input sage values"
+msgstr ""
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "CSV file has no header."
+msgstr "Le fichier CSV ne contient pas d'en têtes"
+
+#. module: choreograph_sage_purchase_account
+#: model:ir.model,name:choreograph_sage_purchase_account.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Could not etablish connexion to ftp server, reason %s"
+msgstr "Impossible de créer une connexion avec le serveur ftp, raison: %s"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Currency does not match"
+msgstr "La devise ne correspond pas"
+
+#. module: choreograph_sage_purchase_account
+#: model:ir.model.fields,field_description:choreograph_sage_purchase_account.field_res_config_settings__sage_file_date
+msgid "Date import"
+msgstr "Date d'import"
+
+#. module: choreograph_sage_purchase_account
+#: model_terms:ir.ui.view,arch_db:choreograph_sage_purchase_account.res_config_settings_view_form
+msgid ""
+"Define default suffixes and prefixes when importing files from the FTP "
+"server."
+msgstr "Définie les suffixes et préfixes par défaut lors de l'importation de fichiers depuis le serveur FTP."
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "File is not a valid UTF-8 CSV."
+msgstr "Le fichier n'est pas un fichier CSV UTF-8 valide."
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "File not found"
+msgstr "Fichier non trouver"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "File not found: %s"
+msgstr "Fichier non trouver: %s"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Invalid CSV file: %s"
+msgstr "Fichier CSV invalide: %s"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Invalid payment amount: '%s'."
+msgstr "Montant invalide pour le paiement: %s"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid ""
+"Invoice cannot be paid; please check the remaining balance or whether a "
+"reversal has already been created."
+msgstr ""
+"La facture ne peut pas être réglée ; veuillez vérifier le solde restant ou si le statut de paiement est en extourne"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Invoice has already been paid."
+msgstr "Facture déja payée"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Invoice must be posted."
+msgstr "Le statut de la facture doit être comptabilisé"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Invoice reference is missing."
+msgstr "La réference de la facture est manquante"
+
+#. module: choreograph_sage_purchase_account
+#: model:ir.model,name:choreograph_sage_purchase_account.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Missing required column(s): %s"
+msgstr "Colonne manquante dans les en-têtes: %s"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Payment amount does not match the invoice total."
+msgstr "Le montant du paiement ne correspond pas au total de la facture."
+
+#. module: choreograph_sage_purchase_account
+#: model:ir.model.fields,field_description:choreograph_sage_purchase_account.field_res_config_settings__sage_file_prefix
+msgid "Prefix"
+msgstr "Préfixe"
+
+#. module: choreograph_sage_purchase_account
+#: model:ir.model.fields,field_description:choreograph_sage_purchase_account.field_res_config_settings__sage_purchase_default_journal_id
+msgid "Sage Purchase Default Journal"
+msgstr "Journal de paiement pour les factures achats"
+
+#. module: choreograph_sage_purchase_account
+#: model_terms:ir.ui.view,arch_db:choreograph_sage_purchase_account.res_config_settings_view_form
+msgid "<span class=\"o_form_label\">Sage purchase Invoice</span>"
+msgstr "<span class=\"o_form_label\">Factures Fournisseurs SAGE</span>"
+
+#. module: choreograph_sage_purchase_account
+#: model:ir.actions.server,name:choreograph_sage_purchase_account.ir_cron_import_account_move_in_invoice_ir_actions_server
+#: model:ir.cron,cron_name:choreograph_sage_purchase_account.ir_cron_import_account_move_in_invoice
+msgid "Sage: Import account move in invoice"
+msgstr "Sage: Import automatique des factures fournisseurs"
+
+#. module: choreograph_sage_purchase_account
+#: model:ir.model.fields,field_description:choreograph_sage_purchase_account.field_res_config_settings__sage_file_suffix
+msgid "Suffix"
+msgstr "Suffixe"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Supplier SIREN does not match the invoice."
+msgstr "Le numéro de Siren fournisseur ne correspond pas à la facture"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Unable to read file: %s"
+msgstr "Impossible de lire le fichier: %s"
+
+#. module: choreograph_sage_purchase_account
+#. odoo-python
+#: code:addons/choreograph_sage_purchase_account/models/account_move.py:0
+#, python-format
+msgid "Unknown payment state '%s'. Expected one of: %s."
+msgstr "Statut inconnu pour la valeur: %s. Valeur attendue: %s"
