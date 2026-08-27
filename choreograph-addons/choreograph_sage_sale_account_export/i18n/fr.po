@@ -355,8 +355,8 @@ msgstr "Avoir"
 
 #. module: choreograph_sage_sale_account_export
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_account_move__is_transferred_to_pa
-msgid "Is transferred to PA ?"
-msgstr "Est transférée à la PA ?"
+msgid "Transferred to PA"
+msgstr "Transférée à la PA"
 
 #. module: choreograph_sage_sale_account_export
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_res_config_settings__sftp_ubl_export_server_id
