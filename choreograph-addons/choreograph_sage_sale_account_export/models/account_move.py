@@ -16,7 +16,7 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     is_invoice_collected = fields.Boolean(copy=False)
-    is_transferred_to_pa = fields.Boolean(string="Is transferred to PA ?",copy=False)
+    is_transferred_to_pa = fields.Boolean(string="Transferred to PA",copy=False)
 
     def get_export_file_name(self):
         """Generate file name with date in DDMMYYYY format"""
