@@ -215,7 +215,7 @@ class AccountMove(models.Model):
             endpoint_node.text = adresse_electronique
             party_node.insert(0, endpoint_node)
         
-        siren = partner.commercial_partner_id.siren
+        siren = partner.commercial_partner_id.siren or partner.partner_id.siren
         if siren:
             party_legal_entity = party_node.find(cac + 'PartyLegalEntity')
             if party_legal_entity is not None:
@@ -352,3 +352,49 @@ class AccountMove(models.Model):
         if tax_scheme_id_node is not None:
             tax_scheme_id_node.attrib.pop('schemeID', None)
             tax_scheme_id_node.attrib.pop('schemeAgencyID', None)
+            
+    def generate_invoice_ubl_xml_etree(self, version='2.1'):
+        xml_root = super().generate_invoice_ubl_xml_etree(version=version)
+
+        if self.move_type == 'out_refund':
+            self._ubl_add_billing_reference(xml_root, version=version)
+
+        return xml_root
+
+    def _ubl_add_billing_reference(self, parent_node, version='2.1'):
+        reversed_entry = self.reversed_entry_id
+        if not reversed_entry:
+            return
+
+        nsmap = parent_node.nsmap
+        cac = '{%s}' % nsmap.get('cac', 'urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2')
+        cbc = '{%s}' % nsmap.get('cbc', 'urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2')
+
+        billing_ref = etree.Element(cac + 'BillingReference')
+        invoice_doc_ref = etree.SubElement(billing_ref, cac + 'InvoiceDocumentReference')
+
+        ref_id = etree.SubElement(invoice_doc_ref, cbc + 'ID')
+        ref_id.text = reversed_entry.name
+
+        if reversed_entry.invoice_date:
+            ref_date = etree.SubElement(invoice_doc_ref, cbc + 'IssueDate')
+            ref_date.text = reversed_entry.invoice_date.strftime('%Y-%m-%d')
+
+        correct_order = [
+            cac + 'OrderReference',
+            cac + 'BillingReference',
+            cac + 'DespatchDocumentReference',
+            cac + 'ReceiptDocumentReference',
+            cac + 'ContractDocumentReference',
+            cac + 'AdditionalDocumentReference',
+            cac + 'AccountingSupplierParty',
+        ]
+
+        children = list(parent_node)
+        insert_at = len(children)
+        for i, child in enumerate(children):
+            if child.tag in correct_order[correct_order.index(cac + 'BillingReference'):]:
+                insert_at = i
+                break
+
+        parent_node.insert(insert_at, billing_ref)
