@@ -220,7 +220,7 @@ class AccountMove(models.Model):
             endpoint_node.text = adresse_electronique
             party_node.insert(0, endpoint_node)
         
-        siren = partner.commercial_partner_id.siren or partner.partner_id.siren
+        siren = partner.commercial_partner_id.siren or partner.siren
         if siren:
             party_legal_entity = party_node.find(cac + 'PartyLegalEntity')
             if party_legal_entity is not None:
