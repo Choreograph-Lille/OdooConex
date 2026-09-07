@@ -131,6 +131,11 @@ class AccountMove(models.Model):
             )
             parent_node.append(customization_node)
 
+        if parent_node.find(cbc + 'ProfileID') is None:
+            profile_node = etree.Element(cbc + 'ProfileID')
+            profile_node.text = 'S1'
+            parent_node.append(profile_node)
+
         code_pf = self.partner_id.commercial_partner_id.pf_code_identification
         if code_pf:
             note_node = etree.Element(cbc + "Note")
@@ -215,7 +220,7 @@ class AccountMove(models.Model):
             endpoint_node.text = adresse_electronique
             party_node.insert(0, endpoint_node)
         
-        siren = partner.commercial_partner_id.siren or partner.partner_id.siren
+        siren = partner.commercial_partner_id.siren or partner.siren
         if siren:
             party_legal_entity = party_node.find(cac + 'PartyLegalEntity')
             if party_legal_entity is not None:
