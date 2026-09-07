@@ -131,6 +131,11 @@ class AccountMove(models.Model):
             )
             parent_node.append(customization_node)
 
+        if parent_node.find(cbc + 'ProfileID') is None:
+            profile_node = etree.Element(cbc + 'ProfileID')
+            profile_node.text = 'S1'
+            parent_node.append(profile_node)
+
         code_pf = self.partner_id.commercial_partner_id.pf_code_identification
         if code_pf:
             note_node = etree.Element(cbc + "Note")
