@@ -403,3 +403,24 @@ class AccountMove(models.Model):
                 break
 
         parent_node.insert(insert_at, billing_ref)
+    
+    def _ubl_add_invoice_line_discount(
+    self, xml_root, iline, base_price, base_qty, ns, version="2.1"
+    ):
+        super()._ubl_add_invoice_line_discount(
+            xml_root, iline, base_price, base_qty, ns, version=version
+        )
+
+        cac = ns['cac']
+        cbc = ns['cbc']
+
+        allowance_nodes = xml_root.findall(cac + 'AllowanceCharge')
+        if not allowance_nodes:
+            return
+
+        last_allowance = allowance_nodes[-1]
+
+        amount_node = last_allowance.find(cbc + 'Amount')
+        if amount_node is not None:
+            current_value = float(amount_node.text)
+            amount_node.text = "%.2f" % round(current_value, 2)
