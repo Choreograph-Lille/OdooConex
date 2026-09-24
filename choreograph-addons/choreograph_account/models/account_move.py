@@ -213,11 +213,11 @@ class AccountMove(models.Model):
         if website_node is not None:
             party_node.remove(website_node)
 
-        adresse_electronique = partner.commercial_partner_id.electronic_address
-        if adresse_electronique:
+        email = partner.email
+        if email:
             endpoint_node = etree.Element(cbc + "EndpointID")
-            endpoint_node.set("schemeID", "0225")
-            endpoint_node.text = adresse_electronique
+            endpoint_node.set("schemeID", "EM")
+            endpoint_node.text = email
             party_node.insert(0, endpoint_node)
         
         siren = partner.commercial_partner_id.siren or partner.siren
