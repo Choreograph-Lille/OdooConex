@@ -184,7 +184,14 @@ $(document).ready(function () {
 					var modal_restricted_access = $('#report_bi_iframe');
 					// Astrato is the only report backend in use, kept unconditional on purpose.
 					// The Power BI srcdoc line below is dead code, left in place to be removed later.
-					$(iframe).attr('src', data[0]['report_bi_src']);
+					// Force a fresh iframe load on every click without altering the URL:
+					// replace the iframe element by a new one pointing to the original URL
+					var src = data[0]['report_bi_src'];
+					var new_iframe = iframe.cloneNode(false);
+					new_iframe.removeAttribute('src');
+					iframe.parentNode.replaceChild(new_iframe, iframe);
+					iframe = new_iframe;
+					setTimeout(function(){ $(iframe).attr('src', src); }, 50);
 					$('.close-report')[0].value = parseInt(data[0]['id']);
                     modal_restricted_access.modal('show');
 					return;
