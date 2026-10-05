@@ -136,6 +136,20 @@ class AccountMove(models.Model):
             profile_node.text = 'S1'
             parent_node.append(profile_node)
 
+        # GBP invoices only: TaxCurrencyCode = EUR, placed right after
+        # DocumentCurrencyCode (new UBL 2.1 regulation)
+        if (
+            self.currency_id == self.env.ref('base.GBP')
+            and parent_node.find(cbc + 'TaxCurrencyCode') is None
+        ):
+            tax_currency_node = etree.Element(cbc + 'TaxCurrencyCode')
+            tax_currency_node.text = 'EUR'
+            doc_currency_node = parent_node.find(cbc + 'DocumentCurrencyCode')
+            if doc_currency_node is not None:
+                doc_currency_node.addnext(tax_currency_node)
+            else:
+                parent_node.append(tax_currency_node)
+
         code_pf = self.partner_id.commercial_partner_id.pf_code_identification
         if code_pf:
             note_node = etree.Element(cbc + "Note")
@@ -194,6 +208,25 @@ class AccountMove(models.Model):
             parent_node.remove(child)
         for child in children:
             parent_node.append(child)
+
+    def _ubl_add_tax_total(self, xml_root, ns, version="2.1"):
+        super()._ubl_add_tax_total(xml_root, ns, version=version)
+        # GBP invoices only: TaxAmount (global and per VAT category) is expressed
+        # in EUR. Only the currencyID attribute is changed, TaxableAmount stays
+        # in the invoice currency.
+        if self.currency_id != self.env.ref('base.GBP'):
+            return
+        tax_currency = 'EUR'
+        for tax_total in xml_root.findall(ns["cac"] + "TaxTotal"):
+            # Global TaxAmount (child of TaxTotal)
+            tax_amount = tax_total.find(ns["cbc"] + "TaxAmount")
+            if tax_amount is not None:
+                tax_amount.set("currencyID", tax_currency)
+            # TaxAmount per VAT category (child of TaxSubtotal)
+            for subtotal in tax_total.findall(ns["cac"] + "TaxSubtotal"):
+                sub_tax_amount = subtotal.find(ns["cbc"] + "TaxAmount")
+                if sub_tax_amount is not None:
+                    sub_tax_amount.set("currencyID", tax_currency)
 
     def _ubl_add_customer_party(
         self, partner, company, node_name, parent_node, ns, version="2.1"
