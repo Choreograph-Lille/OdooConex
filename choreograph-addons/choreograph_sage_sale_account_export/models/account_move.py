@@ -102,14 +102,36 @@ class AccountMove(models.Model):
 
         return True
 
+    def _get_last_payment_dates(self):
+        """Return {move_id: last reconciliation date} in a single query.
+
+        Covers payments AND bank statement lines reconciled with the invoices.
+        """
+        if not self:
+            return {}
+        self.env.cr.execute(
+            """
+            SELECT aml.move_id, MAX(apr.max_date)
+              FROM account_partial_reconcile apr
+              JOIN account_move_line aml
+                ON aml.id IN (apr.debit_move_id, apr.credit_move_id)
+             WHERE aml.move_id IN %s
+             GROUP BY aml.move_id
+            """,
+            (tuple(self.ids),),
+        )
+        return dict(self.env.cr.fetchall())
+
     def prepare_paid_invoices_rows(self, moves):
         """Prepare rows for the paid invoices CSV file"""
         invoice_number_label = _("Invoice Number")
         amount_ttc_label = _("Amount TTC")
         status_label = _("Status")
+        payment_date = _("Payment date")
 
-        fields_list = [invoice_number_label, amount_ttc_label, status_label]
+        fields_list = [invoice_number_label, amount_ttc_label, status_label, payment_date]
         rows = []
+        payment_dates = moves._get_last_payment_dates()
 
         for move in moves:
             if move.move_type in ["out_invoice", "out_refund"]:
@@ -117,6 +139,7 @@ class AccountMove(models.Model):
                     invoice_number_label: move.name,
                     amount_ttc_label: abs(move.amount_total),
                     status_label: _("Collected"),
+                    payment_date: payment_dates[move.id].strftime('%d/%m/%Y') if move.id in payment_dates else ''
                 }
                 rows.append(vals)
 
