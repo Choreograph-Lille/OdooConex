@@ -387,3 +387,9 @@ msgstr "Exporter les fichiers UBL des Factures et Avoirs Ventes vers PA ICD"
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account_export.field_sftp_export_report_line__message
 msgid "Error Message"
 msgstr "Message d'Erreur"
+
+#. module: choreograph_sage_sale_account_export
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "Payment date"
+msgstr "Date de paiement"
