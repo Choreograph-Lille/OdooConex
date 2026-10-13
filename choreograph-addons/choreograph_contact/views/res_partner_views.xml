@@ -30,8 +30,8 @@
                             <group name="client_data_right">
                                 <field name="last_transaction_date" readonly="1"/>
                                 <field name="last_receipt_date" readonly="1"/>
-                                <field name="private_title" readonly="1"/>
-                                <field name="data_destruction_date" readonly="1"/>
+                                <field name="private_title"/>
+                                <field name="data_destruction_date"/>
                             </group>
                         </group>
                     </page>
