@@ -210,7 +210,10 @@ class AccountMove(models.Model):
             parent_node.append(child)
 
     def _ubl_add_tax_total(self, xml_root, ns, version="2.1"):
-        super()._ubl_add_tax_total(xml_root, ns, version=version)
+        if self._ubl_is_norm_fr():
+            self._ubl_fr_add_tax_total(xml_root, ns, version=version)
+        else:
+            super()._ubl_add_tax_total(xml_root, ns, version=version)
         # GBP invoices only: TaxAmount (global and per VAT category) is expressed
         # in EUR. Only the currencyID attribute is changed, TaxableAmount stays
         # in the invoice currency.
@@ -294,6 +297,11 @@ class AccountMove(models.Model):
         website_node = party_node.find(cbc + 'WebsiteURI')
         if website_node is not None:
             party_node.remove(website_node)
+
+        if self._ubl_is_norm_fr():
+            language_node = party_node.find(cac + 'Language')
+            if language_node is not None:
+                party_node.remove(language_node)
 
         electronic_address = self.company_id.get_electronic_address()
         if electronic_address:
@@ -457,3 +465,130 @@ class AccountMove(models.Model):
         if amount_node is not None:
             current_value = float(amount_node.text)
             amount_node.text = "%.2f" % round(current_value, 2)
+
+    # ------------------------------------------------------------------
+    # UBL - French standard (norme FR)
+    # Triggered by the "Generate UBL XML File (FR)" button through the
+    # 'ubl_norm_fr' context key. Differences with the standard generation:
+    #   - all invoice taxes are declared as VAT: no document level
+    #     AllowanceCharge (ABK), TaxTotal/LegalMonetaryTotal amounts fixed
+    #   - ChargeTotalAmount always present
+    #   - no Language block on the supplier party
+    #   - ClassifiedTaxCategory added on each invoice line
+    # ------------------------------------------------------------------
+
+    def _ubl_is_norm_fr(self):
+        return bool(self.env.context.get('ubl_norm_fr'))
+
+    def attach_ubl_fr_xml_file_button(self):
+        return self.with_context(ubl_norm_fr=True).attach_ubl_xml_file_button()
+
+    def _ubl_get_invoice_vat_exclusive_amount(self):
+        if self._ubl_is_norm_fr():
+            return self.amount_untaxed
+        return super()._ubl_get_invoice_vat_exclusive_amount()
+
+    def _ubl_get_invoice_vat_amount(self):
+        if self._ubl_is_norm_fr():
+            return self.amount_tax
+        return super()._ubl_get_invoice_vat_amount()
+
+    def _ubl_get_charge_total_amount(self):
+        if self._ubl_is_norm_fr():
+            return 0.0
+        return super()._ubl_get_charge_total_amount()
+
+    def _ubl_fr_add_tax_total(self, xml_root, ns, version="2.1"):
+        cur_name = self.currency_id.name
+        prec = self.currency_id.decimal_places
+
+        tax_lines = {}
+        for tline in self.line_ids:
+            sign = 1 if tline.is_refund else -1
+            if tline.tax_line_id:
+                tax_lines.setdefault(tline.tax_line_id, {"base": 0.0, "amount": 0.0})
+                tax_lines[tline.tax_line_id]["base"] += tline.tax_base_amount
+                tax_lines[tline.tax_line_id]["amount"] += sign * tline.balance
+            elif tline.tax_ids:
+                # In case there are no declared (tag) repartition lines
+                for tax in tline.tax_ids:
+                    if not tline.is_refund and tax.invoice_repartition_line_ids.tag_ids:
+                        continue
+                    if tline.is_refund and tax.refund_repartition_line_ids.tag_ids:
+                        continue
+                    tax_lines.setdefault(tax, {"base": 0.0, "amount": 0.0})
+                    tax_lines[tax]["base"] += sign * tline.balance
+
+        tax_total_node = etree.SubElement(xml_root, ns["cac"] + "TaxTotal")
+        tax_amount_node = etree.SubElement(
+            tax_total_node, ns["cbc"] + "TaxAmount", currencyID=cur_name
+        )
+        tax_amount_node.text = "%0.*f" % (prec, self._ubl_get_invoice_vat_amount())
+        for tax, amounts in tax_lines.items():
+            self._ubl_add_tax_subtotal(
+                amounts["base"],
+                amounts["amount"],
+                tax,
+                cur_name,
+                tax_total_node,
+                ns,
+                version=version,
+            )
+
+    def _ubl_add_legal_monetary_total(self, parent_node, ns, version="2.1"):
+        super()._ubl_add_legal_monetary_total(parent_node, ns, version=version)
+        if not self._ubl_is_norm_fr():
+            return
+
+        cac = ns['cac']
+        cbc = ns['cbc']
+
+        monetary_total = parent_node.findall(cac + 'LegalMonetaryTotal')[-1]
+        if monetary_total.find(cbc + 'ChargeTotalAmount') is not None:
+            return
+        charge_total_node = etree.Element(
+            cbc + 'ChargeTotalAmount', currencyID=self.currency_id.name
+        )
+        charge_total_node.text = "%0.*f" % (self.currency_id.decimal_places, 0.0)
+        prepaid_node = monetary_total.find(cbc + 'PrepaidAmount')
+        if prepaid_node is not None:
+            prepaid_node.addprevious(charge_total_node)
+        else:
+            monetary_total.append(charge_total_node)
+
+    def _ubl_add_invoice_line(self, parent_node, iline, line_number, ns, version="2.1"):
+        if not self._ubl_is_norm_fr():
+            return super()._ubl_add_invoice_line(
+                parent_node, iline, line_number, ns, version=version
+            )
+
+        # Line taxes are added below from iline.tax_ids (instead of the
+        # product taxes filtered on UNECE type VAT)
+        super(AccountMove, self.with_context(ubl_add_item__skip_taxes=True))._ubl_add_invoice_line(
+            parent_node, iline, line_number, ns, version=version
+        )
+
+        cac = ns['cac']
+        item_node = parent_node[-1].find(cac + 'Item')
+        if item_node is None or not iline.tax_ids:
+            return
+
+        # ClassifiedTaxCategory must be placed before these Item children
+        following_tags = [cac + tag for tag in (
+            'AdditionalItemProperty',
+            'ManufacturerParty',
+            'InformationContentProviderParty',
+            'OriginAddress',
+            'ItemInstance',
+            'Certificate',
+            'Dimension',
+        )]
+        following_nodes = [c for c in item_node if c.tag in following_tags]
+        for node in following_nodes:
+            item_node.remove(node)
+        for tax in iline.tax_ids:
+            self._ubl_add_tax_category(
+                tax, item_node, ns, node_name='ClassifiedTaxCategory', version=version
+            )
+        for node in following_nodes:
+            item_node.append(node)
