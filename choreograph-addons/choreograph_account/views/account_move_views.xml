@@ -18,6 +18,14 @@
                 <xpath expr="//field[@name='team_id']" position="attributes">
                     <attribute name="attrs"></attribute>
                 </xpath>
+                <button name="attach_ubl_xml_file_button" position="after">
+                    <button
+                        type="object"
+                        name="attach_ubl_fr_xml_file_button"
+                        attrs="{'invisible': ['|', ('move_type', 'not in', ['out_invoice', 'out_refund']), ('state', '!=', 'posted')]}"
+                        string="Generate UBL XML File (FR)"
+                    />
+                </button>
                 <field name="partner_bank_id" position="after">
                     <field name="provider_invoice_date" 
                         attrs="{
