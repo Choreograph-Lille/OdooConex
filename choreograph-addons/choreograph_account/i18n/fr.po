@@ -508,3 +508,8 @@ msgstr "Code Identification PF"
 #: model:ir.model.fields,field_description:choreograph_account.field_res_partner__vatex
 msgid "VATEX"
 msgstr "VATEX"
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.account_move_view_form_inherit
+msgid "Generate UBL XML File (FR)"
+msgstr "Générer le fichier XML UBL (norme FR)"
