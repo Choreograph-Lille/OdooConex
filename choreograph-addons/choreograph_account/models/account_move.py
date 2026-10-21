@@ -249,7 +249,15 @@ class AccountMove(models.Model):
         if website_node is not None:
             party_node.remove(website_node)
 
-        if self._ubl_is_norm_fr():
+        code_pf = (partner.commercial_partner_id.pf_code_identification or '').strip().upper()
+        if self._ubl_is_norm_fr() and code_pf in ('B2BINT', 'B2C'):
+            email = partner.email
+            if email:
+                endpoint_node = etree.Element(cbc + "EndpointID")
+                endpoint_node.set("schemeID", "EM")
+                endpoint_node.text = email
+                party_node.insert(0, endpoint_node)
+        elif self._ubl_is_norm_fr():
             adresse_electronique = partner.commercial_partner_id.electronic_address
             if adresse_electronique:
                 endpoint_node = etree.Element(cbc + "EndpointID")
@@ -482,7 +490,9 @@ class AccountMove(models.Model):
     #     AllowanceCharge (ABK), TaxTotal/LegalMonetaryTotal amounts fixed
     #   - ChargeTotalAmount always present
     #   - no Language block on the supplier party
-    #   - customer EndpointID = electronic address (schemeID 0225)
+    #   - customer EndpointID depends on the PF code (#BAR# note):
+    #     B2BINT / B2C -> invoicing contact email (schemeID EM)
+    #     otherwise (B2B) -> electronic address (schemeID 0225)
     #   - ClassifiedTaxCategory added on each invoice line
     # ------------------------------------------------------------------
 
