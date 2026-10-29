@@ -20,12 +20,14 @@
                 </xpath>
                 <button name="attach_ubl_xml_file_button" position="attributes">
                     <attribute name="string">Generate UBL GBP</attribute>
+                    <attribute name="attrs">{'invisible': ['|', '|', ('move_type', 'not in', ['out_invoice', 'out_refund']), ('state', '!=', 'posted'), ('is_ubl_norm_fr', '=', True)]}</attribute>
                 </button>
                 <button name="attach_ubl_xml_file_button" position="after">
+                    <field name="is_ubl_norm_fr" invisible="1"/>
                     <button
                         type="object"
                         name="attach_ubl_fr_xml_file_button"
-                        attrs="{'invisible': ['|', ('move_type', 'not in', ['out_invoice', 'out_refund']), ('state', '!=', 'posted')]}"
+                        attrs="{'invisible': ['|', '|', ('move_type', 'not in', ['out_invoice', 'out_refund']), ('state', '!=', 'posted'), ('is_ubl_norm_fr', '=', False)]}"
                         string="Generate UBL EUR"
                     />
                 </button>

@@ -518,3 +518,8 @@ msgstr "Générer UBL EUR"
 #: model_terms:ir.ui.view,arch_db:choreograph_account.account_move_view_form_inherit
 msgid "Generate UBL GBP"
 msgstr "Générer UBL GBP"
+
+#. module: choreograph_account
+#: model:ir.model.fields,field_description:choreograph_account.field_account_move__is_ubl_norm_fr
+msgid "UBL EUR (French standard)"
+msgstr "UBL EUR (norme française)"
