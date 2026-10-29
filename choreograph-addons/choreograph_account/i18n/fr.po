@@ -511,5 +511,10 @@ msgstr "VATEX"
 
 #. module: choreograph_account
 #: model_terms:ir.ui.view,arch_db:choreograph_account.account_move_view_form_inherit
-msgid "Generate UBL XML File (FR)"
-msgstr "Générer le fichier XML UBL (norme FR)"
+msgid "Generate UBL EUR"
+msgstr "Générer UBL EUR"
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.account_move_view_form_inherit
+msgid "Generate UBL GBP"
+msgstr "Générer UBL GBP"
