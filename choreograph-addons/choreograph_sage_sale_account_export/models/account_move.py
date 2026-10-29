@@ -284,7 +284,9 @@ class AccountMove(models.Model):
         This method can be overridden in other modules to customize the UBL generation.
         """
         self.ensure_one()
-        return self.generate_ubl_xml_string(version='2.1')
+        # EUR invoices are exported with the UBL EUR (French standard)
+        move = self.with_context(ubl_norm_fr=True) if self.is_ubl_norm_fr else self
+        return move.generate_ubl_xml_string(version='2.1')
 
     def _get_export_type(self):
         """Return the export type based on the move type."""
