@@ -20,6 +20,7 @@ class AccountMove(models.Model):
     is_confidential = fields.Boolean()
     provider_invoice_date = fields.Date()
     siren = fields.Char(compute='compute_siren', string='SIREN')
+    is_ubl_norm_fr = fields.Boolean(compute='_compute_is_ubl_norm_fr', string='UBL EUR (French standard)')
 
     def action_invoice_sent(self):
         result = super(AccountMove, self).action_invoice_sent()
@@ -498,6 +499,13 @@ class AccountMove(models.Model):
 
     def _ubl_is_norm_fr(self):
         return bool(self.env.context.get('ubl_norm_fr'))
+
+    @api.depends('currency_id')
+    def _compute_is_ubl_norm_fr(self):
+        # EUR invoices -> UBL EUR (French standard), other currencies -> UBL GBP
+        eur = self.env.ref('base.EUR')
+        for move in self:
+            move.is_ubl_norm_fr = move.currency_id == eur
 
     def attach_ubl_fr_xml_file_button(self):
         return self.with_context(ubl_norm_fr=True).attach_ubl_xml_file_button()
