@@ -11,6 +11,17 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+# Payment choice (Sage) -> UBL PaymentMeansCode expected by the e-invoicing reform
+UBL_PAYMENT_MEANS_CODES = {
+    'vsep': '58',    # SEPA credit transfer
+    'prv': '49',     # Direct debit
+    'virint': '30',  # International credit transfer
+    'cbb': '48',     # Bank card
+    'chq': '20',     # Cheque
+}
+# Payment means codes for which the payee bank account (IBAN/BIC) is given
+UBL_BANK_ACCOUNT_PAYMENT_MEANS_CODES = ['30', '31', '42', '58', '59']
+
 
 class AccountMove(models.Model):
     _inherit = "account.move"
@@ -277,6 +288,51 @@ class AccountMove(models.Model):
         today = date.today().strftime('%d%m%Y')
         ref = self.name.replace('/', '-')
         return f"{ref}_{today}.xml"
+
+    def _ubl_add_payment_means(
+        self,
+        partner_bank,
+        payment_mode,
+        date_due,
+        parent_node,
+        ns,
+        payment_identifier=None,
+        version="2.1",
+    ):
+        payment_means_code = UBL_PAYMENT_MEANS_CODES.get(self.payment_choice)
+        if not payment_means_code:
+            return super()._ubl_add_payment_means(
+                partner_bank, payment_mode, date_due, parent_node, ns,
+                payment_identifier=payment_identifier, version=version,
+            )
+
+        # The code comes from the payment choice: the payment mode is only used
+        # to find the bank account, as in the standard method
+        if (
+            not partner_bank
+            and payment_mode
+            and payment_mode.bank_account_link == "fixed"
+            and payment_mode.fixed_journal_id
+        ):
+            partner_bank = payment_mode.fixed_journal_id.bank_account_id
+        super()._ubl_add_payment_means(
+            partner_bank, False, date_due, parent_node, ns,
+            payment_identifier=payment_identifier, version=version,
+        )
+
+        cac = ns['cac']
+        cbc = ns['cbc']
+        pay_means = parent_node.findall(cac + 'PaymentMeans')[-1]
+        pay_means.find(cbc + 'PaymentMeansCode').text = payment_means_code
+        if payment_means_code not in UBL_BANK_ACCOUNT_PAYMENT_MEANS_CODES:
+            # No payee bank account for direct debit, bank card and cheque
+            for tag in ('PaymentChannelCode', 'PaymentID'):
+                node = pay_means.find(cbc + tag)
+                if node is not None:
+                    pay_means.remove(node)
+            node = pay_means.find(cac + 'PayeeFinancialAccount')
+            if node is not None:
+                pay_means.remove(node)
 
     def _get_ubl_content(self):
         """
