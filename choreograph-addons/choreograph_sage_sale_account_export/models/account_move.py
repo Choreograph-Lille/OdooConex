@@ -11,11 +11,23 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
+# Payment choice (Sage) -> UBL PaymentMeansCode expected by the e-invoicing reform
+UBL_PAYMENT_MEANS_CODES = {
+    'vsep': '58',    # SEPA credit transfer
+    'prv': '49',     # Direct debit
+    'virint': '30',  # International credit transfer
+    'cbb': '48',     # Bank card
+    'chq': '20',     # Cheque
+}
+# Payment means codes for which the payee bank account (IBAN/BIC) is given
+UBL_BANK_ACCOUNT_PAYMENT_MEANS_CODES = ['30', '31', '42', '58', '59']
+
 
 class AccountMove(models.Model):
     _inherit = "account.move"
 
     is_invoice_collected = fields.Boolean(copy=False)
+    is_transferred_to_pa = fields.Boolean(string="Transferred to PA",copy=False)
 
     def get_export_file_name(self):
         """Generate file name with date in DDMMYYYY format"""
@@ -101,14 +113,36 @@ class AccountMove(models.Model):
 
         return True
 
+    def _get_last_payment_dates(self):
+        """Return {move_id: last reconciliation date} in a single query.
+
+        Covers payments AND bank statement lines reconciled with the invoices.
+        """
+        if not self:
+            return {}
+        self.env.cr.execute(
+            """
+            SELECT aml.move_id, MAX(apr.max_date)
+              FROM account_partial_reconcile apr
+              JOIN account_move_line aml
+                ON aml.id IN (apr.debit_move_id, apr.credit_move_id)
+             WHERE aml.move_id IN %s
+             GROUP BY aml.move_id
+            """,
+            (tuple(self.ids),),
+        )
+        return dict(self.env.cr.fetchall())
+
     def prepare_paid_invoices_rows(self, moves):
         """Prepare rows for the paid invoices CSV file"""
         invoice_number_label = _("Invoice Number")
         amount_ttc_label = _("Amount TTC")
         status_label = _("Status")
+        payment_date = _("Payment date")
 
-        fields_list = [invoice_number_label, amount_ttc_label, status_label]
+        fields_list = [invoice_number_label, amount_ttc_label, status_label, payment_date]
         rows = []
+        payment_dates = moves._get_last_payment_dates()
 
         for move in moves:
             if move.move_type in ["out_invoice", "out_refund"]:
@@ -116,6 +150,7 @@ class AccountMove(models.Model):
                     invoice_number_label: move.name,
                     amount_ttc_label: abs(move.amount_total),
                     status_label: _("Collected"),
+                    payment_date: payment_dates[move.id].strftime('%d/%m/%Y') if move.id in payment_dates else ''
                 }
                 rows.append(vals)
 
@@ -243,3 +278,178 @@ class AccountMove(models.Model):
                 self.env["sftp.export.report.line"].create(line_vals)
 
         return report
+    
+    def get_ubl_filename(self, version="2.1"):
+        """
+        Format :
+          Facture : FAC-2026-00331_29062026.xml
+          Avoir   : RFAC-2026-00003_29062026.xml
+        """
+        today = date.today().strftime('%d%m%Y')
+        ref = self.name.replace('/', '-')
+        return f"{ref}_{today}.xml"
+
+    def _ubl_add_payment_means(
+        self,
+        partner_bank,
+        payment_mode,
+        date_due,
+        parent_node,
+        ns,
+        payment_identifier=None,
+        version="2.1",
+    ):
+        payment_means_code = UBL_PAYMENT_MEANS_CODES.get(self.payment_choice)
+        if not payment_means_code:
+            return super()._ubl_add_payment_means(
+                partner_bank, payment_mode, date_due, parent_node, ns,
+                payment_identifier=payment_identifier, version=version,
+            )
+
+        # The code comes from the payment choice: the payment mode is only used
+        # to find the bank account, as in the standard method
+        if (
+            not partner_bank
+            and payment_mode
+            and payment_mode.bank_account_link == "fixed"
+            and payment_mode.fixed_journal_id
+        ):
+            partner_bank = payment_mode.fixed_journal_id.bank_account_id
+        super()._ubl_add_payment_means(
+            partner_bank, False, date_due, parent_node, ns,
+            payment_identifier=payment_identifier, version=version,
+        )
+
+        cac = ns['cac']
+        cbc = ns['cbc']
+        pay_means = parent_node.findall(cac + 'PaymentMeans')[-1]
+        pay_means.find(cbc + 'PaymentMeansCode').text = payment_means_code
+        if payment_means_code not in UBL_BANK_ACCOUNT_PAYMENT_MEANS_CODES:
+            # No payee bank account for direct debit, bank card and cheque
+            for tag in ('PaymentChannelCode', 'PaymentID'):
+                node = pay_means.find(cbc + tag)
+                if node is not None:
+                    pay_means.remove(node)
+            node = pay_means.find(cac + 'PayeeFinancialAccount')
+            if node is not None:
+                pay_means.remove(node)
+
+    def _get_ubl_content(self):
+        """
+        Generate UBL XML content for the invoice. 
+        This method can be overridden in other modules to customize the UBL generation.
+        """
+        self.ensure_one()
+        # EUR invoices are exported with the UBL EUR (French standard)
+        move = self.with_context(ubl_norm_fr=True) if self.is_ubl_norm_fr else self
+        return move.generate_ubl_xml_string(version='2.1')
+
+    def _get_export_type(self):
+        """Return the export type based on the move type."""
+        if self.move_type == 'out_invoice':
+            return 'invoice'
+        elif self.move_type == 'out_refund':
+            return 'credit_note'
+        return 'invoice'
+    
+    def _get_ftp_server(self, param_key):
+        """
+        Helper method to retrieve the SFTP server configuration based on a parameter key.
+        """
+        sftp_server_id = self.env['ir.config_parameter'].sudo().get_param(param_key)
+        if not sftp_server_id:
+            return None
+        try:
+            server = self.env['choreograph.sage.sftp.server'].browse(
+                int(sftp_server_id))
+            return server if server.exists() else None
+        except (ValueError, TypeError):
+            return None
+    @api.model
+    def export_ubl_invoices_to_pa(self):
+        """
+        Cron job method to export UBL invoices and credit notes to the PA ICD via SFTP.
+        It retrieves the SFTP server configuration, searches for posted invoices and credit notes
+        """
+        ftp_server = self._get_ftp_server(
+            'choreograph_sage_sale_account_export.sftp_ubl_server_id')
+
+        if not ftp_server:
+            _logger.warning('UBL export: no SFTP ICD server configured.')
+            return False
+
+        moves = self.env['account.move'].search([
+            ('move_type', 'in', ['out_invoice', 'out_refund']),
+            ('state', '=', 'posted'),
+            ('is_transferred_to_pa', '=', False),
+        ])
+
+        if not moves:
+            _logger.info('UBL export: no invoice or credit note to export.')
+            return True
+
+        ssh_client, sftp = self.get_sftp_client(ftp_server)
+
+        report = self.env['sftp.export.report'].create({
+            'export_date':    fields.Datetime.now(),
+            'sftp_server_id': ftp_server.id,
+            'file_name':      f"UBL_export_{date.today().strftime('%d%m%Y')}",
+        })
+
+        line_count = success_count = error_count = 0
+
+        try:
+            for move in moves:
+                line_count += 1
+                filename = move.get_ubl_filename()
+
+                try:
+                    ubl_content = move._get_ubl_content()
+
+                    remote_path = f"{ftp_server.output_path}/{filename}"
+                    with sftp.open(remote_path, 'wb') as remote_file:
+                        remote_file.write(ubl_content)
+
+                    move.write({'is_transferred_to_pa': True})
+
+                    self.env['sftp.export.report.line'].create({
+                        'report_id':    report.id,
+                        'invoice_ref':  move.name,
+                        'amount_total': move.amount_total,
+                        'status':       _('Transferred'),
+                        'type':         move._get_export_type(),
+                    })
+                    success_count += 1
+                    _logger.info('UBL export: %s → %s', move.name, remote_path)
+
+                except Exception as e:
+                    error_count += 1
+                    self.env['sftp.export.report.line'].create({
+                        'report_id':    report.id,
+                        'invoice_ref':  move.name,
+                        'amount_total': move.amount_total,
+                        'status':       _('Failed'),
+                        'type':         move._get_export_type(),
+                        'message':      str(e),
+                    })
+                    _logger.error('UBL export: error on %s — %s', move.name, e)
+
+        finally:
+            sftp.close()
+            ssh_client.close()
+
+            if error_count == 0:
+                state = 'success'
+            elif success_count == 0:
+                state = 'failed'
+            else:
+                state = 'partial'
+
+            report.write({
+                'line_count':    line_count,
+                'success_count': success_count,
+                'error_count':   error_count,
+                'state':         state,
+            })
+
+        return True

@@ -25,6 +25,7 @@
                 </field>
                 <xpath expr="//field[@name='property_account_position_id']" position="after">
                     <field name="pf_code_identification" attrs="{'invisible': [('is_company', '=', False)]}"/>
+                    <field name="vatex" attrs="{'invisible': [('is_company', '=', False)]}"/>
                 </xpath>
             </field>
         </record>
@@ -59,6 +60,19 @@
                 <field name="total_overdue" position="attributes">
                     <attribute name="options">{'currency_field': 'pricelist_currency_id'}</attribute>
                 </field>
+            </field>
+        </record>
+
+        <record id="res_partner_form_view_notes_pa" model="ir.ui.view">
+            <field name="name">res.partner.form.view.inherit.notes.pa</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='internal_notes']" position="after">
+                    <page name="notes_pa" string="Notes PA">
+                        <field name="notes_pa" widget="text" nolabel="1"/>
+                    </page>
+                </xpath>
             </field>
         </record>
     

@@ -495,6 +495,7 @@ msgstr ""
 
 #. module: choreograph_account
 #: model:ir.model.fields,field_description:choreograph_account.field_res_partner__electronic_address
+#: model:ir.model.fields,field_description:choreograph_account.field_res_company__electronic_address
 msgid "Electronic Address"
 msgstr "Adresse Electronique"
 
@@ -502,3 +503,23 @@ msgstr "Adresse Electronique"
 #: model:ir.model.fields,field_description:choreograph_account.field_res_partner__pf_code_identification
 msgid "PF Code Identification"
 msgstr "Code Identification PF"
+
+#. module: choreograph_account
+#: model:ir.model.fields,field_description:choreograph_account.field_res_partner__vatex
+msgid "VATEX"
+msgstr "VATEX"
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.account_move_view_form_inherit
+msgid "Generate UBL EUR"
+msgstr "Générer UBL EUR"
+
+#. module: choreograph_account
+#: model_terms:ir.ui.view,arch_db:choreograph_account.account_move_view_form_inherit
+msgid "Generate UBL GBP"
+msgstr "Générer UBL GBP"
+
+#. module: choreograph_account
+#: model:ir.model.fields,field_description:choreograph_account.field_account_move__is_ubl_norm_fr
+msgid "UBL EUR (French standard)"
+msgstr "UBL EUR (norme française)"
