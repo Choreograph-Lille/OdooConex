@@ -16,7 +16,6 @@
         'choreograph_base',
         'mail',
         'account_invoice_ubl',
-        'choreograph_contact'
     ],
     'data': [
         # data
