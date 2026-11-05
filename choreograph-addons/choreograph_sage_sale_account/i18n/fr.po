@@ -52,8 +52,8 @@ msgstr "Pièce comptable"
 
 #. module: choreograph_sage_sale_account
 #: model:ir.model.fields,help:choreograph_sage_sale_account.field_res_config_settings__sage_sale_file_date
-msgid "Leave empty to use today's date"
-msgstr "Laisser vide pour utiliser la date du jour"
+msgid "Leave empty to automatically import every file not imported yet. Set a date only to relaunch the file of that date, then empty it."
+msgstr "Laisser vide pour importer automatiquement tous les fichiers pas encore importés. Renseigner une date uniquement pour relancer le fichier de cette date, puis la vider."
 
 #. module: choreograph_sage_sale_account
 #: model:ir.model.fields,field_description:choreograph_sage_sale_account.field_res_config_settings__sage_sale_file_prefix

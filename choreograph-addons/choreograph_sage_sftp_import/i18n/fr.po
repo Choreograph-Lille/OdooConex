@@ -163,3 +163,17 @@ msgstr "Impossible de lire le fichier: %s"
 #, python-format
 msgid "Unknown payment state '%s'. Expected one of: %s."
 msgstr "Statut inconnu pour la valeur: %s. Valeur attendue: %s"
+
+#. module: choreograph_sage_sftp_import
+#. odoo-python
+#: code:addons/choreograph_sage_sftp_import/models/account_move.py:0
+#, python-format
+msgid "No new file to import over the last %s days."
+msgstr "Aucun nouveau fichier à importer sur les %s derniers jours."
+
+#. module: choreograph_sage_sftp_import
+#. odoo-python
+#: code:addons/choreograph_sage_sftp_import/models/account_move.py:0
+#, python-format
+msgid "Empty file: no payment to import."
+msgstr "Fichier vide : aucun paiement à importer."

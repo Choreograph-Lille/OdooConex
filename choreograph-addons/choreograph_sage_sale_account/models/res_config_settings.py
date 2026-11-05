@@ -15,5 +15,5 @@ class ResConfigSettings(models.TransientModel):
     sage_sale_file_date = fields.Datetime(
     string="File date",
     config_parameter='choreograph_sage_sale_account.sage_file_date',
-    help="Leave empty to use today's date",
+    help="Leave empty to automatically import every file not imported yet. Set a date only to relaunch the file of that date, then empty it.",
     )
