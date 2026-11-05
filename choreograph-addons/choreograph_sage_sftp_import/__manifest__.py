@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': 'Choreograph SAGE SFTP Import',
-    'version': '16.0.0.0',
+    'version': '16.0.0.1',
     'license': 'LGPL-3',
     'category': 'Accounting',
     'sequence': -98,
@@ -15,6 +15,7 @@
         'account'
     ],
     'data': [
+        'data/ir_config_parameter_data.xml',
         'views/res_config_settings_views.xml'
     ],
     'assets': {

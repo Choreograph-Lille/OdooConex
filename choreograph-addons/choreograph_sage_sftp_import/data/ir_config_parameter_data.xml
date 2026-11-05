@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- Number of days (before today) scanned on the SFTP to import the Sage files
+             not imported yet. Can be changed in Settings > Technical > System Parameters. -->
+        <record id="config_parameter_sage_catchup_days" model="ir.config_parameter">
+            <field name="key">choreograph_sage_sftp_import.catchup_days</field>
+            <field name="value">30</field>
+        </record>
+    </data>
+</odoo>
