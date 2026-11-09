@@ -393,3 +393,9 @@ msgstr "Message d'Erreur"
 #, python-format
 msgid "Payment date"
 msgstr "Date d'encaissement"
+
+#. module: choreograph_sage_sale_account_export
+#: code:addons/choreograph_sage_sale_account_export/models/account_move.py:0
+#, python-format
+msgid "VAT rate"
+msgstr "Taux TVA"

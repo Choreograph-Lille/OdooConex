@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "Choreograph PA Sale Account Export",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "license": "LGPL-3",
     "category": "Accounting",
     "sequence": -97,
