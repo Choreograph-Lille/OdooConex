@@ -19,7 +19,7 @@ from odoo.tools import float_compare
 
 AUTHORIZED_PAYMENT_STATE = ('En paiement', 'Extourné')
 
-# Sage names its files with the French local date of generation.
+# Sage puts the generation date, in Paris time, in its file names.
 SAGE_TZ = 'Europe/Paris'
 # Number of days (before today) scanned on the SFTP to catch up missed files.
 CATCHUP_DAYS_PARAM = 'choreograph_sage_sftp_import.catchup_days'
@@ -41,7 +41,7 @@ class AccountMove(models.Model):
         return False, False, False
 
     def _get_sage_today(self):
-        """Today's date in the French timezone (independent of UTC / DST)."""
+        """Today's date in Paris time, whatever the server timezone or daylight saving time."""
         return fields.Date.context_today(self.with_context(tz=SAGE_TZ))
 
     def _parse_sage_forced_date(self, value):
@@ -85,8 +85,7 @@ class AccountMove(models.Model):
 
         - 'Date import' set: only that file (manual relaunch, even if already imported).
         - Otherwise: every file of the last N days (today excluded, it may still be in
-          transfer) present on the SFTP and never read yet, i.e. without an import log
-          bearing its name.
+          transfer) that is on the SFTP and has no import log with its name yet.
         """
         forced_date = self._parse_sage_forced_date(self._get_sage_file_config()[2])
         if forced_date:
@@ -290,14 +289,8 @@ class AccountMove(models.Model):
                 ref,
             )
 
-        if move.amount_residual == 0:
-            return self._validation_error(
-                log,
-                _("Invoice has already been paid."),
-                "data_mismatch",
-                ref,
-            )
-
+        # Already paid invoices are handled in _process_sage_file, once the SIREN,
+        # currency and amount below have been checked
         siren = invoice_data.get("Siren tiers")
 
         if siren and move.siren != siren:
@@ -430,13 +423,12 @@ class AccountMove(models.Model):
             list_dir = sftp.listdir(f'/{sftp_server_id.output_path}')
             file_names = self._get_sage_files_to_import(sftp_server_id, list_dir, log_type)
             if not file_names:
+                # Every file is already imported: this is the usual case, so the log is a success
                 log = self.create_sftp_log(sftp_server_id, log_type)
-                self._validation_error(
-                    log,
-                    _("No new file to import over the last %s days.") % self._get_sage_catchup_days(),
-                    "file_not_found",
-                )
-                log.state = 'rejected'
+                log.write({
+                    'state': 'success',
+                    'message': _("No new file to import over the last %s days.") % self._get_sage_catchup_days(),
+                })
                 return False
             for file_name in file_names:
                 self._import_sage_file(sftp_server_id, ssh_client, sftp, file_name, move_type, log_type)
@@ -453,8 +445,8 @@ class AccountMove(models.Model):
                 self._process_sage_file(sftp_server_id, ssh_client, sftp, file_name, move_type, log)
         except Exception as e:
             _logger.exception("Unexpected error while importing Sage file %s", file_name)
-            # Keep the file name on the log: the file is considered as read and won't be
-            # retried every day; it can be relaunched manually with 'Date import'.
+            # The file name stays on the log, so the next runs treat the file as read and
+            # do not retry it. 'Date import' relaunches it manually.
             log.write({'file_name': file_name, 'state': 'failed', 'message': str(e)})
         log.duration = (datetime.now() - start).seconds
 
@@ -464,7 +456,7 @@ class AccountMove(models.Model):
             if log.error_line_ids:
                 log.state = 'rejected'
             else:
-                # Header only: Sage writes a file every day, even when there is no payment
+                # Header only: Sage writes a file every day, even on days without payment
                 log.write({
                     'state': 'success',
                     'message': _("Empty file: no payment to import."),
@@ -474,12 +466,24 @@ class AccountMove(models.Model):
         line_count = 0
         error_count = 0
         success_count = 0
+        ignored_count = 0
         for data in datas:
             try:
-                # Savepoint: a database error on one line must not break the whole import
+                # One savepoint per line, so a database error on a line does not stop the file
                 with self.env.cr.savepoint():
                     move_id = self.validate_data_import(data, log, move_type)
-                    if move_id:
+                    # A reversed invoice (credit note) is not in this list and gets the error below
+                    if move_id and move_id.payment_state in ('paid', 'in_payment'):
+                        # The payment is already in Odoo (for example entered by the accounting
+                        # team) and the amount matches: skip the line without counting an error
+                        self.create_sftp_log_line(
+                            log=log,
+                            message=_("Invoice already paid in Odoo: line ignored."),
+                            error_type="already_paid",
+                            ref=data.get("Référence Pièce"),
+                        )
+                        ignored_count += 1
+                    elif move_id:
                         payment_state = data.get('Statut paiement')
                         if move_id.amount_residual > 0 and payment_state == 'En paiement':
                             self._register_sage_payment(move_id, data, move_type)
@@ -511,10 +515,13 @@ class AccountMove(models.Model):
         log.line_count = line_count
         log.error_count = error_count
         log.success_count = success_count
-        if line_count == error_count:
-            log.state = 'failed'
-        elif line_count == success_count:
+        if ignored_count:
+            log.message = _("%s line(s) ignored: invoice already paid in Odoo.") % ignored_count
+        # Only real errors make the log partial or failed. Skipped lines do not count
+        if not error_count:
             log.state = 'success'
+        elif error_count == line_count:
+            log.state = 'failed'
         else:
             log.state = 'partial'
 
