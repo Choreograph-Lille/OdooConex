@@ -133,14 +133,28 @@ class AccountMove(models.Model):
         )
         return dict(self.env.cr.fetchall())
 
+    def _get_vat_rates_label(self):
+        """Return the VAT rates of the invoice lines, numbers only (e.g. "20", "20|5.5").
+
+        A line without tax counts as a 0% rate.
+        """
+        self.ensure_one()
+        rates = set()
+        for line in self.invoice_line_ids.filtered(lambda l: l.display_type == 'product'):
+            taxes = line.tax_ids.flatten_taxes_hierarchy().filtered(
+                lambda t: t.amount_type == 'percent')
+            rates.update(taxes.mapped('amount') or [0.0])
+        return '|'.join('%g' % rate for rate in sorted(rates, reverse=True)) or '0'
+
     def prepare_paid_invoices_rows(self, moves):
         """Prepare rows for the paid invoices CSV file"""
         invoice_number_label = _("Invoice Number")
         amount_ttc_label = _("Amount TTC")
         status_label = _("Status")
         payment_date = _("Payment date")
+        vat_rate_label = _("VAT rate")
 
-        fields_list = [invoice_number_label, amount_ttc_label, status_label, payment_date]
+        fields_list = [invoice_number_label, amount_ttc_label, status_label, payment_date, vat_rate_label]
         rows = []
         payment_dates = moves._get_last_payment_dates()
 
@@ -150,7 +164,8 @@ class AccountMove(models.Model):
                     invoice_number_label: move.name,
                     amount_ttc_label: abs(move.amount_total),
                     status_label: _("Collected"),
-                    payment_date: payment_dates[move.id].strftime('%d/%m/%Y') if move.id in payment_dates else ''
+                    payment_date: payment_dates[move.id].strftime('%d/%m/%Y') if move.id in payment_dates else '',
+                    vat_rate_label: move._get_vat_rates_label(),
                 }
                 rows.append(vals)
 
