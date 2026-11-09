@@ -177,3 +177,17 @@ msgstr "Aucun nouveau fichier à importer sur les %s derniers jours."
 #, python-format
 msgid "Empty file: no payment to import."
 msgstr "Fichier vide : aucun paiement à importer."
+
+#. module: choreograph_sage_sftp_import
+#. odoo-python
+#: code:addons/choreograph_sage_sftp_import/models/account_move.py:0
+#, python-format
+msgid "Invoice already paid in Odoo: line ignored."
+msgstr "Facture déjà payée dans Odoo : ligne ignorée."
+
+#. module: choreograph_sage_sftp_import
+#. odoo-python
+#: code:addons/choreograph_sage_sftp_import/models/account_move.py:0
+#, python-format
+msgid "%s line(s) ignored: invoice already paid in Odoo."
+msgstr "%s ligne(s) ignorée(s) : facture déjà payée dans Odoo."
