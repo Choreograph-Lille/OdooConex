@@ -61,12 +61,19 @@ class TestSageImport(AccountTestInvoicingCommon):
         icp.set_param("choreograph_sage_purchase_account.prefix", "PAYACH")
         icp.set_param("choreograph_sage_purchase_account.sage_file_date", False)
         icp.set_param("choreograph_sage_sftp_import.catchup_days", 30)
+        # The production journal belongs to CHOREOGRAPH: use the test company's bank journal
+        icp.set_param("choreograph_sage_purchase_account.purchase_default_journal_id",
+                      cls.company_data["default_journal_bank"].id)
         cls.sale_move = cls.env["account.move"].with_context(move_type="out_invoice")
+        # On a copy of production, existing logs would mark the test files as read.
+        # Start from an empty history (the deletion is rolled back after the tests)
+        cls.env["sftp.import.report"].sudo().search([]).unlink()
 
     def _run(self, files, move_type="out_invoice", log_type="sale"):
         ssh = FakeSSH(FakeSFTP(files))
         with patch.object(AccountMove, "get_sftp_client_import", return_value=ssh):
-            self.env["account.move"]._run_sage_import(move_type, log_type)
+            # The crons run as __system__: record rules do not apply
+            self.env["account.move"].sudo()._run_sage_import(move_type, log_type)
         return ssh
 
     def _logs(self, log_type="sale"):
@@ -166,8 +173,10 @@ class TestSageImport(AccountTestInvoicingCommon):
         # Next run: nothing new, files are not imported twice
         self._run(files)
         last = self._logs()[-1]
-        self.assertEqual(last.state, "rejected")
+        self.assertEqual(last.state, "success")
         self.assertFalse(last.file_name)
+        self.assertFalse(last.error_line_ids)
+        self.assertIn("30", last.message)
         self.assertEqual(len(inv1._get_reconciled_payments()), 1)
 
     @freeze_time("2026-11-05 00:00:30")
@@ -181,6 +190,43 @@ class TestSageImport(AccountTestInvoicingCommon):
         self.assertEqual(log.file_name, "PAYACH_20261102.csv")
         self.assertEqual(log.state, "success")
         self.assertEqual(bill.amount_residual, 0.0)
+
+    def _pay_manually(self, invoice):
+        self.env["account.payment.register"].with_context(
+            active_model="account.move", active_ids=invoice.ids,
+        ).create({})._create_payments()
+
+    @freeze_time("2026-11-05 00:00:30")
+    def test_already_paid_line_is_ignored(self):
+        # Customer invoices paid manually by the accounting team before the import
+        inv_paid = self.init_invoice("out_invoice", amounts=[100.0], post=True)
+        inv_todo = self.init_invoice("out_invoice", amounts=[200.0], post=True)
+        self._pay_manually(inv_paid)
+        files = {
+            "PAYVEN_20261102.csv": self._make_file(inv_paid),            # only already paid lines
+            "PAYVEN_20261103.csv": self._make_file(inv_paid + inv_todo),  # mixed
+        }
+        self._run(files)
+        logs = self._logs()
+        self.assertEqual(logs.mapped("state"), ["success", "success"])
+        self.assertEqual(logs.mapped("error_count"), [0, 0])
+        self.assertEqual(logs.mapped("success_count"), [0, 1])
+        self.assertEqual(set(logs.error_line_ids.mapped("error_type")), {"already_paid"})
+        self.assertTrue(all(logs.mapped("message")))
+        # The invoice already paid gets no second payment, the other one is now paid
+        self.assertEqual(len(inv_paid._get_reconciled_payments()), 1)
+        self.assertEqual(inv_todo.amount_residual, 0.0)
+
+    @freeze_time("2026-11-05 00:00:30")
+    def test_already_paid_with_other_amount_is_an_error(self):
+        inv = self.init_invoice("out_invoice", amounts=[100.0], post=True)
+        self._pay_manually(inv)
+        row = f"{inv.name}\t\tEn paiement\t30/10/2026\t{inv.amount_total + 10:.2f}\t0.00\t{inv.currency_id.name}\t{inv.id}"
+        files = {"PAYVEN_20261102.csv": ("﻿" + HEADER + "\r\n" + row + "\r\n").encode("utf-8")}
+        self._run(files)
+        log = self._logs()
+        self.assertEqual(log.state, "failed")
+        self.assertEqual(log.error_line_ids.error_type, "data_mismatch")
 
     @freeze_time("2026-11-05 00:00:30")
     def test_invalid_file_is_logged_and_not_retried(self):
