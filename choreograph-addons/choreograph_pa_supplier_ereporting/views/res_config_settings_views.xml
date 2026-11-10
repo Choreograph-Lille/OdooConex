@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_ereporting" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.choreograph.pa.supplier.ereporting</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="choreograph_sage_sale_account_export.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sftp_ubl_export_server_id']/.." position="after">
+                <div class="row mt16">
+                    <label for="pa_ereporting_remote_path" class="col-lg-3 o_light_label"/>
+                    <field name="pa_ereporting_remote_path" placeholder="ereporting"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

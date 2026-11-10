@@ -1,0 +1,220 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* choreograph_pa_supplier_ereporting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 08:41+0000\n"
+"PO-Revision-Date: 2026-11-10 08:41+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "%s document(s) in error, not sent:"
+msgstr "%s pièce(s) en erreur, non envoyée(s) :"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "%s document(s) sent to the PA ICD."
+msgstr "%s pièce(s) envoyée(s) à la PA ICD."
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model.fields,help:choreograph_pa_supplier_ereporting.field_account_bank_statement_line__is_transferred_to_ereporting
+#: model:ir.model.fields,help:choreograph_pa_supplier_ereporting.field_account_move__is_transferred_to_ereporting
+#: model:ir.model.fields,help:choreograph_pa_supplier_ereporting.field_account_payment__is_transferred_to_ereporting
+msgid ""
+"Checked once the document has been sent to the PA ICD in the E-Reporting "
+"file."
+msgstr ""
+"Cochée une fois la pièce envoyée à la PA ICD dans le fichier E-Reporting."
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model,name:choreograph_pa_supplier_ereporting.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de configuration"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model.fields,help:choreograph_pa_supplier_ereporting.field_res_config_settings__pa_ereporting_remote_path
+msgid ""
+"Directory of the PA ICD SFTP server where the E-Reporting file is sent "
+"(default: ereporting)."
+msgstr ""
+"Répertoire du serveur SFTP de la PA ICD où est déposé le fichier E-Reporting"
+" (par défaut : ereporting)."
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model.fields,field_description:choreograph_pa_supplier_ereporting.field_res_config_settings__pa_ereporting_remote_path
+msgid "E-Reporting Directory"
+msgstr "Répertoire E-Reporting"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model.fields.selection,name:choreograph_pa_supplier_ereporting.selection__sftp_export_report__type__ereporting_supplier
+#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_search_ereporting
+msgid "E-Reporting Suppliers"
+msgstr "E-Reporting fournisseurs"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model.fields,field_description:choreograph_pa_supplier_ereporting.field_account_bank_statement_line__is_transferred_to_ereporting
+#: model:ir.model.fields,field_description:choreograph_pa_supplier_ereporting.field_account_move__is_transferred_to_ereporting
+#: model:ir.model.fields,field_description:choreograph_pa_supplier_ereporting.field_account_payment__is_transferred_to_ereporting
+msgid "E-Reporting Transfer"
+msgstr "Transfert E-Reporting"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model.fields,field_description:choreograph_pa_supplier_ereporting.field_sftp_export_report__type
+#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_search_ereporting
+msgid "Export Type"
+msgstr "Type d'export"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model.fields,field_description:choreograph_pa_supplier_ereporting.field_sftp_export_report__exported_move_names
+#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_form_inherit_ereporting
+msgid "Exported Documents"
+msgstr "Pièces exportées"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_search_ereporting
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model,name:choreograph_pa_supplier_ereporting.model_account_move
+msgid "Journal Entry"
+msgstr "Pièce comptable"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "No SFTP server is configured for the PA ICD."
+msgstr "Aucun serveur SFTP n'est configuré pour la PA ICD."
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "No supplier invoice or credit note to transfer."
+msgstr "Aucune facture ni aucun avoir fournisseur à transférer."
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.actions.server,name:choreograph_pa_supplier_ereporting.ir_cron_export_ereporting_supplier_ir_actions_server
+#: model:ir.cron,cron_name:choreograph_pa_supplier_ereporting.ir_cron_export_ereporting_supplier
+msgid "PA ICD: Export E-Reporting supplier invoices and credit notes"
+msgstr "PA ICD : Export E-Reporting des factures et avoirs fournisseurs"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_search_ereporting
+msgid "Partial or Failed"
+msgstr "Partiel ou en échec"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.model,name:choreograph_pa_supplier_ereporting.model_sftp_export_report
+msgid "SFTP Export Report"
+msgstr "Rapport d'export SFTP"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "SIREN of the company %s"
+msgstr "SIREN de la société %s"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_search_ereporting
+msgid "Status"
+msgstr "Statut"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid ""
+"The file could not be sent to the SFTP server, so no document is marked as "
+"transferred. Error: %s"
+msgstr ""
+"Le fichier n'a pas pu être envoyé sur le serveur SFTP : aucune pièce n'est "
+"marquée comme transférée. Erreur : %s"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "UNECE tax category on %s"
+msgstr "catégorie de taxe UNECE sur %s"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "VAT (no tax on the invoice lines)"
+msgstr "TVA (aucune taxe sur les lignes de la facture)"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "VATEX on the vendor %s"
+msgstr "VATEX sur le fournisseur %s"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "due date"
+msgstr "date d'échéance"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.res_config_settings_view_form_ereporting
+msgid "ereporting"
+msgstr "ereporting"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "invoice reference"
+msgstr "référence de la facture"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "provider invoice date"
+msgstr "date facture fournisseur"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "vendor SIREN"
+msgstr "SIREN du fournisseur"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model:ir.ui.menu,name:choreograph_pa_supplier_ereporting.menu_pa_export_logs
+msgid "Odoo to PA Logs"
+msgstr "Logs Odoo vers PA"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "Sent on %(date)s in the file %(file)s"
+msgstr "Envoyée le %(date)s dans le fichier %(file)s"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "E-Reporting: %s"
+msgstr "E-Reporting : %s"

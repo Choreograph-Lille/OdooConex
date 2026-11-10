@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sftp_export_report_tree_inherit_ereporting" model="ir.ui.view">
+        <field name="name">sftp.export.report.tree.inherit.ereporting</field>
+        <field name="model">sftp.export.report</field>
+        <field name="inherit_id" ref="choreograph_sage_sale_account_export.sftp_export_report_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='file_name']" position="after">
+                <field name="type"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sftp_export_report_form_inherit_ereporting" model="ir.ui.view">
+        <field name="name">sftp.export.report.form.inherit.ereporting</field>
+        <field name="model">sftp.export.report</field>
+        <field name="inherit_id" ref="choreograph_sage_sale_account_export.sftp_export_report_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_count']" position="after">
+                <field name="success_count" attrs="{'invisible': [('type', '!=', 'ereporting_supplier')]}"/>
+                <field name="error_count" attrs="{'invisible': [('type', '!=', 'ereporting_supplier')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='message']" position="after">
+                <separator string="Exported Documents" attrs="{'invisible': [('type', '!=', 'ereporting_supplier')]}"/>
+                <field name="exported_move_names" readonly="1"
+                       attrs="{'invisible': [('type', '!=', 'ereporting_supplier')]}"/>
+            </xpath>
+            <xpath expr="//field[@name='message']" position="attributes">
+                <attribute name="readonly">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']/preceding-sibling::separator[1]" position="attributes">
+                <attribute name="attrs">{'invisible': [('type', '=', 'ereporting_supplier')]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='line_ids']" position="attributes">
+                <attribute name="attrs">{'invisible': [('type', '=', 'ereporting_supplier')]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="sftp_export_report_search_ereporting" model="ir.ui.view">
+        <field name="name">sftp.export.report.search</field>
+        <field name="model">sftp.export.report</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="file_name"/>
+                <field name="exported_move_names"/>
+                <filter name="filter_ereporting" string="E-Reporting Suppliers"
+                        domain="[('type', '=', 'ereporting_supplier')]"/>
+                <separator/>
+                <filter name="filter_partial_failed" string="Partial or Failed"
+                        domain="[('state', 'in', ('partial', 'failed'))]"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_type" string="Export Type" context="{'group_by': 'type'}"/>
+                    <filter name="group_state" string="Status" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

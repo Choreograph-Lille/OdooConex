@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Same journal as Odoo to PA > Export Reports, next to the other logs -->
+    <menuitem id="menu_pa_export_logs"
+              name="Odoo to PA Logs"
+              parent="choreograph_sage.menu_logs"
+              action="choreograph_sage_sale_account_export.sftp_export_report_action"
+              sequence="4"/>
+</odoo>
