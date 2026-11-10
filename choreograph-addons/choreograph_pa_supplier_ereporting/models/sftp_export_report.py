@@ -10,4 +10,3 @@ class SftpExportReport(models.Model):
         selection_add=[("ereporting_supplier", "E-Reporting Suppliers")],
         ondelete={"ereporting_supplier": "set null"},
     )
-    exported_move_names = fields.Text(string="Exported Documents")

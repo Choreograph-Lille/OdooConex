@@ -185,6 +185,17 @@ class AccountMove(models.Model):
     # Cron
     # ------------------------------------------------------------------
 
+    def _get_ereporting_log_line(self, status, message=False):
+        """One line of the export log per document, as in the other PA flows."""
+        self.ensure_one()
+        return {
+            "invoice_ref": self.name,
+            "amount_total": self.amount_total,
+            "type": "credit_note" if self.move_type == "in_refund" else "invoice",
+            "status": status,
+            "message": message,
+        }
+
     @api.model
     def export_ereporting_supplier_to_pa(self):
         """Weekly cron: send the supplier invoices and credit notes to the PA ICD (E-Reporting)."""
@@ -196,7 +207,6 @@ class AccountMove(models.Model):
             "file_name": file_name,
             "sftp_server_id": ftp_server.id if ftp_server else False,
         }
-        report_model = self.env["sftp.export.report"].sudo()
 
         moves = self.search(self._get_ereporting_domain(), order="name")
         if not moves:
@@ -205,23 +215,21 @@ class AccountMove(models.Model):
                 "line_count": 0,
                 "message": _("No supplier invoice or credit note to transfer."),
             })
-            return report_model.create(log_vals)
+            return self._create_ereporting_log(log_vals, [])
 
         rows = []
         exported = self.browse()
-        errors = []
+        error_lines = []
         for move in moves:
             row, missing = move._prepare_ereporting_row()
             if missing:
-                errors.append("%s : %s" % (move.name, ", ".join(missing)))
+                error_lines.append(move._get_ereporting_log_line(
+                    _("Error"), _("Missing: %s") % ", ".join(missing)))
             else:
                 rows.append(row)
                 exported |= move
-        log_vals.update({"line_count": len(moves), "error_count": len(errors)})
-        error_message = ""
-        if errors:
-            error_message = "\n".join(
-                [_("%s document(s) in error, not sent:") % len(errors)] + errors)
+        log_vals.update({"line_count": len(moves), "error_count": len(error_lines)})
+        error_message = _("%s document(s) in error, not sent.") % len(error_lines) if error_lines else ""
 
         if rows:
             content = self._build_ereporting_csv(rows)
@@ -229,18 +237,17 @@ class AccountMove(models.Model):
                 file_name = self._upload_ereporting_file(ftp_server, file_name, content)
             except Exception as error:
                 _logger.exception("E-Reporting: the file could not be sent to the PA ICD")
+                sftp_error = _("The file could not be sent to the SFTP server, so no document is "
+                               "marked as transferred. Error: %s") % error
                 log_vals.update({
                     "state": "failed",
                     "success_count": 0,
                     "error_count": len(moves),
-                    "message": "\n".join(filter(None, [
-                        _("The file could not be sent to the SFTP server, so no document is "
-                          "marked as transferred. Error: %s") % error,
-                        error_message,
-                    ])),
+                    "message": "\n".join(filter(None, [sftp_error, error_message])),
+                    "attachment_id": self._create_ereporting_attachment(file_name, content).id,
                 })
-                log_vals["attachment_id"] = self._create_ereporting_attachment(file_name, content).id
-                return report_model.create(log_vals)
+                lines = [move._get_ereporting_log_line(_("Not sent"), sftp_error) for move in exported]
+                return self._create_ereporting_log(log_vals, lines + error_lines)
             log_vals["file_name"] = file_name
             log_vals["attachment_id"] = self._create_ereporting_attachment(file_name, content).id
             # One write per document: the account.move write of choreograph_sox
@@ -254,7 +261,7 @@ class AccountMove(models.Model):
                 # Internal note: followers are not notified
                 move.message_post(body=_("E-Reporting: %s") % comment, subtype_xmlid="mail.mt_note")
 
-        if not errors:
+        if not error_lines:
             state = "success"
         elif not exported:
             state = "failed"
@@ -263,7 +270,6 @@ class AccountMove(models.Model):
         log_vals.update({
             "state": state,
             "success_count": len(exported),
-            "exported_move_names": ", ".join(exported.mapped("name")) or False,
             "message": "\n".join(filter(None, [
                 _("%s document(s) sent to the PA ICD.") % len(exported) if exported else "",
                 error_message,
@@ -271,8 +277,17 @@ class AccountMove(models.Model):
         })
         if not rows:
             log_vals["file_name"] = False
-        _logger.info("E-Reporting: %s document(s) sent, %s in error", len(exported), len(errors))
-        return report_model.create(log_vals)
+        _logger.info("E-Reporting: %s document(s) sent, %s in error", len(exported), len(error_lines))
+        lines = [move._get_ereporting_log_line(_("Transferred")) for move in exported]
+        return self._create_ereporting_log(log_vals, lines + error_lines)
+
+    @api.model
+    def _create_ereporting_log(self, log_vals, lines):
+        report = self.env["sftp.export.report"].sudo().create(log_vals)
+        line_model = self.env["sftp.export.report.line"].sudo()
+        for line_vals in lines:
+            line_model.create(dict(line_vals, report_id=report.id))
+        return report
 
     @api.model
     def _create_ereporting_attachment(self, file_name, content):

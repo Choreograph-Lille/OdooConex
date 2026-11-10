@@ -131,6 +131,9 @@ class TestEReporting(AccountTestInvoicingCommon):
             report = self.env["account.move"].with_context(lang="en_US").export_ereporting_supplier_to_pa()
         return report, sftp
 
+    def _lines(self, report):
+        return {line.invoice_ref: line for line in report.line_ids}
+
     def _read_csv(self, content):
         return list(csv.reader(io.StringIO(content.decode("utf-8")), delimiter="\t"))
 
@@ -150,7 +153,12 @@ class TestEReporting(AccountTestInvoicingCommon):
         self.assertEqual(report.type, "ereporting_supplier")
         self.assertEqual(report.file_name, "E-Reporting_Fournisseurs_16112026.csv")
         self.assertEqual((report.line_count, report.success_count, report.error_count), (2, 2, 0))
-        self.assertEqual(report.exported_move_names, ", ".join(sorted([invoice.name, refund.name])))
+        lines = self._lines(report)
+        self.assertEqual(set(lines), {invoice.name, refund.name})
+        self.assertEqual((lines[invoice.name].type, lines[invoice.name].status), ("invoice", "Transferred"))
+        self.assertEqual(lines[invoice.name].amount_total, 100.0)
+        self.assertFalse(lines[invoice.name].message)
+        self.assertEqual((lines[refund.name].type, lines[refund.name].amount_total), ("credit_note", 40.0))
         self.assertTrue(invoice.is_transferred_to_ereporting)
         self.assertTrue(refund.is_transferred_to_ereporting)
         note = invoice.message_ids.filtered(lambda m: "E-Reporting" in (m.body or ""))
@@ -182,7 +190,7 @@ class TestEReporting(AccountTestInvoicingCommon):
 
         report, _sftp = self._run()
 
-        self.assertEqual(report.exported_move_names, from_contact.name)
+        self.assertEqual(report.line_ids.mapped("invoice_ref"), [from_contact.name])
         for move in (draft, other, customer):
             self.assertFalse(move.is_transferred_to_ereporting)
 
@@ -202,12 +210,16 @@ class TestEReporting(AccountTestInvoicingCommon):
 
         self.assertEqual(report.state, "partial")
         self.assertEqual((report.line_count, report.success_count, report.error_count), (4, 1, 3))
-        self.assertEqual(report.exported_move_names, good.name)
-        self.assertIn("%s : provider invoice date" % no_date.name, report.message)
+        self.assertIn("3 document(s) in error, not sent.", report.message)
+        lines = self._lines(report)
+        self.assertEqual(len(lines), 4)
+        self.assertEqual(lines[good.name].status, "Transferred")
+        self.assertEqual(lines[no_date.name].status, "Error")
+        self.assertEqual(lines[no_date.name].message, "Missing: provider invoice date")
         # Every missing value is listed at once
-        self.assertIn("%s : provider invoice date, VATEX on the vendor Particulier" % no_vatex.name,
-                      report.message)
-        self.assertIn("%s : VAT (no tax on the invoice lines)" % no_tax.name, report.message)
+        self.assertEqual(lines[no_vatex.name].message,
+                         "Missing: provider invoice date, VATEX on the vendor Particulier")
+        self.assertEqual(lines[no_tax.name].message, "Missing: VAT (no tax on the invoice lines)")
         self.assertTrue(good.is_transferred_to_ereporting)
         for move in (no_date, no_vatex, no_tax):
             self.assertFalse(move.is_transferred_to_ereporting)
@@ -245,7 +257,8 @@ class TestEReporting(AccountTestInvoicingCommon):
         self.assertEqual(report.state, "failed")
         self.assertIn("Permission denied", report.message)
         self.assertTrue(report.attachment_id)
-        self.assertFalse(report.exported_move_names)
+        self.assertEqual(report.line_ids.status, "Not sent")
+        self.assertIn("Permission denied", report.line_ids.message)
         self.assertFalse(move.is_transferred_to_ereporting)
         self.assertFalse(move.message_ids.filtered(lambda m: "E-Reporting" in (m.body or "")))
 
