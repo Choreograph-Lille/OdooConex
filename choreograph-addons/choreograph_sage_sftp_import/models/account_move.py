@@ -5,24 +5,105 @@ import logging
 import io
 import csv
 import base64
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
+
+import pytz
 
 
 _logger = logging.getLogger(__name__)
 
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 AUTHORIZED_PAYMENT_STATE = ('En paiement', 'Extourné')
+
+# Sage puts the generation date, in Paris time, in its file names.
+SAGE_TZ = 'Europe/Paris'
+# Number of days (before today) scanned on the SFTP to catch up missed files.
+CATCHUP_DAYS_PARAM = 'choreograph_sage_sftp_import.catchup_days'
+DEFAULT_CATCHUP_DAYS = 30
 
 
 class AccountMove(models.Model):
     _inherit = 'account.move'
 
+    # ------------------------------------------------------------------
+    # File name management
+    # ------------------------------------------------------------------
+
+    def _get_sage_file_config(self):
+        """Return (prefix, suffix, forced_date_str) for the move_type in context.
+
+        Overridden by choreograph_sage_purchase_account / choreograph_sage_sale_account.
+        """
+        return False, False, False
+
+    def _get_sage_today(self):
+        """Today's date in Paris time, whatever the server timezone or daylight saving time."""
+        return fields.Date.context_today(self.with_context(tz=SAGE_TZ))
+
+    def _parse_sage_forced_date(self, value):
+        """Convert the 'Date import' setting to a date.
+
+        The purchase setting is a Datetime stored in UTC: convert it back to the
+        French date, otherwise a date entered at midnight would shift to the day before.
+        """
+        if not value:
+            return False
+        if len(value) > 10:
+            utc_dt = fields.Datetime.from_string(value)
+            return pytz.utc.localize(utc_dt).astimezone(pytz.timezone(SAGE_TZ)).date()
+        return fields.Date.from_string(value)
+
+    def _build_sage_file_name(self, file_date):
+        prefix, suffix, _forced_date = self._get_sage_file_config()
+        file_name = f"{file_date.strftime('%Y%m%d')}.csv"
+        if prefix:
+            file_name = f"{prefix}_{file_name}"
+        if suffix:
+            file_name = f"{file_name}_{suffix}"
+        return file_name
+
     def get_file_name(self):
-        """ This function allow to download any file_name """
-        return ""
+        """Name of the file to import when a single file is targeted:
+        the forced 'Date import' if set, otherwise the file of yesterday (French date)."""
+        forced_date = self._parse_sage_forced_date(self._get_sage_file_config()[2])
+        return self._build_sage_file_name(forced_date or self._get_sage_today() - timedelta(days=1))
+
+    def _get_sage_catchup_days(self):
+        value = self.env['ir.config_parameter'].sudo().get_param(CATCHUP_DAYS_PARAM)
+        try:
+            days = int(value)
+        except (TypeError, ValueError):
+            days = DEFAULT_CATCHUP_DAYS
+        return max(days, 1)
+
+    def _get_sage_files_to_import(self, ftp_server, list_dir, log_type):
+        """Return the file names to import, oldest first.
+
+        - 'Date import' set: only that file (manual relaunch, even if already imported).
+        - Otherwise: every file of the last N days (today excluded, it may still be in
+          transfer) that is on the SFTP and has no import log with its name yet.
+        """
+        forced_date = self._parse_sage_forced_date(self._get_sage_file_config()[2])
+        if forced_date:
+            return [self._build_sage_file_name(forced_date)]
+
+        today = self._get_sage_today()
+        candidates = [
+            self._build_sage_file_name(today - timedelta(days=delta))
+            for delta in range(self._get_sage_catchup_days(), 0, -1)
+        ]
+        present = [name for name in candidates if name in list_dir]
+        if not present:
+            return []
+        already_read = set(self.env['sftp.import.report'].search([
+            ('type', '=', log_type),
+            ('file_name', 'in', present),
+        ]).mapped('file_name'))
+        return [name for name in present if name not in already_read]
 
     def is_present_file(self, filename, listdir):
         if filename in listdir:
@@ -68,14 +149,14 @@ class AccountMove(models.Model):
         )
         return False
 
-    def download_file(self, ftp_server, ssh_client, log):
-        """Read the configured CSV file and return its attachment and rows."""
-        file_path = f"{ftp_server.output_path}/{self.get_file_name()}"
-        sftp = ssh_client.open_sftp()
+    def download_file(self, ftp_server, ssh_client, log, filename=None, sftp=None):
+        """Read the CSV file `filename` (default: get_file_name()) and return its rows."""
+        filename = filename or self.get_file_name()
+        file_path = f"{ftp_server.output_path}/{filename}"
+        sftp = sftp or ssh_client.open_sftp()
 
         # Try to read file first
         list_dir = sftp.listdir(f'/{ftp_server.output_path}')
-        filename = self.get_file_name()
         if not self.is_present_file(filename, list_dir):
             _logger.info('File %s not found' % filename)
             self._validation_error(
@@ -208,14 +289,8 @@ class AccountMove(models.Model):
                 ref,
             )
 
-        if move.amount_residual == 0:
-            return self._validation_error(
-                log,
-                _("Invoice has already been paid."),
-                "data_mismatch",
-                ref,
-            )
-
+        # Already paid invoices are handled in _process_sage_file, once the SIREN,
+        # currency and amount below have been checked
         siren = invoice_data.get("Siren tiers")
 
         if siren and move.siren != siren:
@@ -248,7 +323,11 @@ class AccountMove(models.Model):
             )
 
         # Check if the amount to pay is different of amount_total only if the currency is same as main company
-        if amount != move.amount_total and move.currency_id.id == move.company_id.currency_id.id:            return self._validation_error(
+        # Currency rounding: a total of 123.60000000000001 must match 123.60
+        same_amount = float_compare(
+            amount, move.amount_total, precision_rounding=move.currency_id.rounding) == 0
+        if not same_amount and move.currency_id == move.company_id.currency_id:
+            return self._validation_error(
                 log,
                 _("Payment amount does not match the invoice total."),
                 "data_mismatch",
@@ -316,4 +395,133 @@ class AccountMove(models.Model):
         ).create(vals)
         wizard._create_payments()
         _logger.info('Payment created successfully for account move %s', self.id)
+
+    # ------------------------------------------------------------------
+    # Import engine (shared by purchase and sale imports)
+    # ------------------------------------------------------------------
+
+    def _register_sage_payment(self, move, data, move_type):
+        if move_type == 'in_invoice':
+            move.create_payment(payment_date=data.get('Date paiement'))
+        else:
+            move.create_sale_payment(data)
+
+    @api.model
+    def _run_sage_import(self, move_type, log_type):
+        """Import every Sage file not imported yet (see _get_sage_files_to_import)."""
+        self = self.with_context(move_type=move_type)
+        sftp_server_param = self.env['ir.config_parameter'].sudo().get_param(
+            'choreograph_sage_sftp_import.sftp_server_id', False)
+        sftp_server_id = self.env['choreograph.sage.sftp.server'].browse(
+            int(sftp_server_param)) if sftp_server_param else False
+        if not sftp_server_id:
+            return False
+
+        ssh_client = self.get_sftp_client_import(sftp_server_id)
+        try:
+            sftp = ssh_client.open_sftp()
+            list_dir = sftp.listdir(f'/{sftp_server_id.output_path}')
+            file_names = self._get_sage_files_to_import(sftp_server_id, list_dir, log_type)
+            if not file_names:
+                # Every file is already imported: this is the usual case, so the log is a success
+                log = self.create_sftp_log(sftp_server_id, log_type)
+                log.write({
+                    'state': 'success',
+                    'message': _("No new file to import over the last %s days.") % self._get_sage_catchup_days(),
+                })
+                return False
+            for file_name in file_names:
+                self._import_sage_file(sftp_server_id, ssh_client, sftp, file_name, move_type, log_type)
+        finally:
+            ssh_client.close()
+        return True
+
+    def _import_sage_file(self, sftp_server_id, ssh_client, sftp, file_name, move_type, log_type):
+        """Import one Sage file and fill its import log."""
+        start = datetime.now()
+        log = self.create_sftp_log(sftp_server_id, log_type)
+        try:
+            with self.env.cr.savepoint():
+                self._process_sage_file(sftp_server_id, ssh_client, sftp, file_name, move_type, log)
+        except Exception as e:
+            _logger.exception("Unexpected error while importing Sage file %s", file_name)
+            # The file name stays on the log, so the next runs treat the file as read and
+            # do not retry it. 'Date import' relaunches it manually.
+            log.write({'file_name': file_name, 'state': 'failed', 'message': str(e)})
+        log.duration = (datetime.now() - start).seconds
+
+    def _process_sage_file(self, sftp_server_id, ssh_client, sftp, file_name, move_type, log):
+        datas = self.download_file(sftp_server_id, ssh_client, log, filename=file_name, sftp=sftp)
+        if not datas:
+            if log.error_line_ids:
+                log.state = 'rejected'
+            else:
+                # Header only: Sage writes a file every day, even on days without payment
+                log.write({
+                    'state': 'success',
+                    'message': _("Empty file: no payment to import."),
+                })
+            return
+
+        line_count = 0
+        error_count = 0
+        success_count = 0
+        ignored_count = 0
+        for data in datas:
+            try:
+                # One savepoint per line, so a database error on a line does not stop the file
+                with self.env.cr.savepoint():
+                    move_id = self.validate_data_import(data, log, move_type)
+                    # A reversed invoice (credit note) is not in this list and gets the error below
+                    if move_id and move_id.payment_state in ('paid', 'in_payment'):
+                        # The payment is already in Odoo (for example entered by the accounting
+                        # team) and the amount matches: skip the line without counting an error
+                        self.create_sftp_log_line(
+                            log=log,
+                            message=_("Invoice already paid in Odoo: line ignored."),
+                            error_type="already_paid",
+                            ref=data.get("Référence Pièce"),
+                        )
+                        ignored_count += 1
+                    elif move_id:
+                        payment_state = data.get('Statut paiement')
+                        if move_id.amount_residual > 0 and payment_state == 'En paiement':
+                            self._register_sage_payment(move_id, data, move_type)
+                            success_count += 1
+                        else:
+                            self.create_sftp_log_line(
+                                log=log,
+                                message=_("Invoice cannot be paid; please check the remaining balance or whether a reversal has already been created."),
+                                error_type="data_mismatch",
+                                ref=data.get("Référence Pièce"),
+                            )
+                            error_count += 1
+                    else:
+                        error_count += 1
+            except Exception as e:
+                _logger.exception(
+                    "Unexpected error while processing line with reference '%s'",
+                    data.get("Référence Pièce")
+                )
+                self.create_sftp_log_line(
+                    log=log,
+                    message=str(e),
+                    error_type="file_invalid",
+                    ref=data.get("Référence Pièce"),
+                )
+                error_count += 1
+            finally:
+                line_count += 1
+        log.line_count = line_count
+        log.error_count = error_count
+        log.success_count = success_count
+        if ignored_count:
+            log.message = _("%s line(s) ignored: invoice already paid in Odoo.") % ignored_count
+        # Only real errors make the log partial or failed. Skipped lines do not count
+        if not error_count:
+            log.state = 'success'
+        elif error_count == line_count:
+            log.state = 'failed'
+        else:
+            log.state = 'partial'
 
