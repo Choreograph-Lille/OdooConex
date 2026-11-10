@@ -242,3 +242,8 @@ msgstr "Transférée"
 #: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_search_ereporting
 msgid "Invoice Reference"
 msgstr "Référence de la facture"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.res_config_settings_view_form_ereporting
+msgid "PA ICD SFTP Server (UBL and E-Reporting)"
+msgstr "Serveur SFTP de la PA ICD (UBL et E-Reporting)"
