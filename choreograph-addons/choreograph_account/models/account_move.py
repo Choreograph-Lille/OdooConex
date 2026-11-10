@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import base64
+
 from odoo import models, fields, api, _, Command
 from lxml import etree
 TYPE_REVERSE_MAP = {
@@ -482,6 +484,40 @@ class AccountMove(models.Model):
         if amount_node is not None:
             current_value = float(amount_node.text)
             amount_node.text = "%.2f" % round(current_value, 2)
+
+    def _ubl_get_pdf_filename(self):
+        """Same logic as the UBL file name: FAC/2026/00540 -> FAC-2026-00540.pdf"""
+        return "%s.pdf" % self.name.replace('/', '-')
+
+    def _ubl_add_attachments(self, parent_node, ns, version="2.1"):
+        # The invoice PDF is always embedded (UBL EUR and UBL GBP), whatever
+        # the company setting 'embed_pdf_in_ubl_xml_invoice'
+        self.ensure_one()
+        if self.env.context.get("no_embedded_pdf"):
+            return
+
+        cac = ns['cac']
+        cbc = ns['cbc']
+        filename = self._ubl_get_pdf_filename()
+
+        docu_reference = etree.SubElement(parent_node, cac + "AdditionalDocumentReference")
+        docu_reference_id = etree.SubElement(docu_reference, cbc + "ID")
+        docu_reference_id.text = filename
+        docu_description = etree.SubElement(docu_reference, cbc + "DocumentDescription")
+        docu_description.text = "LISIBLE"
+        attach_node = etree.SubElement(docu_reference, cac + "Attachment")
+        binary_node = etree.SubElement(
+            attach_node,
+            cbc + "EmbeddedDocumentBinaryObject",
+            mimeCode="application/pdf",
+            filename=filename,
+        )
+        pdf_content = (
+            self.env["ir.actions.report"]
+            .with_context(no_embedded_ubl_xml=True, force_report_rendering=True)
+            ._render_qweb_pdf("account.account_invoices", [self.id])[0]
+        )
+        binary_node.text = base64.b64encode(pdf_content).decode()
 
     # ------------------------------------------------------------------
     # UBL - French standard (norme FR)
