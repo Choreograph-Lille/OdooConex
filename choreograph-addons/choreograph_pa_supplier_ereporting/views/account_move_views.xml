@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="account_move_view_form_inherit_ereporting" model="ir.ui.view">
+        <field name="name">account.move.view.form.inherit.ereporting</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="choreograph_sage.account_move_view_form_inherit"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='is_transferred_to_sage']" position="after">
+                <field name="is_transferred_to_ereporting" readonly="1"
+                       attrs="{'invisible': [('move_type', 'not in', ['in_invoice', 'in_refund'])]}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

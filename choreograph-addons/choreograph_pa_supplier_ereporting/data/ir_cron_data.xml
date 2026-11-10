@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <!-- Every Monday. The hour is still to be set with Choreograph: 05:00 UTC by default -->
+    <record id="ir_cron_export_ereporting_supplier" model="ir.cron">
+        <field name="name">PA ICD: Export E-Reporting supplier invoices and credit notes</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">model.export_ereporting_supplier_to_pa()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="numbercall">-1</field>
+        <field name="nextcall" eval="(DateTime.now() + relativedelta(weekday=0, days=1)).strftime('%Y-%m-%d 05:00:00')"/>
+        <field name="active" eval="False"/>
+    </record>
+</odoo>
