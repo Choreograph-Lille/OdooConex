@@ -19,8 +19,8 @@ msgstr ""
 #. odoo-python
 #: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
 #, python-format
-msgid "%s document(s) in error, not sent:"
-msgstr "%s pièce(s) en erreur, non envoyée(s) :"
+msgid "%s document(s) in error, not sent."
+msgstr "%s pièce(s) en erreur, non envoyée(s)."
 
 #. module: choreograph_pa_supplier_ereporting
 #. odoo-python
@@ -76,12 +76,6 @@ msgstr "Transfert E-Reporting"
 #: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_search_ereporting
 msgid "Export Type"
 msgstr "Type d'export"
-
-#. module: choreograph_pa_supplier_ereporting
-#: model:ir.model.fields,field_description:choreograph_pa_supplier_ereporting.field_sftp_export_report__exported_move_names
-#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_form_inherit_ereporting
-msgid "Exported Documents"
-msgstr "Pièces exportées"
 
 #. module: choreograph_pa_supplier_ereporting
 #: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_search_ereporting
@@ -218,3 +212,33 @@ msgstr "Envoyée le %(date)s dans le fichier %(file)s"
 #, python-format
 msgid "E-Reporting: %s"
 msgstr "E-Reporting : %s"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+msgid "Error"
+msgstr "Erreur"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+#, python-format
+msgid "Missing: %s"
+msgstr "Manquant : %s"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+msgid "Not sent"
+msgstr "Non envoyée"
+
+#. module: choreograph_pa_supplier_ereporting
+#. odoo-python
+#: code:addons/choreograph_pa_supplier_ereporting/models/account_move.py:0
+msgid "Transferred"
+msgstr "Transférée"
+
+#. module: choreograph_pa_supplier_ereporting
+#: model_terms:ir.ui.view,arch_db:choreograph_pa_supplier_ereporting.sftp_export_report_search_ereporting
+msgid "Invoice Reference"
+msgstr "Référence de la facture"

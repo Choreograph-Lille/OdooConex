@@ -20,19 +20,8 @@
                 <field name="success_count" attrs="{'invisible': [('type', '!=', 'ereporting_supplier')]}"/>
                 <field name="error_count" attrs="{'invisible': [('type', '!=', 'ereporting_supplier')]}"/>
             </xpath>
-            <xpath expr="//field[@name='message']" position="after">
-                <separator string="Exported Documents" attrs="{'invisible': [('type', '!=', 'ereporting_supplier')]}"/>
-                <field name="exported_move_names" readonly="1"
-                       attrs="{'invisible': [('type', '!=', 'ereporting_supplier')]}"/>
-            </xpath>
             <xpath expr="//field[@name='message']" position="attributes">
                 <attribute name="readonly">1</attribute>
-            </xpath>
-            <xpath expr="//field[@name='line_ids']/preceding-sibling::separator[1]" position="attributes">
-                <attribute name="attrs">{'invisible': [('type', '=', 'ereporting_supplier')]}</attribute>
-            </xpath>
-            <xpath expr="//field[@name='line_ids']" position="attributes">
-                <attribute name="attrs">{'invisible': [('type', '=', 'ereporting_supplier')]}</attribute>
             </xpath>
         </field>
     </record>
@@ -43,7 +32,8 @@
         <field name="arch" type="xml">
             <search>
                 <field name="file_name"/>
-                <field name="exported_move_names"/>
+                <field name="line_ids" string="Invoice Reference"
+                       filter_domain="[('line_ids.invoice_ref', 'ilike', self)]"/>
                 <filter name="filter_ereporting" string="E-Reporting Suppliers"
                         domain="[('type', '=', 'ereporting_supplier')]"/>
                 <separator/>
