@@ -4,6 +4,7 @@ from odoo import models, fields, api, _
 import base64
 import csv
 import io
+from collections import defaultdict
 from datetime import datetime, date
 import paramiko
 from odoo.exceptions import ValidationError, UserError
@@ -133,18 +134,28 @@ class AccountMove(models.Model):
         )
         return dict(self.env.cr.fetchall())
 
-    def _get_vat_rates_label(self):
-        """Return the VAT rates of the invoice lines, numbers only (e.g. "20", "20|5.5").
+    def _get_amounts_by_vat_rate(self):
+        """Return [(rate, amount TTC)], one entry per VAT rate, rate as a number only (e.g. "20", "5.5").
 
-        A line without tax counts as a 0% rate.
+        A line without tax counts as a 0% rate. Any rounding gap goes to the highest
+        amount so that the amounts always add up to the invoice total.
         """
         self.ensure_one()
-        rates = set()
+        amounts = defaultdict(float)
         for line in self.invoice_line_ids.filtered(lambda l: l.display_type == 'product'):
             taxes = line.tax_ids.flatten_taxes_hierarchy().filtered(
                 lambda t: t.amount_type == 'percent')
-            rates.update(taxes.mapped('amount') or [0.0])
-        return '|'.join('%g' % rate for rate in sorted(rates, reverse=True)) or '0'
+            amounts[sum(taxes.mapped('amount'))] += line.price_total
+        total = abs(self.amount_total)
+        if not amounts:
+            return [('0', total)]
+        gap = self.currency_id.round(total - sum(amounts.values()))
+        if gap:
+            amounts[max(amounts, key=lambda rate: abs(amounts[rate]))] += gap
+        return [
+            ('%g' % rate, self.currency_id.round(amounts[rate]))
+            for rate in sorted(amounts, reverse=True)
+        ]
 
     def prepare_paid_invoices_rows(self, moves):
         """Prepare rows for the paid invoices CSV file"""
@@ -160,14 +171,15 @@ class AccountMove(models.Model):
 
         for move in moves:
             if move.move_type in ["out_invoice", "out_refund"]:
-                vals = {
-                    invoice_number_label: move.name,
-                    amount_ttc_label: abs(move.amount_total),
-                    status_label: _("Collected"),
-                    payment_date: payment_dates[move.id].strftime('%d/%m/%Y') if move.id in payment_dates else '',
-                    vat_rate_label: move._get_vat_rates_label(),
-                }
-                rows.append(vals)
+                # One row per VAT rate, the TTC amount is split by rate
+                for rate, amount in move._get_amounts_by_vat_rate():
+                    rows.append({
+                        invoice_number_label: move.name,
+                        amount_ttc_label: amount,
+                        status_label: _("Collected"),
+                        payment_date: payment_dates[move.id].strftime('%d/%m/%Y') if move.id in payment_dates else '',
+                        vat_rate_label: rate,
+                    })
 
         return fields_list, rows
 
