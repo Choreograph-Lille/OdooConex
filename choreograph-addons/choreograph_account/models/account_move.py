@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import base64
+
 from odoo import models, fields, api, _, Command
 from lxml import etree
 TYPE_REVERSE_MAP = {
@@ -10,6 +12,13 @@ TYPE_REVERSE_MAP = {
     'in_refund': 'entry',
     'out_receipt': 'out_refund',
     'in_receipt': 'in_refund',
+}
+# VAT category (UNCL5305) -> default VATEX code when the customer has none
+VATEX_BY_CATEGORY = {
+    'K': 'VATEX-EU-IC',  # Intra-community supply
+    'G': 'VATEX-EU-G',   # Export outside the EU
+    'AE': 'VATEX-EU-AE', # Reverse charge
+    'O': 'VATEX-EU-O',   # Not subject to VAT
 }
 
 class AccountMove(models.Model):
@@ -369,12 +378,11 @@ class AccountMove(models.Model):
         if tax_id_node is not None and tax_id_node.text == 'AC':
             tax_id_node.text = 'S'
         
+        # The exemption reason is only declared in the VAT breakdown (TaxTotal),
+        # not on the invoice lines (ClassifiedTaxCategory)
         if node_name != 'TaxCategory':
             return
-        if tax.unece_categ_code != 'E':
-            return
-        
-        vatex = self.partner_id.commercial_partner_id.vatex
+        vatex = self._ubl_get_vatex(tax_id_node.text if tax_id_node is not None else None)
         if vatex:
             sequence = [
                 cbc + 'ID',
@@ -386,7 +394,7 @@ class AccountMove(models.Model):
                 cbc + 'TaxExemptionReason',
                 cbc + 'TierRange',
                 cbc + 'TierRatePercent',
-                cbc + 'TaxScheme',
+                cac + 'TaxScheme',
             ]
             target_pos = sequence.index(cbc + 'TaxExemptionReasonCode')
 
@@ -401,6 +409,41 @@ class AccountMove(models.Model):
             exemption_node.text = vatex
             tax_category_node.insert(insert_at, exemption_node)
     
+    def _ubl_get_vatex(self, categ_code):
+        """Return the VATEX code of the given VAT category (EN16931).
+
+        Required for E, AE, K, G and O, forbidden for the other categories (S, Z...).
+        The customer VATEX field is used first, otherwise the code expected for
+        the category (none for E, which depends on the exemption article).
+        """
+        if categ_code not in ('E', *VATEX_BY_CATEGORY):
+            return False
+        return self.partner_id.commercial_partner_id.vatex or VATEX_BY_CATEGORY.get(categ_code)
+
+    def _ubl_add_delivery(self, delivery_partner, parent_node, ns, version="2.1"):
+        super()._ubl_add_delivery(delivery_partner, parent_node, ns, version=version)
+        delivery_date = self._ubl_get_delivery_date()
+        if not delivery_date:
+            return
+        delivery_node = parent_node.findall(ns['cac'] + 'Delivery')[-1]
+        # ActualDeliveryDate comes before DeliveryLocation in the UBL sequence
+        date_node = etree.Element(ns['cbc'] + 'ActualDeliveryDate')
+        date_node.text = delivery_date.strftime('%Y-%m-%d')
+        delivery_node.insert(0, date_node)
+
+    def _ubl_get_delivery_date(self):
+        """Delivery date (BT-72): 'Delivery Date' (commitment_date) of the sale order.
+
+        A credit note uses the sale order of the reversed invoice.
+        """
+        order = self.sale_order_id or self.reversed_entry_id.sale_order_id
+        if not order.commitment_date:
+            return False
+        # commitment_date is stored in UTC: convert it to the date shown to the user
+        # (the cron may run without timezone)
+        tz_self = self.with_context(tz=self.env.context.get('tz') or self.env.user.tz or 'Europe/Paris')
+        return fields.Datetime.context_timestamp(tz_self, order.commitment_date).date()
+
     def _ubl_add_tax_scheme(self, tax_scheme_dict, parent_node, ns, version='2.1'):
         super()._ubl_add_tax_scheme(tax_scheme_dict, parent_node, ns, version=version)
 
@@ -482,6 +525,40 @@ class AccountMove(models.Model):
         if amount_node is not None:
             current_value = float(amount_node.text)
             amount_node.text = "%.2f" % round(current_value, 2)
+
+    def _ubl_get_pdf_filename(self):
+        """Same logic as the UBL file name: FAC/2026/00540 -> FAC-2026-00540.pdf"""
+        return "%s.pdf" % self.name.replace('/', '-')
+
+    def _ubl_add_attachments(self, parent_node, ns, version="2.1"):
+        # The invoice PDF is always embedded (UBL EUR and UBL GBP), whatever
+        # the company setting 'embed_pdf_in_ubl_xml_invoice'
+        self.ensure_one()
+        if self.env.context.get("no_embedded_pdf"):
+            return
+
+        cac = ns['cac']
+        cbc = ns['cbc']
+        filename = self._ubl_get_pdf_filename()
+
+        docu_reference = etree.SubElement(parent_node, cac + "AdditionalDocumentReference")
+        docu_reference_id = etree.SubElement(docu_reference, cbc + "ID")
+        docu_reference_id.text = filename
+        docu_description = etree.SubElement(docu_reference, cbc + "DocumentDescription")
+        docu_description.text = "LISIBLE"
+        attach_node = etree.SubElement(docu_reference, cac + "Attachment")
+        binary_node = etree.SubElement(
+            attach_node,
+            cbc + "EmbeddedDocumentBinaryObject",
+            mimeCode="application/pdf",
+            filename=filename,
+        )
+        pdf_content = (
+            self.env["ir.actions.report"]
+            .with_context(no_embedded_ubl_xml=True, force_report_rendering=True)
+            ._render_qweb_pdf("account.account_invoices", [self.id])[0]
+        )
+        binary_node.text = base64.b64encode(pdf_content).decode()
 
     # ------------------------------------------------------------------
     # UBL - French standard (norme FR)
